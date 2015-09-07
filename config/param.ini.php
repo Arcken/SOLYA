@@ -2,7 +2,8 @@
 [SQL]
 host = localhost
 user = solya
-passwd = Stage2015!
+passwd = "Stage2015!"
 base = solya
 
 [APPLI]
+titre = "Gestion de Stock Sol'ya!"
