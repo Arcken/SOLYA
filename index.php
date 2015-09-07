@@ -6,8 +6,9 @@ and open the template in the editor.
 -->
 <?php
 session_start(); //lance la session
-require_once 'controler/control.php'; //appel page du contrôleur
 require_once('inc/ini.inc'); //recupere parametre du fichier param.ini
+require_once 'controler/control.php'; //appel page du contrôleur
+require_once('inc/model.inc'); //recupere parametre du fichier param.ini
 // Initialisation des variables
 
 ?>
@@ -18,11 +19,7 @@ require_once('inc/ini.inc'); //recupere parametre du fichier param.ini
     </head>
     <body>
         <?php
-        echo $user;
-        echo $base;
-        echo $pwd;
-        echo $host;
-                
+                        
         if (isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE)
             require 'view/view_menu.php';
         else 
