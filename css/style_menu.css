@@ -27,7 +27,9 @@ and open the template in the editor.
 #cssmenu{
     background-color: black;
     width:10.5%;
+    height: 
 }
+
 #cssmenu ul {
     position: relative; 
     z-index: 397;
