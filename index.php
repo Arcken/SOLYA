@@ -22,7 +22,8 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-session_start();
+session_start(); //lance la session
+require_once 'controler/control.php'; //appel page du contrôleur
 require_once('inc/ini.inc'); //recupere parametre du fichier param.ini
 // Initialisation des variables
 
@@ -30,11 +31,19 @@ require_once('inc/ini.inc'); //recupere parametre du fichier param.ini
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php $sTitre ?></title>
+        <title><?php echo $sTitre ?></title>
     </head>
     <body>
         <?php
-     require 'view/view_menu.php';
+        echo $user;
+        echo $base;
+        echo $pwd;
+        echo $host;
+                
+        if (isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE)
+            require 'view/view_menu.php';
+        else 
+            require 'view/view_connection.php';
      //require 'view/view_connexion.php'
         ?>
     </body>
