@@ -5,7 +5,7 @@ if (file_exists($fichier) && is_file($fichier)) {
 
     $host = $config['SQL']['host'];
     $user = $config['SQL']['user'];
-    $pwd = $config['SQL']['pwd'];
+    $pwd  = $config['SQL']['pwd'];
     $base = $config['SQL']['base'];
     
     $sTitle=$config['APPLI']['titre'];
