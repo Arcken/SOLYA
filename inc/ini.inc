@@ -8,7 +8,7 @@ if (file_exists($fichier) && is_file($fichier)) {
     $pwd = $config['SQL']['pwd'];
     $base = $config['SQL']['base'];
     
-    $sTitre=$config['APPLI']['titre'];
+    $sTitle=$config['APPLI']['titre'];
     
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"

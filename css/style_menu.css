@@ -10,31 +10,37 @@ and open the template in the editor.
 
 /* Base CSS */
 
+/* Initialisation des attributs*/
 #cssmenu {
-    padding: 0; 
-    margin: 0; 
-    border: 0;
+    padding: 0px; 
+    margin:  0px; 
+    border:  0px;
     
 }
 #cssmenu ul,
 #cssmenu ul li,
 #cssmenu ul ul {
     list-style: none;
-    margin: 0; 
-    padding: 0; 
-    border: 0;
+    margin: 0px; 
+    padding: 0px; 
+    border: 0px;
+}
+
+
+#menu_banner{
+    width:100%; 
+    height:10%;
 }
 #cssmenu{
     background-color: black;
-    width:10.5%;
-    height: 80%;
+    position:fixed;
+    height:98%;
+    width: 10.5%;
 }
 
 #cssmenu ul {
     position: relative; 
     z-index: 397;
-    
-   
 }
 
 #cssmenu ul li {
@@ -42,13 +48,16 @@ and open the template in the editor.
     line-height: 1em;
     vertical-align: middle;
     horizontal-align:middle;
-    height: 1.5em;
+    height: auto;
+    min-height: 1.5em;
 }
+
 #cssmenu ul li:hover {
     position: relative; 
     z-index: 399; 
     cursor: default;
 }
+
 #cssmenu ul ul {
     visibility: hidden;
     position: absolute;
@@ -61,6 +70,8 @@ and open the template in the editor.
 #cssmenu ul ul ul {
     top: 0px;
     left: 99%;
+    width:auto;
+    
 }
 
 #cssmenu ul li:hover > ul {
@@ -73,22 +84,21 @@ and open the template in the editor.
 }
 
 /* Custom CSS Styles */
+/*Propriétés spécifiques */
+
 #cssmenu ul {
-    
     border-right: 0.3em solid;
     border-right-color:#61C45A;
-    width: 200px;
-    //background: black;
     
 }
 
 #cssmenu ul ul {
-    width: 150px;
+    width: 100%;
     background: #55d247;
 }
 
 #cssmenu ul li {
-    padding: 7px 10px;
+    padding: 4px 10px;
     color: #55d247;
 }
 
