@@ -1,5 +1,4 @@
 <!-- Menu de l'application -->
-
 <link type="text/css" href="css/style_menu.css" rel="stylesheet" >
 <!--Conteneur principal du Menu -->
 <div id='cssmenu'>

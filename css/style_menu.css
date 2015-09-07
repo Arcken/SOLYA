@@ -33,16 +33,9 @@ and open the template in the editor.
 }
 #cssmenu{
     background-color: black;
-<<<<<<< HEAD
     position:fixed;
     height:98%;
     width: 10.5%;
-    
-     
-=======
-    width:10.5%;
-    height: 80%;
->>>>>>> origin/master
 }
 
 #cssmenu ul {
