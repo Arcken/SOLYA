@@ -4,10 +4,16 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+<?php
+session_start();
+require_once('inc/ini.inc'); //recupere parametre du fichier param.ini
+// Initialisation des variables
+
+?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>test</title>
+        <title><?php $sTitre ?></title>
     </head>
     <body>
         <?php

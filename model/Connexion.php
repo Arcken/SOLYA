@@ -1,6 +1,6 @@
 <?php
 
-require_once 'inc/modele.inc.php';
+require_once 'inc/ini.inc';
 require_once 'exception/MySQLException.php';
  /**
      * Class de connexion à la base de données,
@@ -26,12 +26,11 @@ class Connexion {
         // singleton de la connexion
         // empty détermine si une variable est considérée comme vide. Une variable est considérée comme vide si elle n'existe pas, ou si sa valeur équivaut à FALSE. La fonction empty() ne génère pas d'alerte si la variable n'existe pas. 
         if (empty(self::$cnx)) {
-            $tParamSQL = getParamSQL();
             
             // Pas de try ... catch ici,on laisse l'appelant gérer l'erreur
             try {
                 //echo "mysql:host=$host;dbname=$base $user $passwd";
-                self::$cnx = new PDO("mysql:host=".$tParamSQL[0].";charset=utf8;dbname=".$tParamSQL[1], $tParamSQL[2], $tParamSQL[3],
+                self::$cnx = new PDO("mysql:host=".$host.";charset=utf8;dbname=".$base, $user, $passwd,
                         // Beaucoup d'applications web utilisent des connexions persistantes aux serveurs de base de données. 
                         // Les connexions persistantes ne sont pas fermées à la fin du 
                         // script, mais sont mises en cache et réutilisées lorsqu'un 
