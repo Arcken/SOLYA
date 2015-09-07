@@ -1,0 +1,114 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 3 sept. 2015, 15:34:05
+    Author     : Olivier
+*/
+
+/* Base CSS */
+
+#cssmenu {
+    padding: 0; 
+    margin: 0; 
+    border: 0;
+    
+}
+#cssmenu ul,
+#cssmenu ul li,
+#cssmenu ul ul {
+    list-style: none;
+    margin: 0; 
+    padding: 0; 
+    border: 0;
+}
+#cssmenu{
+    background-color: black;
+    width:2%;
+}
+#cssmenu ul {
+    position: relative; 
+    z-index: 397;
+    
+   
+}
+
+#cssmenu ul li {
+    min-height: 1px; 
+    line-height: 1em;
+    vertical-align: middle;
+    horizontal-align:middle;
+    height: 1.5em;
+}
+#cssmenu ul li:hover {
+    position: relative; 
+    z-index: 399; 
+    cursor: default;
+}
+#cssmenu ul ul {
+    visibility: hidden;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    z-index: 398;
+    width: 100%;
+}
+
+#cssmenu ul ul ul {
+    top: 0px;
+    left: 99%;
+}
+
+#cssmenu ul li:hover > ul {
+    visibility: visible;
+}
+
+#cssmenu ul ul {
+    top: 0px; 
+    left: 99%;
+}
+
+/* Custom CSS Styles */
+#cssmenu ul {
+    
+    border-right: 0.3em solid;
+    border-right-color:#61C45A;
+    width: 200px;
+    background: black;
+    
+}
+
+#cssmenu ul ul {
+    width: 150px;
+    background: #55d247;
+}
+
+#cssmenu ul li {
+    padding: 7px 10px;
+    color: #55d247;
+}
+
+#cssmenu ul li.hover,
+#cssmenu ul li:hover {
+    background: #61C45A;
+    color: #fff;
+
+}
+
+#cssmenu ul a:link,
+#cssmenu ul a:visited {
+    color: white;
+    text-decoration: none;
+    font-family: arial;
+    font-weight: bold;
+}
+#cssmenu ul a:hover {
+    color: #000;
+    
+}
+
+#cssmenu ul a:active {
+    color: #FAED3C;
+}
