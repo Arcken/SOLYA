@@ -26,7 +26,7 @@ and open the template in the editor.
 }
 #cssmenu{
     background-color: black;
-    width:2%;
+    width:10.5%;
 }
 #cssmenu ul {
     position: relative; 
@@ -76,7 +76,7 @@ and open the template in the editor.
     border-right: 0.3em solid;
     border-right-color:#61C45A;
     width: 200px;
-    background: black;
+    //background: black;
     
 }
 
