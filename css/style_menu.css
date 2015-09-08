@@ -30,17 +30,21 @@ and open the template in the editor.
 #menu_banner{
     width:100%; 
     height:10%;
+    margin-bottom: 20%;
+
 }
 #cssmenu{
     background-color: black;
     position:fixed;
     height:98%;
     width: 10.5%;
+
 }
 
 #cssmenu ul {
     position: relative; 
     z-index: 397;
+    
 }
 
 #cssmenu ul li {
@@ -50,6 +54,7 @@ and open the template in the editor.
     horizontal-align:middle;
     height: auto;
     min-height: 1.5em;
+    
 }
 
 #cssmenu ul li:hover {
