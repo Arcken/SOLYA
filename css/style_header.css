@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 8 sept. 2015, 12:14:32
+    Author     : Olivier
+*/
+
+/*Initialisation des propriétés*/
+#bloc_header,#img_header,#bloc_user_info{
+    margin:0px;
+    padding: 0px;
+    border: 0px;
+}
+
+/* Propriétés spécifiques*/
+#bloc_header{
+    position:fixed;
+    background-color:darkgray;
+    width:  100%;
+    height: 12%;
+    //text-align: center;
+}
+#img_header{
+    position:fixed;
+    width:10.5%; 
+    height:12%;
+    margin-bottom: 20%;
+    z-index: 500;
+    
+
+}
+#bloc_user_info{
+    position:fixed;
+    left:85%;
+    background-color: whitesmoke;
+    height:12%;
+    width:15%;
+    text-align:center;
+    top:0%;
+    
+}
+h1{
+    text-align:center;
+}
+
+

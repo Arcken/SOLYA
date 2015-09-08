@@ -1,5 +1,6 @@
 <?php //Test si l'utilisateur est connecté si non retour à connexion.
  if (isset($_SESSION['auth']) && $_SESSION['auth'] == TRUE){
+    require_once 'view/view_header.php';
     require_once 'view/view_menu.php';
  
  }

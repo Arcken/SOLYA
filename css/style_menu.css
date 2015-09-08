@@ -11,6 +11,7 @@ and open the template in the editor.
 /* Base CSS */
 
 /* Initialisation des attributs*/
+
 #cssmenu {
     padding: 0px; 
     margin:  0px; 
@@ -26,24 +27,19 @@ and open the template in the editor.
     border: 0px;
 }
 
-
-#menu_banner{
-    width:100%; 
-    height:10%;
-    margin-bottom: 20%;
-
-}
 #cssmenu{
     background-color: black;
     position:fixed;
-    height:98%;
+    height:100%;
     width: 10.5%;
+    top:12%;
 
 }
 
 #cssmenu ul {
     position: relative; 
     z-index: 397;
+    margin-top: 20%;
     
 }
 
@@ -54,7 +50,6 @@ and open the template in the editor.
     horizontal-align:middle;
     height: auto;
     min-height: 1.5em;
-    
 }
 
 #cssmenu ul li:hover {

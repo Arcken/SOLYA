@@ -2,10 +2,6 @@
 <link type="text/css" href="css/style_menu.css" rel="stylesheet" >
 <!--Conteneur principal du Menu -->
 <div id='cssmenu'>
-    
-    <!--Image du menu -->
-    <img id='menu_banner' src='files/Bandeau_SOLYA.png'></img>
-    
     <!--Elements du Menu -->
 <ul>
    <li><a href='index.php'><span>Accueil</span></a></li>
