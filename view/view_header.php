@@ -1,5 +1,5 @@
 <link type="text/css" href="css/style_header.css" rel="stylesheet">
-
+<?php print_r($_SESSION); ?>
 <div id="bloc_header">
      <!--Image du menu -->
     <img id='img_header' src='files/Bandeau_SOLYA.png'></img>
@@ -11,7 +11,11 @@
             <span><?php print_r($_SESSION['name']) ?></span>
             <span><?php print_r($_SESSION['lastname']) ?></span>
         </p>  
-        <div id="ui_bloc_btn"><button id="ui_btn_deco" type =button name="deconnect" value="Déconnexion" onclick="">Déconnexion</button></div>
+        <div id="ui_bloc_btn">
+            <form action="index.php" >
+            <input id="ui_btn_deco" type="submit" name="Action" value="Deconnexion" ></input>
+            </form>
+        </div>
     </div>
 </div>
 <?php  

@@ -7,4 +7,21 @@ and open the template in the editor.
     Created on : 4 sept. 2015, 12:54:38
     Author     : Olivier
 */
+body{
+    background-color: grey;
+    //background-image: url(../files/Bandeau_SOLYA.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-align: center;
+    color:white;
+    
+}
+
+#bloc_form_cnx{
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    top:40%;
+    
+}
 
