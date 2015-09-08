@@ -6,4 +6,4 @@ pwd = "Stage2015!"
 base = solya
 
 [APPLI]
-titre = "Gestion de Stock Sol'ya!"
+titre = "Sol'ya!"

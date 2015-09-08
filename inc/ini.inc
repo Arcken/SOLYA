@@ -1,4 +1,6 @@
 <?php
+
+//Récupération des paramètres de l'application
 $fichier = 'config/param.ini.php';
 if (file_exists($fichier) && is_file($fichier)) {
     $config = parse_ini_file($fichier, true);
