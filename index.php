@@ -1,6 +1,6 @@
 
 <meta charset="UTF-8"></meta>
-<link href="css/style_index.css" type="text/css" rel="stylesheet">
+<link href="css/style.css" type="text/css" rel="stylesheet">
 <?php
     session_start();
     require 'controler/control.php'; //appel page du contrôleur

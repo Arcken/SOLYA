@@ -18,11 +18,13 @@ and open the template in the editor.
 /* Propriétés spécifiques*/
 #bloc_header{
     position:fixed;
-    background-color:darkgray;
+    background-color:gainsboro;
     width:  100%;
     height: auto;
     min-height: 15.1%;
     max-height: 15.1%;
+    border-bottom: 1px solid black;
+    //border-radius: 10px;
     //text-align: center;
 }
 #img_header{
@@ -46,6 +48,7 @@ and open the template in the editor.
     width:15%;
     text-align:center;
     top:0%;
+    border-left: 1px solid black;
 }
 #ui_title{
     font-weight: bold;
