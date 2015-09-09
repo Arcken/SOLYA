@@ -2,8 +2,8 @@
 <div>
     <form>
         <div> 
-            <label for="gaLbl"> Libellé de la gamme: </label>
-            <input name="gaLbl" placeholder="Saisie" required type="text">            
+            <label for="consLbl"> Libellé: </label>
+            <input name="consLbl" placeholder="Saisie" required type="text">            
             <br>
             <input type="submit">
             <input name="clear" type="reset"> 
@@ -14,6 +14,6 @@
         <!-- affichage de la liste des éléments de "GAMMME" 
         avec foreach label pour chaque et bouton modifier
         -->
-        <p> Essai1 <img src="../img/icon/process.png" alt="" onclick="" title="Modifier"/> </p>
+        <p> Conservation1 <img src="../img/icon/process.png" alt="" onclick="" title="Modifier"/> </p>
     </div>
 </div>

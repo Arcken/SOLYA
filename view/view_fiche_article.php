@@ -1,6 +1,6 @@
 <?php ?>
-<form>
-    <div>
+<div>
+    <form>
         <div>
             <div> 
                 <label for="fiartId"> Code de la fiche article </label>
@@ -16,7 +16,9 @@
                     <option value="2">Tablette</option>
                     <option value="2">Graine</option>                        
                 </select>
-                <img src="../img/icon/add.png" alt=""/>
+                <a href="" onClick="popup('view_gamme.php');">
+                    <img src="../img/icon/add.png" alt=""/>
+                </a>
                 <br>
                 <label for="pays"> Pays: </label>
                 <select name="pays">
@@ -24,7 +26,9 @@
                     <option value="2">France</option>
                     <option value="2">Angleterre</option>                        
                 </select>
-                <img src="../img/icon/add.png" alt=""/>
+                <a href="" onClick="popup('view_pays.php');">
+                    <img src="../img/icon/add.png" alt=""/>
+                </a>
                 <br>
             </div>
 
@@ -49,8 +53,11 @@
             <!-- affichage de la liste des champs de nutrition 
             avec foreach input text et label pour chaque
             -->
-            <img src="../img/icon/add.png" alt=""/>
+            <a href="" onClick="popup('view_nutrition.php');">
+                <img src="../img/icon/add.png" alt=""/>
+            </a>
             <br>
         </div>
-    </div>
-</form>
+
+    </form>
+</div>
