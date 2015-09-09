@@ -1,11 +1,12 @@
 <?php ?>
-<div>
-    <form>
-        <div>
+<link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+<div class="corps">
+    <form class="form">
+        <div class="gauche">
             <div> 
                 <label for="fiartId"> Code de la fiche article </label>
                 <input name="fiartId" placeholder="Abréviation pays-gammes" required type="text">
-                <img src="../img/icon/accept.png" alt=""/>
+                <img src="img/icon/accept.png" alt=""/>
                 <br>
                 <label for="fiartLbl"> Libellé de la fiche article </label>
                 <input name="fiartLbl" placeholder="description" required type="text">
@@ -17,7 +18,7 @@
                     <option value="2">Graine</option>                        
                 </select>
                 <a href="" onClick="popup('view_gamme.php');">
-                    <img src="../img/icon/add.png" alt=""/>
+                    <img src="img/icon/add.png" alt=""/>
                 </a>
                 <br>
                 <label for="pays"> Pays: </label>
@@ -27,7 +28,7 @@
                     <option value="2">Angleterre</option>                        
                 </select>
                 <a href="" onClick="popup('view_pays.php');">
-                    <img src="../img/icon/add.png" alt=""/>
+                    <img src="img/icon/add.png" alt=""/>
                 </a>
                 <br>
             </div>
@@ -48,13 +49,13 @@
                 <input name="clear" type="reset"> 
             </div>
         </div>
-        <div>
+        <div class="droite">
             <p> Table de nutrition: </p>
             <!-- affichage de la liste des champs de nutrition 
             avec foreach input text et label pour chaque
             -->
             <a href="" onClick="popup('view_nutrition.php');">
-                <img src="../img/icon/add.png" alt=""/>
+                <img src="img/icon/add.png" alt=""/>
             </a>
             <br>
         </div>

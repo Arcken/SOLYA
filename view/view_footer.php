@@ -1,6 +1,6 @@
 <?php
 ?>
-
+</body>
 <footer>
     <link href="css/style_footer.css" type="text/css" rel="stylesheet">
     

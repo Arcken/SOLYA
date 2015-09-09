@@ -1,7 +1,7 @@
 <!-- Menu de l'application -->
 <link type="text/css" href="css/style_menu.css" rel="stylesheet" >
 <!--Conteneur principal du Menu -->
-<div id='cssmenu'>
+<aside id='menu'>
     <!--Elements du Menu -->
 <ul>
    <li><a href='index.php?Action=Accueil'><span>Accueil</span></a></li>
@@ -111,7 +111,7 @@
    </li>
    <li><a href='#'><span>Alertes</span></a></li>
 </ul>
-</div>
+</aside>
 
 
 

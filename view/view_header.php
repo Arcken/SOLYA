@@ -24,13 +24,13 @@
         <!-- Bloc contenant le bouton-->
         <div id="ui_bloc_btn">
             <form action="index.php" >
-            <input id="ui_btn_deco" type="submit" name="Action" value="Deconnexion" ></input>
+            <input id="ui_btn_deco" type="submit" name="action" value="deconnexion" ></input>
             </form>
         </div>
         
     </div>
 </div>
-
+<body class="zone_client">
 
 
  

@@ -8,8 +8,9 @@
     require_once 'inc/ini.inc'; //recupere parametre du fichier param.ini
     require_once 'model/Connection.php';
     require_once 'inc/model.inc';
-    require 'security/user_control.php';
-    require_once'controler/control.php';
+    require_once 'security/user_control.php';
+    require_once 'controler/control.php';
+    
     //Test si l'utilisateur est connecté si non retour à connexion.
     ?>
 </head>

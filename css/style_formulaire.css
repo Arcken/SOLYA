@@ -1,0 +1,48 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 9 sept. 2015, 15:51:47
+    Author     : patat
+*/
+
+.corps{
+    position: relative;
+    width: 74%;
+    height: auto;
+    left: 11%;
+    top: 18%;
+    
+    border: 2px solid yellow;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+
+}
+.form{
+    padding-left: 5px;
+    display: inline;
+    vertical-align: top;
+    border: red solid 1px;    
+    width: 100%;
+    margin: 5px;
+}
+.gauche{
+    width: 45%;    
+    border: blue solid 1px;
+}
+.droite{
+    width: 20%;    
+    border: green solid 1px;
+}
+.gauche, label{
+    width: 250px;
+}
+.gauche, input{
+    width: 250px;
+}

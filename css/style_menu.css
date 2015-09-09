@@ -12,22 +12,23 @@ and open the template in the editor.
 
 /* Initialisation des attributs*/
 
-#cssmenu {
+#menu {
     padding: 0px; 
     margin:  0px; 
     border:  0px;
     
+    
 }
-#cssmenu ul,
-#cssmenu ul li,
-#cssmenu ul ul {
+#menu ul,
+#menu ul li,
+#menu ul ul {
     list-style: none;
     margin: 0px; 
     padding: 0px; 
     border: 0px;
 }
 
-#cssmenu{
+#menu{
     background-color: black;
     position:fixed;
     height:100%;
@@ -36,14 +37,14 @@ and open the template in the editor.
 
 }
 
-#cssmenu ul {
+#menu ul {
     position: relative; 
-    z-index: 397;
+    z-index: 0;
     margin-top: 20%;
     
 }
 
-#cssmenu ul li {
+#menu ul li {
     min-height: 1px; 
     line-height: 1em;
     vertical-align: middle;
@@ -52,13 +53,13 @@ and open the template in the editor.
     min-height: 1.5em;
 }
 
-#cssmenu ul li:hover {
+#menu ul li:hover {
     position: relative; 
     z-index: 399; 
     cursor: default;
 }
 
-#cssmenu ul ul {
+#menu ul ul {
     visibility: hidden;
     position: absolute;
     top: 100%; 
@@ -67,18 +68,18 @@ and open the template in the editor.
     width: 100%;
 }
 
-#cssmenu ul ul ul {
+#menu ul ul ul {
     top: 0px;
     left: 99%;
     width:auto;
     
 }
 
-#cssmenu ul li:hover > ul {
+#menu ul li:hover > ul {
     visibility: visible;
 }
 
-#cssmenu ul ul {
+#menu ul ul {
     top: 0px; 
     left: 99%;
 }
@@ -86,41 +87,56 @@ and open the template in the editor.
 /* Custom CSS Styles */
 /*Propriétés spécifiques */
 
-#cssmenu ul {
+#menu ul {
     border-right: 0.3em solid;
     border-right-color:#61C45A;
     
 }
 
-#cssmenu ul ul {
+#menu ul ul {
     width: 100%;
     background: #55d247;
 }
 
-#cssmenu ul li {
+#menu ul li {
     padding: 4px 10px;
     color: #55d247;
 }
 
-#cssmenu ul li.hover,
-#cssmenu ul li:hover {
+#menu ul li.hover,
+#menu ul li:hover {
     background: #61C45A;
     color: #fff;
 
 }
 
-#cssmenu ul a:link,
-#cssmenu ul a:visited {
+#menu ul a:link,
+#menu ul a:visited {
     color: white;
     text-decoration: none;
     font-family: arial;
     font-weight: bold;
 }
-#cssmenu ul a:hover {
+#menu ul a:hover {
     color: #000;
     
 }
 
-#cssmenu ul a:active {
+#menu ul a:active {
     color: #FAED3C;
+}
+
+/* Bloc du centre de l'application */
+.zone_client{
+    position :static;
+    top:12%;
+    left:10.5%;
+    width:100%;
+    height:90%;
+    background-color: white;
+    display: inline-block;
+    //background-color: yellow;
+}
+.formulaire{
+    position: relative;
 }
