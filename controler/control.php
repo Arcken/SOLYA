@@ -45,5 +45,5 @@ switch ($sAction){
         require_once 'view/view_connection.php';
         
     }
-    echo $sAction;
+    
 ?>
