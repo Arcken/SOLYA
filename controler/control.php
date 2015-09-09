@@ -28,7 +28,7 @@ switch ($sAction){
             session_destroy();
             session_commit();
             $_SESSION=array();
-            require 'index.php';
+            require 'view/view_connection.php';
             }
             break;
     
