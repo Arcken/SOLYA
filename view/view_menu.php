@@ -48,7 +48,7 @@
          <li><a href='#'><span>Créer</span></a>
             <ul>
                <li><a href='#'><span>Gamme</span></a></li>
-               <li><a href='#'><span>Fiche Article</span></a></li>
+               <li><a href='index.php?action=fiart'><span>Fiche Article</span></a></li>
                <li class='last'><a href='#'><span>Références</span></a></li>
             </ul>
          </li>
