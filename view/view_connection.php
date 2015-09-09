@@ -1,3 +1,11 @@
+<?php 
+    if (isset($_REQUEST['login'])){
+    
+     echo '<span> Authentification requise pour accéder au contenu de cette page </span>';
+     
+    }  
+
+?>
 <link type="text/css" href="css/style_connexion.css" rel="stylesheet" >
 <div id="bloc_form_cnx">
     

@@ -15,7 +15,7 @@ body{
     
 }
 /* Bloc du centre de l'application */
-.bloc_traitement{
+.zone_client{
     position :static;
     top:12%;
     left:10.5%;

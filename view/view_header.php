@@ -1,5 +1,5 @@
 <link type="text/css" href="css/style_header.css" rel="stylesheet">
-<header>
+
 <!--Bloc du header-->
 <div id="bloc_header">
     
@@ -30,7 +30,7 @@
         
     </div>
 </div>
-</header>
+
 
 
  
