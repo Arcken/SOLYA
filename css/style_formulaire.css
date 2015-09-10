@@ -15,7 +15,7 @@ and open the template in the editor.
     height: auto;
     left: 12.9%;
     top: 17%;
-    background-color: darkgray;
+    background-color: gray;
     border: 2px solid yellow;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -26,26 +26,54 @@ and open the template in the editor.
 
 }
 .form{
-    position: relative;
-    display: inline-block;
-    vertical-align: top;
-    border: red solid 1px;    
+    position: relative;            
     width: 98%;
     height: auto;
     margin: 1%;
 }
-.gauche{
-    width: 400px;    
-    border: blue solid 1px;
+.form img{
+    border: solid black 1px;
+    vertical-align: middle;
+    float: right;
+    margin-right: 20px;
+}
+.form input,textArea,select{
+    margin-left: 30px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    border: solid black 1px;
+}
+.form label{    
+    color: white;
+}
+.droite, .gauche{
+    border: antiquewhite solid 2px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
     
 }
+.gauche{
+    padding: 5px;   
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: top;    
+    width: 47%;     
+}
+
 .droite{
-    width: 200px;    
-    border: green solid 1px;
+    width: auto;    
+   margin-left: 15px;
+    display: inline-block;
+    vertical-align: top;
+    
 }
-.gauche, label{
-    width: 250px;
-}
-.gauche, input{
-    width: 250px;
+.bas{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    
 }
