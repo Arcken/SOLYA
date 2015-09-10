@@ -10,7 +10,7 @@ require_once 'exception/MySQLException.php';
      * 
      * @throws MySQLException
      */
-class Connexion {
+class Connection {
 
     private static $cnx;
 
@@ -21,7 +21,7 @@ class Connexion {
      * @return type identifiant de connexion
      * @throws MySQLException
      */
-    public static function getConnexion() {
+    public static function getConnection() {
     
         // singleton de la connexion
         // empty détermine si une variable est considérée comme vide. Une variable est considérée comme vide si elle n'existe pas, ou si sa valeur équivaut à FALSE. La fonction empty() ne génère pas d'alerte si la variable n'existe pas. 
@@ -62,49 +62,101 @@ class Connexion {
     }
 
     /**
-     * Envoie une requête préparé 
-     * et retourne le résultat dans le format PDO demandé.<br>
-     * Si nécessaire, ne pas oublier de tester le nbre d'enreg retourné avec
-     * $result->rowCount()
-     * 
+     * Envoie une requète à la base de données
+     * Le code requète permet de choisir le type de requète 
+	 *
+     * 0 = Pour un select simple
+     * 1 = Pour un select préparé
+	 * 2 = Pour un insert simple
+	 * 3 = Pour un insert préparé
+	 *
      * $format est optionnel, par défaut -> PDO::FETCH_OBJ
-     * Si $tParam n'est pas renseigné, la fonction execute une requête simple.
+     * Si $CodeRequete n'est pas renseigné, la fonction execute un select simple.
+	 * @param int $CodeRequete de 0 à 3
      * @param string $sql
      * @param array $tParam
      * @param [int $format]
      * @return un tableau en fonction du format
      * @throws MySQLException
      */
-    public static function requetes($sql, $tParam = null, $format = PDO::FETCH_OBJ) {
+    public static function request($codeRequete = 0, $sql, $tParam = null, $format = PDO::FETCH_OBJ) {
 
         if (empty(self::$cnx)) {
-            self::$cnx = Connexion::getConnexion();
+            self::$cnx = Connection::getConnection();
         }
+		
         //Libération des ressources précédentes
         //PDO::query() retourne un objet PDOStatement, ou FALSE si une erreur survient. 
         //donc le try .. catch est inutile
 		
-        //Si $tParam = null on lance une requete simple
-        if ($tParam === null) {
+		switch ($codeRequete){
+			
+			//Requète select simple
+			
+			case 0:
+				$stm = self::$cnx->query($sql);
+				$result = $stm->fetchAll($format);
+				$stm->closeCursor();
+				
+				if (!$result) {
+				throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+				} else {
+					return $result;
+				}
+			break;
+			
+			
+			//Requète select préparé
+			
+			case 1:
+			
+				$stm = self::$cnx->prepare($sql);
+				$stm->execute($tParam);
+				$result = $stm->fetch($format);
+				$stm->closeCursor();
+			
+				if (!$result) {
+					throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+				} else {
+					return $result;
+				}
+			break;
+				
+				
+			//Requète insert simple
+			
+			case 2:
+			
+				$result = $stm = self::$cnx->query($sql);
+				$stm->closeCursor();
+				
+				if (!$result) {
+				throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+			} else {
+				return $result;
+			}
+			break;
+			
+				
+			//Requète insert préparé
+			
+			case 3:
+			
+				$stm = self::$cnx->prepare($sql);
+				$result = $stm->execute($tParam);
+				$stm->closeCursor();
+			
+				if (!$result) {
+					throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+				} else {
+					return $result;
+				}
+				break;
+				
+			
+		}
+}
 
-            $stm = self::$cnx->query($sql);
-            $result = $stm->fetchAll($format);
-            $stm->closeCursor();
-        }
-		
-        //Sinon on lance une requete préparée prenant $tParam en paramètres
-        else {
-            $stm = self::$cnx->prepare($sql);
-            $stm->execute($tParam);
-            $result = $stm->fetchAll($format);
-            $stm->closeCursor();
-        }
-        if (!$result) {
-            throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-        } else {
-            return $result;
-        }
-    }
 /**
      * Envoie une requête préparé 
      * et retourne le résultat dans le format PDO demandé.<br>
@@ -120,7 +172,7 @@ class Connexion {
      * @return un tableau en fonction du format
      * @throws MySQLException
      */
-    public static function requeteFetch($sql,$tParam=null,$paramUn=null,$paramDeux=null,$format = PDO::FETCH_BOTH) {
+    /*public static function requeteFetch($sql,$tParam=null,$paramUn=null,$paramDeux=null,$format = PDO::FETCH_BOTH) {
 
         if (empty(self::$cnx)) {
             self::$cnx = Connexion::getConnexion();
@@ -164,7 +216,7 @@ class Connexion {
         } else {
             return $result;
         }
-    }
+    }*/
 
     /**
      * Retourne l'identifiant de la dernière ligne insérée
@@ -173,7 +225,7 @@ class Connexion {
      */
     public static function dernierId() {
         if (empty(self::$cnx)) {
-            self::$cnx = Connexion::getConnexion();
+            self::$cnx = Connection::getConnection();
         }
         return self::$cnx->lastInsertId();
     }

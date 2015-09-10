@@ -73,6 +73,9 @@ else {
             require 'view/view_fiche_article.php';
             break;
         
+        case "test":
+            require'view/view_gamme.php';
+            break;
     }
     require_once 'view/view_footer.php';
 }

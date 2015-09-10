@@ -12,7 +12,7 @@ class FicheArticleManager {
         try {
            
             $sql = 'SELECT * FROM fiche_article';
-            $result = Connexion::requetes($sql);
+            $result = Connection::request(0,$sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }
@@ -42,15 +42,15 @@ class FicheArticleManager {
                         . "VALUES(?,?,?,?)";
                         //. "PAYS_ID,"
                 
-                $result = Connexion::requeteFetch($sql,$tParam);
-           
+                $result = Connection::request(3,$sql,$tParam);
+                print_r($result);
             }else{
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
             }
                 
         } catch (MySQLException $e) {
           
-           //echo $e->RetourneErreur();
+           echo $e->RetourneErreur();
           
             //$result ='<br/><p class="info">la Fiche article a bien était ajouté </p>';
            

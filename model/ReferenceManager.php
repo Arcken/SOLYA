@@ -22,7 +22,7 @@ class ReferenceManager {
         try {
            
             $sql = 'SELECT * FROM reference';
-            $result = Connexion::requetes($sql);
+            $result = Connection::request($sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }
@@ -68,7 +68,7 @@ class ReferenceManager {
                         . "REF_DIM_DIAM) " .
                     " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
-                $result = Connexion::requetes($sql,$tParam);
+                $result = Connection::request($sql,$tParam);
            
             }else{
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
