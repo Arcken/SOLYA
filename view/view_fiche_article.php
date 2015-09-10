@@ -45,8 +45,9 @@
                 </div>
             </div>
             <div>
-                <input value="Submit" type="submit">
+                <input name="action" value="fiartAdd" type="submit">
                 <input name="clear" type="reset"> 
+                <textarea name="php_action" value="<?php echo $sPhp_Action ?>" hidden>
             </div>
         </div>
         <div class="droite">

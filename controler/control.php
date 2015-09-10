@@ -5,15 +5,20 @@ $sAction = '';
 
 if (!isset($_SESSION['auth'])) {
     require 'view/view_connection.php';
-} else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
+} 
+else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
+    
     session_destroy();
     session_commit();
     $_SESSION = array();
     require 'view/view_connection.php';
-} else {
+    
+} 
+else {
+    
     require_once'view/view_header.php';
     require_once'view/view_menu.php';
-
+    
     if (isset($_REQUEST['action'])) {
         $sAction = $_REQUEST['action'];
     }
@@ -26,8 +31,17 @@ if (!isset($_SESSION['auth'])) {
         case "connexion":
             $sPageTitle = "Accueil";
             break;
-        
-        //Catalogue
+       
+     //Catalogue
+        case "fiart_add":
+            require 'model/FicheArticle.php';
+            require 'model/FicheArticleManager.php';
+            
+            if(isset($_REQUEST['fiart_add'])){
+               $oFiArt= new FicheArticle(); 
+            }
+            
+            break;
     }
 
     /* ----------------------------Affichage--------------------------------- */
@@ -41,6 +55,8 @@ if (!isset($_SESSION['auth'])) {
         //Catalogue
         case "fiart":
             require 'view/view_fiche_article.php';
+            break;
+        
     }
     require_once 'view/view_footer.php';
 }
