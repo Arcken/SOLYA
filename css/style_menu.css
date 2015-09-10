@@ -14,9 +14,7 @@ and open the template in the editor.
 
 #menu {
     padding: 0px; 
-    margin:  5px;
-    height: 100%;
-   
+    margin: 0px;
     
 }
 #menu ul,
@@ -31,7 +29,9 @@ and open the template in the editor.
 #menu{
     background-color: black;
     position:fixed;
-    height:100%;
+    height:82.7%;
+    margin-left: 7px;
+    margin-top: 7px;
     width: 10.5%;
     top:15.1%;
      border:  2px solid cyan;

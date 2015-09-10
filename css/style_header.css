@@ -26,19 +26,19 @@ and open the template in the editor.
     border-bottom: 1px solid black;
     //border-radius: 10px;
     //text-align: center;
+    
 }
-#img_header{
+#header_img{
     position:fixed;
     width:10.5%; 
     height:auto;
-    min-width: 10.5%;
-    min-height:15.1%;
-    margin-bottom: 20%;
-    z-index: 500;
+    margin: 1px;    
+    z-index: 500;  
     
-
 }
-#bloc_user_info{
+
+
+#header_user_info{
     position:fixed;
     left:85%;
     background-color: whitesmoke;

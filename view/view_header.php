@@ -4,13 +4,15 @@
 <div id="bloc_header">
     
      <!--Image du menu -->
+     <div id="header_img">
     <img id='img_header' src='files/Bandeau_SOLYA.png'></img>
-    
+     </div>
+     <div id="header_titre">
     <!--Titre De la page -->
     <h1><?php echo $sPageTitle ?></h1>
-    
+     </div>
     <!--Bloc des informations utilisateurs-->
-    <div id="bloc_user_info">
+    <div id="header_user_info">
         
         <!-- Titre du bloc Informations utilisateurs-->
         <span id="ui_title">Informations :</span>

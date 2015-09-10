@@ -12,7 +12,7 @@ and open the template in the editor.
     position: relative;
     width: 74%;
     height: auto;
-    left: 12%;
+    left: 12.4%;
     top: 18%;
 
     border: 2px solid yellow;
@@ -29,15 +29,17 @@ and open the template in the editor.
     display: inline-block;
     vertical-align: top;
     border: red solid 1px;    
-    //width: 100%;
-    margin: 5px;
+    width: 98%;
+    height: auto;
+    margin: 1%;
 }
 .gauche{
     width: 400px;    
     border: blue solid 1px;
+    
 }
 .droite{
-    width: 20%;    
+    width: 200px;    
     border: green solid 1px;
 }
 .gauche, label{
