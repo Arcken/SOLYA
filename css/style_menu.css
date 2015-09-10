@@ -14,9 +14,9 @@ and open the template in the editor.
 
 #menu {
     padding: 0px; 
-    margin:  0px; 
-    border:  0px;
-    
+    margin:  5px;
+    height: 100%;
+   
     
 }
 #menu ul,
@@ -34,7 +34,13 @@ and open the template in the editor.
     height:100%;
     width: 10.5%;
     top:15.1%;
-
+     border:  2px solid cyan;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 
 #menu ul {

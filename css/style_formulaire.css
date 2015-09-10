@@ -12,9 +12,9 @@ and open the template in the editor.
     position: relative;
     width: 74%;
     height: auto;
-    left: 11%;
+    left: 12%;
     top: 18%;
-    
+
     border: 2px solid yellow;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -25,15 +25,15 @@ and open the template in the editor.
 
 }
 .form{
-    padding-left: 5px;
-    display: inline;
+    position: relative;
+    display: inline-block;
     vertical-align: top;
     border: red solid 1px;    
-    width: 100%;
+    //width: 100%;
     margin: 5px;
 }
 .gauche{
-    width: 45%;    
+    width: 400px;    
     border: blue solid 1px;
 }
 .droite{

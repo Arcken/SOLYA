@@ -13,9 +13,18 @@ footer{
     height: 10%;
     background-color: whitesmoke;
     bottom:0%;
-    left:10.5%;
+    left:11.5%;
     border-top: 1px solid black;
-    
+    margin: 5px;
+    margin-bottom: 7px; 
+    margin-right: 7px;
+    border: 2px magenta solid;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 #bloc_footer{
 }
