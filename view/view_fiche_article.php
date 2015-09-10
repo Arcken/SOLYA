@@ -1,7 +1,7 @@
 <?php ?>
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 <div class="corps">
-    <form class="form">
+    <form class="form" action="index.php" method="get">
         <div class="gauche">
             <div> 
                 <label for="fiartId"> Code de la fiche article </label>
@@ -41,13 +41,13 @@
                 </div>
                 <div>                    
                     <label for="fiartAlg"> Allergénes: </label>
-                    <textarea rows="4" cols="30" placeholder="Saisie"></textarea>
+                    <textarea name="fiartAlg" rows="4" cols="30" placeholder="Saisie"></textarea>
                 </div>
             </div>
             <div>
-                <input name="action" value="fiartAdd" type="submit">
+                <input name="btnForm" type="submit" value="<?php echo $sButton;?>">
                 <input name="clear" type="reset"> 
-                <textarea name="php_action" value="<?php echo $sPhp_Action ?>" hidden>
+                <input name="action" value="<?php echo $sAction ?>" type="text">
             </div>
         </div>
         <div class="droite">

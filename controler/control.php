@@ -2,6 +2,8 @@
 
 $sPageTitle = "Connexion";
 $sAction = '';
+//$sPhp_Action='';
+//$sButton='';
 
 if (!isset($_SESSION['auth'])) {
     require 'view/view_connection.php';
@@ -34,13 +36,27 @@ else {
        
      //Catalogue
         case "fiart_add":
+            
             require 'model/FicheArticle.php';
             require 'model/FicheArticleManager.php';
             
-            if(isset($_REQUEST['fiart_add'])){
-               $oFiArt= new FicheArticle(); 
-            }
-            
+                $sButton="Envoyer";
+               
+                if (isset($_REQUEST['btnForm'])&& $_REQUEST['btnForm']=="Envoyer"){
+                    
+                $oFiArt= new FicheArticle();
+                //$oFiArt->fiart_id      = $_REQUEST[''];
+                $oFiArt->fiart_pays_id = $_REQUEST['pays'];
+                $oFiArt->fiart_lbl     = $_REQUEST['fiartLbl'];
+                //$oFiArt->fiart_photos  = $_REQUEST[''];
+                $oFiArt->fiart_ing     = $_REQUEST['fiartIng'];
+                $oFiArt->fiart_alg     = $_REQUEST['fiartAlg'];
+                echo $oFiArt->fiart_lbl;
+                $result = FicheArticleManager::addFicheArticle($oFiArt);
+                echo $result;
+                
+                }
+                
             break;
     }
 
@@ -53,7 +69,7 @@ else {
             break;
         
         //Catalogue
-        case "fiart":
+        case "fiart_add":
             require 'view/view_fiche_article.php';
             break;
         

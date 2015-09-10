@@ -1,5 +1,5 @@
 <?php
-
+require_once 'Connection.php';
 class FicheArticleManager {
     
     /**
@@ -23,11 +23,11 @@ class FicheArticleManager {
         
         try {
             
-            if(!empty($FicheArticle->fiart_lbl)&&($FicheArticle->fiart_lbl>3)){
+            if(!empty($FicheArticle->fiart_lbl)&& (strlen($FicheArticle->fiart_lbl))>3){
                 
-                $tParam =array(
-                            $FicheArticle->fiart_id,
-                            $FicheArticle->fiart_pays_id,
+                $tParam = array(
+                            
+                            //$FicheArticle->fiart_pays_id,
                             $FicheArticle->fiart_lbl,
                             $FicheArticle->fiart_photos,
                             $FicheArticle->fiart_ing,
@@ -35,14 +35,14 @@ class FicheArticleManager {
                         );
                 
                 $sql = "INSERT INTO fiche_article ("
-                        . "PAYS_ID,"
                         . "FIART_LBL,"
                         . "FIART_PHOTOS,"
                         . "FIART_ING,"
                         . "FIART_ALG)"
-                        . "VALUES(?,?,?,?,?,?)";
+                        . "VALUES(?,?,?,?)";
+                        //. "PAYS_ID,"
                 
-                $result = Connexion::requetes($sql,$tParam);
+                $result = Connexion::requeteFetch($sql,$tParam);
            
             }else{
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
@@ -50,11 +50,12 @@ class FicheArticleManager {
                 
         } catch (MySQLException $e) {
           
-           
-            $result ='<br/><p class="info">la Fiche article a bien était ajouté </p>';
+           //echo $e->RetourneErreur();
+          
+            //$result ='<br/><p class="info">la Fiche article a bien était ajouté </p>';
            
           
         }
-        return $result;
+       // return $result;
     }
 }

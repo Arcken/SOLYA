@@ -23,8 +23,8 @@ class MySQLException extends Exception {
             $msg .= '<br>' . $this->cnx->errorInfo()[0] ;
         }
         $msg .= '<br>Trace : ' . str_replace("#", "<br>", $this->getTraceAsString());
-//        $msg .= ' dans ' . $this->getFile();
-//        $msg .= ' ligne : ' . $this->getLine();
+        $msg .= ' dans ' . $this->getFile();
+        $msg .= ' ligne : ' . $this->getLine();
         $msg .= '</div>';
         return $msg;
     }

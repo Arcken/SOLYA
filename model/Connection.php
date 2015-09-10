@@ -27,13 +27,14 @@ class Connexion {
         // empty détermine si une variable est considérée comme vide. Une variable est considérée comme vide si elle n'existe pas, ou si sa valeur équivaut à FALSE. La fonction empty() ne génère pas d'alerte si la variable n'existe pas. 
         if (empty(self::$cnx)) {
             $fichier = 'config/param.ini.php';
-if (file_exists($fichier) && is_file($fichier)) {
-    $config = parse_ini_file($fichier, true);
+            
+    if (file_exists($fichier) && is_file($fichier)) {
+            $config = parse_ini_file($fichier, true);
 
-    $host = $config['SQL']['host'];
-    $user = $config['SQL']['user'];
-    $pwd  = $config['SQL']['pwd'];
-    $base = $config['SQL']['base'];
+            $host = $config['SQL']['host'];
+            $user = $config['SQL']['user'];
+            $pwd  = $config['SQL']['pwd'];
+            $base = $config['SQL']['base'];
     
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"
@@ -154,6 +155,7 @@ if (file_exists($fichier) && is_file($fichier)) {
             $stm->execute($tParam);
             $result = $stm->fetchAll($format);
             $stm->closeCursor();
+            print_r ($result);
         }
       
         
