@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 /*Initialisation des propriétés*/
-#bloc_header,#img_header,#bloc_user_info{
+#bloc_header{
     margin:0px;
     padding: 0px;
     border: 0px;
@@ -20,20 +20,39 @@ and open the template in the editor.
     position:fixed;
     background-color:gainsboro;
     width:  100%;
-    height: auto;
+    height: 15.1%;
     min-height: 15.1%;
     max-height: 15.1%;
     border-bottom: 1px solid black;
+    display: inline-block;
+    vertical-align: top;
     //border-radius: 10px;
     //text-align: center;
     
 }
 #header_img{
-    position:fixed;
+    
     width:10.5%; 
-    height:auto;
-    margin: 1px;    
-    z-index: 500;  
+    height:100%;
+    margin: 1px;
+    background-image: url(../files/Bandeau_SOLYA.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: solid yellow 2px;
+    //z-index: 500;
+}
+
+#img_header{
+    width: 100%;
+}
+
+#header_title{
+    position: relative;
+    width:70%;
+    height: auto;
+    border: solid red 2px;
+    left: 13%;
     
 }
 

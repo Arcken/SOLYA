@@ -5,9 +5,9 @@
     
      <!--Image du menu -->
      <div id="header_img">
-    <img id='img_header' src='files/Bandeau_SOLYA.png'></img>
+         <p>.</p>
      </div>
-     <div id="header_titre">
+     <div id="header_title">
     <!--Titre De la page -->
     <h1><?php echo $sPageTitle ?></h1>
      </div>
