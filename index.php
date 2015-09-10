@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8"></meta>
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="../css/style.css" type="text/css" rel="stylesheet">
      <?php
     //Début de la session
     session_start();
