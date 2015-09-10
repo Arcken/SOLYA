@@ -8,15 +8,16 @@ and open the template in the editor.
     Author     : Olivier
 */
 footer{
+    z-index: 2;
     position:fixed;
     width:86%;
     height: 10%;
     background-color: whitesmoke;
-    bottom:0%;
+    bottom: 0;
     left:12%;
     border-top: 1px solid black;
     margin: 5px;
-    margin-bottom: 1%; 
+    //margin-bottom: 1%; 
     margin-right: 7px;
     border: 2px magenta solid;
     border-radius: 10px 10px 10px 10px;

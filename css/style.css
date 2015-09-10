@@ -9,11 +9,14 @@ and open the template in the editor.
 */
 html{
     height: 100%;
+    width: 100%;
+    
 }
 body{
     padding:0px;
     margin: 0px;
     border:0px;
     font-family: arial;
-    
+    background-color: #FAED3C;
+      
 }

@@ -9,12 +9,13 @@ and open the template in the editor.
 */
 
 .corps{
-    position: relative;
-    width: 74%;
+    
+    position: fixed;
+    width: 70%;
     height: auto;
-    left: 12.4%;
-    top: 18%;
-
+    left: 12.9%;
+    top: 17%;
+    background-color: darkgray;
     border: 2px solid yellow;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;

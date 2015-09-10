@@ -27,11 +27,12 @@ and open the template in the editor.
 }
 
 #menu{
+    z-index: 1;
     background-color: black;
     position:fixed;
     height:82.7%;
-    margin-left: 7px;
-    margin-top: 7px;
+    margin-left: 5px;
+    margin-top: 17px;
     width: 10.5%;
     top:15.1%;
      border:  2px solid cyan;
@@ -132,17 +133,7 @@ and open the template in the editor.
     color: #FAED3C;
 }
 
-/* Bloc du centre de l'application */
-.zone_client{
-    position :static;
-    top:12%;
-    left:10.5%;
-    width:100%;
-    height:90%;
-    background-color: white;
-    display: inline-block;
-    //background-color: yellow;
-}
+
 .formulaire{
     position: relative;
 }

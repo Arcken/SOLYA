@@ -11,4 +11,5 @@ and open the template in the editor.
     position: fixed;
     top:15.1%;
     left:10.5%;
+    border: solid black 2px;
 }

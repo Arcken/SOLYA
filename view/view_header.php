@@ -15,7 +15,7 @@
     <div id="header_user_info">
         
         <!-- Titre du bloc Informations utilisateurs-->
-        <span id="ui_title">Informations :</span>
+        <p id="ui_title">Informations :</p>
         
         <!-- Paragraphe contenant le nom et prénom-->
         <p id ="ui_info">
@@ -24,7 +24,7 @@
         </p>
         
         <!-- Bloc contenant le bouton-->
-        <div id="ui_bloc_btn">
+        <div>
             <form action="index.php" >
             <input id="ui_btn_deco" type="submit" name="action" value="deconnexion" ></input>
             </form>
@@ -33,6 +33,3 @@
     </div>
 </div>
 <body class="zone_client">
-
-
- 
