@@ -17,7 +17,7 @@
                     <option value="2">Tablette</option>
                     <option value="2">Graine</option>                        
                 </select>
-                <a href="" onClick="popup('view/view_gamme.php');">
+                <a href="" onClick="popup('view/view_gamme.php','newView');">
                     <img src="img/icon/add.png" alt="" title="Créer gamme"/>
                 </a>
                 <br>

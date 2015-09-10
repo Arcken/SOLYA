@@ -1,10 +1,76 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 10 sept. 2015, 15:27:53
-    Author     : patat
-*/
+body{
+    background-color: antiquewhite;
+}
 
+.corps{    
+    position: relative;
+    width: 98%;
+    height: auto;    
+    background-color: gray;
+    border: 2px solid yellow;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+}
+
+.form{
+    position: relative;            
+    width: 98%;
+    height: auto;
+    margin: 1%;
+}
+.form img{
+    border: solid black 1px;
+    vertical-align: middle;
+    float: right;
+    margin-right: 20px;
+}
+.form input,textArea,select{
+    margin-left: 30px;
+    margin-top: 4px;
+    margin-bottom: 8px;
+    border: solid black 1px;
+}
+
+h2{
+    color: white;
+    
+    text-align: center;
+}
+.form label{    
+    color: white;
+}
+.droite, .gauche{
+    border: antiquewhite solid 2px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+    
+}
+.gauche{
+    padding: 5px;   
+    margin-left: 5px;
+    display: inline-block;
+    vertical-align: top;    
+    width: 47%;     
+}
+
+.droite{
+    width: auto;    
+   margin-left: 15px;
+    display: inline-block;
+    vertical-align: top;
+    
+}
+.bas{
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    
+}

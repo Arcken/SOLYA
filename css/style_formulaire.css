@@ -25,6 +25,10 @@ and open the template in the editor.
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 
 }
+h2{
+    color: wheat;
+    text-align: center;
+}
 .form{
     position: relative;            
     width: 98%;

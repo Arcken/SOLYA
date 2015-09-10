@@ -17,7 +17,7 @@ else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
     
 } 
 else {
-    
+    if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'newView')== false){
     require_once'view/view_header.php';
     require_once'view/view_menu.php';
     
@@ -64,19 +64,35 @@ else {
     switch ($sAction) {
 
         case "home":
-        case "connexion":
+        case "connexion":            
             require 'view/view_home.php';
             break;
         
         //Catalogue
         case "fiart_add":
+            $sPageTitle = "Ajouter une fiche article";
             require 'view/view_fiche_article.php';
             break;
         
-        case "test":
+        
+        case "ga_add":
+            $sPageTitle = "Ajouter une gamme";
             require'view/view_gamme.php';
             break;
     }
     require_once 'view/view_footer.php';
+}
+
+else{
+    if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'newView')!= false){
+        $sAction = $_REQUEST['action'];
+        
+        switch ($sAction) {
+            case newViewGamme:
+                include 'view_gamme.php';
+        }
+        
+    }
+}
 }
 ?>
