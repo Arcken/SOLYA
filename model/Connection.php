@@ -63,22 +63,22 @@ class Connection {
 
     /**
      * Envoie une requète à la base de données
-     * Le code requète permet de choisir le type de requète 
+     * Le code requète permet de choisir le type de résultat attendu par la requête
 	 *
-     * 0 = Pour un select simple
-     * 1 = Pour un select préparé
-	 * 2 = Pour un insert simple
-	 * 3 = Pour un insert préparé
-	 *
+     * 0 = Résultat attendu ramène une seul ligne
+     * 1 = Résultat  attendue ramène plusieurs ligne
+     * 2 = Résultat attendu ramène l'état de la requète
+     * 
      * $format est optionnel, par défaut -> PDO::FETCH_OBJ
-     * Si $CodeRequete n'est pas renseigné, la fonction execute un select simple.
-	 * @param int $CodeRequete de 0 à 3
+     * Si $CodeRequete n'est pas renseigné, sa valeur est à 0 par défaut.
+     * @param int $CodeRequete de 0 à 2
      * @param string $sql
      * @param array $tParam
      * @param [int $format]
      * @return un tableau en fonction du format
      * @throws MySQLException
      */
+	 
     public static function request($codeRequete = 0, $sql, $tParam = null, $format = PDO::FETCH_OBJ) {
 
         if (empty(self::$cnx)) {
@@ -89,140 +89,64 @@ class Connection {
         //PDO::query() retourne un objet PDOStatement, ou FALSE si une erreur survient. 
         //donc le try .. catch est inutile
 		
-		switch ($codeRequete){
+	if($tParam == null){
+		$stm = self::$cnx->query($sql);
+	}else {
+		$stm = self::$cnx->prepare($sql);
+		$state = $stm->execute($tParam);
+                
+	}
+		
+	switch ($codeRequete){
 			
-			//Requète select simple
+			//requête résultat simple
 			
-			case 0:
-				$stm = self::$cnx->query($sql);
-				$result = $stm->fetchAll($format);
-				$stm->closeCursor();
+		case 0:
+			
+			$result = $stm->fetch($format);
+			$stm->closeCursor();
 				
-				if (!$result) {
-				throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-				} else {
-					return $result;
+			if (!$result) {
+                            throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+			} else {
+                            return $result;
 				}
 			break;
 			
 			
-			//Requète select préparé
+			//requête résultats Multiple
 			
-			case 1:
+		case 1:
 			
-				$stm = self::$cnx->prepare($sql);
-				$stm->execute($tParam);
-				$result = $stm->fetch($format);
-				$stm->closeCursor();
+			$result = $stm->fetchAll($format);
+			$stm->closeCursor();
 			
-				if (!$result) {
-					throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-				} else {
-					return $result;
+			if (!$result) {
+				throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+			} else {
+				return $result;
 				}
 			break;
 				
 				
-			//Requète insert simple
+			//requête Etat requête
 			
-			case 2:
+		case 2:
 			
-				$result = $stm = self::$cnx->query($sql);
-				$stm->closeCursor();
-				
-				if (!$result) {
-				throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+			$result = $state;
+			$stm->closeCursor();
+			//si result n'est pas supérieur a 0 alors la requête n'a pas marché	
+			if (!$result) {
+				throw new MySQLException("Erreur sur la requête : $sql || état de la requète --> $state", self::$cnx);
 			} else {
 				return $result;
 			}
 			break;
-			
-				
-			//Requète insert préparé
-			
-			case 3:
-			
-				$stm = self::$cnx->prepare($sql);
-				$result = $stm->execute($tParam);
-				$stm->closeCursor();
-			
-				if (!$result) {
-					throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-				} else {
-					return $result;
-				}
-				break;
 				
 			
 		}
 }
 
-/**
-     * Envoie une requête préparé 
-     * et retourne le résultat dans le format PDO demandé.<br>
-     * Si nécessaire, ne pas oublier de tester le nbre d'enreg retourné
-     * 
-     * 
-     * $format est optionnel, par défaut -> PDO::FETCH_OBJ
-     * Si $tParam n'est pas renseigné, la fonction execute une requête simple.
-     * @param string $sql
-     * @param int $ParamUn  
-     * @param array $tParam
-     * @param [int $format]
-     * @return un tableau en fonction du format
-     * @throws MySQLException
-     */
-    /*public static function requeteFetch($sql,$tParam=null,$paramUn=null,$paramDeux=null,$format = PDO::FETCH_BOTH) {
-
-        if (empty(self::$cnx)) {
-            self::$cnx = Connexion::getConnexion();
-        }
-        //Libération des ressources précédentes
-        //PDO::query() retourne un objet PDOStatement, ou FALSE si une erreur survient. 
-        //donc le try .. catch est inutile
-		
-        //Si $tParam = null on lance une requete simple
-        if ($tParam === null && $paramUn ===null && $paramDeux===null) {
-
-            $stm = self::$cnx->query($sql);
-            $result = $stm->fetch($format);
-            $stm->closeCursor();
-        }
-		
-        //Sinon on lance une requete préparée prenant param un et deux en paramêtre en tant qu'int en paramètres
-        //Spécifique pour bind des valeurs sur le limit de getBDby5($page,$limite) de BDManager.
-        if($tParam===null && isset($paramUn) && isset($paramDeux) ) {
-            
-            $stm = self::$cnx->prepare($sql);
-            $stm->bindParam(1,$paramUn,PDO::PARAM_INT);
-            $stm->bindParam(2,$paramDeux,PDO::PARAM_INT);
-            $stm->execute();
-            $result=$stm->fetchAll($format);
-            $stm->closeCursor();
-            return $result;
-        }
-        //Sinon on effectue une requete préparé prenant $tParam en paramètres
-        else {
-            $stm = self::$cnx->prepare($sql);
-            $stm->execute($tParam);
-            $result = $stm->fetchAll($format);
-            $stm->closeCursor();
-            print_r ($result);
-        }
-      
-        
-        if (!$result) {
-            throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-        } else {
-            return $result;
-        }
-    }*/
-
-    /**
-     * Retourne l'identifiant de la dernière ligne insérée
-     * 
-     * @return String
-     */
     public static function dernierId() {
         if (empty(self::$cnx)) {
             self::$cnx = Connection::getConnection();

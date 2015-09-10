@@ -12,7 +12,7 @@ $sql="SELECT * FROM utilisateur u "
             . "WHERE UT_LOGIN=? AND UT_PASS=?";
 
     $tParam=[$login, $pwd];
-    $res = Connection::request(1,$sql,$tParam);
+    $res = Connection::request(0,$sql,$tParam);
     
     /*$cnx=  Connexion::getConnexion();
     $stm = $cnx->prepare($sql) or die("Erreur dans la requête!<br/>".$sql."<br/>Requête annulé");

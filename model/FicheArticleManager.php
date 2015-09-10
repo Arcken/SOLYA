@@ -42,7 +42,7 @@ class FicheArticleManager {
                         . "VALUES(?,?,?,?)";
                         //. "PAYS_ID,"
                 
-                $result = Connection::request(3,$sql,$tParam);
+                $result = Connection::request(2,$sql,$tParam);
                 print_r($result);
             }else{
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
