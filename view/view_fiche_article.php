@@ -3,7 +3,7 @@
 <div class="corps">
     <form class="form" action="index.php" method="get">
         <div class="gauche">
-            <div> 
+            <div>                 
                 <label for="fiartId"> Code de la fiche article </label><br>
                 <input name="fiartId" placeholder="Abréviation pays-gammes" required type="text">
                 <img src="img/icon/accept.png" alt=""/>
@@ -12,12 +12,10 @@
                 <input name="fiartLbl" placeholder="description" required type="text">
                 <br>
                 <label for="gamme"> Gamme: </label><br>
-                <select name="gamme">
-                    <option value="1">Sirop</option>
-                    <option value="2">Tablette</option>
-                    <option value="2">Graine</option>                        
+                <select name="gamme" id="selGamme">
+
                 </select>
-                <a href="" onClick="popup('view/view_gamme.php','newView');">
+                <a href="" onClick="popup('view/view_gamme.php', 'newView');">                
                     <img src="img/icon/add.png" alt="" title="Créer gamme"/>
                 </a>
                 <br>
@@ -44,7 +42,7 @@
                     <textarea name="fiartAlg" rows="4" cols="30" placeholder="Saisie"></textarea>
                 </div>
             </div>
-            
+
         </div>
         <div class="droite">
             <p> Table de nutrition: </p>
@@ -57,9 +55,9 @@
             <br>
         </div>
         <div class="bas">
-                <input name="btnForm" type="submit" value="<?php echo $sButton;?>">
-                <input name="clear" type="reset"> 
-                <input name="action" value="<?php echo $sAction ?>" type="text" hidden>
-            </div>
+            <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
+            <input name="clear" type="reset"> 
+            <input name="action" value="<?php echo $sAction ?>" type="text" hidden>
+        </div>
     </form>
 </div>

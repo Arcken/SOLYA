@@ -7,7 +7,7 @@ class FicheArticleManager {
      * 
      * @return Reference[]
      */
-    public static function getAllFicheArticle() {
+    public static function getAllFichesArticles() {
         
         try {
            
@@ -23,7 +23,7 @@ class FicheArticleManager {
         
         try {
             
-            if(!empty($FicheArticle->fiart_lbl)&& (strlen($FicheArticle->fiart_lbl))>3){
+            if(!empty($FicheArticle->fiart_lbl)&& (strlen($FicheArticle->fiart_lbl))>  Connection::getLimLbl()){
                 
                 $tParam = array(
                             

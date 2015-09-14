@@ -1,7 +1,7 @@
 <?php
 
 
-require_once 'exception/MySQLException.php';
+require_once $sPath.'/exception/MySQLException.php';
  /**
      * Class de connexion à la base de données,
 	 * contient :
@@ -13,7 +13,8 @@ require_once 'exception/MySQLException.php';
 class Connection {
 
     private static $cnx;
-
+    private static $iLimLbl;
+            
     /**
      * Se connecte à la base de données, il n'est pas nécessaire d'appeler cette méthode,
      * les autres méthodes vont le faire si besoin.
@@ -29,13 +30,14 @@ class Connection {
             $fichier = 'config/param.ini.php';
             
     if (file_exists($fichier) && is_file($fichier)) {
-            $config = parse_ini_file($fichier, true);
+        
+        $config = parse_ini_file($fichier, true);
 
             $host = $config['SQL']['host'];
             $user = $config['SQL']['user'];
             $pwd  = $config['SQL']['pwd'];
             $base = $config['SQL']['base'];
-    
+            self::$iLimLbl=$config['APPLI']['limlbl'];
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"
     , self::$cnx);
@@ -154,4 +156,7 @@ class Connection {
         return self::$cnx->lastInsertId();
     }
 
+    public static function getLimLbl(){
+        return self::$iLimLbl;
+    }
 }

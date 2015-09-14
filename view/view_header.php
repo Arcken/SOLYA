@@ -1,5 +1,5 @@
 <link type="text/css" href="css/style_header.css" rel="stylesheet">
-
+  <script type="text/javascript" src="lib/jquery.js"></script>
 <!--Bloc du header-->
 <div id="bloc_header">
     

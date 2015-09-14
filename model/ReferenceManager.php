@@ -33,7 +33,7 @@ class ReferenceManager {
         
         try {
             
-            if(!empty($reference->ref_lbl)&&($reference->ref_lbl>3)){
+            if(!empty($reference->ref_lbl)&&(strlen($reference->ref_lbl)>Connection::getLimLbl())){
                 
                 $tParam =array(
                         $reference->ref_emb_id,
@@ -77,7 +77,7 @@ class ReferenceManager {
         } catch (MySQLException $e) {
           
            
-            $result ='<br/><p class="info">la Référence a bien était ajouté </p>';
+            echo $e->RetourneErreur();
            
           
         }
