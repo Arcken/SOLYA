@@ -4,10 +4,10 @@
 <aside id='menu'>
     <!--Elements du Menu -->
 <ul>
-   <li><a href='index.php?Action=Accueil'><span>Accueil</span></a></li>
+   <li><a href='index.php?action=Accueil'><span>Accueil</span></a></li>
    <li><a href='#'><span>Contacts</span></a>
       <ul>
-         <li><a href='#'><span>Créer</span></a>
+         <li><a href='index.php?action=ctc_add'><span>Créer</span></a>
             <ul>
                <li><a href='#'><span>Fournisseur</span></a></li>
                <li><a href='#'><span> Client</span></a></li>

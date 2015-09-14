@@ -58,6 +58,10 @@ else {
                 }
                 
             break;
+            
+        case "ctc_add":
+            $sButton ="Envoyer";
+            break;
     }
 
     /* ----------------------------Affichage--------------------------------- */
@@ -78,6 +82,10 @@ else {
         case "ga_add":
             $sPageTitle = "Ajouter une gamme";
             require'view/view_gamme.php';
+            break;
+        
+         case "ctc_add":
+            require 'view/view_creer_contact.php';
             break;
     }
     require_once 'view/view_footer.php';
