@@ -8,7 +8,7 @@
 
 class Gamme {
 
-    public $GA_id      = '';
+    public $GA_ID = '';
     public $GA_LBL = '';
     
     public function __construct($args = null) {

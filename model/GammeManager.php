@@ -31,7 +31,7 @@ class GammeManager {
  * @param type $gamme
  * @return string
  */
-    public static function insGamme($gamme) {
+    public static function addGamme($gamme) {
 
         try {
 
@@ -41,8 +41,8 @@ class GammeManager {
                     $gamme->GA_LBL
                 );
 
-                $sql = "INSERT INTO reference ("
-                        . "GA_ID) " .
+                $sql = "INSERT INTO gamme ("
+                        . "GA_LBL) " .
                         " VALUES(?)";
 
                 $result = Connection::request($sql, $tParam);

@@ -12,7 +12,7 @@ if (isset($_REQUEST['action'])) {
     
     ?>
     <div class="corps">
-        <form class="form">
+        <form class="form" id="fGa" action="../index.php">
             <h2>Saisir</h2>
                 
             <div> 
@@ -22,6 +22,7 @@ if (isset($_REQUEST['action'])) {
                  
             </div>
             <div class="bas">
+                <input type="text" value="ga_add_add" name="action">
                 <input type="submit">
                 <input name="clear" type="reset">
             </div>

@@ -1,7 +1,7 @@
 <?php
 
 
-require_once $sPath.'/exception/MySQLException.php';
+require_once '/exception/MySQLException.php';
  /**
      * Class de connexion à la base de données,
 	 * contient :
