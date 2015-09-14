@@ -1,13 +1,27 @@
-<div class="droite">
+<div class="centre">
     <div>
-            <label for="ENT_NOM">Nom de l'entreprise :</label><br>
-            <input name="ENT_NOM" type="text"></input>
+            <label for="ADR_NUM">Numéro :</label><br>
+            <input name="ADR_NUM" type="text"></input>
             <br>
-            <label for="ENT_HORAIRE">Horaires de l'entreprise :</label><br>
-            <input name="ENT_HORAIRE" type="text"></input>
+            <label for="ADR_VOIE" >Voie :</label><br>
+            <input name="ADR_VOIE" type="text"></input>
             <br>
-            <label for="ENT_ECOMMERCE">Site E-commerce :</label><br>
-            <input name="ENT_ECOMMERCE" type="text"></input>
+            <label for="ADR_RUE1">RUE :</label><br>
+            <input name="ADR_RUE1" type="text"></input>
+            <br>
+            <input name="ADR_RUE2" type="text"></input>
+            <br>
+            <input name="ADR_RUE3" type="text"></input>
+            <br>
+            <label for="ADR_CP">Code postal :</label><br>
+            <input name="ADR_CP" type="text"></input>
+            <br>
+            <label for="ADR_VILLE">Ville :</label><br>
+            <input name="ADR_VILLE" type="text"></input>
+            <br>
+            <label for="ADR_ETAT">Etat :</label><br>
+            <input name="ADR_ETAT" type="text"></input>
+            <br>
     </div>
 </div>
 

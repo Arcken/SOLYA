@@ -46,9 +46,21 @@
             <textarea name="ENT_COM" type="text"></textarea>
             <br>
         </div>
-        
-        <?php require 'view/view_address.php';?>
-        
+
+        <?php require 'view/view_address.php'; ?>
+
+        <div class="droite">
+            <label for="MAIL_ADR">Adresse mail :</label><br>
+            <input name="MAIL_ADR" type="text"></input>
+            <br>
+            <label for="TEL_IND">Indicatif pays :</label>
+            <textarea name="TEL_IND" type="text"></textarea>
+            <br>
+            <label for="TEL_NUM">Numéro de téléphone :</label><br>
+            <textarea name="TEL_NUM" type="text"></textarea>
+            <br>
+        </div>
+
         <div class="bas">
             <input name="btnForm" type="submit" value="<?php echo $sButton; ?>" ></input>
             <input name="clear" type="reset"> 
@@ -74,10 +86,23 @@
             <label for ="PRS_DTN">Date de naissance :</label><br>
             <input name="PRS_DTN" type="text"></input>
             <br>
-
         </div>
 
-        <div class="bas">
+        <?php require 'view/view_address.php'; ?>
+        
+        <div class="droite">
+            <label for="MAIL_ADR">Adresse mail :</label><br>
+            <input name="MAIL_ADR" type="text"></input>
+            <br>
+            <label for="TEL_IND">Indicatif pays :</label>
+            <textarea name="TEL_IND" type="text"></textarea>
+            <br>
+            <label for="TEL_NUM">Numéro de téléphone :</label><br>
+            <textarea name="TEL_NUM" type="text"></textarea>
+            <br>
+        </div>
+        
+        <div class="bas">    
             <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
             <input name="clear"   type="reset"> 
             <input name="action"  value="<?php echo $sAction ?>" type="text" hidden>
