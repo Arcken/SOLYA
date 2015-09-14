@@ -1,5 +1,6 @@
 <?php
 ?>
+<script type="text/javascript" src="lib/jquery.js"></script>
 </body>
 <footer>
     <link href="css/style_footer.css" type="text/css" rel="stylesheet">

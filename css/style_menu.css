@@ -50,7 +50,9 @@ and open the template in the editor.
     margin-top: 20%;
     
 }
-
+#menu ul :hover{
+    
+}
 #menu ul li {
     min-height: 1px; 
     line-height: 1em;
@@ -60,7 +62,7 @@ and open the template in the editor.
     min-height: 1.5em;
 }
 
-#menu ul li:hover {
+#menu ul li {
     position: relative; 
     z-index: 399; 
     cursor: default;
