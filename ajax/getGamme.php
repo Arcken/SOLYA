@@ -1,8 +1,8 @@
 <?php
+$tab = array();
+$requete = "SELECT * FROM GAMME";
+$resultat = $bdd->query($requete);
+$donnees = $resultat->fetch(PDO::FETCH_ASSOC);
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
+echo json_encode($tab);
+?>
