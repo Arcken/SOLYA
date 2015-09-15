@@ -21,7 +21,6 @@ if (!isset($_SESSION['auth'])) {
         $nv = 0;
         if (isset($_REQUEST['action'])) {
             $sAction = $_REQUEST['action'];
-            
         }
 
         /* ----------------------------Traitement des données-------------------- */
@@ -38,7 +37,11 @@ if (!isset($_SESSION['auth'])) {
                 $sPageTitle = "Ajout de Fiche Article";
                 require $path . '/model/FicheArticle.php';
                 require $path . '/model/FicheArticleManager.php';
-
+                require $path . '/model/Gamme.php';
+                require $path . '/model/GammeManager.php';
+                
+                $resGa = GammeManager::getAllGammes();
+                
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                     $oFiArt = new FicheArticle();
@@ -68,14 +71,29 @@ if (!isset($_SESSION['auth'])) {
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                     $oGa = new Gamme();
                     $oGa->GA_LBL = $_REQUEST['gaLbl'];
+                    $oGa->GA_ABV = $_REQUEST['gaAbv'];
                     $result = GammeManager::addGamme($oGa);
                     echo $result;
                 }
+                $resGa = GammeManager::getAllGammes();
+                break;
+                
+                case "pays_add":
+                $sPageTitle = "Ajouter un pays";
+                require $path . '/model/Pays.php';
+                require $path . '/model/PaysManager.php';
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                    $oGa = new Pays();
+                    
+                    $result = GammeManager::addGamme($oPays);
+                    echo $result;
+                }
+                $resPays = GammeManager::getAllPays();
                 break;
         }
 
         /* ----------------------------Affichage--------------------------------- */
-        require_once $path . '/view/view_header.php';        
+        require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
         switch ($sAction) {
 
@@ -90,7 +108,6 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/view/view_fiche_article.php';
                 break;
 
-
             case "ga_add":
             case "ga_add_add":
 
@@ -98,20 +115,38 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/view/view_gamme.php';
                 break;
 
-
-
             case "ctc_add":
                 require $path . '/view/view_creer_contact.php';
                 break;
         }
         require_once $path . '/view/view_footer.php';
     } else {
+        /* ----------------------------Popup--------------------------------- */
+
         if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') !== FALSE) {
             $sAction = $_REQUEST['action'];
             $nv = 1;
+            /* ----------------------------Traitement--------------------------------- */
+            switch ($sAction) {
+                case "nv_ga_add":
+                    require $path . '/model/Gamme.php';
+                    require $path . '/model/GammeManager.php';
+                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                        $oGa = new Gamme();
+                        $oGa->GA_LBL = $_REQUEST['gaLbl'];
+                        $oGa->GA_ABV = $_REQUEST['gaAbv'];
+                        $result = GammeManager::addGamme($oGa);
+                        
+                    }
+                    $resGa = GammeManager::getAllGammes();
+                    break;
+            }
+
+            /* ----------------------------Affichage--------------------------------- */
             switch ($sAction) {
                 case "nv_ga_add":
                     include $path . '/view/view_gamme.php';
+                    
                     break;
             }
         }

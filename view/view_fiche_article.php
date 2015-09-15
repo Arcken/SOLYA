@@ -13,7 +13,10 @@
                 <br>
                 <label for="gamme"> Gamme: </label><br>
                 <select name="gamme" id="selGamme">
-
+                    <?php foreach ($resGA as $value) { ?>
+                        <option value="<?php echo $value->GA_ID?>">
+                            <?php echo $value->GA_LBL ?> </option>
+                    <?php } ?>
                 </select>
                 <a href="" onClick="popup('ga_add');">                
                     <img src="img/icon/add.png" alt="" title="Créer gamme"/>

@@ -8,9 +8,12 @@
 
 class Gamme {
 
-    public $GA_ID = '';
-    public $GA_LBL = '';
-    public $GA_ABV = '';
+    public $PAYS_ID = '';
+    public $PAYS_NOM = '';
+    public $PAYS_ABV = '';
+    public $PAYS_DVS_NOM = '';
+    public $PAYS_DVS_ABV = '';
+    public $PAYS_DVS_SYM = '';
     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
             // Pour chaque clé, on récupère sa valeur.

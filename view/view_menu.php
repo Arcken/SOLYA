@@ -110,5 +110,16 @@
       </ul>
    </li>
    <li><a href='#'><span>Alertes</span></a></li>
+    <li><a href='#'><span>Consulter</span></a>
+      <ul>
+         <li class='has-sub'><a href='index.php?action=pays'><span>Pays</span></a>
+             <ul>
+               <li><a href='pays_add'><span>Ajouter</span></a></li>
+               <li><a href='#'><span>Liste</span></a></li>
+            </ul>
+         </li>
+         
+      </ul>
+   </li>
 </ul>
 </aside>

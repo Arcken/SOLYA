@@ -8,18 +8,18 @@
 /**
  * Manager de la table GAMME
  */
-class GammeManager {
+class PaysManager {
 
     /**
      * Retourne tous les enregistrements de la table Gamme
      * 
      * @return gamme[]
      */
-    public static function getAllGammes() {
+    public static function getAllPays() {
 
         try {
 
-            $sql = 'SELECT * FROM gamme';
+            $sql = 'SELECT * FROM pays';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
@@ -31,21 +31,28 @@ class GammeManager {
  * @param type $gamme
  * @return string
  */
-    public static function addGamme($gamme) {
+    public static function addPays($pays) {
 
         try {
 
-            if (!empty($gamme->GA_LBL) && (strlen($gamme->GA_LBL) > Connection::getLimLbl())) {
+            if (!empty($pays->PAYS_NOM) && (strlen($pays->PAYS_NOM) > Connection::getLimLbl())) {
 
                 $tParam = array(
-                    $gamme->GA_LBL,
-                    $gamme->GA_ABV
+                    $pays->PAYS_NOM,
+                    $pays->PAYS_ABV,
+                    $pays->PAYS_DVS_NOM,
+                    $pays->PAYS_DVS_ABV,
+                    $pays->PAYS_DVS_SYM
+                    
                 );
 
-                $sql = "INSERT INTO gamme ("
-                        . " GA_LBL, "
-                        . " GA_ABV) "
-                        . " VALUES(?,?)";
+                $sql = "INSERT INTO pays ("
+                        . " PAYS_NOM, "
+                        . " PAYS_ABV, "
+                        . " PAYS_DVS_NOM, "
+                        . " PAYS_DVS_ABV, "
+                        . " PAYS_DVS_SYM) "
+                        . " VALUES(?,?,?,?,?)";
 
                 $result = Connection::request(2,$sql, $tParam);
             } else {
