@@ -9,7 +9,10 @@
         </div>
    
 
-<?php } ?>
+<?php
+}
+else echo 'Le silence est d\'or'
+?>
     
 
 

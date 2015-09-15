@@ -1,4 +1,4 @@
-<?php ?>
+<?php if (isset($_SESSION['group']) && $_SESSION['group'] >=0){ ?>
 <div>
     <form>
         <div> 
@@ -17,3 +17,8 @@
         <p> Conservation1 <img src="../img/icon/process.png" alt="" onclick="" title="Modifier"/> </p>
     </div>
 </div>
+
+<?php
+}
+else echo 'Le silence est d\'or'
+?>

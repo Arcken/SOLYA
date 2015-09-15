@@ -1,4 +1,4 @@
-<?php ?>
+<?php if (isset($_SESSION['group']) && $_SESSION['group'] >=0){ ?>
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 <div class="corps">
     <form class="form" action="index.php" method="get">
@@ -64,3 +64,7 @@
         </div>
     </form>
 </div>
+<?php
+}
+else echo 'Le silence est d\'or'
+?>

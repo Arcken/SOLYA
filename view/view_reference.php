@@ -1,4 +1,4 @@
-<?php ?>
+<?php if (isset($_SESSION['group']) && $_SESSION['group'] >=0){ ?>
 <form>
     <div> 
         <label for="ficheArticle"> Fiche article associée </label>
@@ -113,3 +113,7 @@
     <input name="clear" type="reset"> 
      </div>
 </form>
+<?php
+}
+else echo 'Le silence est d\'or'
+?>
