@@ -6,17 +6,17 @@ $sAction = '';
 //$sButton='';
 
 if (!isset($_SESSION['auth'])) {
-    require '../view/view_connection.php';
+    require $path.'/view/view_connection.php';
 } else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
 
     session_destroy();
     session_commit();
     $_SESSION = array();
-    require 'view/view_connection.php';
+    require $path.'/view/view_connection.php';
 } else {
     if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'newView') == false) {
-        require_once'view/view_header.php';
-        require_once'view/view_menu.php';
+        require_once $path.'/view/view_header.php';
+        require_once $path.'/view/view_menu.php';
 
         if (isset($_REQUEST['action'])) {
             $sAction = $_REQUEST['action'];
@@ -34,8 +34,8 @@ if (!isset($_SESSION['auth'])) {
             //Catalogue
             case "fiart_add":
 
-                require 'model/FicheArticle.php';
-                require 'model/FicheArticleManager.php';
+                require $path.'/model/FicheArticle.php';
+                require $path.'/model/FicheArticleManager.php';
 
                 $sButton = "Envoyer";
 
@@ -61,8 +61,8 @@ if (!isset($_SESSION['auth'])) {
 
             //gamme
             case "ga_add_add":
-                require 'model/Gamme.php';
-                require 'model/GammeManager.php';
+                require $path.'/model/Gamme.php';
+                require $path.'/model/GammeManager.php';
 
                 $oGa = new Gamme();
                 $oGa->GA_LBL = $_REQUEST['gaLbl'];
@@ -76,13 +76,13 @@ if (!isset($_SESSION['auth'])) {
 
             case "home":
             case "connexion":
-                require 'view/view_home.php';
+                require $path.'/view/view_home.php';
                 break;
 
             //Catalogue
             case "fiart_add":
                 $sPageTitle = "Ajouter une fiche article";
-                require 'view/view_fiche_article.php';
+                require $path.'/view/view_fiche_article.php';
                 break;
 
 
@@ -90,23 +90,23 @@ if (!isset($_SESSION['auth'])) {
             case "ga_add_add":
                 $sAction = '';
                 $sPageTitle = "Ajouter une gamme";
-                require'view/view_gamme.php';
+                require $path.'/view/view_gamme.php';
                 break;
 
 
 
             case "ctc_add":
-                require 'view/view_creer_contact.php';
+                require $path.'/view/view_creer_contact.php';
                 break;
         }
-        require_once 'view/view_footer.php';
+        require_once $path.'/view/view_footer.php';
     } else {
         if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'newView') != false) {
             $sAction = $_REQUEST['action'];
 
             switch ($sAction) {
                 case newViewGamme:
-                    include 'view_gamme.php';
+                    include $path.'/view_gamme.php';
             }
         }
     }

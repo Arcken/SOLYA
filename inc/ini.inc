@@ -11,7 +11,7 @@ if (file_exists($fichier) && is_file($fichier)) {
     $base = $config['SQL']['base'];
     
     $sTitle=$config['APPLI']['titre'];
-    $sPath=$config['APPLI']['path'];
+    $sWebPath=$config['APPLI']['webpath'];
     $iLimLbl=$config['APPLI']['limlbl'];
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"

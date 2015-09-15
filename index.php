@@ -5,7 +5,10 @@
     //Début de la session
     session_start();
     //connexion et control de connexion utilisateur
+    
     require_once 'inc/ini.inc'; //recupere parametre du fichier param.ini
+    $path = $_SERVER['DOCUMENT_ROOT'].$sWebPath;
+    echo $path;
     require_once 'model/Connection.php';
     require_once 'inc/model.inc';
     require_once 'security/user_control.php';
