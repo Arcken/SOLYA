@@ -1,5 +1,5 @@
 <?php
-
+require_once '/exception/MySQLException.php';
 //Récupération des paramètres de l'application
 $fichier = 'config/param.ini.php';
 if (file_exists($fichier) && is_file($fichier)) {

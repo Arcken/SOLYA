@@ -1,20 +1,18 @@
 <?php
-if (isset($_REQUEST['action'])) {
-    $bNewView = false;
+if ($nv == 0) {    
     ?>
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
     <?php
     } else {
-    require '../view/view_new_view_header.php';
-    $bNewView = true;
+    require $path.'/view/view_new_view_header.php';
     }
-    
     ?>
+    
     <div class="corps">
-        <form class="form" id="fGa" action="../index.php">
+        <form class="form" id="fGa" action="index.php">
             <h2>Saisir</h2>
-                
+                <?php echo $nv; ?>
             <div> 
                 <label for="gaLbl"> Libellé de la gamme: </label>
                 <input name="gaLbl" placeholder="Saisie" required type="text">            
@@ -22,8 +20,8 @@ if (isset($_REQUEST['action'])) {
                  
             </div>
             <div class="bas">
-                <input type="text" value="ga_add_add" name="action">
-                <input type="submit">
+                <input name="action" id="action" value="<?php echo $sAction ?>" type="text" >
+                <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
                 <input name="clear" type="reset">
             </div>
         </form>
@@ -35,4 +33,4 @@ if (isset($_REQUEST['action'])) {
             <p> Essai1 <img src="../img/icon/process.png" alt="" onclick="" title="Modifier"/> </p>
         </div>
     </div>
-    <?php if ($bNewView)     require '../view/view_new_view_footer.php';?>
+    <?php if ($nv == 1)     require '../view/view_new_view_footer.php';?>

@@ -15,7 +15,7 @@
                 <select name="gamme" id="selGamme">
 
                 </select>
-                <a href="" onClick="popup('view/view_gamme.php', 'newView');">                
+                <a href="" onClick="popup('ga_add');">                
                     <img src="img/icon/add.png" alt="" title="Créer gamme"/>
                 </a>
                 <br>
@@ -57,7 +57,7 @@
         <div class="bas">
             <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
             <input name="clear" type="reset"> 
-            <input name="action" value="<?php echo $sAction ?>" type="text" hidden>
+            <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
         </div>
     </form>
 </div>

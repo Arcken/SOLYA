@@ -2,26 +2,26 @@
 
 $sPageTitle = "Connexion";
 $sAction = '';
+$sButton = "Envoyer";
+$nv = ''; //variable de contrôle pour les popups
 //$sPhp_Action='';
 //$sButton='';
 
 if (!isset($_SESSION['auth'])) {
 
-    require $path.'/view/view_connection.php';
-
+    require $path . '/view/view_connection.php';
 } else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
 
     session_destroy();
     session_commit();
     $_SESSION = array();
-    require $path.'/view/view_connection.php';
+    require $path . '/view/view_connection.php';
 } else {
-    if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'newView') == false) {
-        require_once $path.'/view/view_header.php';
-        require_once $path.'/view/view_menu.php';
-
+    if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') === FALSE) {
+        $nv = 0;
         if (isset($_REQUEST['action'])) {
             $sAction = $_REQUEST['action'];
+            
         }
 
         /* ----------------------------Traitement des données-------------------- */
@@ -35,11 +35,9 @@ if (!isset($_SESSION['auth'])) {
 
             //Catalogue
             case "fiart_add":
-
-                require $path.'/model/FicheArticle.php';
-                require $path.'/model/FicheArticleManager.php';
-
-                $sButton = "Envoyer";
+                $sPageTitle = "Ajout de Fiche Article";
+                require $path . '/model/FicheArticle.php';
+                require $path . '/model/FicheArticleManager.php';
 
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
@@ -58,57 +56,63 @@ if (!isset($_SESSION['auth'])) {
                 break;
 
             case "ctc_add":
+                $sPageTitle = "Ajouter un contact";
                 $sButton = "Envoyer";
                 break;
 
             //gamme
-            case "ga_add_add":
-                require $path.'/model/Gamme.php';
-                require $path.'/model/GammeManager.php';
-
-                $oGa = new Gamme();
-                $oGa->GA_LBL = $_REQUEST['gaLbl'];
-                $result = GammeManager::addGamme($oGa);
-                echo $result;
+            case "ga_add":
+                $sPageTitle = "Ajouter une gamme";
+                require $path . '/model/Gamme.php';
+                require $path . '/model/GammeManager.php';
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                    $oGa = new Gamme();
+                    $oGa->GA_LBL = $_REQUEST['gaLbl'];
+                    $result = GammeManager::addGamme($oGa);
+                    echo $result;
+                }
                 break;
         }
 
         /* ----------------------------Affichage--------------------------------- */
+        require_once $path . '/view/view_header.php';        
+        require_once $path . '/view/view_menu.php';
         switch ($sAction) {
 
             case "home":
             case "connexion":
-                require $path.'/view/view_home.php';
+                require $path . '/view/view_home.php';
                 break;
 
             //Catalogue
             case "fiart_add":
                 $sPageTitle = "Ajouter une fiche article";
-                require $path.'/view/view_fiche_article.php';
+                require $path . '/view/view_fiche_article.php';
                 break;
 
 
             case "ga_add":
             case "ga_add_add":
-                $sAction = '';
+
                 $sPageTitle = "Ajouter une gamme";
-                require $path.'/view/view_gamme.php';
+                require $path . '/view/view_gamme.php';
                 break;
 
 
 
             case "ctc_add":
-                require $path.'/view/view_creer_contact.php';
+                require $path . '/view/view_creer_contact.php';
                 break;
         }
-        require_once $path.'/view/view_footer.php';
+        require_once $path . '/view/view_footer.php';
     } else {
-        if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'newView') != false) {
+        if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') !== FALSE) {
             $sAction = $_REQUEST['action'];
-
+            $nv = 1;
             switch ($sAction) {
-                case newViewGamme:
-                    include $path.'/view_gamme.php';
+                case "nv_ga_add":
+                    include $path . '/view/view_gamme.php';
+                    break;
             }
         }
     }

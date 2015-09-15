@@ -35,7 +35,7 @@ class GammeManager {
 
         try {
 
-            if (!empty($gamme->GA_LBL) && (strlen($gamme->ref_lbl) > Connection::getLimLbl())) {
+            if (!empty($gamme->GA_LBL) && (strlen($gamme->GA_LBL) > Connection::getLimLbl())) {
 
                 $tParam = array(
                     $gamme->GA_LBL
@@ -45,7 +45,7 @@ class GammeManager {
                         . "GA_LBL) " .
                         " VALUES(?)";
 
-                $result = Connection::request($sql, $tParam);
+                $result = Connection::request(2,$sql, $tParam);
             } else {
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
             }
