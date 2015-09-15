@@ -5,6 +5,9 @@ if ($nv == 0) {
 
     <?php
     } else {
+        ?>
+        <link type="text/css" href="./css/style_new_view.css" rel="stylesheet">
+        <?php
     require $path.'/view/view_new_view_header.php';
     }
     ?>
@@ -33,4 +36,4 @@ if ($nv == 0) {
             <p> Essai1 <img src="../img/icon/process.png" alt="" onclick="" title="Modifier"/> </p>
         </div>
     </div>
-    <?php if ($nv == 1)     require '../view/view_new_view_footer.php';?>
+    <?php if ($nv == 1)     require $path.'/view/view_new_view_footer.php';?>
