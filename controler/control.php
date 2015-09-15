@@ -6,7 +6,11 @@ $sAction = '';
 //$sButton='';
 
 if (!isset($_SESSION['auth'])) {
+<<<<<<< HEAD
     require $path.'/view/view_connection.php';
+=======
+    require 'view/view_connection.php';
+>>>>>>> origin/master
 } else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
 
     session_destroy();

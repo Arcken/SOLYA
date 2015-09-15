@@ -53,7 +53,7 @@
             <label for="MAIL_ADR">Adresse mail :</label><br>
             <input name="MAIL_ADR" type="text"></input>
             <br>
-            <label for="TEL_IND">Indicatif pays :</label>
+            <label for="TEL_IND">Indicatif pays :</label><br>
             <textarea name="TEL_IND" type="text"></textarea>
             <br>
             <label for="TEL_NUM">Numéro de téléphone :</label><br>
@@ -70,7 +70,14 @@
 
     <form id="form_add_prs" class="form" action="index.php" method="get" hidden>
         <div class="gauche"> 
-
+            
+            <label for="PRS_ENT">Entreprise :</label><br>
+            <select name="PRS_ENT"id="PRS_ENT" onChange="" >
+                    <option value="0">Nom de l'entreprise</option>
+                    <option value="1">truc</option>
+                    <option value="2">machin</option>
+                </select>
+            <br>
             <label for ="PRS_NOM">Nom :</label><br>
             <input name="PRS_NOM" type="text"></input>
             <br>
@@ -94,12 +101,16 @@
             <label for="MAIL_ADR">Adresse mail :</label><br>
             <input name="MAIL_ADR" type="text"></input>
             <br>
-            <label for="TEL_IND">Indicatif pays :</label>
+            <label for="TEL_IND">Indicatif pays :</label><br>
             <textarea name="TEL_IND" type="text"></textarea>
             <br>
             <label for="TEL_NUM">Numéro de téléphone :</label><br>
             <textarea name="TEL_NUM" type="text"></textarea>
             <br>
+            <label for='CAT_CTC'>Catégorie contact :</label> <br>
+            <input type="checkbox" name='CAT_CTC[]' value='Client'>Client <br>
+            <input type="checkbox" name='CAT_CTC[]' value='Fournisseur'>Fournisseur <br>
+            <input type="checkbox" name='CAT_CTC[]' value='Prospect'>Prospect <br>
         </div>
         
         <div class="bas">    
