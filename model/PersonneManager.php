@@ -14,10 +14,7 @@
 class PersonneManager {
 
     public static function addPersonne($Personne) {
-        $cnx = Connection::getConnection();
-        $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $cnx->beginTransaction();
-
+        
         try {
 
             if (!empty($Personne->PRS_NOM) && (strlen($Personne->PRS_NOM)) > Connection::getLimLbl()) {
@@ -37,57 +34,18 @@ class PersonneManager {
                         . "PRS_PRENOM3,"
                         . "PRS_DTN)"
                         . "VALUES(?,?,?,?,?)";
-                //. "PAYS_ID,"
+              
 
                 $result = Connection::request(2, $sqlPrs, $tParamPrs);
-
-                if (is_string($_REQUEST['MAIL_ADR']) && strlen($_REQUEST['MAIL_ADR']) > 3) {
-
-                    $tParamAdr = array($_REQUEST['MAIL_ADR']);
-
-                    $sql = "INSERT INTO mail ("
-                            . "MAIL_ADR)"
-                            . "VALUES(?)";
-
-                    $result = Connection::request(2, $sqlMail, $tParamAdr);
-                }
-
-                if (is_string($_REQUEST['MAIL_ADR']) && strlen($_REQUEST['MAIL_ADR']) > 3) {
-
-                    $tParamAdr = array($_REQUEST['MAIL_ADR']);
-
-                    $sql = "INSERT INTO mail ("
-                            . "MAIL_ADR)"
-                            . "VALUES(?)";
-
-                    $result +=' ' . Connection::request(2, $sqlMail, $tParamAdr);
-                }
-
-                if (is_string($_REQUEST['TEL_IND']) && is_string($_REQUEST['TEL_NUM']) && strlen($_REQUEST['TEL_IND']) > 2 && strlen($_REQUEST['TEL_NUM']) > 2) {
-
-                    $tParamTel = array($_REQUEST['TEL_IND'], $_REQUEST['TEL_NUM']);
-
-                    $sqlTel = "INSERT INTO telephone ("
-                            . "TEL_IND,"
-                            . "TEL,NUM)"
-                            . "VALUES(?,?)";
-
-                    $result +=' ' . Connection::request(2, $sqlTel, $tParamTel);
-                    
-                    print_r($result);
-                    $cnx->commit();
-                }
-            } else {
-                $cnx->rollback();
+  
+            }else{
                 $result = '<br/><p class="info">Enregistrement impossible sans NOM </p>';
             }
         } catch (MySQLException $e) {
 
             echo $e->RetourneErreur();
-
-            //$result ='<br/><p class="info">la Fiche article a bien était ajouté </p>';
         }
-        // return $result;
+      
     }
 
 }
