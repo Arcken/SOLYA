@@ -107,10 +107,10 @@
             <label for="TEL_NUM">Numéro de téléphone :</label><br>
             <textarea name="TEL_NUM" type="text"></textarea>
             <br>
-            <label for='CAT_CTC'>Catégorie contact :</label> <br>
-            <input type="checkbox" name='CAT_CTC[]' value='Client'>Client <br>
-            <input type="checkbox" name='CAT_CTC[]' value='Fournisseur'>Fournisseur <br>
-            <input type="checkbox" name='CAT_CTC[]' value='Prospect'>Prospect <br>
+            <label for='CAT_CTC[]'>Catégorie contact :</label> <br>
+            <input id='CB_CLI'   type="checkbox" name='CAT_CTC[]' value='Client'>Client <br>
+            <input id='CB_FOUR'  type="checkbox" name='CAT_CTC[]' value='Fournisseur'>Fournisseur <br>
+            <input id='CB_PRSPT' type="checkbox" name='CAT_CTC[]' value='Prospect'>Prospect <br>
         </div>
         
         <div class="bas">    
