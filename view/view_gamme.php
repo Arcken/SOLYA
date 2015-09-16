@@ -16,7 +16,7 @@ require $path.'/view/view_new_view_header.php';
 <div class="corps">
     <form class="form" id="fGa" action="index.php">
         <h2>Saisie</h2>
-
+        <img src="img/icon/add.png" alt="" onclick="window.opener.getGamme()"title="Maj gamme fen parent"/>
         <div> 
             <label for="gaLbl"> Libellé de la gamme: </label>
             <input name="gaLbl" placeholder="Saisie" required type="text">            

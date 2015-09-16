@@ -20,7 +20,7 @@ function popup(action)
     params += ', status=no';
     params += ', toolbar=no';
     newwin = window.open('index.php?action=nv_' + action, 'windowname5', params);
-   
+
     if (window.focus) {
         newwin.focus()
     }
@@ -31,15 +31,34 @@ function getGamme() {
 
     console.log('dedans');
     $.getJSON(
-            'ajax/getGamme.php', // code cible         
-            function maj(json) {
-                console.log('dedans');                
-                
-                var code ='';
-                for (var key in json) {
-                    code += ('<option value="' + json[key].GA_ID + '">' + json[key].GA_LBL + '</option>');
-                }
-                $('#selGamme').append(code);
-            }
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getAllGamme'},
+    function maj(json) {
+        console.log('dedans');
+        var $selectCol1 = $('#selGamme');       
+        $selectCol1.empty();       
+        for (var key in json) {
+            $selectCol1.append('<option value="'+json[key].GA_ID +'">'+json[key].GA_LBL+'</option>');            
+        }
+       
+    }
+    );
+}
+
+function getPays() {
+
+    console.log('dedans');
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getAllPays'},
+    function maj(json) {
+        console.log('dedans');
+        var $selectCol1 = $('#selPays');       
+        $selectCol1.empty();       
+        for (var key in json) {
+            $selectCol1.append('<option value="'+json[key].PAYS_ID +'">'+json[key].PAYS_NOM+'</option>');            
+        }
+       
+    }
     );
 }
