@@ -42,7 +42,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                     $resAddCtc = PersonneManager::addPersonne($oPers);
                     $idPers = Connection::dernierId();
-                    echo '<br> id personne:'.$idPers;
+                    //echo '<br> id personne:'.$idPers;
 
                     if (isset($_REQUEST['ADR_VILLE'])) {
 
@@ -62,7 +62,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                         $resAddCtc = AdresseManager::addAddresse($oAddr);
                         $idAdr = Connection::dernierId();
-                        echo '<br>id adress:'.$idAdr.' resultat :'.$resAddCtc;
+                        
+                        //echo '<br>id adress:'.$idAdr.' resultat :'.$resAddCtc;
                         
                         if (isset($idAdr) && isset($idPers)) {
                             require $path . '/model/DomicilierPrs.php';
@@ -74,7 +75,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                             $oDomPrs->PRS_ID = $idPers;
 
                             $resAddCtc = DomicilierPrsManager::addDomicilierPrs($oDomPrs);
-                             echo'<br> reultat Joindre personne : '.$resAddCtc;
+                            // echo'<br> reultat Joindre personne : '.$resAddCtc;
                         }
                     }
 
@@ -87,7 +88,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                         $resAddCtc = MailManager::addMail($oMail);
                         $idMail = Connection::dernierId();
-                        echo '<br> id Mail :'.$idMail.' resultat :'.$resAddCtc;
+                        //echo '<br> id Mail :'.$idMail.' resultat :'.$resAddCtc;
                         
                         if (isset($idMail) && isset($idPers)) {
                             require $path . '/model/ContacterPrs.php';
@@ -99,7 +100,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                             $oCtcPrs->PRS_ID = $idPers;
 
                             $resAddCtc = ContacterPrsManager::addContacterPrs($oCtcPrs);
-                             echo'<br> reultat Joindre personne : '.$resAddCtc;
+                             //echo'<br> reultat Joindre personne : '.$resAddCtc;
                         }
                     }
 
@@ -114,7 +115,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                         $resAddCtc = TelephoneManager::addTel($oTel);
                         $idTel = Connection::dernierId();
-                        echo '<br>id telephone :'.$idTel.' resultat :'.$resAddCtc ;
+                        //echo '<br>id telephone :'.$idTel.' resultat :'.$resAddCtc ;
 
                         if (isset($idTel)) {
 
@@ -127,11 +128,11 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                             $oJoindrePrs->TELPER_LBL = "truc";
 
                             $resAddCtc = JoindrePrsManager::addJoindrePrs($oJoindrePrs);
-                            echo'<br> reultat Joindre personne : '.$resAddCtc;
+                           // echo'<br> reultat Joindre personne : '.$resAddCtc;
                         }
                     }
                     $cnx->commit();
-                    echo $resAddCtc;
+                    //echo $resAddCtc;
                 } catch (MySQLException $e) {
                     $e->RetourneErreur();
                     $cnx->rollback();

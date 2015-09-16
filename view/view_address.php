@@ -1,5 +1,5 @@
 <div class="centre" id="add_adr" style="display:none" >
-    <div>
+    
             <label for="ADR_NUM">Numéro :</label><br>
             <input name="ADR_NUM" type="text"></input>
             <br>
@@ -29,7 +29,5 @@
                 <option value ="<?php echo $oPays->PAYS_ID ?>"> <?php echo $oPays->PAYS_NOM ?> </option>
                     <?php } ?>
             </select>
-            <br>
-    </div>
 </div>
 

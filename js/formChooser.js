@@ -42,7 +42,7 @@ function formChooser(){
            $("#add_adr").show();
            $("#add_tel_mail").show();
            $("#btn_zone").show();
-          
+ 
            break;
            
      

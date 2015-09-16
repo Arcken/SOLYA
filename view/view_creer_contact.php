@@ -10,14 +10,14 @@
    <!-- En-tête choix du type contact-->
     <form id="form_add_ctc" class="form" action="index.php" method="get">
         <div class="haut">
-            <div> 
+            
                 <label for="typeCtc"> Type de contact: </label><br>
                 <select id="typeCtc" name="typeCtc" onChange="formChooser()">
                     <option value="0" selected>--Type contact--</option>
                     <option value="1">Entreprise</option>
                     <option value="2">Personne</option>
                 </select>
-            </div>
+            
         </div>
 
    
@@ -53,7 +53,7 @@
        <!-- Partie gauche de l'écran : Civilité -->
         <div class="gauche" id="add_prs" style="display:none"> 
             <label for="PRS_ENT">Entreprise :</label><br>
-            <select name="PRS_ENT"id="PRS_ENT" onChange="" >
+            <select name="PRS_ENT"id="PRS_ENT" onChange="">
                     <option value="0">Nom de l'entreprise</option>
                     <option value="1">truc</option>
                     <option value="2">machin</option>
@@ -99,17 +99,17 @@
             <textarea name="TEL_NUM" type="text"></textarea>
             <br>
             <label for='CAT_CTC[]'>Catégorie contact :</label> <br>
-            <input class='CB_CLI'   type="checkbox" name='CAT_CTC[]' value='Client' onclick="cbChooser()">Client <br>
-            <input class='CB_FOUR'  type="checkbox" name='CAT_CTC[]' value='Fournisseur' onclick="cbChooser()">Fournisseur <br>
-            <input class='CB_PRSPT' type="checkbox" name='CAT_CTC[]' value='Prospect' onclick="cbChooser()">Prospect <br>
+            <input class='CB_CLI'   type="checkbox" name='CAT_CTC[]' value='Client' onclick="cbChooser()"/>Client <br>
+            <input class='CB_FOUR'  type="checkbox" name='CAT_CTC[]' value='Fournisseur' onclick="cbChooser()"/>Fournisseur <br>
+            <input class='CB_PRSPT' type="checkbox" name='CAT_CTC[]' value='Prospect' onclick="cbChooser()"/>Prospect <br>
             
         </div>
         
        <!--Zone des boutons-->
         <div class="bas" id="btn_zone" style="display:none">    
-            <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
-            <input name="clear"   type="reset"> 
-            <input name="action"  value="<?php echo $sAction ?>" type="text" hidden>
+            <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
+            <input name="clear"   type="reset"/> 
+            <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
         </div>
     </form>
 

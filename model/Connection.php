@@ -42,7 +42,7 @@ class Connection {
                         // qu'un script doit accéder à une base de données, 
                         // rendant l'application web plus rapide. 
 						
-                        array(\PDO::ATTR_PERSISTENT => true));
+                        array(PDO::ATTR_PERSISTENT => true,PDO::ATTR_ERRMODE => true, PDO::ERRMODE_EXCEPTION => true));
             } catch (Exception $e) {
                 throw new MySQLException($e->getMessage(), self::$cnx);
             }
@@ -68,7 +68,7 @@ class Connection {
      * @throws MySQLException
      */
 	 
-    public static function request($codeRequete = 0, $sql, $tParam = null, $format = PDO::FETCH_OBJ) {
+    public static function request($codeRequete = 0, $sql, $tParam = NULL, $format = PDO::FETCH_OBJ) {
     
         if (empty(self::$cnx)) {
             self::$cnx = Connection::getConnection();
@@ -115,8 +115,7 @@ class Connection {
 			//requête Etat requête
 			
 		case 2:
-			
-			$result = $stm->rowCount();
+			$result =$stm->rowCount();
 			$stm->closeCursor();
 			//si result n'est pas supérieur a 0 alors la requête n'a pas marché	
 			if (!$result) {
