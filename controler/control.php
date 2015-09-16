@@ -40,7 +40,9 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/model/Gamme.php';
                 require $path . '/model/GammeManager.php';
                 
-                $resGa = GammeManager::getAllGammes();
+                $resAllGa = GammeManager::getAllGammes();
+                $resAllPays = PaysManager::getAllPays();
+                $resAllNut = NutritionManager::getAllNutritions();
                 
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 

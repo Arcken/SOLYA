@@ -13,7 +13,7 @@
                     <br>
                     <label for="gamme"> Gamme: </label><br>                    
                     <select name="gamme" id="selGamme">                        
-                        <?php foreach ($resGA as $value) { ?>
+                        <?php foreach ($resAllGa as $value) { ?>
                             <option value="<?php echo $value->GA_ID ?>">
                                 <?php echo $value->GA_LBL ?> </option>
                         <?php } ?>
@@ -24,13 +24,14 @@
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays">
-                        <option value="1">Mexique</option>
-                        <option value="2">France</option>
-                        <option value="2">Angleterre</option>                        
+                        <?php foreach ($resAllPays as $value) { ?>
+                            <option value="<?php echo $value->PAYS_ID ?>">
+                                <?php echo $value->PAYS_LBL ?> </option>
+                        <?php } ?>                        
                     </select>
-                    <!--<a href="" onClick="popup('view_pays.php');">-->
+                    <a href="" onClick="popup('pays_add');">
                         <img src="img/icon/add.png" alt="" onclick="getPays()" title="Créer pays"/>
-                    <!--</a>-->
+                    </a>
                     <br>
                 </div>
 
