@@ -33,7 +33,7 @@ require $path.'/view/view_new_view_header.php';
     </form>
     <div class="list">
         <h2> Liste des éléments </h2>
-        <?php foreach ($resGa as $value) {
+        <?php foreach ($resAllGa as $value) {
         echo $value->GA_LBL
         ?>,  <?php echo $value->GA_ABV ?> <br>
         <?php

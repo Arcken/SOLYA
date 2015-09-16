@@ -1,4 +1,4 @@
 
     
 </head>
-<body>
+<body id="newView" onload="selMaj();">

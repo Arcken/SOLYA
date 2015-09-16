@@ -17,3 +17,4 @@ require_once 'controler/control.php';
 //Test si l'utilisateur est connecté si non retour à connexion.
 ?>
 
+</footer>

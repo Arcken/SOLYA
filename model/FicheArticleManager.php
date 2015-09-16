@@ -19,6 +19,18 @@ class FicheArticleManager {
         return $result;
     }
     
+    public static function getMaxIdFicheArticle() {
+        
+        try {
+           
+            $sql = 'SELECT MAX(fiart_id) FROM fiche_article';
+            $result = Connection::request(0,$sql);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    }
+    
     public static function addFicheArticle($FicheArticle) {
         
         try {

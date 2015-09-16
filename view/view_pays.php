@@ -41,7 +41,7 @@ require $path.'/view/view_new_view_header.php';
     </form>
     <div class="list">
         <h2> Liste des éléments </h2>
-        <?php foreach ($resPays as $value) {
+        <?php foreach ($resAllPays as $value) {
         echo $value->PAYS_NOM
         ?>,  <?php echo $value->PAYS_ABV ?> <br>
         <?php

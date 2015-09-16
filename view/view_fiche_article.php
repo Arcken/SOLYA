@@ -3,9 +3,9 @@
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="gauche">
-                <div>                 
+                <div> <?php print_r($resMaxIdFiart)?>                
                     <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" placeholder="Abréviation pays-gammes" required type="text">
+                    <input name="fiartId" placeholder="<?php echo $resMaxIdFiart["MAX(FIART_ID)"]?>" type="text">
                     <img src="img/icon/accept.png" alt=""/>
                     <br>
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
@@ -50,14 +50,14 @@
             </div>
             <div class="droite">
                 <label> Table de nutrition: </label>
-                <img src="img/icon/add.png" onClick="popup('pays_add');" title="Créer pays" alt=""/>
+                <img src="img/icon/add.png" onClick="popup('nut_add');" title="Créer nuvel élément" alt=""/>
                 </br>
                 </br>
                 <?php foreach ($resAllNut as $value) { ?>
                 <label for="<?php echo $value->NUT_LBL?>"><?php echo $value->NUT_LBL?></label>
                 
                 </br>
-                <input name="<?php echo $value->NUT_LBL?>" placeholder="saisie">                                
+                <input name="<?php echo $value->NUT_LBL?>" placeholder="saisie"> </br>                               
                         <?php } ?>                
                     
                 <br>

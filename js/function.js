@@ -20,7 +20,7 @@ function popup(action)
     params += ', status=no';
     params += ', toolbar=no';
     newwin = window.open('index.php?action=nv_' + action, 'windowname5', params);
-
+    
     if (window.focus) {
         newwin.focus()
     }
@@ -63,4 +63,11 @@ function getPays() {
        
     }
     );
+}
+
+function selMaj(){
+    //var $action = $('#action').val();    
+    //if ($('#action').val() == 'nv_ga_add'){
+        $('#body').attr('onunload','window.opener.getGamme()');
+    //}
 }

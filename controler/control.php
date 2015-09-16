@@ -43,11 +43,11 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/model/PaysManager.php';
                 require $path . '/model/Nutrition.php';
                 require $path . '/model/NutritionManager.php';
-                
+
                 $resAllGa = GammeManager::getAllGammes();
                 $resAllPays = PaysManager::getAllPays();
                 $resAllNut = NutritionManager::getAllNutritions();
-                
+                $resMaxIdFiart = FicheArticleManager::getMaxIdFicheArticle();
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                     $oFiArt = new FicheArticle();
@@ -63,13 +63,13 @@ if (!isset($_SESSION['auth'])) {
                 }
 
                 break;
-                
+
             //Créer un contact    
             case "ctc_add":
-                
+
                 require'control_ctc_add.php';
                 $sPageTitle = "Ajouter un contact";
-           
+
                 break;
 
             //gamme
@@ -86,18 +86,18 @@ if (!isset($_SESSION['auth'])) {
                 }
                 $resGa = GammeManager::getAllGammes();
                 break;
-                
-                case "pays_add":
+
+            case "pays_add":
                 $sPageTitle = "Ajouter un pays";
                 require $path . '/model/Pays.php';
                 require $path . '/model/PaysManager.php';
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                     $oGa = new Pays();
-                    
-                    $result = GammeManager::addGamme($oPays);
+
+                    $result = PaysManager::addPays($oPays);
                     echo $result;
                 }
-                $resPays = GammeManager::getAllPays();
+                $resAllPays = PaysManager::getAllPays();
                 break;
         }
 
@@ -137,6 +137,7 @@ if (!isset($_SESSION['auth'])) {
             $nv = 1;
             /* ----------------------------Traitement--------------------------------- */
             switch ($sAction) {
+                
                 case "nv_ga_add":
                     require $path . '/model/Gamme.php';
                     require $path . '/model/GammeManager.php';
@@ -145,17 +146,54 @@ if (!isset($_SESSION['auth'])) {
                         $oGa->GA_LBL = $_REQUEST['gaLbl'];
                         $oGa->GA_ABV = $_REQUEST['gaAbv'];
                         $result = GammeManager::addGamme($oGa);
-                        
                     }
-                    $resGa = GammeManager::getAllGammes();
+                    $resAllGa = GammeManager::getAllGammes();
+                    break;
+                    
+                case 'nv_pays_add':
+                    $sPageTitle = "Ajouter un pays";
+                    require $path . '/model/Pays.php';
+                    require $path . '/model/PaysManager.php';
+                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                        $oPays = new Pays();
+                        $oPays->PAYS_ABV = $_REQUEST['paysAbv'];
+                        $oPays->PAYS_NOM = $_REQUEST['paysNom'];
+                        $oPays->PAYS_DVS_ABV = $_REQUEST['paysDvsAbv'];
+                        $oPays->PAYS_DVS_NOM = $_REQUEST['paysDvsNom'];
+                        $oPays->PAYS_DVS_SYM = $_REQUEST['paysDvsSym'];
+                        $result = PaysManager::addPays($oPays);
+                        echo $result;
+                    }
+                    $resAllPays = PaysManager::getAllPays();
+                    break;
+                    
+                    case 'nv_nut_add':                     
+                    $sPageTitle = "Ajouter une information";
+                    require $path . '/model/Nutrition.php';
+                    require $path . '/model/NutritionManager.php';
+                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                        $oNut = new Nutrition();
+                        $oNut->NUT_LBL = $_REQUEST['nutLbl'];
+                        $result = NutritionManager::addNutrition($oNut);
+                        echo $result;
+                    }
+                    $resAllNut = NutritionManager::getAllNutritions();
                     break;
             }
 
             /* ----------------------------Affichage--------------------------------- */
             switch ($sAction) {
+                
                 case "nv_ga_add":
                     include $path . '/view/view_gamme.php';
-                    
+                    break;
+                
+                case "nv_pays_add":
+                    include $path . '/view/view_pays.php';
+                    break;
+                
+                case "nv_nut_add":
+                    include $path . '/view/view_nutrition.php';
                     break;
             }
         }
