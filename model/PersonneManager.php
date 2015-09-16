@@ -21,7 +21,7 @@ class PersonneManager {
 
                 $tParamPrs = array(
                     $Personne->PRS_NOM,
-                    $Personne->PRS_PRENOM,
+                    $Personne->PRS_PRENOM1,
                     $Personne->PRS_PRENOM2,
                     $Personne->PRS_PRENOM3,
                     $Personne->PRS_DTN
@@ -29,7 +29,7 @@ class PersonneManager {
 
                 $sqlPrs = "INSERT INTO personne ("
                         . "PRS_NOM,"
-                        . "PRS_PRENOM,"
+                        . "PRS_PRENOM1,"
                         . "PRS_PRENOM2,"
                         . "PRS_PRENOM3,"
                         . "PRS_DTN)"

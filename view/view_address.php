@@ -1,4 +1,4 @@
-<div class="centre">
+<div class="centre" id="add_adr" style="display:none" >
     <div>
             <label for="ADR_NUM">Numéro :</label><br>
             <input name="ADR_NUM" type="text"></input>

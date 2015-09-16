@@ -10,28 +10,42 @@ function formChooser(){
     
    
     var typeCtc = $("#typeCtc").val();
-  
+    
+    console.log(typeCtc);
     
     switch (typeCtc){
         
+         case "0":
+             
+            $("#add_ent").hide();
+            $("#add_prs").hide();
+            $("#add_adr").hide();
+            $("#add_tel_mail").hide();
+            $("#btn_zone").hide();
+            
+            break;
         
         case "1":
             
-            $("#form_add_ent").show();
-            $("#form_add_prs").hide();
+            $("#add_ent").show();
+            $("#add_prs").hide();
+            $("#add_adr").show();
+            $("#add_tel_mail").show();
+            $("#btn_zone").show();
+            
             break;
             
         case "2":
            
-           $("#form_add_ent").hide();
-           $("#form_add_prs").show();
+           $("#add_ent").hide();
+           $("#add_prs").show();
+           $("#add_adr").show();
+           $("#add_tel_mail").show();
+           $("#btn_zone").show();
+          
            break;
-            
-        case "0":
-            
-            $("#form_add_ent").hide();
-            $("#form_add_prs").hide();  
-            break;
-        
+           
+     
+       
     }
 }
