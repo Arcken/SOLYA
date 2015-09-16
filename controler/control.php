@@ -50,14 +50,15 @@ if (!isset($_SESSION['auth'])) {
                 $resMaxIdFiart = FicheArticleManager::getMaxIdFicheArticle();
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
-                    $oFiArt = new FicheArticle();
-                    //$oFiArt->fiart_id      = $_REQUEST[''];
-                    $oFiArt->fiart_pays_id = $_REQUEST['pays'];
+                    $oFiArt = new FicheArticle();                    
+                    
                     $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
-                    //$oFiArt->fiart_photos  = $_REQUEST[''];
+                    $oFiArt->fiart_photos  = $_REQUEST['fiartPhoto'];
                     $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
-                    $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];
-                    echo $oFiArt->fiart_lbl;
+                    $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];                    
+                    $oFiArt->fiart_pays_id = $_REQUEST['pays'];
+                    $oFiArt->fiart_ga_id = $_REQUEST['gamme'];
+                    print_r($oFiArt);
                     $result = FicheArticleManager::addFicheArticle($oFiArt);
                     echo $result;
                 }

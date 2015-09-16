@@ -13,13 +13,15 @@
  */
 class FicheArticle {
 
-    public $fiart_id      = '';
-    public $fiart_pays_id = '';
+    public $fiart_id      = '';    
     public $fiart_lbl     = '';
     public $fiart_photos  = '';
     public $fiart_ing     = '';
     public $fiart_alg     = '';
-
+    
+    public $fiart_pays_id = '';
+    public $fiart_ga_id = '';
+    
     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
 

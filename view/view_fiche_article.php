@@ -5,7 +5,7 @@
             <div class="gauche">
                 <div> <?php print_r($resMaxIdFiart)?>                
                     <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" placeholder="<?php echo $resMaxIdFiart["MAX(FIART_ID)"]?>" type="text">
+                    <input name="fiartId" value="<?php echo $resMaxIdFiart['MAX(fiart_id)']?>" readonly type="text">
                     <img src="img/icon/accept.png" alt=""/>
                     <br>
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
@@ -66,6 +66,7 @@
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
                 <input name="clear" type="reset"> 
                 <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
+                <input name="fiartPhoto" id="action" value="rien" type="text" hidden>
             </div>
         </form>
     </div>
