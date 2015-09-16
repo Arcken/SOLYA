@@ -79,12 +79,12 @@ class Connection {
         //donc le try .. catch est inutile
 		
 	if($tParam == null){
-		$result = self::$cnx->query($sql);
+		$result = $stm =self::$cnx->query($sql);
 	}else {
 		$stm = self::$cnx->prepare($sql);
 		$state = $stm->execute($tParam);
-                
-                switch ($codeRequete){
+	}
+        switch ($codeRequete){
 			
 			//requête résultat simple
 			
@@ -123,11 +123,9 @@ class Connection {
 				throw new MySQLException("Erreur sur la requête : $sql || état de la requète --> $state", self::$cnx);
 			}
 			break;
-		}
-                return $result;
-	}
-		
-	
+                        
+        }
+	return $result;
 }
 
     public static function dernierId() {
