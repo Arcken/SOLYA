@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Gamme {
+class Pays {
 
     public $PAYS_ID = '';
     public $PAYS_NOM = '';

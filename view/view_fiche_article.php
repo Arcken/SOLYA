@@ -18,20 +18,18 @@
                                 <?php echo $value->GA_LBL ?> </option>
                         <?php } ?>
                     </select>
-                    <a href="" onClick="popup('ga_add');">
-                    <img src="img/icon/add.png" alt="" title="Créer gamme"/>
-                    </a>
+                    
+                    <img src="img/icon/add.png" alt="" onClick="popup('ga_add');" title="Créer gamme"/>
+                    
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays">
                         <?php foreach ($resAllPays as $value) { ?>
                             <option value="<?php echo $value->PAYS_ID ?>">
-                                <?php echo $value->PAYS_LBL ?> </option>
+                                <?php echo $value->PAYS_NOM ?> </option>
                         <?php } ?>                        
-                    </select>
-                    <a href="" onClick="popup('pays_add');">
-                        <img src="img/icon/add.png" alt="" onclick="getPays()" title="Créer pays"/>
-                    </a>
+                    </select>                    
+                        <img src="img/icon/add.png" alt="" onClick="popup('pays_add');" title="Créer pays"/>                   
                     <br>
                 </div>
 
@@ -50,12 +48,12 @@
             </div>
             <div class="droite">
                 <p> Table de nutrition: </p>
-                <?php foreach ($resNUT as $value) { ?>
-                <label for="<?php echo $value->NUT_LBL?>"></label></br>
+                <?php foreach ($resAllNut as $value) { ?>
+                <label for="<?php echo $value->NUT_LBL?>"><?php echo $value->NUT_LBL?></label></br>
                 <input name="<?php echo $value->NUT_LBL?>" placeholder="saisie">                                
                         <?php } ?>
                 <a href="" onClick="popup('view_nutrition.php');">
-                    <img src="img/icon/add.png" alt=""/>
+                    <img src="img/icon/add.png" onClick="popup('pays_add');" title="Créer pays" alt=""/>
                 </a>
                 <br>
             </div>

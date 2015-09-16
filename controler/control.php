@@ -39,6 +39,10 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/model/FicheArticleManager.php';
                 require $path . '/model/Gamme.php';
                 require $path . '/model/GammeManager.php';
+                require $path . '/model/Pays.php';
+                require $path . '/model/PaysManager.php';
+                require $path . '/model/Nutrition.php';
+                require $path . '/model/NutritionManager.php';
                 
                 $resAllGa = GammeManager::getAllGammes();
                 $resAllPays = PaysManager::getAllPays();
