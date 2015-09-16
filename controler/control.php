@@ -63,14 +63,13 @@ if (!isset($_SESSION['auth'])) {
                 }
 
                 break;
+                
             //Créer un contact    
             case "ctc_add":
                 
+                require'control_ctc_add.php';
                 $sPageTitle = "Ajouter un contact";
-                
-                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-                    require'control_ctc_add.php';
-                }
+           
                 break;
 
             //gamme
