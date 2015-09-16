@@ -59,6 +59,14 @@
                     <option value="2">machin</option>
                 </select>
             <br>
+            <label for="CIV_LBL">Civilité :</label><br>
+            <select name="CIV_LBL" id="CIV_LBL" >
+                <option value="0"selected=""> --Civilité-- </option>
+                    <?php foreach ($toCiv as $oCiv) {?>
+                <option value ="<?php echo $oCiv->CIV_ID?>"> <?php echo $oCiv->CIV_CODE ?> </option>
+                    <?php } ?>
+                </select>
+            <br>
             <label for ="PRS_NOM">Nom :</label><br>
             <input name="PRS_NOM" type="text"/>
             <br>
