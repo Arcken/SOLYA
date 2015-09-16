@@ -36,7 +36,8 @@ function getGamme() {
     function maj(json) {
         console.log('dedans');
         var $selectCol1 = $('#selGamme');       
-        $selectCol1.empty();       
+        $selectCol1.empty();
+        $selectCol1.append('<option value="0">Aucun</option>');
         for (var key in json) {
             $selectCol1.append('<option value="'+json[key].GA_ID +'">'+json[key].GA_LBL+'</option>');            
         }
@@ -54,7 +55,8 @@ function getPays() {
     function maj(json) {
         console.log('dedans');
         var $selectCol1 = $('#selPays');       
-        $selectCol1.empty();       
+        $selectCol1.empty();
+        $selectCol1.append('<option value="0">Aucun</option>');
         for (var key in json) {
             $selectCol1.append('<option value="'+json[key].PAYS_ID +'">'+json[key].PAYS_NOM+'</option>');            
         }

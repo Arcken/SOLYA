@@ -12,7 +12,8 @@
                     <input name="fiartLbl" placeholder="description" required type="text">
                     <br>
                     <label for="gamme"> Gamme: </label><br>                    
-                    <select name="gamme" id="selGamme">                        
+                    <select name="gamme" id="selGamme">
+                        <option value="0">Aucun</option>
                         <?php foreach ($resAllGa as $value) { ?>
                             <option value="<?php echo $value->GA_ID ?>">
                                 <?php echo $value->GA_LBL ?> </option>
@@ -24,6 +25,7 @@
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays">
+                        <option value="0">Aucun</option>
                         <?php foreach ($resAllPays as $value) { ?>
                             <option value="<?php echo $value->PAYS_ID ?>">
                                 <?php echo $value->PAYS_NOM ?> </option>
@@ -47,14 +49,17 @@
 
             </div>
             <div class="droite">
-                <p> Table de nutrition: </p>
+                <label> Table de nutrition: </label>
+                <img src="img/icon/add.png" onClick="popup('pays_add');" title="Créer pays" alt=""/>
+                </br>
+                </br>
                 <?php foreach ($resAllNut as $value) { ?>
-                <label for="<?php echo $value->NUT_LBL?>"><?php echo $value->NUT_LBL?></label></br>
+                <label for="<?php echo $value->NUT_LBL?>"><?php echo $value->NUT_LBL?></label>
+                
+                </br>
                 <input name="<?php echo $value->NUT_LBL?>" placeholder="saisie">                                
-                        <?php } ?>
-                <a href="" onClick="popup('view_nutrition.php');">
-                    <img src="img/icon/add.png" onClick="popup('pays_add');" title="Créer pays" alt=""/>
-                </a>
+                        <?php } ?>                
+                    
                 <br>
             </div>
             <div class="bas">
