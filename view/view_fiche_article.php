@@ -49,9 +49,10 @@
             </div>
             <div class="droite">
                 <p> Table de nutrition: </p>
-                <!-- affichage de la liste des champs de nutrition 
-                avec foreach input text et label pour chaque
-                -->
+                <?php foreach ($resNUT as $value) { ?>
+                <label for="<?php echo $value->NUT_LBL?>"></label></br>
+                <input name="<?php echo $value->NUT_LBL?>" placeholder="saisie">                                
+                        <?php } ?>
                 <a href="" onClick="popup('view_nutrition.php');">
                     <img src="img/icon/add.png" alt=""/>
                 </a>
