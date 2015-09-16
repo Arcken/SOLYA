@@ -117,19 +117,26 @@ if (!isset($_SESSION['auth'])) {
                 $sPageTitle = "Ajouter une fiche article";
                 require $path . '/view/view_fiche_article.php';
                 break;
-
+            
             case "ga_add":
             case "ga_add_add":
 
                 $sPageTitle = "Ajouter une gamme";
                 require $path . '/view/view_gamme.php';
                 break;
-
+            
+            case "ref_add":
+                $sPageTitle = "Ajouter une référence";
+                require $path . '/view/view_reference.php';
+                break;
+            
+            //Contacts
             case "ctc_add":
                 require $path . '/view/view_creer_contact.php';
                 break;
         }
         require_once $path . '/view/view_footer.php';
+        
     } else {
         /* ----------------------------Popup--------------------------------- */
 

@@ -53,7 +53,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
             <ul>
                <li><a href='index.php?action=ga_add'><span>Gamme</span></a></li>
                <li><a href='index.php?action=fiart_add'><span>Fiche Article</span></a></li>
-               <li class='last'><a href='#'><span>Références</span></a></li>
+               <li class='last'><a href='index.php?action=ref_add'><span>Références</span></a></li>
             </ul>
          </li>
          <li><a href='#'><span>Consulter</span></a>
