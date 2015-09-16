@@ -13,7 +13,7 @@
  */
 class CiviliteManager {
     //put your code here
-    public static function getAllCivilites($Civilite){
+    public static function getAllCivilites(){
         
         try {
             $sql    = "SELECT * FROM civilite";

@@ -16,8 +16,8 @@ class ContacterPrsManager {
      public static function addContacterPrs($CtcPrs){
          try {
 
-            if (!empty($CtcPrs->MAIL_ID) && (strlen($CtcPrs->MAIL_ID)) > Connection::getLimLbl()
-               && !empty($CtcPrs->PRS_ID) && (strlen($CtcPrs->PRS_ID)) > Connection::getLimLbl()
+            if (!empty($CtcPrs->MAIL_ID) 
+               && !empty($CtcPrs->PRS_ID) 
                && !empty($CtcPrs->MAILPER_LBL) && (strlen($CtcPrs->MAILPER_LBL)) > Connection::getLimLbl()) {
 
                 $tParam= array(

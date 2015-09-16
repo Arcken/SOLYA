@@ -69,7 +69,7 @@ class Connection {
      */
 	 
     public static function request($codeRequete = 0, $sql, $tParam = null, $format = PDO::FETCH_OBJ) {
-
+    
         if (empty(self::$cnx)) {
             self::$cnx = Connection::getConnection();
         }
@@ -79,14 +79,12 @@ class Connection {
         //donc le try .. catch est inutile
 		
 	if($tParam == null){
-		$stm = self::$cnx->query($sql);
+		$result = self::$cnx->query($sql);
 	}else {
 		$stm = self::$cnx->prepare($sql);
 		$state = $stm->execute($tParam);
                 
-	}
-		
-	switch ($codeRequete){
+                switch ($codeRequete){
 			
 			//requête résultat simple
 			
@@ -97,9 +95,7 @@ class Connection {
 				
 			if (!$result) {
                             throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-			} else {
-                            return $result;
-				}
+			}
 			break;
 			
 			
@@ -112,9 +108,7 @@ class Connection {
 			
 			if (!$result) {
 				throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
-			} else {
-				return $result;
-				}
+			} 
 			break;
 				
 				
@@ -122,18 +116,18 @@ class Connection {
 			
 		case 2:
 			
-			$result = $state;
+			$result = $stm->rowCount();
 			$stm->closeCursor();
 			//si result n'est pas supérieur a 0 alors la requête n'a pas marché	
 			if (!$result) {
 				throw new MySQLException("Erreur sur la requête : $sql || état de la requète --> $state", self::$cnx);
-			} else {
-				return $result;
 			}
 			break;
-				
-			
 		}
+                return $result;
+	}
+		
+	
 }
 
     public static function dernierId() {

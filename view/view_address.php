@@ -22,6 +22,14 @@
             <label for="ADR_ETAT">Etat :</label><br>
             <input name="ADR_ETAT" type="text"></input>
             <br>
+            <label for="PAYS_ID">Pays :</label><br>
+            <select name="PAYS_ID" id="PAYS_ID" required >
+                <option value="0" selected> --Pays-- </option>
+                    <?php foreach ($toPays as $oPays) {?>
+                <option value ="<?php echo $oPays->PAYS_ID ?>"> <?php echo $oPays->PAYS_NOM ?> </option>
+                    <?php } ?>
+            </select>
+            <br>
     </div>
 </div>
 

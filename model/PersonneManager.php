@@ -17,9 +17,12 @@ class PersonneManager {
         
         try {
 
-            if (!empty($Personne->PRS_NOM) && (strlen($Personne->PRS_NOM)) > Connection::getLimLbl()) {
+            if (!empty($Personne->PRS_NOM) && (strlen($Personne->PRS_NOM)) > Connection::getLimLbl()
+                && !empty($Personne->PRS_PRENOM1) && (strlen($Personne->PRS_PRENOM1)) > Connection::getLimLbl()
+                && !empty($Personne->CIV_ID)){
 
-                $tParamPrs = array(
+                $tParam = array(
+                    $Personne->CIV_ID,
                     $Personne->PRS_NOM,
                     $Personne->PRS_PRENOM1,
                     $Personne->PRS_PRENOM2,
@@ -27,19 +30,20 @@ class PersonneManager {
                     $Personne->PRS_DTN
                 );
 
-                $sqlPrs = "INSERT INTO personne ("
+                $sql = "INSERT INTO personne ("
+                        . "CIV_ID,"
                         . "PRS_NOM,"
                         . "PRS_PRENOM1,"
                         . "PRS_PRENOM2,"
                         . "PRS_PRENOM3,"
                         . "PRS_DTN)"
-                        . "VALUES(?,?,?,?,?)";
+                        . "VALUES(?,?,?,?,?,?)";
               
 
-                $result = Connection::request(2, $sqlPrs, $tParamPrs);
+                $result = Connection::request(2, $sql, $tParam);
   
             }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans NOM </p>';
+                $result = '<br/><p class="info">Enregistrement impossible sans NOM,prénom et civilité</p>';
             }
         } catch (MySQLException $e) {
 

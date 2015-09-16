@@ -59,9 +59,9 @@
                     <option value="2">machin</option>
                 </select>
             <br>
-            <label for="CIV_LBL">Civilité :</label><br>
-            <select name="CIV_LBL" id="CIV_LBL" >
-                <option value="0"selected=""> --Civilité-- </option>
+            <label for="CIV_CODE">Civilité :</label><br>
+            <select name="CIV_CODE" id="CIV_LBL" >
+                <option value="0" selected> --Civilité-- </option>
                     <?php foreach ($toCiv as $oCiv) {?>
                 <option value ="<?php echo $oCiv->CIV_ID?>"> <?php echo $oCiv->CIV_CODE ?> </option>
                     <?php } ?>

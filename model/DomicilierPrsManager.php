@@ -16,8 +16,8 @@ class DomicilierPrsManager {
      public static function addDomicilierPrs($DomPrs){
          try {
 
-            if (!empty($DomPrs->ADR_ID) && (strlen($DomPrs->ADR_ID)) > Connection::getLimLbl()
-               && !empty($DomPrs->PRS_ID) && (strlen($DomPrs->PRS_ID)) > Connection::getLimLbl()
+            if (!empty($DomPrs->ADR_ID)
+               && !empty($DomPrs->PRS_ID) 
                && !empty($DomPrs->ADRPER_LBL) && (strlen($DomPrs->ADRPER_LBL)) > Connection::getLimLbl()) {
 
                 $tParam= array(

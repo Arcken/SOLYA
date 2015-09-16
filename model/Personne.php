@@ -15,6 +15,8 @@
 class Personne {
     
     //Données membre
+    public $PRS_ID='';
+    public $CIV_ID='';
     public $PRS_NOM='';
     public $PRS_PRENOM1='';
     public $PRS_PRENOM2='';

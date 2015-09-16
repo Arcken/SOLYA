@@ -16,8 +16,8 @@ class JoindrePrsManager {
      public static function addJoindrePrs($JoindrePrs){
          try {
 
-            if (!empty($JoindrePrs->TEL_ID) && (strlen( $JoindrePrs->TEL_ID)) > Connection::getLimLbl()
-               && !empty($JoindrePrs->PRS_ID) && (strlen( $JoindrePrs->PRS_ID)) > Connection::getLimLbl()
+            if (!empty($JoindrePrs->TEL_ID) 
+               && !empty($JoindrePrs->PRS_ID) 
                && !empty( $JoindrePrs-> TELPER_LBL) && (strlen( $JoindrePrs-> TELPER_LBL)) > Connection::getLimLbl()) {
 
                 $tParam= array(
