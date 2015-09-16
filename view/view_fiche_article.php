@@ -24,8 +24,8 @@
                     
                     <br>
                     <label for="pays"> Pays: </label><br>
-                    <select name="pays" id="selPays">
-                        <option value="0">Aucun</option>
+                    <select name="pays" id="selPays" required>
+                        <option value="" selected>Aucun</option>
                         <?php foreach ($resAllPays as $value) { ?>
                             <option value="<?php echo $value->PAYS_ID ?>">
                                 <?php echo $value->PAYS_NOM ?> </option>

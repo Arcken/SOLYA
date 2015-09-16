@@ -56,8 +56,7 @@ if (!isset($_SESSION['auth'])) {
                     $oFiArt->fiart_photos  = $_REQUEST['fiartPhoto'];
                     $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
                     $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];                    
-                    $oFiArt->fiart_pays_id = $_REQUEST['pays'];
-                    $oFiArt->fiart_ga_id = $_REQUEST['gamme'];
+                    $oFiArt->fiart_pays_id = $_REQUEST['pays'];                   
                     print_r($oFiArt);
                     $result = FicheArticleManager::addFicheArticle($oFiArt);
                     echo $result;

@@ -37,28 +37,21 @@ class FicheArticleManager {
             
             if(!empty($FicheArticle->fiart_lbl)&& (strlen($FicheArticle->fiart_lbl))>  Connection::getLimLbl()){
                 
-                $arg = '';
-                $param = '?,?,?,?';
                 $tParam = array(
                             $FicheArticle->fiart_lbl,
                             $FicheArticle->fiart_photos,
                             $FicheArticle->fiart_ing,
-                            $FicheArticle->fiart_alg                                                        
+                            $FicheArticle->fiart_alg,
+                            $FicheArticle->fiart_pays_id
                         );
-                        
-                if ($FicheArticle->fiart_pays_id > 0){
-                    $tParam[] = $FicheArticle->fiart_pays_id;
-                    $arg = 'PAYS_ID,';
-                    $param += ',?';
-                }
                 
-                $sql = "INSERT INTO fiche_article (".
-                        $arg
+                $sql = "INSERT INTO fiche_article ("                        
                         . "FIART_LBL,"
                         . "FIART_PHOTOS,"
                         . "FIART_ING,"
-                        . "FIART_ALG)"                                               
-                        . "VALUES(".$param.")";                        
+                        . "FIART_ALG,"
+                        . "PAYS_ID)"
+                        . "VALUES(?,?,?,?,?)";                        
                 
                 $result = Connection::request(2,$sql,$tParam);
                 print_r($result);
