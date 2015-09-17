@@ -1,7 +1,10 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
+
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+    
     <div class="corps">
-        <form >
+        
+        <form class ="form">
             <div class=" haut"> 
                 <label for="ficheArticle"> Fiche article associée </label><br>
                 <select required="required" name="ficheArticle" title="Choisir un élément">
@@ -11,7 +14,7 @@
                     <option value="huile de cacao">Audi</option>
                 </select>
                 <a href="" onClick="popup('view_fiche_article.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer"/>
+                    <img src="img/icon/add.png" alt="" title="Créer"/>
                 </a>
             </div>
 
@@ -20,7 +23,7 @@
                 <label for="refId"> Référence: </label><br>
                 <input name="refId" placeholder="pays-gamme-n°" 
                        required="" type="text"/>
-                <img src="<?php echo $path . '/img/icon/accept.png' ?>" alt=""></img>
+                <img src="img/icon/accept.png" alt=""></img>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
                 <textarea name="refLbl" rows="4" cols="30" placeholder="Description de la réf" required></textarea>
@@ -44,27 +47,24 @@
                     <option value="Au frais">Au frais</option>
                     <option value="A 5°C">A 5°C</option>
                 </select>
-                <a href="" onClick="popup('view_mode_conservation.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer"/>
-                </a>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_mode_conservation.php');"/>
+                
                 <br>
                 <label for="dureeConservation"> Durée de conservation </label><br>
                 <select name="dureeConservation" title="Choisir un élément">
                     <option value="365">365 jours</option>
                     <option value="60">60 jours</option>
                 </select>
-                <a href="" onClick="popup('view_duree_conservation.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer"/>
-                </a>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_duree_conservation.php');" />
+               
                 <br>
                 <label for="emballage"> Emballage </label><br>
                 <select name="emballage" title="Choisir un élément">
                     <option value="1">bocal 250g</option>
                     <option value="2">sac papier kraft</option>
                 </select>
-                <a href="" onClick="popup('view_emballage.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer"/>
-                </a>
+                    <img src="img/icon/add.png" alt="" title="Créer"onClick="popup('view_emballage.php');" />
+               
             </div>
 
             <div class="droite">
@@ -79,28 +79,26 @@
                     <option value="1">TVA de 5,5%</option>
                     <option value="2">TVA de 20%</option>
                 </select>
-                <a href="" onClick="popup('view_tva.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer" />
-                </a>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_tva.php');" />
+              
                 <br>
                 <label for="droitDouane"> Droit de douanes: </label><br>
                 <select name="droitDouane" title="Choisir un élément">
                     <option value="1">Droit de 8,5%</option>
                     <option value="2">Droit de 12%</option>
                 </select>
-                <a href="" onClick="popup('view_droit_douane.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer"/>
-                </a>
-                <br>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
+               
+                
 
-                <label for="compte"> Compte du fournisseur: </label><br>
-                <select name="compte" title="Choisir un élément">
+                <!-- <br>
+                <label for="compte" > Compte du fournisseur: </label><br>
+                <select name="compte" title="Choisir un élément" disabled >
                     <option value="1">Eurocorp</option>
                     <option value="2">Mexican enterprise</option>
                 </select>
-                <a href="" onClick="popup('view_compte.php');">
-                    <img src="../img/icon/add.png" alt="" title="Créer"/>
-                </a>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_compte.php');"/>-->
+              
                 <br>
                 <label for="pacA"> Prix A: </label><br>
                 <input name="pacA" placeholder="### ###,##" type="text">         
