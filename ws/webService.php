@@ -24,6 +24,16 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             }
             echo json_encode($tab);
             break;
+            
+         case 'getAllNut':
+            $tab = array();
+            $requete = "SELECT * FROM nutrition";
+            $resultat = $bdd->query($requete);
+            while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $donnees;
+            }
+            echo json_encode($tab);
+            break;
     }
 }
 ?>

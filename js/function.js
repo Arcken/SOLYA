@@ -74,7 +74,7 @@ function getNut() {
     function(json) {
         console.log('dedans');
         var $divNut = $('#divNut');       
-        $divNut.empty();
+        $('#divNut').empty();
         
         
         for (var key in json) {
@@ -86,8 +86,14 @@ function getNut() {
 }
 
 function selMaj(){
-    var $action = $('#action').val();    
+    var $action = $('#action').val();   
+    
     switch ($action){
+        
+        case 'nv_nut_add' :
+            console.log("switch");
+            $("#newView").prop('onunload',window.opener.getNut());
+        break;
         
         case 'nv_ga_add':
             
@@ -96,12 +102,10 @@ function selMaj(){
         
         case 'nv_pays_add':
             
-          $("#newView").prop('onunload',window.opener.getPays());  
+           $("#newView").prop('onunload',window.opener.getPays());  
         break;
         
-        case 'nv_nut_add' :
-            $("#newView").prop('onunload',window.opener.getNut());
-        break;
+
         
     }
 }

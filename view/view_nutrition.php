@@ -12,6 +12,9 @@ require $path.'/view/view_new_view_header.php';
 }
 ?>
 
+
+
+
 <div class="corps">
     <form class="form" id="fNut" action="index.php">
         <div> 
@@ -32,6 +35,7 @@ require $path.'/view/view_new_view_header.php';
 </div>
 
 <?php
+if ($nv == 1) require $path.'/view/view_new_view_footer.php';
 }
 else echo 'Le silence est d\'or'
 ?>

@@ -50,7 +50,7 @@
                 </div>
 
             </div>
-            <div class="droite">
+            <div class="droite" id="divNut">
                 <label> Table de nutrition: </label>
                 <img src="img/icon/add.png" onClick="popup('nut_add');" title="Créer nouvel élément" alt=""/>
                 </br>

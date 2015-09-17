@@ -235,15 +235,18 @@ if (!isset($_SESSION['auth'])) {
                     break;
 
                 case 'nv_nut_add':
+                    
                     $sPageTitle = "Ajouter une information";
                     require $path . '/model/Nutrition.php';
                     require $path . '/model/NutritionManager.php';
+                    
                     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                         $oNut = new Nutrition();
-                        $oNut->NUT_LBL = $_REQUEST['nutLbl'];
+                        $oNut->nut_lbl = $_REQUEST['nutLbl'];
                         $result = NutritionManager::addNutrition($oNut);
                         echo $result;
                     }
+                    
                     $resAllNut = NutritionManager::getAllNutritions();
                     break;
             }
