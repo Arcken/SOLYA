@@ -12,8 +12,8 @@
                     <input name="fiartLbl" placeholder="description" required type="text">
                     <br>
                     <label for="gamme"> Gamme: </label><br>                    
-                    <select name="gamme" id="selGamme">
-                        <option value="0">Aucun</option>
+                    <select name="gamme" id="selGamme" multiple="multiple" required="">
+                        <option value="" selected="">Aucun</option>
                         <?php foreach ($resAllGa as $value) { ?>
                             <option value="<?php echo $value->GA_ID ?>">
                                 <?php echo $value->GA_LBL ?> </option>
