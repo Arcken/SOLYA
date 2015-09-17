@@ -14,10 +14,7 @@
 class Emballage {
     
     //Données membres
-    public $EMB_ID='';
-    public $EMB_LBL='';
-    public $EMB_COULEUR='';
-    public $EMB_TYPE='';
+    
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

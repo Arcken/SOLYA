@@ -22,7 +22,7 @@ class ReferenceManager {
         try {
            
             $sql = 'SELECT * FROM reference';
-            $result = Connection::request($sql);
+            $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }
@@ -36,39 +36,44 @@ class ReferenceManager {
             if(!empty($reference->ref_lbl)&&(strlen($reference->ref_lbl)>Connection::getLimLbl())){
                 
                 $tParam =array(
-                        $reference->ref_emb_id,
-                        $reference->ref_dc_id,
-                        $reference->ref_fiart_id,
-                        $reference->ref_dd_id ,     
-                        $reference->ref_tva_id ,    
-                        $reference->ref_lbl ,      
-                        $reference->ref_st_min  ,   
-                        $reference->ref_poids_brut ,
-                        $reference->ref_poids_net , 
-                        $reference->ref_vlm_ctn ,   
-                        $reference->ref_dim_lng  ,  
-                        $reference->ref_dim_lrg  ,  
-                        $reference->ref_dim_ht    ,
-                        $reference->ref_dim_diam);
+                            $reference->$dc_id             ,
+                            $reference->$fiart_id          ,
+                            $reference->$dd_id             ,
+                            $reference->$tva_id            ,
+                            $reference->$ref_lbl           ,
+                            $reference->$ref_st_min        ,
+                            $reference->$ref_poids_brut    ,
+                            $reference->$ref_poids_net     ,
+                            $reference->$ref_emb_lbl       ,
+                            $reference->$ref_emb_couleur   ,
+                            $reference->$ref_emb_type      ,
+                            $reference->$ref_emb_vlm_ctn   ,
+                            $reference->$ref_emb_dim_lng   ,
+                            $reference->$ref_emb_dim_lrg   ,
+                            $reference->$ref_emb_dim_ht    ,
+                            $reference->$ref_emb_dim_diam  
+                             );
                 
                 $sql = "INSERT INTO reference ("
-                        . "EMB_ID,"
                         . "DC_ID,"
                         . "FIART_ID,"
                         . "DD_ID,"
-                        . "TV_ID,"
+                        . "TVA_ID,"
                         . "REF_LBL,"
                         . "REF_ST_MIN,"
                         . "REF_POIDS_BRUT,"
                         . "REF_POIDS_NET,"
-                        . "REF_VLM_CTN,"
-                        . "REF_DIM_LNG,"
-                        . "REF_DIM_LRG,"
-                        . "REF_DIM_HT,"
-                        . "REF_DIM_DIAM) " .
-                    " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        . "REF_EMB_LBL,"
+                        . "REF_EMB_COULEUR,"
+                        . "REF_EMB_TYPE,"
+                        . "REF_EMB_VLM_CTN,"
+                        . "REF_EMB_DIM_LNG,"
+                        . "REF_EMB_DIM_LRG,"
+                        . "REF_EMB_DIM_HT,"
+                        . "REF_EMB_DIM_DIAM) ".
+                    " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
-                $result = Connection::request($sql,$tParam);
+                $result = Connection::request(2,$sql,$tParam);
            
             }else{
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';

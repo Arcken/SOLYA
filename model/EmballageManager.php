@@ -7,7 +7,7 @@
  */
 
 /**
- * Description of MailManager
+ * Manager de la classe Emballage
  *
  * @author Olivier
  */
@@ -43,14 +43,24 @@ class EmballageManager {
                 $tParam= array(
                     $Emb->EMB_LBL,
                     $Emb->EMB_COULEUR,
-                    $Emb->EMB_TYPE
+                    $Emb->EMB_TYPE,
+                    $Emb->EMB_VLM_CTN,
+                    $Emb->EMB_DIM_LNG,
+                    $Emb->EMB_DIM_LRG,
+                    $Emb->EMB_DIM_HT,
+                    $Emb->EMB_DIM_DIAM
                 );
 
                 $sql = "INSERT INTO emballage ("
                         . "EMB_LBL,"
                         . "EMB_COULEUR,"
-                        . "EMB_TYPE) "
-                        . "VALUES(?,?,?)";
+                        . "EMB_TYPE,"
+                        . "EMB_VLM_CTN,"
+                        . "EMB_DIM_LNG,"
+                        . "EMB_DIM_LRG,"
+                        . "EMB_DIM_HT,"
+                        . "EMB_DIM_DIAM) "
+                        . "VALUES(?,?,?,?,?,?,?,?)";
                 
                 $result = Connection::request(2, $sql, $tParam);
   
