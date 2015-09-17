@@ -49,12 +49,12 @@ class GammeManager {
 
                 $result = Connection::request(2,$sql, $tParam);
             } else {
-                $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
+                $result = '<br/><p class="info">Enregistrement Gamme impossible sans libéllé </p>';
             }
         } catch (MySQLException $e) {
 
 
-            $result = '<br/><p class="info">la Référence a bien était ajouté </p>';
+            $result = 'Erreur pour la Gamme';
         }
         return $result;
     }

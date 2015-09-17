@@ -10,8 +10,8 @@
 class Nutrition {
     
     //Données membres
-    public $NUT_ID='';
-    public $NUT_LBL='';
+    public $nut_id='';
+    public $nut_lbl='';
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

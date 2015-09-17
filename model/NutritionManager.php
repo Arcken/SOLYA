@@ -33,10 +33,10 @@ class NutritionManager {
     public static function addNutrition($Nut){
          try {
 
-            if (!empty($Nut->NUT_LBL) && (strlen($Nut->NUT_LBL)) > Connection::getLimLbl()) {
+            if (!empty($Nut->nut_lbl) && (strlen($Nut->nut_lbl)) > Connection::getLimLbl()) {
 
                 $tParam= array(
-                    $Nut->NUT_LBL
+                    $Nut->nut_lbl
                 );
 
                 $sql = "INSERT INTO nutrition ("

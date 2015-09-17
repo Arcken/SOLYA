@@ -56,7 +56,7 @@ class InformerManager {
             if (isset($informer->fiart_id) &&
                     isset($informer->nut_id) &&
                     isset($informer->nutfiart_val) &&
-                    $informer->nutfiart_val > 0) {
+                    $informer->nutfiart_val != '') {
 
                 $tParam = array(
                     $informer->fiart_id,
@@ -67,12 +67,12 @@ class InformerManager {
                 $sql = "INSERT INTO informer ("
                         . " FIART_ID, "
                         . " NUT_ID, "
-                        . " NUTRIFIART_VAL) "
+                        . " NUTFIART_VAL) "
                         . " VALUES(?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
             } else {
-                $result = '<br/><p class="info">Enregistrement impossible</p>';
+                $result = '<br/><p class="info">Enregistrement Informer impossible</p>';
             }
         } catch (MySQLException $e) {
 

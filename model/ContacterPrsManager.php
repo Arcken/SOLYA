@@ -6,24 +6,20 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of ContacterPrsManager
- *
- * @author Olivier
- */
+
 class ContacterPrsManager {
     //put your code here
      public static function addContacterPrs($CtcPrs){
          try {
 
-            if (!empty($CtcPrs->MAIL_ID) 
-               && !empty($CtcPrs->PRS_ID) 
-               && !empty($CtcPrs->MAILPER_LBL) && (strlen($CtcPrs->MAILPER_LBL)) > Connection::getLimLbl()) {
+            if (!empty($CtcPrs->mail_id) 
+               && !empty($CtcPrs->prs_id) 
+               && !empty($CtcPrs->mailper_lbl) && (strlen($CtcPrs->mailper_lbl)) > Connection::getLimLbl()) {
 
                 $tParam= array(
-                    $CtcPrs->MAILPER_LBL,
-                    $CtcPrs->MAIL_ID,
-                    $CtcPrs->PRS_ID
+                    $CtcPrs->mailper_lbl,
+                    $CtcPrs->mail_id,
+                    $CtcPrs->prs_id
                 );
 
                 $sql = "INSERT INTO contacter_prs ("

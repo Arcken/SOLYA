@@ -13,9 +13,9 @@
  */
 class ContacterPrs {
     //put your code here
-    public $MAILPER_LBL='';
-    public $MAIL_ID='';
-    public $PRS_ID='';
+    public $mailper_lbl='';
+    public $mail_id='';
+    public $prs_id='';
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

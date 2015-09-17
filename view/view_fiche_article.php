@@ -52,15 +52,19 @@
             </div>
             <div class="droite">
                 <label> Table de nutrition: </label>
-                <img src="img/icon/add.png" onClick="popup('nut_add');" title="Créer nuvel élément" alt=""/>
+                <img src="img/icon/add.png" onClick="popup('nut_add');" title="Créer nouvel élément" alt=""/>
                 </br>
                 </br>
-                <?php foreach ($resAllNut as $value) { ?>
-                <label for="<?php echo $value->NUT_LBL?>"><?php echo $value->NUT_LBL?></label>
+                <?php
+                foreach ($resAllNut as $value) { ?>
+                <label for="<?php echo 'nut'.$value->NUT_ID?>"><?php echo urlencode($value->NUT_LBL)?></label>
                 
                 </br>
-                <input name="<?php echo $value->NUT_LBL?>" placeholder="saisie"> </br>                               
-                        <?php } ?>                
+                <input name="<?php echo 'nut'.$value->NUT_ID?>" placeholder="saisie"> </br>                               
+                        <?php 
+                        
+                }
+                ?>
                     
                 <br>
             </div>

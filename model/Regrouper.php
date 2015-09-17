@@ -1,17 +1,18 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-class Informer {
-
-    public $fiart_id = '';
-    public $nut_id = '';
-    public $nutfiart_val = '';
-    public function __construct($args = null) {
+class Regrouper {
+    
+    //Données membres
+    public $ga_id='';
+    public $fiart_id='';
+    
+     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
             // Pour chaque clé, on récupère sa valeur.
             foreach ($args as $key => $value) {
@@ -22,6 +23,5 @@ class Informer {
                 $this->$key = $value;
             }
         }
-    }
-
+     }
 }
