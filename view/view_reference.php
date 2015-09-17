@@ -121,11 +121,7 @@
     </div>
 
     <?php
-} else
-    echo 'Le silence est d\'or'
-
-
-
-
-    
+} else{
+    echo 'Le silence est d\'or' ;
+}
 ?>

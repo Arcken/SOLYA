@@ -1,8 +1,8 @@
 
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 <script src="lib/jquery.js" type="text/javascript"></script>
-<script src="js/formChooser.js" type="text/javascript"></script>
-<script src="js/cbChooser.js" type="text/javascript"></script>
+<script src="js/CtcAddFct.js" type="text/javascript"></script>
+
 
 <!--Corps de la page-->
 <div class="corps">
@@ -12,8 +12,8 @@
         <div class="haut">
             
                 <label for="typeCtc"> Type de contact: </label><br>
-                <select id="typeCtc" name="typeCtc" onChange="formChooser()">
-                    <option value="0" selected>--Type contact--</option>
+                <select id="typeCtc" name="typeCtc" onChange="formChooser()" required>
+                    <option value="" selected>--Type contact--</option>
                     <option value="1">Entreprise</option>
                     <option value="2">Personne</option>
                 </select>
@@ -53,15 +53,15 @@
        <!-- Partie gauche de l'écran : Civilité -->
         <div class="gauche" id="add_prs" style="display:none"> 
             <label for="PRS_ENT">Entreprise :</label><br>
-            <select name="PRS_ENT"id="PRS_ENT" onChange="">
-                    <option value="0">Nom de l'entreprise</option>
+            <select name="PRS_ENT"id="PRS_ENT" onChange="" required>
+                    <option value="">Nom de l'entreprise</option>
                     <option value="1">truc</option>
                     <option value="2">machin</option>
                 </select>
             <br>
             <label for="CIV_CODE">Civilité :</label><br>
-            <select name="CIV_CODE" id="CIV_LBL" >
-                <option value="0" selected> --Civilité-- </option>
+            <select name="CIV_CODE" id="CIV_LBL" required>
+                <option value="" selected > --Civilité-- </option>
                     <?php foreach ($toCiv as $oCiv) {?>
                 <option value ="<?php echo $oCiv->CIV_ID?>"> <?php echo $oCiv->CIV_CODE ?> </option>
                     <?php } ?>
@@ -101,14 +101,14 @@
             <label for='CAT_CTC[]'>Catégorie contact :</label> <br>
             <input class='CB_CLI'   type="checkbox" name='CAT_CTC[]' value='Client' onclick="cbChooser()"/>Client <br>
             <input class='CB_FOUR'  type="checkbox" name='CAT_CTC[]' value='Fournisseur' onclick="cbChooser()"/>Fournisseur <br>
-            <input class='CB_PRSPT' type="checkbox" name='CAT_CTC[]' value='Prospect' onclick="cbChooser()"/>Prospect <br>
+            <input class='CB_PRSPT' type="checkbox" name='CAT_CTC[]' value='Prospect' onclick="cbChooser()" />Prospect <br>
             
         </div>
         
        <!--Zone des boutons-->
         <div class="bas" id="btn_zone" style="display:none">    
             <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
-            <input name="clear"   type="reset"/> 
+            <input id ='clearForm' name="clear"   type="reset" onclick="formChooser()"/> 
             <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
         </div>
     </form>
