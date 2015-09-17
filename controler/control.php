@@ -58,8 +58,14 @@ if (!isset($_SESSION['auth'])) {
                     $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];                    
                     $oFiArt->fiart_pays_id = $_REQUEST['pays'];                   
                     print_r($oFiArt);
-                    $result = FicheArticleManager::addFicheArticle($oFiArt);
-                    echo $result;
+                    
+                    if (isset($_REQUEST['gamme']) 
+                            && !empty($_REQUEST['gamme'])){
+                        print_r($_REQUEST['gamme']);
+                    }
+                    
+                    //$result = FicheArticleManager::addFicheArticle($oFiArt);
+                    //echo $result;
                 }
 
                 break;
@@ -84,7 +90,7 @@ if (!isset($_SESSION['auth'])) {
                     $result = GammeManager::addGamme($oGa);
                     echo $result;
                 }
-                $resGa = GammeManager::getAllGammes();
+                $resAllGa = GammeManager::getAllGammes();
                 break;
 
             case "pays_add":

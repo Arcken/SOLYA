@@ -28,7 +28,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                 try {
 
                     $cnx = Connection::getConnection();
-                    $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    
                     $cnx->beginTransaction();
 
                     $oPers = new Personne();
