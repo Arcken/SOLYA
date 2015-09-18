@@ -21,7 +21,13 @@ class NutritionManager {
             $sql = 'SELECT * FROM nutrition';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+            if ($e->getCode() == 00000){
+                return 0;
+            }
+            else {
+                return $e->getCode ();
+            
+            }
         }
         return $result;
     }

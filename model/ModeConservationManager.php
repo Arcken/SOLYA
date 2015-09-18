@@ -26,8 +26,9 @@ class ModeConservationManager {
             } else {
                 return $e->getCode();
             }
-            return $result;
+           
         }
+         return $result;
     }
 
     /**

@@ -36,7 +36,6 @@ class ReferenceManager {
             if(!empty($reference->ref_lbl)&&(strlen($reference->ref_lbl)>Connection::getLimLbl())){
                 
                 $tParam =array(
-                            $reference->ref_id,
                             $reference->dc_id             ,
                             $reference->fiart_id          ,
                             $reference->dd_id             ,
@@ -55,7 +54,6 @@ class ReferenceManager {
                              );
                 
                 $sql = "INSERT INTO reference ("
-                        . "REF_ID,"
                         . "DC_ID,"
                         . "FIART_ID,"
                         . "DD_ID,"
@@ -71,7 +69,7 @@ class ReferenceManager {
                         . "REF_EMB_DIM_LRG,"
                         . "REF_EMB_DIM_HT,"
                         . "REF_EMB_DIM_DIAM) ".
-                    " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                    " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 
                 $result = Connection::request(2,$sql,$tParam);
            

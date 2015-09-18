@@ -26,10 +26,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <option value="" selected="">Aucun</option>
 
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
-                        <?php foreach ($resAllGa as $value) { ?>
-                            <option value="<?php echo $value->GA_ID ?>">
-                                <?php echo $value->GA_LBL ?> </option>
-                        <?php } ?>
+                        
+                        <?php if(is_array($resAllGa) && $resAllGa!=0) {
+                                foreach ($resAllGa as $value) { ?>
+                                 <option value="<?php echo $value->GA_ID ?>">
+                                 <?php echo $value->GA_LBL ?> </option>
+                        <?php   }
+                        
+                              } ?>
                     </select>
 
                     <img src="img/icon/add.png" alt="" onClick="popup('ga_add');" title="Créer gamme"/><br>
@@ -42,10 +46,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <select name="pays" id="selPays" required>
                         <option value="" selected>Aucun</option>
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
-                        <?php foreach ($resAllPays as $value) { ?>
-                            <option value="<?php echo $value->PAYS_ID ?>">
-                                <?php echo $value->PAYS_NOM ?> </option>
-                        <?php } ?>                        
+                        <?php if(is_array($resAllPays) && $resAllGa!=0) {
+                                foreach ($resAllPays as $value) { ?>
+                                    <option value="<?php echo $value->PAYS_ID ?>">
+                                    <?php echo $value->PAYS_NOM ?> </option>
+                          <?php }
+                        
+                              } ?>                        
                     </select>                    
                     <img src="img/icon/add.png" alt="" onClick="popup('pays_add');" title="Créer pays"/>                   
                     <br>
@@ -70,12 +77,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 </br>
                 </br>
                 <!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
-                <?php foreach ($resAllNut as $value) { ?>
-                    <label for="<?php echo 'nut' . $value->NUT_ID ?>"><?php echo $value->NUT_LBL ?></label>
-                    </br>
-                    <input name="<?php echo 'nut' . $value->NUT_ID ?>" placeholder="saisie"> </br>                               
-                    <?php
-                }
+                <?php if(is_array($resAllNut) && $resAllNut!=0) {
+                        foreach ($resAllNut as $value) { ?>
+                            <label for="<?php echo 'nut' . $value->NUT_ID ?>"><?php echo $value->NUT_LBL ?></label>
+                        </br>
+                        <input name="<?php echo 'nut' . $value->NUT_ID ?>" placeholder="saisie"> </br>                               
+                        <?php
+                        
+                        }
+                      }
                 ?>
                 <br>
             </div>

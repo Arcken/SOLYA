@@ -12,13 +12,16 @@ class FicheArticleManager {
         try {
            
             $sql = 'SELECT * FROM fiche_article';
-            $result = Connection::request(0,$sql);
+            $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             
             if ($e->getCode() == 00000){
                 return 0;
             }
-            else return $e->getCode ();
+            else{ 
+                return $e->getCode ();
+            
+            }
         }
         return $result;
     }
@@ -41,7 +44,7 @@ class FicheArticleManager {
            //jointure avec pays_id
             $sql = 'SELECT * FROM fiche_article '
                     . 'NATURAL JOIN pays';
-            $result = Connection::request(0,$sql, null ,$format = PDO::FETCH_ASSOC);
+            $result = Connection::request(1,$sql, null ,$format = PDO::FETCH_ASSOC);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }

@@ -8,7 +8,7 @@
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select  name="ficheArticle" title="Choisir un élément">
+                <select  name="ficheArticle" title="Choisir un élément" required>
                     <option value="">Aucun</option>
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
@@ -42,13 +42,13 @@
                 <input name="refVolume" placeholder="litre ###,###" type="text">         
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
-                <select name="modeConservation" title="Choisir un élément" >
+                <select name="modeConservation" title="Choisir un élément" required>
                     <option value="" selected>Aucun</option>
                     
                     <?php
                     if (isset($toModCons) && is_array($toModCons)){
                     foreach($toModCons as $oModCons) { ?>
-                        <option value=<?php echo $oModCons->CONS_ID ?>> <?php echo $oModCons->CONS_LBL ?> </option>
+                        <option value="<?php echo $oModCons->CONS_ID ?>"> <?php echo $oModCons->CONS_LBL ?> </option>
                     <?php }
                     
                     }?>
@@ -57,7 +57,7 @@
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_mode_conservation.php');"/>
                 <br>
                 <label for="dureeConservation"> Durée de conservation </label><br>
-                <select name="dureeConservation" title="Choisir un élément" >
+                <select name="dureeConservation" title="Choisir un élément" required>
                     <option value="" selected>Aucun</option>
                     
                     <?php
@@ -107,7 +107,7 @@
                 <input name="pveEnt" placeholder="### ###,##" type="text">         
                 <br>
                 <label for="tva"> Taux de TVA: </label><br>
-                <select name="tva" title="Choisir un élément">
+                <select name="tva" title="Choisir un élément" required>
                    <option value="" selected>Aucun</option>
                     
                     <?php
@@ -122,7 +122,7 @@
 
                 <br>
                 <label for="droitDouane"> Droit de douanes: </label><br>
-                <select name="droitDouane" title="Choisir un élément">
+                <select name="droitDouane" title="Choisir un élément" required>
                     
                      <option value="" selected>Aucun</option>
                      

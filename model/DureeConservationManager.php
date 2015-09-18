@@ -22,7 +22,13 @@ class DureeConservationManager {
             $sql = 'SELECT * FROM duree_conservation';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+             if ($e->getCode() == 00000){
+                return 0;
+            }
+            else {
+                return $e->getCode ();
+            
+            }
         }
         return $result;
     }
@@ -52,10 +58,9 @@ class DureeConservationManager {
                 $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
             }
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            die($e->retourneErreur());
+           
         }
-      
     }
 }
 
