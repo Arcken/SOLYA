@@ -6,12 +6,17 @@
 
         <form class ="form">
             <div class=" haut"> 
-                <label for="ficheArticle"> Fiche article associée </label><br>
+                
+                <label for="ficheArticle"> Associée fiche article: </label><br>
                 <select required="required" name="ficheArticle" title="Choisir un élément">
-                    <option value="cacao">Volvo</option>
-                    <option value="chocolat">Saab</option>
-                    <option value="caramel">Mercedes</option>
-                    <option value="huile de cacao">Audi</option>
+                    <option value="">Aucun</option>
+                    
+                   <?php if (isset($toFiArts) && is_array($toFiArts)){ 
+                        foreach($toFiArts as $oFiArt) { ?>
+                        <option value=<?php echo $oFiArt->FIART_ID ?>> <?php echo 'Id :'.$oFiArt->FIART_ID.' '.$oFiArt->FIART_LBL ?> </option>
+                   <?php }
+                   
+                   } ?>
                 </select>
                 <a href="" onClick="popup('view_fiche_article.php');">
                     <img src="img/icon/add.png" alt="" title="Créer"/>
@@ -37,16 +42,32 @@
                 <input name="refVolume" placeholder="litre ###,###" type="text">         
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
-                <select name="modeConservation" title="Choisir un élément">
-                    <option value="Au frais">Au frais</option>
-                    <option value="A 5°C">A 5°C</option>
+                <select name="modeConservation" title="Choisir un élément" required>
+                    <option value="" selected>Aucun</option>
+                    
+                    <?php
+                    if (isset($toModCons) && is_array($toModCons)){
+                    foreach($toModCons as $oModCons) { ?>
+                        <option value=<?php echo $oModCons->CONS_ID ?>> <?php echo $oModCons->CONS_LBL ?> </option>
+                    <?php }
+                    
+                    }?>
+                        
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_mode_conservation.php');"/>
                 <br>
                 <label for="dureeConservation"> Durée de conservation </label><br>
-                <select name="dureeConservation" title="Choisir un élément">
-                    <option value="365">365 jours</option>
-                    <option value="60">60 jours</option>
+                <select name="dureeConservation" title="Choisir un élément" required>
+                    <option value="" selected>Aucun</option>
+                    
+                    <?php
+                    if (isset($toDurCons) && is_array($toDurCons)){
+                    foreach($toDurCons as $oDurCons) { ?>
+                        <option value=<?php echo $oDurCons->DC_ID ?>> <?php echo $oDurCons->DC_NB.' '.$oDurCons->DC_LBL ?> </option>
+                    <?php }
+                    
+                    }?>
+                        
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_duree_conservation.php');" />
                 <br>
@@ -87,16 +108,31 @@
                 <br>
                 <label for="tva"> Taux de TVA: </label><br>
                 <select name="tva" title="Choisir un élément">
-                    <option value="1">TVA de 5,5%</option>
-                    <option value="2">TVA de 20%</option>
+                   <option value="" selected>Aucun</option>
+                    
+                    <?php
+                    if (isset($toTvas) && is_array($toTvas)){
+                    foreach($toTvas as $oTva) { ?>
+                        <option value=<?php echo $oTva->TVA_ID ?>> <?php echo $oTva->TVA_LBL.' '.$oTva->TVA_TAUX.' %' ?> </option>
+                    <?php }
+                    
+                    }?>
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_tva.php');" />
 
                 <br>
                 <label for="droitDouane"> Droit de douanes: </label><br>
                 <select name="droitDouane" title="Choisir un élément">
-                    <option value="1">Droit de 8,5%</option>
-                    <option value="2">Droit de 12%</option>
+                    
+                     <option value="" selected>Aucun</option>
+                     
+                    <?php 
+                     if (isset($toTvas) && is_array($toTvas)){
+                     foreach($toDroitDouanes as $oDroitDouane) { ?>
+                        <option value=<?php echo $oDroitDouane->DD_ID ?>> <?php echo $oDroitDouane->DD_LBL.' '.$oDroitDouane->DD_TAUX.' %' ?> </option>
+                     <?php }
+                     
+                    }?>
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
             </div>

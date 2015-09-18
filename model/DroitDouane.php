@@ -6,14 +6,20 @@
  * and open the template in the editor.
  */
 
-class Duree_conservation {
-    
+/**
+ * Class de l'objet droit de douane
+ *
+ * @author Olivier
+ */
+class DroitDouane {
     //Données membres
-    public $DC_ID='';
-    public $DC_LBL='';
-    public $DC_NB='';
     
-     public function __construct($args = null) {
+    public $dd_id='';
+    public $dd_lbl='';
+    public $dd_taux='';
+    
+    
+      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
             // Pour chaque clé, on récupère sa valeur.
             foreach ($args as $key => $value) {

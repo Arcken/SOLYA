@@ -6,20 +6,22 @@
  * and open the template in the editor.
  */
 
-
-class Duree_conservationManager {
-    //put your code here
-    
-    /**
-     * Retourne tous les enregistrements de la table mode_conservation
+/**
+ * Description of DroitDouaneManager
+ *
+ * @author Olivier
+ */
+class DroitDouaneManager {
+     /**
+     * Retourne tous les enregistrements de la table droit_douane
      * 
-     * @return mode_conservation[] objet
+     * @return droit_douane[] objet
      */
-    public static function getAllDuree_conservations() {
+    public static function getAllDroitDouanes() {
 
         try {
 
-            $sql = 'SELECT * FROM duree_conservation';
+            $sql = 'SELECT * FROM droit_douane';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
@@ -28,22 +30,22 @@ class Duree_conservationManager {
     }
     
     /**
-     * Ajoute un enregistrement dans la table mode_conservation
-     * @param type $Dc
+     * Ajoute un enregistrement dans la table droit_douane
+     * @param type $Dd
      */
-    public static function addDuree_conservation($Dc){
+    public static function addDroitDouane($Dd){
          try {
 
-            if (!empty($Dc->DC_LBL) && (strlen($Dc->DC_LBL)) > Connection::getLimLbl()) {
+            if (!empty($Dd->dd_taux) && (strlen($Dd->dd_taux)) >0) {
 
                 $tParam= array(
-                    $Dc->DC_LBL,
-                    $Dc->DC_NB
+                    $Dd->dd_lbl,
+                    $Dd->dd_taux
                 );
 
-                $sql = "INSERT INTO duree_conservation ("
-                        . "DC_LBL,"
-                        . "DC_NB)"
+                $sql = "INSERT INTO droit_douane("
+                        . "DD_LBL,"
+                        . "DD_TAUX)"
                         . "VALUES(?,?)";
                 
                 $result = Connection::request(2, $sql, $tParam);
@@ -58,4 +60,3 @@ class Duree_conservationManager {
       
     }
 }
-

@@ -6,13 +6,12 @@
  * and open the template in the editor.
  */
 
-class prix_vente {
+class DureeConservation {
     
     //Données membres
-    public $PVE_ID='';
-    public $PVE_DATE='';
-    public $PVE_PER='';
-    public $PVE_ENT='';
+    public $dc_id='';
+    public $dc_lbl='';
+    public $dc_nb='';
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

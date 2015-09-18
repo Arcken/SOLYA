@@ -7,19 +7,19 @@
  */
 
 
-class Prix_venteManager {
+class ModeConservationManager {
     //put your code here
     
     /**
-     * Retourne tous les enregistrements de la table prix_vente
+     * Retourne tous les enregistrements de la table mode_conservation
      * 
-     * @return prix_vente[] objet
+     * @return mode_conservation[] objet
      */
-    public static function getAllPrix_ventes() {
+    public static function getAllModeConservations() {
 
         try {
 
-            $sql = 'SELECT * FROM prix_vente';
+            $sql = 'SELECT * FROM mode_conservation';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
@@ -28,30 +28,26 @@ class Prix_venteManager {
     }
     
     /**
-     * Ajoute un enregistrement dans la table prix_vente
-     * @param type $Pve
+     * Ajoute un enregistrement dans la table mode_conservation
+     * @param type $Cons
      */
-    public static function addPrix_vente($Pve){
+    public static function addModeConservation($Cons){
          try {
 
-            if (!empty($Pve->PVE_PER) && ($Pve->PVE_PER) > 0 && ($Pve->PVE_ENT) > 0) {
+            if (!empty($Cons->CONS_LBL) && (strlen($Cons->CONS_LBL)) > Connection::getLimLbl()) {
 
                 $tParam= array(
-                    $Pve->PVE_PER,
-                    $Pve->PVE_ENT,
-                    $Pve->PVE_DATE
+                    $Cons->CONS_LBL
                 );
 
                 $sql = "INSERT INTO mode_conservation ("
-                        . "PVE_PER,"
-                        . "PVE_ENT,"
-                        . "PVE_DATE)"
+                        . "CONS_LBL)"
                         . "VALUES(?)";
                 
                 $result = Connection::request(2, $sql, $tParam);
   
             }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans prix </p>';
+                $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
             }
         } catch (MySQLException $e) {
 
