@@ -36,25 +36,26 @@ class ReferenceManager {
             if(!empty($reference->ref_lbl)&&(strlen($reference->ref_lbl)>Connection::getLimLbl())){
                 
                 $tParam =array(
-                            $reference->$dc_id             ,
-                            $reference->$fiart_id          ,
-                            $reference->$dd_id             ,
-                            $reference->$tva_id            ,
-                            $reference->$ref_lbl           ,
-                            $reference->$ref_st_min        ,
-                            $reference->$ref_poids_brut    ,
-                            $reference->$ref_poids_net     ,
-                            $reference->$ref_emb_lbl       ,
-                            $reference->$ref_emb_couleur   ,
-                            $reference->$ref_emb_type      ,
-                            $reference->$ref_emb_vlm_ctn   ,
-                            $reference->$ref_emb_dim_lng   ,
-                            $reference->$ref_emb_dim_lrg   ,
-                            $reference->$ref_emb_dim_ht    ,
-                            $reference->$ref_emb_dim_diam  
+                            $reference->ref_id,
+                            $reference->dc_id             ,
+                            $reference->fiart_id          ,
+                            $reference->dd_id             ,
+                            $reference->tva_id            ,
+                            $reference->ref_lbl           ,
+                            $reference->ref_st_min        ,
+                            $reference->ref_poids_brut    ,
+                            $reference->ref_poids_net     ,
+                            $reference->ref_emb_lbl       ,
+                            $reference->ref_emb_couleur   ,
+                            $reference->ref_emb_vlm_ctn   ,
+                            $reference->ref_emb_dim_lng   ,
+                            $reference->ref_emb_dim_lrg   ,
+                            $reference->ref_emb_dim_ht    ,
+                            $reference->ref_emb_dim_diam  
                              );
                 
                 $sql = "INSERT INTO reference ("
+                        . "REF_ID,"
                         . "DC_ID,"
                         . "FIART_ID,"
                         . "DD_ID,"
@@ -65,7 +66,6 @@ class ReferenceManager {
                         . "REF_POIDS_NET,"
                         . "REF_EMB_LBL,"
                         . "REF_EMB_COULEUR,"
-                        . "REF_EMB_TYPE,"
                         . "REF_EMB_VLM_CTN,"
                         . "REF_EMB_DIM_LNG,"
                         . "REF_EMB_DIM_LRG,"

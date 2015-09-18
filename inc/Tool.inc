@@ -18,6 +18,8 @@ class Tool {
         
         if(is_array($var)){
             print_r($var);
+        }elseif (is_object($var)) {
+            print_r($var);    
         }else{
             echo $var;
         }

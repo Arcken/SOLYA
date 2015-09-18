@@ -6,10 +6,9 @@
  * and open the template in the editor.
  */
 
-
 class ModeConservationManager {
     //put your code here
-    
+
     /**
      * Retourne tous les enregistrements de la table mode_conservation
      * 
@@ -20,40 +19,42 @@ class ModeConservationManager {
         try {
 
             $sql = 'SELECT * FROM mode_conservation';
-            $result = Connection::request(1,$sql);
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+            if ($e->getCode() == 00000) {
+                return 0;
+            } else {
+                return $e->getCode();
+            }
+            return $result;
         }
-        return $result;
     }
-    
+
     /**
      * Ajoute un enregistrement dans la table mode_conservation
      * @param type $Cons
      */
-    public static function addModeConservation($Cons){
-         try {
+    public static function addModeConservation($Cons) {
+        try {
 
             if (!empty($Cons->CONS_LBL) && (strlen($Cons->CONS_LBL)) > Connection::getLimLbl()) {
 
-                $tParam= array(
+                $tParam = array(
                     $Cons->CONS_LBL
                 );
 
                 $sql = "INSERT INTO mode_conservation ("
                         . "CONS_LBL)"
                         . "VALUES(?)";
-                
+
                 $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
+            } else {
                 $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
             }
         } catch (MySQLException $e) {
 
             echo $e->RetourneErreur();
         }
-      
     }
-}
 
+}

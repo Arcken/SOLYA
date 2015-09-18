@@ -15,7 +15,7 @@ class FicheArticleManager {
             $result = Connection::request(0,$sql);
         } catch (MySQLException $e) {
             
-            if ($e->getCode() == 0000){
+            if ($e->getCode() == 00000){
                 return 0;
             }
             else return $e->getCode ();

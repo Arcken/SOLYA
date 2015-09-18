@@ -8,7 +8,7 @@
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select required="required" name="ficheArticle" title="Choisir un élément">
+                <select  name="ficheArticle" title="Choisir un élément">
                     <option value="">Aucun</option>
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
@@ -42,7 +42,7 @@
                 <input name="refVolume" placeholder="litre ###,###" type="text">         
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
-                <select name="modeConservation" title="Choisir un élément" required>
+                <select name="modeConservation" title="Choisir un élément" >
                     <option value="" selected>Aucun</option>
                     
                     <?php
@@ -57,7 +57,7 @@
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_mode_conservation.php');"/>
                 <br>
                 <label for="dureeConservation"> Durée de conservation </label><br>
-                <select name="dureeConservation" title="Choisir un élément" required>
+                <select name="dureeConservation" title="Choisir un élément" >
                     <option value="" selected>Aucun</option>
                     
                     <?php
@@ -127,7 +127,7 @@
                      <option value="" selected>Aucun</option>
                      
                     <?php 
-                     if (isset($toTvas) && is_array($toTvas)){
+                     if (isset($toDroitDouanes) && is_array($toDroitDouanes)){
                      foreach($toDroitDouanes as $oDroitDouane) { ?>
                         <option value=<?php echo $oDroitDouane->DD_ID ?>> <?php echo $oDroitDouane->DD_LBL.' '.$oDroitDouane->DD_TAUX.' %' ?> </option>
                      <?php }
@@ -137,8 +137,9 @@
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
             </div>
             <div class="bas">
-                <input value="Submit" type="submit">
-                <input name="clear" type="reset"> 
+                <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
+            <input id ='clearForm' name="clear"   type="reset" onclick="formChooser()"/> 
+            <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
             </div>
     </div>
     </form>

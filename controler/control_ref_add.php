@@ -10,7 +10,10 @@ require $path . '/model/TvaManager.php';
 require $path . '/model/DroitDouaneManager.php';
 require $path . '/model/FicheArticleManager.php';
 
+
 $sPageTitle = "Ajouter une référence";
+$sButton="Envoyer";
+
 Tool::printAnyCase($sAction);
 
 $toFiArts = FicheArticleManager::getAllFichesArticles();
@@ -19,30 +22,18 @@ $toDurCons = DureeConservationManager::getAllDureeConservations();
 $toTvas =  TvaManager::getAllTvas();
 $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
 
-Tool::printAnyCase($toFiArts);
+/*Tool::printAnyCase($toFiArts);
 Tool::printAnyCase($toModCons);
 Tool::printAnyCase($toDurCons);
 Tool::printAnyCase($toTvas);
-Tool::printAnyCase($toDroitDouanes);
+Tool::printAnyCase($toDroitDouanes);*/
 
 
-if (isset($_REQUEST['typeCtc'])) {
-    $iTypeCtc = $_REQUEST['typeCtc'];
-} else {
-    $iTypeCtc = 0;
-}
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
-    switch ($iTypeCtc) {
-
-        case 1:
-            break;
-
-        case 2 :
-
-            if (isset($_REQUEST['PRS_NOM']) && !empty($_REQUEST['PRS_NOM'])) {
-                require $path . '/model/Personne.php';
-                require $path . '/model/PersonneManager.php';
+            if (isset($_REQUEST['refLbl']) && !empty($_REQUEST['refLbl'])) {
+                require $path . '/model/Reference.php';
+                require $path . '/model/ReferenceManager.php';
 
                 try {
 
@@ -50,19 +41,47 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                     $cnx->beginTransaction();
 
-                    $oPers = new Personne();
-
-                    $oPers->CIV_ID = $_REQUEST['CIV_CODE'];
-                    $oPers->PRS_NOM = $_REQUEST['PRS_NOM'];
-                    $oPers->PRS_PRENOM1 = $_REQUEST['PRS_PRENOM1'];
-                    $oPers->PRS_PRENOM2 = $_REQUEST['PRS_PRENOM2'];
-                    $oPers->PRS_PRENOM3 = $_REQUEST['PRS_PRENOM3'];
-                    $oPers->PRS_DTN = $_REQUEST['PRS_DTN'];
-
-                    $resAddCtc = PersonneManager::addPersonne($oPers);
-                    $idPers = Connection::dernierId();
-                    //echo '<br> id personne:'.$idPers;
-
+                    $oRef = new Reference();
+                    
+                    //if (isset($_REQUEST['dureeConservation']))
+                    $oRef->ref_id='g';
+                    $oRef->dc_id            = $_REQUEST['dureeConservation'];
+                    //if (isset())
+                    $oRef->fiart_id         = $_REQUEST['ficheArticle'];
+                    //if (isset())
+                    $oRef->dd_id            = $_REQUEST['droitDouane'];
+                    //if (isset())
+                    $oRef->tva_id           = $_REQUEST['tva'];
+                    //if (isset())
+                    $oRef->ref_lbl          = $_REQUEST['refLbl'];
+                    //if (isset())
+                    $oRef->ref_st_min       = $_REQUEST['refStMin'];
+                    //if (isset())
+                    $oRef->ref_poids_brut    = $_REQUEST['refPoidsBrut'];
+                    //if (isset())
+                    $oRef->ref_poids_net     = $_REQUEST['refPoidsNet'];
+                    //if (isset())
+                    $oRef->ref_emb_lbl      = $_REQUEST['refEmbLbl'];
+                    //if (isset($_REQUEST['refEmbCouleur']))
+                    $oRef->ref_emb_couleur  = $_REQUEST['refEmbCouleur'];
+                    //if (isset($_REQUEST['refEmbVlmCtn']))
+                    $oRef->ref_emb_vlm_ctn  = $_REQUEST['refEmbVlmCtn'];
+                    //if (isset($_REQUEST['refEmbDimLng']))
+                    $oRef->ref_emb_dim_lng  = $_REQUEST['refEmbDimLng'];
+                    //if (isset($_REQUEST['refEmbDimLrg']))
+                    $oRef->ref_emb_dim_lrg  = $_REQUEST['refEmbDimLrg'];
+                    //if (isset($_REQUEST['refEmbDimHt']))
+                    $oRef->ref_emb_dim_ht   = $_REQUEST['refEmbDimHt'];
+                    //if (isset($_REQUEST['refEmbDimDiam']))
+                    $oRef->ref_emb_dim_diam = $_REQUEST['refEmbDimDiam'];
+                    
+                    Tool::printAnyCase($oRef);
+      
+                    $resAddRef = ReferenceManager::insReference($oRef);
+                    $idRef = Connection::dernierId();
+                    Tool::printAnyCase($resAddRef);
+                    echo '<br> id personne:'.$idRef;
+                    /*
                     if (isset($_REQUEST['ADR_VILLE'])) {
 
                         require $path . '/model/Adresse.php';
@@ -148,15 +167,13 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                             $resAddCtc = JoindrePrsManager::addJoindrePrs($oJoindrePrs);
                             // echo'<br> reultat Joindre personne : '.$resAddCtc;
-                        }
-                    }
+                        }*/
+                    
                     $cnx->commit();
                     //echo $resAddCtc;
                 } catch (MySQLException $e) {
                     $e->RetourneErreur();
                     $cnx->rollback();
                 }
-            }
-            break;
     }
 }

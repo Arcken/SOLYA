@@ -7,17 +7,16 @@
 class Reference {
 
     public $ref_id           = '';
-    public $ref_dc_id        = '';
-    public $ref_fiart_id     = '';
-    public $ref_dd_id        = '';
-    public $ref_tva_id       = '';
+    public $dc_id            = '';
+    public $fiart_id         = '';
+    public $dd_id            = '';
+    public $tva_id           = '';
     public $ref_lbl          = '';
     public $ref_st_min       = '';
     public $ref_poids_brut   = '';
     public $ref_poids_net    = '';
     public $ref_emb_lbl      = '';
     public $ref_emb_couleur  = '';
-    public $ref_emb_type     = '';
     public $ref_emb_vlm_ctn  = '';
     public $ref_emb_dim_lng  = '';
     public $ref_emb_dim_lrg  = '';
