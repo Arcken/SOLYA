@@ -1,11 +1,18 @@
-<?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
+
+<?php
+//Contrôle si la connection de l'utilisateur est valide
+//Le 'group' permet de choisir si l'utilisateur à accés à la page
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
+    ?>
+
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="gauche">
-                <div> <?php print_r($resMaxIdFiart)?>                
+                <div>
                     <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" value="<?php echo $resMaxIdFiart['MAX(fiart_id)']?>" readonly type="text">
+                    <input name="fiartId" value="<?php echo $resMaxIdFiart['MAX(fiart_id)'] ?>" readonly type="text">
                     <img src="img/icon/accept.png" alt=""/>
                     <br>
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
@@ -14,26 +21,29 @@
                     <label for="gamme"> Gamme: </label><br>                    
                     <select name="gamme[]" id="selGamme" multiple="multiple" required="">
                         <option value="" selected="">Aucun</option>
+
+                        <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
                         <?php foreach ($resAllGa as $value) { ?>
                             <option value="<?php echo $value->GA_ID ?>">
                                 <?php echo $value->GA_LBL ?> </option>
                         <?php } ?>
                     </select>
+
                     <img src="img/icon/add.png" alt="" onClick="popup('ga_add');" title="Créer gamme"/><br>
-                    <p id="listGamme">Gamme sélectionné:</p>
-                                        
-                    
-                    
+                    <div id="listGamme">
+                        <p>Gamme sélectionné:</p>
+                    </div>
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays" required>
                         <option value="" selected>Aucun</option>
+                        <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
                         <?php foreach ($resAllPays as $value) { ?>
                             <option value="<?php echo $value->PAYS_ID ?>">
                                 <?php echo $value->PAYS_NOM ?> </option>
                         <?php } ?>                        
                     </select>                    
-                        <img src="img/icon/add.png" alt="" onClick="popup('pays_add');" title="Créer pays"/>                   
+                    <img src="img/icon/add.png" alt="" onClick="popup('pays_add');" title="Créer pays"/>                   
                     <br>
                 </div>
 
@@ -55,17 +65,14 @@
                 <img src="img/icon/add.png" onClick="popup('nut_add');" title="Créer nouvel élément" alt=""/>
                 </br>
                 </br>
-                <?php
-                foreach ($resAllNut as $value) { ?>
-                <label for="<?php echo 'nut'.$value->NUT_ID?>"><?php echo urlencode($value->NUT_LBL)?></label>
-                
-                </br>
-                <input name="<?php echo 'nut'.$value->NUT_ID?>" placeholder="saisie"> </br>                               
-                        <?php 
-                        
+                <!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
+                <?php foreach ($resAllNut as $value) { ?>
+                    <label for="<?php echo 'nut' . $value->NUT_ID ?>"><?php echo $value->NUT_LBL ?></label>
+                    </br>
+                    <input name="<?php echo 'nut' . $value->NUT_ID ?>" placeholder="saisie"> </br>                               
+                    <?php
                 }
                 ?>
-                    
                 <br>
             </div>
             <div class="bas">
@@ -76,9 +83,9 @@
             </div>
         </form>
     </div>
+
     <?php
 } else
     echo 'Le silence est d\'or'
-
     
 ?>
