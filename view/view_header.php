@@ -16,14 +16,14 @@
     <div id="header_user_info">
         
         <!-- Titre du bloc Informations utilisateurs-->
-        <p id="ui_title">Informations :</p>
-        
+        <span id="ui_title">Informations :</span>
+        <br>
         <!-- Paragraphe contenant le nom et prénom-->
-        <p id ="ui_info">
+        <div id ="ui_info">
             <span><?php print_r($_SESSION['name']) ?></span>
             <span><?php print_r($_SESSION['lastname']) ?></span>
-        </p>
-        
+        </div>
+        <br>
         <!-- Bloc contenant le bouton-->
         <div>
             <form action="index.php" >
