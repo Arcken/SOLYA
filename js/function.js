@@ -110,6 +110,15 @@ function selMaj(){
     }
 }
 
-function listgamme(){
-    
+/**
+ * Met à jour un bloc html selon les choix d'une combobox
+ * @param {Combobox, source des données} $select
+ * @param {bloc p ou idv ou autre à modifier} $target
+ * @returns {undefined}
+ */        
+function listSelect($select,$target){
+    //on récupére la combox et ses options choisis
+    $a = $('#' + $select + ' option:selected');
+    //On écrit les valeurs récupérés dans un bloc html
+    $('#' + $target).html($a.text());    
 }

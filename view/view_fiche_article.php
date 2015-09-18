@@ -11,15 +11,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" action="index.php" method="get">
             <div class="gauche">
                 <div>
+                    <!--
                     <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" value="<?php echo $resMaxIdFiart['MAX(fiart_id)'] ?>" readonly type="text">
+                    <input name="fiartId" value="<?php //echo $resMaxIdFiart['MAX(fiart_id)'] ?>" readonly type="text">
                     <img src="img/icon/accept.png" alt=""/>
                     <br>
+                    -->
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
                     <input name="fiartLbl" placeholder="description" required type="text">
                     <br>
                     <label for="gamme"> Gamme: </label><br>                    
-                    <select name="gamme[]" id="selGamme" multiple="multiple" required="">
+                    <select name="gamme[]" id="selGamme" onclick="listSelect('selGamme','listGamme')" 
+                            multiple="multiple" required="" size='3'>
                         <option value="" selected="">Aucun</option>
 
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
@@ -30,9 +33,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </select>
 
                     <img src="img/icon/add.png" alt="" onClick="popup('ga_add');" title="Créer gamme"/><br>
-                    <div id="listGamme">
-                        <p>Gamme sélectionné:</p>
-                    </div>
+                    <label for="listGamme">Gamme sélectionnée:</label>
+                    <br>                        
+                    <span id="listGamme" class="listchoisis">                        
+                    </span>
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays" required>

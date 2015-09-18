@@ -14,7 +14,11 @@ class FicheArticleManager {
             $sql = 'SELECT * FROM fiche_article';
             $result = Connection::request(0,$sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+            
+            if ($e->getCode() == 0000){
+                return 0;
+            }
+            else return $e->getCode ();
         }
         return $result;
     }
@@ -24,6 +28,19 @@ class FicheArticleManager {
         try {
            
             $sql = 'SELECT MAX(fiart_id) FROM fiche_article';
+            $result = Connection::request(0,$sql, null ,$format = PDO::FETCH_ASSOC);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    }
+    
+    public static function getAllFicheArticleFull() {
+        
+        try {
+           //jointure avec pays_id
+            $sql = 'SELECT * FROM fiche_article '
+                    . 'NATURAL JOIN pays';
             $result = Connection::request(0,$sql, null ,$format = PDO::FETCH_ASSOC);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
@@ -56,7 +73,7 @@ class FicheArticleManager {
                 $result = Connection::request(2,$sql,$tParam);
                 print_r($result);
             }else{
-                $result = '<br/><p class="info">Enregistrement FIART impossible sans libéllé </p>';
+                $result = '<p class="info">Enregistrement FIART impossible, erreur de données insérées</p><br/>';
             }
                 
         } catch (MySQLException $e) {

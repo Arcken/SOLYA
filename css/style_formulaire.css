@@ -102,3 +102,7 @@ h2{
     box-shadow: 5px 5px 5px 0px #cfcfcf;
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
+.listchoisis{
+    color: white;
+    margin-left: 10px;
+}

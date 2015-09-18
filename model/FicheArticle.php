@@ -6,11 +6,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Description of FicheArticle
- *
- * @author Olivier
- */
 class FicheArticle {
 
     public $fiart_id      = '';    
@@ -19,8 +14,12 @@ class FicheArticle {
     public $fiart_ing     = '';
     public $fiart_alg     = '';
     
+    //clef étrangère
     public $fiart_pays_id = '';
-   
+    
+    //Valeur table étrangére
+    public $fiart_pays_nom;
+       
     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
 
