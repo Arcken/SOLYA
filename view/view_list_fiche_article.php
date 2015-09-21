@@ -8,14 +8,25 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <div class="corps">
         <table>
-        <?php foreach ($resAllFiartFull as $value) { ?>
-            <tr><td><?php echo $value->FIART_LBL ?></td>
-                <td><?php echo $value->FIART_ING ?></td>
-                <td><?php echo $value->FIART_ALG ?></td>
-                <td><?php echo $value->PAYS_NOM ?></td>
-                <td><img src="img/icon/modify.png" alt=""/></td>
+        <?php $fiartControl='';
+        $fiartGamme = '';
+        foreach ($resFiartList as $value) { 
+             if ($fiartControl != $value->fiart_id) {
+            ?>
+            <tr>
+                <td><?php echo $value->fiart_id ?></td>
+                <td><?php echo $value->fiart_lbl ?></td>               
+                <td><?php echo $value->fiart_alg ?></td>
+                <td><?php echo $value->fiart_ing ?></td>
+                <td><?php echo $value->fiart_ing ?></td>
+                
+                <td><img src="img/icon/modify.png" alt="" onclick='location.href = "index.php?action=fiart_detail"'/></td>
             </tr>
-                        <?php } ?>
+                        <?php
+             }
+                        $fiartControl = $value->fiart_id;
+                        
+        } ?>
             </table>
     </div>
     

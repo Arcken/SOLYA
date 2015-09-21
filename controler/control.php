@@ -58,6 +58,20 @@ if (!isset($_SESSION['auth'])) {
             case "ref_add":
                 require 'control_ref_add.php';
                 break;
+            
+            //Liste fiche article
+            case "fiart_list":
+                require $path . '/model/FicheArticle.php';
+                require $path . '/model/FicheArticleManager.php';
+                $resFiartList = FicheArticleManager::getAllFichesArticles();
+                print_r($resFiartList);
+                break;
+            
+            //liste référence
+            case "ref_list":
+                
+                break;
+            
         }
 
         /* ----------------------------Affichage--------------------------------- */
@@ -91,6 +105,16 @@ if (!isset($_SESSION['auth'])) {
             //Contacts
             case "ctc_add":
                 require $path . '/view/view_creer_contact.php';
+                break;
+            
+            //Liste fiche article
+            case "fiart_list":
+                require $path.'/view/view_list_fiche_article.php';
+                break;
+            
+            //liste référence
+            case "ref_list":
+                require $path.'/view/view_list_reference.php';
                 break;
         }
         require_once $path . '/view/view_footer.php';

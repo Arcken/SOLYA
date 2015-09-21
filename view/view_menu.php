@@ -152,7 +152,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
                <li><a href='emb_list'><span>Liste</span></a></li>
             </ul>
          </li>
-         
+          <li class='has-sub'><a href='index.php?action='><span>Liste Fiche article</span></a>
+             <ul>
+               <li><a href='index.php?action=fiart_list'><span>Liste fiche article</span></a></li>
+               <li><a href='ref_list'><span>Liste référence</span></a></li>
+            </ul>
+         </li>
       </ul>
    </li>
 </ul>
