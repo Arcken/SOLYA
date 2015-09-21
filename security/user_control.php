@@ -21,8 +21,7 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
     //On contrôle le résultat et on stock les valeurs dans un tableau de session si le compte est actif
     if (!empty($res) && isset($res) && $res->UT_ACTIF == 1) {
         $_SESSION['name'] = $res->UT_PRENOM;
-        $_SESSION['lastname'] = $res->UT_NOM;
-        //$_SESSION['BTHD'] = $res->UT_DTN;
+        $_SESSION['lastname'] = $res->UT_NOM;        
         $_SESSION['auth'] = TRUE;
         $_SESSION['group'] = $res->GRP_NOM;
         $_SESSION['login'] = $_REQUEST['login'];

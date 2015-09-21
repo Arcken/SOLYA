@@ -44,19 +44,22 @@ class FicheArticleManager {
     }
 
     /**
-     * Renvoie la liste des fiches articles avec les détails
+     * Renvoie le détail d'une fiche article
      * @return Objet[]
      * @description Retourne un tableau d'objet
      */
-    public static function getFicheArticleDetail() {
+    public static function getFicheArticleDetail($iFiartId) {
 
         try {
             
+                $tParam = array($iFiartId);
+            
             $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, p.pays_nom FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
-                    . 'LEFT JOIN regrouper AS r ON f.fiart_id = r.fiart_id ';
+                    . 'LEFT JOIN regrouper AS r ON f.fiart_id = r.fiart_id WHERE f.fiart_id = ?';
                     
-            $result = Connection::request(1, $sql, null);
+            
+            $result = Connection::request(1, $sql, $tParam);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }

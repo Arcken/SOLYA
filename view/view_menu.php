@@ -155,7 +155,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
           <li class='has-sub'><a href='index.php?action='><span>Liste Fiche article</span></a>
              <ul>
                <li><a href='index.php?action=fiart_list'><span>Liste fiche article</span></a></li>
-               <li><a href='ref_list'><span>Liste référence</span></a></li>
+               <li><a href='index.php?action=ref_list'><span>Liste référence</span></a></li>
             </ul>
          </li>
       </ul>

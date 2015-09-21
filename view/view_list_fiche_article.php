@@ -20,7 +20,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <td><?php echo $value->fiart_ing ?></td>
                 <td><?php echo $value->fiart_ing ?></td>
                 
-                <td><img src="img/icon/modify.png" alt="" onclick='location.href = "index.php?action=fiart_detail"'/></td>
+                <td><img src="img/icon/modify.png" alt="" 
+                         onclick='location.href = "index.php?action=fiart_detail\n\
+&fiartId=<?php echo $value->fiart_id?>"'/></td>
             </tr>
                         <?php
              }

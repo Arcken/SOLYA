@@ -66,6 +66,18 @@ if (!isset($_SESSION['auth'])) {
                 $resFiartList = FicheArticleManager::getAllFichesArticles();
                 break;
             
+            //Detail fiche article
+            case "fiart_detail":
+                require $path . '/model/FicheArticle.php';
+                require $path . '/model/FicheArticleManager.php';
+                if (isset($_REQUEST['fiartId'])){
+                    $iFiartId = $_REQUEST['fiartId'];
+                $resFiartDetail = FicheArticleManager::getFicheArticleDetail($iFiartId);
+                print_r($resFiartDetail);
+                }
+                $sButton = "Modifier";
+                break;
+            
             //liste référence
             case "ref_list":
                 require $path . '/control/control_ref_list.php';                
@@ -88,7 +100,12 @@ if (!isset($_SESSION['auth'])) {
                 $sPageTitle = "Ajouter une fiche article";
                 require $path . '/view/view_fiche_article.php';
                 break;
-
+            
+            case "fiart_detail":
+                $sPageTitle = "Détail fiche article";
+                require $path . '/view/view_fiche_article.php';
+                break;
+            
             case "ga_add":
             case "ga_add_add":
 
