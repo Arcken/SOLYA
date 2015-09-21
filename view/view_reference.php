@@ -24,10 +24,10 @@
             </div>
 
 
-            <div class="gauche"> 
+            <div class="col30"> 
 
                 <label for="refLbl"> Libellé: </label><br>          
-                <textarea name="refLbl" rows="4" cols="25" placeholder="Description de la réf" required></textarea>
+                <input name="refLbl" type="text" placeholder="Nom de la référence" required></input>
                 <br>
                 <label for="refStMin"> Stock minimum: </label><br>
                 <input name="refStMin" placeholder="###,##" type="text">         
@@ -62,18 +62,24 @@
                     
                     <?php
                     if (isset($toDurCons) && is_array($toDurCons)){
-                    foreach($toDurCons as $oDurCons) { ?>
-                        <option value=<?php echo $oDurCons->DC_ID ?>> <?php echo $oDurCons->DC_NB.' '.$oDurCons->DC_LBL ?> </option>
-                    <?php }
-                    
-                    }?>
+                        foreach($toDurCons as $oDurCons) { 
+                            if(!empty($oDurCons->DC_LBL) && $oDurCons->DC_LBL !== '') {?>
+                            <option value=<?php echo $oDurCons->DC_ID ?>>
+                             <?php echo $oDurCons->DC_NB.' | '.$oDurCons->DC_LBL ?> </option>
+                        <?php }else{ ?>
+                                <option value=<?php echo $oDurCons->DC_ID ?>>
+                                <?php echo $oDurCons->DC_NB.' | '.$oDurCons->DC_LBL ?> </option>
+                        <?php }
+                        }
+                    }
+                    ?>
                         
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_duree_conservation.php');" />
                 <br>
             </div>
 
-            <div class="centre">
+            <div class="col30">
                 <label for="refEmbLbl">Description de l'emballage :</label><br>
                 <input name="refEmbLbl" placeholder="Pot en verre 250gr" type="text">         
                 <br>
@@ -98,7 +104,7 @@
 
             </div>
 
-            <div class="droite">
+            <div class="col30">
 
                 <label for="pvePer"> Prix de vente particulier: </label><br>
                 <input name="pvePer" placeholder="### ###,##" type="text">         
@@ -113,8 +119,15 @@
                     <?php
                     if (isset($toTvas) && is_array($toTvas)){
                     foreach($toTvas as $oTva) { ?>
-                        <option value=<?php echo $oTva->TVA_ID ?>> <?php echo $oTva->TVA_LBL.' '.$oTva->TVA_TAUX.' %' ?> </option>
-                    <?php }
+                    <?php if(!empty($oTva->TVA_LBL) && $oTva->TVA_LBL !== '') { ?>
+                            <option value=<?php echo $oTva->TVA_ID ?>>
+                      <?php echo $oTva->TVA_LBL.' | '.$oTva->TVA_TAUX.' %' ?> </option>
+                    <?php 
+                        }else { ?>
+                             <option value=<?php echo $oTva->TVA_ID ?>>
+                      <?php echo $oTva->TVA_LBL.''.$oTva->TVA_TAUX.' %' ?> </option>
+                  <?php }
+                    }
                     
                     }?>
                 </select>
@@ -128,22 +141,39 @@
                      
                     <?php 
                      if (isset($toDroitDouanes) && is_array($toDroitDouanes)){
-                     foreach($toDroitDouanes as $oDroitDouane) { ?>
-                        <option value=<?php echo $oDroitDouane->DD_ID ?>> <?php echo $oDroitDouane->DD_LBL.' '.$oDroitDouane->DD_TAUX.' %' ?> </option>
-                     <?php }
-                     
+                        foreach($toDroitDouanes as $oDroitDouane) {
+                            if(!empty($oDroitDouane->DD_LBL) && $oDroitDouane->DD_LBL !== '') { ?>
+                         ?>
+                                <option value=<?php echo $oDroitDouane->DD_ID ?>>
+                          <?php echo $oDroitDouane->DD_LBL.' | '.$oDroitDouane->DD_TAUX.' %' ?> </option>
+                            
+                     <?php  }else{ ?>
+                         <option value=<?php echo $oDroitDouane->DD_ID ?>>
+                          <?php echo $oDroitDouane->DD_LBL.''.$oDroitDouane->DD_TAUX.' %' ?> </option>
+                          <?php 
+                            }
+                        }
                     }?>
+                         
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
+            </div>
+            
+            <div class="col30">
+                <label for="refCom"> Commentaire : </label><br>
+                <textarea name="refCom" rows="4" cols="25" placeholder="Commentaire sur la référence" ></textarea>
+                <br>
+                <label for="dtlsTechs"> Détails techniques : </label><br>
+                <textarea name="dtlsTechs" rows="4" cols="25" placeholder="Détails techniques" ></textarea>
             </div>
             <div class="bas">
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
             <input id ='clearForm' name="clear"   type="reset" onclick="formChooser()"/> 
             <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
             </div>
-    </div>
+   
     </form>
-
+ </div>
     <?php
 } else {
     echo 'Le silence est d\'or';

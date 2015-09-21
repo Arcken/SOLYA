@@ -9,12 +9,11 @@ and open the template in the editor.
 */
 
 .corps{
-    
     overflow: auto;
     position: fixed;
     width: 70%;
     height: 70%;
-    left: 12.9%;
+    left: 12.5%;
     top: 17%;
     background-color: gray;
     border: 2px solid yellow;
@@ -47,11 +46,17 @@ h2{
     margin-top: 4px;
     margin-bottom: 8px;
     border: solid black 1px;
+    font-size: 0.82em;  
 }
 .form label{    
     color: white;
 }
-.droite, .gauche, .centre{
+.col30, .col50, .col70{
+    overflow:auto;
+    padding: 0.2%;   
+    display: inline-block;
+    vertical-align: top;  
+    margin: 0.8%;
     border: antiquewhite solid 2px;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -61,35 +66,27 @@ h2{
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
     
 }
-.gauche{
-    padding: 5px;   
-    margin-left: 5px;
-    display: inline-block;
-    vertical-align: top;    
-    max-width: 50%;     
+.col30{
+      max-width: 30%; 
+      width:30%;
 }
 
-.centre{
-    max-width:50%; 
-    padding:5px;
-    margin-left: 15px;
-    display: inline-block;
-    vertical-align: top;
+.col50{
+    max-width: 50%; 
+    width:50%;
     
 }
 .droite{
-    max-width:50%; 
-    padding:5px;
-    margin-left: 15px;
-    display: inline-block;
-    vertical-align: top;
+    max-width: 70%; 
+    width:70%;
 }
 
 .bas{
     display: block;
     text-align: center;
-    margin-top: 1%;
-    
+    margin-top: 0.5%;
+    height:auto;
+    border: 1px solid blue;
 }
 .haut{ 
     margin: 0.3%;
@@ -104,5 +101,5 @@ h2{
 }
 .listchoisis{
     color: white;
-    margin-left: 10px;
+    margin: 1%;
 }

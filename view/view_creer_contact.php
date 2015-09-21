@@ -22,7 +22,7 @@
 
    
         <!--Partie gauche de l'écran : Civilité--> 
-        <div class="gauche" id ="add_ent" style="display:none">
+        <div class="col30" id ="add_ent" style="display:none">
             <label for="ENT_NOM">Nom de l'entreprise :</label><br>
             <input name="ENT_NOM" type="text"/>
             <br>
@@ -51,7 +51,7 @@
    
            
        <!-- Partie gauche de l'écran : Civilité -->
-        <div class="gauche" id="add_prs" style="display:none"> 
+        <div class="col30" id="add_prs" style="display:none"> 
             <label for="PRS_ENT">Entreprise :</label><br>
             <select name="PRS_ENT"id="PRS_ENT" onChange="" required>
                     <option value="">Nom de l'entreprise</option>
@@ -88,7 +88,7 @@
         <?php require 'view/view_address.php'; ?>
         
        <!--Partie de droite : Mail/téléphone Catégorie contact-->  
-        <div class="droite" id="add_tel_mail" style="display:none">
+        <div class="col30" id="add_tel_mail" style="display:none">
             <label for="MAIL_ADR">Adresse mail :</label><br>
             <input name="MAIL_ADR" type="text"/>
             <br>
@@ -112,7 +112,6 @@
             <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
         </div>
     </form>
-
 </div>
 
 
