@@ -8,6 +8,7 @@ class Reference {
 
     public $ref_id           = '';
     public $dc_id            = '';
+    public $cons_id          = '';
     public $fiart_id         = '';
     public $dd_id            = '';
     public $tva_id           = '';

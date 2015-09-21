@@ -9,9 +9,9 @@
 class Tva {
     
     //Données membres
-    public $TVA_ID='';
-    public $TVA_LBL='';
-    public $TVA_TAUX='';
+    public $tva_id='';
+    public $tva_lbl='';
+    public $tva_taux='';
     
     
      public function __construct($args = null) {

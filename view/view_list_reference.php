@@ -17,7 +17,7 @@
                         <td><?php echo $oRef->ref_lbl; ?></td>
                         <td>
                             <!--<img src="img/icon/read.png" onclick='location.href="index.php?action=read_ref"'</img>-->
-                            <img src="img/icon/modify.png" onclick='location.href="index.php?action=ref_detail"'</img>
+                            <img src="img/icon/modify.png" onclick='location.href="index.php?action=ref_detail&idRef="+ <?php echo $oRef->ref_id; ?>'</img>
                         </td>
                      </tr>
 

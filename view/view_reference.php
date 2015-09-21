@@ -48,7 +48,7 @@
                     <?php
                     if (isset($toModCons) && is_array($toModCons)){
                     foreach($toModCons as $oModCons) { ?>
-                        <option value="<?php echo $oModCons->CONS_ID ?>"> <?php echo $oModCons->CONS_LBL ?> </option>
+                        <option value="<?php echo $oModCons->cons_id ?>"> <?php echo $oModCons->cons_lbl ?> </option>
                     <?php }
                     
                     }?>
@@ -63,12 +63,12 @@
                     <?php
                     if (isset($toDurCons) && is_array($toDurCons)){
                         foreach($toDurCons as $oDurCons) { 
-                            if(!empty($oDurCons->DC_LBL) && $oDurCons->DC_LBL !== '') {?>
-                            <option value=<?php echo $oDurCons->DC_ID ?>>
-                             <?php echo $oDurCons->DC_NB.' | '.$oDurCons->DC_LBL ?> </option>
+                            if(!empty($oDurCons->dc_lbl) && $oDurCons->dc_lbl !== '') {?>
+                            <option value=<?php echo $oDurCons->dc_id ?>>
+                             <?php echo $oDurCons->dc_nb.' | '.$oDurCons->dc_lbl ?> </option>
                         <?php }else{ ?>
-                                <option value=<?php echo $oDurCons->DC_ID ?>>
-                                <?php echo $oDurCons->DC_NB.' | '.$oDurCons->DC_LBL ?> </option>
+                                <option value=<?php echo $oDurCons->dc_id ?>>
+                                <?php echo $oDurCons->dc_nb.' | '.$oDurCons->dc_lbl ?> </option>
                         <?php }
                         }
                     }
@@ -119,13 +119,13 @@
                     <?php
                     if (isset($toTvas) && is_array($toTvas)){
                     foreach($toTvas as $oTva) { ?>
-                    <?php if(!empty($oTva->TVA_LBL) && $oTva->TVA_LBL !== '') { ?>
-                            <option value=<?php echo $oTva->TVA_ID ?>>
-                      <?php echo $oTva->TVA_LBL.' | '.$oTva->TVA_TAUX.' %' ?> </option>
+                    <?php if(!empty($oTva->tva_lbl) && $oTva->tva_lbl !== '') { ?>
+                            <option value=<?php echo $oTva->tva_id ?>>
+                      <?php echo $oTva->tva_lbl.' | '.$oTva->tva_taux.' %' ?> </option>
                     <?php 
                         }else { ?>
-                             <option value=<?php echo $oTva->TVA_ID ?>>
-                      <?php echo $oTva->TVA_LBL.''.$oTva->TVA_TAUX.' %' ?> </option>
+                             <option value=<?php echo $oTva->tva_id ?>>
+                      <?php echo $oTva->tva_lbl.''.$oTva->tva_taux.' %' ?> </option>
                   <?php }
                     }
                     
@@ -142,14 +142,14 @@
                     <?php 
                      if (isset($toDroitDouanes) && is_array($toDroitDouanes)){
                         foreach($toDroitDouanes as $oDroitDouane) {
-                            if(!empty($oDroitDouane->DD_LBL) && $oDroitDouane->DD_LBL !== '') { ?>
+                            if(!empty($oDroitDouane->dd_lbl) && $oDroitDouane->dd_lbl !== '') { ?>
                          ?>
-                                <option value=<?php echo $oDroitDouane->DD_ID ?>>
-                          <?php echo $oDroitDouane->DD_LBL.' | '.$oDroitDouane->DD_TAUX.' %' ?> </option>
+                                <option value=<?php echo $oDroitDouane->dd_id ?>>
+                          <?php echo $oDroitDouane->dd_lbl.' | '.$oDroitDouane->dd_taux.' %' ?> </option>
                             
                      <?php  }else{ ?>
-                         <option value=<?php echo $oDroitDouane->DD_ID ?>>
-                          <?php echo $oDroitDouane->DD_LBL.''.$oDroitDouane->DD_TAUX.' %' ?> </option>
+                         <option value=<?php echo $oDroitDouane->dd_id ?>>
+                          <?php echo $oDroitDouane->dd_lbl.''.$oDroitDouane->dd_taux.' %' ?> </option>
                           <?php 
                             }
                         }

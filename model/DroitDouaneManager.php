@@ -21,7 +21,7 @@ class DroitDouaneManager {
 
         try {
 
-            $sql = 'SELECT * FROM droit_douane';
+            $sql = 'SELECT d.dd_id, d.dd_lbl, d.dd_taux FROM droit_douane d';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             if ($e->getCode() == 00000){
@@ -51,8 +51,8 @@ class DroitDouaneManager {
                 );
 
                 $sql = "INSERT INTO droit_douane("
-                        . "DD_LBL,"
-                        . "DD_TAUX)"
+                        . "dd_lbl,"
+                        . "dd_taux)"
                         . "VALUES(?,?)";
                 
                 $result = Connection::request(2, $sql, $tParam);

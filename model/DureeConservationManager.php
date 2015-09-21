@@ -19,7 +19,7 @@ class DureeConservationManager {
 
         try {
 
-            $sql = 'SELECT * FROM duree_conservation';
+            $sql = 'SELECT d.dc_id,d.dc_lbl,d.dc_nb FROM duree_conservation d';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
              if ($e->getCode() == 00000){
@@ -40,16 +40,16 @@ class DureeConservationManager {
     public static function addDureeConservation($Dc){
          try {
 
-            if (!empty($Dc->DC_LBL) && (strlen($Dc->DC_LBL)) > Connection::getLimLbl()) {
+            if (!empty($Dc->dc_lbl) && (strlen($Dc->dc_lbl)) > Connection::getLimLbl()) {
 
                 $tParam= array(
-                    $Dc->DC_LBL,
-                    $Dc->DC_NB
+                    $Dc->dc_lbl,
+                    $Dc->dc_nb
                 );
 
                 $sql = "INSERT INTO duree_conservation ("
-                        . "DC_LBL,"
-                        . "DC_NB)"
+                        . "dc_lbl,"
+                        . "dc_nb)"
                         . "VALUES(?,?)";
                 
                 $result = Connection::request(2, $sql, $tParam);

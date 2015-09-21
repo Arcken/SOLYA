@@ -19,7 +19,7 @@ class TvaManager {
 
         try {
 
-            $sql = 'SELECT * FROM tva';
+            $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
               if ($e->getCode() == 00000) {
@@ -38,16 +38,16 @@ class TvaManager {
     public static function addTva($Tva){
          try {
 
-            if (!empty($Tva->TVA_LBL) && (strlen($Tva->TVA_LBL)) > Connection::getLimLbl()) {
+            if (!empty($Tva->tva_lbl) && (strlen($Tva->tva_lbl)) > Connection::getLimLbl()) {
 
                 $tParam= array(
-                    $Tva->TVA_LBL,
-                    $Tva->TVA_TAUX
+                    $Tva->tva_lbl,
+                    $Tva->tva_taux
                 );
 
                 $sql = "INSERT INTO tva ("
-                        . "TVA_LBL,"
-                        . "TVA_TAUX)"
+                        . "tva_lbl,"
+                        . "tva_taux)"
                         . "VALUES(?,?)";
                 
                 $result = Connection::request(2, $sql, $tParam);

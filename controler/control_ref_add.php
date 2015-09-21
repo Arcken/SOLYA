@@ -45,6 +45,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                     
                    
                     $oRef->dc_id            = $_REQUEST['dureeConservation'];
+                    $oRef->cons_id          = $_REQUEST['modeConservation'];
                     $oRef->fiart_id         = $_REQUEST['ficheArticle'];
                     $oRef->dd_id            = $_REQUEST['droitDouane'];
                     $oRef->tva_id           = $_REQUEST['tva'];

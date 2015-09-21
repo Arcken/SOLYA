@@ -54,6 +54,7 @@ class ReferenceManager {
 
                 $tParam = array(
                     $reference->dc_id,
+                    $reference->cons_id,
                     $reference->fiart_id,
                     $reference->dd_id,
                     $reference->tva_id,
@@ -72,6 +73,7 @@ class ReferenceManager {
 
                 $sql = "INSERT INTO reference ("
                         . "dc_id,"
+                        . "cons_id,"
                         . "fiart_id,"
                         . "dd_id,"
                         . "tva_id,"
@@ -93,11 +95,47 @@ class ReferenceManager {
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
             }
         } catch (MySQLException $e) {
-
-
+            
             echo $e->RetourneErreur();
         }
         return $result;
     }
+    /**
+     * Retourne un enregistrements de la table Référence
+     * @param Integer $idRef identifiant de la référence
+     * 
+     * @return Reference
+     */
+    public static function getReference() {
 
+        try {
+
+            $sql = "SELECT  r.ref_id, 
+                            r.dc_id,
+                            r.cons_id,
+                            r.fiart_id,
+                            r.dd_id,
+                            r.tva_id,
+                            r.ref_lbl,
+                            r.ref_st_min,
+                            r.ref_poids_brut,
+                            r.ref_poids_net,
+                            r.ref_emb_lbl,
+                            r.ref_emb_couleur,
+                            r.ref_emb_vlm_ctn,
+                            r.ref_emb_dim_lng,
+                            r.ref_emb_dim_lrg,
+                            r.ref_emb_dim_ht,
+                            r.ref_emb_dim_diam FROM reference r";
+
+            $result = Connection::request(0, $sql);
+        } catch (MySQLException $e) {
+            if ($e->getCode() ===00000){
+                return 0;
+            }else{
+                return $e->getCode();
+            }
+        }
+        return $result;
+    }
 }

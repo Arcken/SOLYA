@@ -9,8 +9,8 @@
 class Mode_conservation {
     
     //Données membres
-    public $CONS_ID='';
-    public $CONS_LBL='';
+    public $cons_id='';
+    public $cons_lbl='';
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

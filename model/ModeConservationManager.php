@@ -18,7 +18,7 @@ class ModeConservationManager {
 
         try {
 
-            $sql = 'SELECT * FROM mode_conservation';
+            $sql = 'SELECT m.cons_id,m.cons_lbl FROM mode_conservation m';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
             if ($e->getCode() == 00000) {
@@ -38,14 +38,14 @@ class ModeConservationManager {
     public static function addModeConservation($Cons) {
         try {
 
-            if (!empty($Cons->CONS_LBL) && (strlen($Cons->CONS_LBL)) > Connection::getLimLbl()) {
+            if (!empty($Cons->cons_lbl) && (strlen($Cons->cons_lbl)) > Connection::getLimLbl()) {
 
                 $tParam = array(
-                    $Cons->CONS_LBL
+                    $Cons->cons_lbl
                 );
 
                 $sql = "INSERT INTO mode_conservation ("
-                        . "CONS_LBL)"
+                        . "cons_lbl)"
                         . "VALUES(?)";
 
                 $result = Connection::request(2, $sql, $tParam);
