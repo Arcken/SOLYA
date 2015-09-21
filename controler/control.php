@@ -64,12 +64,11 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/model/FicheArticle.php';
                 require $path . '/model/FicheArticleManager.php';
                 $resFiartList = FicheArticleManager::getAllFichesArticles();
-                print_r($resFiartList);
                 break;
             
             //liste référence
             case "ref_list":
-                
+                require $path . '/control/control_ref_list.php';                
                 break;
             
         }
