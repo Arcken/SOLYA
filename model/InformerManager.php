@@ -34,16 +34,13 @@ class InformerManager {
         return $result;
     }
 
-    public static function getFiartInformer($informer) {
+    public static function getFiartInformer($iFiartId) {
 
-        try {
-            if (isset($informer->fiart_id)) {
-                $tParam = [$informer->fiart_id];
-                $sql = 'SELECT * FROM informer WHERE fiart_id = ?';
+        try {            
+                $tParam = [$iFiartId];
+                $sql = 'SELECT fiart_id,nut_id, nutfiart_val FROM informer WHERE fiart_id = ?';
                 $result = Connection::request(1, $sql, $tParam);
-            } else {
-                $result = "Pas de fiche article sélectionné";
-            }
+            
         } catch (MySQLException $e) {
             $result = "Erreur de traitement de donnée";
         }
@@ -88,4 +85,18 @@ class InformerManager {
         return $result;
     }
 
+    public static function delInformerFiart($iFiartId){
+        try {
+            $tParam = array(
+                    $iFiartId
+                    );
+            $sql = 'DELETE FROM informer WHERE fiart_id=?';
+            $result = Connection::request(2,$sql,$tParam);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    
+    }
+    
 }

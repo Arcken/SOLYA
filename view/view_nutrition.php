@@ -30,7 +30,7 @@
    <?php 
          if(is_array($resAllNut) && $resAllNut!=0) {
             foreach ($resAllNut as $value) { ?>
-                <p><?php echo $value->NUT_LBL ?></p>
+                <p><?php echo $value->nut_lbl ?></p>
    <?php    }
          } ?>
     </div>

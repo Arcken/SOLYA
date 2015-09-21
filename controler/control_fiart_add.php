@@ -17,7 +17,6 @@ require $path . '/model/NutritionManager.php';
 $resAllGa = GammeManager::getAllGammes();
 $resAllPays = PaysManager::getAllPays();
 $resAllNut = NutritionManager::getAllNutritions();
-$resMaxIdFiart = FicheArticleManager::getMaxIdFicheArticle();
 
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
@@ -69,13 +68,13 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             require $path . '/model/Informer.php';
             foreach ($resAllNut as $object) {
 
-                if (isset($_REQUEST['nut' . $object->NUT_ID]) && $_REQUEST['nut' . $object->NUT_ID] != '') {
+                if (isset($_REQUEST['nut' . $object->nut_id]) && $_REQUEST['nut' . $object->nut_id] != '') {
 
-                    echo 'nut' . $object->NUT_ID . '=' . $_REQUEST['nut' . $object->NUT_ID];
+                    echo 'nut' . $object->nut_id . '=' . $_REQUEST['nut' . $object->nut_id];
                     $oInformer = new Informer();
                     $oInformer->fiart_id = $oFiArt->fiart_id;
-                    $oInformer->nut_id = $object->NUT_ID;
-                    $oInformer->nutfiart_val = $_REQUEST['nut' . $object->NUT_ID];
+                    $oInformer->nut_id = $object->nut_id;
+                    $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
                     print_r($oInformer);
                     //on exécute la requête
                     $r = InformerManager::addInformer($oInformer);

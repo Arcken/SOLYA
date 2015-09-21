@@ -74,5 +74,19 @@ class RegrouperManager {
         return $result;
     }
 
+    public static function delRegrouperFiart($iFiartId){
+        try {
+            $tParam = array(
+                    $iFiartId
+                    );
+            $sql = 'DELETE FROM regrouper WHERE fiart_id=?';
+            $result = Connection::request(2,$sql,$tParam);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    
+    }
+    
 }
 ?>

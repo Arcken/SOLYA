@@ -67,7 +67,65 @@ class FicheArticleManager {
         }
         return $result;
     }
+    
+    /**
+     * Renvoie le détail d'une fiche article
+     * @return Objet[]
+     * @description Retourne un tableau d'objet
+     */
+    public static function getFicheArticleDetailUpd($iFiartId) {
 
+        try {
+            
+                $tParam = array($iFiartId);
+            
+            $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, '
+                    . 'f.pays_id, p.pays_nom '
+                    . 'FROM fiche_article f '
+                    . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
+                    . 'WHERE f.fiart_id = ? FOR UPDATE';
+                    
+            
+            $result = Connection::request(0, $sql, $tParam);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    }
+
+    public static function updFicheArticle($FicheArticle) {
+    try{
+        if (!empty($FicheArticle->fiart_lbl) && (strlen($FicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
+
+                $tParam = array(
+                    $FicheArticle->fiart_lbl,
+                    $FicheArticle->fiart_photos,
+                    $FicheArticle->fiart_ing,
+                    $FicheArticle->fiart_alg,
+                    $FicheArticle->fiart_pays_id,
+                    $FicheArticle->fiart_id
+                );
+                 $sql = "UPDATE fiche_article SET "                        
+                        . "FIART_LBL = ?,"
+                        . "FIART_PHOTOS = ?,"
+                        . "FIART_ING = ?,"
+                        . "FIART_ALG = ?,"
+                        . "PAYS_ID = ?"
+                         . "WHERE fiart_id = ?";
+
+                $result = Connection::request(2, $sql, $tParam);                
+            } else {
+                $result = '<p class="info">Enregistrement FIART impossible, erreur de données insérées</p><br/>';
+            }
+        } catch (MySQLException $e) {
+
+            //echo $e->RetourneErreur();
+
+            $result = 'Enregistrement fiart erreur';
+        }
+        return $result;
+    }
+    
     /**
      * Effecute un insert dans la table ficher article à partir de l'objet
      * @param 'FicheArticle'

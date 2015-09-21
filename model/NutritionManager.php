@@ -18,7 +18,7 @@ class NutritionManager {
 
         try {
 
-            $sql = 'SELECT * FROM nutrition';
+            $sql = 'SELECT nut_id, nut_lbl FROM nutrition';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             if ($e->getCode() == 00000){

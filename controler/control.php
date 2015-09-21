@@ -65,6 +65,7 @@ if (!isset($_SESSION['auth'])) {
                 break;
             
             //Detail fiche article
+            case "fiart_detail_upd":
             case "fiart_detail":
                 require $path.'/controler/control_fiart_detail.php';
                 break;
@@ -92,12 +93,20 @@ if (!isset($_SESSION['auth'])) {
                 break;
 
             //Catalogue
+            case "fiart_detail_upd":
+                $sAction = 'fiart_list';
+                break;
+            
             case "fiart_add":
                 $sPageTitle = "Ajouter une fiche article";
                 require $path . '/view/view_fiche_article.php';
                 break;
             
+            
+                
+                
             case "fiart_detail":
+                $sAction = "fiart_detail_upd";
                 $sPageTitle = "Détail fiche article";
                 require $path . '/view/view_fiche_article_rw.php';
                 break;

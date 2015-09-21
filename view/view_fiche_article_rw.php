@@ -46,14 +46,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <?php }
                         ?>
                     </select>
-
-                    <img src="img/icon/add.png" alt="" onClick="popup('ga_add');" title="Créer gamme"/><br>
+                    <br>
+                    
                     <label for="listGamme">Gamme sélectionnée:</label>
                     <br>                        
                     <span id="listGamme" class="listchoisis">
                         <?php echo $listGamme;
                         ?>
                     </span>
+                    <br>
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays">
@@ -71,7 +72,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         }
                         ?>                        
                     </select>                    
-                    <img src="img/icon/add.png" alt="" onClick="popup('pays_add');" title="Créer pays"/>                   
                     <br>
                 </div>
 
@@ -90,23 +90,30 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 </div>
 
             </div>
-            <div class="col50" id="divNut">
+            <div class="col50">
                 <label> Table de nutrition: </label>
-                <img src="img/icon/add.png" onClick="popup('nut_add');" title="Créer nouvel élément" alt=""/>
+                
                 </br>
                 </br>
                 <!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
+                <div id="divNut">
                 <?php
                 if (isset($resAllNut) && is_array($resAllNut) && $resAllNut != 0) {
-                    foreach ($resAllNut as $value) {
+                    foreach ($resAllNut as $nut) {
                         ?>
-                        <label for="<?php echo 'nut' . $value->NUT_ID ?>"><?php echo $value->NUT_LBL ?></label>
+                        <label for="<?php echo 'nut' . $nut->nut_id ?>"><?php echo $nut->nut_lbl ?></label>
                         </br>
-                        <input name="<?php echo 'nut' . $value->NUT_ID ?>" placeholder="saisie"> </br>                               
+                        <input name="<?php echo 'nut' . $nut->nut_id ?>" 
+                               placeholder="saisie" value="<?php
+                                foreach ($resNutFiart as $nutVal){
+                                    if ($nutVal->nut_id == $nut->nut_id) echo $nutVal->nutfiart_val;
+                                }
+                               ?>"> </br>                               
                         <?php
                     }
                 }
                 ?>
+                </div>
                 <br>
             </div>
 
