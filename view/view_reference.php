@@ -13,7 +13,7 @@
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
                         foreach($toFiArts as $oFiArt) { ?>
-                        <option value=<?php echo $oFiArt->FIART_ID ?>> <?php echo 'Id :'.$oFiArt->FIART_ID.' '.$oFiArt->FIART_LBL ?> </option>
+                        <option value=<?php echo $oFiArt->fiart_id ?>> <?php echo 'Id :'.$oFiArt->fiart_id.' '.$oFiArt->fiart_lbl ?> </option>
                    <?php }
                    
                    } ?>

@@ -35,8 +35,8 @@ h2{
     height: auto;
     margin: 1%;
 }
-.form img{
-    border: solid black 1px;
+img{
+    //border: solid black 1px;
     vertical-align: middle;
     float: right;
     margin-right: 20px;
@@ -51,7 +51,7 @@ h2{
 .form label{    
     color: white;
 }
-.col30, .col50, .col70{
+.col30, .col50, .col70, .col20{
     overflow:auto;
     padding: 0.2%;   
     display: inline-block;
@@ -76,17 +76,19 @@ h2{
     width:50%;
     
 }
-.droite{
+.col70{
     max-width: 70%; 
     width:70%;
 }
-
+.col20{
+    max-width: 20%; 
+    width:20%;
+}
 .bas{
     display: block;
     text-align: center;
     margin-top: 0.5%;
     height:auto;
-    border: 1px solid blue;
 }
 .haut{ 
     margin: 0.3%;
@@ -102,4 +104,17 @@ h2{
 .listchoisis{
     color: white;
     margin: 1%;
+}
+table{
+    color:white;
+    width:100%;
+    text-align: center;
+}
+
+.colTitle{
+    border-bottom: 2px solid white;
+}
+
+img:hover{
+    cursor:pointer; 
 }
