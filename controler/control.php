@@ -74,13 +74,16 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/model/PaysManager.php';
                 require $path . '/model/Gamme.php';
                 require $path . '/model/GammeManager.php';
+                require $path . '/model/Regrouper.php';
+                require $path . '/model/RegrouperManager.php';
                 
                 if (isset($_REQUEST['fiartId'])){
                     $iFiartId = $_REQUEST['fiartId'];
                 $resFiartDetail = FicheArticleManager::getFicheArticleDetail($iFiartId);
                 $resAllPays = PaysManager::getAllPays();
                 $resAllGamme = GammeManager::getAllGammes();
-                print_r($resFiartDetail);
+                $resRegrouperFiart = RegrouperManager::getRegrouperFiart($iFiartId);
+                
                 }
                 $sButton = "Modifier";
                 break;

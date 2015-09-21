@@ -24,15 +24,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <label for="gamme"> Gamme: </label><br>                    
                     <select name="gamme[]" id="selGamme" onclick="" 
                             multiple="multiple" required="" size='3'>
-                        <option value="" selected="">Aucun</option>
-
+                       
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
                         
                         <?php
                                 foreach ($resAllGamme as $gamme) {            ?>
                                  <option value="<?php echo $gamme->GA_ID ?>"  
-                                     <?php if ($gamme->ga_id == $fiart->ga_id){
-                                        ?>selected<?php } ?> >>
+                                     <?php if ($gamme->GA_ID == $fiart->ga_id){
+                                        ?>selected<?php } ?> >
                                  <?php echo $gamme->GA_LBL ?> </option>
                         <?php   }
                         

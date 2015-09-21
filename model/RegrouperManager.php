@@ -28,7 +28,20 @@ class RegrouperManager {
     }
     
     
-/**
+    public static function getRegrouperFiart($iFiartId) {
+        try {
+            $tParam = array(
+                    $iFiartId
+                    );
+            $sql = 'SELECT * FROM regrouper WHERE fiart_id=?';
+            $result = Connection::request(1,$sql,$tParam);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    }
+
+    /**
  * Insert une enregistrement dans la table REGROUPER
  * @param type $regrouper
  * @return string
