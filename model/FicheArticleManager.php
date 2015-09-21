@@ -54,7 +54,9 @@ class FicheArticleManager {
             
                 $tParam = array($iFiartId);
             
-            $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, p.pays_nom FROM fiche_article f '
+            $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, '
+                    . 'f.pays_id, p.pays_nom, r.ga_id '
+                    . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'LEFT JOIN regrouper AS r ON f.fiart_id = r.fiart_id WHERE f.fiart_id = ?';
                     

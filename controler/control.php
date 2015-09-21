@@ -70,9 +70,16 @@ if (!isset($_SESSION['auth'])) {
             case "fiart_detail":
                 require $path . '/model/FicheArticle.php';
                 require $path . '/model/FicheArticleManager.php';
+                require $path . '/model/Pays.php';
+                require $path . '/model/PaysManager.php';
+                require $path . '/model/Gamme.php';
+                require $path . '/model/GammeManager.php';
+                
                 if (isset($_REQUEST['fiartId'])){
                     $iFiartId = $_REQUEST['fiartId'];
                 $resFiartDetail = FicheArticleManager::getFicheArticleDetail($iFiartId);
+                $resAllPays = PaysManager::getAllPays();
+                $resAllGamme = GammeManager::getAllGammes();
                 print_r($resFiartDetail);
                 }
                 $sButton = "Modifier";
@@ -103,7 +110,7 @@ if (!isset($_SESSION['auth'])) {
             
             case "fiart_detail":
                 $sPageTitle = "Détail fiche article";
-                require $path . '/view/view_fiche_article.php';
+                require $path . '/view/view_fiche_article_rw.php';
                 break;
             
             case "ga_add":
