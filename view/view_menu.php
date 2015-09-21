@@ -60,7 +60,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
             <ul>
                <li><a href='#'><span>Gamme</span></a></li>
                <li><a href='#'><span>Fiche Article</span></a></li>
-               <li><a href='#'><span>Références</span></a></li>
+               <li><a href='index.php?action=ref_list'><span>Références</span></a></li>
             </ul>
          </li>
       </ul>

@@ -35,62 +35,48 @@ if (!isset($_SESSION['auth'])) {
 
             //Catalogue
             case "fiart_add":
-                require 'control_fiart_add.php';
+                require $path.'/controler/control_fiart_add.php';
                 break;
 
             //Créer un contact    
             case "ctc_add":
 
-                require 'control_ctc_add.php';
+                require $path.'/controler/control_ctc_add.php';
                 $sPageTitle = "Ajouter un contact";
 
                 break;
 
             //gamme
             case "ga_add":
-                require 'control_ga_add.php';
+                require $path.'/controler/control_ga_add.php';
                 break;
 
             case "pays_add":
-                require 'control_pays_add.php';
+                require $path.'/controler/control_pays_add.php';
                 break;
                 
             case "ref_add":
-                require 'control_ref_add.php';
+                require $path.'/controler/control_ref_add.php';
                 break;
             
             //Liste fiche article
             case "fiart_list":
-                require $path . '/model/FicheArticle.php';
-                require $path . '/model/FicheArticleManager.php';
-                $resFiartList = FicheArticleManager::getAllFichesArticles();
+                require $path.'/controler/control_fiart_list.php';
                 break;
             
             //Detail fiche article
             case "fiart_detail":
-                require $path . '/model/FicheArticle.php';
-                require $path . '/model/FicheArticleManager.php';
-                require $path . '/model/Pays.php';
-                require $path . '/model/PaysManager.php';
-                require $path . '/model/Gamme.php';
-                require $path . '/model/GammeManager.php';
-                require $path . '/model/Regrouper.php';
-                require $path . '/model/RegrouperManager.php';
-                
-                if (isset($_REQUEST['fiartId'])){
-                    $iFiartId = $_REQUEST['fiartId'];
-                $resFiartDetail = FicheArticleManager::getFicheArticleDetail($iFiartId);
-                $resAllPays = PaysManager::getAllPays();
-                $resAllGamme = GammeManager::getAllGammes();
-                $resRegrouperFiart = RegrouperManager::getRegrouperFiart($iFiartId);
-                
-                }
-                $sButton = "Modifier";
+                require $path.'/controler/control_fiart_detail.php';
                 break;
             
             //liste référence
             case "ref_list":
-                require $path . '/controler/control_ref_list.php';                
+                require $path .'/controler/control_ref_list.php';                
+                break;
+            //Détail référence
+            
+            case "ref_detail":
+                require $path.'/controler/control_ref_detail.php';
                 break;
             
         }
@@ -123,11 +109,17 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/view/view_gamme.php';
                 break;
 
+            //Références
             case "ref_add":
                 $sPageTitle = "Ajouter une référence";
                 require $path . '/view/view_reference.php';
                 break;
-
+            
+            case "ref_detail":
+                $sPageTitle="Consulter Modifier une référence";
+                require $path . '/view/view_reference_rw.php';
+                break;
+            
             //Contacts
             case "ctc_add":
                 require $path . '/view/view_creer_contact.php';
