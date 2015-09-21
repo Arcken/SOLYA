@@ -80,7 +80,7 @@ if (!isset($_SESSION['auth'])) {
             
             //liste référence
             case "ref_list":
-                require $path . '/control/control_ref_list.php';                
+                require $path . '/controler/control_ref_list.php';                
                 break;
             
         }
@@ -125,6 +125,7 @@ if (!isset($_SESSION['auth'])) {
             
             //Liste fiche article
             case "fiart_list":
+                $sPageTitle = "Liste fiche article";
                 require $path.'/view/view_list_fiche_article.php';
                 break;
             
