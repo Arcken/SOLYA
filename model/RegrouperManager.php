@@ -33,7 +33,7 @@ class RegrouperManager {
             $tParam = array(
                     $iFiartId
                     );
-            $sql = 'SELECT * FROM regrouper WHERE fiart_id=?';
+            $sql = 'SELECT fiart_id,ga_id FROM regrouper WHERE fiart_id=?';
             $result = Connection::request(1,$sql,$tParam);
         } catch (MySQLException $e) {
             die($e->retourneErreur());

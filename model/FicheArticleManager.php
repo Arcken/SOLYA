@@ -55,13 +55,13 @@ class FicheArticleManager {
                 $tParam = array($iFiartId);
             
             $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, '
-                    . 'f.pays_id, p.pays_nom'
+                    . 'f.pays_id, p.pays_nom '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'WHERE f.fiart_id = ?';
                     
             
-            $result = Connection::request(1, $sql, $tParam);
+            $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }

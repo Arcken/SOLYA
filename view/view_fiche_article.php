@@ -46,7 +46,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <select name="pays" id="selPays" required>
                         <option value="" selected>Aucun</option>
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
-                        <?php if(is_array($resAllPays) && $resAllGa!=0) {
+                        <?php if(is_array($resAllPays) && $resAllPays!=0) {
                                 foreach ($resAllPays as $value) { ?>
                                     <option value="<?php echo $value->PAYS_ID ?>">
                                     <?php echo $value->PAYS_NOM ?> </option>
