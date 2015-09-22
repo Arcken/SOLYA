@@ -71,7 +71,8 @@ class ReferenceManager {
                     $reference->ref_emb_dim_lrg,
                     $reference->ref_emb_dim_ht,
                     $reference->ref_emb_dim_diam,
-                    $reference->ref_com 
+                    $reference->ref_com,
+                    $reference->ref_code
                 );
 
                 $sql = "INSERT INTO reference ("
@@ -91,8 +92,9 @@ class ReferenceManager {
                         . "ref_emb_dim_lrg,"
                         . "ref_emb_dim_ht,"
                         . "ref_emb_dim_diam,"
-                        . "ref_com) " .
-                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        . "ref_com,"
+                        . "ref_code) " .
+                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
             } else {
@@ -157,6 +159,7 @@ class ReferenceManager {
                     $reference->ref_emb_dim_ht,
                     $reference->ref_emb_dim_diam,
                     $reference->ref_com,
+                    $reference->ref_code,
                     $reference->ref_id
                 );
                     
@@ -177,7 +180,8 @@ class ReferenceManager {
                         . "r.ref_emb_dim_lrg=?,"
                         . "r.ref_emb_dim_ht=?,"
                         . "r.ref_emb_dim_diam=?,"
-                        . "r.ref_com=? " .
+                        . "r.ref_com=? " 
+                        . "r.ref_code=?".
                         " WHERE r.ref_id=? ";
 
                 $result = Connection::request(2, $sqlUpd, $tParamUpd);
@@ -227,7 +231,7 @@ class ReferenceManager {
                             r.ref_emb_dim_lrg,
                             r.ref_emb_dim_ht,
                             r.ref_emb_dim_diam,
-                            r.ref_com FROM reference r WHERE r.ref_id = ? FOR UPDATE";
+                            r.ref_com, r.ref_code FROM reference r WHERE r.ref_id = ? FOR UPDATE";
 
             $result = Connection::request(0, $sql,$tParam);
             }
@@ -272,7 +276,7 @@ class ReferenceManager {
                             r.ref_emb_dim_lrg,
                             r.ref_emb_dim_ht,
                             r.ref_emb_dim_diam,
-                            r.ref_com FROM reference r WHERE r.ref_id = ?";
+                            r.ref_com, r.ref_code FROM reference r WHERE r.ref_id = ?";
 
             $result = Connection::request(0, $sql,$tParam);
             }

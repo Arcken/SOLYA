@@ -5,9 +5,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
- * Manager de la table GAMME
+ * Manager de la table Pays
  */
+
 class PaysManager {
 
     /**
@@ -67,5 +69,20 @@ class PaysManager {
         }
         return $result;
     }
+    
+    public static function getPaysFromFiArt($fiArtId){
+        
+        $tParam = array(
+            $fiArtId
+        );
 
+        $sql ="SELECT pays_nom, 
+                      pays_abv,
+                      pays_dvs_nom,
+                      pays_dvs_abv,
+                      pays_dvs_sym FROM pays WHERE pays_id = ?";
+        
+        Connection::request(0,$sql,$tParam);
+    
+    }
 }

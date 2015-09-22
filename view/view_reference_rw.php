@@ -39,7 +39,9 @@
 
 
             <div class="col30"> 
-
+                <label for="refCode"> Code rapide de la référence: </label><br>          
+                <input name="refCode" type="text" placeholder="Code de la référence" required value="<?php echo $rsRef->ref_code; ?>"></input>
+                <br>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" placeholder="Nom de la référence" required value="<?php echo $rsRef->ref_lbl; ?>"></input>
                 <br>
