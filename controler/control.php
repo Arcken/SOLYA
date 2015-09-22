@@ -12,23 +12,26 @@ if (!isset($_REQUEST['limite']))
 else
     $limite = (int) $_REQUEST['limite'];
 
+//Vérification de connection
 if (!isset($_SESSION['auth'])) {
-
     require $path . '/view/view_connection.php';
-} else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
+} else if (isset($_REQUEST['action']) 
+        && $_REQUEST['action'] == 'deconnexion') {
 
     session_destroy();
     session_commit();
     $_SESSION = array();
     require $path . '/view/view_connection.php';
-} else {
+} 
+else {
     if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') === FALSE) {
         $nv = 0;
         if (isset($_REQUEST['action'])) {
             $sAction = $_REQUEST['action'];
         }
 
-        /* ----------------------------Traitement des données-------------------- */
+        // ----------------------------Traitement des données-----------------//
+        //--------------------------------------------------------------------//
 
         switch ($sAction) {
 
@@ -36,15 +39,36 @@ if (!isset($_SESSION['auth'])) {
             case "connexion":
                 $sPageTitle = "Accueil";
                 break;
-
-            //Catalogue
+//-------------------------------Fiche article-------------------------------
+            //Ajout de fiche article
             case "fiart_add":
                 require $path . '/controler/control_fiart_add.php';
                 break;
 
+            //Suppression de fiche article
+            case "fiart_supp":
+                require_once $path . '/model/FicheArticle.php';
+                require_once $path . '/model/FicheArticleManager.php';
+                $res = FicheArticleManager::delFicheArticle($_REQUEST['fiartId']);
+                if ($res == 1) {
+                    $resMessage = "<font color='orange'> La fiche article N° " . $_REQUEST['fiartId'] . " est supprimée</font>";
+                }
+                require $path . '/controler/control_fiart_list.php';
+                break;
+
+            //Liste de fiche article
+            case "fiart_list":
+                require $path . '/controler/control_fiart_list.php';
+                break;
+
+            //Detail fiche article et maj fiche article
+            case "fiart_detail_upd":
+            case "fiart_detail":
+                require $path . '/controler/control_fiart_detail.php';
+                break;
+            
             //Créer un contact    
             case "ctc_add":
-
                 require $path . '/controler/control_ctc_add.php';
                 $sPageTitle = "Ajouter un contact";
 
@@ -63,27 +87,7 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/controler/control_ref_add.php';
                 break;
 
-            //Liste fiche article
-            case "fiart_supp":
-                require_once $path . '/model/FicheArticle.php';
-                require_once $path . '/model/FicheArticleManager.php';
-                $res = FicheArticleManager::delFicheArticle($_REQUEST['fiartId']);
-                if ($res == 1) {
-                    $resMessage = "<font color='orange'> La fiche article N° " . $_REQUEST['fiartId'] . " est supprimée</font>";
-                }
-                require $path . '/controler/control_fiart_list.php';
-                break;
-
-            case "fiart_list":
-                require $path . '/controler/control_fiart_list.php';
-                break;
-
-            //Detail fiche article
-
-            case "fiart_detail_upd":
-            case "fiart_detail":
-                require $path . '/controler/control_fiart_detail.php';
-                break;
+            
 
             //liste référence
             case "ref_list":
