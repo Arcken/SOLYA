@@ -38,8 +38,12 @@ class Tool {
         $limitePrecedente = $limite - $nombre;
 
         echo '<table border = "0" ><tr>' . "\n";
+        if (isset($_REQUEST['orderby'])){
         $order = $_REQUEST['orderby'];
-        
+        }
+        else {
+            $order='';
+        }
         if ($limite != 0) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
@@ -62,30 +66,10 @@ class Tool {
         if ($limiteSuivante < $total) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limiteSuivante . '" method="post">></a></td>' . "\n";
+            . $limiteSuivante . '&orderby='.$order.'" method="post">></a></td>' . "\n";
         }
 
         echo '</tr></table>' . "\n";
-    }
-
-//verifie limite
-    public static function verifLimite($limite, $total, $nombre) {
-        // je verifie si limite est un nombre.
-        if (is_numeric($limite)) {
-            // si $limite est entre 0 et $total, $limite est ok
-            // sinon $limite n'est pas valide.
-            if (($limite >= 0) && ($limite <= $total) && (($limite % $nombre) == 0)) {
-                // j'assigne 1 à $valide si $limite est entre 0 et $max
-                $valide = 1;
-            } else {
-                // sinon j'assigne 0 à $valide
-                $valide = 0;
-            }
-        } else {
-            // si $limite n'est pas numérique j'assigne 0 à $valide
-            $valide = 0;
-        }
-        return $valide; // je renvois $valide
     }
 
     /**

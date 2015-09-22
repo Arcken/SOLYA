@@ -7,9 +7,9 @@
  */
 
 /**
- * Description of AdresseManager
+ * Classe manager des objets fiche article
  *
- * @author Olivier
+ *
  */
 class AdresseManager {
 
