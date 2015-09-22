@@ -157,15 +157,13 @@
                          
                 </select>
                 <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
-            </div>
-            
-            <div class="col30">
+                <br>
                 <label for="refCom"> Commentaire : </label><br>
                 <textarea name="refCom" rows="4" cols="25" placeholder="Commentaire sur la référence" ></textarea>
                 <br>
-                <label for="dtlsTechs"> Détails techniques : </label><br>
-                <textarea name="dtlsTechs" rows="4" cols="25" placeholder="Détails techniques" ></textarea>
             </div>
+          
+            
             <div class="bas">
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
             <input id ='clearForm' name="clear"   type="reset" onclick="formChooser()"/> 

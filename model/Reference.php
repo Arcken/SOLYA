@@ -23,7 +23,7 @@ class Reference {
     public $ref_emb_dim_lrg  = '';
     public $ref_emb_dim_ht   = '';
     public $ref_emb_dim_diam = '';
-
+    public $ref_com          = '';
 
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs
