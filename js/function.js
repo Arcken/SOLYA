@@ -27,6 +27,23 @@ function popup(action)
     return false;
 }
 
+function test(){
+    alert('Coucou');
+}
+
+function orderby(action,champs){
+    window.open('index.php?action=' + action + "&orderby=" + champs, '_self');
+    
+}
+
+function delElt(id,codetype,type,action){
+$resBool = confirm("Voulez-vous supprimez l'élément: " + type + " numéro: " + id);
+if ($resBool){
+    window.open('index.php?action=' + action + "&" + codetype + "=" + id, '_self')
+}
+}
+
+
 function getGamme() {
 
     console.log('dedans');

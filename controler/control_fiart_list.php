@@ -5,7 +5,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-require $path . '/model/FicheArticle.php';
-require $path . '/model/FicheArticleManager.php';
-$resFiartList = FicheArticleManager::getAllFichesArticles();
+require_once $path . '/model/FicheArticle.php';
+require_once $path . '/model/FicheArticleManager.php';
+$iTotal = Tool::getCountTable('fiche_article');
+if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
+    $orderby =  $_REQUEST['orderby'];
+    $resFiartList = FicheArticleManager::getAllFichesArticlesLim($limite,$iNbPage,$orderby);
+}
+else $resFiartList = FicheArticleManager::getAllFichesArticlesLim($limite,$iNbPage);
+
 

@@ -7,18 +7,18 @@
  */
 
 
-require $path . '/model/FicheArticle.php';
-require $path . '/model/FicheArticleManager.php';
-require $path . '/model/Pays.php';
-require $path . '/model/PaysManager.php';
-require $path . '/model/Gamme.php';
-require $path . '/model/GammeManager.php';
-require $path . '/model/Regrouper.php';
-require $path . '/model/RegrouperManager.php';
-require $path . '/model/Nutrition.php';
-require $path . '/model/NutritionManager.php';
-require $path . '/model/Informer.php';
-require $path . '/model/InformerManager.php';
+require_once $path . '/model/FicheArticle.php';
+require_once $path . '/model/FicheArticleManager.php';
+require_once $path . '/model/Pays.php';
+require_once $path . '/model/PaysManager.php';
+require_once $path . '/model/Gamme.php';
+require_once $path . '/model/GammeManager.php';
+require_once $path . '/model/Regrouper.php';
+require_once $path . '/model/RegrouperManager.php';
+require_once $path . '/model/Nutrition.php';
+require_once $path . '/model/NutritionManager.php';
+require_once $path . '/model/Informer.php';
+require_once $path . '/model/InformerManager.php';
 
 if (isset($_REQUEST['fiartId'])) {
     $iFiartId = $_REQUEST['fiartId'];
@@ -35,7 +35,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
     $cnx = Connection::getConnection();
     //début de transaction
     $cnx->beginTransaction();
-    
+
     try {
         $oFiArt = new FicheArticle();
         $oFiArt->fiart_id = $_REQUEST['fiartId'];
@@ -46,7 +46,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
         $oFiArt->fiart_pays_id = $_REQUEST['pays'];
 
         FicheArticleManager::updFicheArticle($oFiArt);
-        
+
         RegrouperManager::delRegrouperFiart($oFiArt->fiart_id);
         InformerManager::delInformerFiart($oFiArt->fiart_id);
 
@@ -68,11 +68,15 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
                 InformerManager::addInformer($oInformer);
             }
         }
-         $cnx->commit();
-         
+        $cnx->commit();
+        $resMessage = "<font color='green'> La modification de la fiche article N° $oFiArt->fiart_id
+                 intitulée: $oFiArt->fiart_lbl est un succés</font>";
+        require_once $path . '/controler/control_fiart_list.php';
     } catch (MySQLException $e) {
-         $e->RetourneErreur();
+        $e->RetourneErreur();
         $cnx->rollback();
+        $resMessage = "<font color='red'> La modification de la fiche article N° $oFiArt->fiart_id
+                 intitulée: $oFiArt->fiart_lbl a échoué</font>";
     }
 }
 $sButton = "Modifier";

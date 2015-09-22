@@ -26,21 +26,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <select name="gamme[]" id="selGamme" onclick="listSelect('selGamme', 'listGamme')" 
                             multiple="multiple" required="" size='3'>
                                 <?php foreach ($resAllGamme as $gamme) { ?>
-                            <option value="<?php echo $gamme->GA_ID ?>"  
+                            <option value="<?php echo $gamme->ga_id ?>"  
 
                                     <?php
                                     foreach ($resRegrouperFiart as $regrouper) {
 
-                                        if ($gamme->GA_ID == $regrouper->ga_id) {
+                                        if ($gamme->ga_id == $regrouper->ga_id) {
                                             ?>selected<?php
                                            
-                                            $listGamme = $listGamme.$gamme->GA_LBL." ";
+                                            $listGamme = $listGamme.$gamme->ga_lbl." ";
                                         }
                                     }
                                     ?> 
                                     >
                                         <?php
-                                echo $gamme->GA_LBL;
+                                echo $gamme->ga_lbl;
                                 
                                 ?> </option>
                         <?php }
@@ -64,9 +64,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         if (is_array($resAllPays) && $resAllPays != 0) {
                             foreach ($resAllPays as $pays) {
                                 ?>
-                                <option value="<?php echo $pays->PAYS_ID ?>" <?php if ($pays->PAYS_ID == $resFiartDetail->pays_id) {
+                                <option value="<?php echo $pays->pays_id ?>" <?php if ($pays->pays_id == $resFiartDetail->pays_id) {
                                     ?>selected<?php } ?> >
-                                <?php echo $pays->PAYS_NOM ?> </option>
+                                <?php echo $pays->pays_nom ?> </option>
                                 <?php
                             }
                         }

@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /**
  * Manager de la table REGROUPER
  */
@@ -13,28 +14,15 @@ class RegrouperManager {
     /**
      * Retourne tous les enregistrements de la table REGROUPER
      * 
-     * @return gamme[]
+     * @return Regrouper[]
+     * Retourne un tableau d'objet
      */
     public static function getAllRegroupers() {
 
         try {
 
-            $sql = 'SELECT * FROM regrouper';
-            $result = Connection::request(1,$sql);
-        } catch (MySQLException $e) {
-            die($e->retourneErreur());
-        }
-        return $result;
-    }
-    
-    
-    public static function getRegrouperFiart($iFiartId) {
-        try {
-            $tParam = array(
-                    $iFiartId
-                    );
-            $sql = 'SELECT fiart_id,ga_id FROM regrouper WHERE fiart_id=?';
-            $result = Connection::request(1,$sql,$tParam);
+            $sql = 'SELECT ga_id, fiart_id FROM regrouper';
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }
@@ -42,10 +30,32 @@ class RegrouperManager {
     }
 
     /**
- * Insert une enregistrement dans la table REGROUPER
- * @param type $regrouper
- * @return string
- */
+     * Retourne toutes les gammes associé à une fiche article
+     * @param integer
+     * ID de la fiche article
+     * @return objet[]
+     * Renvoie un tableau d'objet
+     */
+    public static function getRegrouperFiart($iFiartId) {
+        try {
+            $tParam = array(
+                $iFiartId
+            );
+            $sql = 'SELECT fiart_id, ga_id FROM regrouper WHERE fiart_id=?';
+            $result = Connection::request(1, $sql, $tParam);
+        } catch (MySQLException $e) {
+            die($e->retourneErreur());
+        }
+        return $result;
+    }
+
+    /**
+     * Insert une enregistrement dans la table REGROUPER
+     * @param $oRegrouper
+     * Attend un objet Rgrouper 
+     * @return string
+     * Renvoie un chaîne de caractère selon le succés ou non 
+     */
     public static function addRegrouper($regrouper) {
 
         try {
@@ -62,31 +72,35 @@ class RegrouperManager {
                         . " FIART_ID) "
                         . " VALUES(?,?)";
 
-                $result = Connection::request(2,$sql, $tParam);
+                $result = Connection::request(2, $sql, $tParam);
             } else {
                 $result = '<br/><p class="info">Enregistrement Regrouper impossible</p>';
             }
         } catch (MySQLException $e) {
-
-
             $result = '<br/><p class="info">Erreur, insert défectueux</p>';
         }
         return $result;
     }
 
-    public static function delRegrouperFiart($iFiartId){
+    /**
+     * Efface tous les enregistrements de la table Regrouper concernant une fiche article
+     * @param integer
+     * ID de la fiche article
+     * @return type
+     */
+    public static function delRegrouperFiart($iFiartId) {
         try {
             $tParam = array(
-                    $iFiartId
-                    );
+                $iFiartId
+            );
             $sql = 'DELETE FROM regrouper WHERE fiart_id=?';
-            $result = Connection::request(2,$sql,$tParam);
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }
         return $result;
-    
     }
-    
+
 }
+
 ?>

@@ -27,7 +27,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         //on vérifie que le libellé de la fiche article soit renseigné
         if (isset($_REQUEST['fiartLbl'])) {
             $oFiArt = new FicheArticle();
-            echo 'FIART';
+            
             //On hydrate l'objet avec les paramètres de l'url
             $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
             $oFiArt->fiart_photos = $_REQUEST['fiartPhoto'];
@@ -38,7 +38,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             //on exécute la requête d'insert de la fiche article
             FicheArticleManager::addFicheArticle($oFiArt);
             $a = Connection::dernierId();
-            echo 'FIART ajouter !';
+            
             //On récupère l'id du dernier insert de la fiche article
             $oFiArt->fiart_id = $a;
 
@@ -46,17 +46,16 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             if (isset($_REQUEST['gamme']) && !empty($_REQUEST['gamme'])) {
                 require $path . '/model/RegrouperManager.php';
                 require $path . '/model/Regrouper.php';
-                echo 'GAMME';
+                
                 foreach ($_REQUEST['gamme'] as $value) {
-                    echo $value;
+                    
                     $oRegrouper = new Regrouper();
 
                     $oRegrouper->fiart_id = $oFiArt->fiart_id;
                     $oRegrouper->ga_id = $value;
-                    print_r($oRegrouper);
+                    
                     $r = RegrouperManager::addRegrouper($oRegrouper);
-                    echo 'Gamme Ajouter !';
-                    print_r($r);
+                    
                 }
             }
 
@@ -70,19 +69,21 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                 if (isset($_REQUEST['nut' . $object->nut_id]) && $_REQUEST['nut' . $object->nut_id] != '') {
 
-                    echo 'nut' . $object->nut_id . '=' . $_REQUEST['nut' . $object->nut_id];
+                    
                     $oInformer = new Informer();
                     $oInformer->fiart_id = $oFiArt->fiart_id;
                     $oInformer->nut_id = $object->nut_id;
                     $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
-                    print_r($oInformer);
+                    
                     //on exécute la requête
                     $r = InformerManager::addInformer($oInformer);
-                    print_r($r);
+                    
                 }
             }
         }
-        $cnx->commit();
+        $res = $cnx->commit();
+        $resMessage = "<font color='green'> L'enregistrement de la fiche article N° $oFiArt->fiart_id
+                 intitulée: $oFiArt->fiart_lbl est un succés</font>";
         //Avec un objet PDO si l'insert n'est pas fait, il y a une remonté d'exception
     } catch (MySQLException $e) {
         $e->RetourneErreur();
@@ -91,4 +92,3 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
     //$result = FicheArticleManager::addFicheArticle($oFiArt);
     //echo $result;
 }
-?>

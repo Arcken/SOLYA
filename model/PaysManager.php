@@ -11,38 +11,40 @@
 class PaysManager {
 
     /**
-     * Retourne tous les enregistrements de la table Gamme
-     * 
-     * @return gamme[]
+     * Retourne tous les enregistrements de la table Pays     * 
+     * @return objet[]
+     * Retourne un tableau d'objet
      */
     public static function getAllPays() {
 
         try {
 
-            $sql = 'SELECT * FROM pays';
+            $sql = 'SELECT pays_id, pays_nom, pays_abv, pays_dvs_nom, pays_dvs_abv, pays_dvs_sym FROM pays';
             $result = Connection::request(1,$sql);
         } catch (MySQLException $e) {
             die($e->retourneErreur());
         }
         return $result;
     }
+    
 /**
- * Insert une enregistrement dans la table gamme
- * @param type $gamme
+ * Insert une enregistrement dans la table pays
+ * @param $oPays
+ * Attend un objet Pays
  * @return string
  */
     public static function addPays($pays) {
 
         try {
 
-            if (!empty($pays->PAYS_NOM) && (strlen($pays->PAYS_NOM) > Connection::getLimLbl())) {
+            if (!empty($pays->pays_nom) && (strlen($pays->pays_nom) > Connection::getLimLbl())) {
 
                 $tParam = array(
-                    $pays->PAYS_NOM,
-                    $pays->PAYS_ABV,
-                    $pays->PAYS_DVS_NOM,
-                    $pays->PAYS_DVS_ABV,
-                    $pays->PAYS_DVS_SYM
+                    $pays->pays_nom,
+                    $pays->pays_abv,
+                    $pays->pays_dvs_nom,
+                    $pays->pays_dvs_abv,
+                    $pays->pays_dvs_sym
                     
                 );
 

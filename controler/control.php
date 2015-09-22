@@ -1,12 +1,16 @@
 <?php
-require $path.'/inc/Tool.inc';
+
+require $path . '/inc/Tool.inc';
 
 $sPageTitle = "Connexion";
 $sAction = '';
 $sButton = "Envoyer";
 $nv = ''; //variable de contrôle pour les popups
-//$sPhp_Action='';
-//$sButton='';
+//Initialisation valeur limite pour les requêtes si non définie
+if (!isset($_REQUEST['limite']))
+    $limite = 0;
+else
+    $limite = (int) $_REQUEST['limite'];
 
 if (!isset($_SESSION['auth'])) {
 
@@ -35,51 +39,61 @@ if (!isset($_SESSION['auth'])) {
 
             //Catalogue
             case "fiart_add":
-                require $path.'/controler/control_fiart_add.php';
+                require $path . '/controler/control_fiart_add.php';
                 break;
 
             //Créer un contact    
             case "ctc_add":
 
-                require $path.'/controler/control_ctc_add.php';
+                require $path . '/controler/control_ctc_add.php';
                 $sPageTitle = "Ajouter un contact";
 
                 break;
 
             //gamme
             case "ga_add":
-                require $path.'/controler/control_ga_add.php';
+                require $path . '/controler/control_ga_add.php';
                 break;
 
             case "pays_add":
-                require $path.'/controler/control_pays_add.php';
+                require $path . '/controler/control_pays_add.php';
                 break;
-                
+
             case "ref_add":
-                require $path.'/controler/control_ref_add.php';
+                require $path . '/controler/control_ref_add.php';
                 break;
-            
+
             //Liste fiche article
-            case "fiart_list":
-                require $path.'/controler/control_fiart_list.php';
+            case "fiart_supp":
+                require_once $path . '/model/FicheArticle.php';
+                require_once $path . '/model/FicheArticleManager.php';
+                $res = FicheArticleManager::delFicheArticle($_REQUEST['fiartId']);
+                if ($res == 1) {
+                    $resMessage = "<font color='orange'> La fiche article N° " . $_REQUEST['fiartId'] . " est supprimée</font>";
+                }
+                require $path . '/controler/control_fiart_list.php';
                 break;
-            
+
+            case "fiart_list":
+                require $path . '/controler/control_fiart_list.php';
+                break;
+
             //Detail fiche article
+
             case "fiart_detail_upd":
             case "fiart_detail":
-                require $path.'/controler/control_fiart_detail.php';
+                require $path . '/controler/control_fiart_detail.php';
                 break;
-            
+
             //liste référence
             case "ref_list":
-                require $path .'/controler/control_ref_list.php';                
+                require $path . '/controler/control_ref_list.php';
                 break;
             //Détail référence
-            
+
             case "ref_detail":
-                require $path.'/controler/control_ref_detail.php';
+                require $path . '/controler/control_ref_detail.php';
                 break;
-            
         }
 
         /* ----------------------------Affichage--------------------------------- */
@@ -93,24 +107,22 @@ if (!isset($_SESSION['auth'])) {
                 break;
 
             //Catalogue
-            case "fiart_detail_upd":
-                $sAction = 'fiart_list';
-                break;
-            
+
+
             case "fiart_add":
                 $sPageTitle = "Ajouter une fiche article";
                 require $path . '/view/view_fiche_article.php';
                 break;
-            
-            
-                
-                
+
+
+
+
             case "fiart_detail":
                 $sAction = "fiart_detail_upd";
                 $sPageTitle = "Détail fiche article";
                 require $path . '/view/view_fiche_article_rw.php';
                 break;
-            
+
             case "ga_add":
             case "ga_add_add":
 
@@ -123,26 +135,29 @@ if (!isset($_SESSION['auth'])) {
                 $sPageTitle = "Ajouter une référence";
                 require $path . '/view/view_reference.php';
                 break;
-            
+
             case "ref_detail":
-                $sPageTitle="Consulter Modifier une référence";
+                $sPageTitle = "Consulter Modifier une référence";
                 require $path . '/view/view_reference_rw.php';
                 break;
-            
+
             //Contacts
             case "ctc_add":
                 require $path . '/view/view_creer_contact.php';
                 break;
-            
+
             //Liste fiche article
+            case "fiart_supp":
+                $sAction = "fiart_list";
+            case "fiart_detail_upd":
             case "fiart_list":
                 $sPageTitle = "Liste fiche article";
-                require $path.'/view/view_list_fiche_article.php';
+                require $path . '/view/view_list_fiche_article.php';
                 break;
-            
+
             //liste référence
             case "ref_list":
-                require $path.'/view/view_list_reference.php';
+                require $path . '/view/view_list_reference.php';
                 break;
         }
         require_once $path . '/view/view_footer.php';
@@ -186,18 +201,18 @@ if (!isset($_SESSION['auth'])) {
                     break;
 
                 case 'nv_nut_add':
-                    
+
                     $sPageTitle = "Ajouter une information";
                     require $path . '/model/Nutrition.php';
                     require $path . '/model/NutritionManager.php';
-                    
+
                     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                         $oNut = new Nutrition();
                         $oNut->nut_lbl = $_REQUEST['nutLbl'];
                         $result = NutritionManager::addNutrition($oNut);
                         echo $result;
                     }
-                    
+
                     $resAllNut = NutritionManager::getAllNutritions();
                     break;
             }
@@ -207,7 +222,7 @@ if (!isset($_SESSION['auth'])) {
 
                 case "nv_ga_add":
                     require $path . '/view/view_gamme.php';
-                    
+
                     break;
 
                 case "nv_pays_add":

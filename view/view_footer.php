@@ -8,7 +8,7 @@
 
 <footer>
     <link href="css/style_footer.css" type="text/css" rel="stylesheet">
-    <p>allo</p>
+    <p><?php if (isset($resMessage)) echo $resMessage;?></p>
     <div id="bloc_footer">
     </div>
 </footer>

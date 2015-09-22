@@ -8,9 +8,9 @@
 
 class Gamme {
 
-    public $GA_ID = '';
-    public $GA_LBL = '';
-    public $GA_ABV = '';
+    public $ga_id = '';
+    public $ga_lbl = '';
+    public $ga_abv = '';
     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
             // Pour chaque clé, on récupère sa valeur.

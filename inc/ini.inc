@@ -13,6 +13,7 @@ if (file_exists($fichier) && is_file($fichier)) {
     $sTitle=$config['APPLI']['titre'];
     $sWebPath=$config['APPLI']['webpath'];
     $iLimLbl=$config['APPLI']['limlbl'];
+    $iNbPage=$config['APPLI']['nbpage'];
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"
     , self::$cnx);

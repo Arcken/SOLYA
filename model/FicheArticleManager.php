@@ -11,7 +11,7 @@ class FicheArticleManager {
      * Retourne tous les enregistrements de la table Référence
      * 
      * @return Objet[]
-     * * @description Retourne un tableau d'objet
+     * Retourne un tableau d'objet
      */
     public static function getAllFichesArticles() {
 
@@ -30,23 +30,34 @@ class FicheArticleManager {
         }
         return $result;
     }
-
-    public static function getMaxIdFicheArticle() {
+/**
+     * Retourne tous les enregistrements de la table Référence
+     * 
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getAllFichesArticlesLim($limite,$nombre,$orderby = 'fiart_id') {
 
         try {
 
-            $sql = 'SELECT MAX(fiart_id) FROM fiche_article';
-            $result = Connection::request(0, $sql, null, $format = PDO::FETCH_ASSOC);
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg '
+                    . 'FROM fiche_article ORDER BY '.$orderby.' LIMIT '.$limite.' , '.$nombre;
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+
+            if ($e->getCode() == 00000) {
+                return 0;
+            } else {
+                return $e->getCode();
+            }
         }
         return $result;
     }
-
+    
     /**
      * Renvoie le détail d'une fiche article
      * @return Objet[]
-     * @description Retourne un tableau d'objet
+     * Retourne un tableau d'objet
      */
     public static function getFicheArticleDetail($iFiartId) {
 
@@ -168,4 +179,18 @@ class FicheArticleManager {
         return $result;
     }
 
+    public static function delFicheArticle($iFiartId){
+        try {
+            $tParam = array(
+                    $iFiartId
+                    );
+            $sql = 'DELETE FROM fiche_article WHERE fiart_id=?';
+            $result = Connection::request(2,$sql,$tParam);
+        } catch (MySQLException $e) {
+            
+        }
+        return $result;
+    
+    }
+    
 }

@@ -9,3 +9,4 @@ base = solya
 webpath="SOLYA"
 titre = "Sol'ya!"
 limlbl = 3;
+nbpage = 5;
