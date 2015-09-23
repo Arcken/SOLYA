@@ -16,8 +16,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $oNut->nut_lbl = strtoupper($_REQUEST['nutLbl']);
         $result = NutritionManager::addNutrition($oNut);
         
-        if ($result == 1){ $resMessage = "<font color='green'> L'ajout de la gamme N° $id
-                 intitulée: $oGa->GA_LBL est un succés</font>";
+        if ($result == 1){ $resMessage = "<font color='green'> L'ajout de la nutrition
+                 intitulée: $oNut->nut_lbl est un succés</font>";
         }
         else $resMessage = "<font color='red'> L'ajout de la gamme est un échec, champs mal remplies</font>";
     } catch (MySQLException $e) {

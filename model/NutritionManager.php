@@ -59,7 +59,7 @@ class NutritionManager {
 
             echo $e->RetourneErreur();
         }
-      
+    return $result;
     }
 }
 
