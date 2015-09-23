@@ -176,3 +176,69 @@ $divNut.append('<label> Table de nutrition: </label><br><br>');
     }
     );
 }
+
+function getFiartPays($fiartId){
+     var $inputCodeRef = $('#refCode');
+     $inputCodeRef.val('');
+     
+     $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getFiartPays', fiartId:$fiartId},
+    
+    $pays= function (json) {
+        for (var key in json) {
+            $pays_Abv=json[key].PAYS_ABV;
+        }
+        return $pays_Abv;
+    }
+    );
+    return $pays;
+}
+
+
+function getFiartGamme($fiartId){
+    //console.log("dedans");
+     var $inputCodeRef = $('#refCode');
+     var $value     = $inputCodeRef.val();
+     
+     $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getFiartGamme', fiartId:$fiartId},
+    
+     $gamme=function (json) {
+        
+        for (var key in json) {
+            $value += json[key].GA_ABV;   
+        }
+        return $value;
+        
+    }
+    );
+    return $gamme;
+}
+
+
+
+function getLastRefCode(){
+    
+    var $refCode=$('#refCode').val();
+    console.log($refCode);
+    var $divRechCode = $('#divRechCode');
+    $divRechCode.empty();
+    //console.log("dedans");
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getRefCode', refCode:$refCode},
+    
+     function (json) {
+        console.log("dedans");
+        
+        for (var key in json) {
+            $divRechCode.append('<p> '+json[key].REF_CODE+' </p>');
+            //console.log(json[key].REF_CODE);
+        }
+        
+    }
+    );
+    $divRechCode.show();
+}

@@ -38,7 +38,7 @@ class ReferenceManager {
                             ref_emb_dim_lrg,
                             ref_emb_dim_ht,
                             ref_emb_dim_diam,
-                            ref_com 
+                            ref_com,
                             ref_code FROM reference ORDER BY ".$orderby." LIMIT ".$nombre.",".$limit."";
 
             $result = Connection::request(1, $sql);
@@ -180,9 +180,9 @@ class ReferenceManager {
                         . "r.ref_emb_dim_lrg=?,"
                         . "r.ref_emb_dim_ht=?,"
                         . "r.ref_emb_dim_diam=?,"
-                        . "r.ref_com=? " 
-                        . "r.ref_code=?".
-                        " WHERE r.ref_id=? ";
+                        . "r.ref_com=?," 
+                        . "r.ref_code=? ".
+                          "WHERE r.ref_id=? ";
 
                 $result = Connection::request(2, $sqlUpd, $tParamUpd);
                 

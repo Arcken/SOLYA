@@ -62,7 +62,7 @@ require $path . '/model/ReferenceManager.php';
                 $oRef->ref_emb_dim_ht   = $_REQUEST['refEmbDimHt'];
                 $oRef->ref_emb_dim_diam = $_REQUEST['refEmbDimDiam'];
                 $oRef->ref_com          = $_REQUEST['refCom'];
-
+                $oRef->ref_code         = $_REQUEST['refCode'];
                // Tool::printAnyCase($oRef);
 
                 $resAddRef = ReferenceManager::updReference($oRef);

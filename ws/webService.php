@@ -24,13 +24,64 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             }
             echo json_encode($tab);
             break;
-            
-         case 'getAllNut':
+
+        case 'getAllNut':
             $tab = array();
             $requete = "SELECT * FROM nutrition";
             $resultat = $bdd->query($requete);
             while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $donnees;
+            }
+            echo json_encode($tab);
+            break;
+
+        case 'getFiartPays':
+            $fiartId = $_REQUEST['fiartId'];
+            $tab = array();
+            $requete = "SELECT * FROM pays p "
+                       . "INNER JOIN fiche_article f ON "
+                       . "f.pays_id=p.pays_id "
+                       . "WHERE f.fiart_id =" . $fiartId;
+
+            $resultat = $bdd->query($requete);
+
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
+            }
+            echo json_encode($tab);
+
+            break;
+
+
+        case 'getFiartGamme':
+
+            $fiartId = $_REQUEST['fiartId'];
+            $tab = array();
+            $requete = "SELECT * FROM gamme g "
+                        . "INNER JOIN regrouper r ON "
+                        . "g.ga_id = r.ga_id "
+                        . "WHERE r.fiart_id =" . $fiartId;
+
+            $resultat = $bdd->query($requete);
+
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
+            }
+
+            echo json_encode($tab);
+            break;
+
+        case 'getRefCode':
+
+            $refCode = $_REQUEST['refCode'];
+            $tab = array();
+            $requete =  " SELECT ref_code FROM reference "
+                        . "WHERE ref_code =" .$refCode." ORDER BY ref_code ";
+
+            $resultat = $bdd->query($requete);
+
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
             }
             echo json_encode($tab);
             break;

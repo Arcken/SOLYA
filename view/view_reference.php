@@ -1,5 +1,6 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
-
+    <script type="text/javascript" src="js/function.js"></script>
+    <script type="text/javascript" src="js/refAddFct.js"></script>
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
     <div class="corps">
@@ -8,8 +9,8 @@
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select  name="ficheArticle" title="Choisir un élément" required>
-                    <option value="">Aucun</option>
+                <select id="ficheArticle" name="ficheArticle" title="Choisir un élément" required onchange="fillRefCode()">
+                    <option value="" selected>Aucun</option>
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
                         foreach($toFiArts as $oFiArt) { ?>
@@ -18,14 +19,18 @@
                    
                    } ?>
                 </select>
-                <a href="" onClick="popup('view_fiche_article.php');">
-                    <img src="img/icon/add.png" alt="" title="Créer"/>
-                </a>
+                
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_fiche_article.php');"/>
+               
             </div>
 
 
             <div class="col30"> 
-
+                <label for="refCode">Code de la référence : </label><br>          
+                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required onkeypress="getLastRefCode()" onkeydown="getLastRefCode()" onkeyup="getLastRefCode()"></input>
+                <br>
+                <div class="col20" id="divRechCode" style="display:none">
+                </div>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" placeholder="Nom de la référence" required></input>
                 <br>
@@ -36,10 +41,7 @@
                 <input name="refPoidsBrut" placeholder="gramme ### ###,##" type="text">         
                 <br>
                 <label for="refPoidsNet"> Poids net de l'article: </label><br>
-                <input name="refPoidsNet" placeholder="gramme ### ###,##" type="text">         
-                <br>
-                <label for="refVolume"> Volume de l'article: </label><br>
-                <input name="refVolume" placeholder="litre ###,###" type="text">         
+                <input name="refPoidsNet" placeholder="gramme ### ###,##" type="text">             
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
                 <select name="modeConservation" title="Choisir un élément" required>
@@ -166,7 +168,7 @@
             
             <div class="bas">
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
-            <input id ='clearForm' name="clear"   type="reset" onclick="formChooser()"/> 
+            <input id ='clearForm' name="clear"   type="reset"/> 
             <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
             </div>
    
