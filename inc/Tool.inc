@@ -92,24 +92,24 @@ class Tool {
     }
 
     //Traitement upload image
-    public static function uplImg($path_img_mini, $path_img_grande, $path_img_tmp, $maxsize, $ext_img) {
+    public static function uplImg($imgPath, $imgMiniPath, $imgExtension) {
 
 //tableau extension valide
-        $extensions_valides = explode(",", $ext_img);
+        $extensions_valides = explode(",", $imgExtension);
 //nom fichier dans variable
-        $IMGNOM = $_FILES['img_bd_upload']['name'];
-        $IMGTMP = $_FILES['img_bd_upload']['tmp_name'];
+        $IMGNOM = $_FILES['img_upload']['name'];
+        $IMGTMP = $_FILES['img_upload']['tmp_name'];
 
 //verif nom
         if (preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $IMGNOM)) {
             die("Fichier image: Nom de fichier non valide");
         }
-        /* Desactiver
-          if (file_exists($path_img_grande.$IMGNOM)){
+        
+          if (file_exists($imgPath.$IMGNOM)){
           die("Fichier déja existant");
           }
-         */
-        if ($_FILES['img_bd_upload']['error'] > 0)
+        
+        if ($_FILES['img_upload']['error'] > 0)
             die("Fichier image: Erreur lors du transfert");
 
         $extension_upload = strtolower(substr(strrchr($IMGNOM, '.'), 1));
@@ -137,11 +137,11 @@ class Tool {
 // copie du contenu de $image_tmp, vers $image_mini_tmp en appliquant les nouvelles dimensions
         imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 //enregistrement de la miniature de crée vers fichier ;
-        imagejpeg($image_mini_tmp, $path_img_mini . $imgMiniNom);
+        imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
 
         //-----------------------Grande-----------------------------
 //definition taille
-        $new_height = 500;
+        $new_height = 400;
         $new_width = ($width / $height) * $new_height;
 
 //creation d’une image miniature en mémoire vers $image_grande_tmp
@@ -151,11 +151,9 @@ class Tool {
 // copie du contenu de $image_tmp, vers $image_grande_tmp en appliquant les nouvelles dimensions
         imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 //enregistrement de la grande image de crée vers fichier ;
-        imagejpeg($image_grande_tmp, $path_img_grande . $IMGNOM);
+        imagejpeg($image_grande_tmp, $imgPath . $IMGNOM);
 
-        //----------------------Original-----------------------------
-//copie de l'image origine
-        move_uploaded_file($IMGTMP, $path_img_tmp . $IMGNOM);
+        
     }
 
 }

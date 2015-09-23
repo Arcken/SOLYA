@@ -72,6 +72,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <textarea name="fiartAlg" rows="3" cols="25" placeholder="Saisie"></textarea>
                     </div>
                 </div>
+                <div class='impImg'>
+                        <fieldset><legend>Image</legend>                           
+                            
+                        <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
+                            <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
+                        <br/>       
+                        <input type="hidden" name="MAX_FILE_SIZE" 
+                               value="<?php echo $imgMaxSize ?>" />
+                        <br/>       
+                        <input type="file" name="img_upload"  
+                               id="img_bd_upload"/>
+                        
+                        
+                        </fieldset>
+            </div>
 
             </div>
             <div class="col30" id="ComFiart">

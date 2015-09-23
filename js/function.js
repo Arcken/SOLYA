@@ -166,11 +166,12 @@ function getNut() {
         var $divNut = $('#divNut');
         $('#divNut').empty();
 
+$divNut.append('<label> Table de nutrition: </label><br><br>');
         for (var key in json) {
-            $divNut.append('<label for="nut' + json[key].NUT_ID + '>'
-                    + json[key].NUT_LBL + '</label>');
+            $divNut.append('<label for="nut' + json[key].NUT_ID + '">'
+                    + json[key].NUT_LBL + '</label><br>');
             $divNut.append('<input type="text" value="nut' + json[key].NUT_ID 
-                    + '">' + json[key].NUT_LBL + '</input><br>');
+                    + '"></input><br>');
         }
     }
     );

@@ -95,6 +95,12 @@ img{
     max-width: 20%; 
     width:20%;
 }
+
+.impImg input{
+    margin-left: 0px;
+    max-width: 220px;
+}
+
 .bas{
     display: block;
     text-align: center;

@@ -10,10 +10,17 @@ if (file_exists($fichier) && is_file($fichier)) {
     $pwd  = $config['SQL']['pwd'];
     $base = $config['SQL']['base'];
     
-    $sTitle=$config['APPLI']['titre'];
-    $sWebPath=$config['APPLI']['webpath'];
-    $iLimLbl=$config['APPLI']['limlbl'];
-    $iNbPage=$config['APPLI']['nbpage'];
+    $sTitle = $config['APPLI']['titre'];
+    $sWebPath = $config['APPLI']['webpath'];
+    
+    $iLimLbl = $config['APPLI']['limlbl'];
+    $iNbPage = $config['APPLI']['nbpage'];
+    
+    $imgPath = $config['APPLI']['imgpath'];
+    $imgMiniPath = $config['APPLI']['imgminipath'];
+    $imgExtension = $config['APPLI']['imgextension'];
+    $imgMaxSize = $config['APPLI']['imgmaxsize'];
+    
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"
     , self::$cnx);
