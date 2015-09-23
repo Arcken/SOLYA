@@ -1,22 +1,20 @@
 <?php
 
 /*
- * Sous controleur d'ajout gamme
+ * Sous controleur d'ajout nutrition
  */
 
 
-$sPageTitle = "Ajouter une gamme";
-require $path . '/model/Gamme.php';
-require $path . '/model/GammeManager.php';
+$sPageTitle = "Ajouter un libellé de nutrition";
+require $path . '/model/Nutrition.php';
+require $path . '/model/NutritionManager.php';
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
     $resMessage = "<font color='red'> L'ajout de la gamme est un échec</font>";
     try {
-        $oGa = new Gamme();
-        $oGa->GA_LBL = $_REQUEST['gaLbl'];
-        $oGa->GA_ABV = strtoupper($_REQUEST['gaAbv']);
-        $result = GammeManager::addGamme($oGa);
-        $id = Connection::dernierId();
-        echo (strlen($oGa->GA_LBL) >= intval(Connection::getLimLbl()));
+        $oNut = new Nutrition();
+        
+        $oNut->nut_lbl = strtoupper($_REQUEST['nutLbl']);
+        $result = NutritionManager::addNutrition($oNut);
         
         if ($result == 1){ $resMessage = "<font color='green'> L'ajout de la gamme N° $id
                  intitulée: $oGa->GA_LBL est un succés</font>";
@@ -26,4 +24,4 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $resMessage = "<font color='red'> L'ajout de la gamme est un échec</font>";
     }
 }
-$resAllGa = GammeManager::getAllGammes();
+$resAllNut = NutritionManager::getAllNutritions();

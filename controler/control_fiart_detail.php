@@ -40,10 +40,16 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
         $oFiArt = new FicheArticle();
         $oFiArt->fiart_id = $_REQUEST['fiartId'];
         $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
-        $oFiArt->fiart_photos = $_REQUEST['fiartId'];
+        $oFiArt->fiart_photos = $_REQUEST['fiartPhoto'];
         $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
         $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];
         $oFiArt->fiart_pays_id = $_REQUEST['pays'];
+        $oFiArt->fiart_com = $_REQUEST['com'];
+        $oFiArt->fiart_com_tech = $_REQUEST['comTech'];
+        $oFiArt->fiart_com_util = $_REQUEST['comUtil'];
+        $oFiArt->fiart_desc_fr = $_REQUEST['descFr'];
+        $oFiArt->fiart_desc_eng = $_REQUEST['descEng'];
+        $oFiArt->fiart_desc_esp = $_REQUEST['descEsp'];
 
         FicheArticleManager::updFicheArticle($oFiArt);
 

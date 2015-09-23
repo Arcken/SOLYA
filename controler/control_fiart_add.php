@@ -29,11 +29,17 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $oFiArt = new FicheArticle();
             
             //On hydrate l'objet avec les paramètres de l'url
-            $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
-            $oFiArt->fiart_photos = $_REQUEST['fiartPhoto'];
-            $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
-            $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];
-            $oFiArt->fiart_pays_id = $_REQUEST['pays'];
+            $oFiArt->fiart_lbl          = $_REQUEST['fiartLbl'];
+            $oFiArt->fiart_photos       = $_REQUEST['fiartPhoto'];
+            $oFiArt->fiart_ing          = $_REQUEST['fiartIng'];
+            $oFiArt->fiart_alg          = $_REQUEST['fiartAlg'];
+            $oFiArt->fiart_pays_id      = $_REQUEST['pays'];
+            $oFiArt->fiart_com          = $_REQUEST['fiartCom'];
+            $oFiArt->fiart_com_tech     = $_REQUEST['fiartComTech'];
+            $oFiArt->fiart_com_util     = $_REQUEST['fiartComUtil'];
+            $oFiArt->fiart_desc_fr      = $_REQUEST['fiartDescFr'];
+            $oFiArt->fiart_desc_eng     = $_REQUEST['fiartDescEng'];
+            $oFiArt->fiart_desc_esp     = $_REQUEST['fiartDescEsp'];
 
             //on exécute la requête d'insert de la fiche article
             FicheArticleManager::addFicheArticle($oFiArt);

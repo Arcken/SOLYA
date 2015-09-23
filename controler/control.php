@@ -87,7 +87,9 @@ else {
                 require $path . '/controler/control_ref_add.php';
                 break;
 
-            
+            case "nut_add":
+                require $path . '/controler/control_nut_add.php';
+                break;
 
             //liste référence
             case "ref_list":
@@ -162,6 +164,15 @@ else {
             //liste référence
             case "ref_list":
                 require $path . '/view/view_list_reference.php';
+                break;
+            
+            //Pays add
+            case "pays_add":
+                require $path . '/view/view_pays.php';
+                break;
+            
+            case "nut_add":
+                require $path . '/view/view_nutrition.php';
                 break;
         }
         require_once $path . '/view/view_footer.php';

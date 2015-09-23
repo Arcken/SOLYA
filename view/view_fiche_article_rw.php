@@ -58,7 +58,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <br>
                     <label for="pays"> Pays: </label><br>
                     <select name="pays" id="selPays">
-                        <option value="" selected>Aucun</option>
+                        
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
                         <?php
                         if (is_array($resAllPays) && $resAllPays != 0) {
@@ -78,19 +78,55 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <div>
                     <div>
                         <label for="fiartIng"> Ingrédients: </label><br>               
-                        <textarea name="fiartIng" rows="4" cols="30" placeholder="Saisie"><?php 
+                        <textarea name="fiartIng" rows="3" cols="25" placeholder="Saisie"><?php 
                         echo $resFiartDetail->fiart_ing ?></textarea>
                         <br>
                     </div>
                     <div>                    
                         <label for="fiartAlg"> Allergénes: </label><br>
-                        <textarea name="fiartAlg" rows="4" cols="30" placeholder="Saisie"><?php 
+                        <textarea name="fiartAlg" rows="3" cols="25" placeholder="Saisie"><?php 
                         echo $resFiartDetail->fiart_alg ?></textarea>
                     </div>
                 </div>
 
             </div>
-            <div class="col50">
+            
+            <div class="col30" id="ComFiart">
+                <div>                    
+                    <label for="fiartCom"> Commentaire de la fiche: </label><br>
+                    <textarea name="fiartCom" rows="3" cols="25" placeholder="Saisie"><?php 
+                        echo $resFiartDetail->fiart_com ?></textarea>
+                </div>
+                <div>                    
+                    <label for="fiartComTech"> Commentaire technique de la fiche: </label><br>
+                    <textarea name="fiartComTech" rows="3" cols="25" placeholder="Saisie"><?php 
+                        echo $resFiartDetail->fiart_com_tech ?></textarea>
+                </div>
+                <div>                    
+                    <label for="fiartComUtil"> Commentaire d'utilisation de la fiche: </label><br>
+                    <textarea name="fiartComUtil" rows="3" cols="25" placeholder="Saisie"><?php 
+                        echo $resFiartDetail->fiart_com_util ?></textarea>
+                </div>
+                <div>                    
+                    <label for="fiartDescFr"> Description Française de la fiche: </label><br>
+                    <textarea name="fiartDescFr" rows="3" cols="25" placeholder="Saisie"><?php 
+                        echo $resFiartDetail->fiart_desc_fr ?></textarea>
+                </div>
+                <div>                    
+                    <label for="fiartDescEng"> Description Anglaise de la fiche: </label><br>
+                    <textarea name="fiartDescEng" rows="3" cols="25" placeholder="Saisie"><?php 
+                        echo $resFiartDetail->fiart_desc_eng ?></textarea>
+                </div>
+                <div>                    
+                    <label for="fiartDescEsp"> Description Espagnole de la fiche: </label><br>
+                    <textarea name="fiartDescEsp" rows="3" cols="25" placeholder="Saisie"><?php 
+                        echo $resFiartDetail->fiart_desc_esp ?></textarea>
+                </div>
+
+
+            </div>
+            
+            <div class="col30">
                 <label> Table de nutrition: </label>
                 
                 </br>

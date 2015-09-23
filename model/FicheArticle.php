@@ -8,11 +8,17 @@
 
 class FicheArticle {
 
-    public $fiart_id      = '';    
-    public $fiart_lbl     = '';
-    public $fiart_photos  = '';
-    public $fiart_ing     = '';
-    public $fiart_alg     = '';
+    public $fiart_id        = '';    
+    public $fiart_lbl       = '';
+    public $fiart_photos    = '';
+    public $fiart_ing       = '';
+    public $fiart_alg       = '';
+    public $fiart_com       = '';
+    public $fiart_com_tech  = '';
+    public $fiart_com_util  = '';
+    public $fiart_desc_fr   = '';
+    public $fiart_desc_eng  = '';
+    public $fiart_desc_esp  = '';
     
     //clef étrangère
     public $fiart_pays_id = '';

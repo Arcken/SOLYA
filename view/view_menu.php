@@ -118,7 +118,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
       <ul>
          <li class='has-sub'><a href='index.php?action=pays'><span>Pays</span></a>
              <ul>
-               <li><a href='pays_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=pays_add'><span>Ajouter</span></a></li>
                <li><a href='pays_list'><span>Liste</span></a></li>
             </ul>
          </li>
@@ -142,7 +142,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
          </li>
           <li class='has-sub'><a href='index.php?action=tva'><span>Nutrition</span></a>
              <ul>
-               <li><a href='nut_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=nut_add'><span>Ajouter</span></a></li>
                <li><a href='nut_list'><span>Liste</span></a></li>
             </ul>
          </li>

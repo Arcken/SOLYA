@@ -51,7 +51,12 @@ img{
 .form label{    
     color: white;
 }
-.col30, .col50, .col70, .col20{
+
+.form textArea{
+    
+}
+
+.col30, .col50, .col70, .col20, .col90{
     overflow:auto;
     padding: 0.2%;   
     display: inline-block;
@@ -80,6 +85,12 @@ img{
     max-width: 70%; 
     width:70%;
 }
+
+.col90{
+    max-width: 90%; 
+    width:90%;
+}
+
 .col20{
     max-width: 20%; 
     width:20%;

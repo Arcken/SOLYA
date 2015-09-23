@@ -17,7 +17,8 @@ class FicheArticleManager {
 
         try {
 
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg, pays_id, '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -40,7 +41,7 @@ class FicheArticleManager {
 
         try {
 
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg, fiart_com, fiart_desc_fr, pays_id '
                     . 'FROM fiche_article ORDER BY '.$orderby.' LIMIT '.$limite.' , '.$nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -65,8 +66,8 @@ class FicheArticleManager {
             
                 $tParam = array($iFiartId);
             
-            $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, '
-                    . 'f.pays_id, p.pays_nom '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg, pays_id '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'WHERE f.fiart_id = ?';
@@ -80,9 +81,9 @@ class FicheArticleManager {
     }
     
     /**
-     * Renvoie le détail d'une fiche article
-     * @return Objet[]
-     * @description Retourne un tableau d'objet
+     * Select for update détail d'une fiche article
+     * @return Objet
+     * @description Retourne un d'objet
      */
     public static function getFicheArticleDetailUpd($iFiartId) {
 
@@ -90,8 +91,8 @@ class FicheArticleManager {
             
                 $tParam = array($iFiartId);
             
-            $sql = 'SELECT f.fiart_id, f.fiart_lbl, f.fiart_ing, f.fiart_alg, '
-                    . 'f.pays_id, p.pays_nom '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg, f.pays_id, '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'WHERE f.fiart_id = ? FOR UPDATE';
@@ -114,15 +115,29 @@ class FicheArticleManager {
                     $FicheArticle->fiart_ing,
                     $FicheArticle->fiart_alg,
                     $FicheArticle->fiart_pays_id,
+                    $FicheArticle->fiart_com,
+                    $FicheArticle->fiart_com_tech,
+                    $FicheArticle->fiart_com_util,
+                    $FicheArticle->fiart_desc_fr,
+                    $FicheArticle->fiart_desc_eng,
+                    $FicheArticle->fiart_desc_esp,
                     $FicheArticle->fiart_id
                 );
+                
+                                
                  $sql = "UPDATE fiche_article SET "                        
                         . "FIART_LBL = ?,"
                         . "FIART_PHOTOS = ?,"
                         . "FIART_ING = ?,"
                         . "FIART_ALG = ?,"
-                        . "PAYS_ID = ?"
-                         . "WHERE fiart_id = ?";
+                        . "PAYS_ID = ?,"
+                        . "FIART_COM = ?,"
+                        . "FIART_COM_TECH = ?,"
+                        . "FIART_COM_UTIL = ?,"
+                        . "FIART_DESC_FR = ?,"
+                        . "FIART_DESC_ENG = ?,"
+                        . "FIART_DESC_ESP = ?,"
+                        . "WHERE fiart_id = ?";
 
                 $result = Connection::request(2, $sql, $tParam);                
             } else {
@@ -155,7 +170,13 @@ class FicheArticleManager {
                     $FicheArticle->fiart_photos,
                     $FicheArticle->fiart_ing,
                     $FicheArticle->fiart_alg,
-                    $FicheArticle->fiart_pays_id
+                    $FicheArticle->fiart_pays_id,
+                    $FicheArticle->fiart_com,
+                    $FicheArticle->fiart_com_tech,
+                    $FicheArticle->fiart_com_util,
+                    $FicheArticle->fiart_desc_fr,
+                    $FicheArticle->fiart_desc_eng,
+                    $FicheArticle->fiart_desc_esp                    
                 );
 
                 $sql = "INSERT INTO fiche_article ("
@@ -163,8 +184,15 @@ class FicheArticleManager {
                         . "FIART_PHOTOS,"
                         . "FIART_ING,"
                         . "FIART_ALG,"
-                        . "PAYS_ID)"
-                        . "VALUES(?,?,?,?,?)";
+                        . "PAYS_ID,"
+                        . "FIART_COM,"
+                        . "FIART_COM_TECH,"
+                        . "FIART_COM_UTIL,"
+                        . "FIART_DESC_FR,"
+                        . "FIART_DESC_ENG,"
+                        . "FIART_DESC_ESP) "
+                        
+                        . "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);                
             } else {

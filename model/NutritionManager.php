@@ -12,7 +12,8 @@ class NutritionManager {
     /**
      * Retourne tous les enregistrements de la table nutrition
      * 
-     * @return nutrition[] objet
+     * @return objet[]
+     * Retourne un tableau d'objet
      */
     public static function getAllNutritions() {
 

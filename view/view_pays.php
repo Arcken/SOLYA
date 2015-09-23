@@ -42,8 +42,8 @@ require $path.'/view/view_new_view_header.php';
     <div class="list">
         <h2> Liste des éléments </h2>
         <?php foreach ($resAllPays as $value) {
-        echo $value->PAYS_NOM
-        ?>,  <?php echo $value->PAYS_ABV ?> <br>
+        echo $value->pays_nom
+        ?>,  <?php echo $value->pays_abv ?> <br>
         <?php
         }
         ?>

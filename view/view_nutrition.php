@@ -16,10 +16,12 @@
 
 <div class="corps">
     <form class="form" id="fNut" action="index.php">
-        <div> 
+        <div class="col90"> 
             <label for="nutLbl"> Libellé: </label>
             <input name="nutLbl" placeholder="Saisie" required type="text">
             <br>
+        </div>
+        <div class='bas'>
             <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
             <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
             <input name="clear" type="reset"> 
