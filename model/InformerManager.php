@@ -93,7 +93,7 @@ class InformerManager {
             $sql = 'DELETE FROM informer WHERE fiart_id=?';
             $result = Connection::request(2,$sql,$tParam);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+           if ($e->getCode() == 00000) $result = 0;
         }
         return $result;
     

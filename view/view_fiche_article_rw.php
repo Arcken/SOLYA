@@ -105,9 +105,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </br>
                         <input name="<?php echo 'nut' . $nut->nut_id ?>" 
                                placeholder="saisie" value="<?php
+                               if(is_array($resNutFiart) && $resNutFiart!=0) {
                                 foreach ($resNutFiart as $nutVal){
                                     if ($nutVal->nut_id == $nut->nut_id) echo $nutVal->nutfiart_val;
                                 }
+                               }
                                ?>"> </br>                               
                         <?php
                     }
