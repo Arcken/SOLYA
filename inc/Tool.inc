@@ -96,64 +96,65 @@ class Tool {
 
 //tableau extension valide
         $extensions_valides = explode(",", $imgExtension);
+        $image = $_FILES['img_upload']; //Raccourci d'écriture
+        for ($i = 0; $i < count($image['name']); $i++) {
 //nom fichier dans variable
-        $IMGNOM = $_FILES['img_upload']['name'];
-        $IMGTMP = $_FILES['img_upload']['tmp_name'];
+            $IMGNOM = $image['name'][$i];
+            $IMGTMP = $image['tmp_name'][$i];
 
 //verif nom
-        if (preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $IMGNOM)) {
-            die("Fichier image: Nom de fichier non valide");
-        }
-        
-          if (file_exists($imgPath.$IMGNOM)){
-          die("Fichier déja existant");
-          }
-        
-        if ($_FILES['img_upload']['error'] > 0)
-            die("Fichier image: Erreur lors du transfert");
+            if (preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $IMGNOM)) {
+                die("Fichier image: Nom de fichier non valide");
+            }
 
-        $extension_upload = strtolower(substr(strrchr($IMGNOM, '.'), 1));
+            if (file_exists($imgPath . $IMGNOM)) {
+                die("Fichier déja existant");
+            }
+            /*
+            if ($_FILES['img_upload']['error'] > 0)
+                die("Fichier image: Erreur lors du transfert");
+            */
+            $extension_upload = strtolower(substr(strrchr($IMGNOM, '.'), 1));
 
-        if (!in_array($extension_upload, $extensions_valides))
-            die("Fichier image: Extension incorrecte");
+            if (!in_array($extension_upload, $extensions_valides))
+                die("Fichier image: Extension incorrecte");
 
 //Création nom vignette
-        $tNom = explode('.', $IMGNOM);
-        $tNom[0] = $tNom[0] . '_lbl';
-        $imgMiniNom = implode('.', $tNom);
+            $tNom = explode('.', $IMGNOM);
+            $tNom[0] = $tNom[0] . '_lbl';
+            $imgMiniNom = implode('.', $tNom);
 
 //obtention taille img uploader
-        list($width, $height) = getimagesize($IMGTMP);
+            list($width, $height) = getimagesize($IMGTMP);
 
-        //-----------------------Vignette-----------------------------
+            //-----------------------Vignette-----------------------------
 //definition taille
-        $new_height = 150;
-        $new_width = ($width / $height) * $new_height;
+            $new_height = 150;
+            $new_width = ($width / $height) * $new_height;
 
 //creation d’une image miniature en mémoire vers $image_mini_tmp
-        $image_mini_tmp = imagecreatetruecolor($new_width, $new_height);
+            $image_mini_tmp = imagecreatetruecolor($new_width, $new_height);
 //copie de l\'image à duppliquer en mémoire vers $image_tmp
-        $image_tmp = imagecreatefromjpeg($IMGTMP);
+            $image_tmp = imagecreatefromjpeg($IMGTMP);
 // copie du contenu de $image_tmp, vers $image_mini_tmp en appliquant les nouvelles dimensions
-        imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+            imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 //enregistrement de la miniature de crée vers fichier ;
-        imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
+            imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
 
-        //-----------------------Grande-----------------------------
+            //-----------------------Grande-----------------------------
 //definition taille
-        $new_height = 400;
-        $new_width = ($width / $height) * $new_height;
+            $new_height = 400;
+            $new_width = ($width / $height) * $new_height;
 
 //creation d’une image miniature en mémoire vers $image_grande_tmp
-        $image_grande_tmp = imagecreatetruecolor($new_width, $new_height);
+            $image_grande_tmp = imagecreatetruecolor($new_width, $new_height);
 //copie de l\'image à duppliquer en mémoire vers $image_tmp
-        $image_tmp = imagecreatefromjpeg($IMGTMP);
+            $image_tmp = imagecreatefromjpeg($IMGTMP);
 // copie du contenu de $image_tmp, vers $image_grande_tmp en appliquant les nouvelles dimensions
-        imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+            imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 //enregistrement de la grande image de crée vers fichier ;
-        imagejpeg($image_grande_tmp, $imgPath . $IMGNOM);
-
-        
+            imagejpeg($image_grande_tmp, $imgPath . $IMGNOM);
+        }
     }
 
 }

@@ -9,7 +9,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <div class="corps">
         <?php if (isset($res)) echo $res; ?>
-        <form class="form" action="index.php" method="get">
+        <form class="form" action="index.php" method="post" enctype="multipart/form-data">
             <div class="col30">
                 <div>
                     <!--
@@ -81,8 +81,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <input type="hidden" name="MAX_FILE_SIZE" 
                                value="<?php echo $imgMaxSize ?>" />
                         <br/>       
-                        <input type="file" name="img_upload"  
-                               id="img_bd_upload"/>
+                        
+                        <input type="file" name="img_upload[]"  
+                               id="img_upload" multiple=""/>
                         
                         
                         </fieldset>

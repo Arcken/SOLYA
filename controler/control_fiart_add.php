@@ -19,7 +19,9 @@ $resAllPays = PaysManager::getAllPays();
 $resAllNut = NutritionManager::getAllNutritions();
 
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-
+    //traitement photos
+    
+    Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
     $cnx = Connection::getConnection();
     //début de transaction
     $cnx->beginTransaction();
