@@ -13,7 +13,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
     try {
         $oNut = new Nutrition();
         
-        $oNut->nut_lbl = strtoupper($_REQUEST['nutLbl']);
+        $oNut->nut_lbl = $_REQUEST['nutLbl'];
         $result = NutritionManager::addNutrition($oNut);
         
         if ($result == 1){ $resMessage = "<font color='green'> L'ajout de la nutrition

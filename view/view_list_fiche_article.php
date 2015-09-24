@@ -7,20 +7,20 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
     <div class="corps">       
-        <table>
+        <table style="border: solid black 1px">
             <tr>
+                <th> Photo                  
+                </th>
                 <th onclick="orderby('<?php echo $sAction?>','fiart_id');">Identifiant                 
                 </th>
                 <th onclick="orderby('<?php echo $sAction?>','fiart_lbl')">Libellé         
                 </th>
-                <th onclick="orderby('fiart_id')">Essai           
+                <th>       
                 </th>
+                
                 <th>                   
                 </th>
-                <th>                   
-                </th>
-                <th>                   
-                </th>
+                
             </tr>
             <?php
             $fiartControl = '';
@@ -30,11 +30,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 ?>
             
                 <tr>
+                    <td style="border: solid black 1px;width: 125px;" ><img src="<?php echo $imgMiniPath.$value->fiart_photos_pref.'_lbl.jpg' ?>" alt="" title="Modifier"
+                             onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></center></td>
                     <td><?php echo $value->fiart_id ?></td>
                     <td><?php echo $value->fiart_lbl ?></td>               
-                    <td><?php echo $value->fiart_alg ?></td>
-                    <td><?php echo $value->fiart_ing ?></td>
-
+                    
                     <td><img src="img/icon/modify.png" alt="" title="Modifier"
                              onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></td>
 

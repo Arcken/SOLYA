@@ -11,6 +11,7 @@ class Informer {
     public $fiart_id = '';
     public $nut_id = '';
     public $nutfiart_val = '';
+    public $nutfiart_ajr = '';
     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
             // Pour chaque clé, on récupère sa valeur.

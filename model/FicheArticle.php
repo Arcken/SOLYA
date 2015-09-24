@@ -11,6 +11,7 @@ class FicheArticle {
     public $fiart_id        = '';    
     public $fiart_lbl       = '';
     public $fiart_photos    = '';
+    public $fiart_photos_pref    = '';
     public $fiart_ing       = '';
     public $fiart_alg       = '';
     public $fiart_com       = '';

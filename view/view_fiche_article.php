@@ -14,7 +14,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <div>
                     <!--
                     <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" value="<?php //echo $resMaxIdFiart['MAX(fiart_id)']  ?>" readonly type="text">
+                    <input name="fiartId" value="<?php //echo $resMaxIdFiart['MAX(fiart_id)']   ?>" readonly type="text">
                     <img src="img/icon/accept.png" alt=""/>
                     <br>
                     -->
@@ -28,12 +28,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
 
-                        <?php if (is_array($resAllGa) && $resAllGa != 0) {
+                        <?php
+                        if (is_array($resAllGa) && $resAllGa != 0) {
                             foreach ($resAllGa as $value) {
                                 ?>
                                 <option value="<?php echo $value->ga_id ?>">
                                 <?php echo $value->ga_lbl ?> </option>
-                            <?php }
+                            <?php
+                            }
                         }
                         ?>
                     </select>
@@ -48,14 +50,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <select name="pays" id="selPays" required>
                         <option value="" selected>Aucun</option>
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
-                        <?php if (is_array($resAllPays) && $resAllPays != 0) {
+                        <?php
+                        if (is_array($resAllPays) && $resAllPays != 0) {
                             foreach ($resAllPays as $pays) {
                                 ?>
                                 <option value="<?php echo $pays->pays_id ?>">
                                 <?php echo $pays->pays_nom ?> </option>
-                            <?php }
-                        }
-                        ?>                        
+        <?php
+        }
+    }
+    ?>                        
                     </select>                    
                     <img src="img/icon/add.png" alt="" onClick="popup('pays_add');" title="Créer pays"/>                   
                     <br>
@@ -73,21 +77,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </div>
                 </div>
                 <div class='impImg'>
-                        <fieldset><legend>Image</legend>                           
-                            
+                    <fieldset><legend>Image</legend>                           
+
                         <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
-                            <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
+    <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
                         <br/>       
                         <input type="hidden" name="MAX_FILE_SIZE" 
                                value="<?php echo $imgMaxSize ?>" />
                         <br/>       
-                        
+
                         <input type="file" name="img_upload[]"  
                                id="img_upload" multiple=""/>
-                        
-                        
-                        </fieldset>
-            </div>
+
+
+                    </fieldset>
+                </div>
 
             </div>
             <div class="col30" id="ComFiart">
@@ -124,16 +128,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 </br>
                 </br>
                 <!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
-    <?php if (is_array($resAllNut) && $resAllNut != 0) {
+    <?php
+    if (is_array($resAllNut) && $resAllNut != 0) {
         foreach ($resAllNut as $value) {
             ?>
                         <label for="<?php echo 'nut' . $value->nut_id ?>"><?php echo $value->nut_lbl ?></label>
                         </br>
                         <input name="<?php echo 'nut' . $value->nut_id ?>" placeholder="saisie"> </br>                               
-                        <?php
-                    }
-                }
-                ?>
+            <?php
+        }
+    }
+    ?>
                 <br>
             </div>
             <div class="bas">
@@ -148,6 +153,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <?php
 } else
     echo 'Le silence est d\'or'
+
 
     
 ?>

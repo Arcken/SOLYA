@@ -38,7 +38,7 @@ class InformerManager {
 
         try {            
                 $tParam = [$iFiartId];
-                $sql = 'SELECT fiart_id,nut_id, nutfiart_val FROM informer WHERE fiart_id = ?';
+                $sql = 'SELECT fiart_id,nut_id, nutfiart_val, nutfiart_ajr FROM informer WHERE fiart_id = ?';
                 $result = Connection::request(1, $sql, $tParam);
             
         } catch (MySQLException $e) {
@@ -56,22 +56,21 @@ class InformerManager {
 
         try {
 
-            if (isset($informer->fiart_id) &&
-                    isset($informer->nut_id) &&
-                    isset($informer->nutfiart_val) &&
-                    $informer->nutfiart_val != '') {
+            if ($informer->nutfiart_ajr != '' || $informer->nutfiart_val != '') {
 
                 $tParam = array(
                     $informer->fiart_id,
                     $informer->nut_id,
                     $informer->nutfiart_val,
+                    $informer->nutfiart_ajr
                 );
 
                 $sql = "INSERT INTO informer ("
                         . " FIART_ID, "
                         . " NUT_ID, "
-                        . " NUTFIART_VAL) "
-                        . " VALUES(?,?,?)";
+                        . " NUTFIART_VAL, "
+                        . " NUTFIART_AJR) "
+                        . " VALUES(?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
             } else {
@@ -80,7 +79,7 @@ class InformerManager {
         } catch (MySQLException $e) {
 
 
-            $result = '<br/><p class="info">Erreur de données </p>';
+            $result = '<br/><p class="info">Erreur de base de données </p>';
         }
         return $result;
     }
