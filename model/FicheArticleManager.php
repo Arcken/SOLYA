@@ -17,7 +17,7 @@ class FicheArticleManager {
 
         try {
 
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, , fiart_photos_pref, '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
                     . 'fiart_ing, fiart_alg, pays_id, fiart_com, fiart_com_tech, '
                     . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article';

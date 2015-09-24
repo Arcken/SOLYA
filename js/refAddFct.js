@@ -7,9 +7,13 @@
 function changeRefCodeAtTime() {
 
     var $fiartId = $('#ficheArticle').val();
-    getFiartPays($fiartId);
-    getFiartGamme($fiartId);
-    chargeRefCode();
+    if ($fiartId !== '') {
+        getFiartPays($fiartId);
+        getFiartGamme($fiartId);
+        chargeRefCode();
+    } else {
+        $('#divSuggest').hide();
+    }
 }
 
 function chargeRefCode() {
@@ -24,13 +28,3 @@ function chargeRefCode() {
     }
 }
 
-function sugstRefCode() {
-  var  $a = getLastRefCode();
-  
-    if ($a === true) {
-        
-        $divSuggest.show();
-    } else {
-        $divSuggest.hide();
-    }
-}

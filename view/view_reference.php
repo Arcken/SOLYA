@@ -31,7 +31,7 @@
                 <label for="refCode">Code de la référence : </label><br>          
                 <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required onkeyup="getLastRefCode()"></input>
                 
-                <div class="col20" id="divSuggest" style="display:none">
+                <div id="divSuggest" style="display:none">
                 </div>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
