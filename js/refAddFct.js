@@ -4,17 +4,33 @@
  * and open the template in the editor.
  */
 
-function fillRefCode() {
+function changeRefCodeAtTime() {
+
     var $fiartId = $('#ficheArticle').val();
-    if ($fiartId !== '') {
-        //$('#refCode').val('');
-        //console.log($fiartId);
-        $abvPays  = getFiartPays($fiartId);
-        //console.log("$fiartId");
-        $abvGamme = getFiartGamme($fiartId);
-        
-        $('#refCode').val($abvPays+$abvGamme);
-    }else{
-    $('#refCode').val('');
+    getFiartPays($fiartId);
+    getFiartGamme($fiartId);
+    chargeRefCode();
 }
+
+function chargeRefCode() {
+
+    $ctrl = $('#refCode').val('');
+    var $pays = $('#pays_abv').val();
+    var $gamme = $('#ga_abv').val();
+
+
+    if ($pays !== '' && $gamme !== '') {
+        $('#refCode').val($pays + $gamme);
+    }
+}
+
+function sugstRefCode() {
+  var  $a = getLastRefCode();
+  
+    if ($a === true) {
+        
+        $divSuggest.show();
+    } else {
+        $divSuggest.hide();
+    }
 }

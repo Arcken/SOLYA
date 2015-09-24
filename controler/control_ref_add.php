@@ -61,6 +61,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                     $oRef->ref_emb_dim_ht   = $_REQUEST['refEmbDimHt'];
                     $oRef->ref_emb_dim_diam = $_REQUEST['refEmbDimDiam'];
                     $oRef->ref_com          = $_REQUEST['refCom'];
+                    $oRef->ref_code         = strtoupper($_REQUEST['refCode']);
+                    
                     Tool::printAnyCase($oRef);
       
                     $resAddRef = ReferenceManager::insReference($oRef);

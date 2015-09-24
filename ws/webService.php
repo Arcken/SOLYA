@@ -15,6 +15,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
+            
         case 'getAllPays':
             $tab = array();
             $requete = "SELECT * FROM pays";
@@ -25,6 +26,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
+            
         case 'getAllNut':
             $tab = array();
             $requete = "SELECT * FROM nutrition";
@@ -35,6 +37,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
+            
         case 'getFiartPays':
             $fiartId = $_REQUEST['fiartId'];
             $tab = array();
@@ -75,8 +78,8 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
             $refCode = $_REQUEST['refCode'];
             $tab = array();
-            $requete =  " SELECT ref_code FROM reference "
-                        . "WHERE ref_code =" .$refCode." ORDER BY ref_code ";
+            $requete =   "SELECT ref_code FROM reference "
+                        ."WHERE ref_code LIKE '".$refCode."%' ORDER BY ref_code DESC LIMIT 0,5";
 
             $resultat = $bdd->query($requete);
 

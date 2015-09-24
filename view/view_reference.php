@@ -2,14 +2,14 @@
     <script type="text/javascript" src="js/function.js"></script>
     <script type="text/javascript" src="js/refAddFct.js"></script>
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-
+    
     <div class="corps">
 
         <form class ="form">
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select id="ficheArticle" name="ficheArticle" title="Choisir un élément" required onchange="fillRefCode()">
+                <select id="ficheArticle" name="ficheArticle" title="Choisir un élément" required onchange="changeRefCodeAtTime()">
                     <option value="" selected>Aucun</option>
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
@@ -26,11 +26,14 @@
 
 
             <div class="col30"> 
+                <input id="pays_abv" name="pays_abv" type="text" hidden>
+                <input id="ga_abv" name="ga_abv" type="text" hidden>
                 <label for="refCode">Code de la référence : </label><br>          
-                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required onkeypress="getLastRefCode()" onkeydown="getLastRefCode()" onkeyup="getLastRefCode()"></input>
-                <br>
-                <div class="col20" id="divRechCode" style="display:none">
+                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required onkeyup="getLastRefCode()"></input>
+                
+                <div class="col20" id="divSuggest" style="display:none">
                 </div>
+                <br>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" placeholder="Nom de la référence" required></input>
                 <br>

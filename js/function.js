@@ -1,3 +1,6 @@
+function getValueFromJson(json) {
+
+}
 /**
  * Fonction d'ouverture de nouvelle fenetre, 
  *      elle attend la page à afficher en paramètre
@@ -166,79 +169,95 @@ function getNut() {
         var $divNut = $('#divNut');
         $('#divNut').empty();
 
-$divNut.append('<label> Table de nutrition: </label><br><br>');
+        $divNut.append('<label> Table de nutrition: </label><br><br>');
         for (var key in json) {
             $divNut.append('<label for="nut' + json[key].NUT_ID + '">'
                     + json[key].NUT_LBL + '</label><br>');
-            $divNut.append('<input type="text" value="nut' + json[key].NUT_ID 
+            $divNut.append('<input type="text" value="nut' + json[key].NUT_ID
                     + '"></input><br>');
         }
     }
     );
 }
 
-function getFiartPays($fiartId){
-     var $inputCodeRef = $('#refCode');
-     $inputCodeRef.val('');
-     
-     $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getFiartPays', fiartId:$fiartId},
-    
-    $pays= function (json) {
-        for (var key in json) {
-            $pays_Abv=json[key].PAYS_ABV;
-        }
-        return $pays_Abv;
-    }
-    );
-    return $pays;
-}
+function getFiartPays($fiartId) {
+    $("#pays_abv").val('');
+    var $sRes = '';
 
-
-function getFiartGamme($fiartId){
-    //console.log("dedans");
-     var $inputCodeRef = $('#refCode');
-     var $value     = $inputCodeRef.val();
-     
-     $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getFiartGamme', fiartId:$fiartId},
-    
-     $gamme=function (json) {
-        
-        for (var key in json) {
-            $value += json[key].GA_ABV;   
-        }
-        return $value;
-        
-    }
-    );
-    return $gamme;
-}
-
-
-
-function getLastRefCode(){
-    
-    var $refCode=$('#refCode').val();
-    console.log($refCode);
-    var $divRechCode = $('#divRechCode');
-    $divRechCode.empty();
-    //console.log("dedans");
+    $.ajaxSetup({async: false});
     $.getJSON(
             'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRefCode', refCode:$refCode},
-    
-     function (json) {
-        console.log("dedans");
-        
+            {test: 'Solya', action: 'getFiartPays', fiartId: $fiartId},
+    function (json) {
+        var $str = '';
         for (var key in json) {
-            $divRechCode.append('<p> '+json[key].REF_CODE+' </p>');
-            //console.log(json[key].REF_CODE);
+            $str += json[key].PAYS_ABV;
         }
-        
+        $sRes = $str;
+        $("#pays_abv").val($sRes.toUpperCase());
+
     }
     );
-    $divRechCode.show();
+    $.ajaxSetup({async: true});
+}
+
+
+function getFiartGamme($fiartId) {
+
+    $("#ga_abv").val('');
+    var $sRes = '';
+
+    $.ajaxSetup({async: false});
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getFiartGamme', fiartId: $fiartId},
+    function (json) {
+        var $str = '';
+        for (var key in json) {
+            $str += json[key].GA_ABV;
+        }
+        $sRes = $str;
+        $("#ga_abv").val($sRes.toUpperCase());
+
+    }
+    );
+    $.ajaxSetup({async: true});
+}
+
+
+
+function getLastRefCode() {
+
+    var $refCode = $('#refCode').val();
+    var $divSuggest = $('#divSuggest');
+    var verif;
+    var $divSuggest = $('#divSuggest');
+    //$.ajaxSetup({async: false});
+    console.log($refCode);
+    $divSuggest.empty();
+    $divSuggest.hide();
+
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getRefCode', refCode: $refCode.toString().toUpperCase()},
+    function (json) {
+       var $hideShow=false;
+            for (var key in json) {
+                if(json[key].ref_code.length===0){
+                    $hideShow=false;
+                    break;
+                }else{
+                    $divSuggest.append(json[key].ref_code + '<br>');
+                    $hideShow=true;
+            }
+        }
+        if($hideShow===true){
+            $divSuggest.show();
+        }else{
+            $divSuggest.hide();
+        }
+    }
+    );
+    //$.ajaxSetup({async: true});
+
 }
