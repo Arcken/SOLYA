@@ -61,6 +61,11 @@ img{
     max-width: 45px;
 }
 
+#divNut{
+    height: 540px;
+    max-height: 540px;
+}
+
 .col30, .col50, .col70, .col20, .col90{
     overflow:auto;
     padding: 0.2%;   

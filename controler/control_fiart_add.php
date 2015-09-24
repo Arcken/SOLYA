@@ -35,7 +35,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             //traitement photos
 
             $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
-            if (count($resPhoto) > 0) {
+            if (count($resPhoto) > 0 && $resPhoto[0] != '') {
                 $oFiArt->fiart_photos = implode(',', $resPhoto);
                 $oFiArt->fiart_photos_pref = $resPhoto[0];
                 ;
@@ -83,13 +83,15 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             require $path . '/model/Informer.php';
             foreach ($resAllNut as $object) {
 
-                if (isset($_REQUEST['nut' . $object->nut_id]) && $_REQUEST['nut' . $object->nut_id] != '') {
-
-
+                if ((isset($_REQUEST['nut' . $object->nut_id]) && $_REQUEST['nut' . $object->nut_id] != '') 
+                        || (isset($_REQUEST['nutAjr' . $object->nut_id]) && $_REQUEST['nutAjr' . $object->nut_id] != '')) {
                     $oInformer = new Informer();
                     $oInformer->fiart_id = $oFiArt->fiart_id;
                     $oInformer->nut_id = $object->nut_id;
-                    $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
+                    if (isset( $_REQUEST['nutAjr' . $object->nut_id])) 
+                            $oInformer->nutfiart_ajr = $_REQUEST['nutAjr' . $object->nut_id];
+                    if (isset( $_REQUEST['nut' . $object->nut_id]))
+                            $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
 
                     //on exécute la requête
                     $r = InformerManager::addInformer($oInformer);

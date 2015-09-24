@@ -5,6 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+$sPageTitle = "Liste des fiches articles";
 require_once $path . '/model/FicheArticle.php';
 require_once $path . '/model/FicheArticleManager.php';
 $iTotal = Tool::getCountTable('fiche_article');

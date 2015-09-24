@@ -47,18 +47,35 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
 
         </form>
-
+        <hr>
         <div class="list">
             <h2> Liste des éléments </h2>
+            <table>
+                <tr>
+                    <th>
+                        Libellé de la gamme
+                    </th>
+                    <th>
+                        Abréviation de la gamme
+                    </th>                        
+                </tr>
             <?php
             if ($resAllGa != 0 && is_array($resAllGa)) {
-                foreach ($resAllGa as $gamme) {
-                    echo $gamme->ga_lbl
-                    ?>,  <?php echo $gamme->ga_abv ?> <br>
+                foreach ($resAllGa as $gamme) { ?>
+                    <tr>
+                    <td style="border-right: solid 2px black;">
+                        <?php echo $gamme->ga_lbl?>
+                    </td>
+                    <td>
+                        <?php echo $gamme->ga_abv ?>
+                    </td>                        
+                </tr>
+                    
                     <?php
                 }
             }
             ?>
+            </table>
         </div>
     </div>
 

@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+$sPageTitle = "Détail de la fiche N°".$_REQUEST['fiartId'];
 
 require_once $path . '/model/FicheArticle.php';
 require_once $path . '/model/FicheArticleManager.php';
@@ -89,8 +89,10 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
         //Insertion des nouvelles valeurs pour les Nutritions
         foreach ($resAllNut as $object) {
 
-            if ((isset($_REQUEST['nut' . $object->nut_id]) || isset($_REQUEST['nutAjr' . $object->nut_id])) 
-                    && ($_REQUEST['nut' . $object->nut_id] != '' || $_REQUEST['nutAjr' . $object->nut_id] != '')) {
+            if ((isset($_REQUEST['nut' . $object->nut_id]) 
+                    && $_REQUEST['nut' . $object->nut_id] != '') 
+                        || (isset($_REQUEST['nutAjr' . $object->nut_id]) 
+                                && $_REQUEST['nutAjr' . $object->nut_id] != '')) {
                 $oInformer = new Informer();
                 $oInformer->fiart_id = $oFiArt->fiart_id;
                 $oInformer->nut_id = $object->nut_id;

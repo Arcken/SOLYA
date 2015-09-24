@@ -19,3 +19,11 @@ body{
     font-family: arial;
       
 }
+
+.list table{
+    border-collapse:collapse;
+}
+.list th{
+    border: solid black 2px;
+    margin: auto;
+}

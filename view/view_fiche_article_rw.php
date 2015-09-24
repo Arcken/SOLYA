@@ -12,12 +12,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" action="index.php"  method="POST" enctype="multipart/form-data">
 
             <div class="col30">
-                <div>
-
-                    <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" value="<?php echo $resFiartDetail->fiart_id ?>" 
-                           readonly type="text">
-                    <br>
+                <div>                    
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
                     <input name="fiartLbl" placeholder="description" required 
                            type="text" value="<?php echo $resFiartDetail->fiart_lbl ?>">
@@ -77,14 +72,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <div>
                     <div>
                         <label for="fiartIng"> Ingrédients: </label><br>               
-                        <textarea name="fiartIng" rows="3" cols="25" placeholder="Saisie">
-                            <?php echo $resFiartDetail->fiart_ing ?></textarea>
+                        <textarea name="fiartIng" rows="2" cols="25" 
+                                  placeholder="Saisie"><?php echo $resFiartDetail->fiart_ing ?></textarea>
                         <br>
                     </div>
                     <div>                    
                         <label for="fiartAlg"> Allergénes: </label><br>
-                        <textarea name="fiartAlg" rows="3" cols="25" placeholder="Saisie">
-                            <?php echo $resFiartDetail->fiart_alg ?></textarea>
+                        <textarea name="fiartAlg" rows="2" cols="25" 
+                                  placeholder="Saisie"><?php echo $resFiartDetail->fiart_alg ?></textarea>
                     </div>
                 </div>
                 <div class='impImg'>
@@ -131,39 +126,39 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col30" id="ComFiart">
                 <div>                    
                     <label for="fiartCom"> Commentaire de la fiche: </label><br>
-                    <textarea name="fiartCom" rows="3" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com ?></textarea>
+                    <textarea name="fiartCom" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com ?></textarea>
                 </div>
                 <div>                    
                     <label for="fiartComTech"> Commentaire technique de la fiche: </label><br>
-                    <textarea name="fiartComTech" rows="3" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com_tech ?></textarea>
+                    <textarea name="fiartComTech" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com_tech ?></textarea>
                 </div>
                 <div>                    
                     <label for="fiartComUtil"> Commentaire d'utilisation de la fiche: </label><br>
-                    <textarea name="fiartComUtil" rows="3" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com_util ?></textarea>
+                    <textarea name="fiartComUtil" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com_util ?></textarea>
                 </div>
                 <div>                    
                     <label for="fiartDescFr"> Description Française de la fiche: </label><br>
-                    <textarea name="fiartDescFr" rows="3" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_fr ?></textarea>
+                    <textarea name="fiartDescFr" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_fr ?></textarea>
                 </div>
                 <div>                    
                     <label for="fiartDescEng"> Description Anglaise de la fiche: </label><br>
-                    <textarea name="fiartDescEng" rows="3" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_eng ?></textarea>
+                    <textarea name="fiartDescEng" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_eng ?></textarea>
                 </div>
                 <div>                    
                     <label for="fiartDescEsp"> Description Espagnole de la fiche: </label><br>
-                    <textarea name="fiartDescEsp" rows="3" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_esp ?></textarea>
+                    <textarea name="fiartDescEsp" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_esp ?></textarea>
                 </div>
 
 
             </div>
 
-            <div class="col30">
+            <div class="col30" id="divNut">
                 <label> Table de nutrition: </label>
 
                 </br>
                 </br>
                 <!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
-                <div id="divNut">
+                <div>
                     <?php
                     if (isset($resAllNut) && is_array($resAllNut) && $resAllNut != 0) {
                         foreach ($resAllNut as $nut) {
@@ -204,10 +199,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <?php
                 if ($resFiartDetail->fiart_photos == '') {
                     ?>
-                    <input name="fiartPhotosPref" value="" type="text">                
+                    <input name="fiartPhotosPref" value="" type="text" hidden>                
                 <?php } ?>
 
-                <input name="fiartPhotos" value="<?php echo $resFiartDetail->fiart_photos ?>" type="text">
+                <input name="fiartPhotos" value="<?php echo $resFiartDetail->fiart_photos ?>" type="text" hidden>
             </div>
         </form>
     </div>

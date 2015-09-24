@@ -12,12 +12,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" action="index.php" method="post" enctype="multipart/form-data">
             <div class="col30">
                 <div>
-                    <!--
-                    <label for="fiartId"> Code de la fiche article </label><br>
-                    <input name="fiartId" value="<?php //echo $resMaxIdFiart['MAX(fiart_id)']   ?>" readonly type="text">
-                    <img src="img/icon/accept.png" alt=""/>
-                    <br>
-                    -->
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
                     <input name="fiartLbl" placeholder="description" required type="text">
                     <br>
@@ -134,7 +128,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             ?>
                         <label for="<?php echo 'nut' . $value->nut_id ?>"><?php echo $value->nut_lbl ?></label>
                         </br>
-                        <input name="<?php echo 'nut' . $value->nut_id ?>" placeholder="saisie"> </br>                               
+                        <input name="<?php echo 'nut' . $value->nut_id ?>" placeholder="saisie">
+                        <input class="inputSmall" name="<?php echo 'nutAjr' . $value->nut_id ?>" placeholder="###.#">
+                        </br>                               
             <?php
         }
     }
