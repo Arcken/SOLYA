@@ -6,7 +6,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
-    <div class="corps">       
+    <div class="corps">        
         <table style="border: solid black 1px">
             <tr>
                 <th> Photo                  

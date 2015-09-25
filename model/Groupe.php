@@ -6,17 +6,16 @@
  * and open the template in the editor.
  */
 
-class Utilisateur {
-    
-    //Données membres
-    public $ut_login='';
-    public $ut_pass='';
-    public $ut_nom='';
-    public $ut_prenom='';
-    public $ut_actif='';
-    
-    //celf étrangére
-    public $grp_id = '';
+/**
+ * Description of groupe
+ *
+ * 
+ */
+class groupe {
+   //Données membres
+    public $grp_id='';
+    public $grp_des='';
+    public $grp_nom='';
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

@@ -28,6 +28,8 @@
         <div>
             <form action="index.php" >
             <input id="ui_btn_deco" type="submit" name="action" value="deconnexion" ></input>
+            <img style="vertical-align: middle;border: none;" src="img/icon/process.png" alt="" title="Paramètre comptes"
+                                 onclick='location.href = "index.php?action=utilisateur_list"'/>
             </form>
         </div>
         

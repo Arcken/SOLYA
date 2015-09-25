@@ -1,34 +1,31 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >=0){ ?>
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 <div class="corps">
-    <form class="form" onsubmit="return verifPass()">
+    <form class="form">
         <div class="col90">
             <label for="utNom"> Nom de familler: </label>
-            <input name="utNom" placeholder="Nom" type="text">         
+            <input name="utNom" type="text" value="<?php echo $resUtilisateur->ut_nom?>">         
             <br>
             <label for="utPrenom"> Prénom: </label>
-            <input name="utPrenom" placeholder="prenom" type="text">         
+            <input name="utPrenom" type="text" value="<?php echo $resUtilisateur->ut_prenom?>">         
             <br>            
             <label for="utLogin"> Nom d'utilisateur: </label>
-            <input name="utLogin" placeholder="Texte" type="text" required="">         
+            <input name="utLogin" type="text" value="<?php echo $resUtilisateur->ut_login?>">         
             <br>
             <label for="utPass"> Mot de passe: </label>
-            <input name="utPass" id='pass' placeholder="pas de cractère accentuée" type="password" required="">         
-            <br>
-            <label for="utPass2"> Confirmation mot de passe: </label>
-            <input name="utPass2" id='confirmPass' placeholder="pas de cractère accentuée" type="password" required=""
-                   onkeyup='verifPassImg()'>
-            <img id="passValid" src="img/icon/accept.png" hidden style="border: none;">
+            <input name="utPass" type="password" value="<?php echo $resUtilisateur->ut_pass?>">         
             <br>
             <label for="utActif"> Compte actif: </label>
-            <input name="utActif" type="radio" value="1" checked>Oui            
-            <input name="utActif" type="radio" value="0">Non
-            <br>  
+            <input name="utActif" type="radio" 
+                   value="1" <?php if ($resUtilisateur->ut_actif == 1) echo 'checked'?>>Oui            
+            <input name="utActif" type="radio" 
+                   value="0" <?php if ($resUtilisateur->ut_actif == 0) echo 'checked'?>>Non
+            <br>
             <label for="Groupe"> Groupe: </label>
             <select name="Groupe" required="">
-                <option value="">Aucun</option>
                 <?php foreach ($resAllGroupes as $groupe){?>
-                <option value="<?php echo $groupe->grp_id?>">
+                <option value="<?php echo $groupe->grp_id?>" 
+                    <?php if ($groupe->grp_id == $resUtilisateur->grp_id) echo 'selected';?>>
                     <?php echo $groupe->grp_nom;?> | <?php echo $groupe->grp_des;?></option>
                 <?php } ?>
             </select>

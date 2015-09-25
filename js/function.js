@@ -41,6 +41,38 @@ function test() {
 }
 
 /**
+ * fonction qui rend visible une image si le pass et la confirmation sont identique
+ * @returns {undefined}
+ */
+function verifPassImg() {
+    if ($('#pass').val() != ''
+            && $('#confirmPass').val() != ''
+            && $('#pass').val() == $('#confirmPass').val())
+    {
+        $('#passValid').show();
+    }
+    else $('#passValid').hide();
+}
+
+/**
+ * fonction qui teste si le pass et sa confirmation sont identique, affiche une alertbox si différents
+ * @returns {Boolean}
+ */
+function verifPass() {
+    if ($('#pass').val() != ''
+            && $('#confirmPass').val() != ''
+            && $('#pass').val() == $('#confirmPass').val())
+    {
+        return true;
+    }
+    else
+        alert('Erreur de mot de passe');
+        return false;
+    
+}
+
+
+/**
  * Fonction qui appel une page en spécifier le choix du trie pour les reqêtes
  * @param string
  *  action à effectuer pour le contrôleur
@@ -241,19 +273,19 @@ function getLastRefCode() {
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getRefCode', refCode: $refCode.toString().toUpperCase()},
     function (json) {
-       var $hideShow=false;
-            for (var key in json) {
-                if(json[key].ref_code.length===0){
-                    $hideShow=false;
-                    break;
-                }else{
-                    $divSuggest.append(json[key].ref_code + '<br>');
-                    $hideShow=true;
+        var $hideShow = false;
+        for (var key in json) {
+            if (json[key].ref_code.length === 0) {
+                $hideShow = false;
+                break;
+            } else {
+                $divSuggest.append(json[key].ref_code + '<br>');
+                $hideShow = true;
             }
         }
-        if($hideShow===true){
+        if ($hideShow === true) {
             $divSuggest.show();
-        }else{
+        } else {
             $divSuggest.hide();
         }
     }

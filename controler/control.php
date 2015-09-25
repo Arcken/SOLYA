@@ -15,15 +15,13 @@ else
 //Vérification de connection
 if (!isset($_SESSION['auth'])) {
     require $path . '/view/view_connection.php';
-} else if (isset($_REQUEST['action']) 
-        && $_REQUEST['action'] == 'deconnexion') {
+} else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
 
     session_destroy();
     session_commit();
     $_SESSION = array();
     require $path . '/view/view_connection.php';
-} 
-else {
+} else {
     if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') === FALSE) {
         $nv = 0;
         if (isset($_REQUEST['action'])) {
@@ -66,7 +64,7 @@ else {
             case "fiart_detail":
                 require $path . '/controler/control_fiart_detail.php';
                 break;
-            
+
             //Créer un contact    
             case "ctc_add":
                 require $path . '/controler/control_ctc_add.php';
@@ -99,6 +97,56 @@ else {
 
             case "ref_detail":
                 require $path . '/controler/control_ref_detail.php';
+                break;
+
+            case "utilisateur_add":
+                require_once $path . '/model/Groupe.php';
+                require_once $path . '/model/GroupeManager.php';
+                $resAllGroupes = GroupeManager::getAllGroupes();
+                $sPageTitle = "Ajouter un utilisateur";
+                break;
+            
+            case "utilisateur_list":
+                require_once $path . '/model/Utilisateur.php';
+                require_once $path . '/model/UtilisateurManager.php';
+                $resAllUtilisateurs = UtilisateurManager::getAllUtilisateurs();
+                $sPageTitle = "Liste des utilisateurs";
+                break;
+
+            case "utilisateur_detail":
+                require_once $path . '/model/Utilisateur.php';
+                require_once $path . '/model/UtilisateurManager.php';
+                require_once $path . '/model/Groupe.php';
+                require_once $path . '/model/GroupeManager.php';
+
+                if (isset($_REQUEST['utLogin']) && $_REQUEST['utLogin'] != '') {
+                    $oUtilisateur = new Utilisateur();
+                    $oUtilisateur->ut_login = $_REQUEST['utLogin'];
+                    $sButton = 'Modifier';
+                }
+
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+                    $oUtilisateur = new Utilisateur();
+                    $oUtilisateur->ut_login = $_REQUEST['utLogin'];
+                    $oUtilisateur->ut_nom = $_REQUEST['utNom'];
+                    $oUtilisateur->ut_prenom = $_REQUEST['utPrenom'];
+                    $oUtilisateur->ut_pass = $_REQUEST['utPass'];
+                    $oUtilisateur->ut_actif = $_REQUEST['utActif'];
+                    $oUtilisateur->grp_id = $_REQUEST['Groupe'];
+                    $resUpdUtilisateur = UtilisateurManager::updtilisateur($oUtilisateur);
+                    if ($resUpdUtilisateur == 1) {
+                        $resMessage = "<font color='green'> La modification de l'utilisateur $oUtilisateur->ut_login
+                  est un succés</font>";
+                    } else {
+                        $resMessage = "<font color='red'> La modification de l'utilisateur $oUtilisateur->ut_login
+                  est un echec</font>";
+                    }
+                    
+                }
+                $resUtilisateur = UtilisateurManager::getUtilisateurDetailUpd($oUtilisateur);
+                    $resAllGroupes = GroupeManager::getAllGroupes();
+                    $sPageTitle = "Détail de l'utilisateur";
+
                 break;
         }
 
@@ -165,14 +213,26 @@ else {
             case "ref_list":
                 require $path . '/view/view_list_reference.php';
                 break;
-            
+
             //Pays add
             case "pays_add":
                 require $path . '/view/view_pays.php';
                 break;
-            
+
             case "nut_add":
                 require $path . '/view/view_nutrition.php';
+                break;
+
+            case "utilisateur_add":
+                require $path . '/view/view_utilisateur.php';
+                break;
+            
+            case "utilisateur_list":
+                require $path . '/view/view_utilisateur_liste.php';
+                break;
+
+            case "utilisateur_detail":
+                require $path . '/view/view_utilisateur_detail_rw.php';
                 break;
         }
         require_once $path . '/view/view_footer.php';

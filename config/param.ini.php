@@ -8,7 +8,7 @@ base = solya
 [APPLI]
 webpath="SOLYA"
 titre = "Sol'ya!"
-limlbl = 3
+limlbl = 2
 nbpage = 5
 imgpath = img/ref/
 imgminipath= img/ref/mini/

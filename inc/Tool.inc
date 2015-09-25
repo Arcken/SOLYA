@@ -131,7 +131,7 @@ class Tool {
                 $tNom[0] = strtolower($tNom[0]);
                 $tNom[1] = 'jpg';
                 $imgNom = implode('.', $tNom);
-                $res[] = $tNom[0];
+                if ($tNom[0] != '') $res[] = $tNom[0];
                 $tNom[0] = $tNom[0] . '_lbl';
                 $imgMiniNom = implode('.', $tNom);
 
