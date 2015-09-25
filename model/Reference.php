@@ -25,6 +25,8 @@ class Reference {
     public $ref_emb_dim_diam = '';
     public $ref_com          = '';
     public $ref_code         = '';
+    public $ref_photos       = '';
+    public $ref_photos_pref  = '';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

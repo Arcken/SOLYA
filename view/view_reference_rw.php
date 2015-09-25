@@ -5,7 +5,7 @@
     
     <div class="corps">
 
-        <form class ="form" id='ref_detail'>
+        <form class ="form" id='ref_detail' method="POST" enctype="multipart/form-data">
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
@@ -40,7 +40,7 @@
 
             <div class="col30"> 
                 <label for="refCode"> Code rapide de la référence: </label><br>          
-                <input name="refCode" type="text" placeholder="Code de la référence" required value="<?php echo $rsRef->ref_code; ?>"></input>
+                <input name="refCode" type="text" placeholder="Code de la référence" autocomplete="off" required value="<?php echo $rsRef->ref_code; ?>"></input>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" placeholder="Nom de la référence" required value="<?php echo $rsRef->ref_lbl; ?>"></input>
@@ -53,9 +53,6 @@
                 <br>
                 <label for="refPoidsNet"> Poids net de l'article: </label><br>
                 <input name="refPoidsNet" placeholder="gramme ### ###,##" type="text" value="<?php echo $rsRef->ref_poids_net; ?>">         
-                <br>
-                <label for="refVolume"> Volume de l'article: </label><br>
-                <input name="refVolume" placeholder="fonctionalitées désactivées" type="text" disabled >         
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
                 <select name="modeConservation" title="Choisir un élément" required>
@@ -250,6 +247,44 @@
                 <br>
                 <label for="refCom"> Commentaire : </label><br>
                 <textarea name="refCom" rows="4" cols="25" placeholder="Commentaire sur la référence" ><?php echo $rsRef->ref_com; ?></textarea>
+                  <div class='impImg'>
+                    <fieldset><legend>Image</legend>                           
+
+                        <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
+                            <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
+                        <br/>       
+                        <input type="hidden" name="MAX_FILE_SIZE" 
+                               value="<?php echo $imgMaxSize ?>" />
+                        <br/>       
+
+                        <input type="file" name="img_upload[]"  
+                               id="img_upload" multiple=""/>
+
+
+                    </fieldset>
+                </div>
+                <div class="imgList">
+                    <table>
+                        <?php
+                        if ($rsRef->ref_photos != '') {
+                            $tabPhoto = explode(',', $rsRef->ref_photos);
+                            foreach ($tabPhoto as $image) {
+                                if ($image != '') {
+                                    ?>
+                                    <tr>
+                                        <td> <input type="radio" name="refPhotosPref" 
+                                                    value="<?php echo $image ?>"
+                                                    <?php if ($image == $rsRef->ref_photos_pref)echo ' checked '; ?>></td>
+                                        <td><img src="<?php echo $imgMiniPath . $image . '_lbl.jpg' ?>" 
+                                                 alt=""/></td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </table>
+                </div>
             </div>
 
             <div class="bas">
@@ -257,6 +292,13 @@
                 <input name='retour'  type="button" value='Retour' onclick='location.href="index.php?action=ref_list";'/> 
                 <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
                 <input name="idRef"   type='text' value="<?php echo $rsRef->ref_id; ?>" hidden>
+                <?php
+                if ($rsRef->ref_photos == '') {
+                    ?>
+                    <input name="refPhotosPref" value="" type="text" hidden>                
+                <?php } ?>
+
+                <input name="refPhotos" value="<?php echo $rsRef->ref_photos ?>" type="text" hidden>
             </div>
 
         </form>

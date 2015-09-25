@@ -12,6 +12,7 @@ function changeRefCodeAtTime() {
         getFiartGamme($fiartId);
         chargeRefCode();
     } else {
+        $('#refCode').val('');
         $('#divSuggest').hide();
     }
 }

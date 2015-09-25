@@ -41,7 +41,7 @@ img{
     float: right;
     margin-right: 20px;
 }
-.form input,textArea,select{
+.form input,textArea,select, #divSuggest{
     margin-left: 30px;
     margin-top: 4px;
     margin-bottom: 8px;
@@ -150,4 +150,8 @@ table{
 
 img:hover{
     cursor:pointer; 
+}
+#divSuggest{
+    background-color: white;
+    width:157px;
 }

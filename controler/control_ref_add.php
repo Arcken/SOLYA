@@ -63,6 +63,12 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                     $oRef->ref_com          = $_REQUEST['refCom'];
                     $oRef->ref_code         = strtoupper($_REQUEST['refCode']);
                     
+                    $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
+                    if (count($resPhoto) > 0 && $resPhoto[0] != '') {
+                         $oRef->ref_photos = implode(',', $resPhoto);
+                         $oRef->ref_photos_pref = $resPhoto[0];
+                    }
+                    
                     Tool::printAnyCase($oRef);
       
                     $resAddRef = ReferenceManager::insReference($oRef);

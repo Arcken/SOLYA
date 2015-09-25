@@ -5,7 +5,7 @@
     
     <div class="corps">
 
-        <form class ="form">
+        <form class ="form" method="POST" enctype="multipart/form-data">
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
@@ -29,7 +29,7 @@
                 <input id="pays_abv" name="pays_abv" type="text" hidden>
                 <input id="ga_abv" name="ga_abv" type="text" hidden>
                 <label for="refCode">Code de la référence : </label><br>          
-                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required onkeyup="getLastRefCode()"></input>
+                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required autocomplete="off" onkeyup="getLastRefCode()"></input>
                 
                 <div id="divSuggest" style="display:none">
                 </div>
@@ -166,6 +166,22 @@
                 <label for="refCom"> Commentaire : </label><br>
                 <textarea name="refCom" rows="4" cols="25" placeholder="Commentaire sur la référence" ></textarea>
                 <br>
+                     <div class='impImg'>
+                        <fieldset><legend>Image</legend>                           
+
+                            <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
+                            <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
+                            <br/>       
+                            <input type="hidden" name="MAX_FILE_SIZE" 
+                                   value="<?php echo $imgMaxSize ?>" />
+                            <br/>       
+
+                            <input type="file" name="img_upload[]"  
+                                   id="img_upload" multiple=""/>
+
+
+                        </fieldset>
+                    </div>
             </div>
           
             

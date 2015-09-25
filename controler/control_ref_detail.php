@@ -63,14 +63,34 @@ require $path . '/model/ReferenceManager.php';
                 $oRef->ref_emb_dim_diam = $_REQUEST['refEmbDimDiam'];
                 $oRef->ref_com          = $_REQUEST['refCom'];
                 $oRef->ref_code         = strtoupper($_REQUEST['refCode']);
-               // Tool::printAnyCase($oRef);
+                
+                //Récupère l'ancienne liste de photos
+                $oRef->ref_photos = $_REQUEST['refPhotos'];
 
-                $resAddRef = ReferenceManager::updReference($oRef);
-                Tool::printAnyCase($resAddRef);
-                echo '<br> id Ref:' . $oRef->ref_id;
+            //Traitement des uploads de photos
 
-                //$cnx->commit();
-                //echo $resAddCtc;
+            if (!empty($_FILES) && $_FILES['img_upload']['name'][0] != '') {
+                $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
+
+                //On intégre la lste des nouvelles photos avec l'ancienne
+                if ($rsRef->ref_photos != '') {
+                    echo "photos deja existante";
+                    $oRef->ref_photos = $rsRef->ref_photos . ',' . implode(',', $resPhoto);
+                } else {
+                    echo "aucune photos existante";
+                    $oRef->ref_photos = implode(',', $resPhoto);
+                }
+            }
+            if (isset($_REQUEST['refPhotosPref'])){
+                $oRef->ref_photos_pref = $_REQUEST['refPhotosPref'];
+            }
+              
+           Tool::printAnyCase($oRef);
+           $resAddRef = ReferenceManager::updReference($oRef);
+           Tool::printAnyCase($resAddRef);
+           echo '<br> id Ref:' . $oRef->ref_id;
+
+                
             } catch (MySQLException $e) {
                 
                 $e->RetourneErreur();

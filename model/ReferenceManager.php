@@ -39,7 +39,9 @@ class ReferenceManager {
                             ref_emb_dim_ht,
                             ref_emb_dim_diam,
                             ref_com,
-                            ref_code FROM reference ORDER BY ".$orderby." LIMIT ".$nombre.",".$limit."";
+                            ref_code, 
+                            ref_photos,
+                            ref_photos_pref FROM reference ORDER BY ".$orderby." LIMIT ".$nombre.",".$limit."";
 
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -72,7 +74,9 @@ class ReferenceManager {
                     $reference->ref_emb_dim_ht,
                     $reference->ref_emb_dim_diam,
                     $reference->ref_com,
-                    $reference->ref_code
+                    $reference->ref_code,
+                    $reference->ref_photos,
+                    $reference->ref_photos_pref
                 );
 
                 $sql = "INSERT INTO reference ("
@@ -93,8 +97,10 @@ class ReferenceManager {
                         . "ref_emb_dim_ht,"
                         . "ref_emb_dim_diam,"
                         . "ref_com,"
-                        . "ref_code) " .
-                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        . "ref_code,"
+                        . "ref_photos,"
+                        . "ref_photos_pref) " .
+                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
             } else {
@@ -115,33 +121,8 @@ class ReferenceManager {
 
             if (!empty($reference->ref_lbl) && (strlen($reference->ref_lbl) > Connection::getLimLbl())) {
 
-                /*$tParamSel = array(
-                    $reference->ref_id
-                );
-                
-                $sqlSel = "SELECT  r.ref_id, 
-                            r.dc_id,
-                            r.cons_id,
-                            r.fiart_id,
-                            r.dd_id,
-                            r.tva_id,
-                            r.ref_lbl,
-                            r.ref_st_min,
-                            r.ref_poids_brut,
-                            r.ref_poids_net,
-                            r.ref_emb_lbl,
-                            r.ref_emb_couleur,
-                            r.ref_emb_vlm_ctn,
-                            r.ref_emb_dim_lng,
-                            r.ref_emb_dim_lrg,
-                            r.ref_emb_dim_ht,
-                            r.ref_emb_dim_diam,
-                            r.ref_com FROM reference r WHERE r.ref_id = ? FOR UPDATE";
-                
-               $resSel= Connection::request(0, $sqlSel, $tParamSel);
-               Tool::printAnyCase($resSel);*/
                
-               $tParamUpd = array(
+               $tParam = array(
                     $reference->dc_id,
                     $reference->cons_id,
                     $reference->fiart_id,
@@ -160,10 +141,12 @@ class ReferenceManager {
                     $reference->ref_emb_dim_diam,
                     $reference->ref_com,
                     $reference->ref_code,
+                    $reference->ref_photos,
+                    $reference->ref_photos_pref,
                     $reference->ref_id
                 );
                     
-               $sqlUpd = "UPDATE reference r SET "
+               $sql = "UPDATE reference r SET "
                         . "r.dc_id=?,"
                         . "r.cons_id=?,"
                         . "r.fiart_id=?,"
@@ -181,10 +164,12 @@ class ReferenceManager {
                         . "r.ref_emb_dim_ht=?,"
                         . "r.ref_emb_dim_diam=?,"
                         . "r.ref_com=?," 
-                        . "r.ref_code=? ".
+                        . "r.ref_code=?,"
+                        . "r.ref_photos=?,"
+                        . "r.ref_photos_pref=? ".
                           "WHERE r.ref_id=? ";
 
-                $result = Connection::request(2, $sqlUpd, $tParamUpd);
+                $result = Connection::request(2, $sql, $tParam);
                 
             } else {
                 $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
@@ -231,7 +216,10 @@ class ReferenceManager {
                             r.ref_emb_dim_lrg,
                             r.ref_emb_dim_ht,
                             r.ref_emb_dim_diam,
-                            r.ref_com, r.ref_code FROM reference r WHERE r.ref_id = ? FOR UPDATE";
+                            r.ref_com,
+                            r.ref_code,
+                            r.ref_photos,
+                            r.ref_photos_pref FROM reference r WHERE r.ref_id = ? FOR UPDATE";
 
             $result = Connection::request(0, $sql,$tParam);
             }
@@ -276,7 +264,10 @@ class ReferenceManager {
                             r.ref_emb_dim_lrg,
                             r.ref_emb_dim_ht,
                             r.ref_emb_dim_diam,
-                            r.ref_com, r.ref_code FROM reference r WHERE r.ref_id = ?";
+                            r.ref_com,
+                            r.ref_code,
+                            r.ref_photos,
+                            r.ref_photos_pref FROM reference r WHERE r.ref_id = ?";
 
             $result = Connection::request(0, $sql,$tParam);
             }

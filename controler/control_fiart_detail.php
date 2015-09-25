@@ -55,8 +55,9 @@ if (isset($_REQUEST['fiartId'])) {
                     $oFiArt->fiart_photos = implode(',', $resPhoto);
                 }
             }
-            if (isset($_REQUEST['fiartPhotosPref']))
+            if (isset($_REQUEST['fiartPhotosPref'])){
                 $oFiArt->fiart_photos_pref = $_REQUEST['fiartPhotosPref'];
+            }
             $oFiArt->fiart_id = $_REQUEST['fiartId'];
             $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
             $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
