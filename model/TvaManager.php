@@ -31,6 +31,30 @@ class TvaManager {
         return $result;
     }
     
+     /**
+     * Retourne un enregistrement de la table tva par son id
+     *  
+     * @return tva objet
+     */
+    public static function getTvaById($idTva) {
+
+        try {
+            $tParam=array(
+                $idTva
+                    );
+            
+            $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t WHERE t.tva_id=?';
+            $result = Connection::request(0,$sql,$tParam);
+            
+        } catch (MySQLException $e) {
+              if ($e->getCode() == 00000) {
+                return 0;
+            } else {
+                return $e->getCode();
+            }
+        }
+        return $result;
+    }
     /**
      * Ajoute un enregistrement dans la table tva
      * @param type $Tva

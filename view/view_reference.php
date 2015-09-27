@@ -169,8 +169,10 @@
                      <div class='impImg'>
                         <fieldset><legend>Image</legend>                           
 
-                            <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
-                            <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
+                            <label for="img_upload[]">
+                                Image(<?php echo $imgExtension ?> | max. 
+                            <?php echo $imgMaxSize / 1000 ?> Ko) :
+                            </label>
                             <br/>       
                             <input type="hidden" name="MAX_FILE_SIZE" 
                                    value="<?php echo $imgMaxSize ?>" />
@@ -189,8 +191,8 @@
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
             <input id ='clearForm' name="clear"   type="reset"/> 
             <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
+            <inut name="refPhoto" value="rien" id="action" type="text" hidden/>
             </div>
-   
     </form>
  </div>
     <?php

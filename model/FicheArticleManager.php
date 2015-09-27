@@ -7,8 +7,35 @@ require_once 'Connection.php';
  */
 class FicheArticleManager {
 
+    
     /**
-     * Retourne tous les enregistrements de la table Référence
+     * Retourne un enregistrement de la table fiche_article par son id
+     * @param integer $fiartId
+     * @return fiche article Objet
+     * 
+     */
+    public static function getFicheArticleById($fiartId) {
+
+        try {
+            $tParam=array($fiartId);
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
+                    . 'fiart_ing, fiart_alg, pays_id, fiart_com, fiart_com_tech, '
+                    . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
+                    . 'FROM fiche_article WHERE fiart_id =?';
+            $result = Connection::request(0,$sql,$tParam);
+        } catch (MySQLException $e) {
+
+            if ($e->getCode() == 00000) {
+                return 0;
+            } else {
+                return $e->getCode();
+            }
+        }
+        return $result;
+    }
+    
+    /**
+     * Retourne tous les enregistrements de la table fiche article
      * 
      * @return Objet[]
      * Retourne un tableau d'objet

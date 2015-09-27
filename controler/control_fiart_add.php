@@ -38,7 +38,6 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             if (count($resPhoto) > 0 && $resPhoto[0] != '') {
                 $oFiArt->fiart_photos = implode(',', $resPhoto);
                 $oFiArt->fiart_photos_pref = $resPhoto[0];
-                ;
             }
             $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
             $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];

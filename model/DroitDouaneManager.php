@@ -35,7 +35,29 @@ class DroitDouaneManager {
         
         return $result;
     }
-    
+      /**
+     * Retourne un enregistrements de la table droit_douane par son id
+     * 
+     * @return droit_douane objet
+     */
+    public static function getDroitDouaneById($ddId) {
+
+        try {
+            $tParam=array($ddId);
+            $sql = 'SELECT d.dd_id, d.dd_lbl, d.dd_taux FROM droit_douane d';
+            $result = Connection::request(0,$sql,$tParam);
+        } catch (MySQLException $e) {
+            if ($e->getCode() == 00000){
+                return 0;
+            }
+            else {
+                return $e->getCode ();
+            
+            }
+        }
+        
+        return $result;
+    }
     /**
      * Ajoute un enregistrement dans la table droit_douane
      * @param type $Dd

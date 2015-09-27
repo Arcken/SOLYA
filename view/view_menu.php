@@ -59,7 +59,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
          <li><a href='#'><span>Consulter</span></a>
             <ul>
                <li><a href='#'><span>Gamme</span></a></li>
-               <li><a href='#'><span>Fiche Article</span></a></li>
+               <li><a href='index.php?action=fiart_list'><span>Fiche Article</span></a></li>
                <li><a href='index.php?action=ref_list'><span>Références</span></a></li>
             </ul>
          </li>

@@ -138,10 +138,15 @@ img{
     color: white;
     margin: 1%;
 }
-table{
+.colData,.colTitle{
     color:white;
     width:100%;
     text-align: center;
+    border:1px solid white;
+}
+.colTitle:hover{
+    cursor:pointer;
+    color:blue;
 }
 
 .colTitle{

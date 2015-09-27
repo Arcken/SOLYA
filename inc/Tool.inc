@@ -152,7 +152,7 @@ class Tool {
 // copie du contenu de $image_tmp, vers $image_grande_tmp en appliquant les nouvelles dimensions
                 imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 
-//enregistrement de la grande image de crée vers fichier ;
+//enregistrement de la grande image créé vers le fichier ;
                 imagejpeg($image_grande_tmp, $imgPath . $imgNom);
 
 

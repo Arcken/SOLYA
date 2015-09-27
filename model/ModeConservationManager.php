@@ -31,6 +31,28 @@ class ModeConservationManager {
          return $result;
     }
 
+     /**
+     * Retourne un enregistrement de la table mode_conservation par son id
+     * 
+     * @return mode_conservation objet
+     */
+    public static function getModeConservationById($idMc) {
+
+        try {
+            $tParam=array($idMc);
+            $sql = 'SELECT m.cons_id, m.cons_lbl FROM mode_conservation m WHERE m.cons_id=?';
+            $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            if ($e->getCode() == 00000) {
+                return 0;
+            } else {
+                return $e->getCode();
+            }
+           
+        }
+         return $result;
+    }
     /**
      * Ajoute un enregistrement dans la table mode_conservation
      * @param type $Cons

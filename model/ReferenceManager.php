@@ -26,6 +26,7 @@ class ReferenceManager {
                             dc_id,
                             fiart_id,
                             dd_id,
+                            cons_id,
                             tva_id,
                             ref_lbl,
                             ref_st_min,
@@ -41,7 +42,7 @@ class ReferenceManager {
                             ref_com,
                             ref_code, 
                             ref_photos,
-                            ref_photos_pref FROM reference ORDER BY ".$orderby." LIMIT ".$nombre.",".$limit."";
+                            ref_photos_pref FROM reference ORDER BY ".$orderby." DESC LIMIT ".$nombre.",".$limit."";
 
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {

@@ -32,7 +32,29 @@ class DureeConservationManager {
         }
         return $result;
     }
-    
+   /**
+     * Retourne un enregistrement de la table mode_conservation par son id
+     * 
+     * @return mode_conservation objet
+     */
+    public static function getDureeConservationById($dcId) {
+
+        try {
+            $tParam=array($dcId);
+            $sql = 'SELECT d.dc_id,d.dc_lbl,d.dc_nb FROM duree_conservation d WHERE d.dc_id =?';
+            $result = Connection::request(0,$sql,$tParam);
+            
+        } catch (MySQLException $e) {
+             if ($e->getCode() == 00000){
+                return 0;
+            }
+            else {
+                return $e->getCode ();
+            
+            }
+        }
+        return $result;
+    }  
     /**
      * Ajoute un enregistrement dans la table mode_conservation
      * @param type $Dc
