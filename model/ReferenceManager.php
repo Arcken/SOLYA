@@ -29,6 +29,7 @@ class ReferenceManager {
                             cons_id,
                             tva_id,
                             ref_lbl,
+                            ref_mrq,
                             ref_st_min,
                             ref_poids_brut,
                             ref_poids_net,
@@ -64,6 +65,7 @@ class ReferenceManager {
                     $reference->dd_id,
                     $reference->tva_id,
                     $reference->ref_lbl,
+                    $reference->ref_mrq,
                     $reference->ref_st_min,
                     $reference->ref_poids_brut,
                     $reference->ref_poids_net,
@@ -87,6 +89,7 @@ class ReferenceManager {
                         . "dd_id,"
                         . "tva_id,"
                         . "ref_lbl,"
+                        . "ref_mrq,"
                         . "ref_st_min,"
                         . "ref_poids_brut,"
                         . "ref_poids_net,"
@@ -101,15 +104,12 @@ class ReferenceManager {
                         . "ref_code,"
                         . "ref_photos,"
                         . "ref_photos_pref) " .
-                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
             }
         } catch (MySQLException $e) {
-            
-            echo $e->RetourneErreur();
+            throw $e;
         }
         return $result;
     }
@@ -130,6 +130,7 @@ class ReferenceManager {
                     $reference->dd_id,
                     $reference->tva_id,
                     $reference->ref_lbl,
+                    $reference->ref_mrq,
                     $reference->ref_st_min,
                     $reference->ref_poids_brut,
                     $reference->ref_poids_net,
@@ -154,6 +155,7 @@ class ReferenceManager {
                         . "r.dd_id=?,"
                         . "r.tva_id=?,"
                         . "r.ref_lbl=?,"
+                        . "r.ref_mrq=?,"
                         . "r.ref_st_min=?,"
                         . "r.ref_poids_brut=?,"
                         . "r.ref_poids_net=?,"
@@ -207,6 +209,7 @@ class ReferenceManager {
                             r.dd_id,
                             r.tva_id,
                             r.ref_lbl,
+                            r.ref_mrq,
                             r.ref_st_min,
                             r.ref_poids_brut,
                             r.ref_poids_net,
@@ -255,6 +258,7 @@ class ReferenceManager {
                             r.dd_id,
                             r.tva_id,
                             r.ref_lbl,
+                            r.ref_mrq,
                             r.ref_st_min,
                             r.ref_poids_brut,
                             r.ref_poids_net,

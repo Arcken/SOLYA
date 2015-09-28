@@ -35,7 +35,10 @@
                 </div>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
-                <input name="refLbl" type="text" placeholder="Nom de la référence" required></input>
+                <input name="refLbl" type="text" placeholder="Nom de la référence" required>
+                <br>
+                <label for="refMrq"> Marque: </label><br>          
+                <input name="refMrq" type="text" placeholder="Marque de la référence">
                 <br>
                 <label for="refStMin"> Stock minimum: </label><br>
                 <input name="refStMin" placeholder="###,##" type="text">         

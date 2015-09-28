@@ -87,8 +87,8 @@ img{
 }
 
 .col50{
-    max-width: 50%; 
-    width:50%;
+    max-width: 45%; 
+    width:45%;
     
 }
 .col70{
@@ -138,18 +138,29 @@ img{
     color: white;
     margin: 1%;
 }
+table{
+    border-collapse: collapse;
+}
+#colImg{
+    min-width: 250px;
+}
+
 .colData,.colTitle{
     color:white;
-    width:100%;
+    min-width: 100px;
     text-align: center;
     border:1px solid white;
+    padding:5px;
 }
-.colTitle:hover{
+.colTitle:hover, #colFiart:hover{
     cursor:pointer;
     color:blue;
 }
 
 .colTitle{
+    border-top:none;
+    border-left:none;
+    border-right: none;
     border-bottom: 2px solid white;
 }
 

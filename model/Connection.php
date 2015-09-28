@@ -18,7 +18,6 @@ class Connection {
     /**
      * Se connecte à la base de données, il n'est pas nécessaire d'appeler cette méthode,
      * les autres méthodes vont le faire si besoin.
-     * 
      * @return type identifiant de connexion
      * @throws MySQLException
      */
@@ -74,15 +73,15 @@ class Connection {
             self::$cnx = Connection::getConnection();
         }
 		
-        //Libération des ressources précédentes
-        //PDO::query() retourne un objet PDOStatement, ou FALSE si une erreur survient. 
-        //donc le try .. catch est inutile
+       
 		
 	if($tParam == null){
 		$result = $stm =self::$cnx->query($sql);
 	}else {
-		$stm = self::$cnx->prepare($sql);
+		$stm   = self::$cnx->prepare($sql);
+                
 		$state = $stm->execute($tParam);
+                
 	}
         switch ($codeRequete){
 			
@@ -119,7 +118,7 @@ class Connection {
 			$stm->closeCursor();
 			//si result n'est pas supérieur a 0 alors la requête n'a pas marché	
 			if (!$result) {
-				throw new MySQLException("Erreur sur la requête : $sql || état de la requète --> $state", self::$cnx);
+				throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->".$state, self::$cnx);
 			}
 			break;
                         

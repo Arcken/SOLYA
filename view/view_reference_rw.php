@@ -1,13 +1,13 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-    
-    
+
+
     <div class="corps">
 
         <form class ="form" id='ref_detail' method="POST" enctype="multipart/form-data">
             <div class=" haut"> 
-                
+
                 <label for="ficheArticle"> Associée fiche article: </label><br>
                 <select  name="ficheArticle" title="Choisir un élément" required>
                     <option value="">Aucun</option>
@@ -44,6 +44,9 @@
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" placeholder="Nom de la référence" required value="<?php echo $rsRef->ref_lbl; ?>"></input>
+                <br>
+                <label for="refMrq"> Marque: </label><br>          
+                <input name="refMrq" type="text" placeholder="Marque de la référence" value="<?php echo $rsRef->ref_mrq; ?>"></input>
                 <br>
                 <label for="refStMin"> Stock minimum: </label><br>
                 <input name="refStMin" placeholder="###,##" type="text" value="<?php echo $rsRef->ref_st_min; ?>"></input>         
@@ -146,165 +149,165 @@
 
             <div class="col30">
 
-                <label for="pvePer"> Prix de vente particulier: </label><br>
-                <input name="pvePer" placeholder="### ###,##" type="text" disabled>         
-                <br>
-                <label for="pveEnt"> Prix de vente entreprise: </label><br>
-                <input name="pveEnt" placeholder="fonctionalitées désactivées" type="text" disabled>         
-                <br>
-                <label for="tva"> Taux de TVA: </label><br>
-                <select name="tva" title="Choisir un élément" required>
-                    <option value="" selected>Aucun</option>
+                    <label for="pvePer"> Prix de vente particulier: </label><br>
+                    <input name="pvePer" placeholder="### ###,##" type="text" value='<?php echo $oPve->pve_per; ?>'>         
+                    <br>
+                    <label for="pveEnt"> Prix de vente entreprise: </label><br>
+                    <input name="pveEnt" placeholder="### ###,##" type="text" value='<?php echo $oPve->pve_ent; ?>'>         
+                    <br>
+                    <label for="tva"> Taux de TVA: </label><br>
+                    <select name="tva" title="Choisir un élément" required>
+                        <option value="" selected>Aucun</option>
 
-                    <?php
-                    if (isset($toTvas) && is_array($toTvas)) {
-                        foreach ($toTvas as $oTva) {
-                            if ($oTva->tva_id === $rsRef->tva_id) {
-                                if (!empty($oTva->tva_lbl) && $oTva->tva_lbl !== '') {
-                                    ?>
-                                    <option value="<?php echo $oTva->tva_id ?>" selected>
-                                        <?php echo $oTva->tva_lbl . ' | ' . $oTva->tva_taux . ' %' ?> </option>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <option value="<?php echo $oTva->tva_id ?>" selected>
-                                        <?php echo $oTva->tva_lbl . '' . $oTva->tva_taux . ' %' ?> </option>
-                                    <?php
-                                }
-                            } else {
-                                if (!empty($oTva->tva_lbl) && $oTva->tva_lbl !== '') {
-                                    ?>
-                                    <option value="<?php echo $oTva->tva_id ?>">
-                                        <?php echo $oTva->tva_lbl . ' | ' . $oTva->tva_taux . ' %' ?> </option>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <option value="<?php echo $oTva->tva_id ?>">
-                                        <?php echo $oTva->tva_lbl . '' . $oTva->tva_taux . ' %' ?> </option>
-                                    <?php
-                                }
-                            }
-                        }
-                    }
-                    ?>
-                </select>
-                <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_tva.php');" />
-
-                <br>
-                <label for="droitDouane"> Droit de douanes: </label><br>
-                <select name="droitDouane" title="Choisir un élément" required>
-
-                    <option value="" selected>Aucun</option>
-
-                    <?php
-                    if (isset($toDroitDouanes) && is_array($toDroitDouanes)) {
-                        foreach ($toDroitDouanes as $oDroitDouane) {
-                            if ($oDroitDouane->dd_id === $rsRef->dd_id) {
-                                if (!empty($oDroitDouane->dd_lbl) && $oDroitDouane->dd_lbl !== '') {
-                                    ?>
-                                    ?>
-                                    <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
-                                        <?php
-                                        echo $oDroitDouane->dd_lbl . ' | ' . $oDroitDouane->dd_taux . ' %'
-                                        ?> 
-                                    </option>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
-                                        <?php
-                                        echo $oDroitDouane->dd_lbl . '' . $oDroitDouane->dd_taux . ' %'
-                                        ?>
-                                    </option>
-                                    <?php
-                                }
-                            } else {
-                                if (!empty($oDroitDouane->dd_lbl) && $oDroitDouane->dd_lbl !== '') {
-                                    ?>
-                                    ?>
-                                    <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
-                                        <?php
-                                        echo $oDroitDouane->dd_lbl . ' | ' . $oDroitDouane->dd_taux . ' %'
-                                        ?> 
-                                    </option>
-                                    <?php
-                                } else {
-                                    ?>
-                                    <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
-                                        <?php
-                                        echo $oDroitDouane->dd_lbl . '' . $oDroitDouane->dd_taux . ' %'
-                                        ?>
-                                    </option>
-                                    <?php
-                                }
-                            }
-                        }
-                    }
-                    ?>
-
-                </select>
-                <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
-                <br>
-                <label for="refCom"> Commentaire : </label><br>
-                <textarea name="refCom" rows="4" cols="25" placeholder="Commentaire sur la référence" ><?php echo $rsRef->ref_com; ?></textarea>
-                  <div class='impImg'>
-                    <fieldset><legend>Image</legend>                           
-
-                        <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
-                            <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
-                        <br/>       
-                        <input type="hidden" name="MAX_FILE_SIZE" 
-                               value="<?php echo $imgMaxSize ?>" />
-                        <br/>       
-
-                        <input type="file" name="img_upload[]"  
-                               id="img_upload" multiple=""/>
-
-
-                    </fieldset>
-                </div>
-                <div class="imgList">
-                    <table>
                         <?php
-                        if ($rsRef->ref_photos != '') {
-                            $tabPhoto = explode(',', $rsRef->ref_photos);
-                            foreach ($tabPhoto as $image) {
-                                if ($image != '') {
-                                    ?>
-                                    <tr>
-                                        <td> <input type="radio" name="refPhotosPref" 
-                                                    value="<?php echo $image ?>"
-                                                    <?php if ($image == $rsRef->ref_photos_pref)echo ' checked '; ?>></td>
-                                        <td><img src="<?php echo $imgMiniPath . $image . '_lbl.jpg' ?>" 
-                                                 alt=""/></td>
-                                    </tr>
-                                    <?php
+                        if (isset($toTvas) && is_array($toTvas)) {
+                            foreach ($toTvas as $oTva) {
+                                if ($oTva->tva_id === $rsRef->tva_id) {
+                                    if (!empty($oTva->tva_lbl) && $oTva->tva_lbl !== '') {
+                                        ?>
+                                        <option value="<?php echo $oTva->tva_id ?>" selected>
+                                            <?php echo $oTva->tva_lbl . ' | ' . $oTva->tva_taux . ' %' ?> </option>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $oTva->tva_id ?>" selected>
+                                            <?php echo $oTva->tva_lbl . '' . $oTva->tva_taux . ' %' ?> </option>
+                                        <?php
+                                    }
+                                } else {
+                                    if (!empty($oTva->tva_lbl) && $oTva->tva_lbl !== '') {
+                                        ?>
+                                        <option value="<?php echo $oTva->tva_id ?>">
+                                            <?php echo $oTva->tva_lbl . ' | ' . $oTva->tva_taux . ' %' ?> </option>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $oTva->tva_id ?>">
+                                            <?php echo $oTva->tva_lbl . '' . $oTva->tva_taux . ' %' ?> </option>
+                                        <?php
+                                    }
                                 }
                             }
                         }
                         ?>
-                    </table>
+                    </select>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_tva.php');" />
+
+                    <br>
+                    <label for="droitDouane"> Droit de douanes: </label><br>
+                    <select name="droitDouane" title="Choisir un élément" required>
+
+                        <option value="" selected>Aucun</option>
+
+                        <?php
+                        if (isset($toDroitDouanes) && is_array($toDroitDouanes)) {
+                            foreach ($toDroitDouanes as $oDroitDouane) {
+                                if ($oDroitDouane->dd_id === $rsRef->dd_id) {
+                                    if (!empty($oDroitDouane->dd_lbl) && $oDroitDouane->dd_lbl !== '') {
+                                        ?>
+                                        ?>
+                                        <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
+                                            <?php
+                                            echo $oDroitDouane->dd_lbl . ' | ' . $oDroitDouane->dd_taux . ' %'
+                                            ?> 
+                                        </option>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
+                                            <?php
+                                            echo $oDroitDouane->dd_lbl . '' . $oDroitDouane->dd_taux . ' %'
+                                            ?>
+                                        </option>
+                                        <?php
+                                    }
+                                } else {
+                                    if (!empty($oDroitDouane->dd_lbl) && $oDroitDouane->dd_lbl !== '') {
+                                        ?>
+                                        ?>
+                                        <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
+                                            <?php
+                                            echo $oDroitDouane->dd_lbl . ' | ' . $oDroitDouane->dd_taux . ' %'
+                                            ?> 
+                                        </option>
+                                        <?php
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $oDroitDouane->dd_id ?>" selected>
+                                            <?php
+                                            echo $oDroitDouane->dd_lbl . '' . $oDroitDouane->dd_taux . ' %'
+                                            ?>
+                                        </option>
+                                        <?php
+                                    }
+                                }
+                            }
+                        }
+                        ?>
+
+                    </select>
+                    <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_droit_douane.php');"/>
+                    <br>
+                    <label for="refCom"> Commentaire : </label><br>
+                    <textarea name="refCom" rows="4" cols="25" placeholder="Commentaire sur la référence" ><?php echo $rsRef->ref_com; ?></textarea>
+                    <div class='impImg'>
+                        <fieldset><legend>Image</legend>                           
+
+                            <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
+                                <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
+                            <br/>       
+                            <input type="hidden" name="MAX_FILE_SIZE" 
+                                   value="<?php echo $imgMaxSize ?>" />
+                            <br/>       
+
+                            <input type="file" name="img_upload[]"  
+                                   id="img_upload" multiple=""/>
+
+
+                        </fieldset>
+                    </div>
+                    <div class="imgList">
+                        <table>
+                            <?php
+                            if ($rsRef->ref_photos != '') {
+                                $tabPhoto = explode(',', $rsRef->ref_photos);
+                                foreach ($tabPhoto as $image) {
+                                    if ($image != '') {
+                                        ?>
+                                        <tr>
+                                            <td> <input type="radio" name="refPhotosPref" 
+                                                        value="<?php echo $image ?>"
+                                                        <?php if ($image == $rsRef->ref_photos_pref) echo ' checked '; ?>></td>
+                                            <td><img src="<?php echo $imgMiniPath . $image . '_lbl.jpg' ?>" 
+                                                     alt=""/></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                            }
+                            ?>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <div class="bas">
-                <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
-                <input name='retour'  type="button" value='Retour' onclick='location.href="index.php?action=ref_list";'/> 
-                <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
-                <input name="idRef"   type='text' value="<?php echo $rsRef->ref_id; ?>" hidden>
-                <?php
-                if ($rsRef->ref_photos == '') {
-                    ?>
-                    <input name="refPhotosPref" value="" type="text" hidden>                
-                <?php } ?>
+                <div class="bas">
+                    <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
+                    <input name='retour'  type="button" value='Retour' onclick='location.href = "index.php?action=ref_list";'/> 
+                    <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
+                    <input name="idRef"   type='text' value="<?php echo $rsRef->ref_id; ?>" hidden>
+                    <?php
+                    if ($rsRef->ref_photos == '') {
+                        ?>
+                        <input name="refPhotosPref" value="" type="text" hidden>                
+                    <?php } ?>
 
-                <input name="refPhotos" value="<?php echo $rsRef->ref_photos ?>" type="text" hidden>
-            </div>
+                    <input name="refPhotos" value="<?php echo $rsRef->ref_photos ?>" type="text" hidden>
+                </div>
 
-        </form>
-    </div>
-    <?php
-} else {
-    echo 'Le silence est d\'or';
-}
-?>
+            </form>
+        </div>
+        <?php
+    } else {
+        echo 'Le silence est d\'or';
+    }
+    ?>

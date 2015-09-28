@@ -8,7 +8,37 @@
 
 
 class PrixVenteManager {
-    //put your code here
+
+    /**
+     * Retourne le prix de vente le plus récent d'une référence
+     * @param INT $refId
+     * @return object Prix Vente
+     */
+    
+    public static function getCurPrixVente($refId) {
+
+        try {
+            $tParam= array($refId);
+            
+            $sql = 'SELECT pv.pve_id,'
+                          . 'pv.ref_id, '
+                          . 'pv.pve_per,'
+                          . 'pv.pve_ent, '
+                          . 'pv.pve_date '
+                          . 'FROM prix_vente pv WHERE pv.ref_id=?'
+                          . ' ORDER BY pv.pve_date DESC LIMIT 0,1 ';
+            
+            $result = Connection::request(0,$sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            $e->RetourneErreur();
+            if($e->getCode() === 00000){
+                $result =0;
+            }
+            //die($e->retourneErreur());
+        }
+        return $result;
+    }
     
     /**
      * Retourne tous les enregistrements de la table prix_vente
@@ -34,30 +64,31 @@ class PrixVenteManager {
     public static function addPrixVente($Pve){
          try {
 
-            if (!empty($Pve->PVE_PER) && ($Pve->PVE_PER) > 0 && ($Pve->PVE_ENT) > 0) {
+            if (!empty($Pve->pve_per) && ($Pve->pve_per) > 0 &&
+                    !empty($Pve->pve_ent) &&($Pve->pve_ent) > 0) {
 
                 $tParam= array(
-                    $Pve->PVE_PER,
-                    $Pve->PVE_ENT,
-                    $Pve->PVE_DATE
+                    $Pve->ref_id,
+                    $Pve->pve_per,
+                    $Pve->pve_ent
                 );
 
-                $sql = "INSERT INTO mode_conservation ("
+                $sql = "INSERT INTO prix_vente ("
+                        . "REF_ID,"
                         . "PVE_PER,"
                         . "PVE_ENT,"
                         . "PVE_DATE)"
-                        . "VALUES(?)";
+                        . "VALUES(?,?,?,NOW())";
                 
-                $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans prix </p>';
+               return $result = Connection::request(2, $sql, $tParam);
             }
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            
+            if ($e->getCode()===00000){
+              return  $result = 0;
+            }
         }
-      
+
     }
 }
 

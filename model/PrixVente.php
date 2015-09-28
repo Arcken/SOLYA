@@ -9,10 +9,11 @@
 class PrixVente {
     
     //Données membres
-    public $PVE_ID='';
-    public $PVE_DATE='';
-    public $PVE_PER='';
-    public $PVE_ENT='';
+    public $ref_id   ='';
+    public $pve_id   ='';
+    public $pve_date ='';
+    public $pve_per  ='';
+    public $pve_ent  ='';
     
      public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {

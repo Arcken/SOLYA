@@ -14,7 +14,9 @@ require $path.'/model/ModeConservation.php';
 require $path.'/model/ModeConservationManager.php';
 require $path.'/model/DureeConservation.php';
 require $path.'/model/DureeConservationManager.php';
-
+require $path.'/model/PrixVente.php';
+require $path.'/model/PrixVenteManager.php';
+                         
 $iTotal = Tool::getCountTable('reference');
 
 if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {

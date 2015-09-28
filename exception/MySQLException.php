@@ -7,6 +7,7 @@ class MySQLException extends Exception {
 
     private $cnx = "";
 
+
     public function __construct($Msg, $cnx) {
         parent :: __construct($Msg);
         $this->cnx = $cnx;

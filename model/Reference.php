@@ -13,6 +13,7 @@ class Reference {
     public $dd_id            = '';
     public $tva_id           = '';
     public $ref_lbl          = '';
+    public $ref_mrq          = '';
     public $ref_st_min       = '';
     public $ref_poids_brut   = '';
     public $ref_poids_net    = '';
