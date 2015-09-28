@@ -10,10 +10,13 @@
             <input name="utPrenom" placeholder="prenom" type="text">         
             <br>            
             <label for="utLogin"> Nom d'utilisateur: </label>
-            <input name="utLogin" placeholder="Texte" type="text" required="">         
+            <input name="utLogin" placeholder="Texte" type="text" required=""  autocomplete="off" onblur="verifUnique('ut_login','utilisateur','utLogin','verifUnique')" >
+            <a id='verifUnique'></a>
             <br>
             <label for="utPass"> Mot de passe: </label>
-            <input name="utPass" id='pass' placeholder="pas de cractère accentuée" type="password" required="">         
+            <input name="utPass" id='pass' placeholder="Au moins 8 caractères" autocomplete="off" 
+                   onblur='verifPassForce()' type="password" required=""> 
+            <a id='passForce'></a>
             <br>
             <label for="utPass2"> Confirmation mot de passe: </label>
             <input name="utPass2" id='confirmPass' placeholder="pas de cractère accentuée" type="password" required=""

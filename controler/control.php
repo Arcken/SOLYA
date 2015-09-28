@@ -102,10 +102,31 @@ if (!isset($_SESSION['auth'])) {
             case "utilisateur_add":
                 require_once $path . '/model/Groupe.php';
                 require_once $path . '/model/GroupeManager.php';
+                require_once $path . '/model/Utilisateur.php';
+                require_once $path . '/model/UtilisateurManager.php';
                 $resAllGroupes = GroupeManager::getAllGroupes();
+                
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                    
+                    $oUtilisateur = new Utilisateur();
+                    $oUtilisateur->ut_login = $_REQUEST['utLogin'];
+                    $oUtilisateur->ut_pass = $_REQUEST['utPass'];
+                    $oUtilisateur->ut_nom = $_REQUEST['utNom'];
+                    $oUtilisateur->ut_prenom = $_REQUEST['utPrenom'];
+                    $oUtilisateur->ut_actif = $_REQUEST['utActif'];
+                    $oUtilisateur->grp_id = $_REQUEST['Groupe'];
+                    
+                    $resUtilisateur = UtilisateurManager::addtilisateur($oUtilisateur);
+                    
+                    if ($resUtilisateur == 1) {
+                        $resMessage = "<font color='green'> L'ajout de l'utilisateur $oUtilisateur->ut_login
+                  est un succés</font>";
+                    }
+                }
+                $resAllUtilisateurs = UtilisateurManager::getAllUtilisateurs();
                 $sPageTitle = "Ajouter un utilisateur";
                 break;
-            
+
             case "utilisateur_list":
                 require_once $path . '/model/Utilisateur.php';
                 require_once $path . '/model/UtilisateurManager.php';
@@ -119,12 +140,7 @@ if (!isset($_SESSION['auth'])) {
                 require_once $path . '/model/Groupe.php';
                 require_once $path . '/model/GroupeManager.php';
 
-                if (isset($_REQUEST['utLogin']) && $_REQUEST['utLogin'] != '') {
-                    $oUtilisateur = new Utilisateur();
-                    $oUtilisateur->ut_login = $_REQUEST['utLogin'];
-                    $sButton = 'Modifier';
-                }
-
+                
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
                     $oUtilisateur = new Utilisateur();
                     $oUtilisateur->ut_login = $_REQUEST['utLogin'];
@@ -137,15 +153,24 @@ if (!isset($_SESSION['auth'])) {
                     if ($resUpdUtilisateur == 1) {
                         $resMessage = "<font color='green'> La modification de l'utilisateur $oUtilisateur->ut_login
                   est un succés</font>";
+                        $sPageTitle = "Liste des utilisateurs";
                     } else {
                         $resMessage = "<font color='red'> La modification de l'utilisateur $oUtilisateur->ut_login
                   est un echec</font>";
                     }
-                    
+                    $resAllUtilisateurs = UtilisateurManager::getAllUtilisateurs();
+                } else {
+                    $sPageTitle = "Détail de l'utilisateur";
+                    if (isset($_REQUEST['utLogin']) && $_REQUEST['utLogin'] != '') {
+                    $oUtilisateur = new Utilisateur();
+                    $oUtilisateur->ut_login = $_REQUEST['utLogin'];
+                    $sButton = 'Modifier';
+                }
+
                 }
                 $resUtilisateur = UtilisateurManager::getUtilisateurDetailUpd($oUtilisateur);
-                    $resAllGroupes = GroupeManager::getAllGroupes();
-                    $sPageTitle = "Détail de l'utilisateur";
+                $resAllGroupes = GroupeManager::getAllGroupes();
+                
 
                 break;
         }
@@ -167,20 +192,14 @@ if (!isset($_SESSION['auth'])) {
                 $sPageTitle = "Ajouter une fiche article";
                 require $path . '/view/view_fiche_article.php';
                 break;
-
-
-
-
+            
             case "fiart_detail":
                 $sAction = "fiart_detail_upd";
-                $sPageTitle = "Détail fiche article";
                 require $path . '/view/view_fiche_article_rw.php';
                 break;
 
             case "ga_add":
             case "ga_add_add":
-
-                $sPageTitle = "Ajouter une gamme";
                 require $path . '/view/view_gamme.php';
                 break;
 
@@ -204,8 +223,7 @@ if (!isset($_SESSION['auth'])) {
             case "fiart_supp":
                 $sAction = "fiart_list";
             case "fiart_detail_upd":
-            case "fiart_list":
-                $sPageTitle = "Liste fiche article";
+            case "fiart_list":                
                 require $path . '/view/view_list_fiche_article.php';
                 break;
 
@@ -224,15 +242,29 @@ if (!isset($_SESSION['auth'])) {
                 break;
 
             case "utilisateur_add":
-                require $path . '/view/view_utilisateur.php';
+                
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                    require $path . '/view/view_utilisateur_liste.php';
+                }
+                else 
+                {                    
+                require $path . '/view/view_utilisateur.php';                
+                }
                 break;
-            
+
             case "utilisateur_list":
+                
                 require $path . '/view/view_utilisateur_liste.php';
                 break;
 
             case "utilisateur_detail":
-                require $path . '/view/view_utilisateur_detail_rw.php';
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Modifier") {
+                    require $path . '/view/view_utilisateur_liste.php';
+                }
+                else 
+                {               
+                require $path . '/view/view_utilisateur_detail_ru.php';
+                }
                 break;
         }
         require_once $path . '/view/view_footer.php';

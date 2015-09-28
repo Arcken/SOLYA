@@ -149,6 +149,49 @@ class UtilisateurManager {
      *  @return int|string 
      * Retourne un int (succées) ou un string (échec)
      */
+    public static function addtilisateur($oUtilisateur) {
+        try {
+
+             if ((!empty($oUtilisateur->ut_login) && (strlen($oUtilisateur->ut_login)) > Connection::getLimLbl()) 
+                    && (!empty($oUtilisateur->ut_pass) && (strlen($oUtilisateur->ut_pass)) > Connection::getLimLbl())) {
+
+                $tParam = array(
+                    $oUtilisateur->ut_login,
+                    $oUtilisateur->ut_pass,
+                    $oUtilisateur->ut_nom,
+                    $oUtilisateur->ut_prenom,
+                    $oUtilisateur->ut_actif,
+                    $oUtilisateur->grp_id,
+                );
+
+                $sql = "INSERT INTO utilisateur ("
+                        . "UT_LOGIN,"
+                        . "UT_PASS,"
+                        . "UT_NOM,"
+                        . "UT_PRENOM,"
+                        . "UT_ACTIF,"
+                        . "GRP_ID)"
+                        . "VALUES(?,?,?,?,?,?)";
+
+                $result = Connection::request(2, $sql, $tParam);
+            } else {
+                $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
+            }
+        } catch (MySQLException $e) {
+
+            echo $e->RetourneErreur();
+        }
+        return $result;
+    }
+    
+    /**
+     * Modifie un utilisateur selon son id
+     * 
+     * @param $oUtilisateur
+     * Attend un objet Utilisateur
+     *  @return int|string 
+     * Retourne un int (succées) ou un string (échec)
+     */
     public static function updtilisateur($oUtilisateur) {
         try {
 
@@ -171,49 +214,6 @@ class UtilisateurManager {
                         . "UT_ACTIF = ?, "
                         . "GRP_ID = ? "
                         . "WHERE ut_login = ?";
-
-                $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
-            }
-        } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
-        }
-        return $result;
-    }
-    
-    /**
-     * Ajoute un utilisateur dans la table utilisateur
-     * 
-     * @param $oUtilisateur
-     * Attend un objet Utilisateur
-     *  @return int|string 
-     * Retourne un int (succées) ou un string (échec)
-     */
-    public static function addUtilisateur($Utilisateur) {
-        try {
-
-            if ((!empty($Utilisateur->ut_login) && (strlen($Utilisateur->ut_login)) > Connection::getLimLbl()) 
-                    && (!empty($Utilisateur->ut_pass) && (strlen($Utilisateur->ut_pass)) > Connection::getLimLbl())) {
-
-                $tParam = array(
-                    $Utilisateur->ut_login,
-                    $Utilisateur->ut_pass,
-                    $Utilisateur->ut_nom,
-                    $Utilisateur->ut_prenom,
-                    $Utilisateur->ut_actif,
-                    $Utilisateur->grp_id,
-                );
-
-                $sql = "INSERT INTO utilisateur ("
-                        . "UT_LOGIN,"
-                        . "UT_PASS,"
-                        . "UT_NOM,"
-                        . "UT_PRENOM,"
-                        . "UT_ACTIF,"
-                        . "GRP_ID)"
-                        . "VALUES(?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
             } else {

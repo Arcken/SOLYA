@@ -40,6 +40,21 @@ function test() {
     alert('Coucou');
 }
 
+function verifUnique(champs,table,source,cible){
+    valeur = $("input[name="+source+"]").val();
+    console.log (valeur);
+    console.log(table);
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getNombre', table: 'utilisateur', champs: 'ut_login', valeur: 'admin'},
+    function (json) {
+        console.log('dedans');
+        console.log(json);
+            //alert(json.total);
+    }
+    );
+}
+
 /**
  * fonction qui rend visible une image si le pass et la confirmation sont identique
  * @returns {undefined}
@@ -51,24 +66,72 @@ function verifPassImg() {
     {
         $('#passValid').show();
     }
-    else $('#passValid').hide();
+    else
+        $('#passValid').hide();
 }
+
+/**
+ * fonction qui test la solidité du mot de passe
+ * @returns {undefined}
+ */
+function verifPassForce() {    
+    if ($('#pass').val() != ''
+            )
+    {
+        // Doit contenir des majuscules, des chiffres et des minuscules
+var strongRegex = new RegExp("^(?=.{10,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$", "g");
+
+ 
+        // Doit contenir soit des majuscules et des minuscules soit des minuscules et des chiffres
+var mediumRegex = new RegExp("^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+
+ 
+        // Doit faire au minimum huit caractères
+        var okRegex = new RegExp("(?=.{8,}).*", "g");
+ 
+        if (okRegex.test($('#pass').val()) === false) {
+            // If ok regex doesn't match the password
+               alert('Le mot de passe doit contenir 8 caractères');
+ 
+        } else if (strongRegex.test($('#pass').val())) {
+            // If reg ex matches strong password
+            $('#passForce').text('Good Password!');
+        } else if (mediumRegex.test($('#pass').val())) {
+            // If medium password matches the reg ex
+            $('#passForce').text('Medium Password!');
+        } else {
+            // If password is ok
+            $('#passForce').text('Faible Password!');
+        }
+    }
+    
+}
+
 
 /**
  * fonction qui teste si le pass et sa confirmation sont identique, affiche une alertbox si différents
  * @returns {Boolean}
  */
 function verifPass() {
-    if ($('#pass').val() != ''
-            && $('#confirmPass').val() != ''
-            && $('#pass').val() == $('#confirmPass').val())
-    {
-        return true;
+    var test = false;
+    
+    if ($('#pass').val().length >= 8 
+            ) {
+        if ($('#pass').val() != ''
+                && $('#confirmPass').val() != ''
+                && $('#pass').val() == $('#confirmPass').val())
+        {
+            return true;
+        }
+        else {
+            alert('Le mot de passe et sa confirmation doivent être identique');
+            return false;
+        }
     }
     else
-        alert('Erreur de mot de passe');
-        return false;
-    
+        alert('Le mot de passe doit être au moins de huit caractères');
+    return false;
+
 }
 
 

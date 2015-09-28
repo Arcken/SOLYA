@@ -88,6 +88,15 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             }
             echo json_encode($tab);
             break;
+            
+            
+        case 'getNombre':
+             $tab = array();
+            $requete =   "SELECT count(*) as TOTAL FROM ".$_REQUEST['table'].
+                         " WHERE ".$_REQUEST['champs']." = ".$_REQUEST['valeur'];
+            $resultat = $bdd->query($requete);
+            $data = $resultat->fetch(PDO::FETCH_NUM);
+            echo json_encode($data);
     }
 }
 ?>
