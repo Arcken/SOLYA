@@ -12,6 +12,7 @@
             <label for="utLogin"> Nom d'utilisateur: </label>
             <input name="utLogin" placeholder="Texte" type="text" required=""  autocomplete="off" onblur="verifUnique('ut_login','utilisateur','utLogin','verifUnique')" >
             <a id='verifUnique'></a>
+            
             <br>
             <label for="utPass"> Mot de passe: </label>
             <input name="utPass" id='pass' placeholder="Au moins 8 caractères" autocomplete="off" 

@@ -44,14 +44,14 @@ class UtilisateurManager {
      * Retourne un objet
      */
     public static function getUtilisateur($Utilisateur) {
-
+        global $prefixeMDP;
         try {
 
             if (!empty($Utilisateur->ut_login) && (strlen($Utilisateur->ut_login)) > Connection::getLimLbl() && !empty($Utilisateur->ut_pass) && (strlen($Utilisateur->ut_pass)) > Connection::getLimLbl()) {
 
                 $tParam = array(
                     $Utilisateur->ut_login,
-                    $Utilisateur->ut_pass
+                    sha1($prefixeMDP . $Utilisateur->ut_pass)
                 );
 
                 $sql = "SELECT * FROM utilisateur"
@@ -62,11 +62,11 @@ class UtilisateurManager {
             } else {
                 $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
             }
-        } catch (MySQLException $e) {
+        }  catch (MySQLException $e) {
             if ($e->getCode() == 00000) {
                 return 0;
             }
-            echo $e->RetourneErreur();
+            //echo $e->RetourneErreur();
         }
         return $result;
     }
@@ -89,7 +89,7 @@ class UtilisateurManager {
                     $oUtilisateur->ut_login
                 );
 
-                $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_pass, ut_actif, grp_id "
+                $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
                         . "FROM utilisateur"
                         . " WHERE ut_login =?";
 
@@ -124,7 +124,7 @@ class UtilisateurManager {
                     $oUtilisateur->ut_login
                 );
 
-                $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_pass, ut_actif, grp_id "
+                $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
                         . "FROM utilisateur"
                         . " WHERE ut_login =? FOR UPDATE";
 
@@ -140,7 +140,7 @@ class UtilisateurManager {
         }
         return $result;
     }
-    
+
     /**
      * Ajoute un utilisateur dans la table utilisateur
      * 
@@ -152,8 +152,7 @@ class UtilisateurManager {
     public static function addtilisateur($oUtilisateur) {
         try {
 
-             if ((!empty($oUtilisateur->ut_login) && (strlen($oUtilisateur->ut_login)) > Connection::getLimLbl()) 
-                    && (!empty($oUtilisateur->ut_pass) && (strlen($oUtilisateur->ut_pass)) > Connection::getLimLbl())) {
+            if ((!empty($oUtilisateur->ut_login) && (strlen($oUtilisateur->ut_login)) > Connection::getLimLbl()) && (!empty($oUtilisateur->ut_pass) && (strlen($oUtilisateur->ut_pass)) > Connection::getLimLbl())) {
 
                 $tParam = array(
                     $oUtilisateur->ut_login,
@@ -183,7 +182,7 @@ class UtilisateurManager {
         }
         return $result;
     }
-    
+
     /**
      * Modifie un utilisateur selon son id
      * 
@@ -195,10 +194,9 @@ class UtilisateurManager {
     public static function updtilisateur($oUtilisateur) {
         try {
 
-            if ((!empty($oUtilisateur->ut_login) && !empty($oUtilisateur->ut_pass) )) {
+            if ((!empty($oUtilisateur->ut_login) && !empty($oUtilisateur->ut_pass))) {
 
                 $tParam = array(
-                    
                     $oUtilisateur->ut_pass,
                     $oUtilisateur->ut_nom,
                     $oUtilisateur->ut_prenom,
@@ -207,7 +205,7 @@ class UtilisateurManager {
                     $oUtilisateur->ut_login
                 );
 
-                $sql = "UPDATE utilisateur set "                        
+                $sql = "UPDATE utilisateur set "
                         . "UT_PASS = ?, "
                         . "UT_NOM = ?, "
                         . "UT_PRENOM = ?, "

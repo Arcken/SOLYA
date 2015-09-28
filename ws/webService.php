@@ -15,7 +15,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
-            
+
         case 'getAllPays':
             $tab = array();
             $requete = "SELECT * FROM pays";
@@ -26,7 +26,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
-            
+
         case 'getAllNut':
             $tab = array();
             $requete = "SELECT * FROM nutrition";
@@ -37,14 +37,14 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
-            
+
         case 'getFiartPays':
             $fiartId = $_REQUEST['fiartId'];
             $tab = array();
             $requete = "SELECT * FROM pays p "
-                       . "INNER JOIN fiche_article f ON "
-                       . "f.pays_id=p.pays_id "
-                       . "WHERE f.fiart_id =" . $fiartId;
+                    . "INNER JOIN fiche_article f ON "
+                    . "f.pays_id=p.pays_id "
+                    . "WHERE f.fiart_id =" . $fiartId;
 
             $resultat = $bdd->query($requete);
 
@@ -61,9 +61,9 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             $fiartId = $_REQUEST['fiartId'];
             $tab = array();
             $requete = "SELECT * FROM gamme g "
-                        . "INNER JOIN regrouper r ON "
-                        . "g.ga_id = r.ga_id "
-                        . "WHERE r.fiart_id =" . $fiartId;
+                    . "INNER JOIN regrouper r ON "
+                    . "g.ga_id = r.ga_id "
+                    . "WHERE r.fiart_id =" . $fiartId;
 
             $resultat = $bdd->query($requete);
 
@@ -78,8 +78,8 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
             $refCode = $_REQUEST['refCode'];
             $tab = array();
-            $requete =   "SELECT ref_code FROM reference "
-                        ."WHERE ref_code LIKE '".$refCode."%' ORDER BY ref_code DESC LIMIT 0,5";
+            $requete = "SELECT ref_code FROM reference "
+                    . "WHERE ref_code LIKE '" . $refCode . "%' ORDER BY ref_code DESC LIMIT 0,5";
 
             $resultat = $bdd->query($requete);
 
@@ -88,15 +88,23 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             }
             echo json_encode($tab);
             break;
-            
-            
+
+
         case 'getNombre':
-             $tab = array();
-            $requete =   "SELECT count(*) as TOTAL FROM ".$_REQUEST['table'].
-                         " WHERE ".$_REQUEST['champs']." = ".$_REQUEST['valeur'];
+            $tab = array();
+            
+            $champs = $_REQUEST['champs'];
+            $table = $_REQUEST['table'];
+            $valeur = $_REQUEST['valeur'];
+             
+            $requete = "SELECT count(*) AS total FROM " . $table .
+                    " WHERE " . $champs . " ='" . $valeur."'";
             $resultat = $bdd->query($requete);
-            $data = $resultat->fetch(PDO::FETCH_NUM);
-            echo json_encode($data);
+
+            $donnees = $resultat->fetch(PDO::FETCH_ASSOC);
+            echo json_encode($donnees);
+            
+            break;
     }
 }
 ?>

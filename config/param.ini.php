@@ -14,3 +14,4 @@ imgpath = img/ref/
 imgminipath= img/ref/mini/
 imgextension = jpg,jpeg
 imgmaxsize = 400000
+mdpuser = '!Stage2015!'

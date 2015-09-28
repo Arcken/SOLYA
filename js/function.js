@@ -40,17 +40,28 @@ function test() {
     alert('Coucou');
 }
 
-function verifUnique(champs,table,source,cible){
-    valeur = $("input[name="+source+"]").val();
-    console.log (valeur);
-    console.log(table);
+/**
+ * Fonction qui recherche le nombre d'occurence dans une table
+ * @param {String} $champs champs cible dans la table
+ * @param {String} $table nom de la table
+ * @param {String} $source nom de l'input contenant la valeur à chercher
+ * @param {String} $cible id du bloc html à modifier, affiche une image de validation si aucun doublon
+ * ou une croix pour un doublon
+ * @returns {undefined}
+ */
+function verifUnique($champs, $table, $source, $cible) {
+    $valeur = $("input[name=" + $source + "]").val();
     $.getJSON(
             'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getNombre', table: 'utilisateur', champs: 'ut_login', valeur: 'admin'},
+            {test: 'Solya', action: 'getNombre', table: $table, champs: $champs, valeur: $valeur},
     function (json) {
-        console.log('dedans');
-        console.log(json);
-            //alert(json.total);
+        if (json.total == 0) {
+            $('#' + $cible).html('<img src="img/icon/accept.png">');
+
+        }
+        else {
+            $('#' + $cible).html('<img src="img/icon/delete.png">');
+        }
     }
     );
 }
@@ -74,37 +85,37 @@ function verifPassImg() {
  * fonction qui test la solidité du mot de passe
  * @returns {undefined}
  */
-function verifPassForce() {    
+function verifPassForce() {
     if ($('#pass').val() != ''
             )
     {
         // Doit contenir des majuscules, des chiffres et des minuscules
-var strongRegex = new RegExp("^(?=.{10,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$", "g");
+        var strongRegex = new RegExp("^(?=.{10,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*$", "g");
 
- 
+
         // Doit contenir soit des majuscules et des minuscules soit des minuscules et des chiffres
-var mediumRegex = new RegExp("^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+        var mediumRegex = new RegExp("^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
 
- 
+
         // Doit faire au minimum huit caractères
         var okRegex = new RegExp("(?=.{8,}).*", "g");
- 
+
         if (okRegex.test($('#pass').val()) === false) {
             // If ok regex doesn't match the password
-               alert('Le mot de passe doit contenir 8 caractères');
- 
+            alert('Le mot de passe doit contenir 8 caractères minimum');
+
         } else if (strongRegex.test($('#pass').val())) {
             // If reg ex matches strong password
-            $('#passForce').text('Good Password!');
+            $('#passForce').text('Mot de passe fort!');
         } else if (mediumRegex.test($('#pass').val())) {
             // If medium password matches the reg ex
-            $('#passForce').text('Medium Password!');
+            $('#passForce').text('Mot de passe moyen!');
         } else {
             // If password is ok
-            $('#passForce').text('Faible Password!');
+            $('#passForce').text('Mot de passe faible!');
         }
     }
-    
+
 }
 
 
@@ -114,14 +125,14 @@ var mediumRegex = new RegExp("^(?=.{8,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?
  */
 function verifPass() {
     var test = false;
-    
-    if ($('#pass').val().length >= 8 
+
+    if ($('#pass').val().length >= 8
             ) {
         if ($('#pass').val() != ''
                 && $('#confirmPass').val() != ''
                 && $('#pass').val() == $('#confirmPass').val())
         {
-            return true;
+           return true;                       
         }
         else {
             alert('Le mot de passe et sa confirmation doivent être identique');
