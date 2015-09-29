@@ -1,7 +1,7 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-
+    <script type="text/javascript" src="js/refFct.js"></script>
 
     <div class="corps">
 
@@ -9,7 +9,8 @@
             <div class=" haut"> 
 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select  name="ficheArticle" title="Choisir un élément" required>
+                <select  name="ficheArticle" title="Choisir un élément" required 
+                         onchange="changeRefCodeAtTime()">
                     <option value="">Aucun</option>
 
                     <?php
@@ -39,17 +40,27 @@
 
 
             <div class="col30"> 
-                <label for="refCode"> Code rapide de la référence: </label><br>          
-                <input name="refCode" type="text" placeholder="Code de la référence" autocomplete="off" required value="<?php echo $rsRef->ref_code; ?>"></input>
+               <input id="pays_abv" name="pays_abv" type="text" hidden>
+               <input id="ga_abv" name="ga_abv" type="text" hidden>
+               <label for="refCode">Code de la référence : </label><br>    
+               <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
+                       required autocomplete="off" onkeyup="getLastRefCode()" 
+                       onfocus="getLastRefCode()" onblur="$('#divSuggest').hide()"
+                       title="7 caractères Minimum (Chiffres/Lettres)" 
+                       pattern=".{7,}" value="<?php echo $rsRef->ref_code; ?>">
                 <br>
+                <div id="divSuggest" style="display:none">
+                </div>
                 <label for="refLbl"> Libellé: </label><br>          
-                <input name="refLbl" type="text" placeholder="Nom de la référence" required value="<?php echo $rsRef->ref_lbl; ?>"></input>
+                <input name="refLbl" type="text" placeholder="Nom de la référence" 
+                       title="3 caractères minimum" pattern=".{3,}" required 
+                       value="<?php echo $rsRef->ref_lbl; ?>">
                 <br>
                 <label for="refMrq"> Marque: </label><br>          
-                <input name="refMrq" type="text" placeholder="Marque de la référence" value="<?php echo $rsRef->ref_mrq; ?>"></input>
+                <input name="refMrq" type="text" placeholder="Marque de la référence" value="<?php echo $rsRef->ref_mrq; ?>">
                 <br>
                 <label for="refStMin"> Stock minimum: </label><br>
-                <input name="refStMin" placeholder="###,##" type="text" value="<?php echo $rsRef->ref_st_min; ?>"></input>         
+                <input name="refStMin" placeholder="###,##" type="text" value="<?php echo $rsRef->ref_st_min; ?>">         
                 <br>
                 <label for="refPoidsBrut"> Poids brut de l'article: </label><br>
                 <input name="refPoidsBrut" placeholder="gramme ### ###,##" type="text" value="<?php echo $rsRef->ref_poids_brut; ?>">         

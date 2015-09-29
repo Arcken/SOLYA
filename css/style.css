@@ -27,3 +27,10 @@ body{
     border: solid black 2px;
     margin: auto;
 }
+.Info{
+    color:green;
+}
+
+.erreur{
+    color:red;
+}

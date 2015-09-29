@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-require $path.'/model/ReferenceManager.php';
+require_once $path.'/model/ReferenceManager.php';
 
 try{
     $idRef   = $_REQUEST['idRef'];
@@ -18,6 +18,7 @@ try{
         
         $resMessage ="La référence:\n".$refCode."\n".$refLbl." à bien était Supprimé";
     }
+
 }catch(MySQLException $e){
     if(isset($resEr)){
         switch ($resEr){
@@ -26,3 +27,5 @@ try{
         }
     }
 }
+require_once $path.'/controler/control_ref_list.php';
+$sAction="ref_list";

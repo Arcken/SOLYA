@@ -2,20 +2,20 @@
 
 $sPageTitle = "Liste des références";
 
-require $path . '/model/Reference.php';
-require $path . '/model/ReferenceManager.php';
-require $path . '/model/Tva.php';
-require $path . '/model/TvaManager.php';
-require $path . '/model/DroitDouane.php';
-require $path . '/model/DroitDouaneManager.php';
-require $path . '/model/FicheArticle.php';
-require $path . '/model/FicheArticleManager.php';
-require $path . '/model/ModeConservation.php';
-require $path . '/model/ModeConservationManager.php';
-require $path . '/model/DureeConservation.php';
-require $path . '/model/DureeConservationManager.php';
-require $path . '/model/PrixVente.php';
-require $path . '/model/PrixVenteManager.php';
+require_once $path . '/model/Reference.php';
+require_once $path . '/model/ReferenceManager.php';
+require_once $path . '/model/Tva.php';
+require_once $path . '/model/TvaManager.php';
+require_once $path . '/model/DroitDouane.php';
+require_once $path . '/model/DroitDouaneManager.php';
+require_once $path . '/model/FicheArticle.php';
+require_once $path . '/model/FicheArticleManager.php';
+require_once $path . '/model/ModeConservation.php';
+require_once $path . '/model/ModeConservationManager.php';
+require_once $path . '/model/DureeConservation.php';
+require_once $path . '/model/DureeConservationManager.php';
+require_once $path . '/model/PrixVente.php';
+require_once $path . '/model/PrixVenteManager.php';
 
 $iTotal = Tool::getCountTable('reference');
 try {
@@ -33,8 +33,8 @@ try {
 } catch (MySQLException $e){
     $e->RetourneErreur();
     switch ($resEr){
-        case 'Vide':
-            $resMessage ="Aucune référence présente dans la base de données";
+        default:
+            $resMessage ="Une erreur est survenue : $resEr";
         break;
     }
 }

@@ -115,19 +115,32 @@ try {
 
             $resAddRef = ReferenceManager::updReference($oRef);
             $cnx->commit();
-            $resMessage = "La référence " . $oRef->ref_lbl . " a été modifié "
-                        . "avec succès";
+            $resMessage = "<p class=info>La référence " . $oRef->ref_lbl . " a été modifié "
+                        . "avec succès</p>";
         } else {
-            $resMessage = "Merci de compléter  le champ libéllé."
-                          . " (Nombre de caractères minimum 3) ";
+            $resMessage = "<p class='erreur'>Merci de compléter  le champ libéllé."
+                          . " (Nombre de caractères minimum 3)</p> ";
         }
+         $sAction='ref_list';
+         require $path.'/controler/control_ref_list.php';
     }
+    
 } catch (MySQLException $e) {
-    $resMessage = "Oups! Une erreur s'est produite lors de la modification de" 
-                . $oRef->ref_lbl 
-                ."Détail de l'érreur : \n" 
-                . $e->RetourneErreur() . ' ' 
-                . $resEr;
+     switch ($resEr){
+            case '23000':
+                $resMessage="<p class='erreur'>Impossible de Modifier la référence :\n'".$oRef->ref_code
+                    ."'\n'".$oRef->ref_lbl."'.\nMerci de remplir le code référence avec un Code Unique</p>";
+                break;
+            
+            default:
+                $resMessage = "<p class='erreur'>Oups!Une erreur inattendue s'est produite lors de la modification de " 
+                . "'$oRef->ref_lbl'"
+                . ".Détail de l'érreur : \n"  
+                . $resEr."</p>"
+                . "Merci de rééssayer ultérieurement";
+                break;
+        }
+    
     $cnx->rollback();
 }
    

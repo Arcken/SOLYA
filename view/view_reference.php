@@ -1,6 +1,6 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
     <script type="text/javascript" src="js/function.js"></script>
-    <script type="text/javascript" src="js/refAddFct.js"></script>
+    <script type="text/javascript" src="js/refFct.js"></script>
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     
     <div class="corps">
@@ -9,12 +9,15 @@
             <div class=" haut"> 
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select id="ficheArticle" name="ficheArticle" title="Choisir un élément" required onchange="changeRefCodeAtTime()">
+                <select id="ficheArticle" name="ficheArticle" title="Choisir un élément"
+                        required onchange="changeRefCodeAtTime()">
                     <option value="" selected>Aucun</option>
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
                         foreach($toFiArts as $oFiArt) { ?>
-                        <option value=<?php echo $oFiArt->fiart_id ?>> <?php echo 'Id :'.$oFiArt->fiart_id.' '.$oFiArt->fiart_lbl ?> </option>
+                        <option value=<?php echo $oFiArt->fiart_id ?>>
+                   <?php echo 'Id :'.$oFiArt->fiart_id.' '.$oFiArt->fiart_lbl ?>
+                        </option>
                    <?php }
                    
                    } ?>
@@ -29,13 +32,26 @@
                 <input id="pays_abv" name="pays_abv" type="text" hidden>
                 <input id="ga_abv" name="ga_abv" type="text" hidden>
                 <label for="refCode">Code de la référence : </label><br>          
-                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence" required autocomplete="off" onkeyup="getLastRefCode()"></input>
+                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
+                       required autocomplete="off" onkeyup="getLastRefCode()" 
+                       onfocus="getLastRefCode()" 
+                       onblur="function(){ 
+                                    $('#divSuggest').hide();
+                                    //console.log($('#divSuggest').text());
+                                    if( $('#divSuggest').html().length) == 0){
+                                        $('#refCodVld').show();
+                                    }
+                                }"
+                       title="7 caractères Minimum (Chiffres/Lettres)" pattern=".{7,}">
+                
+                 <img id="refCodVld" src="img/icon/accept.png" alt="" title="Code référence Valide" hidden/>
                 
                 <div id="divSuggest" style="display:none">
                 </div>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
-                <input name="refLbl" type="text" placeholder="Nom de la référence" required>
+                <input name="refLbl" type="text" placeholder="Nom de la référence" 
+                       title="3 caractères minimum" pattern=".{3,}"required>
                 <br>
                 <label for="refMrq"> Marque: </label><br>          
                 <input name="refMrq" type="text" placeholder="Marque de la référence">

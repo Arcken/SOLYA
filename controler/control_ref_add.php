@@ -95,16 +95,18 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $cnx->commit();
             $resMessage = "La référence " . $oRef->ref_lbl . " a été enregistré"
                           . " avec succès";
+            $sAction='ref_list';
+            require $path.'/controler/control_ref_list.php';
             
         } catch (MySQLException $e) {
-           if(isset($resEr)){
+           
                switch ($resEr) {
                    case '23000':
                        $resMessage='Merci de compléter le Code Référence'
                                     . ' avec un code unique';
                        break;
                }
-           }
+           
            $cnx->rollback();
         }
     }

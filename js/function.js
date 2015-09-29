@@ -351,7 +351,7 @@ function getLastRefCode() {
     var verif;
     var $divSuggest = $('#divSuggest');
     //$.ajaxSetup({async: false});
-    console.log($refCode);
+    //console.log($refCode);
     $divSuggest.empty();
     $divSuggest.hide();
 
