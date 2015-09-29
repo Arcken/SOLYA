@@ -161,20 +161,31 @@ function orderby(action, champs) {
 
 /**
  * Fonction qui affiche une boite de confirmation pour la suppression
- * @param {string ou int} id
+ * @param {string ou int} $id
  *  id de l'élément à effacer
- * @param string codetype
+ * @param string $codetype
  *  champs id l'élément
- * @param string type
+ * @param string $type
  * Type d'élément à supprimer (s'affiche dans la message box)
- * @param string action
+ * @param string $action
  * Action à effectuer pour le contrôleur
+ * @param  précision[$id][key]
+ * Arguments suplémentaire à passer dans l'url si besoin.(Optionnel)
  * @returns {undefined}
  */
-function delElt(id, codetype, type, action) {
-    $resBool = confirm("Voulez-vous supprimez l'élément: " + type + " numéro: " + id);
-    if ($resBool) {
-        window.open('index.php?action=' + action + "&" + codetype + "=" + id, '_self')
+function delElt($id, $codetype, $type, $action, $precision){
+    
+    $resBool = confirm("Voulez-vous supprimez l'élément: \n" + $type + " numéro: " + $id);
+    if ($resBool && $precision==null) {
+        window.open('index.php?action=' + $action + "&" +$codetype + "=" + $id, '_self');
+    }
+    else if($resBool && $precision.constructor === Array){
+        $url ="index.php?action="+$action+"&"+$codetype+"="+$id;
+        for(var $key in $precision[$id]){    
+            var $value = $precision[$id][$key];
+            $url+="&"+$key+"="+$value;
+        }
+        window.open($url,'_self');
     }
 }
 

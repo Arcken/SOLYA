@@ -5,6 +5,9 @@
     <div class="corps">
         <div>
             <table id="tableRef">
+                <script type='text/javascript'>
+                    $tabRefs=new Array();
+                </script>
                 <tr> <!--En-tête du tableau-->
                     <th class="colTitle" id="colImg">Image</th>
                     <th class="colTitle" 
@@ -65,6 +68,14 @@
                 <!--Données du tableau -->
                   <?php if (isset($toRef)&& is_array($toRef)) {
                          foreach($toRef as $oRef){ ?> 
+                
+                    <script type='text/javascript'>
+                        var $tRef = new Array();
+                        $tRef['refCode']= "<?php echo $oRef->ref_code; ?>";
+                        $tRef['refLbl'] = "<?php echo $oRef->ref_lbl; ?>";
+                        $tabRefs[<?php echo $oRef->ref_id ?>]=$tRef;
+                    </script>
+                    
                      <tr>
                         <td class="colData">
                             <?php if($oRef->ref_photos_pref!=''){ ?>
@@ -124,7 +135,7 @@
                         
                         <td>
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delElt(<?php echo $oRef->ref_id ?>, "refId", "Référence", "ref_del")'
+                                 onclick='delElt(<?php echo $oRef->ref_id ?>, "idRef", "Référence", "ref_del", $tabRefs)'
                              />
                         </td>
                      </tr>

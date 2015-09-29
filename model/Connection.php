@@ -70,6 +70,7 @@ class Connection {
         
         try {
             global $resEr;
+            global $resMessage;
             ExceptionThrower::Start();
             if (empty(self::$cnx)) {
                 self::$cnx = Connection::getConnection();
@@ -78,12 +79,14 @@ class Connection {
 
 
             if ($tParam == null) {
-                $result = $stm = self::$cnx->query($sql);
+                $stm = self::$cnx->query($sql);
+                
             } else {
+                
                 $stm = self::$cnx->prepare($sql);
-
                 $stm->execute($tParam);
             }
+            
             switch ($codeRequete) {
 
                 //requête résultat simple
@@ -124,9 +127,14 @@ class Connection {
             ExceptionThrower::Stop();
             return $result;
             
-        } catch (Exception $e) {
+        } catch (Exception $e) { 
             
-           $resEr = $stm->errorCode();
+           if(isset($stm)){ 
+               $resEr = $stm->errorCode();
+           }else{
+               $resEr =self::$cnx->errorCode();
+           }
+           
            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);;
            return $result=0;
            

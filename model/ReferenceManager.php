@@ -43,9 +43,12 @@ class ReferenceManager {
                             ref_com,
                             ref_code, 
                             ref_photos,
-                            ref_photos_pref FROM reference ORDER BY ".$orderby." DESC LIMIT ".$nombre.",".$limit."";
+                            ref_photos_pref FROM reference " 
+                            ."ORDER BY ".$orderby." DESC "
+                            ."LIMIT ".$nombre.",".$limit."";
 
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
            throw $e;
         }
@@ -56,7 +59,8 @@ class ReferenceManager {
 
         try {
 
-            if (!empty($reference->ref_lbl) && (strlen($reference->ref_lbl) > Connection::getLimLbl())) {
+            if (!empty($reference->ref_lbl) 
+                 && (strlen($reference->ref_lbl) > Connection::getLimLbl())) {
 
                 $tParam = array(
                     $reference->dc_id,
@@ -119,10 +123,7 @@ class ReferenceManager {
      public static function updReference($reference) {
 
         try {
-
-            if (!empty($reference->ref_lbl) && (strlen($reference->ref_lbl) > Connection::getLimLbl())) {
-
-               
+  
                $tParam = array(
                     $reference->dc_id,
                     $reference->cons_id,
@@ -173,16 +174,9 @@ class ReferenceManager {
                           "WHERE r.ref_id=? ";
 
                 $result = Connection::request(2, $sql, $tParam);
-                
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
-            }
+ 
         } catch (MySQLException $e) {
-            if ($e->getCode() === 00000){
-                return 0;
-            }else{
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }
@@ -198,9 +192,7 @@ class ReferenceManager {
 
         try {
             if (isset($idRef)){
-            $tParam= array(
-                           $idRef
-                          );
+            $tParam= array($idRef);
 
             $sql = "SELECT  r.ref_id, 
                             r.dc_id,
@@ -223,16 +215,13 @@ class ReferenceManager {
                             r.ref_com,
                             r.ref_code,
                             r.ref_photos,
-                            r.ref_photos_pref FROM reference r WHERE r.ref_id = ? FOR UPDATE";
+                            r.ref_photos_pref FROM reference r 
+                            WHERE r.ref_id = ? FOR UPDATE";
 
             $result = Connection::request(0, $sql,$tParam);
             }
         } catch (MySQLException $e) {
-            if ($e->getCode() ===00000){
-                return 0;
-            }else{
-                return $e->getCode();
-            }
+           throw $e;
         }
         return $result;
     }
@@ -247,9 +236,7 @@ class ReferenceManager {
 
         try {
             if (isset($idRef)){
-            $tParam= array(
-                           $idRef
-                          );
+            $tParam= array($idRef );
 
             $sql = "SELECT  r.ref_id, 
                             r.dc_id,
@@ -277,12 +264,24 @@ class ReferenceManager {
             $result = Connection::request(0, $sql,$tParam);
             }
         } catch (MySQLException $e) {
-            if ($e->getCode() ===00000){
-                return 0;
-            }else{
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }       
+
+
+public static function delReference($idRef) {
+
+        try {
+
+               $tParam = array($idRef);
+                    
+                $sql = "DELETE FROM reference  WHERE ref_id=? ";
+                $result = Connection::request(2, $sql, $tParam);
+        
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }

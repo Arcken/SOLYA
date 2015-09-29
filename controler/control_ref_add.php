@@ -76,7 +76,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $resAddRef = ReferenceManager::insReference($oRef);
             $idRef = Connection::dernierId();
 
-            if (isset($_REQUEST['pvePer']) && !empty($_REQUEST['pvePer']) || isset($_REQUEST['pveEnt']) && !empty($_REQUEST['pveEnt'])) {
+            if (isset($_REQUEST['pvePer']) && !empty($_REQUEST['pvePer']) ||
+                    isset($_REQUEST['pveEnt']) && !empty($_REQUEST['pveEnt'])) {
 
                 require $path . '/model/PrixVente.php';
                 require $path . '/model/PrixVenteManager.php';
@@ -92,13 +93,15 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             echo '<br> id Ref:' . $idRef;
 
             $cnx->commit();
-            $resMessage = "La référence " . $oRef->ref_lbl . " a été enregistré avec succès";
+            $resMessage = "La référence " . $oRef->ref_lbl . " a été enregistré"
+                          . " avec succès";
             
         } catch (MySQLException $e) {
            if(isset($resEr)){
                switch ($resEr) {
                    case '23000':
-                       $resMessage='Merci de compléter le Code Référence avec un code unique';
+                       $resMessage='Merci de compléter le Code Référence'
+                                    . ' avec un code unique';
                        break;
                }
            }

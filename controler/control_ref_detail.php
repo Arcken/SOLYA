@@ -44,12 +44,10 @@ try {
 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
 
-        if (isset($_REQUEST['refLbl']) && (strlen($_REQUEST['refLbl'])) > Connection::getLimLbl()) {
+        if (isset($_REQUEST['refLbl']) && 
+                (strlen($_REQUEST['refLbl'])) > Connection::getLimLbl()) {
+            
             require $path . '/model/Reference.php';
-
-
-
-
 
 
             $cnx = Connection::getConnection();
@@ -91,7 +89,8 @@ try {
 //On intégre la lste des nouvelles photos avec l'ancienne
                 if ($rsRef->ref_photos != '') {
                     echo "photos deja existante";
-                    $oRef->ref_photos = $rsRef->ref_photos . ',' . implode(',', $resPhoto);
+                    $oRef->ref_photos = $rsRef->ref_photos . ',' 
+                                        . implode(',', $resPhoto);
                 } else {
                     echo "aucune photos existante";
                     $oRef->ref_photos = implode(',', $resPhoto);
@@ -105,7 +104,7 @@ try {
                     $oPve->pve_ent != $_REQUEST['pveEnt']) {
 
                 $oNewPve = new PrixVente();
-                $oNewPve->ref_id = $oRef->ref_id;
+                $oNewPve->ref_id  = $oRef->ref_id;
                 $oNewPve->pve_per = $_REQUEST['pvePer'];
                 $oNewPve->pve_ent = $_REQUEST['pveEnt'];
 
@@ -116,14 +115,19 @@ try {
 
             $resAddRef = ReferenceManager::updReference($oRef);
             $cnx->commit();
-            $resMessage = "La référence " . $oRef->ref_lbl . " a été modifié avec succès";
+            $resMessage = "La référence " . $oRef->ref_lbl . " a été modifié "
+                        . "avec succès";
         } else {
-            $resMessage = "Merci de compléter  le champ libéllé. (Nombre de caractères minimum 3) ";
+            $resMessage = "Merci de compléter  le champ libéllé."
+                          . " (Nombre de caractères minimum 3) ";
         }
     }
 } catch (MySQLException $e) {
-    $resMessage = "Oups! Une erreur s'est produite lors de la modification de" . $oRef->ref_lbl .
-            "Détail de l'érreur : \n" . $e->RetourneErreur() . ' ' . $resEr;
+    $resMessage = "Oups! Une erreur s'est produite lors de la modification de" 
+                . $oRef->ref_lbl 
+                ."Détail de l'érreur : \n" 
+                . $e->RetourneErreur() . ' ' 
+                . $resEr;
     $cnx->rollback();
 }
    
