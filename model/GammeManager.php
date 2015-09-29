@@ -24,11 +24,7 @@ class GammeManager {
             $sql = 'SELECT ga_id, ga_lbl, ga_abv FROM gamme';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() === 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }
@@ -53,11 +49,7 @@ class GammeManager {
                     . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' . $nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() === 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }
@@ -91,7 +83,7 @@ class GammeManager {
             }
         } catch (MySQLException $e) {
 
-            $result = 0;
+            throw $e;
         }
         return $result;
     }
@@ -117,7 +109,7 @@ class GammeManager {
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
             
         }
         return $result;
@@ -148,8 +140,7 @@ class GammeManager {
                 $result = Connection::request(2, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = 0;
-            echo $e->RetourneErreur();
+            throw $e;
         }
         return $result;
     }
@@ -169,7 +160,7 @@ class GammeManager {
             $sql = 'DELETE FROM gamme WHERE ga_id=?';
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = 0;
+           throw $e;
         }
         return $result;
     }

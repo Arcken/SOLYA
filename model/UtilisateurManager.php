@@ -20,7 +20,7 @@ class UtilisateurManager {
 
         try {
 
-            $sql = 'SELECT ut_nom, ut_prenom, ut_login, ut_actif, grp_nom '
+            $sql = 'SELECT ut_nom, ut_prenom, ut_login, ut_actif, grp_nom, u.grp_id '
                     . 'FROM utilisateur AS u '
                     . 'JOIN groupe g ON u.grp_id = g.grp_id ';
             $result = Connection::request(1, $sql);
@@ -39,7 +39,7 @@ class UtilisateurManager {
      * Retourne un objet
      */
     public static function getUtilisateur($oUtilisateur) {
-        global $prefixeMDP;
+        
         try {
 
             $tParam = array(
@@ -54,7 +54,7 @@ class UtilisateurManager {
 
             $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -80,9 +80,8 @@ class UtilisateurManager {
                     . " WHERE ut_login =?";
 
             $result = Connection::request(0, $sql, $tParam);
-            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -114,10 +113,7 @@ class UtilisateurManager {
                 $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
             }
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000) {
-                return 0;
-            }
-            echo $e->RetourneErreur();
+            throw $e;
         }
         return $result;
     }
@@ -133,33 +129,27 @@ class UtilisateurManager {
     public static function addUtilisateur($oUtilisateur) {
         try {
 
-            if ((!empty($oUtilisateur->ut_login) && (strlen($oUtilisateur->ut_login)) > Connection::getLimLbl()) && (!empty($oUtilisateur->ut_pass) && (strlen($oUtilisateur->ut_pass)) > Connection::getLimLbl())) {
+            $tParam = array(
+                $oUtilisateur->ut_login,
+                sha1('!Stage2015!' . $oUtilisateur->ut_pass),
+                $oUtilisateur->ut_nom,
+                $oUtilisateur->ut_prenom,
+                $oUtilisateur->ut_actif,
+                $oUtilisateur->grp_id,
+            );
 
-                $tParam = array(
-                    $oUtilisateur->ut_login,
-                    sha1('!Stage2015!' . $oUtilisateur->ut_pass),
-                    $oUtilisateur->ut_nom,
-                    $oUtilisateur->ut_prenom,
-                    $oUtilisateur->ut_actif,
-                    $oUtilisateur->grp_id,
-                );
+            $sql = "INSERT INTO utilisateur ("
+                    . "UT_LOGIN,"
+                    . "UT_PASS,"
+                    . "UT_NOM,"
+                    . "UT_PRENOM,"
+                    . "UT_ACTIF,"
+                    . "GRP_ID)"
+                    . "VALUES(?,?,?,?,?,?)";
 
-                $sql = "INSERT INTO utilisateur ("
-                        . "UT_LOGIN,"
-                        . "UT_PASS,"
-                        . "UT_NOM,"
-                        . "UT_PRENOM,"
-                        . "UT_ACTIF,"
-                        . "GRP_ID)"
-                        . "VALUES(?,?,?,?,?,?)";
-
-                $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
-            }
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            throw $e;
         }
         return $result;
     }
@@ -194,8 +184,7 @@ class UtilisateurManager {
 
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = 0;
-            echo $e->RetourneErreur();
+            throw $e;
         }
         return $result;
     }

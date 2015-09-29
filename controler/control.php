@@ -187,8 +187,7 @@ else {
             case "fiart_detail":
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
                     require $path . '/view/view_fiche_article_list.php';
-                } else {
-                    $sAction = "fiart_detail_upd";
+                } else {                   
                     require $path . '/view/view_fiche_article_rw.php';
                 }
                 break;
@@ -309,21 +308,29 @@ else {
                     $sPageTitle = "Ajouter un pays";
                     require $path . '/model/Pays.php';
                     require $path . '/model/PaysManager.php';
-                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-                        $oPays = new Pays();
-                        $oPays->pays_abv = $_REQUEST['paysAbv'];
-                        $oPays->pays_nom = $_REQUEST['paysNom'];
-                        $oPays->pays_dvs_abv = $_REQUEST['paysDvsAbv'];
-                        $oPays->pays_dvs_nom = $_REQUEST['paysDvsNom'];
-                        $oPays->pays_dvs_sym = $_REQUEST['paysDvsSym'];
+                    if (isset($_REQUEST['btnForm']) 
+                            && $_REQUEST['btnForm'] == "Envoyer") {
+                        try {
+                            $oPays = new Pays();
+                            $oPays->pays_abv = $_REQUEST['paysAbv'];
+                            $oPays->pays_nom = $_REQUEST['paysNom'];
+                            $oPays->pays_dvs_abv = $_REQUEST['paysDvsAbv'];
+                            $oPays->pays_dvs_nom = $_REQUEST['paysDvsNom'];
+                            $oPays->pays_dvs_sym = $_REQUEST['paysDvsSym'];
 
-                        $result = PaysManager::addPays($oPays);
-                        $id = Connection::dernierId();
-                        if ($result == 1) {
-                            $resMessage = "<font color='green'> L'ajout du pays N° $id
-                 intitulée: $oPays->pays_nom est un succés</font>";
-                        } else {
-                            $resMessage = "<font color='red'> L'ajout du pays est un échec, champs mal remplies</font>";
+                            $result = PaysManager::addPays($oPays);
+                            $id = Connection::dernierId();
+                            if ($result == 1) {
+                                $resMessage = "<font color='green'> "
+                                        . "L'ajout du pays N° $id intitulée: "
+                                        . "$oPays->pays_nom est un succés</font>";
+                            } else {
+                                $resMessage = "<font color='red'> L'ajout du pays"
+                                        . " est un échec, champs mal remplies</font>";
+                            }
+                        } catch (MySQLException $e) {
+                            $resMessage = "<font color='red'> L'ajout du pays "
+                                    . "est un échec</font>";
                         }
                     }
                     $resAllPays = PaysManager::getAllPays();

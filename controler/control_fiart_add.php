@@ -1,5 +1,5 @@
 <?php
-
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 /**
  * Sous controleur ajout fiche article
  */
@@ -22,7 +22,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
 
     try {
-
+        
         //début de transaction si une erreur survient une exception est levé 
         //suivie d'un rollback
         $cnx = Connection::getConnection();
@@ -122,4 +122,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $resMessage = "<font color='green'> L'enregistrement de la "
                 . "fiche article est un echec</font>";
     }
+    require $path . '/controler/control_fiart_list.php';
+    $sAction='fiart_list';
+}
 }

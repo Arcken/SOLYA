@@ -37,7 +37,7 @@ class Tool {
         $limiteSuivante = $limite + $nombre;
         $limitePrecedente = $limite - $nombre;
 
-        echo '<table border = "0" ><tr>' . "\n";
+        echo '<table class="numPage" border = "0" ><tr>' . "\n";
         if (isset($_REQUEST['orderby'])) {
             $order = $_REQUEST['orderby'];
         } else {
@@ -46,7 +46,8 @@ class Tool {
         if ($limite != 0) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limitePrecedente . '&orderby=' . $order . '" method="post"><</a></td>' . "\n";
+            . $limitePrecedente . '&orderby=' . $order . '" method="post" '
+                    . 'title="précédent"><</a></td>' . "\n";
         }
 
         while ($numeroPages <= $nbpages) {
@@ -65,7 +66,8 @@ class Tool {
         if ($limiteSuivante < $total) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limiteSuivante . '&orderby=' . $order . '" method="post">></a></td>' . "\n";
+            . $limiteSuivante . '&orderby=' . $order . '" method="post" '
+                    . 'title="suivant">></a></td>' . "\n";
         }
 
         echo '</tr></table>' . "\n";

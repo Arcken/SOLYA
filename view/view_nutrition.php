@@ -18,7 +18,8 @@
     <form class="form" id="fNut" action="index.php">
         <div class="col90"> 
             <label for="nutLbl"> Libellé: </label>
-            <input name="nutLbl" placeholder="Saisie" required type="text">
+            <input name="nutLbl" placeholder="Saisie" required type="text"
+                   pattern=".{3,}" title="3 caractéres minimum">
             <br>
         </div>
         <div class='bas'>

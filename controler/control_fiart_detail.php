@@ -1,5 +1,5 @@
 <?php
-
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
 $sPageTitle = "Détail de la fiche N°".$_REQUEST['fiartId'];
 
@@ -53,10 +53,7 @@ if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
                     $oFiArt->fiart_photos = implode(',', $resPhoto);
                 }
             }
-            //Si une photo par défaut est choisie
-            if (isset($_REQUEST['fiartPhotosPref'])){
-                $oFiArt->fiart_photos_pref = $_REQUEST['fiartPhotosPref'];
-            }
+            
             //Hydratation de l'objet
             $oFiArt->fiart_id = $_REQUEST['fiartId'];
             $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
@@ -69,12 +66,11 @@ if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
             $oFiArt->fiart_desc_fr = $_REQUEST['fiartDescFr'];
             $oFiArt->fiart_desc_eng = $_REQUEST['fiartDescEng'];
             $oFiArt->fiart_desc_esp = $_REQUEST['fiartDescEsp'];
+            $oFiArt->fiart_photos_pref = $_REQUEST['fiartPhotosPref'];
 
             //Maj de la fiche article
             $r = FicheArticleManager::updFicheArticle($oFiArt);
-            if ($r != 1) {
-                        throw new Exception;
-                    }
+            
             //Effacement des enregistrements concernant cette fiche dans la table Regrouper
             RegrouperManager::delRegrouperFiart($oFiArt->fiart_id);
             //Effacement des enregistrements concernant cette fiche dans la table Informer
@@ -87,9 +83,7 @@ if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
                 $oRegrouper->fiart_id = $oFiArt->fiart_id;
                 $oRegrouper->ga_id = $value;
                 $r = RegrouperManager::addRegrouper($oRegrouper);
-                if ($r != 1) {
-                        throw new Exception;
-                    }
+                
             }
 
              //On vérifie pour chaque champ de nutrition, la valeur soit !=0
@@ -109,11 +103,10 @@ if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
                     $oInformer->nutfiart_ajr = $_REQUEST['nutAjr' . $object->nut_id];
                     $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
                     $r = InformerManager::addInformer($oInformer);
-                    if ($r != 1) {
-                        throw new Exception;
-                    }
+                    
                 }
             }
+           
             $cnx->commit();
             $resMessage = "<font color='green'> La modification de la "
                     . "fiche article N° $oFiArt->fiart_id intitulée: "
@@ -127,6 +120,8 @@ if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
                     . "$oFiArt->fiart_lbl a échoué</font>";
         }
         require $path . '/controler/control_fiart_list.php';
+        $sAction = 'fiart_list';
     }
 }
 $sButton = "Modifier";
+}

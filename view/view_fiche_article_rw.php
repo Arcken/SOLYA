@@ -15,7 +15,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <div>                    
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
                     <input name="fiartLbl" placeholder="description" required 
-                           type="text" value="<?php echo $resFiartDetail->fiart_lbl ?>">
+                           type="text" value="<?php echo $resFiartDetail->fiart_lbl ?>"
+                           pattern=".{3,}" title="3 caractéres minimum">
                     <br>
                     <label for="gamme"> Gamme: </label><br>                    
                     <select name="gamme[]" id="selGamme" onclick="listSelect('selGamme', 'listGamme')" 
@@ -196,6 +197,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
                 <input name="clear" type="reset"> 
                 <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
+                <input name="fiartId" value="<?php echo $resFiartDetail->fiart_id ?>" type="text" hidden>
                 <?php
                 if ($resFiartDetail->fiart_photos == '') {
                     ?>

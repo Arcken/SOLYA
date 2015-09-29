@@ -27,3 +27,7 @@ body{
     border: solid black 2px;
     margin: auto;
 }
+
+.numPage a{
+    color: white;
+}

@@ -16,7 +16,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                    <input name="gaId" value="<?php echo $resGaDetail->ga_id?>" type="text" readonly="">            
                     <br>
                     <label for="gaLbl"> Libellé de la gamme: </label>
-                    <input name="gaLbl" value="<?php echo $resGaDetail->ga_lbl?>" required type="text">            
+                    <input name="gaLbl" value="<?php echo $resGaDetail->ga_lbl?>" required type="text"
+                           pattern=".{3,}" title="3 caractéres minimum">            
                     <br>                
                     <label for="gaAbv"> Abréviation de la gamme: </label>
                     <input name="gaAbv" value="<?php echo $resGaDetail->ga_abv?>" required type="text">            

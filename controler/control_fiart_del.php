@@ -1,5 +1,5 @@
 <?php
-
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 require_once $path . '/model/FicheArticle.php';
 require_once $path . '/model/FicheArticleManager.php';
 
@@ -14,4 +14,6 @@ if (isset($_REQUEST['fiartId'])&& !empty($_REQUEST['fiartId'])) {
         $resMessage = "<font color='red'> Echec de la suppression</font>";
     }
     require $path . '/controler/control_fiart_list.php';
+    $sAction='fiart_list';
+}
 }

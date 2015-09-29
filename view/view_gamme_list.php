@@ -7,6 +7,9 @@
             <table>
                 <tr>
                     <th>
+                        Id de la gamme
+                    </th>
+                    <th>
                         Libellé de la gamme
                     </th>
                     <th>
@@ -17,6 +20,9 @@
             if ($resAllGa != 0 && is_array($resAllGa)) {
                 foreach ($resAllGa as $gamme) { ?>
                     <tr>
+                        <td>
+                            <?php echo $gamme->ga_id?>
+                        </td>
                     <td style="border-right: solid 2px black;">
                         <?php echo $gamme->ga_lbl?>
                     </td>
@@ -27,7 +33,7 @@
                              onclick='location.href = "index.php?action=ga_detail&gaId=<?php echo $gamme->ga_id ?>"'/></td>
 
                     <td><img src="img/icon/delete.png" alt="" title="Supprimer"
-                             onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_supp")'/></td>
+                             onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_del")'/></td>
 
                 </tr>
                     
@@ -36,7 +42,14 @@
             }
             ?>
             </table>
+            
         </div>
+    <?php
+        if ($iTotal > $iNbPage) {
+            // affichage des liens vers les pages
+            Tool::affichePages($limite, $iNbPage, $iTotal, $sAction);
+        }
+        ?>
 </div>
 
 <?php

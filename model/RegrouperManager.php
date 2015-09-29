@@ -24,7 +24,7 @@ class RegrouperManager {
             $sql = 'SELECT ga_id, fiart_id FROM regrouper';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
         }
         return $result;
     }
@@ -46,7 +46,7 @@ class RegrouperManager {
                     . 'WHERE fiart_id=?';
             $result = Connection::request(1, $sql, $tParam);
         } catch (MySQLException $e) {
-           $result = 0;
+            throw $e;
         }
         return $result;
     }
@@ -79,7 +79,7 @@ class RegrouperManager {
                 $result = 0;
             }
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -99,11 +99,9 @@ class RegrouperManager {
             $sql = 'DELETE FROM regrouper WHERE fiart_id=?';
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
 }
-
-?>

@@ -40,53 +40,28 @@ class PaysManager {
 
         try {
 
-            if (isset($oPays->pays_nom) && !empty($oPays->pays_nom)) {
+            $tParam = array(
+                $oPays->pays_nom,
+                $oPays->pays_abv,
+                $oPays->pays_dvs_nom,
+                $oPays->pays_dvs_abv,
+                $oPays->pays_dvs_sym
+            );
 
-                $tParam = array(
-                    $oPays->pays_nom,
-                    $oPays->pays_abv,
-                    $oPays->pays_dvs_nom,
-                    $oPays->pays_dvs_abv,
-                    $oPays->pays_dvs_sym
-                );
+            $sql = "INSERT INTO pays ("
+                    . " PAYS_NOM, "
+                    . " PAYS_ABV, "
+                    . " PAYS_DVS_NOM, "
+                    . " PAYS_DVS_ABV, "
+                    . " PAYS_DVS_SYM) "
+                    . " VALUES(?,?,?,?,?)";
 
-                $sql = "INSERT INTO pays ("
-                        . " PAYS_NOM, "
-                        . " PAYS_ABV, "
-                        . " PAYS_DVS_NOM, "
-                        . " PAYS_DVS_ABV, "
-                        . " PAYS_DVS_SYM) "
-                        . " VALUES(?,?,?,?,?)";
-
-                $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
 
-            $result = -1;
+            throw $e;
         }
         return $result;
-    }
-
-    /**
-     * Retourne le pays selon l'id de la fiche article
-     * @param $iFiArtId
-     * Attend l'id de la fiche article
-     */
-    public static function getPaysFromFiArt($fiArtId) {
-
-        $tParam = array(
-            $fiArtId
-        );
-
-        $sql = "SELECT pays_nom, 
-                      pays_abv,
-                      pays_dvs_nom,
-                      pays_dvs_abv,
-                      pays_dvs_sym FROM pays WHERE pays_id = ?";
-
-        Connection::request(0, $sql, $tParam);
     }
 
 }

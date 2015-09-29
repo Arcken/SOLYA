@@ -36,10 +36,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <?php }?>
             <div> 
                 <label for="gaLbl"> Libellé de la gamme: </label>
-                <input name="gaLbl" placeholder="Saisie" required type="text">            
+                <input name="gaLbl" placeholder="Saisie" required type="text" pattern=".{3,}" 
+                       title="3 caractéres minimum">            
                 <br>                
                 <label for="gaAbv"> Abréviation de la gamme: </label>
-                <input name="gaAbv" placeholder="Saisie" required type="text">            
+                <input name="gaAbv" placeholder="Saisie" required type="text" pattern=".{2,}" 
+                       title="2 caractéres minimum">            
                 <br> 
             </div>
 

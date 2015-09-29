@@ -25,7 +25,7 @@ class FicheArticleManager {
                     . 'WHERE fiart_id =?';
             $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -46,7 +46,7 @@ class FicheArticleManager {
                     . 'FROM fiche_article';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -72,7 +72,7 @@ class FicheArticleManager {
                     . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite . ' , ' . $nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -100,7 +100,7 @@ class FicheArticleManager {
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -127,7 +127,7 @@ class FicheArticleManager {
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = -1;
+           throw $e;
         }
         return $result;
     }
@@ -141,9 +141,7 @@ class FicheArticleManager {
      * Retourne le nombre de ligne impacté
      */
     public static function updFicheArticle($oFicheArticle) {
-        try {
-            if (!empty($oFicheArticle->fiart_lbl) && (strlen($oFicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
-
+        try {            
                 $tParam = array(
                     $oFicheArticle->fiart_lbl,
                     $oFicheArticle->fiart_photos,
@@ -177,12 +175,10 @@ class FicheArticleManager {
                         . "WHERE fiart_id = ?";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+            
         } catch (MySQLException $e) {
 
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -236,7 +232,7 @@ class FicheArticleManager {
             }
         } catch (MySQLException $e) {
 
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
@@ -256,7 +252,7 @@ class FicheArticleManager {
             $sql = 'DELETE FROM fiche_article WHERE fiart_id=?';
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
         }
         return $result;
     }
