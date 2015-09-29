@@ -25,13 +25,12 @@ if (!isset($_SESSION['auth'])) {
     require $path . '/view/view_connection.php';
 }
 //sinon si action = déconnection on détruit la session
-else if (isset($_REQUEST['action']) 
-        && $_REQUEST['action'] == 'deconnexion') {
+else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
     session_destroy();
     session_commit();
     $_SESSION = array();
     require $path . '/view/view_connection.php';
-} 
+}
 //sinon c'est que l'on est connecté
 else {
     /* -------------------------------------------------------------------------
@@ -41,8 +40,7 @@ else {
       ------------------------------------------------------------------------- */
 
     //si action ne contient pas nv_ (pour les popups)
-    if (isset($_REQUEST['action']) 
-            && strpos($_REQUEST['action'], 'nv_') === FALSE) {
+    if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') === FALSE) {
         $nv = 0;
         //on récupére l'action si elle est définie
         if (isset($_REQUEST['action'])) {
@@ -313,13 +311,20 @@ else {
                     require $path . '/model/PaysManager.php';
                     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                         $oPays = new Pays();
-                        $oPays->PAYS_ABV = $_REQUEST['paysAbv'];
-                        $oPays->PAYS_NOM = $_REQUEST['paysNom'];
-                        $oPays->PAYS_DVS_ABV = $_REQUEST['paysDvsAbv'];
-                        $oPays->PAYS_DVS_NOM = $_REQUEST['paysDvsNom'];
-                        $oPays->PAYS_DVS_SYM = $_REQUEST['paysDvsSym'];
+                        $oPays->pays_abv = $_REQUEST['paysAbv'];
+                        $oPays->pays_nom = $_REQUEST['paysNom'];
+                        $oPays->pays_dvs_abv = $_REQUEST['paysDvsAbv'];
+                        $oPays->pays_dvs_nom = $_REQUEST['paysDvsNom'];
+                        $oPays->pays_dvs_sym = $_REQUEST['paysDvsSym'];
+
                         $result = PaysManager::addPays($oPays);
-                        echo $result;
+                        $id = Connection::dernierId();
+                        if ($result == 1) {
+                            $resMessage = "<font color='green'> L'ajout du pays N° $id
+                 intitulée: $oPays->pays_nom est un succés</font>";
+                        } else {
+                            $resMessage = "<font color='red'> L'ajout du pays est un échec, champs mal remplies</font>";
+                        }
                     }
                     $resAllPays = PaysManager::getAllPays();
                     break;

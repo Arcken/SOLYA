@@ -40,8 +40,7 @@ class PaysManager {
 
         try {
 
-            if (!empty($oPays->pays_nom) &&
-                    (strlen($oPays->pays_nom) >= intval(Connection::getLimLbl()))) {
+            if (isset($oPays->pays_nom) && !empty($oPays->pays_nom)) {
 
                 $tParam = array(
                     $oPays->pays_nom,

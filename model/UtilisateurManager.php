@@ -47,7 +47,7 @@ class UtilisateurManager {
                 sha1('!Stage2015!' . $oUtilisateur->ut_pass)
             );
 
-            $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
+            $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id, grp_nom "
                     . "FROM utilisateur"
                     . " NATURAL JOIN GROUPE"
                     . " WHERE UT_LOGIN =? AND UT_PASS =?";

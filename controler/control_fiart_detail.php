@@ -1,11 +1,7 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//$sPageTitle = "Détail de la fiche N°".$_REQUEST['fiartId'];
+
+$sPageTitle = "Détail de la fiche N°".$_REQUEST['fiartId'];
 
 require_once $path . '/model/FicheArticle.php';
 require_once $path . '/model/FicheArticleManager.php';
@@ -21,7 +17,7 @@ require_once $path . '/model/Informer.php';
 require_once $path . '/model/InformerManager.php';
 require_once $path . '/inc/Tool.inc';
 
-if (isset($_REQUEST['fiartId'])) {
+if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
     $iFiartId = $_REQUEST['fiartId'];
     $resFiartDetail = FicheArticleManager::getFicheArticleDetailUpd($iFiartId);
     $resAllPays = PaysManager::getAllPays();
@@ -32,13 +28,14 @@ if (isset($_REQUEST['fiartId'])) {
 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
 
+        //début de transaction si une erreur survient une exception est levé 
+        //suivie d'un rollback
         $cnx = Connection::getConnection();
-        //début de transaction
         $cnx->beginTransaction();
 
         try {
             $oFiArt = new FicheArticle();
-            //Récupère l'ancienne liste de photos
+            //on récupère l'ancienne liste de photos
             $oFiArt->fiart_photos = $_REQUEST['fiartPhotos'];
 
             //Traitement des uploads de photos
@@ -95,10 +92,17 @@ if (isset($_REQUEST['fiartId'])) {
                     }
             }
 
-            //Insertion des nouvelles valeurs pour les Nutritions
+             //On vérifie pour chaque champ de nutrition, la valeur soit !=0
+            //Comme les input du formulaires sont générés dynamiquement, 
+            //leur nom est:
+            //la concaténation de 'nut' et de leur id pour les id, 
+            //et de 'nutAjr' et de leur id pour les valeurs
             foreach ($resAllNut as $object) {
 
-                if ((isset($_REQUEST['nut' . $object->nut_id]) && $_REQUEST['nut' . $object->nut_id] != '') || (isset($_REQUEST['nutAjr' . $object->nut_id]) && $_REQUEST['nutAjr' . $object->nut_id] != '')) {
+                if ((isset($_REQUEST['nut' . $object->nut_id]) 
+                        && $_REQUEST['nut' . $object->nut_id] != '') 
+                        || (isset($_REQUEST['nutAjr' . $object->nut_id]) 
+                                && $_REQUEST['nutAjr' . $object->nut_id] != '')) {
                     $oInformer = new Informer();
                     $oInformer->fiart_id = $oFiArt->fiart_id;
                     $oInformer->nut_id = $object->nut_id;
@@ -111,15 +115,18 @@ if (isset($_REQUEST['fiartId'])) {
                 }
             }
             $cnx->commit();
-            $resMessage = "<font color='green'> La modification de la fiche article N° $oFiArt->fiart_id
-                 intitulée: $oFiArt->fiart_lbl est un succés</font>";
+            $resMessage = "<font color='green'> La modification de la "
+                    . "fiche article N° $oFiArt->fiart_id intitulée: "
+                    . "$oFiArt->fiart_lbl est un succés</font>";
             
         } catch (MySQLException $e) {
 
             $cnx->rollback();
-            $resMessage = "<font color='red'> La modification de la fiche article N° $oFiArt->fiart_id
-                 intitulée: $oFiArt->fiart_lbl a échoué</font>";
+            $resMessage = "<font color='red'> La modification de la "
+                    . "fiche article N° $oFiArt->fiart_id intitulée: "
+                    . "$oFiArt->fiart_lbl a échoué</font>";
         }
+        require $path . '/controler/control_fiart_list.php';
     }
 }
 $sButton = "Modifier";

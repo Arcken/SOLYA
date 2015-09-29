@@ -10,11 +10,15 @@ require_once $path . '/model/FicheArticle.php';
 require_once $path . '/model/FicheArticleManager.php';
 
 $iTotal = Tool::getCountTable('fiche_article');
-
+//Si un champs de tri est défini on exécute la requète avec tri
 if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-    $orderby =  $_REQUEST['orderby'];
-    $resFiartList = FicheArticleManager::getAllFichesArticlesLim($limite,$iNbPage,$orderby);
+    $orderby = $_REQUEST['orderby'];
+    $resFiartList = FicheArticleManager::getAllFichesArticlesLim($limite, $iNbPage, $orderby);
+    
+} 
+//Sinon sans tri
+else {
+    $resFiartList = FicheArticleManager::getAllFichesArticlesLim($limite, $iNbPage);
 }
-else $resFiartList = FicheArticleManager::getAllFichesArticlesLim($limite,$iNbPage);
 
 
