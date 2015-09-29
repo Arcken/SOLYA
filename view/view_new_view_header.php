@@ -1,4 +1,4 @@
 
     
 </head>
-<body id="newView" onload="selMaj();" onblur="window.focus()">
+<body id="newView" onload="selMaj();" onblur="window.close()">
