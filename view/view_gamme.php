@@ -28,9 +28,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <?php } else { ?>
                 <h2> <?php echo $sPageTitle;
     } ?></h2>
-
+                
+                <?php if ($nv == 1) {
+                    
+?>
             <img src="img/icon/add.png" alt="" onclick="window.opener.getGamme()"title="Maj gamme fen parent"/>
-
+                <?php }?>
             <div> 
                 <label for="gaLbl"> Libellé de la gamme: </label>
                 <input name="gaLbl" placeholder="Saisie" required type="text">            

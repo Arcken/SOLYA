@@ -1,8 +1,9 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {?>
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-
+<div class="corps">
 <div class="list">
             <h2> Liste des éléments </h2>
+            <input type="button" onclick='location.href = "index.php?action=ga_add"' value="Ajouter">
             <table>
                 <tr>
                     <th>
@@ -23,10 +24,10 @@
                         <?php echo $gamme->ga_abv ?>
                     </td>
                     <td><img src="img/icon/modify.png" alt="" title="Modifier"
-                             onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $gamme->ga_id ?>"'/></td>
+                             onclick='location.href = "index.php?action=ga_detail&gaId=<?php echo $gamme->ga_id ?>"'/></td>
 
-                    <td><img src="img/icon/delete.png" alt="" title="Modifier"
-                             onclick='delElt(<?php echo $value->fiart_id ?>, "fiartId", "Fiche article", "fiart_supp")'/></td>
+                    <td><img src="img/icon/delete.png" alt="" title="Supprimer"
+                             onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_supp")'/></td>
 
                 </tr>
                     
@@ -36,6 +37,7 @@
             ?>
             </table>
         </div>
+</div>
 
 <?php
     } else

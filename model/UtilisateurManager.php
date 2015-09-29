@@ -150,7 +150,7 @@ class UtilisateurManager {
      *  @return int|string 
      * Retourne un int (succées) ou un string (échec)
      */
-    public static function addtilisateur($oUtilisateur) {
+    public static function addUtilisateur($oUtilisateur) {
         try {
 
             if ((!empty($oUtilisateur->ut_login) && (strlen($oUtilisateur->ut_login)) > Connection::getLimLbl()) && (!empty($oUtilisateur->ut_pass) && (strlen($oUtilisateur->ut_pass)) > Connection::getLimLbl())) {
@@ -192,7 +192,7 @@ class UtilisateurManager {
      *  @return int|string 
      * Retourne un int (succées) ou un string (échec)
      */
-    public static function updtilisateur($oUtilisateur) {
+    public static function updUtilisateur($oUtilisateur) {
         try {
 
                 $tParam = array(

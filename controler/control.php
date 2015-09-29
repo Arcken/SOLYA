@@ -74,13 +74,28 @@ if (!isset($_SESSION['auth'])) {
 
             //gamme
             case "ga_add":
-                require $path . '/controler/control_ga_add.php';
+                require_once $path . '/controler/control_ga_add.php';
                 break;
             
-            case "ga_liste":
-                require $path . '/controler/control_ga_liste.php';
+            case "ga_list":
+                require_once $path . '/controler/control_ga_list.php';
                 break;
 
+            case "ga_detail":
+                require_once $path . '/controler/control_ga_detail.php';
+                break;
+            
+            //Suppression de fiche article
+            case "ga_supp":
+                require_once $path . '/model/Gamme.php';
+                require_once $path . '/model/GammeManager.php';
+                $res = GammeManager::delGamme($_REQUEST['gaId']);
+                if ($res == 1) {
+                    $resMessage = "<font color='orange'> La gamme N° " . $_REQUEST['gaId'] . " est supprimée</font>";
+                }
+                require $path . '/controler/control_ga_list.php';
+                break;
+            
             case "pays_add":
                 require $path . '/controler/control_pays_add.php';
                 break;
@@ -120,7 +135,7 @@ if (!isset($_SESSION['auth'])) {
                     $oUtilisateur->ut_actif = $_REQUEST['utActif'];
                     $oUtilisateur->grp_id = $_REQUEST['Groupe'];
                     
-                    $resUtilisateur = UtilisateurManager::addtilisateur($oUtilisateur);
+                    $resUtilisateur = UtilisateurManager::addUtilisateur($oUtilisateur);
                     
                     if ($resUtilisateur == 1) {
                         $resMessage = "<font color='green'> L'ajout de l'utilisateur $oUtilisateur->ut_login
@@ -153,7 +168,7 @@ if (!isset($_SESSION['auth'])) {
                     $oUtilisateur->ut_pass = $_REQUEST['utPass'];
                     $oUtilisateur->ut_actif = $_REQUEST['utActif'];
                     $oUtilisateur->grp_id = $_REQUEST['Groupe'];
-                    $resUpdUtilisateur = UtilisateurManager::updtilisateur($oUtilisateur);
+                    $resUpdUtilisateur = UtilisateurManager::updUtilisateur($oUtilisateur);
                     print_r($resUpdUtilisateur);
                     if ($resUpdUtilisateur == 1) {
                         $resMessage = "<font color='green'> La modification de l'utilisateur $oUtilisateur->ut_login
@@ -203,10 +218,29 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/view/view_fiche_article_rw.php';
                 break;
 
+            case "ga_detail":
+                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+                   require $path . '/view/view_gamme_list.php';
+               }
+                else {
+                    require $path . '/view/view_gamme_ru.php';                
+                }
+                break;
+            
             case "ga_add":
-            case "ga_add_add":
+            //case "ga_add_add":
+               if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+                   require $path . '/view/view_gamme_list.php';
+               }
                 require $path . '/view/view_gamme.php';
                 break;
+            
+            case "ga_supp":
+                $sAction = "ga_list";
+            case "ga_list":
+                require $path . '/view/view_gamme_list.php';
+                break;
+            
 
             //Références
             case "ref_add":

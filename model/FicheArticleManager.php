@@ -70,7 +70,8 @@ class FicheArticleManager {
         try {
 
             $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos_pref, fiart_ing, fiart_alg, fiart_com, fiart_desc_fr, pays_id '
-                    . 'FROM fiche_article ORDER BY '.$orderby.' LIMIT '.$limite.' , '.$nombre;
+                    . 'FROM fiche_article '
+                    . 'ORDER BY '.$orderby.' LIMIT '.$limite.' , '.$nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
 

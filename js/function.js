@@ -24,10 +24,11 @@ function popup(action)
     params += ', status=no';
     params += ', toolbar=no';
     newwin = window.open('index.php?action=nv_' + action, 'windowname5', params);
-
+    alert(navigator.userAgent.indexOf);
     if (window.focus) {
-        newwin.focus()
+        newwin.focus();
     }
+    
     return false;
 }
 
