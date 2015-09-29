@@ -19,11 +19,11 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
     $res = UtilisateurManager::getUtilisateur($oUser);
     
     //On contrôle le résultat et on stock les valeurs dans un tableau de session si le compte est actif
-    if (!empty($res) && isset($res) && $res->UT_ACTIF == 1) {
-        $_SESSION['name'] = $res->UT_PRENOM;
-        $_SESSION['lastname'] = $res->UT_NOM;        
+    if (!empty($res) && isset($res) && $res->ut_actif == 1) {
+        $_SESSION['name'] = $res->ut_prenom;
+        $_SESSION['lastname'] = $res->ut_nom;        
         $_SESSION['auth'] = TRUE;
-        $_SESSION['group'] = $res->GRP_NOM;
+        $_SESSION['group'] = $res->grp_nom;
         $_SESSION['login'] = $_REQUEST['login'];
     }
 

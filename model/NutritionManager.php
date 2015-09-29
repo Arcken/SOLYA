@@ -7,8 +7,7 @@
  */
 
 class NutritionManager {
-    //put your code here
-    
+
     /**
      * Retourne tous les enregistrements de la table nutrition
      * 
@@ -20,46 +19,41 @@ class NutritionManager {
         try {
 
             $sql = 'SELECT nut_id, nut_lbl FROM nutrition';
-            $result = Connection::request(1,$sql);
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000){
-                return 0;
-            }
-            else {
-                return $e->getCode ();
-            
-            }
+            $result = -1;
         }
         return $result;
     }
-    
+
     /**
      * Ajoute un enregistrement dans la table nutrition
-     * @param type $Nut
+     * @param $oNut
+     * attend un objet de la classe Nutrition
+     * @return int
+     * Nombre de ligne inséré
      */
-    public static function addNutrition($Nut){
-         try {
+    public static function addNutrition($oNut) {
+        try {
 
-            if (!empty($Nut->nut_lbl) && (strlen($Nut->nut_lbl)) > Connection::getLimLbl()) {
+            if (!empty($oNut->nut_lbl) && (strlen($oNut->nut_lbl)) > Connection::getLimLbl()) {
 
-                $tParam= array(
-                    $Nut->nut_lbl
+                $tParam = array(
+                    $oNut->nut_lbl
                 );
 
                 $sql = "INSERT INTO nutrition ("
                         . "NUT_LBL)"
                         . "VALUES(?)";
-                
+
                 $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
+            } else {
+                $result = 0;
             }
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            $result = -1;
         }
-    return $result;
+        return $result;
     }
-}
 
+}

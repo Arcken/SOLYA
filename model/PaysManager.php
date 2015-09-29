@@ -9,7 +9,6 @@
 /**
  * Manager de la table Pays
  */
-
 class PaysManager {
 
     /**
@@ -21,33 +20,35 @@ class PaysManager {
 
         try {
 
-            $sql = 'SELECT pays_id, pays_nom, pays_abv, pays_dvs_nom, pays_dvs_abv, pays_dvs_sym FROM pays';
-            $result = Connection::request(1,$sql);
+            $sql = 'SELECT pays_id, pays_nom, pays_abv, pays_dvs_nom, '
+                    . 'pays_dvs_abv, pays_dvs_sym '
+                    . 'FROM pays';
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+            $result = 0;
         }
         return $result;
     }
-    
-/**
- * Insert une enregistrement dans la table pays
- * @param $oPays
- * Attend un objet Pays
- * @return string
- */
-    public static function addPays($pays) {
+
+    /**
+     * Insert une enregistrement dans la table pays
+     * @param $oPays
+     * Attend un objet Pays
+     * @return string
+     */
+    public static function addPays($oPays) {
 
         try {
 
-            if (!empty($pays->pays_nom) && (strlen($pays->pays_nom) > Connection::getLimLbl())) {
+            if (!empty($oPays->pays_nom) &&
+                    (strlen($oPays->pays_nom) >= intval(Connection::getLimLbl()))) {
 
                 $tParam = array(
-                    $pays->pays_nom,
-                    $pays->pays_abv,
-                    $pays->pays_dvs_nom,
-                    $pays->pays_dvs_abv,
-                    $pays->pays_dvs_sym
-                    
+                    $oPays->pays_nom,
+                    $oPays->pays_abv,
+                    $oPays->pays_dvs_nom,
+                    $oPays->pays_dvs_abv,
+                    $oPays->pays_dvs_sym
                 );
 
                 $sql = "INSERT INTO pays ("
@@ -58,31 +59,35 @@ class PaysManager {
                         . " PAYS_DVS_SYM) "
                         . " VALUES(?,?,?,?,?)";
 
-                $result = Connection::request(2,$sql, $tParam);
+                $result = Connection::request(2, $sql, $tParam);
             } else {
-                $result = '<br/><p class="info">Enregistrement impossible sans libéllé </p>';
+                $result = 0;
             }
         } catch (MySQLException $e) {
 
-
-            $result = '<br/><p class="info">la Référence a bien était ajouté </p>';
+            $result = -1;
         }
         return $result;
     }
-    
-    public static function getPaysFromFiArt($fiArtId){
-        
+
+    /**
+     * Retourne le pays selon l'id de la fiche article
+     * @param $iFiArtId
+     * Attend l'id de la fiche article
+     */
+    public static function getPaysFromFiArt($fiArtId) {
+
         $tParam = array(
             $fiArtId
         );
 
-        $sql ="SELECT pays_nom, 
+        $sql = "SELECT pays_nom, 
                       pays_abv,
                       pays_dvs_nom,
                       pays_dvs_abv,
                       pays_dvs_sym FROM pays WHERE pays_id = ?";
-        
-        Connection::request(0,$sql,$tParam);
-    
+
+        Connection::request(0, $sql, $tParam);
     }
+
 }

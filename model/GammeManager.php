@@ -35,9 +35,14 @@ class GammeManager {
 
     /**
      * Retourne tous les enregistrements de la table Gamme avec limite définie
-     * 
-     * @return objet[]
-     * Renvoie tableau d'objet
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
+     * @return Objet[]
+     * Retourne un tableau d'objet
      */
     public static function getAllGammesLim($limite, $nombre, $orderby = 'ga_id') {
 
@@ -150,9 +155,11 @@ class GammeManager {
     }
 
     /**
-     * Supprime l'enregistremen de la table selon son id
-     * @param int $iGaId
-     * @return int nombre de ligne impacté
+     * Supprime l'enregistrement de la table selon son id
+     * @param $iGaId
+     * id de la gamme
+     * @return int 
+     * nombre de ligne impacté
      */
     public static function delGamme($iGaId) {
         try {

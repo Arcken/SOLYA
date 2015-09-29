@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Manager de la table INFORMER
  */
@@ -14,7 +8,8 @@ class InformerManager {
     /**
      * Retourne tous les enregistrements de la table INFORMER
      * 
-     * @return informer[]
+     * @return objet[]
+     * Retourne un tableau d'objet
      */
     public static function getAllInformer() {
 
@@ -23,46 +18,48 @@ class InformerManager {
             $sql = 'SELECT * FROM informer';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000){
-                return 0;
-            }
-            else {
-                return $e->getCode ();
-            
-            }
-        }
-        return $result;
-    }
-
-    public static function getFiartInformer($iFiartId) {
-
-        try {            
-                $tParam = [$iFiartId];
-                $sql = 'SELECT fiart_id,nut_id, nutfiart_val, nutfiart_ajr FROM informer WHERE fiart_id = ?';
-                $result = Connection::request(1, $sql, $tParam);
-            
-        } catch (MySQLException $e) {
-            $result = "Erreur de traitement de donnée";
+            $result = -1;
         }
         return $result;
     }
 
     /**
-     * Insert une enregistrement dans la table gamme
-     * @param type $gamme
-     * @return string
+     * Retourne les nutritions selon l'id de la fiche article
+     * @param $iFiartId
+     * Id de la fiche article
+     * @return objet[]
+     * Retoourne un tableau d'objet
      */
-    public static function addInformer($informer) {
+    public static function getFiartInformer($iFiartId) {
+
+        try {
+            $tParam = [$iFiartId];
+            $sql = 'SELECT fiart_id,nut_id, nutfiart_val, nutfiart_ajr FROM informer WHERE fiart_id = ?';
+            $result = Connection::request(1, $sql, $tParam);
+        } catch (MySQLException $e) {
+            $result = -1;
+        }
+        return $result;
+    }
+
+    /**
+     * Insert une enregistrement dans la table informer
+     * @param $oInformer
+     * attend un objet de la classe Informer
+     * @return int
+     * Retourne le nombre de ligne inséré
+     */
+    public static function addInformer($oInformer) {
 
         try {
 
-            if ($informer->nutfiart_ajr != '' || $informer->nutfiart_val != '') {
+            if ($oInformer->nutfiart_ajr != '' || $oInformer->nutfiart_val != '') {
 
                 $tParam = array(
-                    $informer->fiart_id,
-                    $informer->nut_id,
-                    $informer->nutfiart_val,
-                    $informer->nutfiart_ajr
+                    $oInformer->fiart_id,
+                    $oInformer->nut_id,
+                    $oInformer->nutfiart_val,
+                    $oInformer->nutfiart_ajr
                 );
 
                 $sql = "INSERT INTO informer ("
@@ -74,28 +71,32 @@ class InformerManager {
 
                 $result = Connection::request(2, $sql, $tParam);
             } else {
-                $result = '<br/><p class="info">Enregistrement Informer impossible</p>';
+                $result = 0;
             }
         } catch (MySQLException $e) {
-
-
-            $result = '<br/><p class="info">Erreur de base de données </p>';
+            $result = -1;
         }
         return $result;
     }
 
-    public static function delInformerFiart($iFiartId){
+    /**
+     * Efface un élément de la table informer selon l'id de la fiche article
+     * @param $iFiartId
+     * id de la fiche article
+     * @return int
+     * renvoie le nombre de ligne supprimé
+     */
+    public static function delInformerFiart($iFiartId) {
         try {
             $tParam = array(
-                    $iFiartId
-                    );
+                $iFiartId
+            );
             $sql = 'DELETE FROM informer WHERE fiart_id=?';
-            $result = Connection::request(2,$sql,$tParam);
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-           if ($e->getCode() == 00000) $result = 0;
+            $result = -1;
         }
         return $result;
-    
     }
-    
+
 }

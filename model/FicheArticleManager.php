@@ -7,33 +7,29 @@ require_once 'Connection.php';
  */
 class FicheArticleManager {
 
-    
     /**
-     * Retourne un enregistrement de la table fiche_article par son id
+     * Retourne un enregistrement de la table fiche_article selon son id
      * @param integer $fiartId
-     * @return fiche article Objet
-     * 
+     * ID de la fiche article
+     * @return Objet
+     * Objet
      */
     public static function getFicheArticleById($fiartId) {
 
         try {
-            $tParam=array($fiartId);
+            $tParam = array($fiartId);
             $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
                     . 'fiart_ing, fiart_alg, pays_id, fiart_com, fiart_com_tech, '
                     . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
-                    . 'FROM fiche_article WHERE fiart_id =?';
-            $result = Connection::request(0,$sql,$tParam);
+                    . 'FROM fiche_article '
+                    . 'WHERE fiart_id =?';
+            $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
-
-            if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            $result = -1;
         }
         return $result;
     }
-    
+
     /**
      * Retourne tous les enregistrements de la table fiche article
      * 
@@ -50,112 +46,122 @@ class FicheArticleManager {
                     . 'FROM fiche_article';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-
-            if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            $result = -1;
         }
         return $result;
     }
-/**
-     * Retourne tous les enregistrements de la table Référence
-     * 
+
+    /**
+     * Retourne tous les enregistrements de la table fiche article avec limite
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllFichesArticlesLim($limite,$nombre,$orderby = 'fiart_id') {
+    public static function getAllFichesArticlesLim($limite, $nombre, $orderby = 'fiart_id') {
 
         try {
 
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos_pref, fiart_ing, fiart_alg, fiart_com, fiart_desc_fr, pays_id '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos_pref, fiart_ing, '
+                    . 'fiart_alg, fiart_com, fiart_desc_fr, pays_id '
                     . 'FROM fiche_article '
-                    . 'ORDER BY '.$orderby.' LIMIT '.$limite.' , '.$nombre;
+                    . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite . ' , ' . $nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-
-            if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            $result = -1;
         }
         return $result;
     }
-    
+
     /**
      * Renvoie le détail d'une fiche article
-     * @return Objet[]
-     * Retourne un tableau d'objet
+     * @param $iFiartId
+     * id de la fiche article (integer)
+     * @return Objet
+     * Retourne un objet
      */
     public static function getFicheArticleDetail($iFiartId) {
 
         try {
-            
-                $tParam = array($iFiartId);
-            
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, fiart_alg, pays_id '
-                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
+
+            $tParam = array($iFiartId);
+
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, '
+                    . 'fiart_alg, pays_id '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, '
+                    . 'fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'WHERE f.fiart_id = ?';
-                    
-            
             $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+            $result = -1;
         }
         return $result;
     }
-    
+
     /**
      * Select for update détail d'une fiche article
+     * @param $iFiartId
+     * id de la fiche article (integer)
      * @return Objet
-     * @description Retourne un d'objet
+     * Retourne un objet
      */
     public static function getFicheArticleDetailUpd($iFiartId) {
 
         try {
-            
-                $tParam = array($iFiartId);
-            
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, fiart_ing, fiart_alg, f.pays_id, '
-                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
+
+            $tParam = array($iFiartId);
+
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
+                    . 'fiart_ing, fiart_alg, f.pays_id, fiart_com, fiart_com_tech, '
+                    . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'WHERE f.fiart_id = ? FOR UPDATE';
-                    
-            
             $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+            $result = -1;
         }
         return $result;
     }
 
-    public static function updFicheArticle($FicheArticle) {
-    try{
-        if (!empty($FicheArticle->fiart_lbl) && (strlen($FicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
+    /**
+     * Modifie une Fiche article selon son id
+     * 
+     * @param $oFicheArticle
+     * Attend un objet Fiche article
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updFicheArticle($oFicheArticle) {
+        try {
+            if (!empty($oFicheArticle->fiart_lbl) && (strlen($oFicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
 
                 $tParam = array(
-                    $FicheArticle->fiart_lbl,
-                    $FicheArticle->fiart_photos,
-                    $FicheArticle->fiart_photos_pref,
-                    $FicheArticle->fiart_ing,
-                    $FicheArticle->fiart_alg,
-                    $FicheArticle->fiart_pays_id,
-                    $FicheArticle->fiart_com,
-                    $FicheArticle->fiart_com_tech,
-                    $FicheArticle->fiart_com_util,
-                    $FicheArticle->fiart_desc_fr,
-                    $FicheArticle->fiart_desc_eng,
-                    $FicheArticle->fiart_desc_esp,
-                    $FicheArticle->fiart_id
+                    $oFicheArticle->fiart_lbl,
+                    $oFicheArticle->fiart_photos,
+                    $oFicheArticle->fiart_photos_pref,
+                    $oFicheArticle->fiart_ing,
+                    $oFicheArticle->fiart_alg,
+                    $oFicheArticle->fiart_pays_id,
+                    $oFicheArticle->fiart_com,
+                    $oFicheArticle->fiart_com_tech,
+                    $oFicheArticle->fiart_com_util,
+                    $oFicheArticle->fiart_desc_fr,
+                    $oFicheArticle->fiart_desc_eng,
+                    $oFicheArticle->fiart_desc_esp,
+                    $oFicheArticle->fiart_id
                 );
-                
-                                
-                 $sql = "UPDATE fiche_article SET "                        
+
+
+                $sql = "UPDATE fiche_article SET "
                         . "FIART_LBL = ?,"
                         . "FIART_PHOTOS = ?,"
                         . "FIART_PHOTOS_PREF = ?,"
@@ -170,45 +176,43 @@ class FicheArticleManager {
                         . "FIART_DESC_ESP = ? "
                         . "WHERE fiart_id = ?";
 
-                $result = Connection::request(2, $sql, $tParam);                
+                $result = Connection::request(2, $sql, $tParam);
             } else {
-                $result = '<p class="info">Enregistrement FIART impossible, erreur de données insérées</p><br/>';
+                $result = 0;
             }
         } catch (MySQLException $e) {
 
-            //echo $e->RetourneErreur();
-
-            $result = 'Enregistrement fiart erreur';
+            $result = -1;
         }
         return $result;
     }
-    
+
     /**
      * Effecute un insert dans la table ficher article à partir de l'objet
-     * @param 'FicheArticle'
+     * @param $oFicheArticle
      * Objet de la classe Fiche article
      * @return int
-     * @description renvoie 1 si insert effectuée sinon 0
+     * renvoie le nombre de ligne inséré
      */
-    public static function addFicheArticle($FicheArticle) {
+    public static function addFicheArticle($oFicheArticle) {
 
         try {
 
-            if (!empty($FicheArticle->fiart_lbl) && (strlen($FicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
+            if (!empty($oFicheArticle->fiart_lbl) && (strlen($oFicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
 
                 $tParam = array(
-                    $FicheArticle->fiart_lbl,
-                    $FicheArticle->fiart_photos,
-                    $FicheArticle->fiart_photos_pref,
-                    $FicheArticle->fiart_ing,
-                    $FicheArticle->fiart_alg,
-                    $FicheArticle->fiart_pays_id,
-                    $FicheArticle->fiart_com,
-                    $FicheArticle->fiart_com_tech,
-                    $FicheArticle->fiart_com_util,
-                    $FicheArticle->fiart_desc_fr,
-                    $FicheArticle->fiart_desc_eng,
-                    $FicheArticle->fiart_desc_esp                    
+                    $oFicheArticle->fiart_lbl,
+                    $oFicheArticle->fiart_photos,
+                    $oFicheArticle->fiart_photos_pref,
+                    $oFicheArticle->fiart_ing,
+                    $oFicheArticle->fiart_alg,
+                    $oFicheArticle->fiart_pays_id,
+                    $oFicheArticle->fiart_com,
+                    $oFicheArticle->fiart_com_tech,
+                    $oFicheArticle->fiart_com_util,
+                    $oFicheArticle->fiart_desc_fr,
+                    $oFicheArticle->fiart_desc_eng,
+                    $oFicheArticle->fiart_desc_esp
                 );
 
                 $sql = "INSERT INTO fiche_article ("
@@ -224,34 +228,37 @@ class FicheArticleManager {
                         . "FIART_DESC_FR,"
                         . "FIART_DESC_ENG,"
                         . "FIART_DESC_ESP) "
-                        
                         . "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
-                $result = Connection::request(2, $sql, $tParam);                
+                $result = Connection::request(2, $sql, $tParam);
             } else {
-                $result = '<p class="info">Enregistrement FIART impossible, erreur de données insérées</p><br/>';
+                $result = 0;
             }
         } catch (MySQLException $e) {
 
-            echo $e->RetourneErreur();
-
-            $result = 'Enregistrement fiart erreur';
+            $result = -1;
         }
         return $result;
     }
 
-    public static function delFicheArticle($iFiartId){
+     /**
+     * Supprime l'enregistremen de la table selon son id
+     * @param $iFiartId
+     * id de la fiche article
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delFicheArticle($iFiartId) {
         try {
             $tParam = array(
-                    $iFiartId
-                    );
+                $iFiartId
+            );
             $sql = 'DELETE FROM fiche_article WHERE fiart_id=?';
-            $result = Connection::request(2,$sql,$tParam);
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-            
+            $result = 0;
         }
         return $result;
-    
     }
-    
+
 }

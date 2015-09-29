@@ -7,7 +7,6 @@
  */
 
 class UtilisateurManager {
-    //put your code here
 
     /**
      * Retourne tous les enregistrements de la table utilisateur 
@@ -26,48 +25,36 @@ class UtilisateurManager {
                     . 'JOIN groupe g ON u.grp_id = g.grp_id ';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-
-            if ($e->getCode() == 00000) {
-                return 0;
-            } else
-                return $e->getCode();
+            $result = 0;
         }
         return $result;
     }
 
     /**
      * Retourne les détails d'un utilisateur selon son login et mot de passe
-     * 
+     * Sert à vérifier le login
      * @param $oUtilisateur
-     * attend un objet Utilisateur
-     * @return string|int
+     * attend un objet de la classe Utilisateur
+     * @return objet
      * Retourne un objet
      */
-    public static function getUtilisateur($Utilisateur) {
+    public static function getUtilisateur($oUtilisateur) {
         global $prefixeMDP;
         try {
 
-            if (!empty($Utilisateur->ut_login) && (strlen($Utilisateur->ut_login)) > Connection::getLimLbl() && !empty($Utilisateur->ut_pass) && (strlen($Utilisateur->ut_pass)) > Connection::getLimLbl()) {
+            $tParam = array(
+                $oUtilisateur->ut_login,
+                sha1('!Stage2015!' . $oUtilisateur->ut_pass)
+            );
 
-                $tParam = array(
-                    $Utilisateur->ut_login,
-                    sha1('!Stage2015!' . $Utilisateur->ut_pass)
-                    
-                );
+            $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
+                    . "FROM utilisateur"
+                    . " NATURAL JOIN GROUPE"
+                    . " WHERE UT_LOGIN =? AND UT_PASS =?";
 
-                $sql = "SELECT * FROM utilisateur"
-                        . " NATURAL JOIN GROUPE"
-                        . " WHERE UT_LOGIN =? AND UT_PASS =?";
-
-                $result = Connection::request(0, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
-            }
-        }  catch (MySQLException $e) {
-            if ($e->getCode() == 00000) {
-                return 0;
-            }
-            //echo $e->RetourneErreur();
+            $result = Connection::request(0, $sql, $tParam);
+        } catch (MySQLException $e) {
+            $result = -1;
         }
         return $result;
     }
@@ -84,25 +71,18 @@ class UtilisateurManager {
 
         try {
 
-            if (!empty($oUtilisateur->ut_login) && $oUtilisateur->ut_login != '') {
+            $tParam = array(
+                $oUtilisateur->ut_login
+            );
 
-                $tParam = array(
-                    $oUtilisateur->ut_login
-                );
+            $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
+                    . "FROM utilisateur"
+                    . " WHERE ut_login =?";
 
-                $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
-                        . "FROM utilisateur"
-                        . " WHERE ut_login =?";
-
-                $result = Connection::request(0, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
-            }
+            $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000) {
-                return 0;
-            }
-            echo $e->RetourneErreur();
+            $result = -1;
         }
         return $result;
     }
@@ -157,7 +137,7 @@ class UtilisateurManager {
 
                 $tParam = array(
                     $oUtilisateur->ut_login,
-                    sha1('!Stage2015!'. $oUtilisateur->ut_pass),
+                    sha1('!Stage2015!' . $oUtilisateur->ut_pass),
                     $oUtilisateur->ut_nom,
                     $oUtilisateur->ut_prenom,
                     $oUtilisateur->ut_actif,
@@ -195,25 +175,24 @@ class UtilisateurManager {
     public static function updUtilisateur($oUtilisateur) {
         try {
 
-                $tParam = array(
-                sha1('$!Stage2015!'.  $oUtilisateur->ut_pass),
-                    $oUtilisateur->ut_nom,
-                    $oUtilisateur->ut_prenom,
-                    $oUtilisateur->ut_actif,
-                    $oUtilisateur->grp_id,
-                    $oUtilisateur->ut_login
-                );
+            $tParam = array(
+                sha1('$!Stage2015!' . $oUtilisateur->ut_pass),
+                $oUtilisateur->ut_nom,
+                $oUtilisateur->ut_prenom,
+                $oUtilisateur->ut_actif,
+                $oUtilisateur->grp_id,
+                $oUtilisateur->ut_login
+            );
 
-                $sql = "UPDATE utilisateur set "
-                        . "UT_PASS = ?, "
-                        . "UT_NOM = ?, "
-                        . "UT_PRENOM = ?, "
-                        . "UT_ACTIF = ?, "
-                        . "GRP_ID = ? "
-                        . "WHERE ut_login = ?";
+            $sql = "UPDATE utilisateur set "
+                    . "UT_PASS = ?, "
+                    . "UT_NOM = ?, "
+                    . "UT_PRENOM = ?, "
+                    . "UT_ACTIF = ?, "
+                    . "GRP_ID = ? "
+                    . "WHERE ut_login = ?";
 
-                $result = Connection::request(2, $sql, $tParam);
-            
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             $result = 0;
             echo $e->RetourneErreur();
