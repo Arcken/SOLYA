@@ -47,7 +47,7 @@ class ReferenceManager {
 
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            die($e->retourneErreur());
+           throw $e;
         }
         return $result;
     }

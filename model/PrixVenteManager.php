@@ -31,10 +31,7 @@ class PrixVenteManager {
             $result = Connection::request(0,$sql,$tParam);
             
         } catch (MySQLException $e) {
-            $e->RetourneErreur();
-            if($e->getCode() === 00000){
-                $result =0;
-            }
+            throw $e;
             //die($e->retourneErreur());
         }
         return $result;

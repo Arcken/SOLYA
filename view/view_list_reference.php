@@ -90,8 +90,9 @@
                         <td class="colData">
                             <?php
                                 $oPve = PrixVenteManager::getCurPrixVente($oRef->ref_id);
-                                if($oPve===0){
-                                   $oPve= new PrixVente();
+                               
+                                if($oPve === 0){
+                                   $oPve = new PrixVente();
                                    $oPve->pve_ent='indéfinis';
                                    $oPve->pve_per='indéfinis';
                                 }

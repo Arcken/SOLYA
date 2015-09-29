@@ -33,24 +33,23 @@ $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
 $toDurCons = DureeConservationManager::getAllDureeConservations();
 $toModCons = ModeConservationManager::getAllModeConservations();
 $toFiArts = FicheArticleManager::getAllFichesArticles();
-$oPve = PrixVenteManager::getCurPrixVente($idRef);
 
-if ($oPve === 0){
-    
-    echo'je suis la';
-    $oPve =new PrixVente();
-    $oPve->pve_ent='indéfinis';
-    $oPve->pve_per='indéfinis';
-}
+try {
+    $oPve = PrixVenteManager::getCurPrixVente($idRef);
+    if ($oPve === 0) {
+        $oPve = new PrixVente();
+        $oPve->pve_ent = 'indéfinis';
+        $oPve->pve_per = 'indéfinis';
+    }
 
-if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
+    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
 
-    if (isset($_REQUEST['refLbl']) && !empty($_REQUEST['refLbl'])) {
-        require $path . '/model/Reference.php';
-
+        if (isset($_REQUEST['refLbl']) && (strlen($_REQUEST['refLbl'])) > Connection::getLimLbl()) {
+            require $path . '/model/Reference.php';
 
 
-        try {
+
+
 
 
             $cnx = Connection::getConnection();
@@ -77,19 +76,19 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
             $oRef->ref_emb_dim_diam = $_REQUEST['refEmbDimDiam'];
             $oRef->ref_com = $_REQUEST['refCom'];
             $oRef->ref_code = strtoupper($_REQUEST['refCode']);
-            
-            if (isset($_REQUEST['refMrq'])){
+
+            if (isset($_REQUEST['refMrq'])) {
                 $oRef->ref_mrq = $_REQUEST['refMrq'];
             }
-            //Récupère l'ancienne liste de photos
+//Récupère l'ancienne liste de photos
             $oRef->ref_photos = $_REQUEST['refPhotos'];
 
-            //Traitement des uploads de photos
+//Traitement des uploads de photos
 
             if (!empty($_FILES) && $_FILES['img_upload']['name'][0] != '') {
                 $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
 
-                //On intégre la lste des nouvelles photos avec l'ancienne
+//On intégre la lste des nouvelles photos avec l'ancienne
                 if ($rsRef->ref_photos != '') {
                     echo "photos deja existante";
                     $oRef->ref_photos = $rsRef->ref_photos . ',' . implode(',', $resPhoto);
@@ -101,29 +100,30 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
             if (isset($_REQUEST['refPhotosPref'])) {
                 $oRef->ref_photos_pref = $_REQUEST['refPhotosPref'];
             }
-            
-            if ($oPve->pve_per != $_REQUEST['pvePer'] ||
-                $oPve->pve_ent != $_REQUEST['pveEnt']) {
 
-                $oNewPve= new PrixVente();
+            if ($oPve->pve_per != $_REQUEST['pvePer'] ||
+                    $oPve->pve_ent != $_REQUEST['pveEnt']) {
+
+                $oNewPve = new PrixVente();
                 $oNewPve->ref_id = $oRef->ref_id;
                 $oNewPve->pve_per = $_REQUEST['pvePer'];
                 $oNewPve->pve_ent = $_REQUEST['pveEnt'];
-                
+
 
                 $resAddPve = PrixVenteManager::addPrixVente($oNewPve);
-                
             }
 
-            
+
             $resAddRef = ReferenceManager::updReference($oRef);
             $cnx->commit();
-            $resMessage="La référence ".$oRef->ref_lbl." a été modifié avec succès";
-        } catch (MySQLException $e) {
-            $cnx->rollback();
-            $resMessage="Oups! Une erreur s'est produite lors de la modification de".$oRef->ref_lbl.
-                "Détail de l'érreur : \n".$e->RetourneErreur();
+            $resMessage = "La référence " . $oRef->ref_lbl . " a été modifié avec succès";
+        } else {
+            $resMessage = "Merci de compléter  le champ libéllé. (Nombre de caractères minimum 3) ";
         }
     }
+} catch (MySQLException $e) {
+    $resMessage = "Oups! Une erreur s'est produite lors de la modification de" . $oRef->ref_lbl .
+            "Détail de l'érreur : \n" . $e->RetourneErreur() . ' ' . $resEr;
+    $cnx->rollback();
 }
    

@@ -69,6 +69,7 @@ class Connection {
 
         
         try {
+            global $resEr;
             ExceptionThrower::Start();
             if (empty(self::$cnx)) {
                 self::$cnx = Connection::getConnection();
@@ -81,7 +82,7 @@ class Connection {
             } else {
                 $stm = self::$cnx->prepare($sql);
 
-                $state = $stm->execute($tParam);
+                $stm->execute($tParam);
             }
             switch ($codeRequete) {
 
@@ -91,9 +92,8 @@ class Connection {
 
                     $result = $stm->fetch($format);
                     $stm->closeCursor();
-
-                    if (!$result) {
-                        throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+                    if (!$result){
+                        $result=0;
                     }
                     break;
 
@@ -104,32 +104,33 @@ class Connection {
 
                     $result = $stm->fetchAll($format);
                     $stm->closeCursor();
-
-                    if (!$result) {
-                        throw new MySQLException("Erreur sur la requête : $sql", self::$cnx);
+                    if (!$result){
+                        $result=0;
                     }
                     break;
 
 
-                //requête Etat requête
+                //requête Nombre de lignes impacté
 
                 case 2:
                     $result = $stm->rowCount();
                     $stm->closeCursor();
-                    //si result n'est pas supérieur a 0 alors la requête n'a pas marché	
-                    if (!$result) {
-                        throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" . $state, self::$cnx);
+                    if (!$result){
+                        $result=0;
                     }
                     break;
             }
             
             ExceptionThrower::Stop();
+            return $result;
+            
         } catch (Exception $e) {
-            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" . $state=0, self::$cnx);;
-        }
-        
-        return $result;
-        
+            
+           $resEr = $stm->errorCode();
+           throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);;
+           return $result=0;
+           
+        } 
     }
 
     public static function dernierId() {
