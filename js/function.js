@@ -148,9 +148,9 @@ function verifPass() {
 
 /**
  * Fonction qui appel une page en spécifier le choix du trie pour les reqêtes
- * @param string
+ * @param string action
  *  action à effectuer pour le contrôleur
- * @param string
+ * @param string champs
  *  champs sur lequel porte le tri de la requéte
  * @returns rien
  */
@@ -160,13 +160,13 @@ function orderby(action, champs) {
 
 /**
  * Fonction qui affiche une boite de confirmation pour la suppression
- * @param string ou int
+ * @param {string ou int} id
  *  id de l'élément à effacer
- * @param string
+ * @param string codetype
  *  champs id l'élément
- * @param string
+ * @param string type
  * Type d'élément à supprimer (s'affiche dans la message box)
- * @param string
+ * @param string action
  * Action à effectuer pour le contrôleur
  * @returns {undefined}
  */

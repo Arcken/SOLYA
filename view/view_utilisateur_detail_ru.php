@@ -13,7 +13,7 @@
             <input name="utLogin" type="text" value="<?php echo $resUtilisateur->ut_login?>">         
             <br>
             <label for="utPass"> Mot de passe: </label>
-            <input name="utPass" type="password" value="<?php echo $resUtilisateur->ut_pass?>">         
+            <input name="utPass" type="password" value="">         
             <br>
             <label for="utActif"> Compte actif: </label>
             <input name="utActif" type="radio" 

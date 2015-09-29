@@ -51,7 +51,8 @@ class UtilisateurManager {
 
                 $tParam = array(
                     $Utilisateur->ut_login,
-                    sha1($prefixeMDP . $Utilisateur->ut_pass)
+                    sha1('!Stage2015!' . $Utilisateur->ut_pass)
+                    
                 );
 
                 $sql = "SELECT * FROM utilisateur"
@@ -156,7 +157,7 @@ class UtilisateurManager {
 
                 $tParam = array(
                     $oUtilisateur->ut_login,
-                    $oUtilisateur->ut_pass,
+                    sha1('!Stage2015!'. $oUtilisateur->ut_pass),
                     $oUtilisateur->ut_nom,
                     $oUtilisateur->ut_prenom,
                     $oUtilisateur->ut_actif,
@@ -194,10 +195,8 @@ class UtilisateurManager {
     public static function updtilisateur($oUtilisateur) {
         try {
 
-            if ((!empty($oUtilisateur->ut_login) && !empty($oUtilisateur->ut_pass))) {
-
                 $tParam = array(
-                    $oUtilisateur->ut_pass,
+                sha1('$!Stage2015!'.  $oUtilisateur->ut_pass),
                     $oUtilisateur->ut_nom,
                     $oUtilisateur->ut_prenom,
                     $oUtilisateur->ut_actif,
@@ -214,11 +213,9 @@ class UtilisateurManager {
                         . "WHERE ut_login = ?";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible, erreur de données saisies</p>';
-            }
+            
         } catch (MySQLException $e) {
-
+            $result = 0;
             echo $e->RetourneErreur();
         }
         return $result;

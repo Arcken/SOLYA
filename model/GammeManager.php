@@ -63,8 +63,7 @@ class GammeManager {
             }
         } catch (MySQLException $e) {
 
-
-            $result = 'Erreur pour la Gamme';
+            $result = 0;
         }
         return $result;
     }

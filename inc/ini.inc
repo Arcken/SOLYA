@@ -21,7 +21,7 @@ if (file_exists($fichier) && is_file($fichier)) {
     $imgExtension = $config['APPLI']['imgextension'];
     $imgMaxSize = $config['APPLI']['imgmaxsize'];
     
-    $prefixeMDP = $config['APPLI']['mdpuser'];
+    
     } else {
     throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"
     , self::$cnx);

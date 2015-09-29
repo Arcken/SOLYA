@@ -76,6 +76,10 @@ if (!isset($_SESSION['auth'])) {
             case "ga_add":
                 require $path . '/controler/control_ga_add.php';
                 break;
+            
+            case "ga_liste":
+                require $path . '/controler/control_ga_liste.php';
+                break;
 
             case "pays_add":
                 require $path . '/controler/control_pays_add.php';
@@ -150,6 +154,7 @@ if (!isset($_SESSION['auth'])) {
                     $oUtilisateur->ut_actif = $_REQUEST['utActif'];
                     $oUtilisateur->grp_id = $_REQUEST['Groupe'];
                     $resUpdUtilisateur = UtilisateurManager::updtilisateur($oUtilisateur);
+                    print_r($resUpdUtilisateur);
                     if ($resUpdUtilisateur == 1) {
                         $resMessage = "<font color='green'> La modification de l'utilisateur $oUtilisateur->ut_login
                   est un succés</font>";
