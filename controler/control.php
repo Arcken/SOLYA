@@ -113,11 +113,17 @@ if (!isset($_SESSION['auth'])) {
                 require $path . '/controler/control_ref_list.php';
                 break;
             //Détail référence
-
+           
             case "ref_detail":
                 require $path . '/controler/control_ref_detail.php';
                 break;
-
+            
+            //Suppression référence
+            case "ref_del":
+                require $path.'/controler/control_ref_del.php';
+                break;
+            
+            //Ajout Utilisateur
             case "utilisateur_add":
                 require_once $path . '/model/Groupe.php';
                 require_once $path . '/model/GroupeManager.php';
@@ -237,6 +243,7 @@ if (!isset($_SESSION['auth'])) {
             
             case "ga_supp":
                 $sAction = "ga_list";
+                
             case "ga_list":
                 require $path . '/view/view_gamme_list.php';
                 break;
@@ -263,12 +270,14 @@ if (!isset($_SESSION['auth'])) {
                 $sAction = "fiart_list";
             case "fiart_detail_upd":
             case "fiart_list":                
-                require $path . '/view/view_list_fiche_article.php';
+                require $path . '/view/view_fiche_article_list.php';
                 break;
 
             //liste référence
+            case "ref_del":
+                $sAction="ref_list";
             case "ref_list":
-                require $path . '/view/view_list_reference.php';
+                require $path . '/view/view_reference_list.php';
                 break;
 
             //Pays add
