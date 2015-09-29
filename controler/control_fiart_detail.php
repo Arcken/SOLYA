@@ -46,18 +46,21 @@ if (isset($_REQUEST['fiartId'])) {
             if (!empty($_FILES) && $_FILES['img_upload']['name'][0] != '') {
                 $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
 
-                //On intégre la lste des nouvelles photos avec l'ancienne
+                //On intégre la liste des nouvelles photos avec l'ancienne si elle existe
                 if ($resFiartDetail->fiart_photos != '') {
                     echo "photos deja existante";
                     $oFiArt->fiart_photos = $resFiartDetail->fiart_photos . ',' . implode(',', $resPhoto);
-                } else {
-                    echo "aucune photos existante";
+                    
+                }//si  l'ancienne liste est vide on intégre que la nouvelle
+                else {                    
                     $oFiArt->fiart_photos = implode(',', $resPhoto);
                 }
             }
+            //Si une photo par défaut est choisie
             if (isset($_REQUEST['fiartPhotosPref'])){
                 $oFiArt->fiart_photos_pref = $_REQUEST['fiartPhotosPref'];
             }
+            //Hydratation de l'objet
             $oFiArt->fiart_id = $_REQUEST['fiartId'];
             $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
             $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
@@ -71,8 +74,10 @@ if (isset($_REQUEST['fiartId'])) {
             $oFiArt->fiart_desc_esp = $_REQUEST['fiartDescEsp'];
 
             //Maj de la fiche article
-            FicheArticleManager::updFicheArticle($oFiArt);
-
+            $r = FicheArticleManager::updFicheArticle($oFiArt);
+            if ($r != 1) {
+                        throw new Exception;
+                    }
             //Effacement des enregistrements concernant cette fiche dans la table Regrouper
             RegrouperManager::delRegrouperFiart($oFiArt->fiart_id);
             //Effacement des enregistrements concernant cette fiche dans la table Informer
@@ -84,7 +89,10 @@ if (isset($_REQUEST['fiartId'])) {
 
                 $oRegrouper->fiart_id = $oFiArt->fiart_id;
                 $oRegrouper->ga_id = $value;
-                RegrouperManager::addRegrouper($oRegrouper);
+                $r = RegrouperManager::addRegrouper($oRegrouper);
+                if ($r != 1) {
+                        throw new Exception;
+                    }
             }
 
             //Insertion des nouvelles valeurs pour les Nutritions
@@ -96,7 +104,10 @@ if (isset($_REQUEST['fiartId'])) {
                     $oInformer->nut_id = $object->nut_id;
                     $oInformer->nutfiart_ajr = $_REQUEST['nutAjr' . $object->nut_id];
                     $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
-                    InformerManager::addInformer($oInformer);
+                    $r = InformerManager::addInformer($oInformer);
+                    if ($r != 1) {
+                        throw new Exception;
+                    }
                 }
             }
             $cnx->commit();

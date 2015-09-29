@@ -51,12 +51,12 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
             //on exécute la requête d'insert de la fiche article
             $resFiartAdd = FicheArticleManager::addFicheArticle($oFiArt);
-            if ($resFiartAdd = 0)
+            if ($resFiartAdd != 1) {
                 throw new Exception;
+            }
             //On récupère l'id du dernier insert de la fiche article
             $oFiArt->fiart_id = Connection::dernierId();
-            ;
-
+            
             //On vérifie que la gamme soit renseignée
             if (isset($_REQUEST['gamme']) && !empty($_REQUEST['gamme'])) {
                 require $path . '/model/RegrouperManager.php';
@@ -70,13 +70,16 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                     $oRegrouper->ga_id = $value;
 
                     $r = RegrouperManager::addRegrouper($oRegrouper);
-                    echo 'gamme ajoute ' . $r;
+                    if ($r != 1) {
+                        throw new Exception;
+                    }
                 }
             }
 
             //On vérifie pour chaque champ de nutrition, la valeur soit !=0
             //Comme les input du formulaires sont générés dynamiquement, leur nom est
-            //la concaténation de nut est de l'id
+            //la concaténation de 'nut' et de leur id pour les id, et de 'nutAjr' et
+            //de leur id pour les valeurs
 
             require $path . '/model/InformerManager.php';
             require $path . '/model/Informer.php';
@@ -94,6 +97,9 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                     //on exécute la requête
                     $r = InformerManager::addInformer($oInformer);
+                    if ($r != 1) {
+                        throw new Exception;
+                    }
                 }
             }
         }

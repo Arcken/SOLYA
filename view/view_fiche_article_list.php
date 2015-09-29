@@ -39,7 +39,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                              onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></td>
 
                     <td><img src="img/icon/delete.png" alt="" title="Modifier"
-                             onclick='delElt(<?php echo $value->fiart_id ?>, "fiartId", "Fiche article", "fiart_supp")'/></td>
+                             onclick='delElt(<?php echo $value->fiart_id ?>, "fiartId", "Fiche article", "fiart_del")'/></td>
 
                 </tr>
                 <?php
