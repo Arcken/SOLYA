@@ -69,7 +69,8 @@ function verifUnique($champs, $table, $source, $cible) {
 
 /**
  * fonction qui rend visible une image si le pass et la confirmation sont identique
- * @returns {undefined}
+ * @returns boolean
+ * 
  */
 function verifPassImg() {
     if ($('#pass').val() != ''
@@ -77,9 +78,11 @@ function verifPassImg() {
             && $('#pass').val() == $('#confirmPass').val())
     {
         $('#passValid').show();
+       
     }
     else
         $('#passValid').hide();
+    
 }
 
 /**
