@@ -17,10 +17,12 @@ require $path.'/view/view_new_view_header.php';
         <h2>Ajouter Pays</h2>                
         <div> 
             <label for="paysNom"> Nom du pays: </label>
-            <input name="paysNom" placeholder="Saisie" required type="text">            
+            <input name="paysNom" placeholder="Saisie" required type="text"
+                   pattern=".{3,}" title="3 caractères minimum">            
             <br>                
             <label for="paysAbv"> Abréviation du pays: </label>
-            <input name="paysAbv" placeholder="Saisie" required type="text">            
+            <input name="paysAbv" placeholder="Saisie" required type="text"
+                   pattern=".{2,}" title="2 caractères minimum">            
             <br>
             <label for="paysDvsNom"> Devise du pays: </label>
             <input name="paysDvsNom" placeholder="Saisie" required type="text">            

@@ -10,12 +10,15 @@
             <input name="utPrenom" placeholder="prenom" type="text">         
             <br>            
             <label for="utLogin"> Nom d'utilisateur: </label>
-            <input name="utLogin" placeholder="Texte" type="text" required=""  autocomplete="off" onblur="verifUnique('ut_login','utilisateur','utLogin','verifUnique')" >
+            <input name="utLogin" placeholder="Texte" type="text" required=""  
+                   autocomplete="off" pattern=".{3,}" title="3 caractères minimum"
+                   onblur="verifUnique('ut_login','utilisateur','utLogin','verifUnique')" >
             <a id='verifUnique'></a>
             
             <br>
             <label for="utPass"> Mot de passe: </label>
-            <input name="utPass" id='pass' placeholder="Au moins 8 caractères" autocomplete="off" 
+            <input name="utPass" id='pass' placeholder="Au moins 8 caractères" 
+                   autocomplete="off" pattern=".{8,}" title="8 caractères minimum"
                    onblur='verifPassForce()' type="password" required=""> 
             <a id='passForce'></a>
             <br>

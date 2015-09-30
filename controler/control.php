@@ -66,6 +66,7 @@ else {
             //Suppression de fiche article
             case "fiart_del":
                 require $path . '/controler/control_fiart_del.php';
+                $sAction = "fiart_list";
                 break;
 
             //Liste de fiche article
@@ -105,14 +106,32 @@ else {
             //Suppression d'une gamme
             case "ga_del":
                 require $path . '/controler/control_ga_del.php';
+                 $sAction = "ga_list";
                 break;
 
 //---------------------------------Pays-----------------------------------------
+
             //ajout de pays
             case "pays_add":
                 require $path . '/controler/control_pays_add.php';
                 break;
-
+            
+            //liste de pays
+            case "pays_list":
+                require $path . '/controler/control_pays_list.php';
+                break;
+            
+            //détail pays
+            case "pays_detail":
+                require $path . '/controler/control_pays_detail.php';
+                break;
+            
+            //supp pays
+            case "pays_del":
+                require $path . '/controler/control_pays_del.php';
+                $sAction = "pays_list";
+                break;
+            
 //---------------------------------Nutrition------------------------------------
             //ajout de nutrition
             case "nut_add":
@@ -138,6 +157,7 @@ else {
             //Suppression d'une référence
             case "ref_del":
                 require $path . '/controler/control_ref_del.php';
+                $sAction = "ref_list";
                 break;
 
 //---------------------------Ajout Utilisateur----------------------------------
@@ -170,14 +190,15 @@ else {
 
             //Catalogue
 //------------------------------ Fiche article----------------------------------
-            case "fiart_supp":
-                $sAction = "fiart_list";
+            case "fiart_del":
+                
             case "fiart_list":
                 require $path . '/view/view_fiche_article_list.php';
                 break;
 
             case "fiart_add":
-                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Envoyer') {
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Envoyer') {
                     require $path . '/view/view_fiche_article_list.php';
                 } else {
                     require $path . '/view/view_fiche_article.php';
@@ -185,18 +206,20 @@ else {
                 break;
 
             case "fiart_detail":
-                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
                     require $path . '/view/view_fiche_article_list.php';
                 } else {
                     $sAction = "fiart_detail_upd";
-                    require $path . '/view/view_fiche_article_rw.php';
+                    require $path . '/view/view_fiche_article_ru.php';
                 }
                 break;
 
 //-------------------------------------- Gamme----------------------------------
 
             case "ga_detail":
-                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
                     require $path . '/view/view_gamme_list.php';
                 } else {
                     require $path . '/view/view_gamme_ru.php';
@@ -205,14 +228,15 @@ else {
 
             case "ga_add":
                 //case "ga_add_add":
-                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
                     require $path . '/view/view_gamme_list.php';
                 }
                 require $path . '/view/view_gamme.php';
                 break;
 
-            case "ga_supp":
-                $sAction = "ga_list";
+            case "ga_del":
+               
             case "ga_list":
                 require $path . '/view/view_gamme_list.php';
                 break;
@@ -230,7 +254,7 @@ else {
                 break;
 
             case "ref_del":
-                $sAction = "ref_list";
+                
             case "ref_list":
                 require $path . '/view/view_reference_list.php';
                 break;
@@ -247,6 +271,23 @@ else {
             case "pays_add":
                 require $path . '/view/view_pays.php';
                 break;
+            
+            case "pays_detail":
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    require $path . '/view/view_pays_list.php';
+                } else {
+                    require $path . '/view/view_pays_ru.php';
+                }                
+                break;
+            
+            case "pays_del":
+                
+            case "pays_list":
+                require $path . '/view/view_pays_list.php';
+                break;
+            
+//-----------------------------------Nutrition----------------------------------            
 
             case "nut_add":
                 require $path . '/view/view_nutrition.php';

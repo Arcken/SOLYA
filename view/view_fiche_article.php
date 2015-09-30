@@ -13,7 +13,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col30">
                 <div>
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
-                    <input name="fiartLbl" placeholder="description" required type="text">
+                    <input name="fiartLbl" placeholder="description" required type="text"
+                           pattern=".{3,}" title="3 caractères minimum">
                     <br>
                     <label for="gamme"> Gamme: </label><br>                    
                     <select name="gamme[]" id="selGamme" onclick="listSelect('selGamme', 'listGamme')" 

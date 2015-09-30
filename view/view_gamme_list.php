@@ -27,7 +27,7 @@
                              onclick='location.href = "index.php?action=ga_detail&gaId=<?php echo $gamme->ga_id ?>"'/></td>
 
                     <td><img src="img/icon/delete.png" alt="" title="Supprimer"
-                             onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_supp")'/></td>
+                             onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_del")'/></td>
 
                 </tr>
                     
@@ -36,6 +36,12 @@
             }
             ?>
             </table>
+            <?php
+        if ($iTotal > $iNbPage) {
+            // affichage des liens vers les pages
+            Tool::affichePages($limite, $iNbPage, $iTotal, $sAction);
+        }
+        ?>
         </div>
 </div>
 

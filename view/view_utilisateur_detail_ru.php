@@ -10,7 +10,9 @@
             <input name="utPrenom" type="text" value="<?php echo $resUtilisateur->ut_prenom?>">         
             <br>            
             <label for="utLogin"> Nom d'utilisateur: </label>
-            <input name="utLogin" type="text" value="<?php echo $resUtilisateur->ut_login?>">         
+            <input name="utLogin" type="text" required="" pattern=".{3,}" 
+                   title="3 caractères minimum"
+                   value="<?php echo $resUtilisateur->ut_login?>">         
             <br>
             <label for="utPass"> Mot de passe: </label>
             <input name="utPass" type="password" value="">         

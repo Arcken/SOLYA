@@ -119,7 +119,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
          <li class='has-sub'><a href='index.php?action=pays'><span>Pays</span></a>
              <ul>
                <li><a href='index.php?action=pays_add'><span>Ajouter</span></a></li>
-               <li><a href='pays_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=pays_list'><span>Liste</span></a></li>
             </ul>
          </li>
          <li class='has-sub'><a href='index.php?action=dd'><span>Droit douane</span></a>
