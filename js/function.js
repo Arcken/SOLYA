@@ -1,17 +1,19 @@
 nRowCount = 1;
-function ajoutBeLigne($table,$row) {
-    
-    $ligne = $('#' + $row).html();    
-    $id = $row + nRowCount;    
+function ajoutBeLigne($table, $row) {
+
+    $ligne = $('#' + $row).html();
+    $id = $row + nRowCount;
     $chaine = /onclick="(.+)">/;
-    $ligne = $ligne.replace(/onclick="(.+)">/,'onclick=\'delLigne("' + $id +'")\'>');
-    $('#' + $table).append('<tr id="' + $id + '">'+ $ligne + "</tr>");
+    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReference("refId","' + $id + '")\'>');
+    $ligne = $ligne.replace(/onclick="(.+)">/, 'onclick=\'delLigne("' + $id + '")\'>');
+    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
+    console.log($ligne);
     nRowCount++;
 }
 
-function delLigne($cible){
-    $res = confirm("Vouslez vous supprimer cette ligne: " + $cible);
-    if($res) {        
+function delLigne($cible) {
+    $res = confirm("Vouslez vous supprimer cette ligne");
+    if ($res) {
         $('#' + $cible).remove();
     }
 }
@@ -315,3 +317,27 @@ function getNut() {
     );
 }
 
+function getReference($champs, $row) {
+
+    $r = $('#' + $row);
+    $t = $('td', $r);
+    $i = $("input[name='" + $champs + "[]']", $t);
+    $j = $("textarea[name='refLbl[]']", $t);
+    console.log('input ' + $i.val());
+    console.log('inputlbl ' + $j.val());
+
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getRef', refId: $i.val()},
+    function (json) {
+        
+        $i = $("input[name='refLbl[]']", $t);
+        console.log($i.val());
+        for (var key in json) {
+            console.log( json[key].REF_LBL );
+            $j.val(json[key].REF_LBL);
+        }
+    }
+    );
+
+}

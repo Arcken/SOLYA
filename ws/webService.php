@@ -105,6 +105,22 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($donnees);
             
             break;
+        
+        case 'getRef':
+
+            $refId = $_REQUEST['refId'];
+            $tab = array();
+            $requete = "SELECT * FROM reference "
+                    . "WHERE ref_id ='".$refId."'";
+
+            $resultat = $bdd->query($requete);
+
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
+            }
+            echo json_encode($tab);
+            break;
+        
     }
 }
 ?>

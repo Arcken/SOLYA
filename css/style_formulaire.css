@@ -164,9 +164,6 @@ table{
     border-bottom: 2px solid white;
 }
 
-img:hover{
-    cursor:pointer; 
-}
 #divSuggest{
     background-color: white;
     width:157px;
@@ -208,4 +205,10 @@ img:hover{
 .beLigneNb{
     width: 50px;
     min-width: 50px;
+}
+beLigneId{
+    margin: auto;
+    width: 5px;
+    min-width: 5px;
+    max-width: 5px;
 }

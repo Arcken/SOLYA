@@ -34,3 +34,7 @@ body{
 .erreur{
     color:red;
 }
+
+img:hover{
+    cursor:pointer; 
+}

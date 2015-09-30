@@ -41,7 +41,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <table class="beLigne" id="beTable">
                     <tr>
                         <th>
-                            Référence
+                            Id
+                        </th>
+                        <th>
+                            Code
                         </th>
                         <th>
                             Libellé ref
@@ -77,8 +80,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </th>
                     </tr>
                     <tr id="beligne" hidden="">
+                        <td  class="beLigneId">
+                            <input type="text" name="refId[]"  class="id" onblur='getReference("refId","beligne")'>
+                        </td>
                         <td>
-                            <input type="text" value="MXSI01" name="refId[]">
+                            <input type="text" value="MXSI01" name="refCode[]">
                         </td>
                         <td>
                             <textarea name="refLbl[]">Tablette chocolat du Mexique 70% cacao</textarea>
@@ -103,10 +109,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="text" value="15" name="beligFt[]">
                         </td>
                         <td>
-                            <input type="text" value="com" name="beligLbl[]">
+                            <input type="text" value="11/12/2016" name="beligDlc[]">
+                            
                         </td>
                         <td>
-                            <input type="text" value="com" name="beligDlc[]">
+                            <textarea name="refLbl[]">Commentaire</textarea>
                         </td>
                         <td>
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
