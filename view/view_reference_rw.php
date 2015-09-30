@@ -40,8 +40,8 @@
 
 
             <div class="col30"> 
-               <input id="pays_abv" name="pays_abv" type="text" hidden>
-               <input id="ga_abv" name="ga_abv" type="text" hidden>
+               <input id="pays_abv" name="pays_abv_rw" type="text" hidden>
+               <input id="ga_abv" name="ga_abv_rw" type="text" hidden>
                <label for="refCode">Code de la référence : </label><br>    
                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
                        required autocomplete="off" onkeyup="getLastRefCode()" 

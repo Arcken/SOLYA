@@ -24,11 +24,11 @@ function popup(action)
     params += ', status=no';
     params += ', toolbar=no';
     newwin = window.open('index.php?action=nv_' + action, 'windowname5', params);
-    
+
     if (window.focus) {
         newwin.focus();
     }
-    
+
     return false;
 }
 
@@ -78,11 +78,11 @@ function verifPassImg() {
             && $('#pass').val() == $('#confirmPass').val())
     {
         $('#passValid').show();
-       
+
     }
     else
         $('#passValid').hide();
-    
+
 }
 
 /**
@@ -136,7 +136,7 @@ function verifPass() {
                 && $('#confirmPass').val() != ''
                 && $('#pass').val() == $('#confirmPass').val())
         {
-           return true;                       
+            return true;
         }
         else {
             alert('Le mot de passe et sa confirmation doivent être identique');
@@ -176,19 +176,19 @@ function orderby(action, champs) {
  * Arguments suplémentaire à passer dans l'url si besoin.(Optionnel)
  * @returns {undefined}
  */
-function delElt($id, $codetype, $type, $action, $precision){
-    
+function delElt($id, $codetype, $type, $action, $precision) {
+
     $resBool = confirm("Voulez-vous supprimez l'élément: \n" + $type + " numéro: " + $id);
-    if ($resBool && $precision==null) {
-        window.open('index.php?action=' + $action + "&" +$codetype + "=" + $id, '_self');
+    if ($resBool && $precision == null) {
+        window.open('index.php?action=' + $action + "&" + $codetype + "=" + $id, '_self');
     }
-    else if($resBool && $precision.constructor === Array){
-        $url ="index.php?action="+$action+"&"+$codetype+"="+$id;
-        for(var $key in $precision[$id]){    
+    else if ($resBool && $precision.constructor === Array) {
+        $url = "index.php?action=" + $action + "&" + $codetype + "=" + $id;
+        for (var $key in $precision[$id]) {
             var $value = $precision[$id][$key];
-            $url+="&"+$key+"="+$value;
+            $url += "&" + $key + "=" + $value;
         }
-        window.open($url,'_self');
+        window.open($url, '_self');
     }
 }
 
@@ -301,84 +301,3 @@ function getNut() {
     );
 }
 
-function getFiartPays($fiartId) {
-    $("#pays_abv").val('');
-    var $sRes = '';
-
-    $.ajaxSetup({async: false});
-    $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getFiartPays', fiartId: $fiartId},
-    function (json) {
-        var $str = '';
-        for (var key in json) {
-            $str += json[key].PAYS_ABV;
-        }
-        $sRes = $str;
-        $("#pays_abv").val($sRes.toUpperCase());
-
-    }
-    );
-    $.ajaxSetup({async: true});
-}
-
-
-function getFiartGamme($fiartId) {
-
-    $("#ga_abv").val('');
-    var $sRes = '';
-
-    $.ajaxSetup({async: false});
-    $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getFiartGamme', fiartId: $fiartId},
-    function (json) {
-        var $str = '';
-        for (var key in json) {
-            $str += json[key].GA_ABV;
-        }
-        $sRes = $str;
-        $("#ga_abv").val($sRes.toUpperCase());
-
-    }
-    );
-    $.ajaxSetup({async: true});
-}
-
-
-
-function getLastRefCode() {
-
-    var $refCode = $('#refCode').val();
-    var $divSuggest = $('#divSuggest');
-    var verif;
-    var $divSuggest = $('#divSuggest');
-    //$.ajaxSetup({async: false});
-    //console.log($refCode);
-    $divSuggest.empty();
-    $divSuggest.hide();
-
-    $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRefCode', refCode: $refCode.toString().toUpperCase()},
-    function (json) {
-        var $hideShow = false;
-        for (var key in json) {
-            if (json[key].ref_code.length === 0) {
-                $hideShow = false;
-                break;
-            } else {
-                $divSuggest.append(json[key].ref_code + '<br>');
-                $hideShow = true;
-            }
-        }
-        if ($hideShow === true) {
-            $divSuggest.show();
-        } else {
-            $divSuggest.hide();
-        }
-    }
-    );
-    //$.ajaxSetup({async: true});
-
-}

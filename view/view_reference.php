@@ -29,23 +29,22 @@
 
 
             <div class="col30"> 
-                <input id="pays_abv" name="pays_abv" type="text" hidden>
-                <input id="ga_abv" name="ga_abv" type="text" hidden>
+                <input id="pays_abv" name="pays_abv" type="text"  hidden/>
+                <input id="ga_abv" name="ga_abv" type="text"  hidden/>
                 <label for="refCode">Code de la référence : </label><br>          
                 <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
-                       required autocomplete="off" onkeyup="getLastRefCode()" 
-                       onfocus="getLastRefCode()" 
-                       onblur="function(){ 
-                                    $('#divSuggest').hide();
-                                    //console.log($('#divSuggest').text());
-                                    if( $('#divSuggest').html().length) == 0){
-                                        $('#refCodVld').show();
-                                    }
-                                }"
-                       title="7 caractères Minimum (Chiffres/Lettres)" pattern=".{7,}">
+                       required  pattern=".{7,}" autocomplete="off" 
+                       onkeyup="getLastRefCode();"
+                      
+                       onfocus="getLastRefCode();"  
+                                
+                       onblur="$('#divSuggest').hide();
+                                confirmRefCode();"
+                                
+                       title="7 caractères Minimum Chiffres/Lettres" />
                 
-                 <img id="refCodVld" src="img/icon/accept.png" alt="" title="Code référence Valide" hidden/>
-                
+                 <img id="refCodVld" src="img/icon/accept.png" alt="" title="Code référence Valide" hidden />
+                 <img id="refCodInvld" src="img/icon/delete.png" alt="" title="Code référence Non Valide" hidden />
                 <div id="divSuggest" style="display:none">
                 </div>
                 <br>
