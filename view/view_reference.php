@@ -10,7 +10,7 @@
                 
                 <label for="ficheArticle"> Associée fiche article: </label><br>
                 <select id="ficheArticle" name="ficheArticle" title="Choisir un élément"
-                        required onchange="changeRefCodeAtTime()">
+                        required onchange="changeRefCodeAtTime();">
                     <option value="" selected>Aucun</option>
                     
                    <?php if (isset($toFiArts) && is_array($toFiArts)){ 
@@ -33,7 +33,7 @@
                 <input id="ga_abv" name="ga_abv" type="text"  hidden/>
                 <label for="refCode">Code de la référence : </label><br>          
                 <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
-                       required  pattern=".{7,}" autocomplete="off" 
+                       required  pattern=".{6,}" autocomplete="off" 
                        onkeyup="getLastRefCode();"
                       
                        onfocus="getLastRefCode();"  
@@ -41,7 +41,7 @@
                        onblur="$('#divSuggest').hide();
                                 confirmRefCode();"
                                 
-                       title="7 caractères Minimum Chiffres/Lettres" />
+                       title="6 caractères Minimum Chiffres/Lettres" />
                 
                  <img id="refCodVld" src="img/icon/accept.png" alt="" title="Code référence Valide" hidden />
                  <img id="refCodInvld" src="img/icon/delete.png" alt="" title="Code référence Non Valide" hidden />
@@ -58,10 +58,10 @@
                 <label for="refStMin"> Stock minimum: </label><br>
                 <input name="refStMin" placeholder="###,##" type="text">         
                 <br>
-                <label for="refPoidsBrut"> Poids brut de l'article: </label><br>
+                <label for="refPoidsBrut"> Poids brut: </label><br>
                 <input name="refPoidsBrut" placeholder="gramme ### ###,##" type="text">         
                 <br>
-                <label for="refPoidsNet"> Poids net de l'article: </label><br>
+                <label for="refPoidsNet"> Poids net : </label><br>
                 <input name="refPoidsNet" placeholder="gramme ### ###,##" type="text">             
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
@@ -109,7 +109,7 @@
                 <label for="refEmbCouleur" >Couleur : </label><br>
                 <input name="refEmbCouleur" placeholder="Rouge !" type="text">         
                 <br> 
-                <label for="refEmbVlmCtn">Volume de produit contenu:</label><br>
+                <label for="refEmbVlmCtn">Volume net:</label><br>
                 <input name="refEmbVlmCtn" placeholder="###,### EN LITRE" type="text">         
                 <br>
                 <label for="refEmbDimLng">Longueur : </label><br>

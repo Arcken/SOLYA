@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 function changeRefCodeAtTime() {
 
     var $fiartId = $('#ficheArticle').val();
@@ -33,16 +35,21 @@ function chargeRefCode() {
     //confirmRefCode();
 }
 
-function confirmRefCode() {
+function confirmRefCode($oldRefCode) {
     
     $sugLgth = $('#divSuggest').html().length;
     $refCodeLgth=$('#refCode').val().length;
-    
+    $refCode =$('#refCode').val();
 
-    if ($sugLgth === 0 && $refCodeLgth > 7) {
+    if ($sugLgth === 0 && $refCodeLgth > 6 ) {
         $('#refCodVld').show();
         $('#refCodInvld').hide();
-    }else{
+   }
+   else if ($oldRefCode === $refCode){
+        $('#refCodVld').show();
+        $('#refCodInvld').hide();
+    }
+    else{
         $('#refCodVld').hide();
         $('#refCodInvld').show();
     }
