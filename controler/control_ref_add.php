@@ -93,8 +93,9 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             echo '<br> id Ref:' . $idRef;
 
             $cnx->commit();
-            $resMessage = "La référence " . $oRef->ref_lbl . " a été enregistré"
+            $msg = "La référence " . $oRef->ref_lbl . " a été enregistré"
                           . " avec succès";
+            Tool::addMsg($msg);
             $sAction='ref_list';
             require $path.'/controler/control_ref_list.php';
             
@@ -102,8 +103,9 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
            
                switch ($resEr) {
                    case '23000':
-                       $resMessage='Merci de compléter le Code Référence'
+                       $msg='Merci de compléter le Code Référence'
                                     . ' avec un code unique';
+                       Tool::addMsg($msg);
                        break;
                }
            

@@ -8,9 +8,12 @@
 
 <footer>
     <link href="css/style_footer.css" type="text/css" rel="stylesheet">
-    <p><?php if (isset($resMessage)) echo $resMessage;?></p>
-     <p><?php if (isset($resEr)) echo '!'.$resEr.'!';?></p>
     <div id="bloc_footer">
+        <?php
+     foreach ($_SESSION['msg'] as $msg ){
+        echo $msg;
+    }?>
+     <p><?php if (isset($resEr)) echo '!'.$resEr.'!';?></p>
     </div>
 </footer>
 

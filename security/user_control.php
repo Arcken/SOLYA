@@ -20,11 +20,12 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
     
     //On contrôle le résultat et on stock les valeurs dans un tableau de session si le compte est actif
     if (!empty($res) && isset($res) && $res->ut_actif == 1) {
-        $_SESSION['name'] = $res->ut_prenom;
+        $_SESSION['name']     = $res->ut_prenom;
         $_SESSION['lastname'] = $res->ut_nom;        
-        $_SESSION['auth'] = TRUE;
-        $_SESSION['group'] = $res->grp_nom;
-        $_SESSION['login'] = $_REQUEST['login'];
+        $_SESSION['auth']     = TRUE;
+        $_SESSION['group']    = $res->grp_nom;
+        $_SESSION['login']    = $_REQUEST['login'];
+        $_SESSION['msg']      = array("","","");
     }
 
     // c'est que le compte est inexistant ou désactivé

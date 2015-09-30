@@ -43,9 +43,6 @@ try {
     }
 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
-
-        if (isset($_REQUEST['refLbl']) && 
-                (strlen($_REQUEST['refLbl'])) > Connection::getLimLbl()) {
             
             require $path . '/model/Reference.php';
 
@@ -115,12 +112,11 @@ try {
 
             $resAddRef = ReferenceManager::updReference($oRef);
             $cnx->commit();
-            $resMessage = "<p class=info>La référence " . $oRef->ref_lbl . " a été modifié "
+            
+            $msg = "<p class=info>La référence " . $oRef->ref_lbl . " a été modifié "
                         . "avec succès</p>";
-        } else {
-            $resMessage = "<p class='erreur'>Merci de compléter  le champ libéllé."
-                          . " (Nombre de caractères minimum 3)</p> ";
-        }
+            Tool::addMsg($msg);
+       
          $sAction='ref_list';
          require $path.'/controler/control_ref_list.php';
     }
@@ -128,16 +124,18 @@ try {
 } catch (MySQLException $e) {
      switch ($resEr){
             case '23000':
-                $resMessage="<p class='erreur'>Impossible de Modifier la référence :\n'".$oRef->ref_code
+                $msg="<p class='erreur'>Impossible de Modifier la référence :\n'".$oRef->ref_code
                     ."'\n'".$oRef->ref_lbl."'.\nMerci de remplir le code référence avec un Code Unique</p>";
+                Tool::addMsg($msg);
                 break;
             
             default:
-                $resMessage = "<p class='erreur'>Oups!Une erreur inattendue s'est produite lors de la modification de " 
+                $msg = "<p class='erreur'>Oups!Une erreur inattendue s'est produite lors de la modification de " 
                 . "'$oRef->ref_lbl'"
                 . ".Détail de l'érreur : \n"  
                 . $resEr."</p>"
                 . "Merci de rééssayer ultérieurement";
+                Tool::addMsg($msg);
                 break;
         }
     

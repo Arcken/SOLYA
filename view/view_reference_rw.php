@@ -43,7 +43,8 @@
               
                <label for="refCode">Code de la référence : </label><br>    
                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
-                       required autocomplete="off"  onkeyup="getLastRefCode();"
+                       required autocomplete="off"  
+                       onkeyup="getLastRefCode();"
                       
                        onfocus="getLastRefCode();"  
                                 

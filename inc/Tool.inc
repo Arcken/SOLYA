@@ -131,7 +131,8 @@ class Tool {
                 $tNom[0] = strtolower($tNom[0]);
                 $tNom[1] = 'jpg';
                 $imgNom = implode('.', $tNom);
-                if ($tNom[0] != '') $res[] = $tNom[0];
+                if ($tNom[0] != '')
+                    $res[] = $tNom[0];
                 $tNom[0] = $tNom[0] . '_lbl';
                 $imgMiniNom = implode('.', $tNom);
 
@@ -176,6 +177,13 @@ class Tool {
             }
             return $res;
         }
+    }
+
+//Ajoute un message au tableau d'information $resMessage
+    public static function addMsg($msg) {
+            $_SESSION['msg'][2] = $_SESSION['msg'][1];
+            $_SESSION['msg'][1] = $_SESSION['msg'][0];
+            $_SESSION['msg'][0] = $msg;
     }
 
 }

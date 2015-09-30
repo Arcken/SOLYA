@@ -35,21 +35,17 @@ function chargeRefCode() {
     //confirmRefCode();
 }
 
-function confirmRefCode($oldRefCode) {
+function confirmRefCode() {
     
-    $sugLgth = $('#divSuggest').html().length;
+    $sugLgth = $('#divSuggest').text().length;
     $refCodeLgth=$('#refCode').val().length;
     $refCode =$('#refCode').val();
-
+    console.log($sugLgth);
     if ($sugLgth === 0 && $refCodeLgth > 6 ) {
         $('#refCodVld').show();
         $('#refCodInvld').hide();
    }
-   else if ($oldRefCode === $refCode){
-        $('#refCodVld').show();
-        $('#refCodInvld').hide();
-    }
-    else{
+   else{
         $('#refCodVld').hide();
         $('#refCodInvld').show();
     }
@@ -116,6 +112,7 @@ function getLastRefCode() {
         var $hideShow = false;
         for (var key in json) {
             if (json[key].ref_code.length === 0) {
+                $divSuggest.html('');
                 $hideShow = false;
                 break;
             } else {
@@ -131,6 +128,5 @@ function getLastRefCode() {
         }
     }
     );
- confirmRefCode();
-
+    confirmRefCode();
 }

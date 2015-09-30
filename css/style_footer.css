@@ -8,6 +8,7 @@ and open the template in the editor.
     Author     : Olivier
 */
 footer{
+    overflow: auto;
     z-index: 2;
     position:fixed;
     width:86%;
@@ -28,4 +29,5 @@ footer{
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 #bloc_footer{
+overflow: auto;
 }
