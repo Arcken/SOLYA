@@ -69,7 +69,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
       <ul>
          <li><a href='#'><span>Créer</span></a>
             <ul>
-               <li><a href='#'><span>Commande</span></a></li>
+               <li><a href='index.php?action=be_add'><span>Bon Entrée</span></a></li>
                <li><a href='#'><span>Facture</span></a></li>
                <li class='last'><a href='#'><span>Paiement</span></a></li>
             </ul>

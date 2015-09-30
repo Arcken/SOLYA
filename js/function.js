@@ -1,5 +1,19 @@
-function getValueFromJson(json) {
+nRowCount = 1;
+function ajoutBeLigne($table,$row) {
+    
+    $ligne = $('#' + $row).html();    
+    $id = $row + nRowCount;    
+    $chaine = /onclick="(.+)">/;
+    $ligne = $ligne.replace(/onclick="(.+)">/,'onclick=\'delLigne("' + $id +'")\'>');
+    $('#' + $table).append('<tr id="' + $id + '">'+ $ligne + "</tr>");
+    nRowCount++;
+}
 
+function delLigne($cible){
+    $res = confirm("Vouslez vous supprimer cette ligne: " + $cible);
+    if($res) {        
+        $('#' + $cible).remove();
+    }
 }
 /**
  * Fonction d'ouverture de nouvelle fenetre, 

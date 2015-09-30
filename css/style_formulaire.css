@@ -53,7 +53,7 @@ img{
 }
 
 .form textArea{
-    
+
 }
 
 .inputSmall{
@@ -79,17 +79,17 @@ img{
     -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
     box-shadow: 10px 10px 5px 0px #cfcfcf;
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
-    
+
 }
 .col30{
-      max-width: 30%; 
-      width:30%;
+    max-width: 30%; 
+    width:30%;
 }
 
 .col50{
     max-width: 45%; 
     width:45%;
-    
+
 }
 .col70{
     max-width: 70%; 
@@ -97,8 +97,8 @@ img{
 }
 
 .col90{
-    max-width: 90%; 
-    width:90%;
+    max-width: 95%; 
+    width:95%;
 }
 
 .col20{
@@ -170,4 +170,42 @@ img:hover{
 #divSuggest{
     background-color: white;
     width:157px;
+}
+
+.beLigne{
+    margin-top: 0.4%;
+    margin-bottom: 0.4%;
+    color: whitesmoke;
+    border-collapse: collapse;
+    width: 93%;
+}
+
+.beLigne th{
+    border: 1px solid black;
+    padding: -0.4%;
+}
+
+.beLigne td{
+    text-align: center;
+    border-bottom: 1px solid black;
+    size: auto;
+    //max-width: 100%;
+    //width: 100%;
+}
+.beLigne input{
+    size: auto;
+    //max-width: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+.beLigne textArea{
+    size: auto;
+    //max-width: 100%;
+    width: 100%;
+    margin: auto;
+}
+.beLigneNb{
+    width: 50px;
+    min-width: 50px;
 }

@@ -57,7 +57,13 @@ else {
                 $sPageTitle = "Accueil";
                 break;
 
-//-------------------------------Fiche article-------------------------------
+//-------------------------------Bon entrée-------------------------------------
+            
+            case "be_add":
+                require $path . '/controler/control_be_add.php';
+                break;
+            
+//-------------------------------Fiche article----------------------------------
             //Ajout de fiche article
             case "fiart_add":
                 require $path . '/controler/control_fiart_add.php';
@@ -188,7 +194,12 @@ else {
                 require $path . '/view/view_home.php';
                 break;
 
-            //Catalogue
+//-------------------------------Bon entrée-------------------------------------
+            
+            case "be_add":
+                require $path . '/view/view_bon_entree.php';
+                break;
+            
 //------------------------------ Fiche article----------------------------------
             case "fiart_del":
                 
