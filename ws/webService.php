@@ -110,15 +110,18 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
             $refId = $_REQUEST['refId'];
             $tab = array();
-            $requete = "SELECT * FROM reference "
+            $requete = "SELECT  ref_id, ref_lbl, dd_taux"
+                    . " FROM reference r "
+                    . "JOIN droit_douane d ON r.dd_id = d.dd_id "
                     . "WHERE ref_id ='".$refId."'";
 
             $resultat = $bdd->query($requete);
-
+           
             while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $data;
             }
             echo json_encode($tab);
+             
             break;
         
     }

@@ -97,8 +97,8 @@ img{
 }
 
 .col90{
-    max-width: 95%; 
-    width:95%;
+    max-width: 97%; 
+    width:97%;
 }
 
 .col20{
@@ -174,41 +174,64 @@ table{
     margin-bottom: 0.4%;
     color: whitesmoke;
     border-collapse: collapse;
-    width: 93%;
+    width: auto;
 }
 
 .beLigne th{
     border: 1px solid black;
-    padding: -0.4%;
+    
+    font-size: 0.8em;
 }
 
 .beLigne td{
     text-align: center;
-    border-bottom: 1px solid black;
-    size: auto;
-    //max-width: 100%;
-    //width: 100%;
+    //border-bottom: 1px solid black;
+    border: 1px solid black;
 }
+
 .beLigne input{
-    size: auto;
-    //max-width: 100%;
+    
     width: 100%;
     margin: auto;
 }
 
 .beLigne textArea{
-    size: auto;
-    //max-width: 100%;
-    width: 100%;
+    
+    width: 30px;
+    min-width: 30px;
     margin: auto;
 }
 .beLigneNb{
-    width: 50px;
-    min-width: 50px;
+    width: 40px;
+    min-width: 40px;
 }
-beLigneId{
+.beLigneId{
+    
+    width: 25px;
+    min-width: 25px;
+    
+}
+.beLigneCode{
+    
+    width: 60px;
+    min-width: 60px;
+    
+}
+.beLigneT{
+    //width: 30px;
+    //min-width: 30px;
+}
+
+.beLigneImg{
+    size: auto;
+     margin: auto;
+     text-align: center;
+}
+
+.tdImgTd{
     margin: auto;
-    width: 5px;
-    min-width: 5px;
-    max-width: 5px;
+    
+    text-align: center;
+    border: 1px solid black;
+    
 }

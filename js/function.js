@@ -3,7 +3,7 @@ function ajoutBeLigne($table, $row) {
 
     $ligne = $('#' + $row).html();
     $id = $row + nRowCount;
-    $chaine = /onclick="(.+)">/;
+    $ligne = $ligne.replace(/\[\]/g, '[' + nRowCount + ']');
     $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReference("refId","' + $id + '")\'>');
     $ligne = $ligne.replace(/onclick="(.+)">/, 'onclick=\'delLigne("' + $id + '")\'>');
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
@@ -323,19 +323,18 @@ function getReference($champs, $row) {
     $t = $('td', $r);
     $i = $("input[name='" + $champs + "[]']", $t);
     $j = $("textarea[name='refLbl[]']", $t);
-    console.log('input ' + $i.val());
-    console.log('inputlbl ' + $j.val());
-
+    
     $.getJSON(
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getRef', refId: $i.val()},
     function (json) {
         
         $i = $("input[name='refLbl[]']", $t);
+        console.log("json" + json);
         console.log($i.val());
         for (var key in json) {
-            console.log( json[key].REF_LBL );
-            $j.val(json[key].REF_LBL);
+            console.log( json[key].ref_lbl );
+            $j.val(json[key].ref_lbl);
         }
     }
     );
