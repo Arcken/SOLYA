@@ -404,9 +404,17 @@ function beCalcul(){
         $qtTotal += parseFloat(this.value);        
     });
     
-    //la val
+    //on calcule la valeur pour chaque unité les frais de douanes
+    $fdUnite = $fDouane / $qtTotal;
+    $('[name*="calculFd"]').pre
+    $('[name*="calculFd"]').each(function(){
+       console.log(this.prev());
+       
+    });
+    
     console.log('F douane: ' + $fDouane);
     console.log('qu total: ' + $qtTotal);
+    console.log('fd unite ' + $fdUnite);
     console.log('fin');
     
 }
