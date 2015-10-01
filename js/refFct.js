@@ -100,7 +100,7 @@ function getLastRefCode() {
 
     var $refCode = $('#refCode').val();
     var $divSuggest = $('#divSuggest');
-    var $divSuggest = $('#divSuggest');
+    
  
     $divSuggest.empty();
     $divSuggest.hide();
