@@ -36,6 +36,12 @@
             }
             ?>
             </table>
+            <?php
+        if ($iTotal > $iNbPage) {
+            // affichage des liens vers les pages
+            Tool::affichePages($limite, $iNbPage, $iTotal, $sAction);
+        }
+        ?>
         </div>
 </div>
 

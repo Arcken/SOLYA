@@ -111,7 +111,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <tr id="beligne" hidden="">
                         <td  class="beLigneId">
-                            <input type="text" name="refId[]"  onblur='getReference("refId","beligne")'>
+                            <input type="text" name="refId[]"  onblur='getReference("refId")'>
                         </td>
                         <td class="beLigneCode">
                             <input type="text" value="MXSI01" name="refCode[]">
@@ -124,31 +124,36 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="text" value="56.0" name="beligPu[]">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="4.00" name="ligQte[]">
+                            <input type="text" value="4.00" name="ligQte[]"
+                                   onblur='beCcDroitDouane("beligPu[]",
+                                               "beligTauxDouane[]",
+                                               "ligQte[]",
+                                               "beligDd[]")'>
                         </td>
                         <td class="beLigneNb">
                             <input type="text" value="10" name="beligDd[]">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="beligTauxDouane[]" disabled="">
+                            <input type="text" value="10" name="beligTauxDouane[]" readonly="">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="beligTaxe[]">
+                            <input type="text" value="10" name="beligTaxe[]"
+                                   onblur='beCc("beligDd[]","beligTaxe[]","calculFd[]")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFd[]" disabled="">
+                            <input type="text" value="10" name="calculFd[]" readonly="">
                         </td>
                         <td class="beLigneNb">
                             <input type="text" value="15" name="beligFb[]">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFb[]" disabled="">
+                            <input type="text" value="10" name="calculFb[]" readonly="">
                         </td>
                         <td class="beLigneNb">
                             <input type="text" value="15" name="beligFt[]">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFt[]" disabled="">
+                            <input type="text" value="10" name="calculFt[]" readonly="">
                         </td>
                         <td>
                             <input type="date" name="beligDlc[]">
@@ -170,6 +175,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
             <div class="bas">
                     <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
+                    <input name="Calcul" type="button" value="Calcul" onclick="beCalcul()">
                     <input name="clear" type="reset"> 
                     <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
                 </div>

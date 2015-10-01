@@ -51,7 +51,61 @@ class NutritionManager {
         return $result;
     }
     
+/**
+     * Select for update selon son id
+     * 
+     * @param $iNutrition
+     * attend l'id
+     * @return int
+     * Retourne nombre de ligne impacté
+     */
+    public static function getNutritionDetailUpd($iNutrition) {
 
+        try {
+
+            $tParam = array(
+                $iNutrition
+            );
+            $sql = "SELECT nut_id, nut_lbl "
+                    . "FROM nutrition "
+                    . "WHERE nut_id =? FOR UPDATE";
+            $result = Connection::request(0, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+     /**
+     * Modifie un enregistrement selon son id
+     * 
+     * @param $oNutrition
+     * Attend un objet Nutrition
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updNutrition($oNutrition) {
+        try {
+
+                $tParam = array(                
+                    $oNutrition->nut_lbl,
+                    $oNutrition->nut_id
+                );
+
+                $sql = "UPDATE nutrition SET "
+                        . "NUT_LBL = ? "
+                        . "WHERE nut_id =?";
+
+                $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     /**
      * Ajoute un enregistrement dans la table
      * @param $oNut
@@ -72,6 +126,26 @@ class NutritionManager {
 
                 $result = Connection::request(2, $sql, $tParam);
                 
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+     /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $iNutId
+     * id de l'élément
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delNutrition($iNutId) {
+        try {
+            $tParam = array(
+                $iNutId
+            );
+            $sql = 'DELETE FROM nutrition WHERE nut_id=?';
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
         }

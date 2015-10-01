@@ -1,13 +1,12 @@
 nRowCount = 1;
-function ajoutBeLigne($table, $row) {
+function ajoutBeLigne($table) {
 
-    $ligne = $('#' + $row).html();
-    $id = $row + nRowCount;
+    $ligne = $('#beligne').html();
+    $id = "beligne" + nRowCount;
     $ligne = $ligne.replace(/\[\]/g, '[' + nRowCount + ']');
-    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReference("refId","' + $id + '")\'>');
+    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReference("' + nRowCount + '")\'>');
     $ligne = $ligne.replace(/onclick="(.+)">/, 'onclick=\'delLigne("' + $id + '")\'>');
-    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
-    console.log($ligne);
+    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");    
     nRowCount++;
 }
 
@@ -317,26 +316,97 @@ function getNut() {
     );
 }
 
-function getReference($champs, $row) {
+function getReference($row) {
+    $valInput = $("input[name='refId[" + $row + "]']");
+    console.log($valInput.val());
+    $textareaLblRef = $("textarea[name='refLbl[" + $row + "]']");
+    $inputTD = $("input[name='beligTauxDouane[" + $row + "]']");
+    console.log($textareaLblRef.val());
+    /*
+     console.log($valInput.val());
+     $r = $('#' + $row);
+     $t = $('td', $r);
+     $i = $("input[name='" + $champs + "[]']", $t);
+     $j = $("textarea[name='refLbl[]']", $t);
+     */
 
-    $r = $('#' + $row);
-    $t = $('td', $r);
-    $i = $("input[name='" + $champs + "[]']", $t);
-    $j = $("textarea[name='refLbl[]']", $t);
-    
     $.getJSON(
             'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRef', refId: $i.val()},
+            {test: 'Solya', action: 'getRef', refId: $valInput.val()},
     function (json) {
-        
-        $i = $("input[name='refLbl[]']", $t);
+
         console.log("json" + json);
-        console.log($i.val());
+
         for (var key in json) {
-            console.log( json[key].ref_lbl );
-            $j.val(json[key].ref_lbl);
+            console.log('lbl' + json[key].ref_lbl);
+            $textareaLblRef.val(json[key].ref_lbl);
+            console.log('taux' + json[key].dd_taux);
+            $inputTD.val(json[key].dd_taux);
         }
     }
     );
+}
+//-----------------calcul bon entree------------------
+/**
+ * Fonction de calcul du droit de douane pour le bon d'entrée
+ * @param $source1
+ * nom de l'input prix unitaire
+ * @param $source2
+ * nom de l'input taux de douane
+ * @param $source3
+ * nom de l'input quantité
+ * @param $cible
+ * nom de l'input droit de douane
+ * @returns {undefined}
+ */
+function beCcDroitDouane($source1, $source2, $source3, $cible) {
+    
+    //on récupére la valeur de l'input
+    $pu = parseFloat($("input[name='" + $source1 + "']").val());
+    //on récupére la valeur de l'input
+    $tauxDouane = parseFloat($("input[name='" + $source2 + "']").val());
+    //on récupére la valeur de l'input
+    $qt = parseFloat($("input[name='" + $source3 + "']").val());
+    //console.log($qt);
+    //on effectue le calcul puis on met l'input cible à jour    
+    $("input[name='" + $cible + "']").val(parseFloat($tauxDouane * $pu * $qt / 100));
+}
 
+/**
+ * Fonction de calcul pour le champs calcul pour le bon d'entrée
+ * @param $source1
+ * nom de l'input droit
+ * @param $source2
+ * nom de l'input taxe
+ * @param $cible
+ * nom de l'input calcul
+ * @returns {undefined}
+ */
+function beCc($source1, $source2, $cible) {
+    
+    //on récupére la valeur de l'input
+    $1 = parseFloat($("input[name='" + $source1 + "']").val());
+    //on récupére la valeur de l'input
+    $2 = parseFloat($("input[name='" + $source2 + "']").val());
+    
+    //on effectue le calcul puis on met l'input cible à jour    
+    $("input[name='" + $cible + "']").val(parseFloat($1 + $2));
+}
+
+function beCalcul(){
+    
+    //on récupére les frais de douanes beFraisDouane
+    $fDouane = parseFloat($('[name*="beFraisDouane"]').val());
+    $qtTotal = 0;
+    
+    //On récupère la quantité totale d'élément
+    $('[name*="ligQte"]').each(function(){    
+        $qtTotal += parseFloat(this.value);        
+    });
+    
+    //la val
+    console.log('F douane: ' + $fDouane);
+    console.log('qu total: ' + $qtTotal);
+    console.log('fin');
+    
 }

@@ -13,7 +13,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <form class="form" id="fGa" action="index.php">
                <div>
                    <label for="gaId"> Id de la gamme: </label>
-                   <input name="gaId" value="<?php echo $resGaDetail->ga_id?>" type="text" readonly="">            
+                   <input name="gaId" value="<?php echo $resGaDetail->ga_id?>" type="text" disabled="">            
                     <br>
                     <label for="gaLbl"> Libellé de la gamme: </label>
                     <input name="gaLbl" value="<?php echo $resGaDetail->ga_lbl?>" required type="text"

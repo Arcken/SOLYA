@@ -182,6 +182,9 @@ table{
     
     font-size: 0.8em;
 }
+.beLigne input:read-only{
+    background-color: #cfcfcf;
+}
 
 .beLigne td{
     text-align: center;
@@ -190,7 +193,7 @@ table{
 }
 
 .beLigne input{
-    
+    text-align: center;
     width: 100%;
     margin: auto;
 }
@@ -225,6 +228,7 @@ table{
 .beLigneImg{
     size: auto;
      margin: auto;
+     
      text-align: center;
 }
 

@@ -9,9 +9,9 @@ $iTotal = Tool::getCountTable('nutrition');
 //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
 if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
     $orderby = $_REQUEST['orderby'];
-    $resAllGa = NutritionManager::getAllNutritionsLim($limite, $iNbPage, $orderby);
+    $resAllNut = NutritionManager::getAllNutritionsLim($limite, $iNbPage, $orderby);
 }
 //Sinon on appel la requête classique
 else {
-    $resAllGa = NutritionManager::getAllNutritionsLim($limite, $iNbPage);
+    $resAllNut = NutritionManager::getAllNutritionsLim($limite, $iNbPage);
 }
