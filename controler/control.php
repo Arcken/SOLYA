@@ -311,7 +311,7 @@ else {
 //-----------------------------------Nutrition----------------------------------            
 
             case "nut_add":
-                require $path . '/view/view_nutrition.php';
+                require $path . '/view/view_nut.php';
                 break;
             
             case "nut_detail":
@@ -325,7 +325,7 @@ else {
             case "nut_del":
                 
             case "nut_list":
-                require $path . '/view/view_nutrition_list.php';
+                require $path . '/view/view_nut_list.php';
                 break;    
 
 //----------------------------------Utilisateur---------------------------------

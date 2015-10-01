@@ -9,7 +9,7 @@
 class NutritionManager {
 
     /**
-     * Retourne tous les enregistrements de la table nutrition
+     * Retourne tous les enregistrements de la table
      * 
      * @return objet[]
      * Retourne un tableau d'objet
@@ -21,13 +21,39 @@ class NutritionManager {
             $sql = 'SELECT nut_id, nut_lbl FROM nutrition';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
+    
+    /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getAllNutritionsLim($limite, $nombre, $orderby = 'nut_id') {
+
+        try {
+
+            $sql = 'SELECT nut_id, nut_lbl '
+                    . 'FROM nutrition '
+                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' . $nombre;
+            $result = Connection::request(1, $sql);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
 
     /**
-     * Ajoute un enregistrement dans la table nutrition
+     * Ajoute un enregistrement dans la table
      * @param $oNut
      * attend un objet de la classe Nutrition
      * @return int
@@ -35,9 +61,7 @@ class NutritionManager {
      */
     public static function addNutrition($oNut) {
         try {
-
-            if (!empty($oNut->nut_lbl) && (strlen($oNut->nut_lbl)) > Connection::getLimLbl()) {
-
+            
                 $tParam = array(
                     $oNut->nut_lbl
                 );
@@ -47,11 +71,9 @@ class NutritionManager {
                         . "VALUES(?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+                
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
