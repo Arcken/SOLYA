@@ -70,7 +70,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <tr id="bonligne" hidden>
                         <td  class="bonLigneId">
-                            <input type="text" name="refId[]"  onblur='getReference("refId","bonligne")'>
+                            <input type="text" name="refId[]"  onblur='getReferenceBon("bonligne");'>
                         </td>
                         <td class="bonLigneCode">
                             <input type="text" value="MXSI01" name="refCode[]">
@@ -82,7 +82,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                            
                         </td>
                          <td class="bonLigneId">
-                            <input type="text" name="refId[]"  onblur='getReference("refId","bonligne")'>
+                            <input type="text" name="refId[]"  onblur='getReferenceBon("bonligne");'>
                         </td>
                         <td class="bonLigneNb">
                             <input type="text" value="4" name="ligQte[]">
@@ -98,7 +98,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                         <td class="bonLigneImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delLigne("bonligne")' class="tdImgTd"/>
+                                 onclick='delLigne("bonligne");' class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
