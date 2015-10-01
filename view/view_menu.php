@@ -124,37 +124,50 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
          </li>
          <li class='has-sub'><a href='index.php?action=dd'><span>Droit douane</span></a>
              <ul>
-               <li><a href='dd_add'><span>Ajouter</span></a></li>
-               <li><a href='dd_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=dd_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=dd_list'><span>Liste</span></a></li>
             </ul>
          </li>
          <li class='has-sub'><a href='index.php?action=dc'><span>Durée conservation</span></a>
              <ul>
-               <li><a href='dc_add'><span>Ajouter</span></a></li>
-               <li><a href='dc_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=dc_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=dc_list'><span>Liste</span></a></li>
+            </ul>
+         </li>
+         <li class='has-sub'><a href='index.php?action=mc'><span>Mode conservation</span></a>
+             <ul>
+               <li><a href='index.php?action=mc_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=mc_list'><span>Liste</span></a></li>
             </ul>
          </li>
          <li class='has-sub'><a href='index.php?action=tva'><span>TVA</span></a>
              <ul>
-               <li><a href='tva_add'><span>Ajouter</span></a></li>
-               <li><a href='tva_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=tva_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=tva_list'><span>Liste</span></a></li>
             </ul>
          </li>
           <li class='has-sub'><a href='index.php?action=tva'><span>Nutrition</span></a>
              <ul>
                <li><a href='index.php?action=nut_add'><span>Ajouter</span></a></li>
-               <li><a href='nut_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=nut_list'><span>Liste</span></a></li>
             </ul>
          </li>
           <li class='has-sub'><a href='index.php?action=emballage'><span>Emballage</span></a>
              <ul>
-               <li><a href='emb_add'><span>Ajouter</span></a></li>
-               <li><a href='emb_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=emb_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=emb_list'><span>Liste</span></a></li>
             </ul>
          </li>
-          <li class='has-sub'><a href='index.php?action='><span>Liste Fiche article</span></a>
+          <li class='has-sub'><a href='index.php?action='><span>Fiche article</span></a>
              <ul>
+                 <li><a href='index.php?action=fiart_add'><span>Ajout fiche article</span></a></li>
                <li><a href='index.php?action=fiart_list'><span>Liste fiche article</span></a></li>
+               <li><a href='index.php?action=ref_list'><span>Liste référence</span></a></li>
+            </ul>
+         </li>
+         <li class='has-sub'><a href='index.php?action='><span>Référence</span></a>
+             <ul>
+                <li><a href='index.php?action=ref_add'><span>Ajout référence</span></a></li>
                <li><a href='index.php?action=ref_list'><span>Liste référence</span></a></li>
             </ul>
          </li>
