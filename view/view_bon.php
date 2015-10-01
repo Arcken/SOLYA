@@ -5,19 +5,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-
+    <link type="text/css" href="css/style_bon.css" rel="stylesheet">
+    <script type="text/javascript" src="js/bonFct.js" ></script>
+    
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="col50">
 
                 <label for="numFact"> Numéro de facture </label><br>
-                <input name="numFact"  id="nFact" placeholder="description" type="text" >
+                <input name="numFact"  id="nFact" placeholder="Numéro de Facture" type="text" required>
                 <br>
                 <label for="typeBon"> Type du bon </label><br>
-                <select name="typeBon" id="typeBon" placeholder="description" type="text">
+                <select name="typeBon" id="typeBon" placeholder="description" type="text"
+                        required onchange="formChooserBon();">
                     <option value="" selected>Aucun</option>
                     <?php foreach($resDocLbl as $lbl){?>
-                        <option value="<?php echo $lbl->docclbl_id;?>"><?php echo $lbl->doclbl_lbl;?></option>
+                        <option value="<?php echo $lbl->doclbl_id;?>"><?php echo $lbl->doclbl_lbl;?></option>
                     <?php } ?>
                 </select>
                 <br>
@@ -28,8 +31,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <textarea name="bonCom" placeholder="Commentaire">Com</textarea>
                 <br>
             </div>
-            <div class="col90">
-                <table class="beLigne" id="beTable">
+            <div class="col90" id="divTable" style ='display:none'>
+                <table  id="bonTable">
                     <tr>
                         <th colspan="3">
                             Référence
@@ -43,7 +46,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <th rowspan="2">
                             Commentaire
                         </th>                        
-                        <th rowspan="2">
+                        <th rowspan="2" id="thImg">
                         </th>
                     </tr>
                     <tr>
@@ -57,7 +60,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             Libellé
                         </th>
                         <th>
-                            Id
+                            N°Lot
                         </th>
                         <th>
                             Qte
@@ -65,68 +68,45 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         
                         
                     </tr>
-                    <tr id="beligne" hidden="">
-                        <td  class="beLigneId">
-                            <input type="text" name="refId[]"  onblur='getReference("refId","beligne")'>
+                    <tr id="bonligne" hidden>
+                        <td  class="bonLigneId">
+                            <input type="text" name="refId[]"  onblur='getReference("refId","bonligne")'>
                         </td>
-                        <td class="beLigneCode">
+                        <td class="bonLigneCode">
                             <input type="text" value="MXSI01" name="refCode[]">
                         </td>
                         <td>
-                            <textarea name="refLbl[]" class="beLigneT">Tablette chocolat du Mexique 70% cacao</textarea>
+                            <textarea name="refLbl[]" class="bonLigneT"
+                                      rows="4" cols="30"
+                            >Tablette chocolat du Mexique 70% cacao</textarea>
                            
                         </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="56.0" name="beligPu[]">
+                         <td class="bonLigneId">
+                            <input type="text" name="refId[]"  onblur='getReference("refId","bonligne")'>
                         </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="4.00" name="ligQte[]">
+                        <td class="bonLigneNb">
+                            <input type="text" value="4" name="ligQte[]">
                         </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="10" name="beligDd[]">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="10" name="beligTauxDouane[]" disabled="">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="10" name="beligTaxe[]">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFd[]" disabled="">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="15" name="beligFb[]">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFb[]" disabled="">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="15" name="beligFt[]">
-                        </td>
-                        <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFt[]" disabled="">
-                        </td>
-                        <td>
-                            <input type="date" name="beligDlc[]">
-                            
-                        </td>
+                        
                         <td >
-                            <textarea name="beligDepot[]" class="beLigneT">Commentaire</textarea>
+                            <textarea name="bonligDepot[]" class="bonLigneT"
+                                      rows="2" cols="30">Dépot?</textarea>
                         </td>
                         <td>
-                            <textarea name="beligCom[]" class="beLigneT">Commentaire</textarea>
+                            <textarea name="bonligCom[]" class="bonLigneT" 
+                                      rows="2" cols="30">Commentaire</textarea>
                         </td>
-                        <td  class="beLigneImg">
+                        <td class="bonLigneImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delLigne("beligne")' class="tdImgTd"/>
+                                 onclick='delLigne("bonligne")' class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
-                <input type="button" value="Ajouter ligne" onclick='ajoutBeLigne("beTable","beligne")'>
+                <input type="button" value="Ajouter ligne" onclick="ajoutBeLigne('bonTable','bonligne');">
             </div>
             <div class="bas">
                     <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
-                    <input name="clear" type="reset"> 
+                    <input id='clearForm' name="clear" type="reset"> 
                     <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
                 </div>
         </form>

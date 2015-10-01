@@ -10,8 +10,8 @@ require $path.'/model/DocLibelleManager.php';
 
 try{
     $resDocLbl=DocLibelleManager::getDocLibelles();
-}catch(MySQLException $e){
     
-    $msg ='Oups une erreur est survenue'+$resEr;
+}catch(MySQLException $e){
+    $msg ='Oups une erreur est survenue'+ $resEr;
     Tool::addMsg($msg);
 }

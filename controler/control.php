@@ -65,13 +65,13 @@ else {
 //-------------------------------Bon sortie/reprise-----------------------------
            
             case "bon_add":
-                require $path.'controler/control_bon_add.php';
+                require $path.'/controler/control_bon_add.php';
                 break;
             
 //-------------------------------Bon entrée-------------------------------------
 
             case "be_add":
-                require $path . '/controler/control_be_add.php';
+                require $path .'/controler/control_be_add.php';
                 break;
 
 //-------------------------------Fiche article----------------------------------
