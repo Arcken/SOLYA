@@ -28,3 +28,18 @@ function formChooserBon(){
        
     }
 }
+
+nRowCount = 1;
+function ajoutBonLigne($table) {
+
+    $ligne = $('#' + "bonligne").html();
+    $id = "bonligne" + nRowCount;
+    $ligne = $ligne.replace(/\[\]/g, '[' + nRowCount + ']');
+    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReference("refId","' + $id + '")\'>');
+    $ligne = $ligne.replace(/onclick="(.+)">/, 'onclick=\'delLigne("' + $id + '")\'>');
+    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
+    console.log($ligne);
+    nRowCount++;
+}
+
+

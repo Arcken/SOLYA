@@ -102,7 +102,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                     </tr>
                 </table>
-                <input type="button" value="Ajouter ligne" onclick="ajoutBeLigne('bonTable','bonligne');">
+                <input type="button" value="Ajouter ligne" onclick="ajoutBonLigne('bonTable');">
             </div>
             <div class="bas">
                     <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
