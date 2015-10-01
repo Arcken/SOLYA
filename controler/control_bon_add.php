@@ -6,3 +6,12 @@
  * and open the template in the editor.
  */
 
+require $path.'/model/DocLibelleManager.php';
+
+try{
+    $resDocLbl=DocLibelleManager::getDocLibelles();
+}catch(MySQLException $e){
+    
+    $msg ='Oups une erreur est survenue'+$resEr;
+    Tool::addMsg($msg);
+}
