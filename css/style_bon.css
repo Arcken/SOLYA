@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1 oct. 2015, 15:06:46
+    Author     : Olivier
+*/
+
+#bonTable{
+    border-collapse: collapse;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    color: whitesmoke;
+    width: auto;
+    text-align: center;
+}
+
+#bonTable th{
+    border: 2px solid whitesmoke;
+    font-size: 0.8em;
+}
+
+#bonTable td{
+    text-align: center;
+    border: 2px solid whitesmoke;
+}
+
+#bonTable input{
+    width: 100%;
+    margin: auto;
+}
+
+#bonTableImg{
+    size: auto;
+    text-align: center;
+    border:none; 
+}
+
+#thImg{
+ border:none;   
+}
+
+.tdImgTd{
+    margin: auto;
+    text-align: center; 
+    border:none;
+}
+#bonTable td textArea{
+    margin:5px;
+}
+#divTable{
+    min-height:10%;
+}

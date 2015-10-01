@@ -7,9 +7,13 @@ $sPageTitle = "Connexion";
 //valeur du bouton d'un formulaire par défaut
 $sButton = "Envoyer";
 
-//on initialise les variables
-$sAction = ''; //action pour le controleur
-$nv = ''; //variable pour contrôler l'affichage des popups
+//Initialisation des variables
+//action pour le controleur
+$sAction = ''; 
+
+//variable pour contrôler l'affichage des popups
+$nv = ''; 
+
 //Initialisation valeur limite pour les requêtes si non définie 
 //sinon on récupére la valeur 
 //cette variable sert pour récupérer la 'limit' pour récupérer 
@@ -24,14 +28,14 @@ else
 if (!isset($_SESSION['auth'])) {
     require $path . '/view/view_connection.php';
 }
-//sinon si action = déconnection on détruit la session
+//Sinon si action = déconnection on détruit la session
 else if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'deconnexion') {
     session_destroy();
     session_commit();
     $_SESSION = array();
     require $path . '/view/view_connection.php';
 }
-//sinon c'est que l'on est connecté
+//Sinon c'est que l'on est connecté
 else {
     /* -------------------------------------------------------------------------
      * ************************************************************************* 
@@ -39,7 +43,7 @@ else {
      * *************************************************************************
       ------------------------------------------------------------------------- */
 
-    //si action ne contient pas nv_ (pour les popups)
+    //Si action ne contient pas nv_ (pour les popups)
     if (isset($_REQUEST['action']) && strpos($_REQUEST['action'], 'nv_') === FALSE) {
         $nv = 0;
         //on récupére l'action si elle est définie
@@ -56,11 +60,18 @@ else {
             case "connexion":
                 $sPageTitle = "Accueil";
                 break;
-
+            
+            
+//-------------------------------Bon sortie/reprise-----------------------------
+           
+            case "bon_add":
+                require $path.'/controler/control_bon_add.php';
+                break;
+            
 //-------------------------------Bon entrée-------------------------------------
 
             case "be_add":
-                require $path . '/controler/control_be_add.php';
+                require $path .'/controler/control_be_add.php';
                 break;
 
 //-------------------------------Fiche article----------------------------------
@@ -93,7 +104,7 @@ else {
 
                 break;
 
-//-------------------------------gamme------------------------------------------
+//-------------------------------Gamme------------------------------------------
             //ajout de gamme
             case "ga_add":
                 require_once $path . '/controler/control_ga_add.php';
@@ -208,7 +219,12 @@ else {
             case "connexion":
                 require $path . '/view/view_home.php';
                 break;
-
+//-------------------------------Bon sortie/reprise-----------------------------
+            
+            case "bon_add":
+                require $path . '/view/view_bon.php';
+                break;
+            
 //-------------------------------Bon entrée-------------------------------------
 
             case "be_add":

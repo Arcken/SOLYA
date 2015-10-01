@@ -15,7 +15,13 @@ class ReferenceManager {
 
     /**
      * Retourne tous les enregistrements de la table Référence
+     * par défaut la table remonte les 15 premier résultats.
+     * Il est possible cependant de modifier
+     * le résultats attendu grace aux paramètres :
      * 
+     * @param integer $limit par défaut 15
+     * @param integer $nombre par défaut 0
+     * @param string orderBy par défaut ref_id DESC
      * @return Reference[]
      */
     public static function getAllReferences($limit=15, $nombre=0,$orderby="ref_id") {
