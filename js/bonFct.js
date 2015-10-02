@@ -35,7 +35,8 @@ function ajoutBonLigne($table) {
     $ligne = $('#' + "bonligne").html();
     $id = "bonligne" + nRowCount;
     $ligne = $ligne.replace(/\[\]/g, '[' + nRowCount + ']');
-    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReferenceBon("' + nRowCount + '")\'>');
+    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReferenceBonFromId("' + nRowCount + '")\'>');
+    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReferenceBonFromCode("' + nRowCount + '")\'>');
     $ligne = $ligne.replace(/onclick="(.+)">/, 'onclick=\'delLigne("' + $id + '")\'>');
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
     console.log($ligne);
@@ -43,25 +44,64 @@ function ajoutBonLigne($table) {
 }
 
 
-function getReferenceBon($row,$choice) {
+function getReferenceBonFromId($row) {
     
-
-    $valInput = $("input[name='refId[" + $row + "]']");
-    console.log($valInput);
-    $inptCodeRef=$("input[name='refCode["+$row+"]']");
+//Champs sur lequel la valeur va être prise
+    $valInput      = $("input[name='refId[" + $row + "]']");
+    console.log($valInput.val());
+//Récupération des trois objets dont la valeur doit changer
+    $inptRefId     =$("input[name='refId["+$row+"]']");
+    $inptCodeRef   =$("input[name='refCode["+$row+"]']");
     $txtAreaLblRef = $("textarea[name='refLbl[" + $row + "]']");
-    console.log($txtAreaLblRef);
+    console.log($txtAreaLblRef.val());
    
-
+//requète à la base
     $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRef', refId: $valInput.val(),champs:'ref_id'},
+            // url cible
+            'ws/webService.php',  
+            //Paramètres
+            {test: 'Solya', action: 'getRef',champs:'ref_id', value: $valInput.val()},
+            //Callback
     function (json) {
 
         console.log("json" + json);
 
         for (var key in json) {
             console.log('lbl' + json[key].ref_lbl);
+            $inptRefId.val(json[key].ref_id);
+            $inptCodeRef.val(json[key].ref_code);
+            $txtAreaLblRef.val(json[key].ref_lbl);
+            
+        }
+    }
+    );
+
+}
+function getReferenceBonFromRefCode($row) {
+    
+//Champs sur lequel la valeur va être prise
+    $valInput= $("input[name='refCode[" + $row + "]']");
+    console.log($valInput.val());
+//Récupération des trois objets dont la valeur doit changer
+    $inptRefId     =$("input[name='refId["+$row+"]']");
+    $inptCodeRef   =$("input[name='refCode["+$row+"]']");
+    $txtAreaLblRef = $("textarea[name='refLbl[" + $row + "]']");
+    console.log($txtAreaLblRef.val());
+   
+//requète à la base
+    $.getJSON(
+            // url cible
+            'ws/webService.php',  
+            //Paramètres
+            {test: 'Solya', action: 'getRef', champs:'ref_code', value: $valInput.val()},
+            //Callback
+    function (json) {
+
+        console.log("json" + json);
+
+        for (var key in json) {
+            console.log('lbl' + json[key].ref_lbl);
+            $inptRefId.val(json[key].ref_);
             $inptCodeRef.val(json[key].ref_code);
             $txtAreaLblRef.val(json[key].ref_lbl);
             

@@ -39,13 +39,13 @@
                        onfocus="getLastRefCode();"  
                                 
                        onblur="$('#divSuggest').hide();
-                                confirmRefCode();"
-                                
+                                confirmRefCode();" 
                        title="6 caractères Minimum Chiffres/Lettres" />
                 
                  <img id="refCodVld" src="img/icon/accept.png" alt="" title="Code référence Valide" hidden />
                  <img id="refCodInvld" src="img/icon/delete.png" alt="" title="Code référence Non Valide" hidden />
                 <div id="divSuggest" style="display:none">
+                    <span id="resSugg"></span>
                 </div>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          

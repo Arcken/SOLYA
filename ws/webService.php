@@ -107,6 +107,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             break;
 
         case 'getRef':
+            
         //On contrôle le champs sur lequel s'effectue la recherche
             if (isset($_REQUEST['champs'])) {
                 //On le récupère
@@ -115,21 +116,23 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
                 switch ($champs) {
 
                     case 'ref_id':
-                        $param = $_REQUEST['refId'];
+                        $param    = $_REQUEST['value'];
+                        $criteria ='ref_id';
                         break;
 
                     case 'ref_code':
-                        $param = $_REQUEST['refCode'];
+                        $param    = $_REQUEST['value'];
+                        $criteria ='ref_code';
                         break;
                 }
 
 
                 //On écrit la requète en conséquence
                 $tab = array();
-                $requete = "SELECT  ref_id, ref_lbl,ref_code,dd_taux"
+                $requete = "SELECT  r.ref_id, r.ref_lbl,r.ref_code,d.dd_taux"
                         . " FROM reference r "
                         . " JOIN droit_douane d ON r.dd_id = d.dd_id "
-                        . " WHERE r." . $champs . " = '" . $param . "'";
+                        . " WHERE r." . $criteria . " = '" . $param . "'";
                 //On l'éxécute
                 $resultat = $bdd->query($requete);
                 //Récupération des données

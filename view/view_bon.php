@@ -70,10 +70,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <tr id="bonligne" hidden>
                         <td  class="bonLigneId">
-                            <input type="text" name="refId[]" onblur='getReferenceBon("0");'>
+                            <input type="text" name="refId[]" onblur="getReferenceBonFromId('0');">
                         </td>
                         <td class="bonLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[]" onblur="getReferenceBon('0');">
+                            <input type="text" value="MXSI01" name="refCode[]" onblur="getReferenceBonFromRefCode('0');">
                         </td>
                         <td>
                             <textarea name="refLbl[]" class="bonLigneT"

@@ -37,11 +37,14 @@ function chargeRefCode() {
 
 function confirmRefCode() {
     
-    $sugLgth = $('#divSuggest').text().length;
+    $sDivSug = $('#divSuggest').text();
+    $sug=$.trim($sDivSug);
     $refCodeLgth=$('#refCode').val().length;
     $refCode =$('#refCode').val();
-    console.log($sugLgth);
-    if ($sugLgth === 0 && $refCodeLgth > 6 ) {
+    
+    console.log($sug.length);
+    
+    if ($sug.length === 0 && $refCodeLgth > 6 ) {
         $('#refCodVld').show();
         $('#refCodInvld').hide();
    }
@@ -100,33 +103,42 @@ function getLastRefCode() {
 
     var $refCode = $('#refCode').val();
     var $divSuggest = $('#divSuggest');
-    
- 
-    $divSuggest.empty();
-    $divSuggest.hide();
+    var $spnSug =$('#resSugg');
+   
 
     $.getJSON(
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getRefCode', refCode: $refCode.toString().toUpperCase()},
     function (json) {
         var $hideShow = false;
+        var $string='';
         for (var key in json) {
+            
             if (json[key].ref_code.length === 0) {
-                $divSuggest.html('');
                 $hideShow = false;
                 break;
             } else {
-                $divSuggest.append(json[key].ref_code + '<br>');
+                $string+=json[key].ref_code + '<br>';
                 $hideShow = true;
             }
             
         }
+        console.log($string);
+        $spnSug.html($string);
+        console.log($spnSug.html());
+        
         if ($hideShow === true) {
+            
+            $spnSug.show();
             $divSuggest.show();
+            
         } else {
+            
+            $spnSug.hide();
+            $spnSug.empty();
             $divSuggest.hide();
         }
     }
     );
-    confirmRefCode();
+confirmRefCode();
 }
