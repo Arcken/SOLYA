@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2 oct. 2015, 10:47:11
+    Author     : Olivier
+*/
+
+
+#asideInfos{
+    margin:0px;
+    padding:0px;
+}
+
+#asideInfos{
+    right:0.5%;
+    background-color: lightslategray;
+    position:fixed;
+    height:70%;
+    width: 15%;
+    top:17%;
+    border:  2px solid cyan;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
+    box-shadow: 10px 10px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+}
+
+#alert{
+    margin: 4%;
+    background-color: gainsboro;
+    height:10%;
+    width: auto;
+    border:  2px solid cyan;
+    border-radius: 10px 10px 10px 10px;
+    -moz-box-shadow: 5px 5px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 5px 5px 5px 0px #cfcfcf;
+    -o-box-shadow: 5px 5px 5px 0px #cfcfcf;
+    box-shadow: 5px 5px 5px 0px #cfcfcf;
+    filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+}

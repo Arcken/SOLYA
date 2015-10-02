@@ -213,6 +213,8 @@ else {
          * -------------------------------------------------------------------- */
         require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        
         switch ($sAction) {
 
             case "home":

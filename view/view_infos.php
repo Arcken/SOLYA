@@ -5,6 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */?>
-<aside id='alert'>
-    
+<link type="text/css" href="css/style_infos.css" rel="stylesheet">
+<aside id='asideInfos'>
+    <div id="alert">
+        
+    </div>
 </aside>

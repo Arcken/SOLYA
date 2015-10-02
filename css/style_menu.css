@@ -30,12 +30,12 @@ and open the template in the editor.
     z-index: 1;
     background-color: black;
     position:fixed;
-    height:82.7%;
-    margin-left: 5px;
-    margin-top: 17px;
+    height:82%;
+    //margin-left: 5px;
+    margin-top: 1%;
     width: 10.5%;
-    top:15.1%;
-     border:  2px solid cyan;
+    top:15%;
+    border:  2px solid cyan;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
     -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -98,23 +98,23 @@ and open the template in the editor.
 
 #menu ul {
     border-right: 0.3em solid;
-    border-right-color:#61C45A;
+    border-right-color:silver;
     
 }
 
 #menu ul ul {
     width: 100%;
-    background: #55d247;
+    background: lightslategray;
 }
 
 #menu ul li {
     padding: 4px 10px;
-    color: #55d247;
+    color: #cfcfcf;
 }
 
 #menu ul li.hover,
 #menu ul li:hover {
-    background: #61C45A;
+    background: silver;
     color: #fff;
 
 }
@@ -132,7 +132,7 @@ and open the template in the editor.
 }
 
 #menu ul a:active {
-    color: #FAED3C;
+    color: aliceblue;
 }
 
 

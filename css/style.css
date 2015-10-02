@@ -19,7 +19,13 @@ body{
     font-family: arial;
       
 }
-
+body{
+    padding:auto;
+    margin: auto;
+    border:0px;
+    font-family: arial;
+      
+}
 .list table{
     border-collapse:collapse;
 }

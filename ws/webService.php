@@ -92,38 +92,54 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
         case 'getNombre':
             $tab = array();
-            
+
             $champs = $_REQUEST['champs'];
             $table = $_REQUEST['table'];
             $valeur = $_REQUEST['valeur'];
-             
+
             $requete = "SELECT count(*) AS total FROM " . $table .
-                    " WHERE " . $champs . " ='" . $valeur."'";
+                    " WHERE " . $champs . " ='" . $valeur . "'";
             $resultat = $bdd->query($requete);
 
             $donnees = $resultat->fetch(PDO::FETCH_ASSOC);
             echo json_encode($donnees);
-            
+
             break;
-        
+
         case 'getRef':
+        //On contrôle le champs sur lequel s'effectue la recherche
+            if (isset($_REQUEST['champs'])) {
+                //On le récupère
+                $champs = $_REQUEST['champs'];
+                //Selon la valeur du champs on récupère la bonne valeur dans $param
+                switch ($champs) {
 
-            $refId = $_REQUEST['refId'];
-            $tab = array();
-            $requete = "SELECT  ref_id, ref_lbl, dd_taux"
-                    . " FROM reference r "
-                    . "JOIN droit_douane d ON r.dd_id = d.dd_id "
-                    . "WHERE ref_id ='".$refId."'";
+                    case 'ref_id':
+                        $param = $_REQUEST['refId'];
+                        break;
 
-            $resultat = $bdd->query($requete);
-           
-            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                $tab[] = $data;
+                    case 'ref_code':
+                        $param = $_REQUEST['refCode'];
+                        break;
+                }
+
+
+                //On écrit la requète en conséquence
+                $tab = array();
+                $requete = "SELECT  ref_id, ref_lbl,ref_code,dd_taux"
+                        . " FROM reference r "
+                        . " JOIN droit_douane d ON r.dd_id = d.dd_id "
+                        . " WHERE r." . $champs . " = '" . $param . "'";
+                //On l'éxécute
+                $resultat = $bdd->query($requete);
+                //Récupération des données
+                while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                    $tab[] = $data;
+                }
+                //Envoie des données en JSON
+                echo json_encode($tab);
             }
-            echo json_encode($tab);
-             
             break;
-        
     }
 }
 ?>
