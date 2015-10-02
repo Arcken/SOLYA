@@ -29,7 +29,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col50">
                 <label for="beFraisDouane"> Frais de douane </label><br>
                 <input name="beFraisDouane" placeholder="description" type="text"
-                       >
+                       value ="150">
                 <br>
                 <label for="beFraisTransport"> Frais de transport </label><br>
                 <input name="beFraisTransport" placeholder="description" type="text"
@@ -42,7 +42,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
             <div class="col90">
                 <table class="beLigne" id="beTable">
-                    <tr>
+                    <tr id="titreGnl">
                         <th colspan="5">
                             Référence
                         </th>
@@ -67,7 +67,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             P
                         </th>
                     </tr>
-                    <tr>
+                    <tr id="titreCol">
                         <th>
                             Id
                         </th>
@@ -110,60 +110,62 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         
                     </tr>
                     <tr id="beligne" hidden="">
+                        
                         <td  class="beLigneId">
-                            <input type="text" name="refId[]"  onblur='getReference("refId")'>
+                            <input type="text" name="refId[NID]"  id="refIdNID" onblur='getReference("NID")'>
                         </td>
                         <td class="beLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[]">
+                            <input type="text" value="MXSI01" name="refCode[NID]" id="refCodeNID">
                         </td>
                         <td>
-                            <textarea name="refLbl[]" class="beLigneT">Tablette chocolat du Mexique 70% cacao</textarea>
+                            <textarea name="refLbl[NID]" id="refLblNID" class="beLigneT">Tablette chocolat du Mexique 70% cacao</textarea>
                            
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="56.0" name="beligPu[]">
+                            <input type="text" value="4" name="beligPu[NID]" id="beligPuNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="4.00" name="ligQte[]"
-                                   onblur='beCcDroitDouane("beligPu[]",
-                                               "beligTauxDouane[]",
-                                               "ligQte[]",
-                                               "beligDd[]")'>
+                            <input type="text" value="5" name="ligQte[NID]" id ="ligQteNID"
+                                   onblur='beCcDroitDouane("beligPu[NID]",
+                                               "beligTauxDouane[NID]",
+                                               "ligQte[NID]",
+                                               "beligDd[NID]")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="beligDd[]">
+                            <input type="text" value="6" name="beligDd[NID]" id="beligDdNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="beligTauxDouane[]" readonly="">
+                            <input type="text" value="7" name="beligTauxDouane[NID]" 
+                                   id="beligTauxDouaneNID" readonly="">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="beligTaxe[]"
-                                   onblur='beCc("beligDd[]","beligTaxe[]","calculFd[]")'>
+                            <input type="text" value="8" name="beligTaxe[NID]" id="beligTaxeNID"
+                                   onblur='beCc("beligDd[NID]","beligTaxe[NID]","calculFd[NID]")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFd[]" readonly="">
+                            <input type="text" value="9" name="calculFd[NID]" id="calculFdNID" readonly="">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="15" name="beligFb[]">
+                            <input type="text" value="10" name="beligFb[NID]" id="beligFbNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFb[]" readonly="">
+                            <input type="text" value="11" name="calculFb[NID]" id="calculFbNID" readonly="">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="15" name="beligFt[]">
+                            <input type="text" value="12" name="beligFt[NID]" id="beligFtNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="calculFt[]" readonly="">
+                            <input type="text" value="13" name="calculFt[NID]" id="calculFtNID" readonly="">
                         </td>
                         <td>
-                            <input type="date" name="beligDlc[]">
+                            <input type="date" name="beligDlc[NID]" id="beligDlcNID">
                             
                         </td>
                         <td >
-                            <textarea name="beligDepot[]" class="beLigneT">Commentaire</textarea>
+                            <textarea name="beligDepot[NID]" id="beligDepotNID" class="beLigneT">Commentaire</textarea>
                         </td>
                         <td>
-                            <textarea name="beligCom[]" class="beLigneT">Commentaire</textarea>
+                            <textarea name="beligCom[NID]" id="beligComNID"  class="beLigneT">Commentaire</textarea>
                         </td>
                         <td  class="beLigneImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"

@@ -1,29 +1,55 @@
-nRowCount = 1;
-function ajoutBeLigne($table) {
 
+
+//Variable d'incrément pour ajoutBeLigne
+nRowCount = 1;
+
+/**
+ * Fonction d'ajout de ligne pour le bon d'entrée
+ * On prend tous ce qui se trouvent entre <tr id=beligne> et </tr>
+ * On modifie les valeurs nécessaires et on ajoute l'ensemble au document avant
+ * la fin de la balise table
+ * @param $table
+ * Table html du document
+ * @returns {undefined}
+ */
+function ajoutBeLigne($table) {
+    //On récupére le squelette du code entre le balises <tr id=belig> et </tr>
     $ligne = $('#beligne').html();
+    //On modifie l'id de la balise tr en incorporant un numéro de ligne
     $id = "beligne" + nRowCount;
-    $ligne = $ligne.replace(/\[\]/g, '[' + nRowCount + ']');
-    $ligne = $ligne.replace(/onblur="(.+)">/, 'onblur=\'getReference("' + nRowCount + '")\'>');
-    $ligne = $ligne.replace(/onclick="(.+)">/, 'onclick=\'delLigne("' + $id + '")\'>');
-    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");    
+    //on remplace tous les mots NID par le même numéro de ligne 
+    $ligne = $ligne.replace(/NID/g, nRowCount);
+    //On remplace beligne par 'beligne + numéro de ligne'
+    $ligne = $ligne.replace(/beligne>/, $id);
+    console.log($ligne);
+    //On ajoute le code à la fin de la table
+    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
+    //on incrémente le compteur
     nRowCount++;
 }
 
+/**
+ * Fonction qui efface une balise html selon son id
+ * @param $cible
+ * Id de la balise cible
+ * @returns {undefined}
+ */
 function delLigne($cible) {
-    $res = confirm("Vouslez vous supprimer cette ligne");
+    $res = confirm("Voulez vous supprimer cette ligne");
     if ($res) {
         $('#' + $cible).remove();
     }
 }
+
 /**
  * Fonction d'ouverture de nouvelle fenetre, 
- *      elle attend la page à afficher en paramètre
- * @param string 
+ *      elle attend l'action du contrôleur en paramètre
+ * @param $action 
  * action a effectuer pour le contrôleur
  * @returns {Boolean}
  */
-function popup(action)
+
+function popup($action)
 {
     var width = 700;
     var height = 500;
@@ -38,7 +64,7 @@ function popup(action)
     params += ', scrollbars=no';
     params += ', status=no';
     params += ', toolbar=no';
-    newwin = window.open('index.php?action=nv_' + action, 'windowname5', params);
+    newwin = window.open('index.php?action=nv_' + $action, 'windowname5', params);
 
     if (window.focus) {
         newwin.focus();
@@ -58,24 +84,29 @@ function test() {
 
 /**
  * Fonction qui recherche le nombre d'occurence dans une table
- * @param {String} $champs champs cible dans la table
- * @param {String} $table nom de la table
- * @param {String} $source nom de l'input contenant la valeur à chercher
- * @param {String} $cible id du bloc html à modifier, affiche une image de validation si aucun doublon
+ * @param $champs champs cible dans la table
+ * @param $table nom de la table
+ * @param $source nom de l'input contenant la valeur à chercher
+ * @param $cible id du bloc html à modifier, 
+ * affiche une image de validation si aucun doublon
  * ou une croix pour un doublon
  * @returns {undefined}
  */
 function verifUnique($champs, $table, $source, $cible) {
+    //on récupére la valeur de l'input
     $valeur = $("input[name=" + $source + "]").val();
     $.getJSON(
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getNombre', table: $table, champs: $champs, valeur: $valeur},
     function (json) {
+        //La web service renvoie le nombre d'enregistrement trouvé
         if (json.total == 0) {
+            //Si aucun enr trouvé on affiche
             $('#' + $cible).html('<img src="img/icon/accept.png">');
 
         }
         else {
+            //Si 1 ou plusieurs enr trouvé on affiche
             $('#' + $cible).html('<img src="img/icon/delete.png">');
         }
     }
@@ -83,21 +114,22 @@ function verifUnique($champs, $table, $source, $cible) {
 }
 
 /**
- * fonction qui rend visible une image si le pass et la confirmation sont identique
+ * fonction qui rend visible une image si le pass 
+ * et la confirmation sont identique
  * @returns boolean
  * 
  */
 function verifPassImg() {
+    //on teste que le pass et sa confirmation ne soient pas nul
+    //et soient identique
     if ($('#pass').val() != ''
             && $('#confirmPass').val() != ''
             && $('#pass').val() == $('#confirmPass').val())
     {
         $('#passValid').show();
-
     }
     else
         $('#passValid').hide();
-
 }
 
 /**
@@ -105,6 +137,7 @@ function verifPassImg() {
  * @returns {undefined}
  */
 function verifPassForce() {
+    //Si le pass est nom nul
     if ($('#pass').val() != ''
             )
     {
@@ -119,12 +152,14 @@ function verifPassForce() {
         // Doit faire au minimum huit caractères
         var okRegex = new RegExp("(?=.{8,}).*", "g");
 
+        //On test si la longueur et trop courte
         if (okRegex.test($('#pass').val()) === false) {
-            // If ok regex doesn't match the password
+            
             alert('Le mot de passe doit contenir 8 caractères minimum');
-
+            
+            //On teste la régle la plus forte
         } else if (strongRegex.test($('#pass').val())) {
-            // If reg ex matches strong password
+            
             $('#passForce').text('Mot de passe fort!');
         } else if (mediumRegex.test($('#pass').val())) {
             // If medium password matches the reg ex
@@ -360,7 +395,7 @@ function getReference($row) {
  * @returns {undefined}
  */
 function beCcDroitDouane($source1, $source2, $source3, $cible) {
-    
+
     //on récupére la valeur de l'input
     $pu = parseFloat($("input[name='" + $source1 + "']").val());
     //on récupére la valeur de l'input
@@ -383,38 +418,47 @@ function beCcDroitDouane($source1, $source2, $source3, $cible) {
  * @returns {undefined}
  */
 function beCc($source1, $source2, $cible) {
-    
+
     //on récupére la valeur de l'input
     $1 = parseFloat($("input[name='" + $source1 + "']").val());
     //on récupére la valeur de l'input
     $2 = parseFloat($("input[name='" + $source2 + "']").val());
-    
+
     //on effectue le calcul puis on met l'input cible à jour    
     $("input[name='" + $cible + "']").val(parseFloat($1 + $2));
 }
 
-function beCalcul(){
-    
+function beCalcul() {
+
     //on récupére les frais de douanes beFraisDouane
-    $fDouane = parseFloat($('[name*="beFraisDouane"]').val());
-    $qtTotal = 0;
-    
+    $fDouaneVal = parseFloat($('[name*="beFraisDouane"]').val());
+    $qtTotalVal = 0;
+    console.log('F douane: ' + $fDouaneVal);
     //On récupère la quantité totale d'élément
-    $('[name*="ligQte"]').each(function(){    
-        $qtTotal += parseFloat(this.value);        
+    $('tr').not('#titreGnl, #titreCol, #beligne').each(function () {
+        
+            $qtTotalVal += parseFloat($(this).find('[id^="ligQte"]').val());
+        
     });
+    
+    console.log('qu total: ' + $qtTotalVal);
     
     //on calcule la valeur pour chaque unité les frais de douanes
-    $fdUnite = $fDouane / $qtTotal;
-    $('[name*="calculFd"]').pre
-    $('[name*="calculFd"]').each(function(){
-       console.log(this.prev());
-       
+    $fdUniteVal = parseFloat($fDouaneVal / $qtTotalVal);
+    console.log('fd unite ' + $fdUniteVal);
+    $('tr').not('#titreGnl, #titreCol, #beligne').each(function () {
+        console.log($(this).get());
+        $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
+        console.log("qtLigne " + $ligneQtVal);
+        $ligneCalcul = $(this).find('[id^="calculFd"]');
+        $ligneCalculVal = parseFloat($ligneCalcul.val());
+        
+        console.log("calculLigne " + $ligneCalculVal);
+        $ligneCalcul.val($ligneQtVal * $fdUniteVal + $ligneCalculVal);
+        console.log("calculLigne MAJ" + $ligneCalculVal);
     });
-    
-    console.log('F douane: ' + $fDouane);
-    console.log('qu total: ' + $qtTotal);
-    console.log('fd unite ' + $fdUnite);
+
+
     console.log('fin');
-    
+
 }
