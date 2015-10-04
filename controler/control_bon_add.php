@@ -11,6 +11,11 @@ require $path.'/model/DocLibelleManager.php';
 try{
     $resDocLbl=DocLibelleManager::getDocLibelles();
     
+    if(isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer"){
+        
+        $tabRefId=$_REQUEST['refId'];
+        Tool::printAnyCase($tabRefId);
+    }
 }catch(MySQLException $e){
     $msg ='Oups une erreur est survenue'+ $resEr;
     Tool::addMsg($msg);

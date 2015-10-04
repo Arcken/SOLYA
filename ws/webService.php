@@ -91,7 +91,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
 
         case 'getNombre':
-            $tab = array();
+
 
             $champs = $_REQUEST['champs'];
             $table = $_REQUEST['table'];
@@ -107,8 +107,8 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             break;
 
         case 'getRef':
-            
-        //On contrôle le champs sur lequel s'effectue la recherche
+
+            //On contrôle le champs sur lequel s'effectue la recherche
             if (isset($_REQUEST['champs'])) {
                 //On le récupère
                 $champs = $_REQUEST['champs'];
@@ -116,13 +116,13 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
                 switch ($champs) {
 
                     case 'ref_id':
-                        $param    = $_REQUEST['value'];
-                        $criteria ='ref_id';
+                        $param = $_REQUEST['value'];
+                        $criteria = 'ref_id';
                         break;
 
                     case 'ref_code':
-                        $param    = $_REQUEST['value'];
-                        $criteria ='ref_code';
+                        $param = $_REQUEST['value'];
+                        $criteria = 'ref_code';
                         break;
                 }
 
@@ -142,6 +142,51 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
                 //Envoie des données en JSON
                 echo json_encode($tab);
             }
+            break;
+
+
+
+        case 'getLots':
+
+            $tab = array();
+            $refId = $_REQUEST['refId'];
+
+
+            $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock"
+                    . " FROM lot l "
+                    . " INNER JOIN reference r ON l.ref_id = r.ref_id "
+                    . " WHERE r.ref_id = '" . $refId . "' AND lot_qt_stock > '0' "
+                    . " ORDER BY lot_date_max ASC";
+
+            //On l'éxécute
+            $resultat = $bdd->query($requete);
+            //Récupération des données
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
+            }
+            echo json_encode($tab);
+
+            break;
+
+        case 'getLotQte':
+
+            $tab = array();
+            $lotId = $_REQUEST['lotId'];
+
+
+           $requete ="SELECT lot_qt_stock"
+                    . " FROM lot"
+                    . " WHERE lot_id=" . $lotId;
+
+            //On l'éxécute
+            $resultat = $bdd->query($requete);
+            //Récupération des données
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
+            }
+            echo json_encode($tab);
+
+
             break;
     }
 }

@@ -7,7 +7,6 @@
  */?>
 <link type="text/css" href="css/style_infos.css" rel="stylesheet">
 <aside id='asideInfos'>
-    <div id="alert">
-        
+    <div id="alert" style='display:none'>
     </div>
 </aside>

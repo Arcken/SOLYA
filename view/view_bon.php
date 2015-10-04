@@ -70,30 +70,32 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <tr id="bonligne" hidden>
                         <td  class="bonLigneId">
-                            <input type="text" name="refId[]" onblur="getReferenceBonFromId('0');">
+                            <input type="text" name="refId[]" id='refId' onblur="getReferenceBonFromId('0');">
                         </td>
                         <td class="bonLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[]" onblur="getReferenceBonFromRefCode('0');">
+                            <input type="text" value="MXSI01" name="refCode[]" id='refCode' onblur="getReferenceBonFromRefCode('0');">
                         </td>
                         <td>
-                            <textarea name="refLbl[]" class="bonLigneT"
+                            <textarea name="refLbl[]" id='refLbl' class="bonLigneT"
                                       rows="4" cols="30"
                             >Tablette chocolat du Mexique 70% cacao</textarea>
                            
                         </td>
                          <td class="bonLigneId">
-                             <input type="text" name="lotId[]">
+                             <input type="text" name="lotId[]" id='lotId' onfocus="getLotsFromReference('0');"
+                                    >
                         </td>
                         <td class="bonLigneNb">
-                            <input type="text" value="4" name="ligQte[]">
+                            <input type="number" name="ligQte[]" id='ligQte' value="0" onfocus='limitQteMax("0");' min='0' 
+                                   >
                         </td>
                         
                         <td >
-                            <textarea name="bonligDepot[]" class="bonLigneT"
+                            <textarea name="bonligDepot[]" id='bonligDepot' class="bonLigneT"
                                       rows="2" cols="30">Dépot?</textarea>
                         </td>
                         <td>
-                            <textarea name="bonligCom[]" class="bonLigneT" 
+                            <textarea name="bonligCom[]" id ='bonligCom' class="bonLigneT" 
                                       rows="2" cols="30">Commentaire</textarea>
                         </td>
                         <td class="bonLigneImg">
@@ -104,11 +106,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 </table>
                 <input type="button" value="Ajouter ligne" onclick="ajoutBonLigne('bonTable');">
             </div>
-            <div class="bas">
+            <div class="bas" id="zoneBtnBon" style='display:none'>
                     <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
                     <input id='clearForm' name="clear" type="reset"> 
                     <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
-                </div>
+            </div>
         </form>
         
     </div>
