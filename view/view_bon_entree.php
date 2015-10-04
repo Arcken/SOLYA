@@ -28,16 +28,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
             <div class="col50">
                 <label for="beFraisDouane"> Frais de douane </label><br>
-                <input name="beFraisDouane" placeholder="description" type="text"
-                       value ="150">
+                <input name="beFraisDouane" id="beFraisDouane" 
+                       placeholder="description" type="text" value ="0">
+                <br>
+                
+                <label for="beFraisBancaire"> Frais bancaire </label><br>
+                <input name="beFraisBancaire" id="beFraisBancaire" 
+                       placeholder="description" type="text" value="0">
                 <br>
                 <label for="beFraisTransport"> Frais de transport </label><br>
-                <input name="beFraisTransport" placeholder="description" type="text"
-                       >
-                <br>
-                <label for="beFraisBancaire"> Frais bancaire </label><br>
-                <input name="beFraisBancaire" placeholder="description" type="text"
-                       >
+                <input name="beFraisTransport" id="beFraisTransport" 
+                       placeholder="description" type="text" value="0">
                 <br>
             </div>
             <div class="col90">
@@ -112,60 +113,78 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <tr id="beligne" hidden="">
                         
                         <td  class="beLigneId">
-                            <input type="text" name="refId[NID]"  id="refIdNID" onblur='getReference("NID")'>
+                            <input type="text" name="refId[NID]"  id="refIdNID" 
+                                   onblur='getReference("NID")'>
                         </td>
                         <td class="beLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[NID]" id="refCodeNID">
+                            <input type="text" value="MXSI01" name="refCode[NID]" 
+                                   id="refCodeNID">
                         </td>
                         <td>
-                            <textarea name="refLbl[NID]" id="refLblNID" class="beLigneT">Tablette chocolat du Mexique 70% cacao</textarea>
+                            <textarea name="refLbl[NID]" id="refLblNID"
+                                      class="beLigneT"></textarea>
                            
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="4" name="beligPu[NID]" id="beligPuNID">
+                            <input type="text" value="0" name="beligPu[NID]" 
+                                   id="beligPuNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="5" name="ligQte[NID]" id ="ligQteNID"
-                                   onblur='beCcDroitDouane("beligPu[NID]",
-                                               "beligTauxDouane[NID]",
-                                               "ligQte[NID]",
-                                               "beligDd[NID]")'>
+                            <input type="text" value="0" name="ligQte[NID]" 
+                                   id ="ligQteNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="6" name="beligDd[NID]" id="beligDdNID">
+                            <!-- Calcul: -->
+                            <input type="text" value="0" name="beligDd[NID]" 
+                                   id="beligDdNID"
+                                   onfocus='beCcDroitDouane("beligPuNID",
+                                               "beligTauxDouaneNID",
+                                               "ligQteNID",
+                                               "beligDdNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="7" name="beligTauxDouane[NID]" 
+                            <input type="text" value="0" name="beligTauxDouane[NID]" 
                                    id="beligTauxDouaneNID" readonly="">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="8" name="beligTaxe[NID]" id="beligTaxeNID"
-                                   onblur='beCc("beligDd[NID]","beligTaxe[NID]","calculFd[NID]")'>
+                            <input type="text" value="0" name="beligTaxe[NID]" 
+                                   id="beligTaxeNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="9" name="calculFd[NID]" id="calculFdNID" readonly="">
+                            <!-- Calcul: -->
+                            <input type="text" value="0" name="calculFd[NID]" 
+                                   id="calculFdNID" readonly=""
+                                   onfocus='beCc("beligDdNID","beligTaxeNID","calculFdNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="10" name="beligFb[NID]" id="beligFbNID">
+                            <input type="text" value="0" name="beligFb[NID]" 
+                                   id="beligFbNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="11" name="calculFb[NID]" id="calculFbNID" readonly="">
+                            <input type="text" value="0" name="calculFb[NID]" 
+                                   id="calculFbNID" readonly=""
+                                   onfocus='beCopieChamps("beligFbNID","calculFbNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="12" name="beligFt[NID]" id="beligFtNID">
+                            <input type="text" value="0" name="beligFt[NID]" 
+                                   id="beligFtNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="13" name="calculFt[NID]" id="calculFtNID" readonly="">
+                            <input type="text" value="0" name="calculFt[NID]" 
+                                   id="calculFtNID" readonly=""
+                                   onfocus='beCopieChamps("beligFtNID","calculFtNID")'>
                         </td>
                         <td>
                             <input type="date" name="beligDlc[NID]" id="beligDlcNID">
                             
                         </td>
                         <td >
-                            <textarea name="beligDepot[NID]" id="beligDepotNID" class="beLigneT">Commentaire</textarea>
+                            <textarea name="beligDepot[NID]" id="beligDepotNID" 
+                                      class="beLigneT"></textarea>
                         </td>
                         <td>
-                            <textarea name="beligCom[NID]" id="beligComNID"  class="beLigneT">Commentaire</textarea>
+                            <textarea name="beligCom[NID]" id="beligComNID"  
+                                      class="beLigneT"></textarea>
                         </td>
                         <td  class="beLigneImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
@@ -173,13 +192,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                     </tr>
                 </table>
-                <input type="button" value="Ajouter ligne" onclick='ajoutBeLigne("beTable","beligne")'>
+                <input type="button" value="Ajouter ligne" 
+                       onclick='ajoutBeLigne("beTable","beligne")'>
             </div>
             <div class="bas">
-                    <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
-                    <input name="Calcul" type="button" value="Calcul" onclick="beCalcul()">
+                    <input name="btnForm" type="submit" 
+                           value="<?php echo $sButton; ?>">
+                    <input name="Calcul" type="button" value="Calcul" 
+                           onclick="beCalcul()">
                     <input name="clear" type="reset"> 
-                    <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
+                    <input name="action" id="action" 
+                           value="<?php echo $sAction ?>" type="text" hidden>
                 </div>
         </form>
         

@@ -353,10 +353,10 @@ function getNut() {
 
 function getReference($row) {
     $valInput = $("input[name='refId[" + $row + "]']");
-    console.log($valInput.val());
+    console.log("valeur case: " + $valInput.val());
     $textareaLblRef = $("textarea[name='refLbl[" + $row + "]']");
     $inputTD = $("input[name='beligTauxDouane[" + $row + "]']");
-    console.log($textareaLblRef.val());
+    console.log("valeur case: " + $textareaLblRef.val());
     /*
      console.log($valInput.val());
      $r = $('#' + $row);
@@ -395,70 +395,139 @@ function getReference($row) {
  * @returns {undefined}
  */
 function beCcDroitDouane($source1, $source2, $source3, $cible) {
-
+console.log("DEBUT CC DROIT DOUANE");
+    
     //on récupére la valeur de l'input
-    $pu = parseFloat($("input[name='" + $source1 + "']").val());
+    $pu = parseFloat($("input[id='" + $source1 + "']").val());
+    console.log("PU : " + $pu);
     //on récupére la valeur de l'input
-    $tauxDouane = parseFloat($("input[name='" + $source2 + "']").val());
+    $tauxDouane = parseFloat($("input[id='" + $source2 + "']").val());
+    console.log("Taux douane : " + $tauxDouane);
     //on récupére la valeur de l'input
-    $qt = parseFloat($("input[name='" + $source3 + "']").val());
-    //console.log($qt);
+    $qt = parseFloat($("input[id='" + $source3 + "']").val());
+    console.log("Quantité : " + $qt);
+    
+    
     //on effectue le calcul puis on met l'input cible à jour    
-    $("input[name='" + $cible + "']").val(parseFloat($tauxDouane * $pu * $qt / 100));
+    $res = $("input[id='" + $cible + "']").val(parseFloat($tauxDouane * $pu / 100));
+    
+    console.log("Droit unitaire : " + $res.val());
+    
+console.log("FIN CC DROIT DOUANE");
 }
 
 /**
- * Fonction de calcul pour le champs calcul pour le bon d'entrée
- * @param $source1
- * nom de l'input droit
- * @param $source2
- * nom de l'input taxe
+ * Fonction copie valeur de champs dans un autre
+ * @param $source
+ * id de la source
  * @param $cible
- * nom de l'input calcul
+ * id de la cible
+ * @returns {undefined}
+ */
+function beCopieChamps($source, $cible){
+    $1 = parseFloat($("input[id='" + $source + "']").val());
+    console.log("Source : " + $1);
+    $res = $("input[id='" + $cible + "']").val(parseFloat($1));
+    console.log("res ad: " + $res.val());
+    
+}
+
+/**
+ * Fonction d'addition entre deux éléments html
+ * @param $source1
+ * id de l'input opérant
+ * @param $source2
+ * id de l'input opérant
+ * @param $cible
+ * id de l'input résultat
  * @returns {undefined}
  */
 function beCc($source1, $source2, $cible) {
-
+console.log("DEBUT ADDITION");
     //on récupére la valeur de l'input
-    $1 = parseFloat($("input[name='" + $source1 + "']").val());
+    $1 = parseFloat($("input[id='" + $source1 + "']").val());
+    console.log("champs 1 ad: " + $1);
     //on récupére la valeur de l'input
-    $2 = parseFloat($("input[name='" + $source2 + "']").val());
-
-    //on effectue le calcul puis on met l'input cible à jour    
-    $("input[name='" + $cible + "']").val(parseFloat($1 + $2));
+    $2 = parseFloat($("input[id='" + $source2 + "']").val());
+    console.log("champs 2 ad: " + $2);
+    //on effectue le calcul puis on met à jour l'input cible à jour    
+    $res = $("input[id='" + $cible + "']").val(parseFloat($1 + $2));
+    console.log("res ad: " + $res.val());
+    console.log("FIN ADDITION");
 }
 
 function beCalcul() {
-
-    //on récupére les frais de douanes beFraisDouane
-    $fDouaneVal = parseFloat($('[name*="beFraisDouane"]').val());
-    $qtTotalVal = 0;
-    console.log('F douane: ' + $fDouaneVal);
+    console.log('DEBUT BECALCUL');
+    
+    //on récupére les frais de l'entête du bon
+    $fDouaneVal = parseFloat($('[id="beFraisDouane"]').val());
+    console.log("frais douane: " + $fDouaneVal);
+    $fBancaireVal = parseFloat($('[id="beFraisBancaire"]').val());
+    console.log("frais bancaire: " + $fBancaireVal);
+    $fTransportVal = parseFloat($('[id="beFraisTransport"]').val());
+    console.log("frais transport: " + $fTransportVal);
+    
+    
     //On récupère la quantité totale d'élément
+    $qtTotalVal = 0;
+    //Pou chaque balise tr dont l'id est différent
     $('tr').not('#titreGnl, #titreCol, #beligne').each(function () {
-        
+            //On cherche l'input quantité descendant de tr et on récupére la valeur
             $qtTotalVal += parseFloat($(this).find('[id^="ligQte"]').val());
         
     });
+    console.log("Qt total: " + $qtTotalVal);
     
-    console.log('qu total: ' + $qtTotalVal);
     
-    //on calcule la valeur pour chaque unité les frais de douanes
+    //on calcule la valeur pour chaque unité les frais de l'entête
     $fdUniteVal = parseFloat($fDouaneVal / $qtTotalVal);
-    console.log('fd unite ' + $fdUniteVal);
+    console.log("Frais douane par unité: " + $fdUniteVal);
+    $fbUniteVal = parseFloat($fBancaireVal / $qtTotalVal);
+    console.log("Frais bancaire par unité: " + $fbUniteVal);
+    $ftUniteVal = parseFloat($fTransportVal / $qtTotalVal);
+    console.log("Frais transport par unité: " + $ftUniteVal);
+    
+    //Pou chaque balise tr dont l'id est différent
     $('tr').not('#titreGnl, #titreCol, #beligne').each(function () {
-        console.log($(this).get());
-        $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
-        console.log("qtLigne " + $ligneQtVal);
-        $ligneCalcul = $(this).find('[id^="calculFd"]');
-        $ligneCalculVal = parseFloat($ligneCalcul.val());
+        //console.log($(this).get());
+        //$ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
+        //console.log("qtLigne " + $ligneQtVal);
         
-        console.log("calculLigne " + $ligneCalculVal);
-        $ligneCalcul.val($ligneQtVal * $fdUniteVal + $ligneCalculVal);
-        console.log("calculLigne MAJ" + $ligneCalculVal);
+        //On récupére l'input et la valeur de la case calcul douane descendant de tr
+        $ligneCalculFd = $(this).find('[id^="calculFd"]');
+        $ligneCalculFdVal = parseFloat($ligneCalculFd.val());
+        console.log("Calcul FD: " + $ligneCalculFdVal);
+        
+        //On fait le calcul 'frais de douane unitaire + calcul douane' et on met
+        //à jour la case calcul
+        $ligneCalculFd.val($fdUniteVal + $ligneCalculFdVal);
+        console.log("calcul FD MAJ : " + $ligneCalculFd.val());
+        
+        
+        //On récupére l'input et la valeur de la case calcul banque descendant de tr
+        $ligneCalculFb = $(this).find('[id^="calculFb"]');
+        $ligneCalculFbVal = parseFloat($ligneCalculFb.val());
+        console.log("Calcul FB: " + $ligneCalculFbVal);
+        
+        //On fait le calcul 'frais de banque unitaire + calcul banque' et on met
+        //à jour la case calcul
+        $ligneCalculFb.val($fbUniteVal + $ligneCalculFbVal);
+        console.log("calcul FB MAJ : " + $ligneCalculFb.val());
+        
+        
+         //On récupére l'input et la valeur de la case calcul transport descendant de tr
+        $ligneCalculFt = $(this).find('[id^="calculFt"]');
+        $ligneCalculFtVal = parseFloat($ligneCalculFt.val());
+        console.log("Calcul FT: " + $ligneCalculFtVal);
+        
+        //On fait le calcul 'frais de transport unitaire + calcul transport' et on met
+        //à jour la case calcul
+        $ligneCalculFt.val($ftUniteVal + $ligneCalculFtVal);
+        console.log("calcul Ft MAJ : " + $ligneCalculFt.val());
+        
     });
 
 
-    console.log('fin');
+    console.log('FIN BECALCUL');
 
 }
