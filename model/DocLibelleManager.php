@@ -29,7 +29,7 @@ public static function getDocLibelles($limit=15, $nombre=0,$orderby="doclbl_id")
         try {
 
             $sql = "SELECT doclbl_id, doclbl_lbl, doclbl_signe FROM doc_libelle " 
-                            ."ORDER BY ".$orderby." DESC "
+                            ."ORDER BY ".$orderby." ASC "
                             ."LIMIT ".$nombre.",".$limit."";
 
             $result = Connection::request(1, $sql);

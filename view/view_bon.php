@@ -25,7 +25,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 </select>
                 <br>
                 <label for="bonDate"> Date</label><br>
-                <input name="bonDate" placeholder="Date" type="text" >
+                <input name="bonDate" placeholder="Date" type="Date" >
                 <br>
                 <label for="bonCom">Commentaire</label><br>
                 <textarea name="bonCom" placeholder="Commentaire">Com</textarea>

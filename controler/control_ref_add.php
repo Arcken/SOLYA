@@ -23,11 +23,6 @@ $toDurCons = DureeConservationManager::getAllDureeConservations();
 $toTvas = TvaManager::getAllTvas();
 $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
 
-/* Tool::printAnyCase($toFiArts);
-  Tool::printAnyCase($toModCons);
-  Tool::printAnyCase($toDurCons);
-  Tool::printAnyCase($toTvas);
-  Tool::printAnyCase($toDroitDouanes); */
 
 
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
@@ -93,7 +88,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             echo '<br> id Ref:' . $idRef;
 
             $cnx->commit();
-            $msg = "La référence " . $oRef->ref_lbl . " a été enregistré"
+            $msg = "<p class='info'>La référence " . $oRef->ref_lbl . " a été enregistré"
                           . " avec succès";
             Tool::addMsg($msg);
             $sAction='ref_list';
@@ -103,8 +98,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
            
                switch ($resEr) {
                    case '23000':
-                       $msg='Merci de compléter le Code Référence'
-                                    . ' avec un code unique';
+                       $msg='<p class=\'erreur\'>Merci de compléter le Code Référence'
+                                    . ' avec un code unique </p>';
                        Tool::addMsg($msg);
                        break;
                }
