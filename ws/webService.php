@@ -7,7 +7,8 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
         case 'getAllGamme':
             $tab = array();
-            $requete = "SELECT * FROM gamme";
+            $requete = "SELECT ga_id, ga_lbl FROM gamme "
+                    . "ORDER BY ga_lbl";
             $resultat = $bdd->query($requete);
             while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $donnees;
@@ -16,9 +17,10 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             break;
 
 
-        case 'getAllPays':
+        case 'getAllMc':
             $tab = array();
-            $requete = "SELECT * FROM pays";
+            $requete = "SELECT cons_id, cons_lbl FROM mode_conservation "
+                    . "ORDER BY cons_lbl";
             $resultat = $bdd->query($requete);
             while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $donnees;
@@ -26,16 +28,31 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
-
+            
+            
         case 'getAllNut':
             $tab = array();
-            $requete = "SELECT * FROM nutrition";
+            $requete = "SELECT nut_id, nut_lbl  FROM nutrition "
+                    . "ORDER BY nut_lbl";
             $resultat = $bdd->query($requete);
             while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $donnees;
             }
             echo json_encode($tab);
             break;
+
+            
+        case 'getAllPays':
+            $tab = array();
+            $requete = "SELECT pays_id, pays_nom, pays_abv FROM pays "
+                    . "ORDER BY pays_nom";
+            $resultat = $bdd->query($requete);
+            while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $donnees;
+            }
+            echo json_encode($tab);
+            break;
+
 
 
         case 'getFiartPays':

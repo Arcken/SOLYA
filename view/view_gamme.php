@@ -18,31 +18,30 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     }
     ?>
 
-    <!-- Fin des tests, code de la page -->
+    <!-- Fin des tests entête, code de la page -->
     <div class="corps">
 
         <form class="form" id="fGa" action="index.php">
             <!-- On choisit le titre du bloc selon si c'est une popup-->
             <?php if ($nv == 0) { ?>            
                 <h2>Saisie</h2>
-                <?php } else { ?>
-                <h2> <?php echo $sPageTitle;
-    } ?></h2>
-                
-                <?php if ($nv == 1) {
-                    
-?>
-            <img src="img/icon/add.png" alt="" onclick="window.opener.getGamme()"title="Maj gamme fen parent"/>
-                <?php }?>
+            <?php } else { ?>
+                <h2> <?php
+                    echo $sPageTitle;
+                }
+                ?></h2>
+
+            
             <div> 
                 <label for="gaLbl"> Libellé de la gamme: </label>
                 <input name="gaLbl" placeholder="Saisie" required type="text"
                        pattern=".{3,}" title="3 caractères minimum">            
-                <br>                
+                <br>
+
                 <label for="gaAbv"> Abréviation de la gamme: </label>
                 <input name="gaAbv" placeholder="Saisie" required type="text"
                        pattern=".{2,}" title="2 caractères minimum">            
-                <br> 
+                <br>
             </div>
 
             <div class="bas">
@@ -52,46 +51,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
 
         </form>
-        <hr>
-        <div class="list">
-            <h2> Liste des éléments </h2>
-            <table>
-                <tr>
-                    <th>
-                        Libellé de la gamme
-                    </th>
-                    <th>
-                        Abréviation de la gamme
-                    </th>                        
-                </tr>
-            <?php
-            if ($resAllGa != 0 && is_array($resAllGa)) {
-                foreach ($resAllGa as $gamme) { ?>
-                    <tr>
-                    <td style="border-right: solid 2px black;">
-                        <?php echo $gamme->ga_lbl?>
-                    </td>
-                    <td>
-                        <?php echo $gamme->ga_abv ?>
-                    </td>                        
-                </tr>
-                    
-                    <?php
-                }
-            }
-            ?>
-            </table>
-        </div>
+
     </div>
 
 
 
     <?php
     //Test si la fenêtre est une popup, si oui on charge un footer
-    if ($nv == 1)
+    if ($nv == 1) {
         require $path . '/view/view_new_view_footer.php';
-} else
-    echo 'Le silence est d\'or'
-
-    
-?>
+    }
+} else {
+    echo 'Le silence est d\'or';
+}

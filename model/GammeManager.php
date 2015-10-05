@@ -12,7 +12,7 @@
 class GammeManager {
 
     /**
-     * Retourne tous les enregistrements de la table Gamme
+     * Retourne tous les enregistrements de la table
      * 
      * @return objet[]
      * Renvoie tableau d'objet
@@ -21,20 +21,17 @@ class GammeManager {
 
         try {
 
-            $sql = 'SELECT ga_id, ga_lbl, ga_abv FROM gamme';
+            $sql = 'SELECT ga_id, ga_lbl, ga_abv FROM gamme '
+                    . 'ORDER BY ga_lbl';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() === 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }
 
     /**
-     * Retourne tous les enregistrements de la table Gamme avec limite définie
+     * Retourne tous les enregistrements de la table avec limite définie
      * @param $limite
      * debut de limite
      * @param $nombre
@@ -63,7 +60,7 @@ class GammeManager {
     }
 
     /**
-     * Insert une enregistrement dans la table gamme
+     * Insert une enregistrement dans la table 
      * @param $oGamme
      * attend un objet de la classe Gamme
      * @return string
@@ -72,8 +69,6 @@ class GammeManager {
     public static function addGamme($oGamme) {
 
         try {
-
-            if (!empty($oGamme->GA_LBL) && (strlen($oGamme->GA_LBL) >= intval(Connection::getLimLbl()))) {
 
                 $tParam = array(
                     $oGamme->GA_LBL,
@@ -86,30 +81,26 @@ class GammeManager {
                         . " VALUES(?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement Gamme impossible sans libéllé </p>';
-            }
         } catch (MySQLException $e) {
-
-            $result = 0;
+            throw $e;
         }
         return $result;
     }
 
     /**
-     * Select for update d'une gamme selon son id
+     * Select for update d'un enregistrement selon son id
      * 
-     * @param $oGamme
-     * attend un objet Gamme
-     * @return int
-     * Retourne nombre de ligne impacté
+     * @param $id
+     * attend l'id de la gamme
+     * @return objet
+     * Retourne un objet
      */
-    public static function getGammeDetailUpd($oGamme) {
+    public static function getGammeDetailUpd($id) {
 
         try {
 
             $tParam = array(
-                $oGamme->ga_id
+                $id
             );
             $sql = "SELECT ga_id, ga_lbl, ga_abv "
                     . "FROM gamme "
@@ -117,14 +108,14 @@ class GammeManager {
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = 0;
-            
+            throw $e;
+        
         }
         return $result;
     }
     
      /**
-     * Modifie une gamme selon son id
+     * Modifie un enregistrement selon son id
      * 
      * @param $oGamme
      * Attend un objet Gamme
@@ -148,28 +139,27 @@ class GammeManager {
                 $result = Connection::request(2, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = 0;
-            echo $e->RetourneErreur();
+            throw $e;
         }
         return $result;
     }
 
     /**
      * Supprime l'enregistrement de la table selon son id
-     * @param $iGaId
+     * @param $id
      * id de la gamme
      * @return int 
      * nombre de ligne impacté
      */
-    public static function delGamme($iGaId) {
+    public static function delGamme($id) {
         try {
             $tParam = array(
-                $iGaId
+                $id
             );
             $sql = 'DELETE FROM gamme WHERE ga_id=?';
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
         }
         return $result;
     }

@@ -329,21 +329,21 @@ else {
 //-----------------------------------Nutrition----------------------------------            
 
             case "nut_add":
-                require $path . '/view/view_nut.php';
+                require $path . '/view/view_nutrition.php';
                 break;
             
             case "nut_detail":
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
-                    require $path . '/view/view_nut_list.php';
+                    require $path . '/view/view_nutrition_list.php';
                 } else {
-                    require $path . '/view/view_nut_ru.php';
+                    require $path . '/view/view_nutrition_ru.php';
                 }
                 break;
                 
             case "nut_del":
                 
             case "nut_list":
-                require $path . '/view/view_nut_list.php';
+                require $path . '/view/view_nutrition_list.php';
                 break;    
 
 //----------------------------------Utilisateur---------------------------------
@@ -395,9 +395,37 @@ else {
                         $oGa->GA_ABV = $_REQUEST['gaAbv'];
                         $result = GammeManager::addGamme($oGa);
                     }
-                    $resAllGa = GammeManager::getAllGammes();
+                    
                     break;
 
+                //Mode de conservation
+                case 'nv_mc_add':
+                    $sPageTitle = "Ajouter un mode de conservation";
+                    require $path . '/model/ModeConservation.php';
+                    require $path . '/model/ModeConservationManager.php';
+                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                        $oMc = new Mode_conservation();
+                        $oMc->cons_lbl = $_REQUEST['consLbl'];
+                        $result = ModeConservationManager::addModeConservation($oMc);
+                        echo $result;
+                    }
+                    
+                    break;
+                    
+                //nutrition
+                case 'nv_nut_add':
+                    $sPageTitle = "Ajouter une information";
+                    require $path . '/model/Nutrition.php';
+                    require $path . '/model/NutritionManager.php';
+                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+                        $oNut = new Nutrition();
+                        $oNut->nut_lbl = $_REQUEST['nutLbl'];
+                        $result = NutritionManager::addNutrition($oNut);
+                        echo $result;
+                    }
+                    
+                    break;
+                    
                 //pays
                 case 'nv_pays_add':
                     $sPageTitle = "Ajouter un pays";
@@ -420,22 +448,10 @@ else {
                             $resMessage = "<font color='red'> L'ajout du pays est un échec, champs mal remplies</font>";
                         }
                     }
-                    $resAllPays = PaysManager::getAllPays();
+                    
                     break;
 
-                //nutrition
-                case 'nv_nut_add':
-                    $sPageTitle = "Ajouter une information";
-                    require $path . '/model/Nutrition.php';
-                    require $path . '/model/NutritionManager.php';
-                    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-                        $oNut = new Nutrition();
-                        $oNut->nut_lbl = $_REQUEST['nutLbl'];
-                        $result = NutritionManager::addNutrition($oNut);
-                        echo $result;
-                    }
-                    $resAllNut = NutritionManager::getAllNutritions();
-                    break;
+                
             }
 
             /* ----------------------------Affichage--------------------------------- */
@@ -446,15 +462,22 @@ else {
                     require $path . '/view/view_gamme.php';
                     break;
 
-                //pays
-                case "nv_pays_add":
-                    require $path . '/view/view_pays.php';
+                //Mode conservation
+                case "nv_mc_add":
+                    require $path . '/view/view_mode_conservation.php';
                     break;
 
                 //nutrition
                 case "nv_nut_add":
                     require $path . '/view/view_nutrition.php';
                     break;
+                
+                //pays
+                case "nv_pays_add":
+                    require $path . '/view/view_pays.php';
+                    break;
+
+                
             }
         }
     }

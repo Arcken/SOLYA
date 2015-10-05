@@ -1,33 +1,4 @@
 
-
-//Variable d'incrément pour ajoutBeLigne
-nRowCount = 1;
-
-/**
- * Fonction d'ajout de ligne pour le bon d'entrée
- * On prend tous ce qui se trouvent entre <tr id=beligne> et </tr>
- * On modifie les valeurs nécessaires et on ajoute l'ensemble au document avant
- * la fin de la balise table
- * @param $table
- * Table html du document
- * @returns {undefined}
- */
-function ajoutBeLigne($table) {
-    //On récupére le squelette du code entre le balises <tr id=belig> et </tr>
-    $ligne = $('#beligne').html();
-    //On modifie l'id de la balise tr en incorporant un numéro de ligne
-    $id = "beligne" + nRowCount;
-    //on remplace tous les mots NID par le même numéro de ligne 
-    $ligne = $ligne.replace(/NID/g, nRowCount);
-    //On remplace beligne par 'beligne + numéro de ligne'
-    $ligne = $ligne.replace(/beligne>/, $id);
-    console.log($ligne);
-    //On ajoute le code à la fin de la table
-    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
-    //on incrémente le compteur
-    nRowCount++;
-}
-
 /**
  * Fonction qui efface une balise html selon son id
  * @param $cible
@@ -49,7 +20,7 @@ function delLigne($cible) {
  * @returns {Boolean}
  */
 
-function popup($action)
+function popup($action) //------------------------Appelable partout
 {
     var width = 700;
     var height = 500;
@@ -78,7 +49,7 @@ function popup($action)
  * Affiche une boite de message
  * @returns rien
  */
-function test() {
+function test() {   //------------------------Appelable partout
     alert('Coucou');
 }
 
@@ -92,9 +63,9 @@ function test() {
  * ou une croix pour un doublon
  * @returns {undefined}
  */
-function verifUnique($champs, $table, $source, $cible) {
+function verifUnique($champs, $table, $source, $cible) {  //appel dans view_utilisateur 
     //on récupére la valeur de l'input
-    $valeur = $("input[name=" + $source + "]").val();
+    $valeur = $("input[id=" + $source + "]").val();
     $.getJSON(
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getNombre', table: $table, champs: $champs, valeur: $valeur},
@@ -119,7 +90,7 @@ function verifUnique($champs, $table, $source, $cible) {
  * @returns boolean
  * 
  */
-function verifPassImg() {
+function verifPassImg() { //appel dans view_utilisateur 
     //on teste que le pass et sa confirmation ne soient pas nul
     //et soient identique
     if ($('#pass').val() != ''
@@ -136,7 +107,7 @@ function verifPassImg() {
  * fonction qui test la solidité du mot de passe
  * @returns {undefined}
  */
-function verifPassForce() {
+function verifPassForce() { //appel dans view_utilisateur 
     //Si le pass est nom nul
     if ($('#pass').val() != ''
             )
@@ -154,12 +125,12 @@ function verifPassForce() {
 
         //On test si la longueur et trop courte
         if (okRegex.test($('#pass').val()) === false) {
-            
+
             alert('Le mot de passe doit contenir 8 caractères minimum');
-            
+
             //On teste la régle la plus forte
         } else if (strongRegex.test($('#pass').val())) {
-            
+
             $('#passForce').text('Mot de passe fort!');
         } else if (mediumRegex.test($('#pass').val())) {
             // If medium password matches the reg ex
@@ -177,7 +148,7 @@ function verifPassForce() {
  * fonction qui teste si le pass et sa confirmation sont identique, affiche une alertbox si différents
  * @returns {Boolean}
  */
-function verifPass() {
+function verifPass() { //appel dans view_utilisateur 
     var test = false;
 
     if ($('#pass').val().length >= 8
@@ -202,14 +173,14 @@ function verifPass() {
 
 /**
  * Fonction qui appel une page en spécifier le choix du trie pour les reqêtes
- * @param string action
+ * @param $action
  *  action à effectuer pour le contrôleur
- * @param string champs
+ * @param $champs
  *  champs sur lequel porte le tri de la requéte
  * @returns rien
  */
-function orderby(action, champs) {
-    window.open('index.php?action=' + action + "&orderby=" + champs, '_self');
+function orderby($action, $champs) { //appel partout
+    window.open('index.php?action=' + $action + "&orderby=" + $champs, '_self');
 }
 
 /**
@@ -226,7 +197,7 @@ function orderby(action, champs) {
  * Arguments suplémentaire à passer dans l'url si besoin.(Optionnel)
  * @returns {undefined}
  */
-function delElt($id, $codetype, $type, $action, $precision) {
+function delElt($id, $codetype, $type, $action, $precision) { //appel partout
 
     $resBool = confirm("Voulez-vous supprimez l'élément: \n" + $type + " numéro: " + $id);
     if ($resBool && $precision == null) {
@@ -246,18 +217,24 @@ function delElt($id, $codetype, $type, $action, $precision) {
  * Fonction qui définit le script à effectuer sur le bloc unload de la page affiché
  * @returns {undefined}
  */
-function selMaj() {
+function selMaj() { // Appel partout
     var $action = $('#action').val();
 
     switch ($action) {
+
+
+        case 'nv_ga_add':
+            $("#newView").prop('onunload', window.opener.getGamme());
+            break;
+
+        case 'nv_mc_add' :
+            $("#newView").prop('onunload', window.opener.getMc());
+            break;
 
         case 'nv_nut_add' :
             $("#newView").prop('onunload', window.opener.getNut());
             break;
 
-        case 'nv_ga_add':
-            $("#newView").prop('onunload', window.opener.getGamme());
-            break;
 
         case 'nv_pays_add':
             $("#newView").prop('onunload', window.opener.getPays());
@@ -273,7 +250,7 @@ function selMaj() {
  * bloc p, div ou autre à modifier
  * @returns {undefined}
  */
-function listSelect($select, $target) {
+function listSelect($select, $target) { //appel dans fiche article
     //on récupére la combox et ses options choisis
     $a = $('#' + $select + ' option:selected');
     //On écrit les valeurs récupérés dans un bloc html
@@ -286,23 +263,76 @@ function listSelect($select, $target) {
  * Récupére les enregistrements de la table GAMME et met à jour la combobox
  * @returns {undefined}
  */
-function getGamme() {
+function getGamme() { //appel partout
 
     $.getJSON(
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getAllGamme'},
     function (json) {
         console.log('dedans');
-        var $selectCol1 = $('#selGamme');
-        $selectCol1.empty();
-        $selectCol1.append('<option value="">Aucun</option>');
+        var $select = $('#selGamme');
+        console.log($select);
+        $select.empty();
+        $select.append('<option value="">Aucun</option>');
         for (var key in json) {
-            $selectCol1.append('<option value="' + json[key].GA_ID + '">'
-                    + json[key].GA_LBL + '</option>');
+            $select.append('<option value="' + json[key].ga_id + '">'
+                    + json[key].ga_lbl + '</option>');
         }
     }
     );
 }
+
+/**
+ * * Récupére les enregistrements de la table Mode conservation et met à jour la combobox
+ * @returns {undefined}
+ */
+function getMc() {
+
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getAllMc'},
+    function (json) {
+        console.log('dedans getMc');
+        var $select = $('#modeConservation');
+        console.log($select);
+        $select.empty();
+        $select.append('<option value="">Aucun</option>');
+        for (var key in json) {
+            $select.append('<option value="' + json[key].cons_id + '">'
+                    + json[key].cons_lbl + '</option>');
+        }
+    }
+    );
+}
+
+
+/**
+ * * Récupére les enregistrements de la table NUTRITION et met à jour la combobox
+ * @returns {undefined}
+ */
+function getNut() {
+
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getAllNut'},
+    function (json) {
+        console.log('dedans');
+        var $divNut = $('#divNut');
+        $('#divNut').empty();
+
+        $divNut.append('<label> Table de nutrition: </label><br><br>');
+        for (var key in json) {
+            $divNut.append('<label for="nut' + json[key].nut_id + '">'
+                    + json[key].nut_lbl + '</label><br>');
+            $divNut.append('<input type="text" name="nut' + json[key].nut_id + '" '
+                    + ' placeholder="saisie">');
+            $divNut.append('<input type="text" class="inputSmall" name="nutAjr' + json[key].nut_id + '"'
+                    + ' placeholder="###.#"><br>');
+        }
+    }
+    );
+}
+
 
 /**
  * * Récupére les enregistrements de la table PAYS et met à jour la combobox
@@ -326,208 +356,36 @@ function getPays() {
     );
 }
 
-/**
- * * Récupére les enregistrements de la table NUTRITION et met à jour la combobox
- * @returns {undefined}
- */
-function getNut() {
+
+function getReference($row, $champs, $form) {
+    $valInput = $("input[id='refId" + $row + "']");
+    console.log("valeur case refid: " + $valInput.val());
+    $textareaLblRef = $("textarea[id='refLbl" + $row + "']");
+    $inputTD = $("input[id='beligTauxDouane" + $row + "']");
+    console.log("valeur case lbl: " + $textareaLblRef.val());
 
     $.getJSON(
             'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getAllNut'},
+            {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput.val()},
     function (json) {
-        console.log('dedans');
-        var $divNut = $('#divNut');
-        $('#divNut').empty();
 
-        $divNut.append('<label> Table de nutrition: </label><br><br>');
+        console.log("json: " + json);
+
         for (var key in json) {
-            $divNut.append('<label for="nut' + json[key].NUT_ID + '">'
-                    + json[key].NUT_LBL + '</label><br>');
-            $divNut.append('<input type="text" value="nut' + json[key].NUT_ID
-                    + '"></input><br>');
+            console.log("champs : " + $champs);
+            console.log("formulaire : " + $form);
+            if ($champs == "ref_id" && $form == "be")
+                retourJsonRefid(key, json);
+
         }
     }
     );
 }
 
-function getReference($row) {
-    $valInput = $("input[name='refId[" + $row + "]']");
-    console.log("valeur case: " + $valInput.val());
-    $textareaLblRef = $("textarea[name='refLbl[" + $row + "]']");
-    $inputTD = $("input[name='beligTauxDouane[" + $row + "]']");
-    console.log("valeur case: " + $textareaLblRef.val());
-    /*
-     console.log($valInput.val());
-     $r = $('#' + $row);
-     $t = $('td', $r);
-     $i = $("input[name='" + $champs + "[]']", $t);
-     $j = $("textarea[name='refLbl[]']", $t);
-     */
-
-    $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRef', refId: $valInput.val()},
-    function (json) {
-
-        console.log("json" + json);
-
-        for (var key in json) {
-            console.log('lbl' + json[key].ref_lbl);
-            $textareaLblRef.val(json[key].ref_lbl);
-            console.log('taux' + json[key].dd_taux);
-            $inputTD.val(json[key].dd_taux);
-        }
-    }
-    );
-}
-//-----------------calcul bon entree------------------
-/**
- * Fonction de calcul du droit de douane pour le bon d'entrée
- * @param $source1
- * nom de l'input prix unitaire
- * @param $source2
- * nom de l'input taux de douane
- * @param $source3
- * nom de l'input quantité
- * @param $cible
- * nom de l'input droit de douane
- * @returns {undefined}
- */
-function beCcDroitDouane($source1, $source2, $source3, $cible) {
-console.log("DEBUT CC DROIT DOUANE");
-    
-    //on récupére la valeur de l'input
-    $pu = parseFloat($("input[id='" + $source1 + "']").val());
-    console.log("PU : " + $pu);
-    //on récupére la valeur de l'input
-    $tauxDouane = parseFloat($("input[id='" + $source2 + "']").val());
-    console.log("Taux douane : " + $tauxDouane);
-    //on récupére la valeur de l'input
-    $qt = parseFloat($("input[id='" + $source3 + "']").val());
-    console.log("Quantité : " + $qt);
-    
-    
-    //on effectue le calcul puis on met l'input cible à jour    
-    $res = $("input[id='" + $cible + "']").val(parseFloat($tauxDouane * $pu / 100));
-    
-    console.log("Droit unitaire : " + $res.val());
-    
-console.log("FIN CC DROIT DOUANE");
+function retourJsonRefid(key, json) {
+    console.log('lbl' + json[key].ref_lbl);
+    $textareaLblRef.val(json[key].ref_lbl);
+    console.log('taux' + json[key].dd_taux);
+    $inputTD.val(json[key].dd_taux);
 }
 
-/**
- * Fonction copie valeur de champs dans un autre
- * @param $source
- * id de la source
- * @param $cible
- * id de la cible
- * @returns {undefined}
- */
-function beCopieChamps($source, $cible){
-    $1 = parseFloat($("input[id='" + $source + "']").val());
-    console.log("Source : " + $1);
-    $res = $("input[id='" + $cible + "']").val(parseFloat($1));
-    console.log("res ad: " + $res.val());
-    
-}
-
-/**
- * Fonction d'addition entre deux éléments html
- * @param $source1
- * id de l'input opérant
- * @param $source2
- * id de l'input opérant
- * @param $cible
- * id de l'input résultat
- * @returns {undefined}
- */
-function beCc($source1, $source2, $cible) {
-console.log("DEBUT ADDITION");
-    //on récupére la valeur de l'input
-    $1 = parseFloat($("input[id='" + $source1 + "']").val());
-    console.log("champs 1 ad: " + $1);
-    //on récupére la valeur de l'input
-    $2 = parseFloat($("input[id='" + $source2 + "']").val());
-    console.log("champs 2 ad: " + $2);
-    //on effectue le calcul puis on met à jour l'input cible à jour    
-    $res = $("input[id='" + $cible + "']").val(parseFloat($1 + $2));
-    console.log("res ad: " + $res.val());
-    console.log("FIN ADDITION");
-}
-
-function beCalcul() {
-    console.log('DEBUT BECALCUL');
-    
-    //on récupére les frais de l'entête du bon
-    $fDouaneVal = parseFloat($('[id="beFraisDouane"]').val());
-    console.log("frais douane: " + $fDouaneVal);
-    $fBancaireVal = parseFloat($('[id="beFraisBancaire"]').val());
-    console.log("frais bancaire: " + $fBancaireVal);
-    $fTransportVal = parseFloat($('[id="beFraisTransport"]').val());
-    console.log("frais transport: " + $fTransportVal);
-    
-    
-    //On récupère la quantité totale d'élément
-    $qtTotalVal = 0;
-    //Pou chaque balise tr dont l'id est différent
-    $('tr').not('#titreGnl, #titreCol, #beligne').each(function () {
-            //On cherche l'input quantité descendant de tr et on récupére la valeur
-            $qtTotalVal += parseFloat($(this).find('[id^="ligQte"]').val());
-        
-    });
-    console.log("Qt total: " + $qtTotalVal);
-    
-    
-    //on calcule la valeur pour chaque unité les frais de l'entête
-    $fdUniteVal = parseFloat($fDouaneVal / $qtTotalVal);
-    console.log("Frais douane par unité: " + $fdUniteVal);
-    $fbUniteVal = parseFloat($fBancaireVal / $qtTotalVal);
-    console.log("Frais bancaire par unité: " + $fbUniteVal);
-    $ftUniteVal = parseFloat($fTransportVal / $qtTotalVal);
-    console.log("Frais transport par unité: " + $ftUniteVal);
-    
-    //Pou chaque balise tr dont l'id est différent
-    $('tr').not('#titreGnl, #titreCol, #beligne').each(function () {
-        //console.log($(this).get());
-        //$ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
-        //console.log("qtLigne " + $ligneQtVal);
-        
-        //On récupére l'input et la valeur de la case calcul douane descendant de tr
-        $ligneCalculFd = $(this).find('[id^="calculFd"]');
-        $ligneCalculFdVal = parseFloat($ligneCalculFd.val());
-        console.log("Calcul FD: " + $ligneCalculFdVal);
-        
-        //On fait le calcul 'frais de douane unitaire + calcul douane' et on met
-        //à jour la case calcul
-        $ligneCalculFd.val($fdUniteVal + $ligneCalculFdVal);
-        console.log("calcul FD MAJ : " + $ligneCalculFd.val());
-        
-        
-        //On récupére l'input et la valeur de la case calcul banque descendant de tr
-        $ligneCalculFb = $(this).find('[id^="calculFb"]');
-        $ligneCalculFbVal = parseFloat($ligneCalculFb.val());
-        console.log("Calcul FB: " + $ligneCalculFbVal);
-        
-        //On fait le calcul 'frais de banque unitaire + calcul banque' et on met
-        //à jour la case calcul
-        $ligneCalculFb.val($fbUniteVal + $ligneCalculFbVal);
-        console.log("calcul FB MAJ : " + $ligneCalculFb.val());
-        
-        
-         //On récupére l'input et la valeur de la case calcul transport descendant de tr
-        $ligneCalculFt = $(this).find('[id^="calculFt"]');
-        $ligneCalculFtVal = parseFloat($ligneCalculFt.val());
-        console.log("Calcul FT: " + $ligneCalculFtVal);
-        
-        //On fait le calcul 'frais de transport unitaire + calcul transport' et on met
-        //à jour la case calcul
-        $ligneCalculFt.val($ftUniteVal + $ligneCalculFtVal);
-        console.log("calcul Ft MAJ : " + $ligneCalculFt.val());
-        
-    });
-
-
-    console.log('FIN BECALCUL');
-
-}

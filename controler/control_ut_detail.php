@@ -32,10 +32,9 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
 } else {
     $sPageTitle = "Détail de l'utilisateur";
     if (isset($_REQUEST['utLogin']) && $_REQUEST['utLogin'] != '') {
-        $oUtilisateur = new Utilisateur();
-        $oUtilisateur->ut_login = $_REQUEST['utLogin'];
+        $resUtilisateur = UtilisateurManager::getUtilisateurDetailUpd($_REQUEST['utLogin']);
         $sButton = 'Modifier';
     }
 }
-$resUtilisateur = UtilisateurManager::getUtilisateurDetailUpd($oUtilisateur);
+
 $resAllGroupes = GroupeManager::getAllGroupes();

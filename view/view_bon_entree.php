@@ -5,7 +5,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-
+    <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="col50">
@@ -19,7 +19,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        >
                 <br>
                 <label for="beDate"> Date</label><br>
-                <input name="beDate" placeholder="description" type="text"
+                <input name="beDate" placeholder="description" type="date"
                        >
                 <br>
                 <label for="beCom"> Commentaire</label><br>
@@ -110,11 +110,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </th>
                         
                     </tr>
-                    <tr id="beligne" hidden="">
+                    <tr id="idLigne" hidden="">
                         
                         <td  class="beLigneId">
-                            <input type="text" name="refId[NID]"  id="refIdNID" 
-                                   onblur='getReference("NID")'>
+                            <!-- Appel de fonction qui recherche une reference selon son id, il faut préciser le champs-->
+                            <input type="number" name="refId[NID]"  id="refIdNID" 
+                                   onblur='getReference("NID","ref_id","be")' min="0">
                         </td>
                         <td class="beLigneCode">
                             <input type="text" value="MXSI01" name="refCode[NID]" 
@@ -134,7 +135,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id ="ligQteNID">
                         </td>
                         <td class="beLigneNb">
-                            <!-- Calcul: -->
+                            <!-- Calcul droit de douane selon le pu et le taux 
+                            récupérés par getreference-->
                             <input type="text" value="0" name="beligDd[NID]" 
                                    id="beligDdNID"
                                    onfocus='beCcDroitDouane("beligPuNID",
@@ -151,7 +153,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligTaxeNID">
                         </td>
                         <td class="beLigneNb">
-                            <!-- Calcul: -->
+                            <!-- Additionne droit de douane et taxe -->
                             <input type="text" value="0" name="calculFd[NID]" 
                                    id="calculFdNID" readonly=""
                                    onfocus='beCc("beligDdNID","beligTaxeNID","calculFdNID")'>
@@ -161,6 +163,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligFbNID">
                         </td>
                         <td class="beLigneNb">
+                            <!-- Copie frais bancaire dans total pour le calcul final -->
                             <input type="text" value="0" name="calculFb[NID]" 
                                    id="calculFbNID" readonly=""
                                    onfocus='beCopieChamps("beligFbNID","calculFbNID")'>
@@ -170,6 +173,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligFtNID">
                         </td>
                         <td class="beLigneNb">
+                            <!-- Copie frais transport dans total pour le calcul final -->
                             <input type="text" value="0" name="calculFt[NID]" 
                                    id="calculFtNID" readonly=""
                                    onfocus='beCopieChamps("beligFtNID","calculFtNID")'>
@@ -187,17 +191,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                       class="beLigneT"></textarea>
                         </td>
                         <td  class="beLigneImg">
+                            <!-- Efface la ligne en cours -->
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delLigne("beligne")' class="tdImgTd"/>
+                                 onclick='delLigne("idLigne")' class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
+                <!-- Ajoute une ligne -->
                 <input type="button" value="Ajouter ligne" 
-                       onclick='ajoutBeLigne("beTable","beligne")'>
+                       onclick='addLigne("beTable","idLigne")'>
             </div>
             <div class="bas">
                     <input name="btnForm" type="submit" 
                            value="<?php echo $sButton; ?>">
+                    <!-- Mets à jour chaque champs calcul selon les champs
+                    de l'entête-->
                     <input name="Calcul" type="button" value="Calcul" 
                            onclick="beCalcul()">
                     <input name="clear" type="reset"> 

@@ -22,10 +22,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
     }
 } else {
     $sPageTitle = "Détail de la gamme";
-    if (isset($_REQUEST['gaId']) && $_REQUEST['gaId'] != '') {
-        $oGamme = new Gamme();
-        $oGamme->ga_id = $_REQUEST['gaId'];
-        $resGaDetail = GammeManager::getGammeDetailUpd($oGamme);
+    if (isset($_REQUEST['gaId']) && $_REQUEST['gaId'] != '') {        
+        $resGaDetail = GammeManager::getGammeDetailUpd($_REQUEST['gaId']);
         $sButton = 'Modifier';
     }
 }

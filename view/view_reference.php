@@ -65,7 +65,7 @@
                 <input name="refPoidsNet" placeholder="gramme ### ###,##" type="text">             
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
-                <select name="modeConservation" title="Choisir un élément" required>
+                <select name="modeConservation" id="modeConservation" title="Choisir un élément" required>
                     <option value="" selected>Aucun</option>
                     
                     <?php
@@ -77,7 +77,7 @@
                     }?>
                         
                 </select>
-                <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('view_mode_conservation.php');"/>
+                <img src="img/icon/add.png" alt="" title="Créer" onClick="popup('mc_add');"/>
                 <br>
                 <label for="dureeConservation"> Durée de conservation </label><br>
                 <select name="dureeConservation" title="Choisir un élément" required>

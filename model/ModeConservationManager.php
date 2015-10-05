@@ -59,22 +59,17 @@ class ModeConservationManager {
      */
     public static function addModeConservation($Cons) {
         try {
-
-            if (!empty($Cons->cons_lbl) && (strlen($Cons->cons_lbl)) > Connection::getLimLbl()) {
-
+            
                 $tParam = array(
                     $Cons->cons_lbl
                 );
 
                 $sql = "INSERT INTO mode_conservation ("
-                        . "cons_lbl)"
-                        . "VALUES(?)";
+                        . "cons_lbl) "
+                        . "VALUES (?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
-            }
-        } catch (MySQLException $e) {
+            } catch (MySQLException $e) {
 
             echo $e->RetourneErreur();
         }
