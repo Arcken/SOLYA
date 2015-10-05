@@ -6,7 +6,7 @@
 class InformerManager {
 
     /**
-     * Retourne tous les enregistrements de la table INFORMER
+     * Retourne tous les enregistrements de la table
      * 
      * @return objet[]
      * Retourne un tableau d'objet
@@ -14,17 +14,18 @@ class InformerManager {
     public static function getAllInformer() {
 
         try {
-
             $sql = 'SELECT * FROM informer';
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Retourne les nutritions selon l'id de la fiche article
+     * Retourne les enregistrements selon l'id de la fiche article
      * @param $iFiartId
      * Id de la fiche article
      * @return objet[]
@@ -34,16 +35,19 @@ class InformerManager {
 
         try {
             $tParam = [$iFiartId];
-            $sql = 'SELECT fiart_id,nut_id, nutfiart_val, nutfiart_ajr FROM informer WHERE fiart_id = ?';
+            $sql = 'SELECT fiart_id,nut_id, nutfiart_val, nutfiart_ajr '
+                    . 'FROM informer WHERE fiart_id = ?';
             $result = Connection::request(1, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Insert une enregistrement dans la table informer
+     * Insert une enregistrement dans la table
      * @param $oInformer
      * attend un objet de la classe Informer
      * @return int
@@ -52,10 +56,7 @@ class InformerManager {
     public static function addInformer($oInformer) {
 
         try {
-
-            if ($oInformer->nutfiart_ajr != '' || $oInformer->nutfiart_val != '') {
-
-                $tParam = array(
+                 $tParam = array(
                     $oInformer->fiart_id,
                     $oInformer->nut_id,
                     $oInformer->nutfiart_val,
@@ -70,17 +71,16 @@ class InformerManager {
                         . " VALUES(?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+                
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Efface un élément de la table informer selon l'id de la fiche article
+     * Efface un élément de la table selon l'id de la fiche article
      * @param $iFiartId
      * id de la fiche article
      * @return int
@@ -88,13 +88,13 @@ class InformerManager {
      */
     public static function delInformerFiart($iFiartId) {
         try {
-            $tParam = array(
-                $iFiartId
-            );
+            $tParam = [$iFiartId];
             $sql = 'DELETE FROM informer WHERE fiart_id=?';
+            
             $result = Connection::request(2, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }

@@ -6,8 +6,8 @@
  * and open the template in the editor.
  * 
  * 
- * --------------------------Les mots de passes sont concaténés avec !Stage2015!
- * -------------------------------pour les complexifier
+ * ---------------------Les mots de passes sont concaténés avec !Stage2015!
+ * ----------------------------pour les complexifier
  * 
  * 
  */
@@ -25,17 +25,19 @@ class UtilisateurManager {
     public static function getAllUtilisateurs() {
 
         try {
-
             $sql = 'SELECT ut_nom, ut_prenom, ut_login, ut_actif, grp_nom '
                     . 'FROM utilisateur AS u '
                     . 'JOIN groupe g ON u.grp_id = g.grp_id ';
+            
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }
 
+    
     /**
      * Retourne les détails d'un utilisateur selon son login et mot de passe
      * Sert à vérifier le login
@@ -47,24 +49,26 @@ class UtilisateurManager {
     public static function getUtilisateur($oUtilisateur) {
 
         try {
-
             $tParam = array(
                 $oUtilisateur->ut_login,
                 sha1('!Stage2015!' . $oUtilisateur->ut_pass)
             );
 
-            $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id, grp_nom "
-                    . "FROM utilisateur"
-                    . " NATURAL JOIN GROUPE"
-                    . " WHERE UT_LOGIN =? AND UT_PASS =?";
+            $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id, "
+                    . "grp_nom "
+                    . "FROM utilisateur "
+                    . "NATURAL JOIN GROUPE "
+                    . "WHERE UT_LOGIN =? AND UT_PASS =?";
 
             $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }
 
+    
     /**
      * Retourne les détails d'un utilisateur selon son login
      * 
@@ -77,21 +81,21 @@ class UtilisateurManager {
 
         try {
 
-            $tParam = array(
-                $oUtilisateur->ut_login
-            );
+            $tParam = [$oUtilisateur->ut_login];
 
             $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
-                    . "FROM utilisateur"
-                    . " WHERE ut_login =?";
+                    . "FROM utilisateur "
+                    . "WHERE ut_login =?";
 
             $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }
 
+    
     /**
      * Select for update d'un enregistrement selon son id
      * 
@@ -103,21 +107,21 @@ class UtilisateurManager {
     public static function getUtilisateurDetailUpd($id) {
 
         try {
-            $tParam = array(
-                $id
-            );
+            $tParam = [$id];
 
             $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id "
-                    . "FROM utilisateur"
-                    . " WHERE ut_login =? FOR UPDATE";
+                    . "FROM utilisateur "
+                    . "WHERE ut_login =? FOR UPDATE";
 
             $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }
 
+    
     /**
      * Ajoute un enregistrement dans la table
      * 
@@ -148,6 +152,7 @@ class UtilisateurManager {
                     . "VALUES(?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }

@@ -62,7 +62,7 @@ if (isset($_REQUEST['fiartId']) && !empty($_REQUEST['fiartId'])) {
             $oFiArt->fiart_lbl = $_REQUEST['fiartLbl'];
             $oFiArt->fiart_ing = $_REQUEST['fiartIng'];
             $oFiArt->fiart_alg = $_REQUEST['fiartAlg'];
-            $oFiArt->fiart_pays_id = $_REQUEST['pays'];
+            $oFiArt->pays_id = $_REQUEST['pays'];
             $oFiArt->fiart_com = $_REQUEST['fiartCom'];
             $oFiArt->fiart_com_tech = $_REQUEST['fiartComTech'];
             $oFiArt->fiart_com_util = $_REQUEST['fiartComUtil'];

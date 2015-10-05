@@ -9,20 +9,24 @@
 /**
  * Description of TelephoneManager
  *
- * @author Olivier
  */
 class TelephoneManager {
-    //put your code here
-    
-     public static function addTel($Telephone){
+
+    /**
+     * Ajoute un enregistrement dans la table
+     * 
+     * @param $oTelephone
+     * Attend un objet de la classe téléphone
+     * 
+     * @return int
+     * Retourne le nombre d'insert
+     */
+     public static function addTel($oTelephone){
+         
          try {
-
-            if (!empty($Telephone->TEL_IND) && (strlen($Telephone->TEL_IND)) >2 &&
-                !empty($Telephone->TEL_NUM) && (strlen($Telephone->TEL_NUM)) > 5) {
-
                 $tParam= array(
-                    $Telephone->TEL_IND,
-                    $Telephone->TEL_NUM
+                    $oTelephone->TEL_IND,
+                    $oTelephone->TEL_NUM
                 );
 
                 $sql = "INSERT INTO telephone ("
@@ -31,15 +35,10 @@ class TelephoneManager {
                         . "VALUES(?,?)";
                 
                 $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans NOM </p>';
-            }
             
         } catch (MySQLException $e) {
-            
-            echo $e->RetourneErreur();
+            throw $e;
         }
-      
+        return $result;
     }
 }

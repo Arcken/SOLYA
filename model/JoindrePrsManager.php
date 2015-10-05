@@ -12,18 +12,24 @@
  * @author Olivier
  */
 class JoindrePrsManager {
-       //put your code here
-     public static function addJoindrePrs($JoindrePrs){
+    
+    
+    /**
+     * Ajoute un enregistrement dans la table
+     * 
+     * @param $oJoindrePrs
+     * Attend un objet de la classe JoindrePersonne
+     * 
+     * @return int
+     * Retourne le nombre d'insert
+     */
+     public static function addJoindrePrs($oJoindrePrs){
+
          try {
-
-            if (!empty($JoindrePrs->TEL_ID) 
-               && !empty($JoindrePrs->PRS_ID) 
-               && !empty( $JoindrePrs-> TELPER_LBL) && (strlen( $JoindrePrs-> TELPER_LBL)) > Connection::getLimLbl()) {
-
                 $tParam= array(
-                     $JoindrePrs-> TELPER_LBL,
-                     $JoindrePrs->TEL_ID,
-                     $JoindrePrs->PRS_ID
+                     $oJoindrePrs-> TELPER_LBL,
+                     $oJoindrePrs->TEL_ID,
+                     $oJoindrePrs->PRS_ID
                 );
 
                 $sql = "INSERT INTO joindre_prs ("
@@ -34,13 +40,9 @@ class JoindrePrsManager {
                 
                 $result = Connection::request(2, $sql, $tParam);
   
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans NOM </p>';
-            }
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            throw $e;
         }
-      
     }
+    
 }

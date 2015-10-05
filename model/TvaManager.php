@@ -6,84 +6,75 @@
  * and open the template in the editor.
  */
 
-
 class TvaManager {
     //put your code here
-    
+
     /**
-     * Retourne tous les enregistrements de la table tva
+     * Retourne tous les enregistrements de la table
      * 
-     * @return tva[] objet
+     * @return []objet
+     * Retourne un tableau d'objet
      */
     public static function getAllTvas() {
 
         try {
 
             $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t';
-            $result = Connection::request(1,$sql);
+
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-              if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }
-    
-     /**
-     * Retourne un enregistrement de la table tva par son id
+
+    /**
+     * Retourne un enregistrement de la table selon son id
      *  
-     * @return tva objet
+     * @param $id
+     * Id de l'enregistrement
+     * 
+     * @return objet
+     * Retourne un objet
      */
-    public static function getTvaById($idTva) {
+    public static function getTvaById($id) {
 
         try {
-            $tParam=array(
-                $idTva
-                    );
-            
+            $tParam = [$id];
+
             $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t WHERE t.tva_id=?';
-            $result = Connection::request(0,$sql,$tParam);
-            
+
+            $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
-              if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            throw $e;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Ajoute un enregistrement dans la table
+     * @param $oTva
+     */
+    public static function addTva($oTva) {
+
+        try {
+            $tParam = array(
+                $oTva->tva_lbl,
+                $oTva->tva_taux
+            );
+
+            $sql = "INSERT INTO tva ("
+                    . "tva_lbl,"
+                    . "tva_taux)"
+                    . "VALUES(?,?)";
+
+            $result = Connection::request(2, $sql, $tParam);
+
+        } catch (MySQLException $e) {
+            throw $e;
         }
         return $result;
     }
-    /**
-     * Ajoute un enregistrement dans la table tva
-     * @param type $Tva
-     */
-    public static function addTva($Tva){
-         try {
 
-            if (!empty($Tva->tva_lbl) && (strlen($Tva->tva_lbl)) > Connection::getLimLbl()) {
-
-                $tParam= array(
-                    $Tva->tva_lbl,
-                    $Tva->tva_taux
-                );
-
-                $sql = "INSERT INTO tva ("
-                        . "tva_lbl,"
-                        . "tva_taux)"
-                        . "VALUES(?,?)";
-                
-                $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
-            }
-        } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
-        }
-      
-    }
 }
-

@@ -13,43 +13,44 @@
  */
 class AdresseManager {
 
-    //put your code here
-    public static function addAddresse($Adresse) {
-        try{
-          if (isset($Adresse->PAYS_ID) && isset($Adresse->ADR_VILLE) && strlen($Adresse->ADR_VILLE)> Connection::getLimLbl()) {
+    /**
+     * Ajout une enregistrement dans la table
+     * 
+     * @param $oAdresse
+     * Attend un objet de la classe Adresse
+     * 
+     */
+    public static function addAddresse($oAdresse) {
 
-                    $tParam = array($Adresse->PAYS_ID,
-                                    $Adresse->ADR_NUM,
-                                    $Adresse->ADR_VOIE,
-                                    $Adresse->ADR_RUE1,
-                                    $Adresse->ADR_RUE2,
-                                    $Adresse->ADR_RUE3,
-                                    $Adresse->ADR_CP,
-                                    $Adresse->ADR_VILLE,
-                                    $Adresse->ADR_ETAT,
-                                       );
+        try {
+            $tParam = array($oAdresse->PAYS_ID,
+                $oAdresse->ADR_NUM,
+                $oAdresse->ADR_VOIE,
+                $oAdresse->ADR_RUE1,
+                $oAdresse->ADR_RUE2,
+                $oAdresse->ADR_RUE3,
+                $oAdresse->ADR_CP,
+                $oAdresse->ADR_VILLE,
+                $oAdresse->ADR_ETAT,
+            );
 
-                    $sql = "INSERT INTO adresse ("
-                            . "PAYS_ID,"
-                            . "ADR_NUM,"
-                            . "ADR_VOIE,"
-                            . "ADR_RUE1,"
-                            . "ADR_RUE2,"
-                            . "ADR_RUE3,"
-                            . "ADR_CP,"
-                            . "ADR_VILLE,"
-                            . "ADR_ETAT)"
-                            . "VALUES(?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO adresse ("
+                    . "PAYS_ID,"
+                    . "ADR_NUM,"
+                    . "ADR_VOIE,"
+                    . "ADR_RUE1,"
+                    . "ADR_RUE2,"
+                    . "ADR_RUE3,"
+                    . "ADR_CP,"
+                    . "ADR_VILLE,"
+                    . "ADR_ETAT)"
+                    . "VALUES(?,?,?,?,?,?,?,?,?)";
 
-                    $result = Connection::request(2, $sql, $tParam);
-                    
-                }else{
-                    $result = '<br/><p class="info">Enregistrement impossible sans Ville et sans pays </p>';
-                }
-    }catch(MySQLException $e){
-        $e->RetourneErreur();
+            $result = Connection::request(2, $sql, $tParam);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
     }
-
-  }
 
 }

@@ -9,7 +9,6 @@
 /**
  * Description of newPHPClass
  *
- * @author Olivier
  */
 class ReferenceManager {
 
@@ -19,12 +18,14 @@ class ReferenceManager {
      * Il est possible cependant de modifier
      * le résultats attendu grace aux paramètres :
      * 
-     * @param integer $limit par défaut 15
-     * @param integer $nombre par défaut 0
-     * @param string orderBy par défaut ref_id DESC
+     * @param $limit par défaut 15
+     * 
+     * @param $nombre par défaut 0
+     * @param orderBy par défaut ref_id DESC
      * @return Reference[]
      */
-    public static function getAllReferences($limit=15, $nombre=0,$orderby="ref_id") {
+    public static function getAllReferences($limit=15, $nombre=0,
+            $orderby="ref_id") {
 
         try {
 
@@ -49,7 +50,8 @@ class ReferenceManager {
                             ref_com,
                             ref_code, 
                             ref_photos,
-                            ref_photos_pref FROM reference " 
+                            ref_photos_pref 
+                            FROM reference " 
                             ."ORDER BY ".$orderby." DESC "
                             ."LIMIT ".$nombre.",".$limit."";
 
@@ -61,35 +63,42 @@ class ReferenceManager {
         return $result;
     }
 
-    public static function insReference($reference) {
+    
+    /**
+     * Ajoute une référence
+     * 
+     * @param $oReference
+     * Attend un objet de la classe référence
+     * 
+     * @return int
+     * Retourne le nombre d'insert
+     */
+    public static function insReference($oReference) {
 
         try {
 
-            if (!empty($reference->ref_lbl) 
-                 && (strlen($reference->ref_lbl) > Connection::getLimLbl())) {
-
                 $tParam = array(
-                    $reference->dc_id,
-                    $reference->cons_id,
-                    $reference->fiart_id,
-                    $reference->dd_id,
-                    $reference->tva_id,
-                    $reference->ref_lbl,
-                    $reference->ref_mrq,
-                    $reference->ref_st_min,
-                    $reference->ref_poids_brut,
-                    $reference->ref_poids_net,
-                    $reference->ref_emb_lbl,
-                    $reference->ref_emb_couleur,
-                    $reference->ref_emb_vlm_ctn,
-                    $reference->ref_emb_dim_lng,
-                    $reference->ref_emb_dim_lrg,
-                    $reference->ref_emb_dim_ht,
-                    $reference->ref_emb_dim_diam,
-                    $reference->ref_com,
-                    $reference->ref_code,
-                    $reference->ref_photos,
-                    $reference->ref_photos_pref
+                    $oReference->dc_id,
+                    $oReference->cons_id,
+                    $oReference->fiart_id,
+                    $oReference->dd_id,
+                    $oReference->tva_id,
+                    $oReference->ref_lbl,
+                    $oReference->ref_mrq,
+                    $oReference->ref_st_min,
+                    $oReference->ref_poids_brut,
+                    $oReference->ref_poids_net,
+                    $oReference->ref_emb_lbl,
+                    $oReference->ref_emb_couleur,
+                    $oReference->ref_emb_vlm_ctn,
+                    $oReference->ref_emb_dim_lng,
+                    $oReference->ref_emb_dim_lrg,
+                    $oReference->ref_emb_dim_ht,
+                    $oReference->ref_emb_dim_diam,
+                    $oReference->ref_com,
+                    $oReference->ref_code,
+                    $oReference->ref_photos,
+                    $oReference->ref_photos_pref
                 );
 
                 $sql = "INSERT INTO reference ("
@@ -117,7 +126,7 @@ class ReferenceManager {
                         " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            }
+            
         } catch (MySQLException $e) {
             throw $e;
         }
@@ -125,34 +134,42 @@ class ReferenceManager {
     }
     
     
-    
-     public static function updReference($reference) {
+    /**
+     * Mets à jour un enregistrement
+     * 
+     * @param $oReference
+     * Attend un objet de la classe Reference
+     * 
+     * @return int
+     * Renvoie le nombre de ligne impacté
+     */
+     public static function updReference($oReference) {
 
         try {
   
                $tParam = array(
-                    $reference->dc_id,
-                    $reference->cons_id,
-                    $reference->fiart_id,
-                    $reference->dd_id,
-                    $reference->tva_id,
-                    $reference->ref_lbl,
-                    $reference->ref_mrq,
-                    $reference->ref_st_min,
-                    $reference->ref_poids_brut,
-                    $reference->ref_poids_net,
-                    $reference->ref_emb_lbl,
-                    $reference->ref_emb_couleur,
-                    $reference->ref_emb_vlm_ctn,
-                    $reference->ref_emb_dim_lng,
-                    $reference->ref_emb_dim_lrg,
-                    $reference->ref_emb_dim_ht,
-                    $reference->ref_emb_dim_diam,
-                    $reference->ref_com,
-                    $reference->ref_code,
-                    $reference->ref_photos,
-                    $reference->ref_photos_pref,
-                    $reference->ref_id
+                    $oReference->dc_id,
+                    $oReference->cons_id,
+                    $oReference->fiart_id,
+                    $oReference->dd_id,
+                    $oReference->tva_id,
+                    $oReference->ref_lbl,
+                    $oReference->ref_mrq,
+                    $oReference->ref_st_min,
+                    $oReference->ref_poids_brut,
+                    $oReference->ref_poids_net,
+                    $oReference->ref_emb_lbl,
+                    $oReference->ref_emb_couleur,
+                    $oReference->ref_emb_vlm_ctn,
+                    $oReference->ref_emb_dim_lng,
+                    $oReference->ref_emb_dim_lrg,
+                    $oReference->ref_emb_dim_ht,
+                    $oReference->ref_emb_dim_diam,
+                    $oReference->ref_com,
+                    $oReference->ref_code,
+                    $oReference->ref_photos,
+                    $oReference->ref_photos_pref,
+                    $oReference->ref_id
                 );
                     
                $sql = "UPDATE reference r SET "
@@ -187,18 +204,20 @@ class ReferenceManager {
         return $result;
     }
     
+    
     /**
-     * Retourne un enregistrements de la table Référence
-     * Pour Mise à jour (vérouille l'enregistrement)
-     * @param Integer $idRef identifiant de la référence
+     * Select for update d'un enregistrement
+     
+     * @param $id
+     * id de l'enregistrement
      * 
-     * @return Reference
+     * @return objet
+     * Retourne un objet
      */
-    public static function getReferenceForUpd($idRef) {
+    public static function getReferenceForUpd($id) {
 
         try {
-            if (isset($idRef)){
-            $tParam= array($idRef);
+            $tParam= [$id];
 
             $sql = "SELECT  r.ref_id, 
                             r.dc_id,
@@ -225,24 +244,27 @@ class ReferenceManager {
                             WHERE r.ref_id = ? FOR UPDATE";
 
             $result = Connection::request(0, $sql,$tParam);
-            }
+            
         } catch (MySQLException $e) {
            throw $e;
         }
         return $result;
     }
     
+    
     /**
-     * Retourne un enregistrements de la table Référence
-     * @param Integer $idRef identifiant de la référence
+     * Retourne un enregistrements de la table
      * 
-     * @return Reference
+     * @param $id
+     * Identifiant de la l'enregistrement
+     * 
+     * @return objet
+     * Retourne un objet
      */
-    public static function getReference($idRef) {
+    public static function getReference($id) {
 
         try {
-            if (isset($idRef)){
-            $tParam= array($idRef );
+            $tParam= [$id];
 
             $sql = "SELECT  r.ref_id, 
                             r.dc_id,
@@ -268,21 +290,30 @@ class ReferenceManager {
                             r.ref_photos_pref FROM reference r WHERE r.ref_id = ?";
 
             $result = Connection::request(0, $sql,$tParam);
-            }
+            
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }       
 
-
-public static function delReference($idRef) {
+/**
+ * Efface un enregistrement selon son id
+ * 
+ * @param $id
+ * Attend l'id de l'enregsitrement
+ * 
+ * @return int
+ * Retourne le nombre de ligne effacé
+ */
+public static function delReference($id) {
 
         try {
 
-               $tParam = array($idRef);
+               $tParam = [$id];
                     
                 $sql = "DELETE FROM reference  WHERE ref_id=? ";
+                
                 $result = Connection::request(2, $sql, $tParam);
         
         } catch (MySQLException $e) {

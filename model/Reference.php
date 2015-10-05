@@ -6,6 +6,7 @@
 
 class Reference {
 
+    //Données membres
     public $ref_id           = '';
     public $dc_id            = '';
     public $cons_id          = '';
@@ -43,12 +44,11 @@ class Reference {
 
             // Pour chaque clé, on récupère sa valeur.
             foreach ($args as $key => $value) {
-                if (!isset($this->$key))
+                if (!isset($this->$key)) {
                     throw new MySQLException("propriété '$key' inconnue !");
-                // Si la propriété de la classe est vide, alors on met à jour sa valeur.
-                //if(isset($this->$key))  $this->$key = $value;
+                }
                 $this->$key = $value;
             }
         }
     }
-} ?>
+} 

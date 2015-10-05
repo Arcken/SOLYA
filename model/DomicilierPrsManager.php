@@ -9,38 +9,36 @@
 /**
  * Description of DomicilierPrsManager
  *
- * @author Olivier
  */
 class DomicilierPrsManager {
-    //put your code here
-     public static function addDomicilierPrs($DomPrs){
-         try {
 
-            if (!empty($DomPrs->ADR_ID)
-               && !empty($DomPrs->PRS_ID) 
-               && !empty($DomPrs->ADRPER_LBL) && (strlen($DomPrs->ADRPER_LBL)) > Connection::getLimLbl()) {
+    /**
+     * Ajout un enregistrement dans la table
+     * 
+     * @param $oDomPrs
+     * Attend un objet de la classe DomicilierPersonne
+     */
+    public static function addDomicilierPrs($oDomPrs) {
+        
+        try {
+            $tParam = array(
+                $oDomPrs->ADRPER_LBL,
+                $oDomPrs->ADR_ID,
+                $oDomPrs->PRS_ID
+            );
 
-                $tParam= array(
-                    $DomPrs->ADRPER_LBL,
-                    $DomPrs->ADR_ID,
-                    $DomPrs->PRS_ID
-                );
+            $sql = "INSERT INTO domicilier_prs ("
+                    . "ADRPER_LBL,"
+                    . "ADR_ID,"
+                    . "PRS_ID)"
+                    . "VALUES(?,?,?)";
 
-                $sql = "INSERT INTO domicilier_prs ("
-                        . "ADRPER_LBL,"
-                        . "ADR_ID,"
-                        . "PRS_ID)"
-                        . "VALUES(?,?,?)";
-                
-                $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans NOM </p>';
-            }
+            $result = Connection::request(2, $sql, $tParam);
+
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            throw $e;
         }
-      
+        return $result;
     }
+
 }

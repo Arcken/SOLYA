@@ -10,69 +10,62 @@ class ModeConservationManager {
     //put your code here
 
     /**
-     * Retourne tous les enregistrements de la table mode_conservation
+     * Retourne tous les enregistrements de la table
      * 
-     * @return mode_conservation[] objet
+     * @return []objet
      */
     public static function getAllModeConservations() {
 
         try {
 
-            $sql = 'SELECT m.cons_id,m.cons_lbl FROM mode_conservation m';
+            $sql = 'SELECT cons_id,cons_lbl FROM mode_conservation';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
-           
+            throw $e;
         }
-         return $result;
+        return $result;
     }
 
-     /**
-     * Retourne un enregistrement de la table mode_conservation par son id
+    /**
+     * Retourne un enregistrement de la table selon son id
      * 
-     * @return mode_conservation objet
+     * @param $id
+     * id de l'enregistrement
+     * @return objet
+     * retourne un objet
      */
-    public static function getModeConservationById($idMc) {
+    public static function getModeConservationById($id) {
 
         try {
-            $tParam=array($idMc);
-            $sql = 'SELECT m.cons_id, m.cons_lbl FROM mode_conservation m WHERE m.cons_id=?';
-            $result = Connection::request(0, $sql,$tParam);
-            
+            $tParam = [$id];
+            $sql = 'SELECT cons_id, cons_lbl FROM mode_conservation '
+                    . 'WHERE cons_id=?';
+            $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
-           
+            throw $e;
         }
-         return $result;
+        return $result;
     }
+
     /**
-     * Ajoute un enregistrement dans la table mode_conservation
-     * @param type $Cons
+     * Ajoute un enregistrement dans la table
+     * @param $Cons
+     * objet de la classe modeConservation
      */
     public static function addModeConservation($Cons) {
         try {
+
+            $tParam = [$Cons->cons_lbl];
+
+            $sql = "INSERT INTO mode_conservation ("
+                    . "cons_lbl) "
+                    . "VALUES (?)";
+
+            $result = Connection::request(2, $sql, $tParam);
             
-                $tParam = array(
-                    $Cons->cons_lbl
-                );
-
-                $sql = "INSERT INTO mode_conservation ("
-                        . "cons_lbl) "
-                        . "VALUES (?)";
-
-                $result = Connection::request(2, $sql, $tParam);
-            } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+        } catch (MySQLException $e) {
+            throw $e;
         }
+        return $result;
     }
-
 }

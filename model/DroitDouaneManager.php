@@ -12,80 +12,80 @@
  * @author Olivier
  */
 class DroitDouaneManager {
-     /**
-     * Retourne tous les enregistrements de la table droit_douane
+
+    /**
+     * Retourne tous les enregistrements de la table
      * 
-     * @return droit_douane[] objet
+     * @return []objet
+     * Retourne un tableau d'objet
      */
     public static function getAllDroitDouanes() {
 
         try {
 
             $sql = 'SELECT d.dd_id, d.dd_lbl, d.dd_taux FROM droit_douane d';
-            $result = Connection::request(1,$sql);
+
+            $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000){
-                return 0;
-            }
-            else {
-                return $e->getCode ();
-            
-            }
+            throw $e;
         }
-        
         return $result;
     }
-      /**
-     * Retourne un enregistrements de la table droit_douane par son id
+
+    
+    /**
+     * * Retourne un enregistrements de la table selon son id
      * 
-     * @return droit_douane objet
+     * @param $id
+     * Id de l'enregistrement
+     * @return objet
+     * Retourne un objet
      */
-    public static function getDroitDouaneById($ddId) {
+    public static function getDroitDouaneById($id) {
 
         try {
-            $tParam=array($ddId);
-            $sql = 'SELECT d.dd_id, d.dd_lbl, d.dd_taux FROM droit_douane d';
-            $result = Connection::request(0,$sql,$tParam);
+            $tParam = [$id];
+
+            $sql = 'SELECT d.dd_id, d.dd_lbl, d.dd_taux '
+                    . 'FROM droit_douane d '
+                    . 'WHERE dd_id =?';
+
+            $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
-            if ($e->getCode() == 00000){
-                return 0;
-            }
-            else {
-                return $e->getCode ();
-            
-            }
+            throw $e;
         }
-        
+
         return $result;
     }
+
+    
     /**
-     * Ajoute un enregistrement dans la table droit_douane
-     * @param type $Dd
+     * Ajoute un enregistrement dans la table
+     * 
+     * @param type $oDd
+     * Attend un objet de la classe DroitDouane
+     * 
+     * @return int
+     * Renvoie le nombre d'ajout     * 
      */
-    public static function addDroitDouane($Dd){
-         try {
+    public static function addDroitDouane($oDd) {
 
-            if (!empty($Dd->dd_taux) && (strlen($Dd->dd_taux)) >0) {
-
-                $tParam= array(
-                    $Dd->dd_lbl,
-                    $Dd->dd_taux
+        try {
+                $tParam = array(
+                    $oDd->dd_lbl,
+                    $oDd->dd_taux
                 );
 
                 $sql = "INSERT INTO droit_douane("
                         . "dd_lbl,"
                         . "dd_taux)"
                         . "VALUES(?,?)";
-                
-                $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans libellé </p>';
-            }
-        } catch (MySQLException $e) {
 
-            echo $e->RetourneErreur();
+                $result = Connection::request(2, $sql, $tParam);
+        } catch (MySQLException $e) {
+            throw $e;
         }
-      
+        return $result;
     }
+
 }

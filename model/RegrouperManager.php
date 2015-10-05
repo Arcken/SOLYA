@@ -12,7 +12,7 @@
 class RegrouperManager {
 
     /**
-     * Retourne tous les enregistrements de la table REGROUPER
+     * Retourne tous les enregistrements de la table
      * 
      * @return objet[]
      * Retourne un tableau d'objet
@@ -20,39 +20,42 @@ class RegrouperManager {
     public static function getAllRegroupers() {
 
         try {
-
             $sql = 'SELECT ga_id, fiart_id FROM regrouper';
+            
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
      * Retourne toutes les gammes associé à une fiche article
-     * @param $iFiartId
+     * @param $id
      * ID de la fiche article
      * @return objet[]
      * Renvoie un tableau d'objet
      */
-    public static function getRegrouperFiart($iFiartId) {
+    public static function getRegrouperFiart($id) {
         try {
-            $tParam = array(
-                $iFiartId
-            );
+            $tParam = [$id];
             $sql = 'SELECT fiart_id, ga_id '
                     . 'FROM regrouper '
                     . 'WHERE fiart_id=?';
+            
             $result = Connection::request(1, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-           $result = 0;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Insert une enregistrement dans la table REGROUPER
+     * Insert un enregistrement dans la table
      * @param $oRegrouper
      * Attend un objet de la classe Regrouper 
      * @return int
@@ -61,9 +64,6 @@ class RegrouperManager {
     public static function addRegrouper($oRegrouper) {
 
         try {
-
-            if (!empty($oRegrouper->ga_id) && !empty($oRegrouper->fiart_id)) {
-
                 $tParam = array(
                     $oRegrouper->ga_id,
                     $oRegrouper->fiart_id
@@ -75,35 +75,33 @@ class RegrouperManager {
                         . " VALUES(?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Efface tous les enregistrements de la table Regrouper concernant une fiche article
-     * @param $iFiartId
+     * Efface tous les enregistrements de la table Regrouper 
+     * concernant une fiche article
+     * @param $id
      * ID de la fiche article
      * @return int
      * retourne le nombre de ligne supprimmé
      */
-    public static function delRegrouperFiart($iFiartId) {
+    public static function delRegrouperFiart($id) {
         try {
-            $tParam = array(
-                $iFiartId
-            );
+            $tParam = [$id];
             $sql = 'DELETE FROM regrouper WHERE fiart_id=?';
+            
             $result = Connection::request(2, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
 }
-
-?>

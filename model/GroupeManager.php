@@ -8,7 +8,7 @@
 class GroupeManager {
 
     /**
-     * Retourne tous les enregistrement de Groupe
+     * Retourne tous les enregistrement de la table
      * 
      * @return objet[]
      * retourne un tableau d'objet
@@ -20,38 +20,33 @@ class GroupeManager {
             $sql = 'SELECT grp_id, grp_nom, grp_des '
                     . 'FROM groupe';
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Retourne les détails d'un Groupe
+     * Retourne les détails d'un enregistrement selon son id
      * 
-     * @param $oGroupe
-     * attend un objet Groupe
+     * @param $id
+     * attend l'id de l'enregistrement
      * @return int
      * Retourne un objet
      */
-    public static function getGroupe($oGroupe) {
+    public static function getGroupe($id) {
 
         try {
 
-            if (!empty($oGroupe->grp_id)) {
-
-                $tParam = array(
-                    $oGroupe->grp_id
-                );
+                $tParam =[$oGroupe->grp_id];
                 $sql = "SELECT grp_nom, grp_des FROM groupe"
                         . " WHERE grp_id =?";
                 $result = Connection::request(0, $sql, $tParam);
                 
-            } else {
-                $result = 0;
-            }
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }

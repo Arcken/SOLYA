@@ -24,6 +24,7 @@ class GammeManager {
             $sql = 'SELECT ga_id, ga_lbl, ga_abv FROM gamme '
                     . 'ORDER BY ga_lbl';
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
             throw $e;
         }
@@ -47,14 +48,12 @@ class GammeManager {
 
             $sql = 'SELECT ga_id, ga_lbl, ga_abv '
                     . 'FROM gamme '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' . $nombre;
+                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
+                    . $nombre;
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
-            if ($e->getCode() === 00000) {
-                return 0;
-            } else {
-                return $e->getCode();
-            }
+            throw $e;
         }
         return $result;
     }
@@ -69,11 +68,10 @@ class GammeManager {
     public static function addGamme($oGamme) {
 
         try {
-
-                $tParam = array(
+                $tParam = [
                     $oGamme->GA_LBL,
                     $oGamme->GA_ABV
-                );
+                ];
 
                 $sql = "INSERT INTO gamme ("
                         . " GA_LBL, "
@@ -81,12 +79,14 @@ class GammeManager {
                         . " VALUES(?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
+                
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }
 
+    
     /**
      * Select for update d'un enregistrement selon son id
      * 
@@ -99,9 +99,8 @@ class GammeManager {
 
         try {
 
-            $tParam = array(
-                $id
-            );
+            $tParam = [$id];
+            
             $sql = "SELECT ga_id, ga_lbl, ga_abv "
                     . "FROM gamme "
                     . "WHERE ga_id =? FOR UPDATE";
@@ -109,10 +108,10 @@ class GammeManager {
             
         } catch (MySQLException $e) {
             throw $e;
-        
         }
         return $result;
     }
+    
     
      /**
      * Modifie un enregistrement selon son id
@@ -123,13 +122,13 @@ class GammeManager {
      * Retourne le nombre de ligne impacté
      */
     public static function updGamme($oGamme) {
+        
         try {
-
-                $tParam = array(                
+                $tParam = [
                     $oGamme->ga_lbl,
                     $oGamme->ga_abv,
                     $oGamme->ga_id
-                );
+                ];
 
                 $sql = "UPDATE gamme SET "
                         . "GA_LBL = ?, "
@@ -144,6 +143,7 @@ class GammeManager {
         return $result;
     }
 
+    
     /**
      * Supprime l'enregistrement de la table selon son id
      * @param $id
@@ -153,11 +153,11 @@ class GammeManager {
      */
     public static function delGamme($id) {
         try {
-            $tParam = array(
-                $id
-            );
+            $tParam = [$id];
             $sql = 'DELETE FROM gamme WHERE ga_id=?';
+            
             $result = Connection::request(2, $sql, $tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }

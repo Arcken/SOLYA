@@ -8,30 +8,33 @@ require_once 'Connection.php';
 class FicheArticleManager {
 
     /**
-     * Retourne un enregistrement de la table fiche_article selon son id
-     * @param integer $fiartId
-     * ID de la fiche article
+     * Retourne un enregistrement de la table selon son id
+     * @param $fiartId
+     * ID de l'enregistrement
      * @return Objet
      * Objet
      */
     public static function getFicheArticleById($fiartId) {
 
         try {
-            $tParam = array($fiartId);
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
-                    . 'fiart_ing, fiart_alg, pays_id, fiart_com, fiart_com_tech, '
-                    . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
+            $tParam = [$fiartId];
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, '
+                    . 'fiart_photos_pref, fiart_ing, fiart_alg, pays_id, '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, '
+                    . 'fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article '
                     . 'WHERE fiart_id =?';
             $result = Connection::request(0, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Retourne tous les enregistrements de la table fiche article
+     * Retourne tous les enregistrements de la table
      * 
      * @return Objet[]
      * Retourne un tableau d'objet
@@ -40,19 +43,23 @@ class FicheArticleManager {
 
         try {
 
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
-                    . 'fiart_ing, fiart_alg, pays_id, fiart_com, fiart_com_tech, '
-                    . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
-                    . 'FROM fiche_article';
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, '
+                    . 'fiart_photos_pref, fiart_ing, fiart_alg, pays_id, '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, '
+                    . 'fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
+                    . 'FROM fiche_article '
+                    . 'ORDER BY fiart_id DESC';
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Retourne tous les enregistrements de la table fiche article avec limite
+     * Retourne tous les enregistrements de la table avec limite définie
      * @param $limite
      * debut de limite
      * @param $nombre
@@ -62,37 +69,41 @@ class FicheArticleManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllFichesArticlesLim($limite, $nombre, $orderby = 'fiart_id') {
+    public static function getAllFichesArticlesLim($limite, $nombre, 
+            $orderby = 'fiart_id') {
 
         try {
 
             $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos_pref, fiart_ing, '
                     . 'fiart_alg, fiart_com, fiart_desc_fr, pays_id '
                     . 'FROM fiche_article '
-                    . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite . ' , ' . $nombre;
+                    . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite 
+                    . ' , ' . $nombre;
             $result = Connection::request(1, $sql);
+            
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Renvoie le détail d'une fiche article
-     * @param $iFiartId
-     * id de la fiche article (integer)
+     * Renvoie le détail d'un enregistrement
+     * @param $id
+     * id de l'enregistrement
      * @return Objet
      * Retourne un objet
      */
-    public static function getFicheArticleDetail($iFiartId) {
+    public static function getFicheArticleDetail($id) {
 
         try {
 
-            $tParam = array($iFiartId);
+            $tParam = [$id];
 
             $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_ing, '
-                    . 'fiart_alg, pays_id '
-                    . 'fiart_com, fiart_com_tech, fiart_com_util, fiart_desc_fr, '
+                    . 'fiart_alg, pays_id, fiart_com, fiart_com_tech, '
+                    . 'fiart_com_util, fiart_desc_fr, '
                     . 'fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
@@ -100,40 +111,44 @@ class FicheArticleManager {
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Select for update détail d'une fiche article
-     * @param $iFiartId
-     * id de la fiche article (integer)
+     * Select for update d'un enregistrement
+     * @param $id
+     * id de l'enregistrement
      * @return Objet
      * Retourne un objet
      */
-    public static function getFicheArticleDetailUpd($iFiartId) {
+    public static function getFicheArticleDetailUpd($id) {
 
         try {
 
-            $tParam = array($iFiartId);
+            $tParam = [$id];
 
-            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, fiart_photos_pref, '
-                    . 'fiart_ing, fiart_alg, f.pays_id, fiart_com, fiart_com_tech, '
-                    . 'fiart_com_util, fiart_desc_fr, fiart_desc_eng, fiart_desc_esp '
+            $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos, '
+                    . 'fiart_photos_pref'
+                    . ',fiart_ing, fiart_alg, f.pays_id, fiart_com, '
+                    . 'fiart_com_tech, fiart_com_util, fiart_desc_fr, '
+                    . 'fiart_desc_eng, fiart_desc_esp '
                     . 'FROM fiche_article f '
                     . 'INNER JOIN pays AS p ON f.pays_id = p.pays_id '
                     . 'WHERE f.fiart_id = ? FOR UPDATE';
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Modifie une Fiche article selon son id
+     * Modifie un enregistrement selon son id
      * 
      * @param $oFicheArticle
      * Attend un objet Fiche article
@@ -142,15 +157,13 @@ class FicheArticleManager {
      */
     public static function updFicheArticle($oFicheArticle) {
         try {
-            if (!empty($oFicheArticle->fiart_lbl) && (strlen($oFicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
-
                 $tParam = array(
                     $oFicheArticle->fiart_lbl,
                     $oFicheArticle->fiart_photos,
                     $oFicheArticle->fiart_photos_pref,
                     $oFicheArticle->fiart_ing,
                     $oFicheArticle->fiart_alg,
-                    $oFicheArticle->fiart_pays_id,
+                    $oFicheArticle->pays_id,
                     $oFicheArticle->fiart_com,
                     $oFicheArticle->fiart_com_tech,
                     $oFicheArticle->fiart_com_util,
@@ -160,35 +173,32 @@ class FicheArticleManager {
                     $oFicheArticle->fiart_id
                 );
 
-
                 $sql = "UPDATE fiche_article SET "
-                        . "FIART_LBL = ?,"
-                        . "FIART_PHOTOS = ?,"
-                        . "FIART_PHOTOS_PREF = ?,"
-                        . "FIART_ING = ?,"
-                        . "FIART_ALG = ?,"
-                        . "PAYS_ID = ?,"
-                        . "FIART_COM = ?,"
-                        . "FIART_COM_TECH = ?,"
-                        . "FIART_COM_UTIL = ?,"
-                        . "FIART_DESC_FR = ?,"
-                        . "FIART_DESC_ENG = ?,"
-                        . "FIART_DESC_ESP = ? "
+                        . "fiart_lbl = ?,"
+                        . "fiart_photos = ?,"
+                        . "fiart_photos_pref = ?,"
+                        . "fiart_ing = ?,"
+                        . "fiart_alg = ?,"
+                        . "pays_id = ?,"
+                        . "fiart_com = ?,"
+                        . "fiart_com_tech = ?,"
+                        . "fiart_com_util = ?,"
+                        . "fiart_desc_fr = ?,"
+                        . "fiart_desc_eng = ?,"
+                        . "fiart_desc_esp = ? "
                         . "WHERE fiart_id = ?";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+            
         } catch (MySQLException $e) {
-
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
     /**
-     * Effecute un insert dans la table ficher article à partir de l'objet
+     * Effecute un insert dans la table
      * @param $oFicheArticle
      * Objet de la classe Fiche article
      * @return int
@@ -197,16 +207,13 @@ class FicheArticleManager {
     public static function addFicheArticle($oFicheArticle) {
 
         try {
-
-            if (!empty($oFicheArticle->fiart_lbl) && (strlen($oFicheArticle->fiart_lbl)) > Connection::getLimLbl()) {
-
                 $tParam = array(
                     $oFicheArticle->fiart_lbl,
                     $oFicheArticle->fiart_photos,
                     $oFicheArticle->fiart_photos_pref,
                     $oFicheArticle->fiart_ing,
                     $oFicheArticle->fiart_alg,
-                    $oFicheArticle->fiart_pays_id,
+                    $oFicheArticle->pays_id,
                     $oFicheArticle->fiart_com,
                     $oFicheArticle->fiart_com_tech,
                     $oFicheArticle->fiart_com_util,
@@ -216,47 +223,46 @@ class FicheArticleManager {
                 );
 
                 $sql = "INSERT INTO fiche_article ("
-                        . "FIART_LBL,"
-                        . "FIART_PHOTOS,"
-                        . "FIART_PHOTOS_PREF,"
-                        . "FIART_ING,"
-                        . "FIART_ALG,"
-                        . "PAYS_ID,"
-                        . "FIART_COM,"
-                        . "FIART_COM_TECH,"
-                        . "FIART_COM_UTIL,"
-                        . "FIART_DESC_FR,"
-                        . "FIART_DESC_ENG,"
-                        . "FIART_DESC_ESP) "
+                        . "fiart_lbl,"
+                        . "fiart_photos,"
+                        . "fiart_photos_pref,"
+                        . "fiart_ing,"
+                        . "fiart_alg,"
+                        . "pays_id,"
+                        . "fiart_com,"
+                        . "fiart_com_tech,"
+                        . "fiart_com_util,"
+                        . "fiart_desc_fr,"
+                        . "fiart_desc_eng,"
+                        . "fiart_desc_esp) "
                         . "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
-            } else {
-                $result = 0;
-            }
+                
         } catch (MySQLException $e) {
-
-            $result = -1;
+            throw $e;
         }
         return $result;
     }
 
+    
      /**
      * Supprime l'enregistremen de la table selon son id
-     * @param $iFiartId
-     * id de la fiche article
+     * @param $id
+     * id de l'enregistrement
      * @return int 
      * nombre de ligne impacté
      */
-    public static function delFicheArticle($iFiartId) {
+    public static function delFicheArticle($id) {
+        
         try {
-            $tParam = array(
-                $iFiartId
-            );
+            $tParam = [$id];
             $sql = 'DELETE FROM fiche_article WHERE fiart_id=?';
+            
             $result = Connection::request(2, $sql, $tParam);
+            
         } catch (MySQLException $e) {
-            $result = 0;
+            throw $e;
         }
         return $result;
     }

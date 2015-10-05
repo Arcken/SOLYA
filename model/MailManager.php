@@ -9,34 +9,34 @@
 /**
  * Description of MailManager
  *
- * @author Olivier
  */
 class MailManager {
-    //put your code here
-    
-    public static function addMail($Mail){
-         try {
 
-            if (!empty($Mail->MAIL_ADR) && (strlen($Mail->MAIL_ADR)) > Connection::getLimLbl()) {
+    /**
+     * Ajoute un enregistrement dans la base
+     * 
+     * @param $oMail
+     * Attend un objet de la classe Mail
+     * 
+     * @return int 
+     * Retourne le nombre d'enregistrement
+     */
+    public static function addMail($oMail) {
 
-                $tParam= array(
-                    $Mail->MAIL_ADR
-                );
+        try {
 
-                $sql = "INSERT INTO mail ("
-                        . "MAIL_ADR)"
-                        . "VALUES(?)";
-                
-                $result = Connection::request(2, $sql, $tParam);
-  
-            }else{
-                $result = '<br/><p class="info">Enregistrement impossible sans NOM </p>';
-            }
+            $tParam = array(
+                $oMail->MAIL_ADR
+            );
+
+            $sql = "INSERT INTO mail ("
+                    . "MAIL_ADR)"
+                    . "VALUES(?)";
+
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
-
-            echo $e->RetourneErreur();
+            throw $e;
         }
-      
     }
-}
 
+}

@@ -9,10 +9,16 @@
 /**
  * Description of CiviliteManager
  *
- * @author Olivier
+ * 
  */
 class CiviliteManager {
-    //put your code here
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * 
+     * @return []objet
+     * Retourne un tableau d'objet
+     */
     public static function getAllCivilites(){
         
         try {
@@ -21,7 +27,8 @@ class CiviliteManager {
             return $result;
             
         } catch (MySQLException $e) {
-            $e->RetourneErreur();
+            throw $e;
         }
+        return $result;
     }
 }
