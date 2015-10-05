@@ -40,6 +40,9 @@
 
 
             <div class="col30"> 
+                 
+              <input id="curRefCode" name="refCode" type="text" placeholder="Code de la référence"
+                     value="<?php echo $rsRef->ref_code; ?>" hidden/>
               
                <label for="refCode">Code de la référence : </label><br>    
                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
@@ -48,7 +51,8 @@
                       
                        onfocus="getLastRefCode();"  
                                 
-                       onblur="$('#divSuggest').hide(); "
+                       onblur="$('#divSuggest').hide();
+                               confirmRefCode();"
                                 
                        title="6 caractères Minimum (Chiffres/Lettres)" 
                        pattern=".{6,}" value="<?php echo $rsRef->ref_code; ?>">
@@ -57,6 +61,7 @@
                 <img id="refCodInvld" src="img/icon/delete.png" alt="" title="Code référence Non Valide" hidden />
                 <br>
                 <div id="divSuggest" style="display:none">
+                     <span id="resSugg"></span>
                 </div>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" placeholder="Nom de la référence" 

@@ -36,7 +36,7 @@ function chargeRefCode() {
 }
 
 function confirmRefCode() {
-    
+    $curRefCode =$('#curRefCode');
     $sDivSug = $('#divSuggest').text();
     $sug=$.trim($sDivSug);
     $refCodeLgth=$('#refCode').val().length;
@@ -47,12 +47,16 @@ function confirmRefCode() {
     if ($sug.length === 0 && $refCodeLgth > 6 ) {
         $('#refCodVld').show();
         $('#refCodInvld').hide();
+   }else if($refCode == $curRefCode.val()){
+       $('#refCodVld').show();
+       $('#refCodInvld').hide();
    }
    else{
         $('#refCodVld').hide();
         $('#refCodInvld').show();
     }
 }
+
 function fillFiartInfos($fiartId) {
 
     $("#pays_abv").val('');
@@ -123,10 +127,8 @@ function getLastRefCode() {
             }
             
         }
-        console.log($string);
+       
         $spnSug.html($string);
-        console.log($spnSug.html());
-        
         if ($hideShow === true) {
             
             $spnSug.show();
