@@ -192,7 +192,7 @@ else {
                 $sAction = "ref_list";
                 break;
 
-//---------------------------Ajout Utilisateur----------------------------------
+//-------------------------------- Utilisateur----------------------------------
             //Ajout d'un utilisateur
             case "utilisateur_add":
                 require $path . '/controler/control_ut_add.php';
@@ -207,6 +207,15 @@ else {
             case "utilisateur_detail":
                 require $path . '/controler/control_ut_detail.php';
                 break;
+            
+//-------------------------------- EXPORT --------------------------------------
+            //export
+            case "export":
+                require $path . '/controler/control_export.php';
+                break;       
+            
+//-------------------------------fin traitement---------------------------------            
+            
         }
 
         /* ----------------------------Affichage---------------------------------
@@ -348,6 +357,10 @@ else {
 
 //----------------------------------Utilisateur---------------------------------
 
+            case "export":
+                require $path . '/view/view_export.php';
+                break;
+            
             case "utilisateur_add":
                     require $path . '/view/view_utilisateur.php';
                 break;
