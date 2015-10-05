@@ -349,11 +349,7 @@ else {
 //----------------------------------Utilisateur---------------------------------
 
             case "utilisateur_add":
-                if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-                    require $path . '/view/view_utilisateur_liste.php';
-                } else {
                     require $path . '/view/view_utilisateur.php';
-                }
                 break;
 
             case "utilisateur_list":

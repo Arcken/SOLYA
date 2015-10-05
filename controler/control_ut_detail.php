@@ -15,16 +15,13 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
         $oUtilisateur->ut_actif = $_REQUEST['utActif'];
         $oUtilisateur->grp_id = $_REQUEST['Groupe'];
         $resUpdUtilisateur = UtilisateurManager::updUtilisateur($oUtilisateur);
-        print_r($resUpdUtilisateur);
+       
         if ($resUpdUtilisateur == 1) {
             $resMessage = "<font color='green'> La modification de l'utilisateur $oUtilisateur->ut_login
                   est un succés</font>";
             $sPageTitle = "Liste des utilisateurs";
-        } else {
-            $resMessage = "<font color='red'> La modification de l'utilisateur $oUtilisateur->ut_login
-                  est un echec, erreur de champs</font>";
+        require_once $path . '/controler/control_ut_list.php';
         }
-        $resAllUtilisateurs = UtilisateurManager::getAllUtilisateurs();
     } catch (MySQLException $e) {
         $resMessage = "<font color='red'> La modification de l'utilisateur $oUtilisateur->ut_login
                   est un echec</font>";

@@ -30,4 +30,4 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
                   est un échec</font>";
     }
 }
-$resAllUtilisateurs = UtilisateurManager::getAllUtilisateurs();
+

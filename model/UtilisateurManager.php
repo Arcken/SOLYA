@@ -96,6 +96,34 @@ class UtilisateurManager {
     }
 
     
+     /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getAllUtilisateursLim($limite, $nombre, $orderby = 'ut_login') {
+
+        try {
+
+            $sql = 'SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id '
+                    . 'FROM utilisateur '
+                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
+                    . $nombre;
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
     /**
      * Select for update d'un enregistrement selon son id
      * 
@@ -121,6 +149,41 @@ class UtilisateurManager {
         return $result;
     }
 
+    
+    /**
+     * Modifie un enregistrement selon son id
+     * 
+     * @param $oUtilisateur
+     * Attend un objet Utilisateur
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updUtilisateur($oUtilisateur) {
+        
+        try {
+            $tParam = array(
+                sha1('!Stage2015!' . $oUtilisateur->ut_pass),
+                $oUtilisateur->ut_nom,
+                $oUtilisateur->ut_prenom,
+                $oUtilisateur->ut_actif,
+                $oUtilisateur->grp_id,
+                $oUtilisateur->ut_login
+            );
+
+            $sql = "UPDATE utilisateur SET "
+                    . "ut_pass = ?, "
+                    . "ut_nom = ?, "
+                    . "ut_prenom = ?, "
+                    . "ut_actif = ? ,"
+                    . "grp_id = ?"
+                    . "WHERE ut_login =?";
+
+            $result = Connection::request(2, $sql, $tParam);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
     
     /**
      * Ajoute un enregistrement dans la table

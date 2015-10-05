@@ -13,8 +13,7 @@
                 <br>    
 
                 <label for="utLogin"> Nom d'utilisateur: </label>
-                <input name="utLogin" type="text" required="" pattern=".{3,}" 
-                       title="3 caractères minimum"
+                <input name="utLogin" type="text" readonly=""
                        value="<?php echo $resUtilisateur->ut_login ?>">         
                 <br>
 
