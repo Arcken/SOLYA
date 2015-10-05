@@ -12,9 +12,17 @@ try{
     $resDocLbl=DocLibelleManager::getDocLibelles();
     
     if(isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer"){
+        $type=$_REQUEST['typeBon'];
+        switch ($type){
+            case 1:
+                $tabRefId=$_REQUEST['refId'];
+                Tool::printAnyCase($type);
+            break;
         
-        $tabRefId=$_REQUEST['refId'];
-        Tool::printAnyCase($tabRefId);
+            case 2:
+                Tool::printAnyCase($type);
+            break;
+        }
     }
 }catch(MySQLException $e){
     $msg ='Oups une erreur est survenue'+ $resEr;

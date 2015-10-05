@@ -70,37 +70,38 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <tr id="bonligne" hidden>
                         <td  class="bonLigneId">
-                            <input type="text" name="refId[]" id='refId' onblur="getReferenceBonFromId('0');">
+                            <input type="text" name="refId[]" id='refIdNID' onblur="getReferenceBonFromId('NID');">
                         </td>
                         <td class="bonLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[]" id='refCode' onblur="getReferenceBonFromRefCode('0');">
+                            <input type="text" value="MXSI01" name="refCode[]" id='refCodeNID' onblur="getReferenceBonFromRefCode('NID');">
                         </td>
                         <td>
-                            <textarea name="refLbl[]" id='refLbl' class="bonLigneT"
+                            <textarea name="refLbl[]" id='refLblNID' class="bonLigneT"
                                       rows="4" cols="30"
                             >Tablette chocolat du Mexique 70% cacao</textarea>
                            
                         </td>
                          <td class="bonLigneId">
-                             <input type="text" name="lotId[]" id='lotId' onfocus="getLotsFromReference('0');"
+                             <input type="text" name="lotId[]" id='lotIdNID' onfocus="getLotsFromReference('NID');"
                                     >
                         </td>
                         <td class="bonLigneNb">
-                            <input type="number" name="ligQte[]" id='ligQte' value="0" onfocus='limitQteMax("0");' min='0' 
-                                   >
+                            <input type="number" name="ligQte[]" id='ligQteNID' value="0" 
+                                   onblur="confirmQteStock('NID');"
+                                   onfocus="limitQteMax('NID');" min='0' >
                         </td>
                         
                         <td >
-                            <textarea name="bonligDepot[]" id='bonligDepot' class="bonLigneT"
+                            <textarea name="bonligDepot[]" id='bonligDepotNID' class="bonLigneT"
                                       rows="2" cols="30">Dépot?</textarea>
                         </td>
                         <td>
-                            <textarea name="bonligCom[]" id ='bonligCom' class="bonLigneT" 
+                            <textarea name="bonligCom[]" id ='bonligComNID' class="bonLigneT" 
                                       rows="2" cols="30">Commentaire</textarea>
                         </td>
                         <td class="bonLigneImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delLigne("bonligne");' class="tdImgTd"/>
+                                 onclick="delLigne('bonligne');" class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
