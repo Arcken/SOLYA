@@ -28,8 +28,8 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
-            
-            
+
+
         case 'getAllNut':
             $tab = array();
             $requete = "SELECT nut_id, nut_lbl  FROM nutrition "
@@ -41,7 +41,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             echo json_encode($tab);
             break;
 
-            
+
         case 'getAllPays':
             $tab = array();
             $requete = "SELECT pays_id, pays_nom, pays_abv FROM pays "
@@ -167,31 +167,56 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
             $tab = array();
             $refId = $_REQUEST['refId'];
+            $typeBon = $_REQUEST['typeBon'];
 
+            switch ($typeBon) {
+                case "1":
 
-            $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock"
-                    . " FROM lot l "
-                    . " INNER JOIN reference r ON l.ref_id = r.ref_id "
-                    . " WHERE r.ref_id = '" . $refId . "' AND lot_qt_stock > '0' "
-                    . " ORDER BY lot_date_max ASC";
+                    $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock, l.lot_qt_init"
+                            . " FROM lot l "
+                            . " INNER JOIN reference r ON l.ref_id = r.ref_id "
+                            . " WHERE r.ref_id = '" . $refId . "' AND lot_qt_stock > '0' "
+                            . " ORDER BY lot_date_max ASC";
 
-            //On l'éxécute
-            $resultat = $bdd->query($requete);
-            //Récupération des données
-            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
-                $tab[] = $data;
+                    //On l'éxécute
+                    $resultat = $bdd->query($requete);
+                    //Récupération des données
+                    while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $tab[] = $data;
+                    }
+                    echo json_encode($tab);
+
+                    break;
+                    
+                    case "2":
+
+                    $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock,l.lot_qt_init"
+                            . " FROM lot l "
+                            . " INNER JOIN reference r ON l.ref_id = r.ref_id "
+                            . " WHERE r.ref_id = '" . $refId . "'"
+                            . " ORDER BY lot_date_max ASC";
+
+                    //On l'éxécute
+                    $resultat = $bdd->query($requete);
+                    //Récupération des données
+                    while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                        $tab[] = $data;
+                    }
+                    echo json_encode($tab);
+
+                    break;
             }
-            echo json_encode($tab);
+        break;
 
-            break;
-
+        
+        
         case 'getLotQte':
 
             $tab = array();
             $lotId = $_REQUEST['lotId'];
 
 
-           $requete ="SELECT lot_qt_stock"
+            $requete = "SELECT lot_qt_stock,lot_qt_init"
                     . " FROM lot"
                     . " WHERE lot_id=" . $lotId;
 
