@@ -10,7 +10,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <div class="corps">
         <?php echo $path; ?>
-        <a href="view/export/export_utilisateur.php?action=export&cat=utilisateur">test</a>
+        <a href="view/export/export_utilisateur.php?test=accésValide&action=export&cat=utilisateur">test</a>
 
     </div>
 
