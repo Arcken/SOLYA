@@ -126,10 +126,15 @@
                         <td class="colData"><?php echo $oRef->ref_emb_lbl;      ?></td>
                         <td class="colData"><?php echo $oRef->ref_st_min;       ?></td>
                         <td class="colData"><?php echo $oRef->ref_com;          ?></td>
-                            <!--<img src="img/icon/read.png" onclick='location.href="index.php?action=read_ref"'</img>-->
+                           
+                        <td>
+                            <img src="img/icon/read.png" 
+                                  onclick='location.href="index.php?action=ref_detail&idRef="+ <?php echo $oRef->ref_id; ?>'
+                             />
+                        </td>
                         <td>
                             <img src="img/icon/modify.png" 
-                                  onclick='location.href="index.php?action=ref_detail&idRef="+ <?php echo $oRef->ref_id; ?>'
+                                  onclick='location.href="index.php?action=ref_upd&idRef="+ <?php echo $oRef->ref_id; ?>'
                              />
                         </td>
                         

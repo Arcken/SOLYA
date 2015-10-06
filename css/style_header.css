@@ -37,8 +37,6 @@ body{
     
     width:10.5%; 
     height:89%;
-    margin-top: auto;
-    margin-bottom: auto;
     background-image: url(../files/Bandeau_SOLYA.png);
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -76,10 +74,10 @@ body{
     
     display:block;
     border: solid red 2px;
-    margin-left: 0.5%;
+    //margin-left:0.1%;
     background-color: whitesmoke;
     height: 89%;
-    width:15%;
+    width:14.7%;
     text-align:center;
     top:0%;
     border-radius: 10px 10px 10px 10px;

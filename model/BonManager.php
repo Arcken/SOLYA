@@ -25,20 +25,23 @@ class BonManager {
             $tParam = array(
                 $oBon->doclbl_id,
                 $oBon->bon_fact_num,
-                $oBon->bon_date
+                $oBon->bon_date,
+                $oBon->bon_sortie_assoc
             );
 
             $sql = "INSERT INTO bon("
                     . "doclbl_id,"
                     . "bon_fact_num,"
-                    . "bon_date) "
-                    . "VALUES(?,?,?)";
+                    . "bon_date,"
+                    . "bon_sortie_assoc) "
+                    . "VALUES(?,?,?,?)";
 
-           return $result = Connection::request(2, $sql, $tParam);
+          $result = Connection::request(2, $sql, $tParam);
             
         } catch (MySQLException $e) {
             throw $e;
         }
+        return $result;
     }
 
 }

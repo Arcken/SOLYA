@@ -182,10 +182,14 @@ else {
                 break;
 
             //Détail d'une référence
+            case "ref_upd":
+                require $path . '/controler/control_ref_upd.php';
+                break;
+            
+            
             case "ref_detail":
                 require $path . '/controler/control_ref_detail.php';
                 break;
-
             //Suppression d'une référence
             case "ref_del":
                 require $path . '/controler/control_ref_del.php';
@@ -297,11 +301,16 @@ else {
                 require $path . '/view/view_reference.php';
                 break;
 
-            case "ref_detail":
-                $sPageTitle = "Consulter Modifier une référence";
-                require $path . '/view/view_reference_rw.php';
+            case "ref_upd":
+                $sPageTitle = "Modifier une référence";
+                require $path . '/view/view_reference_upd.php';
                 break;
-
+            
+            case "ref_detail":
+                $sPageTitle = "Consulter une référence";
+                require $path . '/view/view_reference_detail.php';
+                break;
+            
             case "ref_del":
 
             case "ref_list":

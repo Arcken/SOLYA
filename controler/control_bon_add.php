@@ -18,21 +18,30 @@ require $path . '/model/BonLigneManager.php';
 
 
 try {
+    $sPageTitle='Créer un Bon';
+    //Chargement des Libéllé de documents
     $resDocLbl = DocLibelleManager::getDocLibelles();
-
+    //Controle si le formulaire a était envoyé 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+        //On récupère la valeur de typeBon
         $type = $_REQUEST['typeBon'];
-        $sLblBon='';
+        
         switch ($type) {
             
             //Correspond au bon de sortie
             case "1":
-                    
+            case "2":
+            case "3":
+            case "4": 
+            case "5": 
+            case "6": 
+            case "7":
+                
                     //Instanciation de la connection
                     $cnx = Connection::getConnection();
+                
                     //Création du bon
                     $oBon = new Bon();
-
                     $oBon->bon_date = $_REQUEST['bonDate'];
                     $oBon->bon_fact_num = $_REQUEST['numFact'];
                     $oBon->doclbl_id = $_REQUEST['typeBon'];
@@ -111,7 +120,11 @@ try {
                     
                 break;
 
-            case "2":
+            case "8":
+            case "9": 
+            case "10":     
+            case "11": 
+            case "12":  
                     
                     //Instanciation de la connection
                     $cnx = Connection::getConnection();
@@ -122,7 +135,7 @@ try {
                     $oBon->bon_date = $_REQUEST['bonDate'];
                     $oBon->bon_fact_num = $_REQUEST['numFact'];
                     $oBon->doclbl_id = $_REQUEST['typeBon'];
-                    
+                    $oBon->bon_sortie_assoc=$_REQUEST['bonSortie'];
                     
                     //Prise en main de la connection
                     $cnx->beginTransaction();
@@ -197,10 +210,15 @@ try {
                     $cnx->commit();
                     //Ajout du méssage de réussite
                     $msg='<p class=\'info\'>'.date('H:i:s').' L\'enregistrement du bon numéro : '
-                            .$idBon.' de type reprise à été effectué avec succès </p>';
+                            .$idBon.' de type retour à été effectué avec succès </p>';
                     Tool::addMsg($msg);
                     
                 
+                break;
+                
+            default:
+                $msg='<p class=\'info\'>'.date('H:i:s').'Selectionner un type de bon avant d\'envoyer le formulaire';
+                Tool::addMsg($msg);
                 break;
         }
     }

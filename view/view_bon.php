@@ -30,6 +30,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="bonCom">Commentaire</label><br>
                 <textarea name="bonCom" placeholder="Commentaire">Com</textarea>
                 <br>
+                <div id='divBsArea' style='display:none;'>
+                    <label for="bonSortie">Bon de sortie associé :</label><br>
+                    <input name="bonSortie" placeholder="N° du bon de sortie" id="bonSortie">
+                </div>
             </div>
             <div class="col90" id="divTable" style ='display:none'>
                 <table  id="bonTable">

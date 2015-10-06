@@ -170,7 +170,13 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             $typeBon = $_REQUEST['typeBon'];
 
             switch ($typeBon) {
-                case "1":
+                 case "1":
+                 case "2":
+                 case "3":
+                 case "4": 
+                 case "5": 
+                 case "6": 
+                 case "7":    
 
                     $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock, l.lot_qt_init"
                             . " FROM lot l "
@@ -188,7 +194,11 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
                     break;
                     
-                    case "2":
+                     case "8":
+                     case "9": 
+                     case "10":     
+                     case "11": 
+                     case "12": 
 
                     $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock,l.lot_qt_init"
                             . " FROM lot l "
@@ -210,7 +220,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
         
         
-        case 'getLotQte':
+        case 'getLot':
 
             $tab = array();
             $lotId = $_REQUEST['lotId'];

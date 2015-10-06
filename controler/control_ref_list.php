@@ -17,9 +17,11 @@ require_once $path . '/model/DureeConservationManager.php';
 require_once $path . '/model/PrixVente.php';
 require_once $path . '/model/PrixVenteManager.php';
 
-$iTotal = Tool::getCountTable('reference');
+
 try {
     
+$iTotal = Tool::getCountTable('reference');
+
     if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
         
         $orderby = $_REQUEST['orderby'];
@@ -31,10 +33,11 @@ try {
     }
     
 } catch (MySQLException $e){
-    $e->RetourneErreur();
+    
     switch ($resEr){
         default:
-            $resMessage ="Une erreur est survenue : $resEr";
+            $msg ="Oups! Une erreur est survenue : $resEr";
+            Tool::addMsg($msg);
         break;
     }
 }

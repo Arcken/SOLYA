@@ -14,18 +14,37 @@ function formChooserBon() {
 
 
     var typeBon = $("#typeBon").val();
-
+    console.log($("#typeBon").select().text());
     switch (typeBon) {
 
         case "":
             $('#divTable').hide();
             $('#zoneBtnBon').hide();
+            $('#divBsArea').hide();
             break;
-
-        default:
+            
+        case "1":
+        case "2":
+        case "3":
+        case "4": 
+        case "5": 
+        case "6": 
+        case "7":     
+            $('#divBsArea').hide();
+            $('#bonSortie').val('');
             $('#divTable').show();
             $('#zoneBtnBon').show();
             break;
+            
+        case "8":
+        case "9": 
+        case "10":     
+        case "11": 
+        case "12":  
+            $('#divBsArea').show();
+            $('#divTable').show();
+            $('#zoneBtnBon').show();
+             break;
 
     }
 }
@@ -167,16 +186,34 @@ function getLotsFromReference($row) {
             function (json) {
 
                 console.log("json" + json);
-                $divAlert.append('<table id="tabAlert">\n\
-                               <th>N°Lot</th>\n\
-                               <th>DLUO</th>\n\
-                               <th>QTE EN STOCK</th>\n\
-                               <th>QTE INITIAL</th>');
+                var $myTab='<table id="tabAlert">\n'+
+                                 ' <tr>\n  '+
+                                        '<th>N°LOT</th>\n  '+
+                                        '<th>DLUO</th>\n  '+
+                                        '<th>QTE STOCK</th>\n  '+
+                                        '<th>QTE INITIAL</th>\n'+
+                                 ' </tr>\n';
+                         
+                /*$divAlert.append('<table id="tabAlert">'+
+                                 '<tr>'+
+                                        '<th>N°LOT</th>'+
+                                        '<th>DLUO</th>'+
+                                        '<th>QTE STOCK</th>'+
+                                        '<th>QTE INITIAL</th>'+
+                                 '</tr>');*/
 
                 for (var key in json) {
                     console.log('lot_id' + json[key].lot_id);
                     d = new Date(json[key].lot_date_max);
-                    $divAlert.append(
+                    $myTab+=' <tr>\n   '+
+                                  '<td>' + json[key].lot_id + '</td>\n   '+
+                                  '<td>' + d.getDate() + '/' + d.getMonth() +
+                                    '/' + d.getFullYear().toString().substring(2, 4)+
+                                  '</td>\n   '+
+                                  '<td>' + json[key].lot_qt_stock + '</td>\n   '+
+                                  '<td>' + json[key].lot_qt_init + '</td>\n'+
+                             ' </tr>\n';
+                    /*$divAlert.append(
                             '<tr>\n\
                                   <td>' + json[key].lot_id + '</td>\n\
                                   <td>' + d.getDate() + '/' + d.getMonth() +
@@ -184,9 +221,12 @@ function getLotsFromReference($row) {
                                   '</td>\n\
                                   <td>' + json[key].lot_qt_stock + '</td>\n\
                                   <td>' + json[key].lot_qt_init + '</td>\n\
-                             </tr>');
+                             </tr>');*/
                 }
-                $divAlert.append('</table>');
+                $myTab+='</table>';
+                console.log ($myTab);
+                //$divAlert.append('</table>');
+                $divAlert.append($myTab);
                 $divAlert.show();
             }
             );
@@ -217,26 +257,27 @@ function limitQteMax($row) {
         //Bon de sortie 
 
         case "1":
+        case "2":
+        case "3":
+        case "4": 
+        case "5": 
+        case "6": 
+        case "7":    
             //Récupère la quantité en stock du lot
             $.getJSON(
                     // url cible
                     'ws/webService.php',
                     //Paramètres
-                            {test: 'Solya', action: 'getLotQte', lotId: $valInput.val()},
+                            {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
                     //Callback
                     function (json) {
 
                         //Initialisation de la variable nb
                         var $nb = '';
                         for (var key in json) {
-
                             console.log('lot_Qte ' + json[key].lot_qt_stock);
-
                             //Récupération de la valeur qte qui doit être utilisé pour créer la limit
                             $nb = parseInt(json[key].lot_qt_stock);
-
-
-
                         }
                         //Enfin on change la valeur de l'attribut Max de l'input Qte
                         $inptQte.attr('max', $nb);
@@ -244,28 +285,25 @@ function limitQteMax($row) {
                     );
                     break;
 
-                case "2":
+                 case "8":
+                 case "9": 
+                 case "10":     
+                 case "11": 
+                 case "12": 
                     
                     //Récupère la quantité initial 
                     $.getJSON(
                             // url cible
                             'ws/webService.php',
                             //Paramètres
-                                    {test: 'Solya', action: 'getLotQte', lotId: $valInput.val()},
+                                    {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
                             //Callback
                             function (json) {
-
                                 //Initialisation de la variable nb
                                 var $nb = '';
                                 for (var key in json) {
-
-                                   
-
                                     //Récupération de la valeur qte qui doit être utilisé pour créer la limit
                                     $nb=parseInt(json[key].lot_qt_init)-parseInt(json[key].lot_qt_stock);
-
-
-
                                 }
                                 //Enfin on change la valeur de l'attribut Max de l'input Qte
                                 $inptQte.attr('max', $nb);

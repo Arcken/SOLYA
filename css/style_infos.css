@@ -12,14 +12,15 @@ and open the template in the editor.
 #asideInfos{
     margin:0px;
     padding:0px;
+    border:0px
 }
 
 #asideInfos{
-    right:0.5%;
+    right:1.1%;
     background-color: lightslategray;
     position:fixed;
     height:70%;
-    width: 15%;
+    width: 14.7%;
     top:17%;
     border:  2px solid cyan;
     border-radius: 10px 10px 10px 10px;
@@ -32,6 +33,7 @@ and open the template in the editor.
 
 #alert{
     margin: 4%;
+    padding:auto;
     background-color: gainsboro;
     width: auto;
     border:  2px solid cyan;
@@ -43,28 +45,25 @@ and open the template in the editor.
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 
-table{
+#alert table{
     border-collapse: collapse;
-    //margin-top: 1%;
-    //margin-bottom: 1%;
     margin:2%;
-    width: 100%;
+    width: auto;
     text-align: center;
+    table-layout: auto;
 }
 
-th{
+#alert th{
     border: 2px solid black;
     font-size: 0.8em;
-    width:auto;
-    //min-width:30%;
 }
 
-td{
+#alert td{
     text-align: center;
     border: 1px solid black;
-   // min-width:30%;
-   width:auto;
+   
+   //width:100%;
 }
-tr{
-    width:100%;
+#alert tr{
+    width:auto;
 }

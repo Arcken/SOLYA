@@ -17,6 +17,7 @@ class Bon {
     public $doclbl_id='';
     public $bon_fact_num='';
     public $bon_date='';
+    public $bon_sortie_assoc='';
     
     public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
