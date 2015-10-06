@@ -1,19 +1,17 @@
 <?php
+/*
 if($_REQUEST['cat'] == 'utilisateur'){
 require_once $path . '/model/Utilisateur.php';
 require_once $path . '/model/UtilisateurManager.php';
 
 $res = UtilisateurManager::getAllUtilisateurs();
-Tool::printAnyCase($res);
-header("Content-Type: text/csv; charset=UTF-8");
 
-header("Content-disposition: filename=mon-tableau.csv");
 //
 //
 //
 //il faut récupérer un tableau sans objet
 //
-//
+
 // Création de la ligne d'en-tête
 $entete = array("Nom", "Prénom", "Age");
 
@@ -32,4 +30,6 @@ foreach ($res as $ligne) {
     Tool::printAnyCase($ligne);
     echo implode($separateur, $ligne) . "\r\n";
 }
-}
+ * 
+ */
+

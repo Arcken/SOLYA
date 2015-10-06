@@ -39,6 +39,30 @@ class UtilisateurManager {
 
     
     /**
+     * Retourne tous les enregistrements de la table utilisateur 
+     * avec le nom du groupe associé
+     * sans le mot de passe
+     * 
+     * @return []
+     * Retourne un tableau
+     */
+    public static function getAllUtilisateursTableau() {
+
+        try {
+            $sql = 'SELECT ut_nom, ut_prenom, ut_login, ut_actif, grp_nom '
+                    . 'FROM utilisateur AS u '
+                    . 'JOIN groupe g ON u.grp_id = g.grp_id ';
+            
+            $result = Connection::request(1, $sql, null,PDO::FETCH_ASSOC);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
      * Retourne les détails d'un utilisateur selon son login et mot de passe
      * Sert à vérifier le login
      * @param $oUtilisateur

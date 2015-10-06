@@ -11,6 +11,8 @@ require_once 'inc/ini.inc'; //recupere parametre du fichier param.ini
 $path = $_SERVER['DOCUMENT_ROOT'] . $sWebPath;
 //Intégration de la classe gérant la connection PDO
 require_once 'model/Connection.php';
+//Intégration de la classe mysqlexception dans ini.inc
+
 //Intégration du contrôle de connection de l'utilisateur
 require_once 'security/user_control.php';
 //Intégration du contrôleur principale

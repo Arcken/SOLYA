@@ -9,7 +9,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/exportFct.js" ></script>
 
     <div class="corps">
-        <a href="index.php?action=export&cat=utilisateur">test</a>
+        <?php echo $path; ?>
+        <a href="view/export/export_utilisateur.php?action=export&cat=utilisateur">test</a>
 
     </div>
 
