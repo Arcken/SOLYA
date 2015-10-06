@@ -5,6 +5,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+    <script type="text/javascript" src="js/calculFct.js" ></script>
     <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">
         <form class="form" action="index.php" method="get">
@@ -31,8 +32,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="beFraisDouane" id="beFraisDouane" 
                        placeholder="description" type="text" value ="0">
                 <br>
-                
-                <label for="beFraisBancaire"> Frais bancaire </label><br>
+
+                <label for="beFraisBancaire"> Frais bancaires </label><br>
                 <input name="beFraisBancaire" id="beFraisBancaire" 
                        placeholder="description" type="text" value="0">
                 <br>
@@ -44,16 +45,19 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col90">
                 <table class="beLigne" id="beTable">
                     <tr id="titreGnl">
-                        <th colspan="5">
+                        <th colspan="7">
                             Référence
                         </th>
                         <th colspan="4">
                             Douane
                         <th colspan="2">
-                        Banque
+                            Banque
                         </th>
                         <th colspan="2">
                             Transport
+                        </th>
+                        <th rowspan="2">
+                            Total
                         </th>
                         <th rowspan="2">
                             DLC DLUO
@@ -63,7 +67,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </th>
                         <th rowspan="2">
                             Commentaire
-                        </th>                        
+                        </th>
+                        <th rowspan="2">
+                            Coût unitaire
+                        </th>
                         <th rowspan="2">
                             P
                         </th>
@@ -85,6 +92,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             Qt
                         </th>
                         <th>
+                            Pd U
+                        </th>
+                        <th>
+                            Poids
+                        </th>
+                        <th>
                             Droit
                         </th>
                         <th>
@@ -94,128 +107,221 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             Taxe
                         </th>
                         <th>
-                            Calcul
+                            Total
                         </th>
                         <th>
                             Frais
                         </th>
                         <th>
-                            Calcul
+                            Total
                         </th>
                         <th>
-                            Frais
+                            Prix
                         </th>
                         <th>
-                            Calcul
+                            Total
                         </th>
-                        
+
                     </tr>
                     <tr id="idLigne" hidden="">
-                        
+
                         <td  class="beLigneId">
-                            <!-- Appel de fonction qui recherche une reference selon son id, il faut préciser le champs-->
-                            <input type="number" name="refId[NID]"  id="refIdNID" 
-                                   onblur='getReference("NID","ref_id","be")' min="0">
+                            <!-- Appel de fonction qui recherche une reference 
+                            selon son id, il faut préciser le champs-->
+                            <input type="number" 
+                                   name="refId[NID]" 
+                                   id="refIdNID"
+                                   onblur='getReference("NID",
+                                                       "ref_id",
+                                                       "be")' min="0">
                         </td>
                         <td class="beLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[NID]" 
+                            <input type="text"
+                                   name="refCode[NID]" 
                                    id="refCodeNID">
                         </td>
                         <td>
-                            <textarea name="refLbl[NID]" id="refLblNID"
-                                      class="beLigneT"></textarea>
-                           
+                            <textarea name="refLbl[NID]" 
+                                      id="refLblNID"
+                                      class="beLigneT"></textarea>                           
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="0" name="beligPu[NID]" 
+                            <input type="text" 
+                                   value="0" 
+                                   name="beligPu[NID]" 
                                    id="beligPuNID">
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="0" name="ligQte[NID]" 
+                            <input type="text" 
+                                   value="0" 
+                                   name="ligQte[NID]" 
                                    id ="ligQteNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="text" 
+                                   value="0" 
+                                   name="refPoidsBrut[NID]" 
+                                   id="refPoidsBrutNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="text" 
+                                   value="0" 
+                                   name="totalPoids[NID]" 
+                                   id="totalPoidsNID"
+                                   onfocus='ccMultiplier(["ligQteNID",
+                                                   "refPoidsBrutNID"],
+                                                       "totalPoidsNID")'>
                         </td>
                         <td class="beLigneNb">
                             <!-- Calcul droit de douane selon le pu et le taux 
                             récupérés par getreference-->
-                            <input type="text" value="0" name="beligDd[NID]" 
+                            <input type="text" 
+                                   value="0" 
+                                   name="beligDd[NID]" 
                                    id="beligDdNID"
                                    onfocus='beCcDroitDouane("beligPuNID",
-                                               "beligTauxDouaneNID",
-                                               "ligQteNID",
-                                               "beligDdNID")'>
+                                                       "beligTauxDouaneNID",
+                                                       "ligQteNID",
+                                                       "beligDdNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="0" name="beligTauxDouane[NID]" 
-                                   id="beligTauxDouaneNID" readonly="">
+                            <input type="text" 
+                                   value="0" 
+                                   name="beligTauxDouane[NID]" 
+                                   id="beligTauxDouaneNID"
+                                   onchange='beCcDroitDouane("beligPuNID",
+                                                       "beligTauxDouaneNID",
+                                                       "ligQteNID",
+                                                       "beligDdNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="0" name="beligTaxe[NID]" 
+                            <input type="text" 
+                                   value="0" 
+                                   name="beligTaxe[NID]" 
                                    id="beligTaxeNID">
                         </td>
                         <td class="beLigneNb">
-                            <!-- Additionne droit de douane et taxe -->
-                            <input type="text" value="0" name="calculFd[NID]" 
-                                   id="calculFdNID" readonly=""
-                                   onfocus='beCc("beligDdNID","beligTaxeNID","calculFdNID")'>
+                            <!-- Additionne droit de douane et taxe, mets à jour
+                            le total-->
+                            <input type="text" 
+                                   value="0" 
+                                   name="totalFd[NID]" 
+                                   id="totalFdNID" 
+                                   readonly=""
+                                   onfocus='ccAddition(
+                                                       ["beligDdNID", "beligTaxeNID"],
+                                                       "totalFdNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="0" name="beligFb[NID]" 
+                            <input type="text" 
+                                   value="0" 
+                                   name="beligFb[NID]" 
                                    id="beligFbNID">
                         </td>
                         <td class="beLigneNb">
-                            <!-- Copie frais bancaire dans total pour le calcul final -->
-                            <input type="text" value="0" name="calculFb[NID]" 
-                                   id="calculFbNID" readonly=""
-                                   onfocus='beCopieChamps("beligFbNID","calculFbNID")'>
+                            <!-- Copie frais bancaire dans total -->
+                            <input type="text" 
+                                   value="0" 
+                                   name="totalFb[NID]" 
+                                   id="totalFbNID"
+                                   readonly=""
+                                   onfocus='copieChamps("beligFbNID",
+                                                       "totalFbNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <input type="text" value="0" name="beligFt[NID]" 
+                            <input type="text" 
+                                   value="0" 
+                                   name="beligFt[NID]" 
                                    id="beligFtNID">
                         </td>
                         <td class="beLigneNb">
-                            <!-- Copie frais transport dans total pour le calcul final -->
-                            <input type="text" value="0" name="calculFt[NID]" 
-                                   id="calculFtNID" readonly=""
-                                   onfocus='beCopieChamps("beligFtNID","calculFtNID")'>
+                            <!-- Copie frais transport dans total-->
+                            <input type="text" 
+                                   value="0" 
+                                   name="totalFt[NID]" 
+                                   id="totalFtNID"
+                                   readonly=""
+                                   onfocus='copieChamps("beligFtNID",
+                                                       "totalFtNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Total de la ligne-->
+                            <input type="text" 
+                                   value="0" 
+                                   name="totalLig[NID]" 
+                                   id="totalLigNID"
+                                   readonly=""
+                                   onfocus='beTotalLigne("totalLigNID")'>
                         </td>
                         <td>
-                            <input type="date" name="beligDlc[NID]" id="beligDlcNID">
-                            
+                            <input type="date" 
+                                   name="beligDlc[NID]" 
+                                   id="beligDlcNID">
                         </td>
                         <td >
-                            <textarea name="beligDepot[NID]" id="beligDepotNID" 
+                            <textarea name="beligDepot[NID]" 
+                                      id="beligDepotNID" 
                                       class="beLigneT"></textarea>
                         </td>
                         <td>
-                            <textarea name="beligCom[NID]" id="beligComNID"  
+                            <textarea name="beligCom[NID]" 
+                                      id="beligComNID"  
                                       class="beLigneT"></textarea>
+                        </td>
+                        <td>
+                            <input type="text" 
+                                   name="beligCu[NID]" 
+                                   id="beligCuNID"
+                                   value="0">                            
                         </td>
                         <td  class="beLigneImg">
                             <!-- Efface la ligne en cours -->
-                            <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delLigne("idLigne")' class="tdImgTd"/>
+                            <img src="img/icon/delete.png" 
+                                 alt="" 
+                                 title="Supprimer"
+                                 onclick='delLigne("idLigne")' 
+                                 class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
                 <!-- Ajoute une ligne -->
-                <input type="button" value="Ajouter ligne" 
-                       onclick='addLigne("beTable","idLigne")'>
+                <input type="button" 
+                       value="Ajouter ligne" 
+                       onclick='addLigne("beTable", "idLigne")'>
+            </div>
+            <div>
+                <label for="beTotal">Total</label>
+                <input type="text" 
+                       name="beTotal" 
+                       id="beTotal"
+                       value="0">
             </div>
             <div class="bas">
-                    <input name="btnForm" type="submit" 
-                           value="<?php echo $sButton; ?>">
-                    <!-- Mets à jour chaque champs calcul selon les champs
-                    de l'entête-->
-                    <input name="Calcul" type="button" value="Calcul" 
-                           onclick="beCalcul()">
-                    <input name="clear" type="reset"> 
-                    <input name="action" id="action" 
-                           value="<?php echo $sAction ?>" type="text" hidden>
-                </div>
+                <input name="btnForm" 
+                       type="submit" 
+                       value="<?php echo $sButton; ?>">
+                <!-- Mets à jour chaque champs calcul selon les champs
+                de l'entête-->
+                <input name="Calcul" 
+                       type="button" 
+                       value="Calcul" 
+                       onclick="beCalcul()">
+                <input name="resetCalcul" 
+                       value="Reset Calcul"
+                       type="button" 
+                       onclick="beCalculReset()">
+                <input name="clear" 
+                       type="reset"> 
+                <input name="action" 
+                       id="action" 
+                       value="<?php echo $sAction ?>" 
+                       type="text" 
+                       hidden>
+            </div>
         </form>
-        
+
     </div>
-    
+
     <?php
 } else {
     echo 'Le silence est d\'or';

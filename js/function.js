@@ -389,3 +389,18 @@ function retourJsonRefid(key, json) {
     $inputTD.val(json[key].dd_taux);
 }
 
+/**
+ * Fonction copie valeur de champs dans un autre
+ * @param $source
+ * id de la source
+ * @param $cible
+ * id de la cible
+ * @returns {undefined}
+ */
+function copieChamps($source, $cible) {
+    console.log("DEBUT COPIE CHAMPS");
+    $1 = parseFloat($("input[id='" + $source + "']").val());
+    $res = $("input[id='" + $cible + "']").val(parseFloat($1));
+    console.log($source + " dans " + $cible);
+    console.log("FIN COPIE CHAMPS");
+}
