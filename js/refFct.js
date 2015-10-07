@@ -102,7 +102,6 @@ function fillFiartGamme($fiartId) {
 }
 
 
-
 function getLastRefCode() {
 
     var $refCode = $('#refCode').val();
@@ -144,3 +143,5 @@ function getLastRefCode() {
     );
 confirmRefCode();
 }
+
+

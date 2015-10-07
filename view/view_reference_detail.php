@@ -2,7 +2,7 @@
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     <script type="text/javascript" src="js/refFct.js"></script>
-
+    
     <div class="corps">
 
         <form class ="form" id='ref_detail' method="POST" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
 
 
             <div class="col30"> 
-
+                
                 <label for="refCode">Code de la référence : </label><br>    
                 <input id="refCode" name="refCode" type="text"
                        autocomplete="off"  
@@ -159,12 +159,41 @@
                             </table>
                         </div>
                     </div>
-
+                    
+                    <div class="col90" id='tableLot'>
+                     <?php if (is_array($toLots)){?>
+                        <table style='margin:auto;'>
+                            <tr>
+                                <th class='colTitle'>
+                                    N°Lot</th>
+                                <th class='colTitle'>
+                                    DLC/DLUO</th>
+                                <th class='colTitle'>
+                                    QTE STOCK</th>
+                                <th class='colTitle'>
+                                    QTE INITIAL</th>
+                            </tr>
+                            
+                                
+                              <?php foreach($toLots as $oLot){?>
+                            <tr>
+                                          <td class='colData'><?php echo $oLot->lot_id ?></td>
+                                          <td class='colData'><?php echo $oLot->lot_date_max ?></td>
+                                          <td class='colData'><?php echo $oLot->lot_qt_stock ?></td>
+                                          <td class='colData'><?php echo $oLot->lot_qt_init ?></td>
+                            </tr>
+                              <?php } ?>
+                            
+                        </table>
+                     <?php } else{ ?>
+                        <span>Aucun lot associé à cette référence</span>
+                     <?php } ?>  
+                    </div>
                     <div class="bas">
                         <input name='retour'  type="button" value='Retour' 
                                onclick='location.href = "index.php?action=ref_list";'/> 
                         <input name="action"  value="<?php echo $sAction; ?>" type="text" hidden/>
-                        <input name="idRef"   type='text' value="<?php echo $rsRef->ref_id; ?>" hidden>
+                        <input name="idRef" id="refId"   type='text' value="<?php echo $rsRef->ref_id; ?>" hidden>
                         <?php
                         if ($rsRef->ref_photos == '') {
                             ?>
@@ -174,10 +203,11 @@
                         <input name="refPhotos" value="<?php echo $rsRef->ref_photos;?>" 
                                type="text" hidden>
                     </div>
+                   
                 </form>
             </div>
+   
 
-<!--ajiouter le tableau de lots associés-->
             <?php
         }else{ 
             echo 'Le silence est d\'or';

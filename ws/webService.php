@@ -170,6 +170,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             $typeBon = $_REQUEST['typeBon'];
 
             switch ($typeBon) {
+                 case "0":
                  case "1":
                  case "2":
                  case "3":

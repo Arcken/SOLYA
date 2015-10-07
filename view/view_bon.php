@@ -86,7 +86,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                            
                         </td>
                          <td class="bonLigneId">
-                             <input type="text" name="lotId[]" id='lotIdNID' onfocus="getLotsFromReference('NID');"
+                             <input type="text" name="lotId[]" id='lotIdNID' onfocus="getLotsFromCurReference('NID');"
                                     >
                         </td>
                         <td class="bonLigneNb">
