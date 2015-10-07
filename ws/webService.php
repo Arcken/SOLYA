@@ -170,7 +170,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             $typeBon = $_REQUEST['typeBon'];
 
             switch ($typeBon) {
-                 case "0":
+                
                  case "1":
                  case "2":
                  case "3":
@@ -179,11 +179,11 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
                  case "6": 
                  case "7":    
 
-                    $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock, l.lot_qt_init"
+                    $requete = " SELECT  l.lot_id, l.lot_dlc, l.lot_qt_stock, l.lot_qt_init"
                             . " FROM lot l "
                             . " INNER JOIN reference r ON l.ref_id = r.ref_id "
                             . " WHERE r.ref_id = '" . $refId . "' AND lot_qt_stock > '0' "
-                            . " ORDER BY lot_date_max ASC";
+                            . " ORDER BY lot_dlc ASC";
 
                     //On l'éxécute
                     $resultat = $bdd->query($requete);
@@ -201,11 +201,11 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
                      case "11": 
                      case "12": 
 
-                    $requete = " SELECT  l.lot_id, l.lot_date_max,l.lot_qt_stock,l.lot_qt_init"
+                    $requete =" SELECT  l.lot_id, l.lot_dlc,l.lot_qt_stock,l.lot_qt_init"
                             . " FROM lot l "
                             . " INNER JOIN reference r ON l.ref_id = r.ref_id "
                             . " WHERE r.ref_id = '" . $refId . "'"
-                            . " ORDER BY lot_date_max ASC";
+                            . " ORDER BY lot_dlc ASC";
 
                     //On l'éxécute
                     $resultat = $bdd->query($requete);

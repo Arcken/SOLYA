@@ -31,16 +31,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
       <ul>
          <li><a href='#'><span>Créer</span></a>
             <ul>
-               <li><a href='#'><span>Entrée</span></a></li>
+               <li><a href='index.php?action=be_add'><span>Entrée</span></a></li>
                <li><a href='index.php?action=bon_add'><span>Sortie/Retour</span></a></li>
                <li><a href='#'><span>Inventaire</span></a></li>
             </ul>
          </li>
          <li><a href='#'><span>Consulter</span></a>
             <ul>
-               <li><a href='#'><span>Entrée</span></a></li>
-               <li><a href='#'><span>Sortie</span></a></li>
-               <li><a href='#'><span>Retour</span></a></li>
+               <li><a href='#' ><span>Entrée</span></a></li>
+               <li><a href='index.php?action=bon_list'><span>Sortie/Retour</span></a></li>
                <li><a href='#'><span>Inventaire</span></a></li>
             </ul>
          </li>

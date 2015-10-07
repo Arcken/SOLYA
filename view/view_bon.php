@@ -11,7 +11,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="col50">
-
+                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <label for="numFact"> Numéro de facture </label><br>
                 <input name="numFact"  id="nFact" placeholder="Numéro de Facture" type="text" required>
                 <br>
@@ -96,11 +96,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                         
                         <td >
-                            <textarea name="bonligDepot[]" id='bonligDepotNID' class="bonLigneT"
+                            <textarea name="ligDepot[]" id='ligDepotNID' class="bonLigneT"
                                       rows="2" cols="30">Dépot?</textarea>
                         </td>
                         <td>
-                            <textarea name="bonligCom[]" id ='bonligComNID' class="bonLigneT" 
+                            <textarea name="ligCom[]" id ='ligComNID' class="bonLigneT" 
                                       rows="2" cols="30">Commentaire</textarea>
                         </td>
                         <td class="bonLigneImg">

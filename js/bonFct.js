@@ -189,22 +189,14 @@ function getLotsFromCurReference($row) {
                 var $myTab='<table id="tabAlert">\n'+
                                  ' <tr>\n  '+
                                         '<th>N°LOT</th>\n  '+
-                                        '<th>DLUO</th>\n  '+
+                                        '<th>DLC/DLUO</th>\n  '+
                                         '<th>QTE STOCK</th>\n  '+
                                         '<th>QTE INITIAL</th>\n'+
                                  ' </tr>\n';
                          
-                /*$divAlert.append('<table id="tabAlert">'+
-                                 '<tr>'+
-                                        '<th>N°LOT</th>'+
-                                        '<th>DLUO</th>'+
-                                        '<th>QTE STOCK</th>'+
-                                        '<th>QTE INITIAL</th>'+
-                                 '</tr>');*/
-
                 for (var key in json) {
                     console.log('lot_id' + json[key].lot_id);
-                    d = new Date(json[key].lot_date_max);
+                    d = new Date(json[key].lot_dlc);
                     $myTab+=' <tr>\n   '+
                                   '<td>' + json[key].lot_id + '</td>\n   '+
                                   '<td>' + d.getDate() + '/' + d.getMonth() +
@@ -213,19 +205,9 @@ function getLotsFromCurReference($row) {
                                   '<td>' + json[key].lot_qt_stock + '</td>\n   '+
                                   '<td>' + json[key].lot_qt_init + '</td>\n'+
                              ' </tr>\n';
-                    /*$divAlert.append(
-                            '<tr>\n\
-                                  <td>' + json[key].lot_id + '</td>\n\
-                                  <td>' + d.getDate() + '/' + d.getMonth() +
-                                    '/' + d.getFullYear().toString().substring(2, 4)+
-                                  '</td>\n\
-                                  <td>' + json[key].lot_qt_stock + '</td>\n\
-                                  <td>' + json[key].lot_qt_init + '</td>\n\
-                             </tr>');*/
                 }
                 $myTab+='</table>';
                 console.log ($myTab);
-                //$divAlert.append('</table>');
                 $divAlert.append($myTab);
                 $divAlert.show();
             }

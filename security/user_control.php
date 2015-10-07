@@ -26,6 +26,7 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
         $_SESSION['group']    = $res->grp_nom;
         $_SESSION['login']    = $_REQUEST['login'];
         $_SESSION['msg']      = array("","","");
+        $_SESSION['token']    = '0';
     }
 
     // c'est que le compte est inexistant ou désactivé

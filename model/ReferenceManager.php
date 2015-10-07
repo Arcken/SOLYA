@@ -24,8 +24,9 @@ class ReferenceManager {
      * @param orderBy par défaut ref_id DESC
      * @return Reference[]
      */
-    public static function getAllReferences($limit=15, $nombre=0,
-            $orderby="ref_id") {
+    public static function getAllReferences($limit=15,
+                                            $nombre=0,
+                                            $orderby="ref_id") {
 
         try {
 
