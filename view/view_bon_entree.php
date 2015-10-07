@@ -11,41 +11,66 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" action="index.php" method="get">
             <div class="col50">
 
-                <label for="factRef"> Référence de facture </label><br>
-                <input name="factRef" placeholder="description" type="text"
+                <label for="beFactNum"> Référence de facture </label><br>
+                <input name="beFactNum" 
+                       id="beFactNum"
+                       placeholder="description" 
+                       type="text"
                        >
                 <br>
                 <label for="beLbl"> Libellé du bon </label><br>
-                <input name="beLbl" placeholder="description" type="text"
+                <input name="beLbl" 
+                       id="beLbl"
+                       placeholder="description" 
+                       type="text"
                        >
                 <br>
                 <label for="beDate"> Date</label><br>
-                <input name="beDate" placeholder="description" type="date"
+                <input name="beDate" 
+                       id="beDate"
+                       placeholder="description" 
+                       type="date"
                        >
                 <br>
                 <label for="beCom"> Commentaire</label><br>
-                <textarea name="beCom" placeholder="description">Com</textarea>
+                <textarea name="beCom" 
+                          id="beCom"
+                          placeholder="description">Com</textarea>
                 <br>
             </div>
             <div class="col50">
                 <label for="beFraisDouane"> Frais de douane </label><br>
-                <input name="beFraisDouane" id="beFraisDouane" 
-                       placeholder="description" type="text" value ="0">
+                <input name="beFraisDouane" 
+                       id="beFraisDouane" 
+                       placeholder="description" 
+                       type="text" 
+                       value ="0">
                 <br>
-
                 <label for="beFraisBancaire"> Frais bancaires </label><br>
-                <input name="beFraisBancaire" id="beFraisBancaire" 
-                       placeholder="description" type="text" value="0">
+                <input name="beFraisBancaire" 
+                       id="beFraisBancaire" 
+                       placeholder="description" 
+                       type="text" 
+                       value="0">
                 <br>
                 <label for="beFraisTransport"> Frais de transport </label><br>
-                <input name="beFraisTransport" id="beFraisTransport" 
-                       placeholder="description" type="text" value="0">
+                <input name="beFraisTransport" 
+                       id="beFraisTransport" 
+                       placeholder="description" 
+                       type="text" 
+                       value="0">
+                <br>
+                
+                <label for="beInfosTrans"> Information transport</label><br>
+                <textarea name="beInfosTrans" 
+                          placeholder="description">Com</textarea>
                 <br>
             </div>
+            
             <div class="col90">
                 <table class="beLigne" id="beTable">
                     <tr id="titreGnl">
-                        <th colspan="7">
+                        <th colspan="8">
                             Référence
                         </th>
                         <th colspan="4">
@@ -57,7 +82,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             Transport
                         </th>
                         <th rowspan="2">
-                            Total
+                            Total ligne
                         </th>
                         <th rowspan="2">
                             DLC DLUO
@@ -84,6 +109,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </th>
                         <th>
                             Libellé
+                        </th>
+                        <th>
+                            Lot
                         </th>
                         <th>
                             PU
@@ -144,6 +172,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <textarea name="refLbl[NID]" 
                                       id="refLblNID"
                                       class="beLigneT"></textarea>                           
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="text" 
+                                   value="" 
+                                   name="lotIdProducteur[NID]" 
+                                   id="lotIdProducteurNID"
+                                   title="Lot du producteur">
                         </td>
                         <td class="beLigneNb">
                             <input type="text" 
@@ -255,24 +290,24 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                         <td>
                             <input type="date" 
-                                   name="beligDlc[NID]" 
-                                   id="beligDlcNID">
+                                   name="beligDlcDluo[NID]" 
+                                   id="beligDlcDluoNID">
                         </td>
                         <td >
-                            <textarea name="beligDepot[NID]" 
-                                      id="beligDepotNID" 
+                            <textarea name="ligComDep[NID]" 
+                                      id="ligComDepNID" 
                                       class="beLigneT"></textarea>
                         </td>
                         <td>
-                            <textarea name="beligCom[NID]" 
-                                      id="beligComNID"  
+                            <textarea name="ligCom[NID]" 
+                                      id="ligComNID"  
                                       class="beLigneT"></textarea>
                         </td>
                         <td>
                             <input type="text" 
-                                   name="beligCu[NID]" 
-                                   id="beligCuNID"
-                                   value="0">                            
+                                   name="beligCuAchat[NID]" 
+                                   id="beligCuAchatNID"
+                                   value="">                            
                         </td>
                         <td  class="beLigneImg">
                             <!-- Efface la ligne en cours -->
@@ -290,10 +325,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        onclick='addLigne("beTable", "idLigne")'>
             </div>
             <div>
-                <label for="beTotal">Total</label>
+                <label for="totalBe">Total</label>
                 <input type="text" 
-                       name="beTotal" 
-                       id="beTotal"
+                       name="totalBe" 
+                       id="totalBe"
                        value="0">
             </div>
             <div class="bas">
@@ -306,10 +341,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="button" 
                        value="Calcul" 
                        onclick="beCalcul()">
-                <input name="resetCalcul" 
-                       value="Reset Calcul"
-                       type="button" 
-                       onclick="beCalculReset()">
+                
                 <input name="clear" 
                        type="reset"> 
                 <input name="action" 
