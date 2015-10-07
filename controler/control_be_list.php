@@ -13,7 +13,8 @@ $iTotal = Tool::getCountTable('bon_entree');
 //Si un champs de tri est défini on exécute la requète avec tri
 if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
     $orderby = $_REQUEST['orderby'];
-    $resBeList = BonEntreeManager::getAllBonsEntreesLim($limite, $iNbPage, $orderby);
+    $tri = $_REQUEST['tri'];
+    $resBeList = BonEntreeManager::getAllBonsEntreesLim($limite, $iNbPage, $orderby, $tri);
     
 } 
 //Sinon sans tri

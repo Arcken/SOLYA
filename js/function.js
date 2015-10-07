@@ -175,12 +175,14 @@ function verifPass() { //appel dans view_utilisateur
  * Fonction qui appel une page en spécifier le choix du trie pour les reqêtes
  * @param $action
  *  action à effectuer pour le contrôleur
+ *  @param $ordre
+ *  tri: ASC ou DESC
  * @param $champs
  *  champs sur lequel porte le tri de la requéte
  * @returns rien
  */
-function orderby($action, $champs) { //appel partout
-    window.open('index.php?action=' + $action + "&orderby=" + $champs, '_self');
+function orderby($action, $champs, $ordre) { //appel partout
+    window.open('index.php?action=' + $action + '&tri='+ $ordre + '&orderby=' + $champs, '_self');
 }
 
 /**

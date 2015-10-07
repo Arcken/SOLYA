@@ -10,10 +10,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
             <input type="button" onclick='location.href = "index.php?action=be_add"' value="Ajouter">
             <table>
                 <tr>
-                    <th>
+                    <th onclick="orderby('<?php echo $sAction?>',
+                                'be_id','ASC');"
+                                class="colTitle">
                         AS
                     </th>
-                    <th>
+                    <th onclick="orderby('<?php echo $sAction?>','be_id','DESC');">
                         ds
                     </th>
                     <th>
@@ -45,7 +47,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     </th>
                 </tr>
                 <tr>
-                    <th onclick="orderby('<?php echo $sAction?>','be_id');" colspan="2">
+                    <th colspan="2">
                         Id
                     </th>
                     <th onclick="orderby('<?php echo $sAction?>','be_lbl');" colspan="2">

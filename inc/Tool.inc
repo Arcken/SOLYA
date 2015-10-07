@@ -43,15 +43,20 @@ class Tool {
         } else {
             $order = '';
         }
+        if (isset($_REQUEST['tri'])) {
+            $tri = $_REQUEST['tri'];
+        } else {
+            $tri = '';
+        }
         if ($limite != 0) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limitePrecedente . '&orderby=' . $order . '" method="post"><</a></td>' . "\n";
+            . $limitePrecedente . '&orderby=' . $order . '&tri=' .$tri . '" method="post"><</a></td>' . "\n";
         }
 
         while ($numeroPages <= $nbpages) {
             echo '<td ><a href =
-"' . $page . '?action=' . $sAction . '&limite=' . $lim . '&orderby=' . $order . '">'
+"' . $page . '?action=' . $sAction . '&limite=' . $lim . '&orderby=' . $order . '&tri=' .$tri . '">'
             . $numeroPages . '</a></td>' . " \n";
             $lim = $lim + $nombre;
             $numeroPages = $numeroPages + 1;
@@ -65,7 +70,7 @@ class Tool {
         if ($limiteSuivante < $total) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limiteSuivante . '&orderby=' . $order . '" method="post">></a></td>' . "\n";
+            . $limiteSuivante . '&orderby=' . $order . '&tri=' .$tri . '" method="post">></a></td>' . "\n";
         }
 
         echo '</tr></table>' . "\n";
