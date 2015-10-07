@@ -18,6 +18,7 @@ try {
 
     //Controle si le formulaire a était envoyé 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+        //Vérification du jeton pour savoir si le formulaire à était envoyé
         if ($_SESSION['token'] != $_REQUEST['token']) {
             //On récupère la valeur de typeBon pour définir l'action à executer
             $type = $_REQUEST['typeBon'];
@@ -225,6 +226,7 @@ try {
             //L'ajout s'est effectué donc on copie le token dans la session
             $_SESSION['token']=$_REQUEST['token'];
         }else{
+            $cnx = Connection::getConnection();
             $resEr='555';
             throw new MySQLException('Vous avez déja envoyé ce formulaire',$cnx);
         }
@@ -232,10 +234,16 @@ try {
 } catch (MySQLException $e) {
     switch ($resEr) {
         case '555':
+         //$_SESSION['token'] = '0';
+         $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
+                . $e->getMessage() . "</p>";
+            break;
+        
         case '666':
         case '777':
-            $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
-                    . $e->getMessage() . "</p>";
+          $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
+                . $e->getMessage() . "</p>";
+            $cnx->rollback();
             break;
 
         default:
@@ -243,9 +251,10 @@ try {
                     . ' Oups une erreur est survenue veuillez contacter'
                     . ' votre administrateur avec le code erreur suivant : '
                     . $resEr . ' '.$e->RetourneErreur().'</p>';
+            $cnx->rollback();
             break;
     }
-    $_SESSION['token'] = '0';
-    $cnx->rollback();
+   
+    
     Tool::addMsg($msg);
 }
