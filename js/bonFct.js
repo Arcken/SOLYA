@@ -168,7 +168,7 @@ function getReferenceBonFromRefCode($row) {
  * @returns {undefined}
  */
 
-function getLotsFromReference($row) {
+function getLotsFromCurReference($row) {
     
     $refIdId = 'refId' + $row;
     $valInput = $('#' + $refIdId);

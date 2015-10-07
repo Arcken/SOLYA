@@ -25,15 +25,18 @@ try {
     require $path . '/model/DroitDouaneManager.php';
     require $path . '/model/PrixVente.php';
     require $path . '/model/PrixVenteManager.php';
-
-    $toTvas = TvaManager::getAllTvas();
+    require $path . '/model/LotManager.php';
+    
+    $toTvas         = TvaManager::getAllTvas();
     $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
-    $toDurCons = DureeConservationManager::getAllDureeConservations();
-    $toModCons = ModeConservationManager::getAllModeConservations();
-    $toFiArts = FicheArticleManager::getAllFichesArticles();
-    $oPve = PrixVenteManager::getCurPrixVente($idRef);
-
+    $toDurCons      = DureeConservationManager::getAllDureeConservations();
+    $toModCons      = ModeConservationManager::getAllModeConservations();
+    $toFiArts       = FicheArticleManager::getAllFichesArticles();
+    $oPve           = PrixVenteManager::getCurPrixVente($idRef);
+    $toLots         = LotManager::getLotsFromReference($idRef);
+    
     if ($oPve === 0) {
+        
         $oPve = new PrixVente();
         $oPve->pve_ent = 'indéfinis';
         $oPve->pve_per = 'indéfinis';

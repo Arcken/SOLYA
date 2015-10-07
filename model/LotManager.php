@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of LotManager
  *
@@ -58,4 +52,25 @@ class LotManager {
         }
         return $result;
     }
+    
+    public static function getLotsFromReference($refId){
+         
+     
+        try{
+            $tParam = array($refId);
+
+            $sql= "SELECT lot_id,"
+                        . "lot_date_max,"
+                        . "lot_qt_stock,"
+                        . "lot_qt_init "
+                        . "FROM lot "
+                        . "WHERE ref_id =? and lot_qt_stock >0";
+
+             $result = Connection::request(1, $sql, $tParam);
+         
+        }catch(MySQLException $e){
+          throw $e;   
+        }
+        return $result;
+        }
 }
