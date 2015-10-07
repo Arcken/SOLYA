@@ -14,54 +14,127 @@ require_once $path . '/model/LotManager.php';
 
 //Controle si le formulaire a était envoyé 
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-    //On récupère la valeur de typeBon pour définir l'action à executer
-    //Instanciation de la connection
-    $cnx = Connection::getConnection();
 
-    //Démarrage de la transaction
-    $cnx->beginTransaction();
-    
-    //Création du bon d'entrée
-    $oBe = new BonEntree();
-    //$oBe->cpt_id = $_REQUEST['cptId'];
-    $oBe->be_lbl = $_REQUEST['beLbl'];
-    $oBe->be_date = $_REQUEST['beDate'];
-    $oBe->be_fact_num = $_REQUEST['beFactNum'];
-    $oBe->be_frais_douane =$_REQUEST['beFraisSouane'];
-    $oBe->be_frais_bancaire = $_REQUEST['beFraisBancaire'];
-    $oBe->be_frais_trans = $_REQUEST['beFraisTrans'];
-    $oBe->be_com = $_REQUEST['beCom'];
-    $oBe->be_infos_trans = $_REQUEST['beInfosTrans'];
+    try {
+        //Instanciation de la connection
+        $cnx = Connection::getConnection();
+
+        //Démarrage de la transaction
+        $cnx->beginTransaction();
+
+        //Création du bon d'entrée
+        $oBe = new BonEntree();
+        //$oBe->cpt_id = $_REQUEST['cptId'];
+        $oBe->be_lbl = $_REQUEST['beLbl'];
+        $oBe->be_date = $_REQUEST['beDate'];
+        $oBe->be_fact_num = $_REQUEST['beFactNum'];
+        $oBe->be_frais_douane = $_REQUEST['beFraisDouane'];
+        $oBe->be_frais_bancaire = $_REQUEST['beFraisBancaire'];
+        $oBe->be_frais_trans = $_REQUEST['beFraisTrans'];
+        $oBe->be_com = $_REQUEST['beCom'];
+        $oBe->be_info_trans = $_REQUEST['beInfosTrans'];
+        $oBe->be_total = $_REQUEST['beTotal'];
+        
+        //Insert du bon
+        $resBe = BonEntreeManager::addBonEntree($oBe);
+        
+        //On récupére l'id du bon d'entrée inséré
+        $idBe = Connection::dernierId();
+
+        //-----------------Gestion des lignes du formulaire-------------------------
+        //Création des tableaux contenant toutes les informations
+        //Un tableau par type de champs
+        //Tableaux pour la table be_ligne
+        $tBeligPu = $_REQUEST['beligPu'];
+        $tBeligCuAchat = $_REQUEST['beligCuAchat'];
+        $tBeligFb = $_REQUEST['beligFb'];
+        $tBeligFt = $_REQUEST['beligFt'];
+        $tBeligDd = $_REQUEST['beligDd'];
+        $tBeligTaxe = $_REQUEST['beligTaxe'];
+
+        //Tableaux pour la table ligne
+        $tLigQte = $_REQUEST['ligQte'];
+        $tLigComDep = $_REQUEST['ligComDep'];
+        $tLigCom = $_REQUEST['ligCom'];
+
+        //Tableaux pour la table lot
+        $tLotIdProducteur = $_REQUEST['lotIdProducteur'];
+        $tLotDlc = $_REQUEST['lotDlc'];
+
+        //Tableau pour la référence
+        $tRefId = $_REQUEST['refId'];
+
+        //Tableau de ligne de formulaire
+        $tLigneForm = [
+            'belig_pu' => $tBeligPu,
+            'belig_cu_achat' => $tBeligCuAchat,
+            'belig_fb' => $tBeligFb,
+            'belig_ft' => $tBeligFt,
+            'belig_dd' => $tBeligDd,
+            'belig_taxe' => $tBeligTaxe,
+            'lig_qte' => $tLigQte,
+            'lig_com_dep' => $tLigComDep,
+            'lig_com' => $tLigCom,
+            'lot_id_producteur' => $tLotIdProducteur,
+            'lot_dlc' => $tLotDlc,
+            'lot_qt_init' => $tLigQte,
+            'lot_qt_stock' => $tLigQte,
+            'ref_id' => $tRefId
+        ];
+
+        //Boucle pour insérer les lignes
+        //On ignore la première ligne, c'est le squelette de construction 
+        //pour l'ajout de ligne dans le bon
+        //La limite étant le nombre de ligne remplie on prend ref_id comme témoin
+        for ($i = 1; $i < (count($tLigneForm['ref_id'])); $i++) {
+
+            //on hydrate un objet lot
+            $oLot = new Lot();
+            $oLot->ref_id = $tLigneForm['ref_id'][$i];
+            $oLot->lot_id_producteur = $tLigneForm['lot_id_producteur'][$i];
+            $oLot->lot_dlc = $tLigneForm['lot_dlc'][$i];
+            $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
+            $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
             
-    //Insert du bon
-    $resBe = BonEntreeManager::addBonEntree($oBe);
-    
-    //On récupére l'id du bon d'entrée inséré
-    $idBe = Connection::dernierId();
-    
-    //-----------------Gestion des lignes du formulaire-------------------------
-    //Création des tableaux contenant toutes les informations
-    //Un tableau par type de champs
+            //Insert du lot dans la table lot
+            $resLot = LotManager::addLot($oLot);
 
-    //Tableaux pour la table be_ligne
-    $tBeligPu = $_REQUEST['beligPu'];
-    $tBeligCuAchat = $_REQUEST['beligCuAchat'];
-    $tBeligFb = $_REQUEST['beligFb'];
-    $tBeligFt = $_REQUEST['beligFt'];
-    $tBeligDd = $_REQUEST['beligDd'];
-    $tBeligLbl = $_REQUEST['beligLbl'];
-    $tBeligTaxe = $_REQUEST['beligTaxe'];
+            //On récupére l'id du lot inséré
+            $idLot = Connection::dernierId();
 
-    //Tableaux pour la table ligne
-    $tLigQte = $_REQUEST['ligQte'];
-    $tLigComDep = $_REQUEST['ligComDep'];
-    $tLigCom = $_REQUEST['ligCom'];
-    
-    //Tableaux pour la table lot
-    $tLotIdProducteur = $_REQUEST['lotIdProducteur'];
-    $tLotDlc = $_REQUEST['lotDlc'];
-    
-    //Tableau pour la référence
-    $tRefId = $_REQUEST['refId'];
-    
+            //On hydrate un objet Ligne
+            $oLigne = new Ligne();
+            $oLigne->lot_id = $idLot;
+            $oLigne->lig_qte = $tLigneForm['lig_qte'][$i];
+            $oLigne->lig_com_dep = $tLigneForm['lig_com_dep'][$i];
+            $oLigne->lig_com = $tLigneForm['lig_com'][$i];
+
+            //Insert de la ligne dans la table ligne
+            $resLigne = LigneManager::addLigne($oLigne);
+
+            //On récupére l'id de la ligne inséré
+            $idLigne = Connection::dernierId();
+
+            //On hydrate un objet beligne
+            $oBeLigne = new BeLigne();
+
+            //On hydrate l'objet BeLigne
+            $oBeLigne->lig_id = $idLigne;
+            $oBeLigne->be_id = $idBe;
+            $oBeLigne->belig_pu = $tLigneForm['belig_pu'][$i];
+            $oBeLigne->belig_cu_achat = $tLigneForm['belig_cu_achat'][$i];
+            $oBeLigne->belig_fb = $tLigneForm['belig_fb'][$i];
+            $oBeLigne->belig_ft = $tLigneForm['belig_ft'][$i];
+            $oBeLigne->belig_dd = $tLigneForm['belig_dd'][$i];
+            $oBeLigne->belig_taxe = $tLigneForm['belig_taxe'][$i];
+
+            //on insert l'objet BeLigne dans la table be_ligne
+            $resBeLigne = BeLigneManager::addBeLigne($oBeLigne);
+
+        }
+        $cnx->commit();
+    } catch (MySQLException $e) {
+        $cnx->rollback();
+        throw $e;
+    }
 }

@@ -115,6 +115,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
    <li><a href='#'><span>Alertes</span></a></li>
     <li><a href='#'><span>Consulter</span></a>
       <ul>
+          <li class='has-sub'><a href='index.php?action=be'><span>Bon entré</span></a>
+             <ul>
+               <li><a href='index.php?action=be_add'><span>Ajouter</span></a></li>
+               <li><a href='index.php?action=be_list'><span>Liste</span></a></li>
+            </ul>
+         </li>
          <li class='has-sub'><a href='index.php?action=pays'><span>Pays</span></a>
              <ul>
                <li><a href='index.php?action=pays_add'><span>Ajouter</span></a></li>

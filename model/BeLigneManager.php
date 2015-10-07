@@ -69,25 +69,25 @@ class BeLigneManager {
         try {
 
             $tParam = array(
+                $oBeLigne->lig_id,
                 $oBeLigne->be_id,
                 $oBeLigne->belig_pu,
                 $oBeLigne->belig_cu_achat,
                 $oBeLigne->belig_fb,
                 $oBeLigne->belig_ft,
                 $oBeLigne->belig_dd,
-                $oBeLigne->belig_lbl,
                 $oBeLigne->belig_taxe
             );
 
             $sql = "INSERT INTO be_ligne ("
+                    . " lig_id, "
                     . " be_id, "
                     . " belig_pu, "
                     . " belig_cu_achat, "
                     . " belig_fb, "
                     . " belig_ft, "
                     . " belig_dd, "
-                    . " belig_lbl, "
-                    . " belig_taxe "
+                    . " belig_taxe) "
                     . " VALUES(?,?,?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
@@ -172,7 +172,7 @@ class BeLigneManager {
      * @return int 
      * nombre de ligne impacté
      */
-    public static function delGamme($id) {
+    public static function delBeLigne($id) {
         try {
             $tParam = array(
                 $id

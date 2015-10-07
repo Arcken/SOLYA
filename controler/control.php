@@ -73,6 +73,10 @@ else {
             case "be_add":
                 require $path .'/controler/control_be_add.php';
                 break;
+            
+            case "be_list":
+                require $path .'/controler/control_be_list.php';
+                break;
 
 //-------------------------------Fiche article----------------------------------
             //Ajout de fiche article
@@ -244,6 +248,10 @@ else {
 
             case "be_add":
                 require $path . '/view/view_bon_entree.php';
+                break;
+            
+            case "be_list":
+                require $path . '/view/view_bon_entree_list.php';
                 break;
 
 //------------------------------ Fiche article----------------------------------

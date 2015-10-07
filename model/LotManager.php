@@ -80,7 +80,7 @@ class LotManager {
      * @return string
      * Renvoie le nombre de ligne insérée
      */
-    public static function addGamme($oLot) {
+    public static function addLot($oLot) {
 
         try {
                 $tParam = [
@@ -97,7 +97,7 @@ class LotManager {
                         . " lot_dlc, "
                         . " lot_qt_stock, "
                         . " lot_qt_init) "
-                        . " VALUES(?,?,?,?,?,?)";
+                        . " VALUES(?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
                 

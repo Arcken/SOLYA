@@ -23,7 +23,8 @@ class BonEntreeManager {
 
             $sql = 'SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,'
                     . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
-                    . 'be_com, be_info_trans FROM bon_entree';
+                    . 'be_com, be_info_trans, be_total '
+                    . 'FROM bon_entree';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
             throw $e;
@@ -48,7 +49,8 @@ class BonEntreeManager {
 
             $sql = 'SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,'
                     . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
-                    . 'be_com, be_info_trans FROM bon_entree '
+                    . 'be_com, be_info_trans, be_total '
+                    . 'FROM bon_entree '
                     . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite . ' , ' . $nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -69,6 +71,7 @@ class BonEntreeManager {
         try {
 
             $tParam = array(
+                $oBonEntree->be_id,
                 $oBonEntree->cpt_id,
                 $oBonEntree->be_lbl,
                 $oBonEntree->be_date,
@@ -77,20 +80,23 @@ class BonEntreeManager {
                 $oBonEntree->be_frais_bancaire,
                 $oBonEntree->be_frais_trans,
                 $oBonEntree->be_com,
-                $oBonEntree->be_infos_trans
+                $oBonEntree->be_info_trans,
+                $oBonEntree->be_total
             );
 
-            $sql = "INSERT INTO gamme ("
-                    . " cpt_id, "
-                    . " be_lbl, "
-                    . " be_date, "
-                    . " be_fact_num, "
-                    . " be_frais_douane, "
-                    . " be_frais_bancaire, "
-                    . " be_frais_trans, "
-                    . " be_frais_com, "
-                    . " be_info_trans "
-                    . " VALUES(?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO bon_entree ("
+                    . "be_id, "
+                    . "cpt_id, "
+                    . "be_lbl, "
+                    . "be_date, "
+                    . "be_fact_num, "
+                    . "be_frais_douane, "
+                    . "be_frais_bancaire, "
+                    . "be_frais_trans, "
+                    . "be_com, "
+                    . "be_info_trans, "
+                    . "be_total) "
+                    . "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
             
@@ -116,10 +122,11 @@ class BonEntreeManager {
             $tParam = array(
                 $id
             );
-            $sql = "SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,'
-                    . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
-                    . 'be_com, be_info_trans FROM bon_entree '
-                    . 'WHERE be_id =? FOR UPDATE";
+            $sql = "SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,
+                    be_frais_douane, be_frais_bancaire, be_frais_trans, 
+                    be_com, be_info_trans, be_total
+                    FROM bon_entree 
+                    WHERE be_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
@@ -148,6 +155,7 @@ class BonEntreeManager {
                 $oBonEntree->be_frais_trans,
                 $oBonEntree->be_com,
                 $oBonEntree->be_infos_trans,
+                $oBonEntree->be_total,
                 $oBonEntree->be_id
             );
 
@@ -161,6 +169,7 @@ class BonEntreeManager {
                     . " be_frais_trans = ?, "
                     . " be_frais_com = ?, "
                     . " be_info_trans = ? "
+                    . " be_total = ? "
                     . "WHERE be_id =?";
 
             $result = Connection::request(2, $sql, $tParam);

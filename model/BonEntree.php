@@ -9,8 +9,8 @@
 class BonEntree {
 
     //Données membres
-    public $be_id = '';
-    public $cpt_id = '';
+    public $be_id = NULL;
+    public $cpt_id = NULL;
     public $be_lbl = '';
     public $be_date = '';
     public $be_fact_num = '';
@@ -18,7 +18,8 @@ class BonEntree {
     public $be_frais_bancaire = '';
     public $be_frais_trans = '';
     public $be_com = '';
-    public $be_infos_trans = '';
+    public $be_info_trans = '';
+    public $be_total = '';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

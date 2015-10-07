@@ -53,9 +53,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="text" 
                        value="0">
                 <br>
-                <label for="beFraisTransport"> Frais de transport </label><br>
-                <input name="beFraisTransport" 
-                       id="beFraisTransport" 
+                <label for="beFraisTrans"> Frais de transport </label><br>
+                <input name="beFraisTrans" 
+                       id="beFraisTrans" 
                        placeholder="description" 
                        type="text" 
                        value="0">
@@ -325,10 +325,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        onclick='addLigne("beTable", "idLigne")'>
             </div>
             <div>
-                <label for="totalBe">Total</label>
+                <label for="beTotal">Total</label>
                 <input type="text" 
-                       name="totalBe" 
-                       id="totalBe"
+                       name="beTotal" 
+                       id="beTotal"
                        value="0">
             </div>
             <div class="bas">

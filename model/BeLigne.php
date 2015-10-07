@@ -15,7 +15,6 @@ class BeLigne {
     public $belig_fb = '';
     public $belig_ft = '';
     public $belig_dd = '';
-    public $belig_lbl = '';
     public $belig_taxe = '';
     
     /**

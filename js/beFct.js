@@ -121,7 +121,7 @@ function beCalcul() {
     console.log("frais douane: " + $fDouaneVal);
     $fBancaireVal = parseFloat($('[id="beFraisBancaire"]').val());
     console.log("frais bancaire: " + $fBancaireVal);
-    $fTransportVal = parseFloat($('[id="beFraisTransport"]').val());
+    $fTransportVal = parseFloat($('[id="beFraisTrans"]').val());
     console.log("frais transport: " + $fTransportVal);
 
     //On récupère la quantité totale d'article
@@ -143,9 +143,9 @@ function beCalcul() {
     $ftUniteVal = parseFloat($fTransportVal / $qtTotalVal);
     console.log("Frais transport par unité: " + $ftUniteVal);
     
-    //On récupére l'input total be et on met sa valeur à zéro pour éviter 
+    //On récupére l'input beTotal et on met sa valeur à zéro pour éviter 
     //des erreurs
-    $totalBe = $('[id="totalBe"]');
+    $totalBe = $('[id="beTotal"]');
     $totalBe.val(0);
     
     //Pour chaque balise tr dont l'id est différent de celle des titres 
