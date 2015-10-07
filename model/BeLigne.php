@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class BonEntree {
+class BeLigne {
 
     public $lig_id = '';
     public $be_id = '';
@@ -17,7 +17,6 @@ class BonEntree {
     public $belig_dd = '';
     public $belig_lbl = '';
     public $belig_taxe = '';
-    public $belig_dlc_dluo = '';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

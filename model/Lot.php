@@ -16,7 +16,7 @@ class Lot {
     public $lot_id='';
     public $ref_id='';
     public $lot_id_producteur='';
-    public $lot_date_max='';
+    public $lot_dlc='';
     public $lot_qt_stock='';
     public $lot_qt_init ='';
     

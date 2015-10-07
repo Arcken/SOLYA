@@ -22,8 +22,8 @@ class BeLigneManager {
         try {
 
             $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
-                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe, '
-                    . 'belig_dlc_dluo FROM be_ligne';
+                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe '
+                    . 'FROM be_ligne';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
             throw $e;
@@ -47,8 +47,8 @@ class BeLigneManager {
         try {
 
             $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
-                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe, '
-                    . 'belig_dlc_dluo FROM be_ligne '
+                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe '
+                    . 'FROM be_ligne '
                     . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite . ' , ' . $nombre;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -76,8 +76,7 @@ class BeLigneManager {
                 $oBeLigne->belig_ft,
                 $oBeLigne->belig_dd,
                 $oBeLigne->belig_lbl,
-                $oBeLigne->belig_taxe,
-                $oBeLigne->belig_dlc_dluo,
+                $oBeLigne->belig_taxe
             );
 
             $sql = "INSERT INTO be_ligne ("
@@ -88,9 +87,8 @@ class BeLigneManager {
                     . " belig_ft, "
                     . " belig_dd, "
                     . " belig_lbl, "
-                    . " belig_taxe, "
-                    . " belig_dlc_dluo "
-                    . " VALUES(?,?,?,?,?,?,?,?,?)";
+                    . " belig_taxe "
+                    . " VALUES(?,?,?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
@@ -116,8 +114,8 @@ class BeLigneManager {
                 $id
             );
             $sql = "SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
-                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe, '
-                    . 'belig_dlc_dluo FROM be_ligne '
+                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe '
+                    . 'FROM be_ligne '
                     . 'WHERE lig_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
@@ -146,7 +144,6 @@ class BeLigneManager {
                 $oBeLigne->belig_dd,
                 $oBeLigne->belig_lbl,
                 $oBeLigne->belig_taxe,
-                $oBeLigne->belig_dlc_dluo,
                $oBeLigne->be_id
             );
 
@@ -158,8 +155,7 @@ class BeLigneManager {
                     . " belig_ft = ?, "
                     . " belig_dd = ?, "
                     . " belig_lbl = ?, "
-                    . " belig_taxe = ?, "
-                    . " belig_dlc_dluo = ? "
+                    . " belig_taxe = ? "
                     . "WHERE lig_id =?";
 
             $result = Connection::request(2, $sql, $tParam);

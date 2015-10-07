@@ -290,8 +290,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                         <td>
                             <input type="date" 
-                                   name="beligDlcDluo[NID]" 
-                                   id="beligDlcDluoNID">
+                                   name="lotDlc[NID]" 
+                                   id="lotDlcNID">
                         </td>
                         <td >
                             <textarea name="ligComDep[NID]" 

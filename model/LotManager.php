@@ -3,7 +3,6 @@
 /**
  * Description of LotManager
  *
- * @author Olivier
  */
 class LotManager {
    
@@ -39,7 +38,7 @@ class LotManager {
         $sql= "SELECT lot_id,"
                 . "ref_id,"
                 . "lot_id_producteur,"
-                . "lot_date_max,"
+                . "lot_dlc,"
                 . "lot_qt_stock,"
                 . "lot_qt_init "
                 . "FROM lot "
@@ -60,7 +59,7 @@ class LotManager {
             $tParam = array($refId);
 
             $sql= "SELECT lot_id,"
-                        . "lot_date_max,"
+                        . "lot_dlc,"
                         . "lot_qt_stock,"
                         . "lot_qt_init "
                         . "FROM lot "
@@ -73,4 +72,38 @@ class LotManager {
         }
         return $result;
         }
+        
+        /**
+     * Insert une enregistrement dans la table 
+     * @param $oLot
+     * attend un objet de la classe Lot
+     * @return string
+     * Renvoie le nombre de ligne insérée
+     */
+    public static function addGamme($oLot) {
+
+        try {
+                $tParam = [
+                    $oLot->ref_id,
+                    $oLot->lot_id_producteur,
+                    $oLot->lot_dlc,
+                    $oLot->lot_qt_stock,
+                    $oLot->lot_qt_init
+                ];
+
+                $sql = "INSERT INTO lot ("
+                        . " ref_id, "
+                        . " lot_id_producteur, "
+                        . " lot_dlc, "
+                        . " lot_qt_stock, "
+                        . " lot_qt_init) "
+                        . " VALUES(?,?,?,?,?,?)";
+
+                $result = Connection::request(2, $sql, $tParam);
+                
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }
