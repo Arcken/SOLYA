@@ -9,9 +9,53 @@
 /**
  * Description of LigneManager
  *
- * @author Olivier
  */
 class LigneManager {
+    
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * 
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getAllLignes() {
+
+        try {
+
+            $sql = 'SELECT lig_id, lot_id, lig_qte, lig_com_dep, lig_com '
+                    . 'FROM ligne';
+            $result = Connection::request(1, $sql);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Select for update d'un enregistrement selon l'id
+     * @param $lotId
+     * attend l'id de l'enregistrement
+     * @return objet
+     * retourne un objet
+     */
+    public static function getLigneDetailForUpd($lotId) {
+
+        try {
+
+            $tParam = array(
+                $lotId
+            );
+            $sql = 'SELECT lig_id, lot_id, lig_qte, lig_com_dep, lig_com '
+                    . 'FROM ligne '
+                    . 'WHERE lig_id =? FOR UPDATE';
+            $result = Connection::request(0, $sql, $tParam);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
     
     /**
      * Ajoute un enregistrement dans la table Ligne

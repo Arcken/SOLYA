@@ -32,7 +32,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $oBe->be_frais_bancaire = $_REQUEST['beFraisBancaire'];
         $oBe->be_frais_trans = $_REQUEST['beFraisTrans'];
         $oBe->be_com = $_REQUEST['beCom'];
-        $oBe->be_info_trans = $_REQUEST['beInfosTrans'];
+        $oBe->be_info_trans = $_REQUEST['beInfoTrans'];
         $oBe->be_total = $_REQUEST['beTotal'];
         
         //Insert du bon

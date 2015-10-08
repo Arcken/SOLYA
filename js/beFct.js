@@ -1,7 +1,6 @@
 
 
-//Variable d'incrément pour addLigne
-nRowCount = 1;
+
 
 /**
  * Fonction d'ajout de ligne pour le bon d'entrée
@@ -13,7 +12,8 @@ nRowCount = 1;
  * @returns {undefined}
  */
 function addLigne($table) {
-    
+    nRowCount++;
+    alert("rowcount " + nRowCount);
     //On récupére le squelette du code entre le balises <tr id=idLigne> et </tr>
     $ligne = $('#idLigne').html();
     console.log($ligne);
@@ -27,7 +27,8 @@ function addLigne($table) {
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
     console.log($ligne);
     //on incrémente le compteur
-    nRowCount++;
+    
+    alert("rowcount " + nRowCount);
 }
 
 //-----------------calcul bon entree------------------

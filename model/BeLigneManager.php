@@ -30,6 +30,29 @@ class BeLigneManager {
         }
         return $result;
     }
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * selon le beId
+     * @param $beId
+     * Id du bon d'entré
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getAllBesLignesBeId($beId) {
+
+        try {
+
+            $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
+                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe '
+                    . 'FROM be_ligne '
+                    . 'WHERE be_id = ' . $beId;
+            $result = Connection::request(1, $sql);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 
     /**
      * Retourne tous les enregistrements de la table avec limite définie
@@ -99,25 +122,24 @@ class BeLigneManager {
     }
 
     /**
-     * Select for update d'un enregistrement selon l'id
-     * 
-     * @param id
-     * attend l'id de l'enregistrement
-     * @return objet
-     * retourne un objet
+     * Select for update des enregistrements selon l'id du bon d'entrée 
+     * @param $beId
+     * attend l'id du bon d'entrée
+     * @return []objet
+     * retourne un tableau d'objet
      */
-    public static function getBeLigneDetailUpd($id) {
+    public static function getBesLignesDetailForUpd($beId) {
 
         try {
 
             $tParam = array(
-                $id
+                $beId
             );
-            $sql = "SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
-                    . 'belig_ft, belig_dd, belig_lbl, belig_taxe '
+            $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
+                    . 'belig_ft, belig_dd, belig_taxe '
                     . 'FROM be_ligne '
-                    . 'WHERE lig_id =? FOR UPDATE";
-            $result = Connection::request(0, $sql, $tParam);
+                    . 'WHERE be_id =? FOR UPDATE';
+            $result = Connection::request(1, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
         }

@@ -118,7 +118,7 @@ class BonEntreeManager {
      * @return objet
      * retourne un objet
      */
-    public static function getBonEntreeDetailUpd($id) {
+    public static function getBonEntreeDetailForUpd($id) {
 
         try {
 

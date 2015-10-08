@@ -31,7 +31,14 @@ class LotManager {
         return $result;
     }
     
-    public static function getLotForUpdate($lotId){
+    /** 
+     * Select for update d'un enregistrement selon l'id
+     * @param $lotId
+     * Attend l'id du lot
+     * @return objet
+     * retourne un objet
+     */
+    public static function getLotForUpd($lotId){
         try{
         $tParam = array($lotId);
         
