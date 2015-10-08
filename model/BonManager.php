@@ -17,30 +17,35 @@ class BonManager {
      * Il est possible cependant de modifier
      * le résultats attendu grace aux paramètres :
      * 
-     * @param $limit par défaut 15
-     * 
-     * @param $nombre par défaut 0
-     * @param orderBy par défaut ref_id DESC
-     * @return Reference[]
+     * @param orderBy par défaut ref_id 
+     * @param $tri par défaut ASC 
+     * @param $limite par défaut 0
+     * @param $nombre par défaut 15
+     * @return Bon []
      */
-    public static function getAllBon($limit=15,
-                                     $nombre=0,
-                                     $orderby="ref_id") {
+    public static function getAllBon($limite=0,
+                                     $nombre=15,
+                                     $orderby="ref_id",
+                                     $tri="ASC") {
         try {
 
             $tParam = array(
+                $oBon->bon_id,
                 $oBon->doclbl_id,
                 $oBon->bon_fact_num,
                 $oBon->bon_date,
                 $oBon->bon_sortie_assoc
             );
 
-            $sql = "INSERT INTO bon("
-                    . "doclbl_id,"
-                    . "bon_fact_num,"
-                    . "bon_date,"
-                    . "bon_sortie_assoc) "
-                    . "VALUES(?,?,?,?)";
+            $sql = "SELECT bon_id "
+                         ."doclbl_id,"
+                         ."bon_fact_num,"
+                         ."bon_date,"
+                         ."bon_sortie_assoc FROM bon "
+                         ."ORDER BY ".$orderby 
+                         ." " . $tri 
+                         ." LIMIT " 
+                         .$limite . " , " . $nombre;
 
           $result = Connection::request(2, $sql, $tParam);
             

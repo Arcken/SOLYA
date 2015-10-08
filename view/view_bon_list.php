@@ -5,42 +5,59 @@
 
     <div class="corps">
         <div class="list">
-            <h2> Liste des éléments </h2>
-            <input type="button" onclick='location.href = "index.php?action=ga_add"' value="Ajouter">
+            <h2> Liste des bons de sortie et de retour :  </h2>
+ 
             <table>
                 <tr>
-                    <th>
+                    <th class="colTitle"
+                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                        ID :
                     </th>
-                    <th>
+                    <th class="colTitle"
+                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                        TYPE :
                     </th>      
-                    <th>
+                    <th class="colTitle"
+                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                        N°FACTURE : 
                     </th>  
-                    <th>
+                    <th class="colTitle"
+                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                        DATE :
                     </th>  
-                    <th>
+                    <th class="colTitle"
+                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                        BON SORTIE ASSOCIE :
                     </th>  
                 </tr>
                 <?php
-                if ($resAllGa != 0 && is_array($resAllGa)) {
-                    foreach ($resAllGa as $gamme) {
+                if (is_array($resAllBon)) {
+                    foreach ($resAllBon as $oBon) {
                         ?>
                         <tr>
                             <td style="border-right: solid 2px black;">
-                                <?php echo $gamme->ga_lbl ?>
+                                <?php echo $oBon->bon_id ?>
                             </td>
-                            <td>
-                                <?php echo $gamme->ga_abv ?>
+                            <td><?php foreach($toDocLbl as $oDocLbl){
+                                        if($oDocLbl->doclbl_id === $oBon->doclbl_id){
+                                            echo $oDocLbl->doclbl_lbl ;
+                                        }
+                            }?>
+                            </td>
+                            <td style="border-right: solid 2px black;">
+                                <?php echo $oBon->num_fact ?>
+                            </td>
+                            <td style="border-right: solid 2px black;">
+                                <?php echo $oBon->bon_date ?>
+                            </td>
+                            <td style="border-right: solid 2px black;">
+                                <?php echo $oBon->bon_sortie_assoc ?>
                             </td>
                             <td><img src="img/icon/modify.png" alt="" title="Modifier"
-                                     onclick='location.href = "index.php?action=ga_detail&gaId=<?php echo $gamme->ga_id ?>"'/></td>
+                                     onclick='location.href = 
+                                                "index.php?action=bon_detail&bonId=".
+                                                "<?php echo $oBon->bon_id ?>"'/></td>
 
-                            <td><img src="img/icon/delete.png" alt="" title="Supprimer"
-                                     onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_del")'/></td>
 
                         </tr>
 

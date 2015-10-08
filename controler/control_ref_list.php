@@ -1,4 +1,8 @@
 <?php
+/**
+ * Sous controleur list référence
+ * 
+ */
 
 $sPageTitle = "Liste des références";
 
@@ -25,18 +29,18 @@ $iTotal = Tool::getCountTable('reference');
     if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
         
         $orderby = $_REQUEST['orderby'];
-        $toRef = ReferenceManager::getAllReferences($iNbPage, $limite, $orderby);
+        $toRef = ReferenceManager::getAllReferences($limite,$iNbPage, $orderby);
         
     } else {
         
-        $toRef = ReferenceManager::getAllReferences($iNbPage, $limite);
+        $toRef = ReferenceManager::getAllReferences($limite,$iNbPage);
     }
     
 } catch (MySQLException $e){
     
     switch ($resEr){
         default:
-            $msg ="Oups! Une erreur est survenue : $resEr";
+            $msg ="<p class='erreur'> Oups! Une erreur est survenue : $resEr </p>";
             Tool::addMsg($msg);
         break;
     }

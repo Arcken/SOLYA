@@ -13,20 +13,21 @@
 class ReferenceManager {
 
     /**
-     * Retourne tous les enregistrements de la table Référence
+     * Retourne les enregistrements de la table Référence
      * par défaut la table remonte les 15 premier résultats.
      * Il est possible cependant de modifier
      * le résultats attendu grace aux paramètres :
      * 
-     * @param $limit par défaut 15
-     * 
-     * @param $nombre par défaut 0
-     * @param orderBy par défaut ref_id DESC
+     * @param $limit par défaut 0
+     * @param $nombre par défaut 15
+     * @param $orderBy par défaut ref_id 
+     * @param $tri par défaut DESC
      * @return Reference[]
      */
-    public static function getAllReferences($limit=15,
-                                            $nombre=0,
-                                            $orderby="ref_id") {
+    public static function getAllReferences($limit=0,
+                                            $nombre=15,
+                                            $orderby="ref_id",
+                                            $tri='DESC') {
 
         try {
 
@@ -53,8 +54,8 @@ class ReferenceManager {
                             ref_photos,
                             ref_photos_pref 
                             FROM reference " 
-                            ."ORDER BY ".$orderby." DESC "
-                            ."LIMIT ".$nombre.",".$limit."";
+                            ."ORDER BY ".$orderby." ".$tri." "
+                            ."LIMIT ".$limit.",".$nombre."";
 
             $result = Connection::request(1, $sql);
             
@@ -74,7 +75,7 @@ class ReferenceManager {
      * @return int
      * Retourne le nombre d'insert
      */
-    public static function insReference($oReference) {
+    public static function addReference($oReference) {
 
         try {
 

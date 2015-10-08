@@ -15,7 +15,7 @@ class DocLibelle {
     //Données membres
     public $doclbl_id='';
     public $doclbl_lbl='';
-    public $doclbl_signe='';
+    
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs
      * constructeurs avec des paramètres différents.

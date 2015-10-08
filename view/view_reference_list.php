@@ -11,20 +11,21 @@
                 <tr> <!--En-tête du tableau-->
                     <th class="colTitle" id="colImg">Image</th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_code');">
+                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                         Code référence
                     </th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_lbl');">
+                        onclick="orderby('<?php echo $sAction?>','ref_lbl','DESC');">
                         Libéllé
                     </th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','fiart_id');">
+                        onclick="orderby('<?php echo $sAction?>','fiart_id','DESC');">
                         Fiche article associé 
                     </th>
-                    <th class="colTitle">Marque</th>
+                    <th class="colTitle"
+                        onclick="orderby('<?php echo $sAction?>','ref_mrq','DESC');">Marque</th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_poids_net');">
+                        onclick="orderby('<?php echo $sAction?>','ref_poids_net','DESC');">
                         Poids net
                     </th>
                     <th class="colTitle" 
@@ -41,24 +42,24 @@
                     <th class="colTitle">Marge Pro</th>
                     <th class="colTitle">Coeff Pro</th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','tva_id');">
+                        onclick="orderby('<?php echo $sAction?>','tva_id','DESC');">
                         TVA
                     </th>
                     <th class="colTitle">Code Douanier</th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','dd_id');">
+                        onclick="orderby('<?php echo $sAction?>','dd_id','DESC');">
                         Droit de douane 
                     </th> 
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_emb_lbl');">
+                        onclick="orderby('<?php echo $sAction?>','ref_emb_lbl','DESC');">
                         Conditionnement
                     </th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_st_min');">
+                        onclick="orderby('<?php echo $sAction?>','ref_st_min','DESC');">
                         Stock Minimum 
                     </th>
                     <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_com');">
+                        onclick="orderby('<?php echo $sAction?>','ref_com','DESC');">
                         Commentaire 
                     </th>
                     <th></th>

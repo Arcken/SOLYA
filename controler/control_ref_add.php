@@ -68,7 +68,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
             Tool::printAnyCase($oRef);
 
-            $resAddRef = ReferenceManager::insReference($oRef);
+            $resAddRef = ReferenceManager::addReference($oRef);
             $idRef = Connection::dernierId();
 
             if (isset($_REQUEST['pvePer']) && !empty($_REQUEST['pvePer']) ||
