@@ -68,6 +68,14 @@ else {
                 require $path.'/controler/control_bon_add.php';
                 break;
             
+            case "bon_list":
+                require $path.'/controler/control_bon_list.php';
+                break;
+            
+            case "bon_detail":
+                require $path.'/controler/control_bon_detail.php';
+                break;
+            
 //-------------------------------Bon entrée-------------------------------------
 
             case "be_add":
@@ -76,6 +84,10 @@ else {
             
             case "be_list":
                 require $path .'/controler/control_be_list.php';
+                break;
+            
+            case "be_detail":
+                require $path .'/controler/control_be_detail.php';
                 break;
 
 //-------------------------------Fiche article----------------------------------
@@ -244,10 +256,22 @@ else {
                 require $path . '/view/view_bon.php';
                 break;
             
+            case "bon_detail":
+                require $path . '/view/view_bon_ru.php';
+                break;
+            
+            case "bon_list":
+                require $path . '/view/view_bon_list.php';
+                break;
+            
 //-------------------------------Bon entrée-------------------------------------
 
             case "be_add":
                 require $path . '/view/view_bon_entree.php';
+                break;
+            
+            case "be_detail":
+                require $path . '/view/view_bon_entree_ru.php';
                 break;
             
             case "be_list":

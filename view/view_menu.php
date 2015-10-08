@@ -40,6 +40,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
             <ul>
                <li><a href='#' ><span>Entrée</span></a></li>
                <li><a href='index.php?action=bon_list'><span>Sortie/Retour</span></a></li>
+               <li><a href='index.php?action=bon_detail'><span>Modif/Détail</span></a></li>
                <li><a href='#'><span>Inventaire</span></a></li>
             </ul>
          </li>
@@ -118,6 +119,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
              <ul>
                <li><a href='index.php?action=be_add'><span>Ajouter</span></a></li>
                <li><a href='index.php?action=be_list'><span>Liste</span></a></li>
+               <li><a href='index.php?action=be_detail'><span>Détail</span></a></li>
             </ul>
          </li>
          <li class='has-sub'><a href='index.php?action=pays'><span>Pays</span></a>
