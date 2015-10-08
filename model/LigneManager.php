@@ -58,6 +58,37 @@ class LigneManager {
     }
     
     /**
+     * Modifie un enregistrement dans la table Ligne
+     * @param $oLigne
+     * Attend un objet ligne
+     */
+    public static function updLigne($oLigne) {
+        try {
+            
+            $tParam = array(
+                $oLigne->lot_id,
+                $oLigne->lig_qte,
+                $oLigne->lig_com,
+                $oLigne->lig_com_dep,
+                $oLigne->lig_id
+            );
+
+            $sql = "UPDATE ligne SET "
+                    . "lot_id = ?, "
+                    . "lig_qte = ?, "
+                    . "lig_com = ?, "
+                    . "lig_com_dep = ? "
+                    . "WHERE lig_id = ?";
+
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    /**
      * Ajoute un enregistrement dans la table Ligne
      * @param type $oLigne
      */

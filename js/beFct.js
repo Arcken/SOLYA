@@ -1,7 +1,4 @@
 
-
-
-
 /**
  * Fonction d'ajout de ligne pour le bon d'entrée
  * On prend tous ce qui se trouvent entre <tr id=beligne> et </tr>

@@ -10,7 +10,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="col50">
-
+                
                 <label for="beFactNum"> Référence de facture </label><br>
                 <input name="beFactNum" 
                        id="beFactNum"
