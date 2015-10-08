@@ -159,6 +159,14 @@ function beCalcul() {
         //On récupére la quantité descendant de ce tr
         $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
         console.log($idLigne + ": qtLigne " + $ligneQtVal);
+        
+        //On met à jour le champs poids
+        //poids unitaire
+        $lignePoidsUnitaire = $(this).find('[id^="refPoidsBrut"]')
+        //poids total
+        $lignePoids = $(this).find('[id^="totalPoids"]');
+        //calcul
+        $lignePoids.val(parseFloat($lignePoidsUnitaire.val()) * $ligneQtVal);
 
         //On récupére l'input de la case droit douane ligne
         //descendant de ce tr

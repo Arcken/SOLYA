@@ -160,13 +160,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="refId[NID]" 
                                    id="refIdNID"
                                    onblur='getReference("NID",
-                                                       "ref_id",
-                                                       "be")' min="0">
+                                                        "refIdNID",
+                                                        "ref_id",
+                                                        "be")' min="0">
                         </td>
                         <td class="beLigneCode">
                             <input type="text"
                                    name="refCode[NID]" 
-                                   id="refCodeNID">
+                                   id="refCodeNID"
+                                   onblur='getReference("NID",
+                                                        "refCodeNID",
+                                                        "ref_code",
+                                                        "be")'>
                         </td>
                         <td>
                             <textarea name="refLbl[NID]" 

@@ -182,7 +182,7 @@ function verifPass() { //appel dans view_utilisateur
  * @returns rien
  */
 function orderby($action, $champs, $ordre) { //appel partout
-    window.open('index.php?action=' + $action + '&tri='+ $ordre + '&orderby=' + $champs, '_self');
+    window.open('index.php?action=' + $action + '&tri=' + $ordre + '&orderby=' + $champs, '_self');
 }
 
 /**
@@ -358,37 +358,59 @@ function getPays() {
     );
 }
 
-
-function getReference($row, $champs, $form) {
-    $valInput = $("input[id='refId" + $row + "']");
-    console.log("valeur case refid: " + $valInput.val());
-    $textareaLblRef = $("textarea[id='refLbl" + $row + "']");
-    $inputTD = $("input[id='beligTauxDouane" + $row + "']");
-    console.log("valeur case lbl: " + $textareaLblRef.val());
+/**
+ * Fonction ajax qui recherche une référence selon un champs
+ * on spécifie le formulaire pour adapter la callback
+ * @param $row
+ * Ligne en cours du formulaire
+ * @param $source
+ * Id du champs source pour obtenir sa valeur
+ * @param $champs
+ * Champs pour la recherche
+ * @param $form
+ * Nom du formulaire
+ * @returns {undefined}
+ */
+function getReference($row, $source, $champs, $form) {
+    //On récupére la valeur de l'input
+    $valInput = $("input[id='" + $source + "']").val();
 
     $.getJSON(
             'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput.val()},
+            {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput},
     function (json) {
 
-        console.log("json: " + json);
-
         for (var key in json) {
-            console.log("champs : " + $champs);
-            console.log("formulaire : " + $form);
-            if ($champs == "ref_id" && $form == "be")
-                retourJsonRefid(key, json);
+            //Si le champs est refid et le formulaire appelant est le bon entrée
+            if ($champs == "ref_id" && $form == "be") {
+                //On récupére les blocs html à modifier
+                $inputRefCode = $("input[id='refCode" + $row + "']");
+                $textareaLblRef = $("textarea[id='refLbl" + $row + "']");
+                $inputRefPoidsBrut = $("input[id='refPoidsBrut" + $row + "']");
+                $inputTD = $("input[id='beligTauxDouane" + $row + "']");
 
+                //On assigne les valeurs récupérés par le json dans les blocs html
+                $inputRefCode.val(json[key].ref_code);
+                $textareaLblRef.val(json[key].ref_lbl);
+                $inputRefPoidsBrut.val(json[key].ref_poids_brut);
+                $inputTD.val(json[key].dd_taux);
+            }
+            if ($champs == "ref_code" && $form == "be") {
+                //On récupére les blocs html à modifier
+                $inputRefId = $("input[id='refId" + $row + "']");
+                $textareaLblRef = $("textarea[id='refLbl" + $row + "']");
+                $inputRefPoidsBrut = $("input[id='refPoidsBrut" + $row + "']");
+                $inputTD = $("input[id='beligTauxDouane" + $row + "']");
+
+                //On assigne les valeurs récupérés par le json dans les blocs html
+                $inputRefId.val(json[key].ref_id);
+                $textareaLblRef.val(json[key].ref_lbl);
+                $inputRefPoidsBrut.val(json[key].ref_poids_brut);
+                $inputTD.val(json[key].dd_taux);
+            }
         }
     }
     );
-}
-
-function retourJsonRefid(key, json) {
-    console.log('lbl' + json[key].ref_lbl);
-    $textareaLblRef.val(json[key].ref_lbl);
-    console.log('taux' + json[key].dd_taux);
-    $inputTD.val(json[key].dd_taux);
 }
 
 /**

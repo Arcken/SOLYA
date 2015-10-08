@@ -146,7 +146,8 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
                 //On écrit la requète en conséquence
                 $tab = array();
-                $requete = "SELECT  r.ref_id, r.ref_lbl,r.ref_code,d.dd_taux"
+                $requete = "SELECT  r.ref_id, r.ref_lbl, r.ref_code, "
+                        . " r.ref_poids_brut, d.dd_taux"
                         . " FROM reference r "
                         . " JOIN droit_douane d ON r.dd_id = d.dd_id "
                         . " WHERE r." . $criteria . " = '" . $param . "'";
