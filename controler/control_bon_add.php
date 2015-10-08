@@ -86,7 +86,7 @@ try {
                         //On récupère l'id de la ligne
                         $idLig = Connection::dernierId();
                         //On selectionne le lot à mettre à jour
-                        $oLot = LotManager::getLotForUpdate($oLig->lot_id);
+                        $oLot = LotManager::getLotForUpd($oLig->lot_id);
 
                         //On met à jour la qté stock lot
                         $lotCurQteStk = $oLot->lot_qt_stock;
@@ -114,7 +114,7 @@ try {
                     //Ajout du message de réussite
                     $msg = '<p class=\'info\'>' . date('H:i:s') . ' L\'enregistrement du bon numéro : '
                             . $idBon . ' de type sortie à été effectué avec succès</p>';
-                    Tool::addMsg($msg);
+                    
 
                     break;
                 //Cas des bons de retour
@@ -147,14 +147,14 @@ try {
                     //Création du "tableau de tableau" contenant toutes les informations 
                     $tabLotId = $_REQUEST['lotId'];
                     $tabLigQte = $_REQUEST['ligQte'];
-                    $tabBonLigDepot = $_REQUEST['bonligDepot'];
-                    $tabBonLigCom = $_REQUEST['bonligCom'];
+                    $tabLigDepot = $_REQUEST['ligDepot'];
+                    $tabLigCom = $_REQUEST['ligCom'];
 
                     $tabLigAdd = array(
                         'lot_id' => $tabLotId,
                         'lig_qte' => $tabLigQte,
-                        'lig_com' => $tabBonLigCom,
-                        'lig_com_dep' => $tabBonLigDepot);
+                        'lig_com' => $tabLigCom,
+                        'lig_com_dep' => $tabLigDepot);
 
 
                     //Toujours la même chose.
@@ -177,7 +177,7 @@ try {
                         //On récupère l'id de la ligne
                         $idLig = Connection::dernierId();
                         //On selectionne le lot à mettre à jour
-                        $oLot = LotManager::getLotForUpdate($oLig->lot_id);
+                        $oLot = LotManager::getLotForUpd($oLig->lot_id);
 
                         //On controle que la valeur saisie dans l'input n'ai pas supérieur
                         //à la qt initial - la qté stk si c'est le cas on lance une exception
@@ -212,7 +212,7 @@ try {
                             ' L\'enregistrement du bon numéro : '
                             . $idBon
                             . ' de type retour à été effectué avec succès </p>';
-                    Tool::addMsg($msg);
+                    //Tool::addMsg($msg);
 
 
                     break;
@@ -220,7 +220,7 @@ try {
                 default:
                     $msg = '<p class=\'info\'>' . date('H:i:s') .
                             'Selectionner un type de bon avant d\'envoyer le formulaire';
-                    Tool::addMsg($msg);
+                    
                     break;
             }
             //L'ajout s'est effectué donc on copie le token dans la session
@@ -231,11 +231,13 @@ try {
                 Vous avez déja envoyé ce formulaire </p>";
             
         }
+        Tool::addMsg($msg);
     }
 } catch (MySQLException $e) {
     switch ($resEr) {
         case '666':
         case '777':
+           
           $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
                 . $e->getMessage() . "</p>";
             break;

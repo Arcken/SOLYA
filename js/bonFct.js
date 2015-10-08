@@ -49,29 +49,6 @@ function formChooserBon() {
     }
 }
 
-
-/**
- * Ajoute une ligne de bon à la page 
- *  
- * @param {String} $row
- * @returns {undefined}
- */
-nRowCount = 1;
-function ajoutBonLigne($table) {
-
-    $('#nbLigne').val(nRowCount);
-    $ligne = $('#bonligne').html();
-    $id = "bonligne" + nRowCount;
-    //on remplace tous les mots NID par le même numéro de ligne 
-    $ligne = $ligne.replace(/NID/g, nRowCount);
-    //On remplace beligne par 'beligne + numéro de ligne'
-    $ligne = $ligne.replace(/bonligne>/, $id);
-
-    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
-    console.log($ligne);
-    nRowCount++;
-}
-
 /**
  * Récupère les informations de la référence 
  * par son ID  

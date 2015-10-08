@@ -8,8 +8,34 @@
  * 
  */
 class BonManager {
-    
-    
+    /**
+     * Retourne un enregistrement de la table Bon pour mise a jour
+     * selon son ID.
+     *  
+     * @param type $bonId
+     * @return type
+     * @throws MySQLException
+     */
+     public static function getBonForUpd($bonId) {
+        try {
+
+          $tParam=[$bonId];
+
+            $sql = "SELECT bon_id, "
+                         ."doclbl_id,"
+                         ."bon_fact_num,"
+                         ."bon_date,"
+                         ."bon_com,"
+                         ."bon_sortie_assoc FROM bon "
+                         ."WHERE bon_id=? FOR UPDATE";
+            
+          $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
  
    /**
      * Retourne tous les enregistrements de la table Bon
@@ -35,6 +61,7 @@ class BonManager {
                          ."doclbl_id,"
                          ."bon_fact_num,"
                          ."bon_date,"
+                         ."bon_com,"
                          ."bon_sortie_assoc FROM bon "
                          ."ORDER BY ".$orderby
                          ." " . $tri 
@@ -62,6 +89,7 @@ class BonManager {
                 $oBon->doclbl_id,
                 $oBon->bon_fact_num,
                 $oBon->bon_date,
+                $oBon->bon_com,
                 $oBon->bon_sortie_assoc
             );
 
@@ -69,8 +97,9 @@ class BonManager {
                     . "doclbl_id,"
                     . "bon_fact_num,"
                     . "bon_date,"
+                    . "bon_com,"
                     . "bon_sortie_assoc) "
-                    . "VALUES(?,?,?,?)";
+                    . "VALUES(?,?,?,?,?)";
 
           $result = Connection::request(2, $sql, $tParam);
             

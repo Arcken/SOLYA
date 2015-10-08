@@ -1,5 +1,34 @@
 
 /**
+ * Fonction d'ajout de ligne pour les bons
+ * On prend tous ce qui se trouvent entre <tr id=idligne> et </tr>
+ * On modifie les valeurs nécessaires et on ajoute l'ensemble au document avant
+ * la fin de la balise table
+ * @param $table
+ * Table html du document
+ * @returns {undefined}
+ */
+function addLigne($table) {
+    //on incrémente le compteur
+    nRowCount++;
+    //On récupére le squelette du code entre le balises <tr id=idLigne> et </tr>
+    $ligne = $('#idLigne').html();
+    console.log($ligne);
+    //On modifie l'id de la balise tr en incorporant un numéro de ligne
+    $id = "idLigne" + nRowCount;
+    //on remplace tous les mots NID par le même numéro de ligne 
+    $ligne = $ligne.replace(/NID/g, nRowCount);
+    //On remplace beligne par 'beligne + numéro de ligne'
+    $ligne = $ligne.replace(/idLigne/, $id);
+    //On ajoute le code à la fin de la table
+    $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
+    console.log($ligne);
+    
+    
+}
+
+
+/**
  * Fonction qui efface une balise html selon son id
  * @param $cible
  * Id de la balise cible

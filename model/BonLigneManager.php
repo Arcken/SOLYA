@@ -13,6 +13,29 @@
  */
 class BonLigneManager {
     
+    
+    /**
+     * Retourne tout les lignes de bon associées à un bon
+     * 
+     * @param $bonId
+     * Id du bon 
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getBonLignesFromBon($bonId) {
+
+        try {
+
+            $sql = 'SELECT bon_id, lig_id'
+                   .' FROM bon_ligne '
+                   .' WHERE bon_id = ' . $bonId;
+            $result = Connection::request(1, $sql);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     /**
      * Ajoute un enregistrement dans la table Bon_Ligne
      * @param type $oBonLigne

@@ -13,7 +13,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col50">
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <label for="numFact"> Numéro de facture </label><br>
-                <input name="numFact"  id="nFact" placeholder="Numéro de Facture" type="text" required>
+                <input name="numFact"  id="nFact" placeholder="Numéro de Facture" type="text" >
                 <br>
                 <label for="typeBon"> Type du bon </label><br>
                 <select name="typeBon" id="typeBon" placeholder="description" type="text"
@@ -72,7 +72,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         
                         
                     </tr>
-                    <tr id="bonligne" hidden>
+                    <tr id="idLigne" hidden>
                         <td  class="bonLigneId">
                             <input type="text" name="refId[]" id='refIdNID' onblur="getReferenceBonFromId('NID');">
                         </td>
@@ -105,11 +105,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                         <td class="bonLigneImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick="delLigne('bonligne');" class="tdImgTd"/>
+                                 onclick="delLigne('idLigne');" class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
-                <input type="button" value="Ajouter ligne" onclick="ajoutBonLigne('bonTable');">
+                <input type="button" value="Ajouter ligne" onclick="addLigne('bonTable');">
+                <script type="text/javascript">
+                    nRowCount=1;
+                </script>
             </div>
             <div class="bas" id="zoneBtnBon" style='display:none'>
                     <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
