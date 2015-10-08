@@ -3,13 +3,16 @@
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
     <div class="corps">
-        <div>
+        <div >
+            
             <table id="tableRef">
                 <script type='text/javascript'>
                     $tabRefs=new Array();
                 </script>
                 <tr> <!--En-tête du tableau-->
-                    <th class="colTitle" id="colImg">Image</th>
+                    <th class="colTitle" id="colImg">
+                        Image
+                    </th>
                     <th class="colTitle" 
                         onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
                         Code référence

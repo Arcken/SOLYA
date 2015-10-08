@@ -1,4 +1,5 @@
 <?php
+
 //Contrôle si la connection de l'utilisateur est valide
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
@@ -11,7 +12,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <div class="corps">
         <form class="form" action="index.php" method="get">
             <div class="col50">
+                <!-- valeur du token du formulaire en cours -->
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
+                
                 <label for="numFact"> Numéro de facture </label><br>
                 <input name="numFact"  id="nFact" placeholder="Numéro de Facture" type="text" required>
                 <br>

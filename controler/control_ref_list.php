@@ -40,7 +40,7 @@ $iTotal = Tool::getCountTable('reference');
     
     switch ($resEr){
         default:
-            $msg ="<p class='erreur'> Oups! Une erreur est survenue : $resEr </p>";
+            $msg ="<p class='erreur'> ".date('H:i:s')." Oups! Une erreur est survenue : $resEr </p>";
             Tool::addMsg($msg);
         break;
     }

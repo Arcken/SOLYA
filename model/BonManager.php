@@ -25,29 +25,23 @@ class BonManager {
      */
     public static function getAllBon($limite=0,
                                      $nombre=15,
-                                     $orderby="ref_id",
+                                     $orderby="bon_id",
                                      $tri="ASC") {
         try {
 
-            $tParam = array(
-                $oBon->bon_id,
-                $oBon->doclbl_id,
-                $oBon->bon_fact_num,
-                $oBon->bon_date,
-                $oBon->bon_sortie_assoc
-            );
+          
 
-            $sql = "SELECT bon_id "
+            $sql = "SELECT bon_id, "
                          ."doclbl_id,"
                          ."bon_fact_num,"
                          ."bon_date,"
                          ."bon_sortie_assoc FROM bon "
-                         ."ORDER BY ".$orderby 
+                         ."ORDER BY ".$orderby
                          ." " . $tri 
                          ." LIMIT " 
                          .$limite . " , " . $nombre;
 
-          $result = Connection::request(2, $sql, $tParam);
+          $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {
             throw $e;

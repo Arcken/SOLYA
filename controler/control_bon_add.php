@@ -226,35 +226,28 @@ try {
             //L'ajout s'est effectué donc on copie le token dans la session
             $_SESSION['token']=$_REQUEST['token'];
         }else{
-            $cnx = Connection::getConnection();
-            $resEr='555';
-            throw new MySQLException('Vous avez déja envoyé ce formulaire',$cnx);
+            
+            $msg = "<p class= 'erreur'> " . date('H:i:s')."
+                Vous avez déja envoyé ce formulaire </p>";
+            
         }
     }
 } catch (MySQLException $e) {
     switch ($resEr) {
-        case '555':
-         //$_SESSION['token'] = '0';
-         $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
-                . $e->getMessage() . "</p>";
-            break;
-        
         case '666':
         case '777':
           $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
                 . $e->getMessage() . "</p>";
-            $cnx->rollback();
             break;
 
         default:
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
                     . ' Oups une erreur est survenue veuillez contacter'
                     . ' votre administrateur avec le code erreur suivant : '
-                    . $resEr . ' '.$e->RetourneErreur().'</p>';
-            $cnx->rollback();
+                    . $resEr .'</p>';
             break;
     }
-   
+   $cnx->rollback();
     
     Tool::addMsg($msg);
 }
