@@ -165,7 +165,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                     </tr>
                     
-                    <!-- Squelette des lignes-->
+                    <!-- Squelette des lignes
+                    Une fonction js copie le code html entre les balise tr 
+                    où id=idLigne et le rajoute à la fin du tr en rennomant les id
+                    NID est remplacé par incrément et idligne est complété du
+                    même incrément
+                    -->
                         <tr id="idLigne" hidden="">
                             <td class="beLigneId">
                                 <input type="text"
@@ -218,6 +223,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="refPoidsBrut[NID]" 
                                        id="refPoidsBrutNID">
                             </td>
+                            <!-- Calcul totalPoids Multiplication entre la quantité
+                            et le pois unitaire-->
                             <td class="beLigneNb">
                                 <input type="text" 
                                        value="0" 
@@ -228,8 +235,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalPoidsNID")'>
                             </td>
                             <td class="beLigneNb">
-                                <!-- Calcul droit de douane selon le pu et le taux 
-                                récupérés par getreference-->
+                                <!-- Calcul droit de douane selon le pu, le taux 
+                                et la quantité-->
                                 <input type="text" 
                                        value="0" 
                                        name="beligDd[NID]" 
@@ -240,6 +247,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "beligDdNID")'>
                             </td>
                             <td class="beLigneNb">
+                                <!-- Calcul droit de douane selon le pu, le taux 
+                                et la quantité-->
                                 <input type="text" 
                                        value="0" 
                                        name="beligTauxDouane[NID]" 
@@ -256,8 +265,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="beligTaxeNID">
                             </td>
                             <td class="beLigneNb">
-                                <!-- Additionne droit de douane et taxe, mets à jour
-                                le total-->
+                                <!-- Additionne droit de douane et taxe-->
                                 <input type="text" 
                                        value="0" 
                                        name="totalFd[NID]" 
@@ -300,7 +308,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalFtNID")'>
                             </td>
                             <td class="beLigneNb">
-                                <!-- Total de la ligne-->
+                                <!-- Total de la ligne: appel la fonction qui
+                                calcul le total de la ligne-->
                                 <input type="text" 
                                        value="0" 
                                        name="totalLig[NID]" 
@@ -536,9 +545,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                             <td  class="beLigneImg">
                                 <!-- Pour supprimer les lignes qui existe déja, 
-                                on affiche une case à cocher. 
-                                Pour que le tableau soit complet on masque 
-                                cette case pour les nouvelles lignes-->
+                                on affiche une case à cocher. -->
                                 <label for="ligSupp">Supp</label>
                                 <input type="checkbox" 
                                        name="ligSupp[<?php echo $idLigne ?>]" 

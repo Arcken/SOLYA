@@ -32,7 +32,8 @@ class BeLigneManager {
     }
     
     /**
-     * Retourne tous les enregistrements de la table
+     * Retourne les enregistrements de la table
+     * 
      * selon le beId
      * @param $beId
      * Id du bon d'entré
@@ -55,7 +56,8 @@ class BeLigneManager {
     }
 
     /**
-     * Retourne tous les enregistrements de la table avec limite définie
+     * Retourne les enregistrements de la table avec limite définie
+     * 
      * @param $limite
      * debut de limite
      * @param $nombre
@@ -82,6 +84,7 @@ class BeLigneManager {
 
     /**
      * Insert une enregistrement dans la table
+     * 
      * @param $oBeLigne
      * attend un objet de la classe BeLigne
      * @return int
@@ -123,6 +126,7 @@ class BeLigneManager {
 
     /**
      * Select for update des enregistrements selon l'id du bon d'entrée 
+     * 
      * @param $beId
      * attend l'id du bon d'entrée
      * @return []objet
@@ -146,6 +150,7 @@ class BeLigneManager {
         return $result;
     }
 
+    
     /**
      * Modifie un enregistrement selon son id
      * 
@@ -186,6 +191,7 @@ class BeLigneManager {
 
     /**
      * Supprime l'enregistrement de la table selon son id
+     * 
      * @param $id
      * id de l'enregistrement
      * @return int 

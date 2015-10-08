@@ -155,7 +155,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                         <td  class="beLigneId">
                             <!-- Appel de fonction qui recherche une reference 
-                            selon son id, il faut préciser le champs-->
+                            selon son id-->
                             <input type="number" 
                                    name="refId[NID]" 
                                    id="refIdNID"
@@ -204,6 +204,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="refPoidsBrutNID">
                         </td>
                         <td class="beLigneNb">
+                            <!-- Calcul totalPoids Multiplication entre la quantité
+                            et le pois unitaire-->
                             <input type="text" 
                                    value="0" 
                                    name="totalPoids[NID]" 
@@ -213,8 +215,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalPoidsNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <!-- Calcul droit de douane selon le pu et le taux 
-                            récupérés par getreference-->
+                            <!-- Calcul droit de douane selon le pu, le taux 
+                                et la quantité-->
                             <input type="text" 
                                    value="0" 
                                    name="beligDd[NID]" 
@@ -225,6 +227,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "beligDdNID")'>
                         </td>
                         <td class="beLigneNb">
+                            <!-- Calcul droit de douane selon le pu, le taux 
+                                et la quantité-->
                             <input type="text" 
                                    value="0" 
                                    name="beligTauxDouane[NID]" 
@@ -241,8 +245,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligTaxeNID">
                         </td>
                         <td class="beLigneNb">
-                            <!-- Additionne droit de douane et taxe, mets à jour
-                            le total-->
+                            <!-- Additionne droit de douane et taxe-->
                             <input type="text" 
                                    value="0" 
                                    name="totalFd[NID]" 
@@ -285,7 +288,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalFtNID")'>
                         </td>
                         <td class="beLigneNb">
-                            <!-- Total de la ligne-->
+                            <!-- Total de la ligne: appel la fonction qui
+                                calcul le total de la ligne-->
                             <input type="text" 
                                    value="0" 
                                    name="totalLig[NID]" 

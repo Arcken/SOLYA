@@ -7,7 +7,7 @@
  * @returns {undefined}
  */
 function ccMultiplier($source, $cible) {
-    console.log("DEBUT MULTIPLICATION");
+    //console.log("DEBUT MULTIPLICATION");
 
     //on initilise le résultat à 1, mulitplication oblige
     var $res = 1;
@@ -16,16 +16,17 @@ function ccMultiplier($source, $cible) {
     for (var $i in $source) {
         $a = parseFloat($("input[id='" + $source[$i] + "']").val());
         $res *= $a;
-        console.log($source[$i] + ": " + $a);
+        //console.log($source[$i] + ": " + $a);
     }
 
     //on effectue le calcul puis on met l'input cible à jour    
     $res = $("input[id='" + $cible + "']").val(parseFloat($res));
 
-    console.log("Multiplication: " + $res.val());
+    //console.log("Multiplication: " + $res.val());
 
-    console.log("FIN MULTIPLICATION");
+    //console.log("FIN MULTIPLICATION");
 }
+
 
 /**
  * Fonction d'addition
@@ -36,21 +37,22 @@ function ccMultiplier($source, $cible) {
  * @returns {undefined}
  */
 function ccAddition($source, $cible) {
-    console.log("DEBUT ADDITION");
+    //console.log("DEBUT ADDITION");
 
     //on initilise le résultat à 0, addition oblige
     var $res = 0;
+    
     //On parcours le tableau et à chaque case on additionne res
     //à la case du tableau
     for (var $i in $source) {
         $a = parseFloat($("input[id='" + $source[$i] + "']").val());
-        console.log($source[$i] + " :" + $a)
+        //console.log($source[$i] + " :" + $a)
         $res += $a;
     }
 
-    //on effectue le calcul puis on met l'input cible à jour    
+    //on met l'input cible à jour    
     $res = $("input[id='" + $cible + "']").val(parseFloat($res));
 
-    console.log("Addition: " + $res.val());
-    console.log("FIN ADDITION");
+    //console.log("Addition: " + $res.val());
+    //console.log("FIN ADDITION");
 }

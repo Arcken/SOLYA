@@ -1,7 +1,7 @@
 
 /**
  * Fonction d'ajout de ligne pour les bons
- * On prend tous ce qui se trouvent entre <tr id=idligne> et </tr>
+ * On prend tous ce qui se trouvent entre <tr id=idLigne> et </tr>
  * On modifie les valeurs nécessaires et on ajoute l'ensemble au document avant
  * la fin de la balise table
  * @param $table
@@ -14,17 +14,15 @@ function addLigne($table) {
     //On récupére le squelette du code entre le balises <tr id=idLigne> et </tr>
     $ligne = $('#idLigne').html();
     console.log($ligne);
-    //On modifie l'id de la balise tr en incorporant un numéro de ligne
+    //On créé une variable qui est l'id du nouveau tr
     $id = "idLigne" + nRowCount;
     //on remplace tous les mots NID par le même numéro de ligne 
     $ligne = $ligne.replace(/NID/g, nRowCount);
-    //On remplace beligne par 'beligne + numéro de ligne'
+    //On remplace idLigne par le nouvel id $id
     $ligne = $ligne.replace(/idLigne/, $id);
     //On ajoute le code à la fin de la table
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
     console.log($ligne);
-    
-    
 }
 
 
@@ -41,6 +39,7 @@ function delLigne($cible) {
     }
 }
 
+
 /**
  * Fonction d'ouverture de nouvelle fenetre, 
  *      elle attend l'action du contrôleur en paramètre
@@ -48,7 +47,6 @@ function delLigne($cible) {
  * action a effectuer pour le contrôleur
  * @returns {Boolean}
  */
-
 function popup($action) //------------------------Appelable partout
 {
     var width = 700;
@@ -73,21 +71,17 @@ function popup($action) //------------------------Appelable partout
     return false;
 }
 
-/**
- * Fonction pour tester les appels de js
- * Affiche une boite de message
- * @returns rien
- */
-function test() {   //------------------------Appelable partout
-    alert('Coucou');
-}
 
 /**
  * Fonction qui recherche le nombre d'occurence dans une table
- * @param $champs champs cible dans la table
- * @param $table nom de la table
- * @param $source nom de l'input contenant la valeur à chercher
- * @param $cible id du bloc html à modifier, 
+ * @param $champs 
+ * champs cible dans la table
+ * @param $table 
+ * nom de la table
+ * @param $source 
+ * nom de l'input contenant la valeur à chercher
+ * @param $cible 
+ * id du bloc html à modifier, 
  * affiche une image de validation si aucun doublon
  * ou une croix pour un doublon
  * @returns {undefined}
@@ -103,7 +97,6 @@ function verifUnique($champs, $table, $source, $cible) {  //appel dans view_util
         if (json.total == 0) {
             //Si aucun enr trouvé on affiche
             $('#' + $cible).html('<img src="img/icon/accept.png">');
-
         }
         else {
             //Si 1 ou plusieurs enr trouvé on affiche
@@ -117,7 +110,6 @@ function verifUnique($champs, $table, $source, $cible) {  //appel dans view_util
  * fonction qui rend visible une image si le pass 
  * et la confirmation sont identique
  * @returns boolean
- * 
  */
 function verifPassImg() { //appel dans view_utilisateur 
     //on teste que le pass et sa confirmation ne soient pas nul
@@ -162,26 +154,25 @@ function verifPassForce() { //appel dans view_utilisateur
 
             $('#passForce').text('Mot de passe fort!');
         } else if (mediumRegex.test($('#pass').val())) {
-            // If medium password matches the reg ex
+            // Si le mot de pass est moyen
             $('#passForce').text('Mot de passe moyen!');
         } else {
-            // If password is ok
+            // Si le mot de passe est faible
             $('#passForce').text('Mot de passe faible!');
         }
     }
-
 }
 
 
 /**
- * fonction qui teste si le pass et sa confirmation sont identique, affiche une alertbox si différents
+ * fonction qui teste si le pass et sa confirmation sont identique, 
+ * affiche une alertbox si différents
  * @returns {Boolean}
  */
 function verifPass() { //appel dans view_utilisateur 
     var test = false;
 
-    if ($('#pass').val().length >= 8
-            ) {
+    if ($('#pass').val().length >= 8) {
         if ($('#pass').val() != ''
                 && $('#confirmPass').val() != ''
                 && $('#pass').val() == $('#confirmPass').val())
@@ -196,23 +187,23 @@ function verifPass() { //appel dans view_utilisateur
     else
         alert('Le mot de passe doit être au moins de huit caractères');
     return false;
-
 }
 
 
 /**
- * Fonction qui appel une page en spécifier le choix du trie pour les reqêtes
+ * Fonction qui appel qui rappel la même page en scpécifiant le tri 
+ * pour les requètes
  * @param $action
  *  action à effectuer pour le contrôleur
  *  @param $ordre
  *  tri: ASC ou DESC
  * @param $champs
  *  champs sur lequel porte le tri de la requéte
- * @returns rien
  */
 function orderby($action, $champs, $ordre) { //appel partout
     window.open('index.php?action=' + $action + '&tri=' + $ordre + '&orderby=' + $champs, '_self');
 }
+
 
 /**
  * Fonction qui affiche une boite de confirmation pour la suppression
@@ -230,12 +221,20 @@ function orderby($action, $champs, $ordre) { //appel partout
  */
 function delElt($id, $codetype, $type, $action, $precision) { //appel partout
 
-    $resBool = confirm("Voulez-vous supprimez l'élément: \n" + $type + " numéro: " + $id);
+    $resBool = confirm("Voulez-vous supprimez l'élément: \n" + 
+            $type + " numéro: " + $id);
+    //si $précision est null
     if ($resBool && $precision == null) {
-        window.open('index.php?action=' + $action + "&" + $codetype + "=" + $id, '_self');
+        
+        window.open('index.php?action=' + $action + "&" + 
+                $codetype + "=" + $id, '_self');
     }
+    
+    //Si $précision est un tableau
     else if ($resBool && $precision.constructor === Array) {
+        
         $url = "index.php?action=" + $action + "&" + $codetype + "=" + $id;
+        //On incorpore les cases du tableau à la variable url
         for (var $key in $precision[$id]) {
             var $value = $precision[$id][$key];
             $url += "&" + $key + "=" + $value;
@@ -244,9 +243,10 @@ function delElt($id, $codetype, $type, $action, $precision) { //appel partout
     }
 }
 
+
 /**
- * Fonction qui définit le script à effectuer sur le bloc unload de la page affiché
- * @returns {undefined}
+ * Fonction qui définit le script à effectuer sur le bloc unload de la page
+ * selon l'action définie
  */
 function selMaj() { // Appel partout
     var $action = $('#action').val();
@@ -273,6 +273,7 @@ function selMaj() { // Appel partout
     }
 }
 
+
 /**
  * Met à jour un bloc html selon les choix d'une combobox
  * @param $select
@@ -287,6 +288,9 @@ function listSelect($select, $target) { //appel dans fiche article
     //On écrit les valeurs récupérés dans un bloc html
     $('#' + $target).html($a.text());
 }
+
+
+
 
 //------------------------------AJAX---------------------------------
 
@@ -442,6 +446,7 @@ function getReference($row, $source, $champs, $form) {
     );
 }
 
+
 /**
  * Fonction copie valeur de champs dans un autre
  * @param $source
@@ -451,9 +456,9 @@ function getReference($row, $source, $champs, $form) {
  * @returns {undefined}
  */
 function copieChamps($source, $cible) {
-    console.log("DEBUT COPIE CHAMPS");
+    //console.log("DEBUT COPIE CHAMPS");
     $1 = parseFloat($("input[id='" + $source + "']").val());
-    $res = $("input[id='" + $cible + "']").val(parseFloat($1));
-    console.log($source + " dans " + $cible);
-    console.log("FIN COPIE CHAMPS");
+    $("input[id='" + $cible + "']").val(parseFloat($1));
+    //console.log($source + " dans " + $cible);
+    //console.log("FIN COPIE CHAMPS");
 }

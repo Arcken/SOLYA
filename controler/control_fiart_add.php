@@ -23,7 +23,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
     try {
 
-        //début de transaction si une erreur survient une exception est levé 
+        //début de transaction si une erreur survient une exception est levée
         //suivie d'un rollback
         $cnx = Connection::getConnection();
         $cnx->beginTransaction();

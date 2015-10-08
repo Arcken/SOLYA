@@ -29,7 +29,7 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
             //Création du bon d'entrée
             $oBe = new BonEntree();
             //$oBe->cpt_id = $_REQUEST['cptId'];
-            $oBe->be_id = $_REQUEST['beId'];
+            $oBe->be_id = $beId;
             $oBe->be_lbl = $_REQUEST['beLbl'];
             $oBe->be_date = $_REQUEST['beDate'];
             $oBe->be_fact_num = $_REQUEST['beFactNum'];
@@ -46,6 +46,9 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
             //-----------------Gestion des lignes du formulaire-------------------------
             //Création des tableaux contenant toutes les informations
             //Un tableau par type de champs
+            
+            //tableau pour la suppression de ligne
+            if (isset($_REQUEST['ligSupp'])) $tLigSupp = $_REQUEST['ligSupp'];
             
             //Tableaux pour la table be_ligne
             $tBeligPu = $_REQUEST['beligPu'];
@@ -96,7 +99,10 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
                 //Si la case lig-id est != '' c'est un update
                 if ($tLigneForm['lig_id'][$i] != 0) {
                     //Si
-                    if ($tLigneForm['lig_id'][$i] == 'on'){
+                    if (isset($tLigSupp[$i])){
+                        echo '<br>';
+                        echo 'suppre';
+                        echo '<br>';
                         
                     }else {
                     echo $i . "<br>";
