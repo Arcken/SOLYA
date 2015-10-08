@@ -157,7 +157,7 @@ class BonEntreeManager {
                 $oBonEntree->be_frais_bancaire,
                 $oBonEntree->be_frais_trans,
                 $oBonEntree->be_com,
-                $oBonEntree->be_infos_trans,
+                $oBonEntree->be_info_trans,
                 $oBonEntree->be_total,
                 $oBonEntree->be_id
             );
@@ -170,8 +170,8 @@ class BonEntreeManager {
                     . " be_frais_douane = ?, "
                     . " be_frais_bancaire = ?, "
                     . " be_frais_trans = ?, "
-                    . " be_frais_com = ?, "
-                    . " be_info_trans = ? "
+                    . " be_com = ?, "
+                    . " be_info_trans = ?, "
                     . " be_total = ? "
                     . "WHERE be_id =?";
 
