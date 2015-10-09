@@ -109,4 +109,39 @@ class BonManager {
         return $result;
     }
 
+    
+    /**
+     * Ajoute un enregistrement dans la table Bon
+     * @param type $oBon
+     */
+    public static function updBon($oBon) {
+        try {
+
+
+
+            $tParam = array(
+                
+                $oBon->doclbl_id,
+                $oBon->bon_fact_num,
+                $oBon->bon_date,
+                $oBon->bon_com,
+                $oBon->bon_sortie_assoc,
+                $oBon->bon_id    
+            );
+
+            $sql = "UPDATE bon SET "
+                    . "doclbl_id = ?,"
+                    . "bon_fact_num = ?,"
+                    . "bon_date = ?,"
+                    . "bon_com  = ?,"
+                    . "bon_sortie_assoc = ? "
+                    . "WHERE bon_id = ? ";
+
+          $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }

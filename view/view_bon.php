@@ -90,9 +90,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                     >
                         </td>
                         <td class="bonLigneNb">
-                            <input type="text" name="ligQte[]" id='ligQteNID' 
-                                   value="0" 
-                                   pattern="^[0-9,]{1,}$"
+                            <input type="number" name="ligQte[]" id='ligQteNID' 
+                                   value="1" step="any"
                                    onblur="confirmQteStock('NID');"
                                    onfocus="limitQteMax('NID');" min='1' >
                         </td>

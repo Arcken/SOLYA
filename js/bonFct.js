@@ -252,10 +252,14 @@ function limitQteMax($row) {
                             var $nb = '';
                             for (var key in json) {
                                 console.log('lot_Qte ' + json[key].lot_qt_stock);
-                                //Calcul de la limit qté 
+                                
                                 //La nouvelle quantité sortie doit être inférieur 
-                                //à qté en stock + ancienne quantité sortie
-                                $nb = parseInt(json[key].lot_qt_stock)+ parseInt($ligQteOld);
+                                //à qté en stock 
+                                $nb = parseFloat(json[key].lot_qt_stock);
+                                
+                                console.log('lotqtstk = '+json[key].lot_qt_stock);
+                                console.log('oldValue = '+$ligQteOld);
+                                console.log('$nb = '+$nb);
                             }
                             //Enfin on change la valeur de l'attribut Max de l'input Qte
                             $inptQte.attr('max', $nb);
@@ -277,7 +281,8 @@ function limitQteMax($row) {
                             for (var key in json) {
                                 console.log('lot_Qte ' + json[key].lot_qt_stock);
                                 //Récupération de la valeur qte qui doit être utilisé pour créer la limit
-                                $nb = parseInt(json[key].lot_qt_stock);
+                                $nb = parseFloat(json[key].lot_qt_stock);
+                                console.log('$nb='+$nb);
                             }
                             //Enfin on change la valeur de l'attribut Max de l'input Qte
                             $inptQte.attr('max', $nb);
@@ -323,7 +328,8 @@ function limitQteMax($row) {
                                 //La quantité retourner 
                                 //doit être < ou = à la quantité initial - la qté en stock  + l'ancienne valeur retourné
                                 //
-                                $nb = parseInt(json[key].lot_qt_init) - parseInt(json[key].lot_qt_stock) + parseInt($ligQteOld);
+                                $nb = parseFloat(json[key].lot_qt_init) - parseFloat(json[key].lot_qt_stock) + parseFloat($ligQteOld);
+                                console.log('$nb='+$nb);
                             }
                             //Enfin on change la valeur de l'attribut Max de l'input Qte
                             $inptQte.attr('max', $nb);
@@ -346,7 +352,8 @@ function limitQteMax($row) {
                                 //Récupération de la valeur qte qui doit être utilisé pour créer la limit
                                 //La quantité retourné  
                                 //doit être < ou = à la qté initial - la qté en stock
-                                $nb = parseInt(json[key].lot_qt_init) - parseInt(json[key].lot_qt_stock);
+                                $nb = parseFloat(json[key].lot_qt_init) - parseFloat(json[key].lot_qt_stock);
+                                console.log('$nb='+$nb);
                             }
                             //Enfin on change la valeur de l'attribut Max de l'input Qte
                             $inptQte.attr('max', $nb);
@@ -368,7 +375,7 @@ function confirmQteStock($row) {
     console.log('Valeur dans l\'input: ' + $inptQte.val());
     console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
 
-    if ($inptQte.val() <= parseInt($inptQte.attr('max'))) {
+    if (parseFloat($inptQte.val()) <= parseFloat($inptQte.attr('max'))) {
         $color = 'green';
         $inptQte.css('color', $color);
     } else {

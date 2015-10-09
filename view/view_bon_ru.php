@@ -13,7 +13,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" action="index.php" method="get">
             <div class="col50">
                 <!-- valeur du token du formulaire en cours -->
-                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
+                <input name='token' 
+                       type="text" 
+                       value ='<?php echo rand(1,1000000)?>' 
+                       hidden/>
+                
+                <input name='bonId' 
+                       type="text" 
+                       value ='<?php echo $oBon->bon_id; ?>' 
+                       hidden/>
                 
                 <label for="numFact"> Numéro de facture </label><br>
                 <input name="numFact"  id="nFact" 
@@ -22,14 +30,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="text" >
                 <br>
                 <label for="typeBon"> Type du bon </label><br>
-                <select name="typeBon" id="typeBon" placeholder="description" type="text"
-                        required>
-                    <option value="">Aucun</option>
+                
                     <?php foreach($resDocLbl as $lbl){
                             if ($oBon->doclbl_id === $lbl->doclbl_id ){?>
-                            <option value="<?php echo $lbl->doclbl_id;?>"  selected><?php echo $lbl->doclbl_lbl;?></option>
+                        <input name="typeBon" id="typeBon" placeholder="description" type="text"
+                               value="<?php echo $lbl->doclbl_id;?>" 
+                        hidden> 
+                            <input type="text" value="<?php echo $lbl->doclbl_lbl; ?>" title="Non modifiable" disabled>
                         <?php } ?>
-                            <option value="<?php echo $lbl->doclbl_id;?>"><?php echo $lbl->doclbl_lbl;?></option>
                     <?php } ?>
                 </select>
                 <br>
@@ -101,7 +109,62 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         
                     </tr>
                     <!-- Squelette de construction des lignes-->
-
+                    <tr id="idLigne" hidden>
+                        <td class="bonLigneId">
+                                <input type="text"
+                                       name="ligId[]" 
+                                       id="ligIdNID"
+                                       >
+                            </td>
+                        <td  class="bonLigneId">
+                            <input type="text" 
+                                   name="refId[]" 
+                                   id='refIdNID' 
+                                   onblur="getReferenceBonFromId('NID');">
+                        </td>
+                        <td class="bonLigneCode">
+                            <input type="text" 
+                                   value="" name="refCode[]" id='refCodeNID' 
+                                   onblur="getReferenceBonFromRefCode('NID');">
+                        </td>
+                        <td>
+                            <textarea name="refLbl[]" 
+                                      id='refLblNID' 
+                                      class="bonLigneT"
+                                      rows="4" cols="30"
+                            ></textarea>
+                           
+                        </td>
+                         <td class="bonLigneId">
+                             <input type="text" 
+                                    name="lotId[]" id='lotIdNID' 
+                                    onfocus="getLotsFromCurReference('NID');"
+                                    >
+                        </td>
+                        <td class="bonLigneNb">
+                            <input type="number" name="ligQte[]" id='ligQteNID' value="" 
+                                   step="any"
+                                   onblur="confirmQteStock('NID');"
+                                   onfocus="limitQteMax('NID');" min='1'cols="15" >
+                        </td>
+                       
+                        <td >
+                            <textarea name="ligDepot[]" id='ligDepotNID' 
+                                      class="bonLigneT"
+                                      rows="2" cols="30"></textarea>
+                        </td>
+                        <td>
+                            <textarea name="ligCom[]" id ='ligComNID' 
+                                      class="bonLigneT" 
+                                      rows="2" cols="30"></textarea>
+                        </td>
+                        <td class="bonLigneImg">
+                            <img src="img/icon/delete.png" 
+                                 alt="" 
+                                 title="Supprimer"
+                                 onclick="delLigne('idLigne');" />
+                        </td>
+                    </tr>
                     <?php
                     //Pour chaque ligne de bon
                     for ($i = 0; $i < count($resAllBonLignes); $i++) {
@@ -120,7 +183,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <tr id="idLigne<?php echo $ligId ?>">
                             <td class="bonLigneId">
                                 <input type="text"
-                                       name="ligId<?php echo $ligId ?>" 
+                                       name="ligId[<?php echo $ligId ?>]" 
                                        id="ligId<?php echo $ligId ?>"
                                        value="<?php echo $oBonLig->lig_id ?>">
                             </td>
@@ -155,17 +218,20 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                             <td class="bonLigneNb">
                                 <input type="number" name="ligQte[<?php echo $ligId ?>]"
+                                   step="any"
                                    id='ligQte<?php echo $ligId ?>' 
-                                   value=<?php echo $oLigne->lig_qte; ?> 
+                                   value="<?php echo $oLigne->lig_qte; ?>" 
                                    onblur="confirmQteStock('<?php echo $ligId ?>');"
-                                   onfocus="limitQteMax('<?php echo $ligId ?>');" min='0' >
+                                   onfocus="limitQteMax('<?php echo $ligId ?>');" min='0'
+                                   cols="15" >
                             </td>
                             <td class="bonLigneNb" hidden>
                                 <input type="number" name="ligQteOld[<?php echo $ligId ?>]"
+                                   step="any"    
                                    id='ligQteOld<?php echo $ligId ?>' 
-                                   value=<?php echo $oLigne->lig_qte; ?> 
+                                   value="<?php echo $oLigne->lig_qte; ?>"
                                    onblur="confirmQteStock('<?php echo $ligId ?>');"
-                                   onfocus="limitQteMax('<?php echo $ligId ?>');" min='0' >
+                                   onfocus="limitQteMax('<?php echo $ligId ?>');" min='1' >
                             </td>
                             <td class="bonLigneNb">
                                 <textarea name="ligComDep[<?php echo $ligId ?>]" 
@@ -189,51 +255,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                         </tr>
                    <?php } ?>   
-                    <tr id="idLigne" hidden>
-                        <td class="bonLigneId">
-                                <input type="text"
-                                       name="ligId[]" 
-                                       id="ligIdNID"
-                                       >
-                            </td>
-                        <td  class="bonLigneId">
-                            <input type="text" name="refId[]" id='refIdNID' onblur="getReferenceBonFromId('NID');">
-                        </td>
-                        <td class="bonLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[]" id='refCodeNID' onblur="getReferenceBonFromRefCode('NID');">
-                        </td>
-                        <td>
-                            <textarea name="refLbl[]" id='refLblNID' class="bonLigneT"
-                                      rows="4" cols="30"
-                            >Tablette chocolat du Mexique 70% cacao</textarea>
-                           
-                        </td>
-                         <td class="bonLigneId">
-                             <input type="text" name="lotId[]" id='lotIdNID' onfocus="getLotsFromCurReference('NID');"
-                                    >
-                        </td>
-                        <td class="bonLigneNb">
-                            <input type="text" name="ligQte[]" id='ligQteNID' value="0" 
-                                   pattern="^[0-9.]{1,}$"
-                                   onblur="confirmQteStock('NID');"
-                                   onfocus="limitQteMax('NID');" min='0' >
-                        </td>
-                       
-                        <td >
-                            <textarea name="ligDepot[]" id='ligDepotNID' class="bonLigneT"
-                                      rows="2" cols="30">Dépot?</textarea>
-                        </td>
-                        <td>
-                            <textarea name="ligCom[]" id ='ligComNID' class="bonLigneT" 
-                                      rows="2" cols="30">Commentaire</textarea>
-                        </td>
-                        <td class="bonLigneImg">
-                            <img src="img/icon/delete.png" 
-                                 alt="" 
-                                 title="Supprimer"
-                                 onclick="delLigne('idLigne');" />
-                        </td>
-                    </tr>
                 </table>
                 <input type="button" value="Ajouter ligne" onclick="addLigne('bonTable');">
                 
