@@ -22,29 +22,29 @@ function formChooserBon() {
             $('#zoneBtnBon').hide();
             $('#divBsArea').hide();
             break;
-            
+
         case "1":
         case "2":
         case "3":
-        case "4": 
-        case "5": 
-        case "6": 
-        case "7":     
+        case "4":
+        case "5":
+        case "6":
+        case "7":
             $('#divBsArea').hide();
             $('#bonSortie').val('');
             $('#divTable').show();
             $('#zoneBtnBon').show();
             break;
-            
+
         case "8":
-        case "9": 
-        case "10":     
-        case "11": 
-        case "12":  
+        case "9":
+        case "10":
+        case "11":
+        case "12":
             $('#divBsArea').show();
             $('#divTable').show();
             $('#zoneBtnBon').show();
-             break;
+            break;
 
     }
 }
@@ -146,45 +146,45 @@ function getReferenceBonFromRefCode($row) {
  */
 
 function getLotsFromCurReference($row) {
-    
+
     $refIdId = 'refId' + $row;
     $valInput = $('#' + $refIdId);
     $divAlert = $('#alert');
     $divAlert.text('');
-    $typeBon=$('#typeBon').val();
-    
+    $typeBon = $('#typeBon').val();
+
     //requète à la base
     $.getJSON(
             // url cible
             'ws/webService.php',
             //Paramètres
-                    {test: 'Solya', action: 'getLots', refId: $valInput.val(), typeBon:$typeBon},
+                    {test: 'Solya', action: 'getLots', refId: $valInput.val(), typeBon: $typeBon},
             //Callback
             function (json) {
 
                 console.log("json" + json);
-                var $myTab='<table id="tabAlert">\n'+
-                                 ' <tr>\n  '+
-                                        '<th>N°LOT</th>\n  '+
-                                        '<th>DLC/DLUO</th>\n  '+
-                                        '<th>QTE STOCK</th>\n  '+
-                                        '<th>QTE INITIAL</th>\n'+
-                                 ' </tr>\n';
-                         
+                var $myTab = '<table id="tabAlert">\n' +
+                        ' <tr>\n  ' +
+                        '<th>N°LOT</th>\n  ' +
+                        '<th>DLC/DLUO</th>\n  ' +
+                        '<th>QTE STOCK</th>\n  ' +
+                        '<th>QTE INITIAL</th>\n' +
+                        ' </tr>\n';
+
                 for (var key in json) {
                     console.log('lot_id' + json[key].lot_id);
                     d = new Date(json[key].lot_dlc);
-                    $myTab+=' <tr>\n   '+
-                                  '<td>' + json[key].lot_id + '</td>\n   '+
-                                  '<td>' + d.getDate() + '/' + d.getMonth() +
-                                    '/' + d.getFullYear().toString().substring(2, 4)+
-                                  '</td>\n   '+
-                                  '<td>' + json[key].lot_qt_stock + '</td>\n   '+
-                                  '<td>' + json[key].lot_qt_init + '</td>\n'+
-                             ' </tr>\n';
+                    $myTab += ' <tr>\n   ' +
+                            '<td>' + json[key].lot_id + '</td>\n   ' +
+                            '<td>' + d.getDate() + '/' + d.getMonth() +
+                            '/' + d.getFullYear().toString().substring(2, 4) +
+                            '</td>\n   ' +
+                            '<td>' + json[key].lot_qt_stock + '</td>\n   ' +
+                            '<td>' + json[key].lot_qt_init + '</td>\n' +
+                            ' </tr>\n';
                 }
-                $myTab+='</table>';
-                console.log ($myTab);
+                $myTab += '</table>';
+                console.log($myTab);
                 $divAlert.append($myTab);
                 $divAlert.show();
             }
@@ -213,81 +213,166 @@ function limitQteMax($row) {
     var $typeBon = $('#typeBon').val();
 
     switch ($typeBon) {
+        
         //Bon de sortie 
-
         case "1":
         case "2":
         case "3":
-        case "4": 
-        case "5": 
-        case "6": 
-        case "7":    
-            //Récupère la quantité en stock du lot
-            $.getJSON(
-                    // url cible
-                    'ws/webService.php',
-                    //Paramètres
-                            {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
-                    //Callback
-                    function (json) {
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+            //On récupère l'action pour déterminer le traitement
+             $sAction = $('#action').val();
+            //On construit L'id de la ligne si nous sommes sur une modification 
+             $ligIdId='ligId'+$row;
+            //On récupère la valeur de la ligne 
+            //Si elle est vide cela correspond à une insertion de ligne 
+            //sinon cela correspond à une modification
+             $ligId   =$('#'+$ligIdId).val();
+             console.log('$ligID = '+$('#'+$ligIdId).val());
+            
+            if ($sAction === "bon_detail" && $ligId!== "" ){
+                //Cas de la modification du bon de sortie
+                //Récupère la quantité initial 
+                $lotQteOldId = 'ligQteOld' + $row;
+                $ligQteOld = $('#' + $lotQteOldId).val();
+                console.log('pouete pouete '+$ligQteOld);
+                
+                //Récupère la quantité en stock du lot
+                $.getJSON(
+                        // url cible
+                        'ws/webService.php',
+                        //Paramètres
+                                {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
+                        //Callback
+                        function (json) {
 
-                        //Initialisation de la variable nb
-                        var $nb = '';
-                        for (var key in json) {
-                            console.log('lot_Qte ' + json[key].lot_qt_stock);
-                            //Récupération de la valeur qte qui doit être utilisé pour créer la limit
-                            $nb = parseInt(json[key].lot_qt_stock);
-                        }
-                        //Enfin on change la valeur de l'attribut Max de l'input Qte
-                        $inptQte.attr('max', $nb);
-                    }
-                    );
-                    break;
-
-                 case "8":
-                 case "9": 
-                 case "10":     
-                 case "11": 
-                 case "12": 
-                    
-                    //Récupère la quantité initial 
-                    $.getJSON(
-                            // url cible
-                            'ws/webService.php',
-                            //Paramètres
-                                    {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
-                            //Callback
-                            function (json) {
-                                //Initialisation de la variable nb
-                                var $nb = '';
-                                for (var key in json) {
-                                    //Récupération de la valeur qte qui doit être utilisé pour créer la limit
-                                    $nb=parseInt(json[key].lot_qt_init)-parseInt(json[key].lot_qt_stock);
-                                }
-                                //Enfin on change la valeur de l'attribut Max de l'input Qte
-                                $inptQte.attr('max', $nb);
+                            //Initialisation de la variable nb
+                            var $nb = '';
+                            for (var key in json) {
+                                console.log('lot_Qte ' + json[key].lot_qt_stock);
+                                //Calcul de la limit qté 
+                                //La nouvelle quantité sortie doit être inférieur 
+                                //à qté en stock + ancienne quantité sortie
+                                $nb = parseInt(json[key].lot_qt_stock)+ parseInt($ligQteOld);
                             }
-                            );
-                            break;
-                    }
-        }
-
-
-        function confirmQteStock($row) {
-
-            //id des éléments à modifier
-            $lotQteId = 'ligQte' + $row;
-            console.log($lotQteId);
-            //Récupération des inputs
-            var $inptQte = $('#' + $lotQteId);
-            console.log('Valeur dans l\'input: ' + $inptQte.val());
-            console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
-
-            if ($inptQte.val() <= parseInt($inptQte.attr('max'))) {
-                $color = 'green';
-                $inptQte.css('color', $color);
+                            //Enfin on change la valeur de l'attribut Max de l'input Qte
+                            $inptQte.attr('max', $nb);
+                        }
+                        );
             } else {
-                $color = 'red';
-                $inptQte.css('color', $color);
+                //Cas de l'insertion d'un bon de sortie
+                //Récupère la quantité en stock du lot
+                $.getJSON(
+                        // url cible
+                        'ws/webService.php',
+                        //Paramètres
+                                {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
+                        //Callback
+                        function (json) {
+
+                            //Initialisation de la variable nb
+                            var $nb = '';
+                            for (var key in json) {
+                                console.log('lot_Qte ' + json[key].lot_qt_stock);
+                                //Récupération de la valeur qte qui doit être utilisé pour créer la limit
+                                $nb = parseInt(json[key].lot_qt_stock);
+                            }
+                            //Enfin on change la valeur de l'attribut Max de l'input Qte
+                            $inptQte.attr('max', $nb);
+                        }
+                        );
+
             }
-        }
+            break;
+
+        case "8":
+        case "9":
+        case "10":
+        case "11":
+        case "12":
+
+            //On récupère l'action pour déterminer le traitement
+             $sAction = $('#action').val();
+            //On construit L'id de la ligne si nous sommes sur une modification 
+             $ligIdId='ligId'+$row;
+            //On récupère la valeur de la ligne 
+            //Si elle est vide cela correspond à une insertion de ligne 
+            //sinon cela correspond à une modification
+             $ligId   =$('#'+$ligIdId);
+             console.log('$ligID = '+$('#'+$ligIdId).val());
+
+            if ($ligId && $sAction === "bon_detail" && ($ligId.val()!=="")  ) {
+                //Cas de la modification d'un bon de retour
+                //Récupère la quantité initial 
+                $lotQteOldId = 'ligQteOld' + $row;
+                $ligQteOld = $('#' + $lotQteOldId).val();
+                console.log($ligQteOld);
+                $.getJSON(
+                        // url cible
+                        'ws/webService.php',
+                        //Paramètres
+                                {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
+                        //Callback
+                        function (json) {
+                            //Initialisation de la variable nb
+                            var $nb = '';
+                            for (var key in json) {
+                                //Récupération de la valeur qte qui doit être utilisé pour créer la limit
+                                //La quantité retourner 
+                                //doit être < ou = à la quantité initial - la qté en stock  + l'ancienne valeur retourné
+                                //
+                                $nb = parseInt(json[key].lot_qt_init) - parseInt(json[key].lot_qt_stock) + parseInt($ligQteOld);
+                            }
+                            //Enfin on change la valeur de l'attribut Max de l'input Qte
+                            $inptQte.attr('max', $nb);
+                        }
+                        );
+            } else {
+
+                //Cas de l'insertion d'un bon de retour
+                //Récupère la quantité initial 
+                $.getJSON(
+                        // url cible
+                        'ws/webService.php',
+                        //Paramètres
+                                {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
+                        //Callback
+                        function (json) {
+                            //Initialisation de la variable nb
+                            var $nb = '';
+                            for (var key in json) {
+                                //Récupération de la valeur qte qui doit être utilisé pour créer la limit
+                                //La quantité retourné  
+                                //doit être < ou = à la qté initial - la qté en stock
+                                $nb = parseInt(json[key].lot_qt_init) - parseInt(json[key].lot_qt_stock);
+                            }
+                            //Enfin on change la valeur de l'attribut Max de l'input Qte
+                            $inptQte.attr('max', $nb);
+                        }
+                        );
+                    }
+        break;
+    }
+}
+
+
+function confirmQteStock($row) {
+
+    //id des éléments à modifier
+    $lotQteId = 'ligQte' + $row;
+    console.log($lotQteId);
+    //Récupération des inputs
+    var $inptQte = $('#' + $lotQteId);
+    console.log('Valeur dans l\'input: ' + $inptQte.val());
+    console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
+
+    if ($inptQte.val() <= parseInt($inptQte.attr('max'))) {
+        $color = 'green';
+        $inptQte.css('color', $color);
+    } else {
+        $color = 'red';
+        $inptQte.css('color', $color);
+    }
+}

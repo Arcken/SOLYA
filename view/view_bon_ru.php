@@ -78,7 +78,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <th rowspan="2">
                             Commentaire
                         </th>                        
-                        <th rowspan="2" id="thImg">
+                        <th rowspan="2" id="thImg"> Supprimer
                         </th>
                     </tr>
                     <tr>
@@ -160,6 +160,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    onblur="confirmQteStock('<?php echo $ligId ?>');"
                                    onfocus="limitQteMax('<?php echo $ligId ?>');" min='0' >
                             </td>
+                            <td class="bonLigneNb" hidden>
+                                <input type="number" name="ligQteOld[<?php echo $ligId ?>]"
+                                   id='ligQteOld<?php echo $ligId ?>' 
+                                   value=<?php echo $oLigne->lig_qte; ?> 
+                                   onblur="confirmQteStock('<?php echo $ligId ?>');"
+                                   onfocus="limitQteMax('<?php echo $ligId ?>');" min='0' >
+                            </td>
                             <td class="bonLigneNb">
                                 <textarea name="ligComDep[<?php echo $ligId ?>]" 
                                           id="ligComDep<?php echo $ligId ?>" 
@@ -172,14 +179,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                       class="beLigneT"
                                       ><?php echo $oLigne->lig_com ?></textarea>
                             </td>
-                            <td  class="beLigneImg">
-                                <!-- Pour supprimer les lignes qui existe déja, 
-                                on affiche une case à cocher. 
-                                Pour que le tableau soit complet on masque 
-                                cette case pour les nouvelles lignes-->
+                            <td>
+                               
                                 <input type="checkbox" 
                                        name="ligSupp[<?php echo $ligId ?>]" 
-                                       id="ligSupp<?php echo $ligId ?>">
+                                       id="ligSupp<?php echo $ligId ?>"
+                                       value="<?php echo $ligId ?>">
 
                             </td>
                         </tr>
@@ -208,11 +213,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                     >
                         </td>
                         <td class="bonLigneNb">
-                            <input type="number" name="ligQte[]" id='ligQteNID' value="0" 
+                            <input type="text" name="ligQte[]" id='ligQteNID' value="0" 
+                                   pattern="^[0-9.]{1,}$"
                                    onblur="confirmQteStock('NID');"
                                    onfocus="limitQteMax('NID');" min='0' >
                         </td>
-                        
+                       
                         <td >
                             <textarea name="ligDepot[]" id='ligDepotNID' class="bonLigneT"
                                       rows="2" cols="30">Dépot?</textarea>
@@ -222,8 +228,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                       rows="2" cols="30">Commentaire</textarea>
                         </td>
                         <td class="bonLigneImg">
-                            <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick="delLigne('idLigne');" class="tdImgTd"/>
+                            <img src="img/icon/delete.png" 
+                                 alt="" 
+                                 title="Supprimer"
+                                 onclick="delLigne('idLigne');" />
                         </td>
                     </tr>
                 </table>
