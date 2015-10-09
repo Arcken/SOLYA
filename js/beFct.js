@@ -123,6 +123,10 @@ function beCalcul() {
 
         //idligne pour le control dans la console
         $idLigne= $(this).attr('id');
+        
+        //
+        //Rajouter maj droit douane
+        //
 
         //On récupére la quantité descendant de ce tr
         $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
@@ -136,6 +140,9 @@ function beCalcul() {
         //calcul
         $lignePoids.val(parseFloat($lignePoidsUnitaire.val()) * $ligneQtVal);
 
+        //On met à jour le champs droit douane
+        beCcDroitDouane($source1, $source2, $source3, $cible);
+        
         //On récupére l'input de la case droit douane ligne
         //descendant de ce tr
         $ligneDroitDouane = $(this).find('[id^="beligDd"]');

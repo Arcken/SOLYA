@@ -14,10 +14,8 @@ class LotManager {
     public static function updQteLot($oLot) {
         try {
             
-            $tParam = array(
-                $oLot->lot_qt_stock,
-                $oLot->lot_id
-            );
+            $tParam = [$oLot->lot_qt_stock,
+                $oLot->lot_id];
 
             $sql = "UPDATE lot SET "
                     . "lot_qt_stock =? "
@@ -41,7 +39,7 @@ class LotManager {
      */
     public static function getLot($lotId){
         try{
-        $tParam = array($lotId);
+        $tParam = [$lotId];
         
         $sql= "SELECT lot_id,"
                 . "ref_id,"
@@ -70,7 +68,7 @@ class LotManager {
      */
     public static function getLotForUpd($lotId){
         try{
-        $tParam = array($lotId);
+        $tParam = [$lotId];
         
         $sql= "SELECT lot_id,"
                 . "ref_id,"
@@ -94,7 +92,7 @@ class LotManager {
          
      
         try{
-            $tParam = array($refId);
+            $tParam = [$refId];
 
             $sql= "SELECT lot_id,"
                         . "lot_dlc,"
@@ -118,14 +116,12 @@ class LotManager {
     public static function updLot($oLot) {
         try {
             
-            $tParam = array(
-                $oLot->ref_id,
+            $tParam = [$oLot->ref_id,
                 $oLot->lot_id_producteur,
                 $oLot->lot_dlc,
                 $oLot->lot_qt_stock,
                 $oLot->lot_qt_init,
-                $oLot->lot_id
-            );
+                $oLot->lot_id];
 
             $sql = "UPDATE lot SET "
                     . "ref_id = ?, "
@@ -172,6 +168,27 @@ class LotManager {
 
                 $result = Connection::request(2, $sql, $tParam);
                 
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+     /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $lotId
+     * Id du lot
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delLot($lotId) {
+        try {
+            $tParam = [$lotId];
+            
+            $sql = 'DELETE FROM lot WHERE lot_id = ?';
+            
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
         }

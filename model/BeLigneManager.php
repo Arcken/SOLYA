@@ -94,16 +94,14 @@ class BeLigneManager {
 
         try {
 
-            $tParam = array(
-                $oBeLigne->lig_id,
+            $tParam = [$oBeLigne->lig_id,
                 $oBeLigne->be_id,
                 $oBeLigne->belig_pu,
                 $oBeLigne->belig_cu_achat,
                 $oBeLigne->belig_fb,
                 $oBeLigne->belig_ft,
                 $oBeLigne->belig_dd,
-                $oBeLigne->belig_taxe
-            );
+                $oBeLigne->belig_taxe];
 
             $sql = "INSERT INTO be_ligne ("
                     . " lig_id, "
@@ -136,9 +134,7 @@ class BeLigneManager {
 
         try {
 
-            $tParam = array(
-                $beId
-            );
+            $tParam = [$beId];
             $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
                     . 'belig_ft, belig_dd, belig_taxe '
                     . 'FROM be_ligne '
@@ -162,16 +158,14 @@ class BeLigneManager {
     public static function updBeLigne($oBeLigne) {
         try {
 
-           $tParam = array(
-                $oBeLigne->belig_pu,
+           $tParam = [$oBeLigne->belig_pu,
                 $oBeLigne->belig_cu_achat,
                 $oBeLigne->belig_fb,
                 $oBeLigne->belig_ft,
                 $oBeLigne->belig_dd,
                 $oBeLigne->belig_taxe,
                 $oBeLigne->be_id,
-               $oBeLigne->lig_id,
-            );
+               $oBeLigne->lig_id];
 
             $sql = "UPDATE be_ligne SET "
                     . " belig_pu = ?, "
@@ -191,18 +185,20 @@ class BeLigneManager {
 
     /**
      * Supprime l'enregistrement de la table selon son id
-     * 
-     * @param $id
-     * id de l'enregistrement
+     * l'id est composé de deux id
+     * @param $beId
+     * Id du bon entrée
+     * @param $ligId
+     * Id de ligne
      * @return int 
      * nombre de ligne impacté
      */
-    public static function delBeLigne($id) {
+    public static function delBeLigne($beId,$ligId) {
         try {
-            $tParam = array(
-                $id
-            );
-            $sql = 'DELETE FROM be_ligne WHERE lig_id=?';
+            $tParam = [$beId,
+                $ligId];
+            
+            $sql = 'DELETE FROM be_ligne WHERE be_id = ? AND lig_id = ?';
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;

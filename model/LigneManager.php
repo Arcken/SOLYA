@@ -34,19 +34,41 @@ class LigneManager {
     
     
     /**
-     * Select for update d'un enregistrement selon l'id
-     * @param $lotId
+     * retourne un enregistrement selon l'id
+     * @param $ligId
      * attend l'id de l'enregistrement
      * @return objet
      * retourne un objet
      */
-    public static function getLigneDetailForUpd($lotId) {
+    public static function getLigneDetail($ligId) {
 
         try {
 
-            $tParam = array(
-                $lotId
-            );
+            $tParam = [$ligId];
+            
+            $sql = 'SELECT lig_id, lot_id, lig_qte, lig_com_dep, lig_com '
+                    . 'FROM ligne '
+                    . 'WHERE lig_id =? FOR UPDATE';
+            $result = Connection::request(0, $sql, $tParam);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    /**
+     * Select for update d'un enregistrement selon l'id
+     * @param $ligId
+     * attend l'id de l'enregistrement
+     * @return objet
+     * retourne un objet
+     */
+    public static function getLigneDetailForUpd($ligId) {
+
+        try {
+
+            $tParam = [$ligId];
+            
             $sql = 'SELECT lig_id, lot_id, lig_qte, lig_com_dep, lig_com '
                     . 'FROM ligne '
                     . 'WHERE lig_id =? FOR UPDATE';
@@ -65,16 +87,13 @@ class LigneManager {
     public static function updLigne($oLigne) {
         try {
             
-            $tParam = array(
-                $oLigne->lot_id,
+            $tParam = [
                 $oLigne->lig_qte,
                 $oLigne->lig_com,
                 $oLigne->lig_com_dep,
-                $oLigne->lig_id
-            );
+                $oLigne->lig_id];
 
             $sql = "UPDATE ligne SET "
-                    . "lot_id = ?, "
                     . "lig_qte = ?, "
                     . "lig_com = ?, "
                     . "lig_com_dep = ? "
@@ -95,12 +114,10 @@ class LigneManager {
     public static function addLigne($oLigne) {
         try {
 
-            $tParam = array(
-                $oLigne->lot_id,
+            $tParam = [$oLigne->lot_id,
                 $oLigne->lig_qte,
                 $oLigne->lig_com,
-                $oLigne->lig_com_dep
-                            );
+                $oLigne->lig_com_dep];
 
             $sql = "INSERT INTO ligne ("
                     . "lot_id,"
@@ -111,6 +128,27 @@ class LigneManager {
 
             $result = Connection::request(2, $sql, $tParam);
             
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $ligId
+     * Id de ligne
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delLigne($ligId) {
+        try {
+            $tParam = [$ligId];
+            
+            $sql = 'DELETE FROM ligne WHERE lig_id = ?';
+            
+            $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
         }
