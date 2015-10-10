@@ -4,6 +4,24 @@
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
 
+
+
+    <!--
+
+
+                    Ajouter le mode de paiement
+
+
+
+
+
+
+
+    -->
+
+
+
+
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     <script type="text/javascript" src="js/calculFct.js" ></script>
     <script type="text/javascript" src="js/beFct.js" ></script>
@@ -51,22 +69,25 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="beFraisDouane"> Frais de douane </label><br>
                 <input name="beFraisDouane" 
                        id="beFraisDouane" 
-                       placeholder="description" 
-                       type="text" 
+                       type="number"
+                       min="0"
+                       step="0.01"
                        value="<?php echo $resBeDetail->be_frais_douane ?>">
                 <br>
                 <label for="beFraisBancaire"> Frais bancaires </label><br>
                 <input name="beFraisBancaire" 
                        id="beFraisBancaire" 
-                       placeholder="description" 
-                       type="text" 
+                       type="number"
+                       min="0"
+                       step="0.01"
                        value="<?php echo $resBeDetail->be_frais_bancaire ?>">
                 <br>
                 <label for="beFraisTrans"> Frais de transport </label><br>
                 <input name="beFraisTrans" 
                        id="beFraisTrans" 
-                       placeholder="description" 
-                       type="text" 
+                       type="number"
+                       min="0"
+                       step="0.01"
                        value="<?php echo $resBeDetail->be_frais_trans ?>">
                 <br>
 
@@ -164,196 +185,226 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </th>
 
                     </tr>
-                    
+
                     <!-- Squelette des lignes
                     Une fonction js copie le code html entre les balise tr 
                     où id=idLigne et le rajoute à la fin du tr en rennomant les id
                     NID est remplacé par incrément et idligne est complété du
                     même incrément
                     -->
-                        <tr id="idLigne" hidden="">
-                            <td class="beLigneId">
-                                <input type="text"
-                                       name="ligId[NID]" 
-                                       id="ligIdNID">
-                            </td>
-                            <td  class="beLigneId">
-                                <!-- Appel de fonction qui recherche une reference 
-                                selon son id, il faut préciser le champs-->
-                                <input type="number" 
-                                       name="refId[NID]" 
-                                       id="refIdNID"
-                                       onblur='getReference("NID",
-                                                        "refIdNID",
-                                                        "ref_id",
-                                                        "be")' min="0">
-                            </td>
-                            <td class="beLigneCode">
-                                <input type="text"
-                                       name="refCode[NID]" 
-                                       id="refCodeNID">
-                            </td>
-                            <td>
-                                <textarea name="refLbl[NID]" 
-                                          id="refLblNID"
-                                          class="beLigneT"></textarea>                           
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="" 
-                                       name="lotIdProducteur[NID]" 
-                                       id="lotIdProducteurNID"
-                                       title="Lot du producteur">
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="beligPu[NID]" 
-                                       id="beligPuNID">
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="ligQte[NID]" 
-                                       id ="ligQteNID">
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="refPoidsBrut[NID]" 
-                                       id="refPoidsBrutNID">
-                            </td>
-                            <!-- Calcul totalPoids Multiplication entre la quantité
-                            et le pois unitaire-->
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="totalPoids[NID]" 
-                                       id="totalPoidsNID"
-                                       onfocus='ccMultiplier(["ligQteNID",
-                                                   "refPoidsBrutNID"],
-                                                       "totalPoidsNID")'>
-                            </td>
-                            <td class="beLigneNb">
-                                <!-- Calcul droit de douane selon le pu, le taux 
-                                et la quantité-->
-                                <input type="text" 
-                                       value="0" 
-                                       name="beligDd[NID]" 
-                                       id="beligDdNID"
-                                       onfocus='beCcDroitDouane("beligPuNID",
-                                                       "beligTauxDouaneNID",
-                                                       "ligQteNID",
-                                                       "beligDdNID")'>
-                            </td>
-                            <td class="beLigneNb">
-                                <!-- Calcul droit de douane selon le pu, le taux 
-                                et la quantité-->
-                                <input type="text" 
-                                       value="0" 
-                                       name="beligTauxDouane[NID]" 
-                                       id="beligTauxDouaneNID"
-                                       onchange='beCcDroitDouane("beligPuNID",
-                                                       "beligTauxDouaneNID",
-                                                       "ligQteNID",
-                                                       "beligDdNID")'>
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="beligTaxe[NID]" 
-                                       id="beligTaxeNID">
-                            </td>
-                            <td class="beLigneNb">
-                                <!-- Additionne droit de douane et taxe-->
-                                <input type="text" 
-                                       value="0" 
-                                       name="totalFd[NID]" 
-                                       id="totalFdNID" 
-                                       readonly=""
-                                       onfocus='ccAddition(
-                                                       ["beligDdNID", "beligTaxeNID"],
-                                                       "totalFdNID")'>
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="beligFb[NID]" 
-                                       id="beligFbNID">
-                            </td>
-                            <td class="beLigneNb">
-                                <!-- Copie frais bancaire dans total -->
-                                <input type="text" 
-                                       value="0" 
-                                       name="totalFb[NID]" 
-                                       id="totalFbNID"
-                                       readonly=""
-                                       onfocus='copieChamps("beligFbNID",
-                                                       "totalFbNID")'>
-                            </td>
-                            <td class="beLigneNb">
-                                <input type="text" 
-                                       value="0" 
-                                       name="beligFt[NID]" 
-                                       id="beligFtNID">
-                            </td>
-                            <td class="beLigneNb">
-                                <!-- Copie frais transport dans total-->
-                                <input type="text" 
-                                       value="0" 
-                                       name="totalFt[NID]" 
-                                       id="totalFtNID"
-                                       readonly=""
-                                       onfocus='copieChamps("beligFtNID",
-                                                       "totalFtNID")'>
-                            </td>
-                            <td class="beLigneNb">
-                                <!-- Total de la ligne: appel la fonction qui
-                                calcul le total de la ligne-->
-                                <input type="text" 
-                                       value="0" 
-                                       name="totalLig[NID]" 
-                                       id="totalLigNID"
-                                       readonly=""
-                                       onfocus='beTotalLigne("totalLigNID")'>
-                            </td>
-                            <td>
-                                <input type="date" 
-                                       name="lotDlc[NID]" 
-                                       id="lotDlcNID">
-                            </td>
-                            <td >
-                                <textarea name="ligComDep[NID]" 
-                                          id="ligComDepNID" 
-                                          class="beLigneT"></textarea>
-                            </td>
-                            <td>
-                                <textarea name="ligCom[NID]" 
-                                          id="ligComNID"  
-                                          class="beLigneT"></textarea>
-                            </td>
-                            <td>
-                                <input type="text" 
-                                       name="beligCuAchat[NID]" 
-                                       id="beligCuAchatNID"
-                                       value="">                            
-                            </td>
-                            <td  class="beLigneImg">
-                                
-                                <!-- Efface la ligne en cours, n'est visible 
-                                que pour les lignes ajoutées -->
-                                <img src="img/icon/delete.png" 
-                                     alt="" 
-                                     title="Supprimer"
-                                     onclick='delLigne("idLigne")' 
-                                     class="tdImgTd"/>
-                            </td>
-                        </tr>
-                    
-                        
+                    <tr id="idLigne" hidden="">
+                        <td class="beLigneId">
+                            <input type="text"
+                                   name="ligId[NID]" 
+                                   id="ligIdNID"
+                                   readonly="">
+                        </td>
+                        <td  class="beLigneId">
+                            <!-- Appel de fonction qui recherche une reference 
+                            selon son id, il faut préciser le champs-->
+                            <input type="number" 
+                                   name="refId[NID]" 
+                                   id="refIdNID"
+                                   onblur='getReference("NID",
+                                                   "refIdNID",
+                                                   "ref_id",
+                                                   "be")' min="0">
+                        </td>
+                        <td class="beLigneCode">
+                            <input type="text"
+                                   name="refCode[NID]" 
+                                   id="refCodeNID">
+                        </td>
+                        <td>
+                            <textarea name="refLbl[NID]" 
+                                      id="refLblNID"
+                                      class="beLigneT"></textarea>                           
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="text" 
+                                   value="" 
+                                   name="lotIdProducteur[NID]" 
+                                   id="lotIdProducteurNID"
+                                   title="Lot du producteur">
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0.01"
+                                   step="0.01"
+                                   value="1" 
+                                   name="beligPu[NID]" 
+                                   id="beligPuNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0.01"
+                                   step="0.01"
+                                   value="1" 
+                                   name="ligQte[NID]" 
+                                   id ="ligQteNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="refPoidsBrut[NID]" 
+                                   id="refPoidsBrutNID">
+                        </td>
+                        <!-- Calcul totalPoids Multiplication entre la quantité
+                        et le pois unitaire-->
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="totalPoids[NID]" 
+                                   id="totalPoidsNID"
+                                   onfocus='ccMultiplier(["ligQteNID",
+                                               "refPoidsBrutNID"],
+                                                   "totalPoidsNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Calcul droit de douane selon le pu, le taux 
+                            et la quantité-->
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="beligDd[NID]" 
+                                   id="beligDdNID"
+                                   onfocus='beCcDroitDouane("beligPuNID",
+                                                   "beligTauxDouaneNID",
+                                                   "ligQteNID",
+                                                   "beligDdNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Calcul droit de douane selon le pu, le taux 
+                            et la quantité-->
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="beligTauxDouane[NID]" 
+                                   id="beligTauxDouaneNID"
+                                   onchange='beCcDroitDouane("beligPuNID",
+                                                   "beligTauxDouaneNID",
+                                                   "ligQteNID",
+                                                   "beligDdNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="beligTaxe[NID]" 
+                                   id="beligTaxeNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Additionne droit de douane et taxe-->
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="totalFd[NID]" 
+                                   id="totalFdNID" 
+                                   readonly=""
+                                   onfocus='ccAddition(
+                                                   ["beligDdNID", "beligTaxeNID"],
+                                                   "totalFdNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="beligFb[NID]" 
+                                   id="beligFbNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Copie frais bancaire dans total -->
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="totalFb[NID]" 
+                                   id="totalFbNID"
+                                   readonly=""
+                                   onfocus='copieChamps("beligFbNID",
+                                                   "totalFbNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="beligFt[NID]" 
+                                   id="beligFtNID">
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Copie frais transport dans total-->
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="totalFt[NID]" 
+                                   id="totalFtNID"
+                                   readonly=""
+                                   onfocus='copieChamps("beligFtNID",
+                                                   "totalFtNID")'>
+                        </td>
+                        <td class="beLigneNb">
+                            <!-- Total de la ligne: appel la fonction qui
+                            calcul le total de la ligne-->
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="totalLig[NID]" 
+                                   id="totalLigNID"
+                                   readonly=""
+                                   onfocus='beTotalLigne("totalLigNID")'>
+                        </td>
+                        <td>
+                            <input type="date" 
+                                   name="lotDlc[NID]" 
+                                   id="lotDlcNID">
+                        </td>
+                        <td >
+                            <textarea name="ligComDep[NID]" 
+                                      id="ligComDepNID" 
+                                      class="beLigneT"></textarea>
+                        </td>
+                        <td>
+                            <textarea name="ligCom[NID]" 
+                                      id="ligComNID"  
+                                      class="beLigneT"></textarea>
+                        </td>
+                        <td>
+                            <input type="number"
+                                   min="0"
+                                   step="0.01"
+                                   value="0" 
+                                   name="beligCuAchat[NID]" 
+                                   id="beligCuAchatNID"
+                                   >                            
+                        </td>
+                        <td  class="beLigneImg">
+
+                            <!-- Efface la ligne en cours, n'est visible 
+                            que pour les lignes ajoutées -->
+                            <img src="img/icon/delete.png" 
+                                 alt="" 
+                                 title="Supprimer"
+                                 onclick='delLigne("idLigne")' 
+                                 class="tdImgTd"/>
+                        </td>
+                    </tr>
+
+
                     <!-- Fin du squelette-->    
-                    
-                    
+
+
                     <!-- Construction des lignes récupérées-->
 
                     <?php
@@ -412,25 +463,37 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        value="<?php echo $oLot->lot_id_producteur ?>">
                             </td>
                             <td class="beLigneNb">
-                                <input type="text" 
+                                <input type="number"
+                                       min="0.01"
+                                       step="0.01"
                                        name="beligPu[<?php echo $idLigne ?>]" 
                                        id="beligPu<?php echo $idLigne ?>"
                                        value="<?php echo $oBelig->belig_pu ?>">
                             </td>
                             <td class="beLigneNb">
-                                <input type="text" 
+                                <!-- La quantité minimum que l'on peut mettre à
+                                jour est définie par calcul-->
+                                <input type="number"
+                                       step="0.01"
                                        name="ligQte[<?php echo $idLigne ?>]" 
                                        id ="ligQte<?php echo $idLigne ?>"
-                                       value="<?php echo $oLigne->lig_qte ?>">
+                                       value="<?php echo $oLigne->lig_qte ?>"
+                                       min='ctrlUpdQtInit("ligQte<?php echo $idLigne ?>", 
+                                       "<?php echo $oLot->lot_qt_init ?>",
+                                       "<?php echo $oLot->lot_qt_stock ?>")'>
                             </td>
                             <td class="beLigneNb">
-                                <input type="text"
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        name="refPoidsBrut[<?php echo $idLigne ?>]" 
                                        id="refPoidsBrut<?php echo $idLigne ?>"
                                        value="<?php echo $oRef->ref_poids_brut ?>">
                             </td>
                             <td class="beLigneNb">
-                                <input type="text"
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        name="totalPoids[<?php echo $idLigne ?>]" 
                                        id="totalPoids<?php echo $idLigne ?>"
                                        onfocus='ccMultiplier(["ligQte<?php echo $idLigne ?>",
@@ -441,7 +504,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <td class="beLigneNb">
                                 <!-- Calcul droit de douane selon le pu et le taux 
                                 récupérés par getreference-->
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        value="<?php echo $oBelig->belig_dd ?>" 
                                        name="beligDd[<?php echo $idLigne ?>]" 
                                        id="beligDd<?php echo $idLigne ?>"
@@ -451,7 +516,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "beligDd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        value="<?php echo $oDd->dd_taux ?>"
                                        name="beligTauxDouane[<?php echo $idLigne ?>]" 
                                        id="beligTauxDouane<?php echo $idLigne ?>"
@@ -461,7 +528,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "beligDd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        value="<?php echo $oBelig->belig_taxe ?>" 
                                        name="beligTaxe[<?php echo $idLigne ?>]" 
                                        id="beligTaxe<?php echo $idLigne ?>">
@@ -469,7 +538,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <td class="beLigneNb">
                                 <!-- Additionne droit de douane et taxe, mets à jour
                                 le total-->
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        value="0" 
                                        name="totalFd[<?php echo $idLigne ?>]" 
                                        id="totalFd<?php echo $idLigne ?>" 
@@ -479,15 +550,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalFd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        value="<?php echo $oBelig->belig_fb ?>"
                                        name="beligFb[<?php echo $idLigne ?>]" 
                                        id="beligFb<?php echo $idLigne ?>">
                             </td>
                             <td class="beLigneNb">
                                 <!-- Copie frais bancaire dans total -->
-                                <input type="text" 
-                                       value="0" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        name="totalFb[<?php echo $idLigne ?>]" 
                                        id="totalFb<?php echo $idLigne ?>"
                                        readonly=""
@@ -495,15 +569,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalFb<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        value="<?php echo $oBelig->belig_ft ?>"
                                        name="beligFt[<?php echo $idLigne ?>]" 
                                        id="beligFt<?php echo $idLigne ?>">
                             </td>
                             <td class="beLigneNb">
                                 <!-- Copie frais transport dans total-->
-                                <input type="text" 
-                                       value="0" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        name="totalFt[<?php echo $idLigne ?>]" 
                                        id="totalFt<?php echo $idLigne ?>"
                                        readonly=""
@@ -513,7 +590,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <td class="beLigneNb">
                                 <!-- Total de la ligne-->
                                 <input type="text" 
-                                       value="0" 
+                                       type="number"
+                                       min="0"
+                                       step="0.01"
                                        name="totalLig[<?php echo $idLigne ?>]" 
                                        id="totalLig<?php echo $idLigne ?>"
                                        readonly=""
@@ -538,7 +617,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                           ><?php echo $oLigne->lig_com ?></textarea>
                             </td>
                             <td>
-                                <input type="text" 
+                                <input type="number"
+                                       min="0"
+                                       step="0.01"
                                        name="beligCuAchat[<?php echo $idLigne ?>]" 
                                        id="beligCuAchat<?php echo $idLigne ?>"
                                        value="<?php echo $oBelig->belig_cu_achat ?>">                            
@@ -555,7 +636,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                         </tr>
                         <!-- Fin construction lignes récupérées-->
-                      
+
                     <?php } ?>
                 </table>
                 <!-- Ajoute une ligne -->
@@ -597,7 +678,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         </form>
 
     </div>
-    
+
     <?php
 } else {
     echo 'Le silence est d\'or';

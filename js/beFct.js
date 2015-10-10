@@ -111,27 +111,29 @@ function beCalcul() {
     console.log("Frais bancaire par unité: " + $fbUniteVal);
     $ftUniteVal = parseFloat($fTransportVal / $qtTotalVal);
     console.log("Frais transport par unité: " + $ftUniteVal);
-    
+
     //On récupére l'input beTotal et on met sa valeur à zéro pour éviter 
     //des erreurs
     $totalBe = $('[id="beTotal"]');
     $totalBe.val(0);
-    
+
     //Pour chaque balise tr dont l'id est différent de celle des titres 
     //et du squelette (idligne)
     $('tr').not('#titreGnl, #titreCol, #idLigne').each(function () {
 
-        //idligne pour le control dans la console
-        $idLigne= $(this).attr('id');
+        //Si la checkbox n'existe pas ou n'est pas coché on effectue le calcul
+        if (!$(this).find('[id^="ligSupp"]') ||
+                !$(this).find('[id^="ligSupp"]').attr('checked')){
+            
         
-        //
-        //Rajouter maj droit douane
-        //
 
+        //idligne pour le control dans la console
+        $idLigne = $(this).attr('id');
+        
         //On récupére la quantité descendant de ce tr
         $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
         console.log($idLigne + ": qtLigne " + $ligneQtVal);
-        
+
         //On met à jour le champs poids
         //poids unitaire
         $lignePoidsUnitaire = $(this).find('[id^="refPoidsBrut"]')
@@ -141,21 +143,25 @@ function beCalcul() {
         $lignePoids.val(parseFloat($lignePoidsUnitaire.val()) * $ligneQtVal);
 
         //On met à jour le champs droit douane
-        beCcDroitDouane($source1, $source2, $source3, $cible);
-        
+        //On passe en paramètre les id des inputs
+        beCcDroitDouane($(this).find('[id^="beligPu"]').attr('id'),
+                $(this).find('[id^="beligTauxDouane"]').attr('id'),
+                $(this).find('[id^="ligQte"]').attr('id'),
+                $(this).find('[id^="beligDd"]').attr('id'));
+
         //On récupére l'input de la case droit douane ligne
         //descendant de ce tr
         $ligneDroitDouane = $(this).find('[id^="beligDd"]');
-        
+
         //On récupére l'input de la case taxe ligne
         //descendant de ce tr
         $ligneTaxe = $(this).find('[id^="beligTaxe"]');
-        
+
         //On additionne les deux valeurs précédentes qui donnent le total
         //actuel de douane
-        $ligneTempsTotalDouane = parseFloat($ligneDroitDouane.val()) + 
+        $ligneTempsTotalDouane = parseFloat($ligneDroitDouane.val()) +
                 parseFloat($ligneTaxe.val());
-        
+
         console.log($idLigne + ": Total FD: " + $ligneTempsTotalDouane);
 
         //On fait le calcul 'frais de douane unitaire entête * quantité ligne 
@@ -201,13 +207,44 @@ function beCalcul() {
 
         //Calcul du coût unitaire
         //on prend le total ligne que l'on divise par la quantitée de la ligne
-        $coutUnitaire = parseFloat($(this).find('[id^="totalLig"]').val()/$ligneQtVal);
+        $coutUnitaire = parseFloat($(this).find('[id^="totalLig"]').val() / $ligneQtVal);
         console.log($idLigne + ": cout unitaire " + $coutUnitaire);
         $(this).find('[id^="beligCuAchat"]').val($coutUnitaire);
-        
+
         //On met à jour le total du bon en lui ajoutant le total de la ligne en cours
         $totalBe.val(parseFloat($totalBe.val()) + parseFloat($totalLigne.val()));
+                } else {
+                    //On met 0 au total de la ligne, c'est juste indicatif pour
+                    //l'utilisateur
+                    $totalLigne = $(this).find('[id^="totalLig"]').val(0);
+                }
+                
     });
 
     console.log('FIN BECALCUL');
+    
+}
+
+
+function ctrlUpdQtInit($cible, $qtInit, $qtStock) {
+
+    //On récupère l'input cible
+    $inpQt = $('[id="' + $cible + '"]');
+
+    //On récupère les valeurs en les transformant en décimaux
+    $qInit = parseFloat($qtInit);
+    $qStock = parseFloat($qtStock);
+
+    //Le minimum qui peut-être saisie dans la case quantité de l'upd du bon d'entrée
+    //est la différence entre la qtinit et la qtStock 
+    //qui correspond aux articles déja sortis
+    $qtInitMin = $qInit - $qStock;
+    
+    //si les deux valeurs sont identiques, c'est qu'il n'y a aucune variation de
+    //stock, par conséquent on interdit le 0
+    if ($qInit == $qStock) {
+        $qtInitMin = 0.01;
+    }
+    //Enfin on change la valeur de l'attribut Min de l'input Qt
+    $inpQt.attr('min', $qtInitMin);
 }

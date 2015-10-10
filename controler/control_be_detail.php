@@ -162,11 +162,14 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
                         //on créé un objet du lot qui va être maj
                         $oOldLot = LotManager::getLot($oOldLigne->lot_id);
                         //On compare le stock_init de l'ancien lot et du nouveau
-                        $diffQtLot = $oOldLot->lot_qt_init - $oLot->lot_qt_init;
+                        $diffQtLot = $oLot->lot_qt_init - $oOldLot->lot_qt_init;
 
                         //Si ils sont différents on réajuste
                         if ($diffQtLot != 0) {
-                            $oLot->lot_qt_stock = $oLot->lot_qt_stock - $diffQtLot;
+                            //La quantité init est la nouvelle valeur,
+                            //La quantité stock est l'ancienne qt_stock + 
+                            //nouvelle qt_init - ancienne qt_init
+                            $oLot->lot_qt_stock = $oOldLot->lot_qt_stock + $diffQtLot;
                         }
 
                         //Insert du lot dans la table lot
