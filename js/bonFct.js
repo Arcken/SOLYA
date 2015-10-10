@@ -253,10 +253,15 @@ function limitQteMax($row) {
                             for (var key in json) {
                                 console.log('lot_Qte ' + json[key].lot_qt_stock);
                                 
-                                //La nouvelle quantité sortie doit être inférieur 
-                                //à qté en stock 
-                                $nb = parseFloat(json[key].lot_qt_stock);
-                                
+                               
+                                    //La valeur max est égale à qté en stock + Ancienne qté 
+                                    $nb=parseFloat(json[key].lot_qt_stock)+ parseFloat($ligQteOld);
+                                    
+                                    //Cependant si val max est supérieur a la qté initial du lot 
+                                    //Alors la qté max = taille max du lot
+                                    if($nb > parseFloat(json[key].lot_qt_init)){
+                                        $nb = parseFloat(json[key].lot_qt_init);
+                                    }
                                 console.log('lotqtstk = '+json[key].lot_qt_stock);
                                 console.log('oldValue = '+$ligQteOld);
                                 console.log('$nb = '+$nb);
@@ -329,6 +334,11 @@ function limitQteMax($row) {
                                 //doit être < ou = à la quantité initial - la qté en stock  + l'ancienne valeur retourné
                                 //
                                 $nb = parseFloat(json[key].lot_qt_init) - parseFloat(json[key].lot_qt_stock) + parseFloat($ligQteOld);
+                                //Cependant si val max est supérieur a la qté initial du lot 
+                                    //Alors la qté max = taille max du lot
+                                    if($nb > parseFloat(json[key].lot_qt_init)){
+                                        $nb = parseFloat(json[key].lot_qt_init);
+                                    }
                                 console.log('$nb='+$nb);
                             }
                             //Enfin on change la valeur de l'attribut Max de l'input Qte
