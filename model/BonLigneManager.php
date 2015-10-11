@@ -60,4 +60,28 @@ class BonLigneManager {
         }
         return $result;
     }
+    
+     /**
+     * Supprime un enregistrement dans la table Bon_Ligne
+     * selon son lig_id et son bon_id 
+     * @param Object $oBonLigne
+     */
+    public static function delBonLigne($oBonLigne) {
+        try {
+            
+            $tParam = array(
+                $oBonLigne->lig_id,
+                $oBonLigne->bon_id
+            );
+
+            $sql = "DELETE FROM bon_ligne "
+                  ."WHERE lig_id =? AND bon_id =?";
+
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }

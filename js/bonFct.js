@@ -203,15 +203,27 @@ function getLotsFromCurReference($row) {
  */
 function limitQteMax($row) {
 
-    //id des éléments à modifier
+    //id des éléments à récupérer
     $lotIdId = 'lotId' + $row;
     $lotQteId = 'ligQte' + $row;
-
+    //On construit L'id de la ligne si nous sommes sur une modification 
+    $ligIdId='ligId'+$row;
+    
     //Récupération des inputs
     var $valInput = $('#' + $lotIdId);
     var $inptQte = $('#' + $lotQteId);
     var $typeBon = $('#typeBon').val();
-
+    
+    //On récupère l'action pour déterminer le traitement
+    var $sAction = $('#action').val();
+    var $nb = '';
+    
+    //On récupère la valeur de la ligne 
+    //Si elle est vide cela correspond à une insertion de ligne 
+    //sinon cela correspond à une modification
+    var $ligId = $('#'+$ligIdId).val();
+    console.log('$ligID = '+$('#'+$ligIdId).val());
+    
     switch ($typeBon) {
         
         //Bon de sortie 
@@ -222,21 +234,13 @@ function limitQteMax($row) {
         case "5":
         case "6":
         case "7":
-            //On récupère l'action pour déterminer le traitement
-             $sAction = $('#action').val();
-            //On construit L'id de la ligne si nous sommes sur une modification 
-             $ligIdId='ligId'+$row;
-            //On récupère la valeur de la ligne 
-            //Si elle est vide cela correspond à une insertion de ligne 
-            //sinon cela correspond à une modification
-             $ligId   =$('#'+$ligIdId).val();
-             console.log('$ligID = '+$('#'+$ligIdId).val());
+            
             
             if ($sAction === "bon_detail" && $ligId!== "" ){
                 //Cas de la modification du bon de sortie
                 //Récupère la quantité initial 
-                $lotQteOldId = 'ligQteOld' + $row;
-                $ligQteOld = $('#' + $lotQteOldId).val();
+                var $lotQteOldId = 'ligQteOld' + $row;
+                var $ligQteOld = $('#' + $lotQteOldId).val();
                 console.log('pouete pouete '+$ligQteOld);
                 
                 //Récupère la quantité en stock du lot
@@ -249,16 +253,16 @@ function limitQteMax($row) {
                         function (json) {
 
                             //Initialisation de la variable nb
-                            var $nb = '';
+                            
                             for (var key in json) {
                                 console.log('lot_Qte ' + json[key].lot_qt_stock);
                                 
                                
-                                    //La valeur max est égale à qté en stock + Ancienne qté 
+                                    //$nb est égale à qté en stock + Ancienne qté 
                                     $nb=parseFloat(json[key].lot_qt_stock)+ parseFloat($ligQteOld);
                                     
-                                    //Cependant si val max est supérieur a la qté initial du lot 
-                                    //Alors la qté max = taille max du lot
+                                    //Cependant si $nb max est supérieur a la qté initial du lot 
+                                    //Alors la $nb = taille max du lot
                                     if($nb > parseFloat(json[key].lot_qt_init)){
                                         $nb = parseFloat(json[key].lot_qt_init);
                                     }
@@ -281,8 +285,8 @@ function limitQteMax($row) {
                         //Callback
                         function (json) {
 
-                            //Initialisation de la variable nb
-                            var $nb = '';
+                            
+                            
                             for (var key in json) {
                                 console.log('lot_Qte ' + json[key].lot_qt_stock);
                                 //Récupération de la valeur qte qui doit être utilisé pour créer la limit
@@ -303,21 +307,14 @@ function limitQteMax($row) {
         case "11":
         case "12":
 
-            //On récupère l'action pour déterminer le traitement
-             $sAction = $('#action').val();
-            //On construit L'id de la ligne si nous sommes sur une modification 
-             $ligIdId='ligId'+$row;
-            //On récupère la valeur de la ligne 
-            //Si elle est vide cela correspond à une insertion de ligne 
-            //sinon cela correspond à une modification
-             $ligId   =$('#'+$ligIdId);
-             console.log('$ligID = '+$('#'+$ligIdId).val());
+           
 
-            if ($ligId && $sAction === "bon_detail" && ($ligId.val()!=="")  ) {
+            if ($ligId && $sAction === "bon_detail" && $ligId!==""  ) {
                 //Cas de la modification d'un bon de retour
                 //Récupère la quantité initial 
-                $lotQteOldId = 'ligQteOld' + $row;
-                $ligQteOld = $('#' + $lotQteOldId).val();
+                var $lotQteOldId = 'ligQteOld' + $row;
+                var $ligQteOld = $('#' + $lotQteOldId).val();
+                
                 console.log($ligQteOld);
                 $.getJSON(
                         // url cible
@@ -326,8 +323,7 @@ function limitQteMax($row) {
                                 {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
                         //Callback
                         function (json) {
-                            //Initialisation de la variable nb
-                            var $nb = '';
+                           
                             for (var key in json) {
                                 //Récupération de la valeur qte qui doit être utilisé pour créer la limit
                                 //La quantité retourner 
@@ -356,8 +352,7 @@ function limitQteMax($row) {
                                 {test: 'Solya', action: 'getLot', lotId: $valInput.val()},
                         //Callback
                         function (json) {
-                            //Initialisation de la variable nb
-                            var $nb = '';
+                           
                             for (var key in json) {
                                 //Récupération de la valeur qte qui doit être utilisé pour créer la limit
                                 //La quantité retourné  

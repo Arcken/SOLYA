@@ -31,8 +31,8 @@ try {
     //On récupére toutes les ligne du bon
     $resAllBonLignes = BonLigneManager::getBonLignesFromBon($bonId);
 
-    //On vérifie que $resAllBeLigneBE soit bien un tableau (si aucune donnée ce n'est pas un tableau
-    if (is_array($resAllBonLignes)) {
+    //On vérifie que le résultat récupéré soit bien un tableau (si aucune donnée ce n'est pas un tableau)
+    if ( is_array($resAllBonLignes)) {
 
         //Tableau pour les lignes
         $resLignes = [];
@@ -41,7 +41,7 @@ try {
         //Tableau pour les reférénces
         $resAllRefs = [];
 
-        //Pour chaque be_ligne
+        //Pour chaque bon_ligne
         foreach ($resAllBonLignes as $bonLigne) {
 
             //On récupére l'id de ligne
@@ -69,16 +69,11 @@ try {
     //On définit la valeur de sButton
     $sButton = 'Modifier';
 
-    //Pour vérification permet de controler les valeurs des tableaux
-    /* Tool::printAnyCase($oBon);
-      Tool::printAnyCase($resAllBonLignes);
-      Tool::printAnyCase($resLignes);
-      Tool::printAnyCase($resAllLots);
-      Tool::printAnyCase($resAllRefs); */
-
     //Si le formulaire est envoyé
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
-
+        //Vérification du jeton pour savoir si le formulaire à était envoyé
+        if ($_SESSION['token'] != $_REQUEST['token']) {
+    
         //Instanciation de la connection
         $cnx = Connection::getConnection();
 
@@ -87,7 +82,7 @@ try {
 
         //Création du bon 
         $oBon = new Bon();
-        //$oBe->cpt_id = $_REQUEST['cptId'];
+        //$oBon->cpt_id = $_REQUEST['cptId'];
         $oBon->bon_id = $bonId;
         $oBon->doclbl_id = $_REQUEST['typeBon'];
         $oBon->bon_date = $_REQUEST['bonDate'];
@@ -97,29 +92,34 @@ try {
         // Tool::printAnyCase($oBon);
         //Modification du bon
         $updBon = BonManager::updBon($oBon);
-        Tool::printAnyCase($updBon);
-        echo 'bon';
+        echo "Mise à jour du bon check : $updBon ";
         
         //-----------------Gestion des lignes du formulaire-------------------------
         //Création des tableaux contenant toutes les informations
         //Un tableau par type de champs
         //tableau pour la suppression de ligne
+        
         if (isset($_REQUEST['ligSupp'])) {
             $tLigSupp = $_REQUEST['ligSupp'];
         }
 
-        //On récupère les anciennes quantités des lignes
-        $tOldQte = $_REQUEST['ligQteOld'];
+        
+        
+        
 
         //Tableaux pour la table ligne
-
+    if (isset($_REQUEST['ligId'])) {
+        
         $tLigId = $_REQUEST['ligId'];
         $tLotId = $_REQUEST['lotId'];
         $tLigQte = $_REQUEST['ligQte'];
         $tLigComDep = $_REQUEST['ligComDep'];
         $tLigCom = $_REQUEST['ligCom'];
-
-
+        
+        //On récupère les anciennes quantités des lignes si il en éxiste
+        if(isset($_REQUEST['ligQteOld'])){
+        $tOldQte = $_REQUEST['ligQteOld'];
+        }
         //Tableau pour la référence
         $tRefId = $_REQUEST['refId'];
 
@@ -127,28 +127,92 @@ try {
         $tLigneForm = [
             'lig_id' => $tLigId,
             'lot_id' => $tLotId,
-            'old_qte' => $tOldQte,
             'lig_qte' => $tLigQte,
             'lig_com_dep' => $tLigComDep,
             'lig_com' => $tLigCom,
             'ref_id' => $tRefId
         ];
-
+        if(isset($tOldQte)){
+        $tLigneForm['old_qte'] = $tOldQte;
+        }
+        
         Tool::printAnyCase($tLigneForm);
+    }
+        //On créé la variable typeBon qui va nous permettre
+        //de choisir quelles actions effectuer
+        $typeBon = $_REQUEST['typeBon'];
+        
         //Boucle pour traiter les lignes
         //On ignore la première ligne, c'est le squelette de construction 
         //pour l'ajout de ligne dans le bon
         //La limite étant le nombre de ligne remplie on prend ref_id comme témoin
-        echo '<br>en dehors de la boucle <br>';
+        echo '<br> en dehors de la boucle <br>';
+        
         for ($i = 1; $i <= (count($tLigneForm['ref_id'])) - 1; $i++) {
-            echo '<br>dans la boucle <br>';
+            echo '<br> dans la boucle <br>';
+            
             //Si la case lig-id est != '' c'est un update
             if ($tLigneForm['lig_id'][$i] != 0) {
-                //Si
+                //Si le tableau de checkbox pour la suppression est définit
                 if (isset($tLigSupp[$i])) {
-                    echo '<br>';
-                    echo 'suppre';
-                    echo '<br>';
+                    
+                    //On créé les arguments à passer au constructeur de l'objet Bonligne
+                    $argsDelBl =array(
+                        'lig_id'=>$tLigneForm['lig_id'][$i],
+                        'bon_id'=>$oBon->bon_id
+                    );
+                    
+                    //On hydrate l'objet BonLigne que l'on va supprimer
+                    $oBonLigneToDel= new BonLigne($argsDelBl);
+                    
+                    //On supprime dans la table associative bon_ligne
+                     $resDelBonLig=BonLigneManager::delBonLigne($oBonLigneToDel);
+                     
+                    //On récupère les données de la ligne à supprimer
+                     $oLigneToDel = LigneManager::getLigneDetail($tLigneForm['lig_id'][$i]);
+                     $oLot= LotManager::getLotForUpd($oLigneToDel->lot_id);        
+                    //Selon le type de bon le traitement diffère donc switch
+                    switch ($typeBon) {
+
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                        case '6':
+                        case '7':
+                            
+                            echo "<br>Ancienne valeur stk du lot = $oLot->lot_qt_stock <br>";
+                            //Sur la suppression d'une ligne de bon de sortie
+                            //on modifie la valeur stock du lot pour la réincrémenter
+                            
+                            $oLot->lot_qt_stock = (float) $oLot->lot_qt_stock +(float) $oLigneToDel->lig_qte;
+                            
+                            echo "<br> Nouvelle valeur stk du lot = $oLot->lot_qt_stock <br>";
+                            
+                            break;
+
+                        case '8':
+                        case '9':
+                        case '10':
+                        case '11':
+                        case '12':
+
+                             echo "<br>Ancienne valeur stk du lot = $oLot->lot_qt_stock <br>";
+                            //Sur la suppression d'une ligne de bon de retour
+                            //on modifie la valeur stock du lot pour la décrémenter
+                            $oLot->lot_qt_stock = (float) $oLot->lot_qt_stock - (float) $oLigneToDel->lig_qte;
+                            
+                            echo "<br> Nouvelle valeur stk du lot = $oLot->lot_qt_stock <br>";
+                            
+                            break;
+                    }
+                    
+                    $resLotQteUpd =  LotManager::updQteLot($oLot);
+                            echo"<br> Update qté lot check : $resLotQteUpd <br> ";
+                            
+                    $resLigneDel =  LigneManager::delLigne($oLigneToDel->lig_id);
+                            echo"<br> Suppression ligne $i check : $resLigneDel <br> ";
                 } else {
                     echo $i . "<br>";
                     //On hydrate un objet Ligne
@@ -175,7 +239,7 @@ try {
 
                     //On compare l'ancienne quantité avec la nouvelle le calcul étant
                     //différent selon le type de bon
-                    $typeBon = $_REQUEST['typeBon'];
+                   
 
                     echo 'OldqtéLot =' . $oOldLot->lot_qt_stock . '</br>';
                     switch ($typeBon) {
@@ -267,7 +331,7 @@ try {
                         //Enfin on créé notre BonLigne
                         $oBonLig = new BonLigne();
                         $oBonLig->lig_id = $idLig;
-                        $oBonLig->bon_id = $bonId;
+                        $oBonLig->bon_id = $oBon->bon_id;
                         //Et on l'ajoute
                         $resBl=BonLigneManager::addBonLigne($oBonLig);
                         echo "<br>Ajout Bon lign check : $resBl <br>";
@@ -315,7 +379,7 @@ try {
                         //Enfin on créé notre BonLigne
                         $oBonLig = new BonLigne();
                         $oBonLig->lig_id = $idLig;
-                        $oBonLig->bon_id = $idBon;
+                        $oBonLig->bon_id = $oBon->bon_id;
                         //Et on l'ajoute
                         $resBl=BonLigneManager::addBonLigne($oBonLig);
                         echo "<br>Ajout bon ligne check : $resBl <br>";
@@ -325,9 +389,24 @@ try {
         }
 
         $cnx->commit();
-        echo "<br>pouete pouete : c'est un succés ! <br>";
-    }
+        $msg ="<p class= info>". date('H:i:s').
+              " Les modifications sur le bon N° $oBon->bon_id".
+              " ont bien étaient prises en compte";
+      
+     $_SESSION['token']=$_REQUEST['token'];
+     } else{
+            
+            $msg = "<p class= 'erreur'> " . date('H:i:s')."
+                Vous avez déja envoyé ce formulaire </p>";
+            
+            
+     }
+    Tool::addMsg($msg); 
+   }
 } catch (MySQLException $e) {
+    
     $cnx->rollback();
-    echo 'pouete pouete ' . $resEr . " " . $e->RetourneErreur();
+    $msg='<p class="erreur">Oups !une erreur innatendue est survenue ' .
+           $resEr . " " . $e->getMessage().'</p>';
+    Tool::addMsg($msg);
 }
