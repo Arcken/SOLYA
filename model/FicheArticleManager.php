@@ -56,6 +56,33 @@ class FicheArticleManager {
         }
         return $result;
     }
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * 
+     * @return []
+     * Retourne un tableau associatif
+     */
+    public static function getAllFichesArticlesTableau() {
+
+        try {
+
+            $sql = 'SELECT f.fiart_id, fiart_lbl, fiart_photos, '
+                    . 'fiart_photos_pref, fiart_ing, fiart_alg, pays_nom, '
+                    . 'fiart_com, fiart_com_tech, fiart_com_util, '
+                    . 'fiart_desc_fr, fiart_desc_eng, fiart_desc_esp, ga_lbl '
+                    . 'FROM fiche_article f '
+                    . 'JOIN pays p ON f.pays_id = p.pays_id '
+                    . 'RIGHT JOIN regrouper r ON f.fiart_id = r.fiart_id '
+                    . 'JOIN gamme g ON r.ga_id = g.ga_id '
+                    . 'ORDER BY f.fiart_id DESC';
+            $result = Connection::request(1, $sql,null,PDO::FETCH_ASSOC);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 
     
     /**

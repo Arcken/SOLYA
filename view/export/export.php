@@ -25,7 +25,7 @@ if (file_exists($fichier) && is_file($fichier)) {
 
 
 require_once $path . '/model/Connection.php';
-
+require_once $path . '/exception/MySQLException.php';
 
 } else {
     echo 'Le silence est d\'or';

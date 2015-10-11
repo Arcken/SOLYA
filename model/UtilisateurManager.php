@@ -44,7 +44,7 @@ class UtilisateurManager {
      * sans le mot de passe
      * 
      * @return []
-     * Retourne un tableau
+     * Retourne un tableau associatif
      */
     public static function getAllUtilisateursTableau() {
 
