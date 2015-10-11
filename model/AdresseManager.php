@@ -23,27 +23,28 @@ class AdresseManager {
     public static function addAddresse($oAdresse) {
 
         try {
-            $tParam = array($oAdresse->PAYS_ID,
-                $oAdresse->ADR_NUM,
-                $oAdresse->ADR_VOIE,
-                $oAdresse->ADR_RUE1,
-                $oAdresse->ADR_RUE2,
-                $oAdresse->ADR_RUE3,
-                $oAdresse->ADR_CP,
-                $oAdresse->ADR_VILLE,
-                $oAdresse->ADR_ETAT,
+            $tParam = array(
+                $oAdresse->pays_id,
+                $oAdresse->adr_num,
+                $oAdresse->adr_voie,
+                $oAdresse->adr_rue1,
+                $oAdresse->adr_rue2,
+                $oAdresse->adr_rue3,
+                $oAdresse->adr_cp,
+                $oAdresse->adr_ville,
+                $oAdresse->adr_etat,
             );
 
             $sql = "INSERT INTO adresse ("
-                    . "PAYS_ID,"
-                    . "ADR_NUM,"
-                    . "ADR_VOIE,"
-                    . "ADR_RUE1,"
-                    . "ADR_RUE2,"
-                    . "ADR_RUE3,"
-                    . "ADR_CP,"
-                    . "ADR_VILLE,"
-                    . "ADR_ETAT)"
+                    . "pays_id,"
+                    . "adr_num,"
+                    . "adr_voie,"
+                    . "adr_rue1,"
+                    . "adr_rue2,"
+                    . "adr_rue3,"
+                    . "adr_cp,"
+                    . "adr_ville,"
+                    . "adr_etat)"
                     . "VALUES(?,?,?,?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);

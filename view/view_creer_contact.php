@@ -63,7 +63,7 @@
             <select name="CIV_CODE" id="CIV_LBL" required>
                 <option value="" selected > --Civilité-- </option>
                     <?php foreach ($toCiv as $oCiv) {?>
-                <option value ="<?php echo $oCiv->CIV_ID?>"> <?php echo $oCiv->CIV_CODE ?> </option>
+                <option value ="<?php echo $oCiv->civ_id?>"> <?php echo $oCiv->civ_code ?> </option>
                     <?php } ?>
                 </select>
             <br>

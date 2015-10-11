@@ -22,9 +22,12 @@ class CiviliteManager {
     public static function getAllCivilites(){
         
         try {
-            $sql    = "SELECT * FROM civilite";
+            $sql    = "SELECT civ_id,"
+                    . "civ_lbl,"
+                    . "civ_code "
+                    . "FROM civilite";
+            
             $result = Connection::request(1, $sql);
-            return $result;
             
         } catch (MySQLException $e) {
             throw $e;

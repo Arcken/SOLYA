@@ -13,15 +13,15 @@
  */
 class Adresse {
     //Données membres
-    public $PAYS_ID  ='';
-    public $ADR_NUM  ='';
-    public $ADR_VOIE ='';
-    public $ADR_RUE1 ='';
-    public $ADR_RUE2 ='';
-    public $ADR_RUE3 ='';
-    public $ADR_CP   ='';
-    public $ADR_VILLE='';
-    public $ADR_ETAT ='';
+    public $pays_id   ='';
+    public $adr_num   ='';
+    public $adr_voie  ='';
+    public $adr_rue1  ='';
+    public $adr_rue2  ='';
+    public $adr_rue3  ='';
+    public $adr_cp    ='';
+    public $adr_ville ='';
+    public $adr_etat  ='';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs
