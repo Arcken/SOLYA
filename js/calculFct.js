@@ -41,7 +41,7 @@ function ccAddition($source, $cible) {
 
     //on initilise le résultat à 0, addition oblige
     var $res = 0;
-    
+
     //On parcours le tableau et à chaque case on additionne res
     //à la case du tableau
     for (var $i in $source) {
@@ -55,4 +55,28 @@ function ccAddition($source, $cible) {
 
     //console.log("Addition: " + $res.val());
     //console.log("FIN ADDITION");
+}
+
+/**
+ * Fonction de soustraction entre 2 inputs
+ * @param $source1
+ * id input source
+ * @param $source2
+ * id input source2
+ * @param $cible
+ * id de l'input résultat
+ * @returns {undefined}
+ */
+function ccSoustraction($source1, $source2, $cible) {
+
+    //console.log("DEBUT SOUSTRACTION");
+
+    //On récupére les valeurs
+    $source1Val = parseFloat($("[id^='" + $source1 + "']").val());
+    $source2Val = parseFloat($("[id^='" + $source2 + "']").val());
+
+    //on met l'input cible à jour    
+    $("input[id='" + $cible + "']").val(parseFloat($source1Val - $source2Val));
+
+    //console.log("FIN SOUSTRACTION");
 }

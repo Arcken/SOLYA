@@ -297,7 +297,35 @@ class ReferenceManager {
             throw $e;
         }
         return $result;
+    } 
+    
+    
+    /**
+     * Retourne un enregistrements de la table
+     * 
+     * @param $id
+     * Identifiant de la l'enregistrement
+     * 
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getRefCode($id) {
+
+        try {
+            $tParam= [$id];
+
+            $sql = "SELECT ref_code
+                    FROM reference 
+                    WHERE ref_id = ?";
+
+            $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
     }       
+    
 
 /**
  * Efface un enregistrement selon son id
