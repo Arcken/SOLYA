@@ -9,6 +9,7 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
     require_once $path . '/model/BonEntreeManager.php';
     require_once $path . '/model/BeLigne.php';
     require_once $path . '/model/BeLigneManager.php';
+    require_once $path . '/model/BonLigneManager.php';
     require_once $path . '/model/Ligne.php';
     require_once $path . '/model/LigneManager.php';
     require_once $path . '/model/Lot.php';
@@ -240,6 +241,10 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
 
                 //On récupére l'id du lot
                 $lotId = $ligne->lot_id;
+                
+                print_r (BonLigneManager::getBonLignesFromLot($lotId));
+                
+                
                 //On récupére les infos du lot
                 $lot = LotManager::getLotForUpd($lotId);
                 //On ajoute le lot retourné au tableau de lot

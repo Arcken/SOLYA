@@ -45,14 +45,14 @@ class BonLigneManager {
      * @return objet[]
      * Renvoie tableau d'objet
      */
-    public static function getBonLignesFromBon($lotId) {
+    public static function getBonLignesFromLot($lotId) {
 
         try {
 
-            $sql = 'SELECT lig_id'
-                   .' FROM bon_ligne b'
-                    . 'JOIN ligne l ON b.lig_id = l.lig_id '
-                   .' WHERE l.lot_id = ' . $lotId;
+            $sql = 'SELECT lig_id '
+                   .'FROM bon_ligne b '
+                   .'JOIN ligne l ON b.lig_id = l.lig_id '
+                   .'WHERE l.lot_id = ' . $lotId;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
             throw $e;
