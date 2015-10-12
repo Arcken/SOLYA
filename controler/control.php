@@ -53,7 +53,7 @@ else {
 
         // ----------------------------Traitement des données-----------------//
         //--------------------------------------------------------------------//
-
+        echo $sAction;
         switch ($sAction) {
 
             case "home":
@@ -74,6 +74,10 @@ else {
             
             case "bon_detail":
                 require $path.'/controler/control_bon_detail.php';
+                break;
+            
+            case "bon_pdf":
+                require $path.'/controler/control_bon_pdf.php';
                 break;
             
 //-------------------------------Bon entrée-------------------------------------
@@ -142,6 +146,12 @@ else {
                 $sAction = "ga_list";
                 break;
 
+//---------------------------- Inventaire --------------------------------------
+            //ajout inventaire
+            case "inventaire_add":
+                require_once $path . '/controler/control_inv_add.php';
+                break;
+            
 //---------------------------------Pays-----------------------------------------
             //ajout de pays
             case "pays_add":
@@ -313,7 +323,6 @@ else {
                 break;
 
             case "ga_add":
-                //case "ga_add_add":
                 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
                     require $path . '/view/view_gamme_list.php';
                 }
@@ -325,6 +334,12 @@ else {
             case "ga_list":
                 require $path . '/view/view_gamme_list.php';
                 break;
+            
+//----------------------------------- Inventaire -------------------------------
+            case "inventaire_add":
+                require $path . '/view/view_inventaire_c.php';
+                break;
+            
 
 //-------------------------------Références-------------------------------------
 
