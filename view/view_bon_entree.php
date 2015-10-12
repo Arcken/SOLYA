@@ -32,21 +32,20 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="beFactNum"> Référence de facture </label><br>
                 <input name="beFactNum" 
                        id="beFactNum"
-                       placeholder="description" 
+                       placeholder="Numéro de la facture achat" 
                        type="text"
                        >
                 <br>
                 <label for="beLbl"> Libellé du bon </label><br>
                 <input name="beLbl" 
                        id="beLbl"
-                       placeholder="description" 
+                       placeholder="texte" 
                        type="text"
                        >
                 <br>
                 <label for="beDate"> Date</label><br>
                 <input name="beDate" 
                        id="beDate"
-                       placeholder="description" 
                        type="date"
                        required=""
                        >
@@ -54,7 +53,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="beCom"> Commentaire</label><br>
                 <textarea name="beCom" 
                           id="beCom"
-                          placeholder="description">Com</textarea>
+                          placeholder="description"></textarea>
                 <br>
             </div>
             <div class="col50">
@@ -85,7 +84,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 
                 <label for="beInfoTrans"> Information transport</label><br>
                 <textarea name="beInfoTrans" 
-                          placeholder="description">Com</textarea>
+                          placeholder="description"></textarea>
                 <br>
             </div>
             

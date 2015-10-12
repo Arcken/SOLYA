@@ -13,7 +13,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
               enctype="multipart/form-data">
             <div class="col30">
                 <div>
-                    <label for="fiartLbl"> Libellé de la fiche article </label><br>
+                    <label for="fiartLbl"> Libellé</label><br>
                     <input name="fiartLbl" placeholder="description" 
                            required type="text"
                            pattern=".{3,}" title="3 caractères minimum">
@@ -104,37 +104,37 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
             <div class="col30" id="ComFiart">
                 <div>                    
-                    <label for="fiartCom"> Commentaire de la fiche: </label><br>
+                    <label for="fiartCom"> Commentaire: </label><br>
                     <textarea name="fiartCom" rows="3" cols="25" 
                               placeholder="Saisie"></textarea>
                 </div>
                 
                 <div>                    
-                    <label for="fiartComTech"> Commentaire technique de la fiche: </label><br>
+                    <label for="fiartComTech"> Commentaire technique: </label><br>
                     <textarea name="fiartComTech" rows="3" cols="25" 
                               placeholder="Saisie"></textarea>
                 </div>
                 
                 <div>                    
-                    <label for="fiartComUtil"> Commentaire d'utilisation de la fiche: </label><br>
+                    <label for="fiartComUtil"> Commentaire d'utilisation: </label><br>
                     <textarea name="fiartComUtil" rows="3" cols="25" 
                               placeholder="Saisie"></textarea>
                 </div>
                 
                 <div>                    
-                    <label for="fiartDescFr"> Description Française de la fiche: </label><br>
+                    <label for="fiartDescFr"> Description Française: </label><br>
                     <textarea name="fiartDescFr" rows="3" cols="25" 
                               placeholder="Saisie"></textarea>
                 </div>
                 
                 <div>                    
-                    <label for="fiartDescEng"> Description Anglaise de la fiche: </label><br>
+                    <label for="fiartDescEng"> Description Anglaise: </label><br>
                     <textarea name="fiartDescEng" rows="3" cols="25" 
                               placeholder="Saisie"></textarea>
                 </div>
                 
                 <div>                    
-                    <label for="fiartDescEsp"> Description Espagnole de la fiche: </label><br>
+                    <label for="fiartDescEsp"> Description Espagnole: </label><br>
                     <textarea name="fiartDescEsp" rows="3" cols="25" 
                               placeholder="Saisie"></textarea>
                 </div>

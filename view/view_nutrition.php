@@ -26,7 +26,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             
             <div class="col90"> 
                 <label for="nutLbl"> Libellé: </label>
-                <input name="nutLbl" placeholder="Saisie" required type="text">
+                <input name="nutLbl" 
+                       placeholder="Saisie" 
+                       required 
+                       type="text"
+                       pattern=".{3,}" 
+                       title="3 caractères minimum">
                 <br>
             </div>
             
