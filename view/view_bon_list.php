@@ -86,7 +86,7 @@
                                                 "index.php?action=bon_detail&bonId=<?php echo $oBon->bon_id ?>"' />
                                 <img src="img/icon/read.png" 
                                      onclick='window.open(
-                                              "index.php?action=bon_pdf&bonId=<?php echo $oBon->bon_id ?>")'
+                                              "index.php?action=nv_bon_pdf&bonId=<?php echo $oBon->bon_id ?>")'
                              />
                             </td>
 

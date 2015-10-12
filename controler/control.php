@@ -76,9 +76,6 @@ else {
                 require $path.'/controler/control_bon_detail.php';
                 break;
             
-            case "bon_pdf":
-                require $path.'/controler/control_bon_pdf.php';
-                break;
             
 //-------------------------------Bon entrée-------------------------------------
 
@@ -507,13 +504,17 @@ else {
                         $result = PaysManager::addPays($oPays);
                         $id = Connection::dernierId();
                         if ($result == 1) {
-                            $resMessage = "<font color='green'> L'ajout du pays N° $id
-                 intitulée: $oPays->pays_nom est un succés</font>";
+                            $resMessage = "<font color='green'> L'ajout du pays N° $id".
+                                          "intitulée: $oPays->pays_nom est un succés</font>";
                         } else {
                             $resMessage = "<font color='red'> L'ajout du pays est un échec, champs mal remplies</font>";
                         }
                     }
                     
+                    break;
+                    
+                    case "nv_bon_pdf":
+                        require $path.'/controler/control_bon_pdf.php';
                     break;
 
                 

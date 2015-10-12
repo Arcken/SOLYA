@@ -83,11 +83,14 @@ try {
             //Création du bon 
             $oBon = new Bon();
             //$oBon->cpt_id = $_REQUEST['cptId'];
-            $oBon->bon_id = $bonId;
-            $oBon->doclbl_id = $_REQUEST['typeBon'];
-            $oBon->bon_date = $_REQUEST['bonDate'];
-            $oBon->bon_fact_num = $_REQUEST['numFact'];
-            $oBon->bon_com = $_REQUEST['bonCom'];
+            $oBon->bon_id           = $bonId;
+            $oBon->doclbl_id        = $_REQUEST['typeBon'];
+            $oBon->bon_date         = $_REQUEST['bonDate'];
+            if(isset($_REQUEST['bonSortie'])){
+                $oBon->bon_sortie_assoc = $_REQUEST['bonSortie'];
+            }
+            $oBon->bon_fact_num     = $_REQUEST['numFact'];
+            $oBon->bon_com          = $_REQUEST['bonCom'];
 
 
             //Modification du bon
