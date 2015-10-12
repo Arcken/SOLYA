@@ -104,9 +104,6 @@ try {
             }
 
 
-
-
-
             //Tableaux pour la table ligne
             if (isset($_REQUEST['ligId'])) {
 
@@ -136,7 +133,7 @@ try {
                 $tLigneForm['old_qte'] = $tOldQte;
                 }
 
-                Tool::printAnyCase($tLigneForm);
+                //Tool::printAnyCase($tLigneForm);
             }
             //On créé la variable typeBon qui va nous permettre
             //de choisir quelles actions effectuer
@@ -146,10 +143,11 @@ try {
             //On ignore la première ligne, c'est le squelette de construction 
             //pour l'ajout de ligne dans le bon
             //La limite étant le nombre de ligne remplie on prend ref_id comme témoin
-            echo '<br> en dehors de la boucle <br>';
+            
+           //echo '<br> en dehors de la boucle <br>';
 
             for ($i = 1; $i <= (count($tLigneForm['ref_id'])) - 1; $i++) {
-                echo '<br> dans la boucle <br>';
+                //echo '<br> dans la boucle <br>';
 
                 //Si la case lig-id est != '' c'est un update
                 if ($tLigneForm['lig_id'][$i] != 0) {
@@ -166,7 +164,7 @@ try {
                         $oBonLigneToDel= new BonLigne($argsDelBl);
 
                         //On supprime dans la table associative bon_ligne
-                         $resDelBonLig=BonLigneManager::delBonLigne($oBonLigneToDel);
+                        $resDelBonLig = BonLigneManager::delBonLigne($oBonLigneToDel);
 
                         //On récupère les données de la ligne à supprimer
                          $oLigneToDel = LigneManager::getLigneDetail($tLigneForm['lig_id'][$i]);
@@ -185,8 +183,15 @@ try {
                                 //echo "<br>Ancienne valeur stk du lot = $oLot->lot_qt_stock <br>";
                                 //Sur la suppression d'une ligne de bon de sortie
                                 //on modifie la valeur stock du lot pour la réincrémenter
-
-                                $oLot->lot_qt_stock = (float) $oLot->lot_qt_stock +(float) $oLigneToDel->lig_qte;
+                                //Cependant il est nécessaire de controler
+                                //que la nouvelle valeur ne dépasse pas la quantité initiale du lot
+                                
+                                $nvVal=(float) $oLot->lot_qt_stock +(float) $oLigneToDel->lig_qte;
+                                if ($nvVal> $oLot->lot_qt_init){
+                                    $resEr='444';
+                                    throw new MySQLException("Oups! La quantité actuelle en stock ne permet pas de supprimer la ligne $i",$cnx);
+                                }
+                                $oLot->lot_qt_stock =$nvVal;
 
                                 //echo "<br> Nouvelle valeur stk du lot = $oLot->lot_qt_stock <br>";
 
@@ -201,7 +206,14 @@ try {
                                 //echo "<br>Ancienne valeur stk du lot = $oLot->lot_qt_stock <br>";
                                 //Sur la suppression d'une ligne de bon de retour
                                 //on modifie la valeur stock du lot pour la décrémenter
-                                $oLot->lot_qt_stock = (float) $oLot->lot_qt_stock - (float) $oLigneToDel->lig_qte;
+                                //Cependant il est nécessaire de controler
+                                //que la nouvelle valeur ne soit pas inférieur à 0
+                                $nvVal=(float) $oLot->lot_qt_stock - (float) $oLigneToDel->lig_qte;
+                                 if ($nvVal <0 ){
+                                    $resEr='444';
+                                    throw new MySQLException("Oups! La quantité actuelle en stock ne permet pas de supprimer la ligne $i",$cnx);
+                                }
+                                $oLot->lot_qt_stock = $nvVal ;
 
                                 //echo "<br> Nouvelle valeur stk du lot = $oLot->lot_qt_stock <br>";
 
@@ -267,7 +279,7 @@ try {
                         if($oOldLot->lot_qt_init<$newQtLot){
                             $resEr='666';
                             throw new MySQLException ("Impossible de mettre"
-                                    . " à jour le lot la quantité de retour est"
+                                    . " à jour le stock la quantité de retour est"
                                     . " supérieur à la quantité initial du lot",$cnx);
 
                         }
@@ -407,9 +419,21 @@ try {
         Tool::addMsg($msg); 
     }
 } catch (MySQLException $e) {
+    switch ($resEr){
+        
+    case '666':
+    case '777':
+    case '444':
+        $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
+                . $e->getMessage() . "</p>";
+        break;
     
+    default :
+        $msg='<p class="erreur"> '. date('H:i:s') . 'Oups !une erreur innatendue est survenue ' .
+               $resEr . " " . $e->getMessage().'</p>';
+    break;
+
+    }
     $cnx->rollback();
-    $msg='<p class="erreur">Oups !une erreur innatendue est survenue ' .
-           $resEr . " " . $e->getMessage().'</p>';
     Tool::addMsg($msg);
 }
