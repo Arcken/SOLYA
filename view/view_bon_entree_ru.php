@@ -472,13 +472,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                             <td class="beLigneNb">
                                 <!-- La quantité minimum que l'on peut mettre à
-                                jour est définie par calcul-->
+                                jour est définie par un calcul-->
                                 <input type="number"
                                        step="0.01"
                                        name="ligQte[<?php echo $idLigne ?>]" 
                                        id ="ligQte<?php echo $idLigne ?>"
                                        value="<?php echo $oLigne->lig_qte ?>"
-                                       min='ctrlUpdQtInit("ligQte<?php echo $idLigne ?>", 
+                                       onfocus='ctrlUpdQtInit("ligQte<?php echo $idLigne ?>", 
                                        "<?php echo $oLot->lot_qt_init ?>",
                                        "<?php echo $oLot->lot_qt_stock ?>")'>
                             </td>
