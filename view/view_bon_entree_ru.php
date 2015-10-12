@@ -131,7 +131,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             Coût unitaire
                         </th>
                         <th rowspan="2">
-                            P
+                            Supp
                         </th>
                     </tr>
                     <tr id="titreCol">
@@ -206,9 +206,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="refId[NID]" 
                                    id="refIdNID"
                                    onblur='getReference("NID",
-                                                   "refIdNID",
-                                                   "ref_id",
-                                                   "be")' min="0">
+                                                       "refIdNID",
+                                                       "ref_id",
+                                                       "be")' min="0">
                         </td>
                         <td class="beLigneCode">
                             <input type="text"
@@ -261,8 +261,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="totalPoids[NID]" 
                                    id="totalPoidsNID"
                                    onfocus='ccMultiplier(["ligQteNID",
-                                               "refPoidsBrutNID"],
-                                                   "totalPoidsNID")'>
+                                                   "refPoidsBrutNID"],
+                                                       "totalPoidsNID")'>
                         </td>
                         <td class="beLigneNb">
                             <!-- Calcul droit de douane selon le pu, le taux 
@@ -274,9 +274,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="beligDd[NID]" 
                                    id="beligDdNID"
                                    onfocus='beCcDroitDouane("beligPuNID",
-                                                   "beligTauxDouaneNID",
-                                                   "ligQteNID",
-                                                   "beligDdNID")'>
+                                                       "beligTauxDouaneNID",
+                                                       "ligQteNID",
+                                                       "beligDdNID")'>
                         </td>
                         <td class="beLigneNb">
                             <!-- Calcul droit de douane selon le pu, le taux 
@@ -288,9 +288,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="beligTauxDouane[NID]" 
                                    id="beligTauxDouaneNID"
                                    onchange='beCcDroitDouane("beligPuNID",
-                                                   "beligTauxDouaneNID",
-                                                   "ligQteNID",
-                                                   "beligDdNID")'>
+                                                       "beligTauxDouaneNID",
+                                                       "ligQteNID",
+                                                       "beligDdNID")'>
                         </td>
                         <td class="beLigneNb">
                             <input type="number"
@@ -310,8 +310,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="totalFdNID" 
                                    readonly=""
                                    onfocus='ccAddition(
-                                                   ["beligDdNID", "beligTaxeNID"],
-                                                   "totalFdNID")'>
+                                                       ["beligDdNID", "beligTaxeNID"],
+                                                       "totalFdNID")'>
                         </td>
                         <td class="beLigneNb">
                             <input type="number"
@@ -331,7 +331,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="totalFbNID"
                                    readonly=""
                                    onfocus='copieChamps("beligFbNID",
-                                                   "totalFbNID")'>
+                                                       "totalFbNID")'>
                         </td>
                         <td class="beLigneNb">
                             <input type="number"
@@ -351,7 +351,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="totalFtNID"
                                    readonly=""
                                    onfocus='copieChamps("beligFtNID",
-                                                   "totalFtNID")'>
+                                                       "totalFtNID")'>
                         </td>
                         <td class="beLigneNb">
                             <!-- Total de la ligne: appel la fonction qui
@@ -439,9 +439,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="refId<?php echo $idLigne ?>"
                                        value="<?php echo $oLot->ref_id ?>"
                                        onblur='getReference("<?php echo $idLigne ?>",
-                                                       "refId<?php echo $idLigne ?>",
-                                                       "ref_id",
-                                                       "be")' min="0">
+                                                               "refId<?php echo $idLigne ?>",
+                                                               "ref_id",
+                                                               "be")' min="0">
                             </td>
                             <td class="beLigneCode">
                                 <input type="text"
@@ -478,9 +478,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="ligQte[<?php echo $idLigne ?>]" 
                                        id ="ligQte<?php echo $idLigne ?>"
                                        value="<?php echo $oLigne->lig_qte ?>"
-                                       onfocus='ctrlUpdQtInit("ligQte<?php echo $idLigne ?>", 
-                                       "<?php echo $oLot->lot_qt_init ?>",
-                                       "<?php echo $oLot->lot_qt_stock ?>")'>
+                                       onfocus='ctrlUpdQtInit("ligQte<?php echo $idLigne ?>",
+                                                               "<?php echo $oLot->lot_qt_init ?>",
+                                                               "<?php echo $oLot->lot_qt_stock ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
@@ -497,8 +497,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="totalPoids[<?php echo $idLigne ?>]" 
                                        id="totalPoids<?php echo $idLigne ?>"
                                        onfocus='ccMultiplier(["ligQte<?php echo $idLigne ?>",
-                                                   "refPoidsBrut<?php echo $idLigne ?>"],
-                                                       "totalPoids<?php echo $idLigne ?>")'>
+                                                           "refPoidsBrut<?php echo $idLigne ?>"],
+                                                               "totalPoids<?php echo $idLigne ?>")'>
                             </td>
 
                             <td class="beLigneNb">
@@ -511,9 +511,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="beligDd[<?php echo $idLigne ?>]" 
                                        id="beligDd<?php echo $idLigne ?>"
                                        onfocus='beCcDroitDouane("beligPu<?php echo $idLigne ?>",
-                                                       "beligTauxDouane<?php echo $idLigne ?>",
-                                                       "ligQte<?php echo $idLigne ?>",
-                                                       "beligDd<?php echo $idLigne ?>")'>
+                                                               "beligTauxDouane<?php echo $idLigne ?>",
+                                                               "ligQte<?php echo $idLigne ?>",
+                                                               "beligDd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
@@ -523,9 +523,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="beligTauxDouane[<?php echo $idLigne ?>]" 
                                        id="beligTauxDouane<?php echo $idLigne ?>"
                                        onchange='beCcDroitDouane("beligPu<?php echo $idLigne ?>",
-                                                       "beligTauxDouane<?php echo $idLigne ?>",
-                                                       "ligQte<?php echo $idLigne ?>",
-                                                       "beligDd<?php echo $idLigne ?>")'>
+                                                               "beligTauxDouane<?php echo $idLigne ?>",
+                                                               "ligQte<?php echo $idLigne ?>",
+                                                               "beligDd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
@@ -546,8 +546,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="totalFd<?php echo $idLigne ?>" 
                                        readonly=""
                                        onfocus='ccAddition(
-                                                       ["beligDd<?php echo $idLigne ?>", "beligTaxe<?php echo $idLigne ?>"],
-                                                       "totalFd<?php echo $idLigne ?>")'>
+                                                               ["beligDd<?php echo $idLigne ?>",
+                                                               "beligTaxe<?php echo $idLigne ?>"],
+                                                               "totalFd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
@@ -566,7 +567,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="totalFb<?php echo $idLigne ?>"
                                        readonly=""
                                        onfocus='copieChamps("beligFb<?php echo $idLigne ?>",
-                                                       "totalFb<?php echo $idLigne ?>")'>
+                                                               "totalFb<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
@@ -585,7 +586,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="totalFt<?php echo $idLigne ?>"
                                        readonly=""
                                        onfocus='copieChamps("beligFt<?php echo $idLigne ?>",
-                                                       "totalFt<?php echo $idLigne ?>")'>
+                                                               "totalFt<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <!-- Total de la ligne-->
@@ -626,13 +627,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                             <td  class="beLigneImg">
                                 <!-- Pour supprimer les lignes qui existe déja, 
-                                on affiche une case à cocher. -->
-                                <label for="ligSupp">Supp</label>
+                                on affiche une case à cocher si l'id du lot
+                                n'est pas présent dans le tableau $resAllLotsBons-->
+                                 <?php 
+                                       if (!in_array($oLot->lot_id, $resAllLotsBons)){ ?>
                                 <input type="checkbox" 
                                        name="ligSupp[<?php echo $idLigne ?>]" 
                                        id="ligSupp<?php echo $idLigne ?>"
                                        >
-
+                                       <?php } ?>
                             </td>
                         </tr>
                         <!-- Fin construction lignes récupérées-->

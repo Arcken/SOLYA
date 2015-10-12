@@ -60,6 +60,31 @@ class LotManager {
     
     
     /** 
+     * Retourne tous les lots dont le stock est >0
+     * @return []objet
+     * retourne un tableau d'objets
+     */
+    public static function getLotStock(){
+        try{
+                
+        $sql= "SELECT lot_id,"
+                . "ref_id,"
+                . "lot_dlc,"
+                . "lot_qt_stock,"
+                . "lot_qt_init "
+                . "FROM lot "
+                . "WHERE lot_qt_stock > 0";
+        
+         $result = Connection::request(1, $sql);
+         
+        }catch(MySQLException $e){
+          throw $e;   
+        }
+        return $result;
+    }
+    
+    
+    /** 
      * Select for update d'un enregistrement selon l'id
      * @param $lotId
      * Attend l'id du lot

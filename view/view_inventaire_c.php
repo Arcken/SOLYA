@@ -63,11 +63,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <td  class="beLigneId">
                                 <!-- Appel de fonction qui recherche une reference 
                                 selon son id-->
-                                <input type="number" 
+                                <input type="text" 
                                        name="lotId[NID]" 
                                        id="lotIdNID"
-                                       onblur='' 
-                                       min="0">
+                                       >
                             </td>
                             <td class="beLigneCode">
                                 <input type="text"
@@ -96,13 +95,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                           id="liginvLblNID" 
                                           class="beLigneT"></textarea>
                             </td>
-                            <td>
-                                <textarea name="ligCom[NID]" 
-                                          id="ligComNID"  
-                                          class="beLigneT"></textarea>
-                            </td>
+                            
                             <td class="beLigneCode">
-                                <input type="text"
+                                <input type="number" 
+                                       value="1"
+                                       min="0"
+                                       step="0.01"
                                        name="bonId[NID]" 
                                        id="bonIdNID"
                                        onblur=''>
@@ -117,6 +115,76 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
 
                         </tr>
+                        
+                        
+                        <?php
+                    //Pour chaque lot en stock
+                    for ($i = 0; $i < count($resStock); $i++) {
+                        //l'id du tr html est i+1, 0 étant celle du squellette
+                        $idLigne = $i + 1;
+                        //On récupère un objet lot
+                        $oLot = $resStock[$i];
+                        ?>
+                        <tr id="idLigne<?php echo $idLigne ?>">
+                            <td  class="beLigneId">
+                                <!-- Appel de fonction qui recherche une reference 
+                                selon son id-->
+                                <input type="text" 
+                                       name="lotId[<?php echo $idLigne ?>]" 
+                                       id="lotId<?php echo $idLigne ?>"
+                                       value='<?php echo $oLot->lot_id?>'
+                                       >
+                            </td>
+                            <td class="beLigneCode">
+                                <input type="text"
+                                       name="refCode[<?php echo $idLigne ?>]" 
+                                       id="refCode<?php echo $idLigne ?>"
+                                       onblur=''>
+                            </td>
+                            <td class="beLigneNb">
+                                <input type="number" 
+                                       value="1"
+                                       min="0"
+                                       step="0.01"
+                                       name="liginv_qt_stock[<?php echo $idLigne ?>]" 
+                                       id="liginv_qt_stock<?php echo $idLigne ?>"
+                                       value='<?php echo $oLot->lot_qt_stock?>'
+                                       >
+                            </td>
+                            <td class="beLigneNb">
+                                <input type="number" 
+                                       value="1"
+                                       min="0"
+                                       step="0.01"
+                                       name="liginv_qt_reel[<?php echo $idLigne ?>]" 
+                                       id="liginv_qt_reel<?php echo $idLigne ?>">
+                            </td>
+                            <td >
+                                <textarea name="liginvLbl[<?php echo $idLigne ?>]" 
+                                          id="liginvLbl<?php echo $idLigne ?>" 
+                                          class="beLigneT"></textarea>
+                            </td>
+                            
+                            <td class="beLigneCode">
+                                <input type="number" 
+                                       value="1"
+                                       min="0"
+                                       step="0.01"
+                                       name="bonId[<?php echo $idLigne ?>]" 
+                                       id="bonId<?php echo $idLigne ?>"
+                                       onblur=''>
+                            </td>
+                            <td>
+                                <input type="number" 
+                                       value="0" 
+                                       step="0.01"
+                                       name="diffLig[<?php echo $idLigne ?>]" 
+                                       id="diffLig<?php echo $idLigne ?>"
+                                       value="">                            
+                            </td>
+
+                        </tr>
+                    <?php } ?>
                     </table>
                     <!-- Ajoute une ligne -->
                     <input type="button" 

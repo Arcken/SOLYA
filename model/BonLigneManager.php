@@ -49,7 +49,7 @@ class BonLigneManager {
 
         try {
 
-            $sql = 'SELECT lig_id '
+            $sql = 'SELECT bon_id, l.lig_id, l.lot_id '
                    .'FROM bon_ligne b '
                    .'JOIN ligne l ON b.lig_id = l.lig_id '
                    .'WHERE l.lot_id = ' . $lotId;

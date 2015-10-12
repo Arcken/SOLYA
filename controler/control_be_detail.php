@@ -217,6 +217,8 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
 
         //On récupére toutes les be_ligne du bon
         $resAllBeLigneBE = BeLigneManager::getBesLignesDetailForUpd($beId);
+        
+        
 
         //On vérifie que $resAllBeLigneBE soit bien un tableau (si aucune donnée ce n'est pas un tableau
         if (is_array($resAllBeLigneBE)) {
@@ -224,6 +226,11 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
             $resLignes = [];
             //Tableau pour les lots
             $resAllLots = [];
+            
+            //tableau pour des bons de sorties sont créés pour les lots, afin
+            //d'interdire leur suppression dans ce cas
+            $resAllLotsBons = [];
+            
             //Tableau pour les reférénces
             $resAllRefs = [];
             //Tableaux pour les droits de douanes
@@ -242,8 +249,16 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
                 //On récupére l'id du lot
                 $lotId = $ligne->lot_id;
                 
-                print_r (BonLigneManager::getBonLignesFromLot($lotId));
+                //On recherche ses occurences associé à la table bon
+                $lotBon = BonLigneManager::getBonLignesFromLot($lotId);
                 
+                //Si le tableau est définie, au moins une occurence est trouvé
+                if (is_array($lotBon)){
+                    //Dans ce cas on stock l'id du lot dans le tableau, 
+                    //dans le formulaire si on trouve l'id du lot dans le tableau
+                    //on désactive la checkbox de suppression
+                    $resAllLotsBons[] = $lotId;
+                }
                 
                 //On récupére les infos du lot
                 $lot = LotManager::getLotForUpd($lotId);
@@ -263,6 +278,7 @@ if (isset($_REQUEST['beId']) && $_REQUEST['beId'] != '') {
                 //On ajoute le droit de douane retournée au tableau de droit douane
                 $resAllDds[] = $dd;
             }
+            print_r($resAllLotsBons);
         }
         $sButton = 'Modifier';
     }

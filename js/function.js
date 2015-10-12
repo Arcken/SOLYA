@@ -71,6 +71,36 @@ function popup($action) //------------------------Appelable partout
     return false;
 }
 
+/**
+ * 
+ * @param $champs 
+ * champs cible dans la table
+ * @param $table 
+ * nom de la table
+ * @param $source 
+ * nom de l'input contenant la valeur à chercher
+ * @returns {undefined}
+ */
+function cptOccurence($champs, $table, $source){
+    //on récupére la valeur de l'input
+    $valeur = $("input[id=" + $source + "]").val();
+     $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getNombre', table: $table, champs: $champs, valeur: $valeur},
+    function (json) {
+        //La web service renvoie le nombre d'enregistrement trouvé
+        if (json.total == 0) {
+            //Si aucun enr trouvé on affiche
+            return false;
+        }
+        else {
+            //Si 1 ou plusieurs enr trouvé on affiche
+            return true;
+        }
+    }
+    );
+}
+
 
 /**
  * Fonction qui recherche le nombre d'occurence dans une table

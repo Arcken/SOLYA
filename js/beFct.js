@@ -128,10 +128,10 @@ function beCalcul() {
 
         //Si la checkbox n'existe pas ou n'est pas coché on effectue le calcul
         if (!$(this).find('[id^="ligSupp"]') || !$(this).find('[id^="ligSupp"]').is(':checked')) {
-           
+
             //idligne pour le control dans la console
             $idLigne = $(this).attr('id');
-             console.log("ligne calculé: " + $(this).attr('id'));
+            console.log("ligne calculé: " + $(this).attr('id'));
 
             //On récupére la quantité descendant de ce tr
             $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
@@ -225,6 +225,17 @@ function beCalcul() {
     });
 
     console.log('FIN BECALCUL');
+
+}
+
+function ctrlFormValide() {
+    //Pour chaque balise tr dont l'id est différent de celle des titres 
+    //et du squelette (idligne)
+    $('tr').not('#titreGnl, #titreCol, #idLigne').each(function () {
+        $val = cptOccurence("ref_id", "reference",$(this).find('[id^="refId"]').attr('id'));
+        alert('test ' + $val);
+    }
+    );
 
 }
 
