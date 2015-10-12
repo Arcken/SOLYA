@@ -16,6 +16,36 @@ class BonManager {
      * @return type
      * @throws MySQLException
      */
+     public static function getBon($bonId) {
+        try {
+
+          $tParam=[$bonId];
+
+            $sql = "SELECT bon_id, "
+                         ."doclbl_id,"
+                         ."bon_fact_num,"
+                         ."bon_date,"
+                         ."bon_com,"
+                         ."bon_sortie_assoc FROM bon "
+                         ."WHERE bon_id=?";
+            
+          $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Retourne un enregistrement de la table Bon pour mise a jour
+     * selon son ID.
+     *  
+     * @param type $bonId
+     * @return type
+     * @throws MySQLException
+     */
      public static function getBonForUpd($bonId) {
         try {
 

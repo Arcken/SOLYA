@@ -85,11 +85,11 @@ class generatorPDF extends FPDF {
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 // initialise le numéro de facture
 //
-// $aFacture : numéro de facture
+// $aInfos : numéro du document et type du document
 // $aPage : texte à afiche devant le numéro de page
-// $aDate : date d'émission de la facture
-    public function initFacture($aFacture = '', $aDate = '', $aPage = '') {
-        $this->elementAdd($aFacture, 'infoFacture', 'header');
+// $aDate : date d'émission 
+    public function initPDF($aInfos = '', $aDate = '', $aPage = '') {
+        $this->elementAdd($aInfos, 'infoFacture', 'header');
         $this->elementAdd($aDate, 'infoDate', 'header');
         $this->elementAdd($aPage, 'infoPage', 'header');
         $this->SetSubject($aFacture, true);

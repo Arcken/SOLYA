@@ -84,7 +84,11 @@
                             <td><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = 
                                                 "index.php?action=bon_detail&bonId=<?php echo $oBon->bon_id ?>"' />
-                           </td>
+                                <img src="img/icon/read.png" 
+                                     onclick='location.href=
+                                              "index.php?action=bon_pdf&bonId=<?php echo $oBon->bon_id ?>"'
+                             />
+                            </td>
 
 
                         </tr>
