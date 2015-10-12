@@ -34,7 +34,7 @@ class generatorPDF extends FPDF {
 // $atextAdr1 : adresse de l'entreprise
 // $atextAdr2 : adresse du client
 // $aFooter : texte du pied de page
-    function facturePDF($atextAdr1 = '', $atextAdr2 = '', $aFooter = '') {
+    function generatorPDF($atextAdr1 = '', $atextAdr2 = '', $aFooter = '') {
         $this->FPDF();
         $this->SetMargins(0, 0, 0);
         $this->SetFont('Helvetica', '', 11);
@@ -92,7 +92,7 @@ class generatorPDF extends FPDF {
         $this->elementAdd($aInfos, 'infoFacture', 'header');
         $this->elementAdd($aDate, 'infoDate', 'header');
         $this->elementAdd($aPage, 'infoPage', 'header');
-        $this->SetSubject($aFacture, true);
+        $this->SetSubject($aInfos, true);
     }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -120,6 +120,7 @@ class generatorPDF extends FPDF {
 // $aWidth : largeur de la colonne
 // $aHeaderALign : alignement de la cellule d'entête
 // $aContentAlign : alignement des celules de contenu
+    
     public function productHeaderAddRow($aStr, $aWidth = '30', $aAlign = 'C') {
         if (empty($aStr))
             return 0;
@@ -204,7 +205,13 @@ class generatorPDF extends FPDF {
             $this->prepareLine('', $this->template['totalHead'], 0);
             $tplt = $this->template['total'];
             foreach ($this->totalLst as $r) {
-                $this->buildLine($this->totalWidth, $tplt['lineHeight'], $this->totalHead, $r, $tplt, $tplt['color'], $tplt['backgroundColor']);
+                $this->buildLine($this->totalWidth,
+                                 $tplt['lineHeight'],
+                                 $this->totalHead, 
+                                 $r, 
+                                 $tplt,
+                                 $tplt['color'],
+                                 $tplt['backgroundColor']);
             }
         }
     }
@@ -227,7 +234,10 @@ class generatorPDF extends FPDF {
         // calcul la hauteur (nombre de ligne x hauteur de ligne du gabarit)
         $h = $nbLineMax * $aTplt['lineHeight'];
         // créer la ligne
-        $this->buildLine($w, $h, array(0 => array('width' => $w, 'align' => $aTplt['align'])), array(0 => $aText), $aTplt, $aTplt['color'], $aTplt['backgroundColor']);
+        $this->buildLine($w,
+                         $h,
+                         array(0 => array('width' => $w, 'align' => $aTplt['align'])),
+                         array(0 => $aText), $aTplt, $aTplt['color'], $aTplt['backgroundColor']);
         // renvoi la position actuelle
         return $this->GetY();
     }
@@ -242,7 +252,13 @@ class generatorPDF extends FPDF {
 // $aTplt : gabarit
 // $aColorF : couleur de la police
 // $aColorBk : couleur de fond
-    private function buildLine($aW, $aH, $aHeader = '', $aContent = '', $aTplt = '', $aColorF = array('r' => 0, 'g' => 0, 'b' => 0), $aColorBk = array('r' => 255, 'g' => 255, 'b' => 255)) {
+    private function buildLine($aW, $aH,
+                               $aHeader = '', 
+                               $aContent = '', 
+                               $aTplt = '', 
+                               $aColorF = array('r' => 0, 'g' => 0, 'b' => 0),
+                               $aColorBk = array('r' => 255, 'g' => 255, 'b' => 255)) {
+        
         if (empty($aHeader) || empty($aTplt))
             return 0;
         if (empty($aContent))
@@ -325,6 +341,7 @@ class generatorPDF extends FPDF {
 // entete
 //
     function Header() {
+        $yMax=0;
         if (!empty($this->logoUrl)) {
             $this->Image($this->logoUrl, $this->logoPosX, $this->logoPosY, $this->logoWidth);
             $this->Ln(12);

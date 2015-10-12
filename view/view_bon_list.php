@@ -85,8 +85,8 @@
                                      onclick='location.href = 
                                                 "index.php?action=bon_detail&bonId=<?php echo $oBon->bon_id ?>"' />
                                 <img src="img/icon/read.png" 
-                                     onclick='location.href=
-                                              "index.php?action=bon_pdf&bonId=<?php echo $oBon->bon_id ?>"'
+                                     onclick='window.open(
+                                              "index.php?action=bon_pdf&bonId=<?php echo $oBon->bon_id ?>")'
                              />
                             </td>
 

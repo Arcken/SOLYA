@@ -1,9 +1,7 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+try{
+/**
+ * Sous controleur Bon_Pdf 
  */
     require_once $path . '/lib/generatorPDF.php';
     require_once $path . '/model/Bon.php';
@@ -17,6 +15,9 @@
     require_once $path . '/model/Ligne.php';
     require_once $path . '/model/LigneManager.php';
 
+//-----------------------Initialisation---------------------------------//
+//$buffer=  ob_end_clean();
+//$buffer=  ob_start();
 //------------------------Récupération des données----------------------//
 
     //On récupère l'id du bon passé en paramètre
@@ -74,14 +75,16 @@
     
     //On réunis toutes les informations sous un même tableau pour les exploiter
      $tabLig = array(   
-                     'ref' => $resLignes ,
+                     'ref' => $resAllRefs,
                      'lot' => $resAllLots,
-                     'lig' => $resAllRefs
+                     'lig' => $resLignes 
                         );
     
     
 //------------------------Création du Pdf----------------------//
     //#1 Initialisation
+$buffer=ob_get_clean();
+
 $adresse ='SOL\'YA Mexico 22 quai vandoeuvre\n14000\nCaen';
 
 $piedPage1 ='SOL\'YA Mexico 22 quai vandoeuvre 14000 Caen - contact@solya-mexico.fr 06 00 00 00 00';
@@ -93,23 +96,36 @@ $piedPage3 = "RCS : 000-000-000- CAEN "
 
 $pdf = new generatorPDF($adresse, '', $piedPage1."\n".$piedPage2."\n".$piedPage3);
 
-$pdf->setLogo($path.'/img/site/logo.png');
 
-$pdf->productHeaderAddRow('REF ID', 50, 'L');
-$pdf->productHeaderAddRow('CODE REFERENCE', 40, 'C');
-$pdf->productHeaderAddRow('LIBELLE REFERENCE', 50, 'C');
-$pdf->productHeaderAddRow('N°LOT', 50, 'C');
-$pdf->productHeaderAddRow('QTE ', 15, 'C');
-$pdf->productHeaderAddRow('DEPOT',50,'C');
-$pdf->productHeaderAddRow('COMMENTAIRE',50,'C');
+$pdf->setLogo($path.'/img/site/logo.png');
+// element personnalisé
+$pdf->elementAdd('', 'traitEnteteProduit', 'content');
+$pdf->elementAdd('', 'traitBas', 'footer');
+
+$pdf->productHeaderAddRow('REF ID', 20, 'L');
+$pdf->productHeaderAddRow('CODE REFERENCE', 20, 'C');
+$pdf->productHeaderAddRow('LIBELLE REFERENCE', 20, 'C');
+$pdf->productHeaderAddRow('N°LOT', 20, 'C');
+$pdf->productHeaderAddRow('QTE ', 20, 'C');
+$pdf->productHeaderAddRow('DEPOT',20,'C');
+$pdf->productHeaderAddRow('COMMENTAIRE',20,'R');
 
     //#2 Ajout des infos
 
-$pdf->initPDF("Bon de ".$sTypeBon , "Caen le ".date('d/m/y'), "Page ");
+$pdf->initPDF("Bon de ".$sTypeBon."N°".$oBon->bon_id , "Caen le ".date('d/m/y'), "Page ");
+//print_r($tabLig);
 
 //Création d'une ligne par éléments à l'intérieur de mon tableau
-foreach($tabLig as $ligPdf){
-    $pdf->productAdd($ligPdf);
+for($i=0;$i<count($tabLig['ref']);$i++){
+    
+    $pdf->productAdd((String)$tabLig['ref'][$i]->ref_id,
+                     (String)$tabLig['ref'][$i]->ref_code,
+                     (String)$tabLig['ref'][$i]->ref_lbl,
+                     (String)$tabLig['lot'][$i]->lot_id,
+                     (String)$tabLig['lig'][$i]->lig_qte,
+                     (String)$tabLig['lig'][$i]->lig_com_dep,
+                     (String)$tabLig['lig'][$i]->lig_com
+           );
     
 }    
 
@@ -123,14 +139,14 @@ $pdf->template['header']['margin'] = array(24, 0, 0, 10);
 // numéro de page
 $pdf->template['infoPage']['margin'] = array(5, 5, 0, 0);
 $pdf->template['infoPage']['align'] = 'R';
-// numéro de facture
+// numéro de Bon
 $pdf->template['infoFacture']['margin'] = array(60, 5, 0, 10);
 $pdf->template['infoFacture']['fontFace'] = 'B';
 // date
 $pdf->template['infoDate']['fontSize'] = 10;
 $pdf->template['infoDate']['margin'] = array(20, 0, 0, 120);
 $pdf->template['infoDate']['color'] = array('r'=>150, 'g'=>150, 'b'=>150);
-// client
+// partie client
 $pdf->template['client']['fontSize'] = 15;
 $pdf->template['client']['margin'] = array(30, 0, 0, 120);
 // pied de page
@@ -144,7 +160,7 @@ $pdf->template['productHead']['fontFace'] = 'B';
 $pdf->template['productHead']['color'] = array('r'=>195, 'g'=>0, 'b'=>130);
 $pdf->template['productHead']['margin'] = array(20, 0, 0, 0);
 $pdf->template['productHead']['padding'] = array(4, 4, 0, 14);
-// liste des produit
+// liste des produits
 $pdf->template['product']['fontSize'] = 10;
 $pdf->template['product']['lineHeight'] = 4;
 $pdf->template['product']['backgroundColor2'] = array('r'=>255, 'g'=>255, 'b'=>255);
@@ -172,6 +188,19 @@ $pdf->template['traitBas']['margin'] = array(290, 40, 0, 40);
 
 //------------------Construction du pdf ------------------//
 //# Construction et affichage du pdf
+//On vide le buffer pour permettre l'affichage du pdf sans problèmes.
 
 $pdf->buildPDF();
-$pdf->Output('Facture.pdf', 'I');
+
+
+//$pdf->Output('Bon.pdf', 'I');
+
+}catch (Exception $e){
+    echo'<br>';
+    Tool::printAnyCase($e->getCode());
+    echo'<br>';
+    Tool::printAnyCase($e->getMessage());
+    echo'<br>';
+    Tool::printAnyCase($e->getTraceAsString());
+    echo'<br>';
+}
