@@ -1,5 +1,5 @@
 <?php
-
+//On inclut les classes gérant les exceptions
 require_once $path . '/exception/ExceptionThrower.php';
 require_once $path . '/exception/MySQLException.php';
 

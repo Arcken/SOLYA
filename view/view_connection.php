@@ -18,7 +18,7 @@
     </form>
 </div>
 <div>
-    <img src="img/site/logo.png"/>
+    <img src="img/site/logoSolya.png"/>
 </div>
   
   

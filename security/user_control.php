@@ -27,9 +27,11 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
         $_SESSION['login']    = $_REQUEST['login'];
         $_SESSION['msg']      = array("","","");
         $_SESSION['token']    = '0';
+        //on rappel controler.php car la connection est effectuée
+        require $path . '/controler/control.php';
     }
 
-    // c'est que le compte est inexistant ou désactivé
+    // sinon c'est que le compte est inexistant ou désactivé
     else {
         echo "Erreur de login, compte inexistant ou désactivé.";
     }
