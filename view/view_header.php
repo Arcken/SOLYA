@@ -1,3 +1,6 @@
+ <meta charset="UTF-8"></meta>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+
 <link type="text/css" href="css/style_header.css" rel="stylesheet">
   
   </head>

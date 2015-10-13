@@ -55,10 +55,10 @@ else {
         }
         
         //traitement
-        require $path . 'controlNormalTraitement.php';
+        require $path . '/controler/controlNormalTraitement.php';
 
         //affichage
-        require $path . 'controlNormalAffichage.php';
+        require $path . '/controler/controlNormalAffichage.php';
 
         //fin des switchs on appel le footer des pages
         require $path . '/view/view_footer.php';
