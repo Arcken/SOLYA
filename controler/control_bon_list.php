@@ -12,6 +12,7 @@ try {
     
     //On récupère le nombre d'enregistrement total pour la pagination
     $iTotal = Tool::getCountTable('bon');
+    
    //Si orderby est définis alors tri l'est forcément. 
    //Si c'est le cas on les utilise en paramètres dans notre manager
     if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {

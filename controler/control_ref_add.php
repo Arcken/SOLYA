@@ -15,7 +15,7 @@ try {
     $sPageTitle = "Ajouter une référence";
     $sButton = "Envoyer";
 
-//Tool::printAnyCase($sAction);
+
 
     $toFiArts = FicheArticleManager::getAllFichesArticles();
     $toModCons = ModeConservationManager::getAllModeConservations();
@@ -66,7 +66,7 @@ try {
                 $oRef->ref_photos_pref = $resPhoto[0];
             }
 
-            Tool::printAnyCase($oRef);
+            //Tool::printAnyCase($oRef);
 
             $resAddRef = ReferenceManager::addReference($oRef);
             $idRef = Connection::dernierId();

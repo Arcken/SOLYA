@@ -33,6 +33,37 @@ try {
 
         $toRef = ReferenceManager::getAllReferences($limite, $iNbPage);
     }
+    //Initialisation du tableau contenant toutes les informations
+    
+    if(is_array($toRef)){
+        //on initialise les tableau
+        $resRef=[];
+        $resFiArt=[];
+        $resPve=[];
+        $resTva=[];
+        $resDd=[];
+    }
+    //Pour chaque référence contenu dans notre tableau de référence
+    foreach($toRef as $oRef){
+        $resRef[]   = $oRef;
+        //On récupère la fiche article associé
+        $resFiArt[] = $oFiArt =  FicheArticleManager::getFicheArticleById($oRef->fiart_id);
+        //On récupère les prix de vente associés
+        $resPve[]   = $oPve   = PrixVenteManager::getCurPrixVente($oRef->ref_id);
+        //On récupère la tva associé
+        $resTva[]   = $oTva   =  TvaManager::getTvaById($oRef->tva_id);
+        //On récupère le droit de douane associés
+        $resDd[]    = $oDd    =  DroitDouaneManager::getDroitDouaneById($oRef->dd_id);
+     
+    }
+    //Enfin on construit le tableau contenant toutes les données
+    $resLigRefs=[    
+                'ref'  =>$resRef,
+                'fiart'=>$resFiArt,
+                'dd'   =>$resDd,
+                'tva'  =>$resTva,
+                'pve'  =>$resPve
+                     ];
     
 } catch (MySQLException $e) {
     

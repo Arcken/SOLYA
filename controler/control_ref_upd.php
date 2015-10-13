@@ -122,23 +122,6 @@ try {
     }
     
 } catch (MySQLException $e) {
-     switch ($resEr){
-            case '23000':
-                $msg="<p class='erreur'>Impossible de Modifier la référence :\n'".$oRef->ref_code
-                    ."'\n'".$oRef->ref_lbl."'.\nMerci de remplir le code référence avec un Code Unique</p>";
-                Tool::addMsg($msg);
-                break;
-            
-            default:
-                $msg = "<p class='erreur'>Oups!Une erreur inattendue s'est produite lors de la modification de " 
-                . "'$oRef->ref_lbl'"
-                . ".Détail de l'érreur : \n"  
-                . $resEr."</p>"
-                . "Merci de rééssayer ultérieurement";
-                Tool::addMsg($msg);
-                break;
-        }
-    
     $cnx->rollback();
 }
    

@@ -17,7 +17,7 @@ try{
     //Si la suppression à bien impacté un enregistrement
     //alors on ajoiute le message de réussite
     if (($resDelRef)>0){  
-        $msg ="<p class='info'>".date('H:i:s')."La référence:\n".$refCode."\n".$refLbl." à bien était Supprimé</p>";
+        $msg ="<p class='info'>".date('H:i:s')." La référence:\n".$refCode."\n".$refLbl." à bien était Supprimé</p>";
         Tool::addMsg($msg);
     }
     
