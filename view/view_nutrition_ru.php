@@ -16,6 +16,7 @@
 
 <div class="corps">
     <form class="form" id="fNut" action="index.php">
+        <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
         <div class="col90">
             <label for="nutId"> ID: </label>
             <input name="nutId" readonly="" value="<?php echo $resNutDetail->nut_id?>" type="text">

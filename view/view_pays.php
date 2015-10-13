@@ -22,6 +22,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         <div class="corps">
             <form class="form" id="fPays" action="index.php">
+                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <h2>Ajouter Pays</h2>                
                 <div> 
                     <label for="paysNom"> Nom du pays: </label>

@@ -1,29 +1,58 @@
 <?php
 
-$sPageTitle = "Ajouter une gamme";
-require $path . '/model/Gamme.php';
-require $path . '/model/GammeManager.php';
-if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-    $resMessage = "<font color='red'> L'ajout de la gamme est un échec</font>";
-    try {
-        $oGa = new Gamme();
-        if (isset($_REQUEST['gaLbl']) 
-                && isset($_REQUEST['gaAbv']) 
-                && !empty($_REQUEST['gaLbl']) 
-                && !empty($_REQUEST['gaAbv'])) {
-            $oGa->GA_LBL = $_REQUEST['gaLbl'];
-            $oGa->GA_ABV = strtoupper($_REQUEST['gaAbv']);
-            $result = GammeManager::addGamme($oGa);
-            $id = Connection::dernierId();
-            
-            if ($result == 1) {
-                $resMessage = "<font color='green'> L'ajout de la gamme N° $id
-                 intitulée: $oGa->GA_LBL est un succés</font>";
+//Contrôle si la connection de l'utilisateur est valide
+//Le 'group' permet de choisir si l'utilisateur à accés à la page
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
+
+    $sPageTitle = "Ajouter une gamme";
+
+    //Si le formulaire est envoyé
+    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+        //Si l'insert ne se fait pas le manager léve un exception
+        try {
+            //Vérification du jeton pour savoir si le formulaire à déja était envoyé
+            if ($_SESSION['token'] != $_REQUEST['token']) {
+
+                require_once $path . '/model/Gamme.php';
+                require_once $path . '/model/GammeManager.php';
+
+                //Les valeurs sont vérifiées à la saisie
+                //On créé un objet contenant les valeurs que l'on passe en paramètre 
+                //à la requête
+
+                $oGa = new Gamme();
+                $oGa->GA_LBL = $_REQUEST['gaLbl'];
+                $oGa->GA_ABV = strtoupper($_REQUEST['gaAbv']);
+
+                $result = GammeManager::addGamme($oGa);
+
+                //On récupére l'id de l'insert
+                $id = Connection::dernierId();
+
+                //Message pour le succés
+                $msg = '<p class=\'info\'>' . date('H:i:s')
+                        . ' L\'enregistrement de la gamme: "'
+                        . $id
+                        . '" intitulé "' . $oGa->GA_LBL . '" à été effectué '
+                        . 'avec succès </p>';
+
+                //La requète s'est effectué donc on copie le token dans la session
+                $_SESSION['token'] = $_REQUEST['token'];
+            } else {
+
+                $msg = "<p class= 'erreur'> " . date('H:i:s') . "
+                Vous avez déja envoyé ce formulaire </p>";
             }
-        } else
-            $resMessage = "<font color='red'> L'ajout de la gamme est un échec, champs mal remplies</font>";
-    } catch (MySQLException $e) {
-        $resMessage = "<font color='red'> L'ajout de la gamme est un échec</font>";
+        } catch (MySQLException $e) {
+            //Message pour l'erreur
+            $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
+                    . ' Echec insert Gamme, code: '
+                    . $resEr . '</p>';
+        }
+
+        //On insert le message dans le tableau de message
+        Tool::addMsg($msg);
     }
+} else {
+    echo 'Le silence est d\'or';
 }
-$resAllGa = GammeManager::getAllGammes();

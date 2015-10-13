@@ -1,3 +1,5 @@
+
+<input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
 <div class="col30" id="add_adr" style="display:none" >
     
             <label for="ADR_NUM">Numéro :</label><br>

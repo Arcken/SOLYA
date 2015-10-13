@@ -21,6 +21,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <!-- Fin des tests entête, code de la page -->
     <div class="corps">
         <form class="form" id="fMc" action="index.php">
+            <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <!-- On choisit le titre du bloc selon si c'est une popup-->
             <?php if ($nv == 0) { ?>            
                 <h2>Saisie</h2>

@@ -3,7 +3,8 @@
     <div class="corps">
         <form class="form">
             <div class="col90">
-
+                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
+                
                 <label for="utNom"> Nom de familler: </label>
                 <input name="utNom" type="text" value="<?php echo $resUtilisateur->ut_nom ?>">         
                 <br>

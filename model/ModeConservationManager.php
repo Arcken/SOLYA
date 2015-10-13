@@ -25,6 +25,35 @@ class ModeConservationManager {
         }
         return $result;
     }
+    
+    
+    /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getAllGammesLim($limite, $nombre, $orderby = 'cons_id') {
+
+        try {
+
+            $sql = 'SELECT cons_id, cons_lbl '
+                    . 'FROM mode_conservation '
+                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
+                    . $nombre;
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
 
     /**
      * Retourne un enregistrement de la table selon son id
@@ -46,6 +75,33 @@ class ModeConservationManager {
         }
         return $result;
     }
+    
+    
+    /**
+     * Select for update d'un enregistrement selon son id
+     * 
+     * @param $id
+     * attend l'id de la gamme
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getModeConservationDetailUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql = "SELECT cons_lbl "
+                    . "FROM mode_conservation "
+                    . "WHERE cons_id =? FOR UPDATE";
+            $result = Connection::request(0, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
 
     /**
      * Ajoute un enregistrement dans la table
@@ -61,6 +117,27 @@ class ModeConservationManager {
                     . "cons_lbl) "
                     . "VALUES (?)";
 
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $id
+     * id du mode de conservation
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delModeConservation($id) {
+        try {
+            $tParam = [$id];
+            $sql = 'DELETE FROM mode_conservation WHERE cons_id=?';
+            
             $result = Connection::request(2, $sql, $tParam);
             
         } catch (MySQLException $e) {

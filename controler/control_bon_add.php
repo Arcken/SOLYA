@@ -18,7 +18,7 @@ try {
 
     //Controle si le formulaire a était envoyé 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-        //Vérification du jeton pour savoir si le formulaire à était envoyé
+        //Vérification du jeton pour savoir si le formulaire à déja était envoyé
         if ($_SESSION['token'] != $_REQUEST['token']) {
             //On récupère la valeur de typeBon pour définir l'action à executer
             $type = $_REQUEST['typeBon'];

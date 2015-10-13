@@ -10,7 +10,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <div class="corps">
         <form class="form" action="index.php"  method="POST" enctype="multipart/form-data">
-
+            <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
                 <div>                    
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>

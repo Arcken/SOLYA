@@ -23,7 +23,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <div class="corps">
         <form class="form" id="fNut" action="index.php">
-            
+            <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col90"> 
                 <label for="nutLbl"> Libellé: </label>
                 <input name="nutLbl" 

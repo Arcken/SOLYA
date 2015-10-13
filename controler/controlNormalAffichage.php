@@ -140,6 +140,29 @@
                 require $path . '/view/view_inventaire_c.php';
                 break;
 
+            
+    //---------------------------- Mode de conservation ------------------------
+    
+            //Ajout de mode de conservation
+            case "mc_add":
+                require $path . '/view/view_mode_conservation.php';
+                break;
+            
+            //liste des modes de conservation
+            case "mc_list":
+                require_once $path . '/view/view_mode_conservation_list.php';
+                break;
+
+            //détail d'un mode de conservation
+            case "mc_detail":
+                require_once $path . '/view/view_mode_conservation_detail.php';
+                break;
+
+            //Suppression d'un mode de conservation
+            case "mc_del":
+                require $path . '/view/view_mode_conservation_list.php';
+                $sAction = "mc_list";
+                break;
 
     //-------------------------------------Pays---------------------------------
 

@@ -1,6 +1,7 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {?>
 <div>
     <form>
+        <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
         <div>
             <label for="ddLbl"> Libellé: </label>
             <input name="ddLbl" placeholder="Description" type="text">         

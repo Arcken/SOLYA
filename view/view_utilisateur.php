@@ -3,6 +3,7 @@
     <div class="corps">
         <form class="form" onsubmit="return verifPass()">
             <div class="col90">
+                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <label for="utNom"> Nom de familler: </label>
                 <input name="utNom" placeholder="Nom" type="text">         
                 <br>

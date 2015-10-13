@@ -120,7 +120,31 @@
                 require_once $path . '/controler/control_inv_add.php';
                 break;
 
+                
+    //---------------------------- Mode de conservation ------------------------
     
+            //Ajout de mode de conservation
+            case "mc_add":
+                require $path . '/controler/control_mc_add.php';
+                break;
+            
+            //liste des modes de conservation
+            case "mc_list":
+                require_once $path . '/controler/control_mc_list.php';
+                break;
+
+            //détail d'un mode de conservation
+            case "mc_detail":
+                require_once $path . '/controler/control_mc_detail.php';
+                break;
+
+            //Suppression d'un mode de conservation
+            case "mc_del":
+                require $path . '/controler/control_mc_del.php';
+                $sAction = "mc_list";
+                break;
+            
+            
     //---------------------------------Nutrition--------------------------------
     
             //ajout de nutrition

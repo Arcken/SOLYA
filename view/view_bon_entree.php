@@ -27,6 +27,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">
         <form class="form" action="index.php" method="get">
+            <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col50">
                 
                 <label for="beFactNum"> Référence de facture </label><br>

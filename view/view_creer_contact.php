@@ -9,6 +9,7 @@
     
    <!-- En-tête choix du type contact-->
     <form id="form_add_ctc" class="form" action="index.php" method="get">
+        <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
         <div class="haut">
             
                 <label for="typeCtc"> Type de contact: </label><br>
