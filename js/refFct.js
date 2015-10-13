@@ -4,14 +4,19 @@
  * and open the template in the editor.
  */
 
-
+/**
+ * Change la valeur de l'input refcode
+ *  au retour de la callback 
+ * 
+ * @returns {undefined}
+ */
 function changeRefCodeAtTime() {
 
     var $fiartId = $('#ficheArticle').val();
     
     if ($fiartId !== '') {
+        
         fillFiartInfos($fiartId);
-        //confirmRefCode();
         
     } else {
         $('#pays_abv').val('');
@@ -23,16 +28,23 @@ function changeRefCodeAtTime() {
     }
 }
 
+/**
+ * 
+ * @returns {undefined}
+ */
 
 function chargeRefCode() {
 
     $ctrl = $('#refCode').val('');
-    var $pays = $('#pays_abv').val();
-    var $gamme = $('#ga_abv').val();
+    
+     $pays = $('#pays_abv').val();
+    
+     $gamme = $('#ga_abv').val();
+    
     if ($pays !== '' && $gamme !== '') {
         $('#refCode').val($pays + $gamme);
     }
-    //confirmRefCode();
+
 }
 
 function confirmRefCode() {

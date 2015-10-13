@@ -1,9 +1,9 @@
 <?php
+
 /**
  * Sous controleur list référence
  * 
  */
-
 $sPageTitle = "Liste des références";
 
 require_once $path . '/model/Reference.php';
@@ -22,26 +22,14 @@ require_once $path . '/model/PrixVente.php';
 require_once $path . '/model/PrixVenteManager.php';
 
 
-try {
-    
 $iTotal = Tool::getCountTable('reference');
 
-    if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-        
-        $orderby = $_REQUEST['orderby'];
-        $toRef = ReferenceManager::getAllReferences($limite,$iNbPage, $orderby);
-        
-    } else {
-        
-        $toRef = ReferenceManager::getAllReferences($limite,$iNbPage);
-    }
-    
-} catch (MySQLException $e){
-    
-    switch ($resEr){
-        default:
-            $msg ="<p class='erreur'> ".date('H:i:s')." Oups! Une erreur est survenue : $resEr </p>";
-            Tool::addMsg($msg);
-        break;
-    }
+if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
+
+    $orderby = $_REQUEST['orderby'];
+    $toRef = ReferenceManager::getAllReferences($limite, $iNbPage, $orderby);
+} else {
+
+    $toRef = ReferenceManager::getAllReferences($limite, $iNbPage);
 }
+

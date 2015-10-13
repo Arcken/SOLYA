@@ -74,6 +74,9 @@
                          foreach($toRef as $oRef){ ?> 
                 
                     <script type='text/javascript'>
+                        //On créé un tableau javascript récupérant les données pour
+                        //alimenter la fonction delElt
+                        
                         var $tRef = new Array();
                         $tRef['refCode']= "<?php echo $oRef->ref_code; ?>";
                         $tRef['refLbl'] = "<?php echo $oRef->ref_lbl; ?>";
@@ -133,18 +136,24 @@
                            
                         <td>
                             <img src="img/icon/read.png" 
-                                  onclick='location.href="index.php?action=ref_detail&idRef="+ <?php echo $oRef->ref_id; ?>'
+                                  onclick='location.href="index.php?action=ref_detail&idRef="+
+                                           <?php echo $oRef->ref_id; ?>'
                              />
                         </td>
                         <td>
                             <img src="img/icon/modify.png" 
-                                  onclick='location.href="index.php?action=ref_upd&idRef="+ <?php echo $oRef->ref_id; ?>'
+                                  onclick='location.href="index.php?action=ref_upd&idRef="+
+                                   <?php echo $oRef->ref_id; ?>'
                              />
                         </td>
                         
                         <td>
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
-                                 onclick='delElt(<?php echo $oRef->ref_id ?>, "idRef", "Référence", "ref_del", $tabRefs)'
+                                 onclick='delElt(<?php echo $oRef->ref_id ?>,
+                                                 "idRef",
+                                                 "Référence",
+                                                 "ref_del",
+                                                 $tabRefs)'
                              />
                         </td>
                      </tr>
@@ -169,4 +178,3 @@
 } else {
     echo 'Le silence est d\'or';
 }
-?>
