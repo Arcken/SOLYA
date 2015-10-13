@@ -1,6 +1,7 @@
 <?php
-require_once '/exception/MySQLException.php';
 //Récupération des paramètres de l'application
+
+try{
 $fichier = 'config/param.ini.php';
 if (file_exists($fichier) && is_file($fichier)) {
     $config = parse_ini_file($fichier, true);
@@ -23,7 +24,9 @@ if (file_exists($fichier) && is_file($fichier)) {
     
     
     } else {
-    throw new MySQLException("Impossible de trouver le fichier de configuration 'config/param.ini.php'"
-    , self::$cnx);
+    throw new Exception("Impossible de trouver le fichier de configuration 'config/param.ini.php'");
 }
-?>
+}
+catch(Exception $e){
+    echo $e->getMessage();
+}
