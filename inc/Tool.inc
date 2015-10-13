@@ -186,9 +186,11 @@ class Tool {
 
 //Ajoute un message au tableau d'information $resMessage
     public static function addMsg($msg) {
-            $_SESSION['msg'][2] = $_SESSION['msg'][1];
-            $_SESSION['msg'][1] = $_SESSION['msg'][0];
-            $_SESSION['msg'][0] = $msg;
+        $_SESSION['msg'][4] = $_SESSION['msg'][3];
+        $_SESSION['msg'][3] = $_SESSION['msg'][2];
+        $_SESSION['msg'][2] = $_SESSION['msg'][1];
+        $_SESSION['msg'][1] = $_SESSION['msg'][0];
+        $_SESSION['msg'][0] = $msg;
     }
 
 }

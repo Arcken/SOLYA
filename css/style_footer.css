@@ -26,5 +26,7 @@ footer{
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 #bloc_footer{
-overflow: auto;
+    overflow: auto;
+    margin-top: 0.1%;
+    margin-left: 0.5%;
 }

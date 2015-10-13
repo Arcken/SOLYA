@@ -8,8 +8,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
         
          //Si la modification ne se fait pas le manager léve un exception
-        try {
-            
+                    
             //Vérification du jeton pour savoir si le formulaire à déja était envoyé
             if ($_SESSION['token'] != $_REQUEST['token']) {
                 
@@ -42,13 +41,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $msg = "<p class= 'erreur'> " . date('H:i:s') . "
                 Vous avez déja envoyé ce formulaire </p>";
             }
-        } catch (MySQLException $e) {
-            //Message pour l'erreur
-            $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
-                    . ' Echec modification Gamme, code: '
-                    . $resEr . '</p>';
-        }
-
+        
         //On insert le message dans le tableau de message
         Tool::addMsg($msg);
     } else {

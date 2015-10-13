@@ -150,8 +150,15 @@ class Connection {
            }else{
                $resEr =self::$cnx->errorCode();
            }
-           
-           throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);;
+           switch ($resEr) {
+                case '23000':
+                    $resEr = "<b>23000</b> Elément utilisé par un autre enregistrement";
+                    break;
+                case 'HY000':
+                    $resEr = "<b>HY000</b> Erreur inattendu";
+                    break;
+            }
+            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);;
            return $result=0;
            
         } 

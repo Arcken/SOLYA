@@ -1,8 +1,11 @@
 <?php
 
-$sPageTitle = "Liste des gammes";
+//Contrôle si la connection de l'utilisateur est valide
+//Le 'group' permet de choisir si l'utilisateur à accés à la page
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
-try {
+    $sPageTitle = "Liste des gammes";
+
     require_once $path . '/model/Gamme.php';
     require_once $path . '/model/GammeManager.php';
 
@@ -14,14 +17,11 @@ try {
         $orderby = $_REQUEST['orderby'];
         $resAllGa = GammeManager::getAllGammesLim($limite, $iNbPage, $orderby);
     }
-    
+
 //Sinon on appel la requête classique
     else {
         $resAllGa = GammeManager::getAllGammesLim($limite, $iNbPage);
     }
-} catch (MySQLException $e) {
-    //Message d'echec
-    $msg = "<p class='erreur'>" . date('H:i:s') . " Liste gamme. Une erreur est survenue : $resEr </p>";
-    //On insert le message dans le tableau de message
-    Tool::addMsg($msg);
+} else {
+    echo 'Le silence est d\'or';
 }

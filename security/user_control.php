@@ -25,7 +25,7 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
         $_SESSION['auth']     = TRUE;
         $_SESSION['group']    = $res->grp_nom;
         $_SESSION['login']    = $_REQUEST['login'];
-        $_SESSION['msg']      = array("","","");
+        $_SESSION['msg']      = array("","","","","");
         $_SESSION['token']    = '0';
         //on rappel controler.php car la connection est effectuée
         require $path . '/controler/control.php';

@@ -35,10 +35,12 @@ body{
 }
 .info{
     color:green;
+    margin: 0px;
 }
 
 .erreur{
     color:red;
+    margin: 0px;
 }
 
 img:hover{

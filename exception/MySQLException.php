@@ -31,5 +31,3 @@ class MySQLException extends Exception {
     }
 
 }
-
-?>
