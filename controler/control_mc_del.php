@@ -13,7 +13,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         //Message pour le succés
         $msg = '<p class=\'info\'>' . date('H:i:s')
                 . ' la suppression du mode de conservation: "'
-                . $id
+                . $_REQUEST['consId']
                 . '" à été effectué avec succès </p>';
         
     } catch (MySQLException $e) {
@@ -23,7 +23,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 . "Le mode de conservation N° " . $_REQUEST['consId']
                 . " n'est pas supprimée</p>";
     }
-
+    Tool::addMsg($msg);
     //On appel le contrôleur de la liste, car on affiche la liste après une suppression
     require $path . '/controler/control_mc_list.php';
     

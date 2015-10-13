@@ -8,32 +8,33 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
     <div class="corps">
         <div class="list">
             <h2> Liste des éléments </h2>
-            <input type="button" onclick='location.href = "index.php?action=ga_add"' value="Ajouter">
+            <input type="button" onclick='location.href = "index.php?action=mc_add"' value="Ajouter">
             <table>
                 <tr>
                     <th>
-                        Libellé de la gamme
+                        Id
                     </th>
                     <th>
-                        Abréviation de la gamme
+                        Libellé
                     </th>                        
                 </tr>
                 <?php
-                if ($resAllGa != 0 && is_array($resAllGa)) {
-                    foreach ($resAllGa as $gamme) {
+                if ($resAllMc != 0 && is_array($resAllMc)) {
+                    foreach ($resAllMc as $modeConservation) {
                         ?>
                         <tr>
                             <td style="border-right: solid 2px black;">
-                                <?php echo $gamme->ga_lbl ?>
+                                <?php echo $modeConservation->cons_id ?>
                             </td>
                             <td>
-                                <?php echo $gamme->ga_abv ?>
+                                <?php echo $modeConservation->cons_lbl ?>
                             </td>
                             <td><img src="img/icon/modify.png" alt="" title="Modifier"
-                                     onclick='location.href = "index.php?action=ga_detail&gaId=<?php echo $gamme->ga_id ?>"'/></td>
+                                     onclick='location.href = 
+                                        "index.php?action=mc_detail&consId=<?php echo $modeConservation->cons_id ?>"'/></td>
 
                             <td><img src="img/icon/delete.png" alt="" title="Supprimer"
-                                     onclick='delElt(<?php echo $gamme->ga_id ?>, "gaId", "gamme", "ga_del")'/></td>
+                                     onclick='delElt(<?php echo $modeConservation->cons_id ?>, "consId", "Mode conservation", "mc_del")'/></td>
                         </tr>
                         <?php
                     }

@@ -91,7 +91,7 @@ class ModeConservationManager {
 
             $tParam = [$id];
             
-            $sql = "SELECT cons_lbl "
+            $sql = "SELECT cons_id, cons_lbl "
                     . "FROM mode_conservation "
                     . "WHERE cons_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);

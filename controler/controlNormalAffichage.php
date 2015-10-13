@@ -155,7 +155,15 @@
 
             //détail d'un mode de conservation
             case "mc_detail":
-                require_once $path . '/view/view_mode_conservation_detail.php';
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_mode_conservation_list.php';
+                    
+                } else {
+                    require $path . '/view/view_mode_conservation_detail.php';
+                }
                 break;
 
             //Suppression d'un mode de conservation

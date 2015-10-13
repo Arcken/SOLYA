@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Mode_conservation {
+class ModeConservation {
     
     //Données membres
     public $cons_id='';

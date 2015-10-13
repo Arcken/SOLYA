@@ -137,7 +137,7 @@ class Connection {
             }
             
             ExceptionThrower::Stop();
-            return $result;
+            
             
         } catch (Exception $e) { 
             //Les erreurs de la base de données étant gérer avec le SQLSTATE.
@@ -154,14 +154,17 @@ class Connection {
                 case '23000':
                     $resEr = "<b>23000</b> Elément utilisé par un autre enregistrement";
                     break;
-                case 'HY000':
-                    $resEr = "<b>HY000</b> Erreur inattendu";
+                case defaut:
+                    $resEr = "<b>$resEr</b> Erreur inattendu: ";
                     break;
+                
             }
-            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);;
-           return $result=0;
+            $result=0;
+            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);
+           
            
         } 
+        return $result;
     }
     
     /**
