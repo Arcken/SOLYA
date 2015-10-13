@@ -177,10 +177,19 @@
                                 
                               <?php foreach($toLots as $oLot){?>
                             <tr>
-                                          <td class='colData'><?php echo $oLot->lot_id ?></td>
-                                          <td class='colData'><?php echo $oLot->lot_date_max ?></td>
-                                          <td class='colData'><?php echo $oLot->lot_qt_stock ?></td>
-                                          <td class='colData'><?php echo $oLot->lot_qt_init ?></td>
+                                          <td class='colData'>
+                                              <?php echo $oLot->lot_id ?>
+                                          </td>
+                                          <?php list($year, $month, $day) = explode("-", $oLot->lot_dlc);?>
+                                          <td class='colData'>
+                                              <?php echo $day.'/'.$month.'/'.$year ?>
+                                          </td>
+                                          <td class='colData'>
+                                              <?php echo $oLot->lot_qt_stock ?>
+                                          </td>
+                                          <td class='colData'>
+                                              <?php echo $oLot->lot_qt_init ?>
+                                          </td>
                             </tr>
                               <?php } ?>
                             

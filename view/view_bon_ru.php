@@ -26,8 +26,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="numFact"  id="nFact" 
                        placeholder="Numéro de Facture" 
                        value="<?php if (isset($oBon->bon_fact_num)) {
-        echo $oBon->bon_fact_num;
-    } ?>" 
+                                        echo $oBon->bon_fact_num;
+                                    } ?>" 
                        type="text" >
                 <br>
                 <label for="typeBon"> Type du bon </label><br>
@@ -35,7 +35,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <?php foreach ($resDocLbl as $lbl) {
                     if ($oBon->doclbl_id === $lbl->doclbl_id) {
                         ?>
-                        <input name="typeBon" id="typeBon" placeholder="description" type="text"
+                        <input name="typeBon" id="typeBon" 
+                               placeholder="description" 
+                               type="text"
                                value="<?php echo $lbl->doclbl_id; ?>" 
                                hidden> 
                         <input type="text" 
@@ -48,7 +50,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="bonDate"> Date</label><br>
                 <input name="bonDate" 
                        placeholder="Date" 
-                       type="Date" required 
+                       type="Date"
+                       format='DD-MM-YYYY'
+                       required 
                        value="<?php echo $oBon->bon_date ?>">
                 <br>
                 <label for="bonCom">Commentaire</label><br>

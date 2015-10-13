@@ -28,12 +28,14 @@ class generatorPDF extends FPDF {
 // gabarit
     public $template;
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// constructeur
-//
-// $atextAdr1 : adresse de l'entreprise
-// $atextAdr2 : adresse du client
-// $aFooter : texte du pied de page
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* constructeur
+*
+* $atextAdr1 : adresse de l'entreprise
+* $atextAdr2 : adresse du client
+* $aFooter : texte du pied de page
+* 
+*/
     function generatorPDF($atextAdr1 = '', $atextAdr2 = '', $aFooter = '') {
         $this->FPDF();
         $this->SetMargins(0, 0, 0);
@@ -52,9 +54,11 @@ class generatorPDF extends FPDF {
         $this->elementAdd($aFooter, 'footer', 'footer');
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// initialise un gabarit
-//
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* initialise un gabarit
+*
+* 
+*/
     private function templateArrayInit() {
         $r = array();
         $r['lineHeight'] = 6;
@@ -68,13 +72,15 @@ class generatorPDF extends FPDF {
         return $r;
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// initialise le logo
-//
-// $aUrl : adresse du fichier PNG, JPEG ou GIF
-// $aWidth : largeur à l'affichage
-// $aX : position depuis le bord gauche
-// $aY : position depuis le bord haut
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* initialise le logo
+*
+* $aUrl : adresse du fichier PNG, JPEG ou GIF
+* $aWidth : largeur à l'affichage
+* $aX : position depuis le bord gauche
+* $aY : position depuis le bord haut
+* 
+*/
     public function setLogo($aUrl = '', $aWidth = 30, $aX = 10, $aY = 6) {
         $this->logoUrl = $aUrl;
         $this->logoPosX = $aX;
@@ -82,12 +88,14 @@ class generatorPDF extends FPDF {
         $this->logoWidth = $aWidth;
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// initialise le numéro de facture
-//
-// $aInfos : numéro du document et type du document
-// $aPage : texte à afiche devant le numéro de page
-// $aDate : date d'émission 
+/** 
+* initialise le numéro de facture
+*
+* $aInfos : numéro du document et type du document
+* $aPage : texte à afiche devant le numéro de page
+* $aDate : date d'émission 
+* 
+*/
     public function initPDF($aInfos = '', $aDate = '', $aPage = '') {
         $this->elementAdd($aInfos, 'infoFacture', 'header');
         $this->elementAdd($aDate, 'infoDate', 'header');
@@ -95,11 +103,13 @@ class generatorPDF extends FPDF {
         $this->SetSubject($aInfos, true);
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// liste de contenu
-//
-// $aTxt : texte à afficher dans le bloc
-// $aid : identifiant qui sert à relier l'élément au gabarit
+/** 
+* liste de contenu
+*
+* $aTxt : texte à afficher dans le bloc
+* $aid : identifiant qui sert à relier l'élément au gabarit
+* 
+*/
     public function elementAdd($aTxt, $aId, $aZone = 'content') {
         if (empty($aId))
             return 0;
@@ -113,13 +123,15 @@ class generatorPDF extends FPDF {
         }
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// entete du tableau des produits
-//
-// $aStr : nom de la colonne
-// $aWidth : largeur de la colonne
-// $aHeaderALign : alignement de la cellule d'entête
-// $aContentAlign : alignement des celules de contenu
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* entete du tableau des produits
+*
+* $aStr : nom de la colonne
+* $aWidth : largeur de la colonne
+* $aHeaderALign : alignement de la cellule d'entête
+* $aContentAlign : alignement des celules de contenu
+* 
+*/
     
     public function productHeaderAddRow($aStr, $aWidth = '30', $aAlign = 'C') {
         if (empty($aStr))
@@ -128,37 +140,45 @@ class generatorPDF extends FPDF {
         $this->productWidth += intval($aWidth);
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// tableau de produit
-//
-// $aLst est une array qui contient les infos à afficher
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* tableau de produit
+*
+* $aLst est une array qui contient les infos à afficher
+* 
+*/
     public function productAdd($aLst = '') {
         if (!empty($aLst))
             $this->productLst[] = $aLst;
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// entete du tableau des totaux
-//
-// $aVal : valeur
-// $aContentAlign : alignement des celules de contenu
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* entete du tableau des totaux
+*
+* $aVal : valeur
+* $aContentAlign : alignement des celules de contenu
+* 
+*/
     public function totalHeaderAddRow($aWidth = '30', $aAlign = 'C') {
         $this->totalHead[] = array('width' => $aWidth, 'align' => $aAlign);
         $this->totalWidth += intval($aWidth);
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// tableau de totaux
-//
-// $aLst est une array qui contient les infos à afficher
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* tableau de totaux
+*
+* $aLst est une array qui contient les infos à afficher
+* 
+*/
     public function totalAdd($aLst = '') {
         if (!empty($aLst))
             $this->totalLst[] = $aLst;
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// prépare le contenu du PDF
-//
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* prépare le contenu du PDF
+*
+* 
+*/
     public function buildPDF() {
         // ajoute une nouvelle page (avec entête et pied de page)
         $this->AddPage();
@@ -216,11 +236,13 @@ class generatorPDF extends FPDF {
         }
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// prépare l'affichage d'une ligne simple
-//
-// $aText : texte à afficher
-// $aTplt : gabarit à utiliser
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* prépare l'affichage d'une ligne simple
+*
+* $aText : texte à afficher
+* $aTplt : gabarit à utiliser
+ * 
+ */
     private function prepareLine($aText, $aTplt, $aInitPos = 1) {
         // initialise la position 
         if ($aInitPos)
@@ -242,16 +264,18 @@ class generatorPDF extends FPDF {
         return $this->GetY();
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// ajoute une ligne avec couleur de fond
-//
-// $aW : largeur
-// $aH : hauteur
-// $aHeader : entete
-// $aContent : contenu
-// $aTplt : gabarit
-// $aColorF : couleur de la police
-// $aColorBk : couleur de fond
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* ajoute une ligne avec couleur de fond
+*
+* $aW : largeur
+* $aH : hauteur
+* $aHeader : entete
+* $aContent : contenu
+* $aTplt : gabarit
+* $aColorF : couleur de la police
+* $aColorBk : couleur de fond
+* 
+*/
     private function buildLine($aW, $aH,
                                $aHeader = '', 
                                $aContent = '', 
@@ -282,7 +306,7 @@ class generatorPDF extends FPDF {
             // enregistre la hauteur max
             if ($this->GetY() > $posMaxY)
                 $posMaxY = $this->GetY();
-            // calcul la nouvelle position X en rajoutant la largeur de colonne
+            //calcul la nouvelle position X en rajoutant la largeur de colonne
             $posX += $aHeader[$k]['width'];
             // MultiCell crée un renvoi de ligne. Il faut se replacer
             $this->SetXY($posX, $posY);
@@ -291,8 +315,10 @@ class generatorPDF extends FPDF {
         $this->SetXY($this->lMargin, $posMaxY + $aTplt['padding'][2] + $aTplt['margin'][2]);
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// Tableau avec MultiCells : http://www.fpdf.org/fr/script/script3.php
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* Tableau avec MultiCells : http:*www.fpdf.org/fr/script/script3.php
+* 
+*/
     private function NbLines($w, $txt) {
         //Calcule le nombre de lignes qu'occupe un MultiCell de largeur w
         $cw = $this->CurrentFont['cw'];
@@ -337,9 +363,11 @@ class generatorPDF extends FPDF {
         return $nl;
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// entete
-//
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* entete
+*
+* 
+*/
     function Header() {
         $yMax=0;
         if (!empty($this->logoUrl)) {
@@ -358,16 +386,18 @@ class generatorPDF extends FPDF {
         }
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
-// pied de page
-//
+/** - - - - - - - - - - - - - - - - - - - - - - - -
+* pied de page
+*
+* 
+*/
     function Footer() {
         foreach ($this->elementLst['footer'] as $v) {
             $this->prepareLine($v['text'], $this->template[$v['id']]);
         }
     }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - -
 }
 
 ?>

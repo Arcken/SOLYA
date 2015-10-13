@@ -1,12 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2 oct. 2015, 10:47:11
-    Author     : Olivier
-*/
 
 
 #asideInfos{
@@ -22,7 +13,6 @@ and open the template in the editor.
     height:70%;
     width: 14.7%;
     min-width: 14.7%;
-    //margin-right:0.5% ;
     top:17%;
     border:  2px solid cyan;
     border-radius: 10px 10px 10px 10px;
@@ -33,7 +23,8 @@ and open the template in the editor.
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 
-#alert{
+#alert, #blocSearch{
+    overflow: auto;
     margin: 4%;
     padding:auto;
     background-color: gainsboro;
@@ -47,7 +38,7 @@ and open the template in the editor.
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 
-#alert table{
+#alert table, #blocSearch table{
     border-collapse: collapse;
     margin:2%;
     width: auto;
@@ -55,17 +46,17 @@ and open the template in the editor.
     table-layout: auto;
 }
 
-#alert th{
+#alert th, #blocSearch th{
     border: 2px solid black;
     font-size: 0.8em;
 }
 
-#alert td{
+#alert td, #blocSearch td{
     text-align: center;
     border: 1px solid black;
    
    //width:100%;
 }
-#alert tr{
+#alert tr, #blocSearch tr{
     width:auto;
 }

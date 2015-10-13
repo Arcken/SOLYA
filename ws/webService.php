@@ -242,6 +242,24 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
 
             break;
+            case 'getSearch':
+
+            $tab = array();
+
+            $requete =$_REQUEST['request'];
+
+            //On l'éxécute
+            $resultat = $bdd->query($requete);
+            //Récupération des données
+            
+            while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $data;
+            }
+            echo json_encode($tab);
+
+
+            break;
     }
+    
 }
 ?>

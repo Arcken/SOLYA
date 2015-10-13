@@ -1,4 +1,7 @@
-
+/**
+ * Fichier de fonction de la vue : view_bon
+ * 
+ */
 
 /**
  * Choisis les éléments à afficher selon la valeur du TypeBon
@@ -153,16 +156,16 @@ function getLotsFromCurReference($row) {
     $divAlert.text('');
     $typeBon = $('#typeBon').val();
 
-    //requète à la base
+    //Ajax
     $.getJSON(
-            // url cible
+            // page cible
             'ws/webService.php',
             //Paramètres
                     {test: 'Solya', action: 'getLots', refId: $valInput.val(), typeBon: $typeBon},
             //Callback
             function (json) {
 
-                console.log("json" + json);
+                //console.log("json" + json);
                 var $myTab = '<table id="tabAlert">\n' +
                         ' <tr>\n  ' +
                         '<th>N°LOT</th>\n  ' +
@@ -185,7 +188,7 @@ function getLotsFromCurReference($row) {
                 }
                 $myTab += '</table>';
                 console.log($myTab);
-                $divAlert.append($myTab);
+                $divAlert.append('<h3>Lot asscoié : </h3>'+$myTab);
                 $divAlert.show();
             }
             );
@@ -369,7 +372,14 @@ function limitQteMax($row) {
     }
 }
 
-
+/**
+ * Color la qté en rouge ou en vert 
+ * selon si la qté respecte bien la condition
+ * qté < attr max de l'input qté
+ * 
+ * @param {type} $row
+ * @returns {undefined}
+ */
 function confirmQteStock($row) {
 
     //id des éléments à modifier
@@ -377,8 +387,8 @@ function confirmQteStock($row) {
     console.log($lotQteId);
     //Récupération des inputs
     var $inptQte = $('#' + $lotQteId);
-    console.log('Valeur dans l\'input: ' + $inptQte.val());
-    console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
+    //console.log('Valeur dans l\'input: ' + $inptQte.val());
+    //console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
 
     if (parseFloat($inptQte.val()) <= parseFloat($inptQte.attr('max'))) {
         $color = 'green';
