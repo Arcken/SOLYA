@@ -3,12 +3,12 @@
 /**
  * Sous controleur liste des bons de sortie et des bons de retour
  */
-
+try {
     require_once $path . '/model/Bon.php';
     require_once $path . '/model/BonManager.php';
     require_once $path . '/model/DocLibelleManager.php';
     $sPageTitle="Liste des bons de SORTIE/RETOUR";
-try {
+
     
     //On récupère le nombre d'enregistrement total pour la pagination
     $iTotal = Tool::getCountTable('bon');
@@ -23,12 +23,7 @@ try {
     }
     //On récupère tout les libéllés des Bons pour les associés dans la colonne
     $toDocLbl=  DocLibelleManager::getDocLibelles();
+    
 } catch (MySQLException $e) {
 
-    switch ($resEr) {
-        default:
-            $msg = "<p class='erreur'>".date('H:i:s')." Oups! Une erreur est survenue : $resEr </p>";
-            Tool::addMsg($msg);
-            break;
-    }
 }

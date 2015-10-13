@@ -4,34 +4,34 @@
  * Sous controleur ajout référence
  * 
  */
+try {
+    require $path . '/model/ModeConservationManager.php';
+    require $path . '/model/DureeConservationManager.php';
+    require $path . '/model/TvaManager.php';
+    require $path . '/model/DroitDouaneManager.php';
+    require $path . '/model/FicheArticleManager.php';
 
-require $path . '/model/ModeConservationManager.php';
-require $path . '/model/DureeConservationManager.php';
-require $path . '/model/TvaManager.php';
-require $path . '/model/DroitDouaneManager.php';
-require $path . '/model/FicheArticleManager.php';
 
-
-$sPageTitle = "Ajouter une référence";
-$sButton = "Envoyer";
+    $sPageTitle = "Ajouter une référence";
+    $sButton = "Envoyer";
 
 //Tool::printAnyCase($sAction);
 
-$toFiArts = FicheArticleManager::getAllFichesArticles();
-$toModCons = ModeConservationManager::getAllModeConservations();
-$toDurCons = DureeConservationManager::getAllDureeConservations();
-$toTvas = TvaManager::getAllTvas();
-$toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
+    $toFiArts = FicheArticleManager::getAllFichesArticles();
+    $toModCons = ModeConservationManager::getAllModeConservations();
+    $toDurCons = DureeConservationManager::getAllDureeConservations();
+    $toTvas = TvaManager::getAllTvas();
+    $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
 
 
 
-if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+        if ($_SESSION['token'] != $_REQUEST['token']) {
 
-    if (isset($_REQUEST['refLbl']) && !empty($_REQUEST['refLbl'])) {
-        require $path . '/model/Reference.php';
-        require $path . '/model/ReferenceManager.php';
+            require $path . '/model/Reference.php';
+            require $path . '/model/ReferenceManager.php';
 
-        try {
+
 
             $cnx = Connection::getConnection();
 
@@ -84,27 +84,25 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
                 $resPv = PrixVenteManager::addPrixVente($oPve);
             }
-            
+
             echo '<br> id Ref:' . $idRef;
 
             $cnx->commit();
-            $msg = "<p class='info'>La référence " . $oRef->ref_lbl . " a été enregistré"
-                          . " avec succès";
-            Tool::addMsg($msg);
-            $sAction='ref_list';
-            require $path.'/controler/control_ref_list.php';
+            $msg = "<p class='info'>". date('H:i:s')." La référence " . $oRef->ref_lbl . " a été enregistré"
+                    . " avec succès</p>";
+
             
-        } catch (MySQLException $e) {
-           
-               switch ($resEr) {
-                   case '23000':
-                       $msg='<p class=\'erreur\'>Merci de compléter le Code Référence'
-                                    . ' avec un code unique </p>';
-                       Tool::addMsg($msg);
-                       break;
-               }
-           
-           $cnx->rollback();
+            $_SESSION['token'] = $_REQUEST['token'];
+            $sAction = 'ref_list';
+            require $path . '/controler/control_ref_list.php';
+            
+        }else{
+            $msg = "<p class= 'erreur'> " . date('H:i:s').
+                    " Vous avez déja envoyé ce formulaire </p>";
+        
         }
+        Tool::addMsg($msg);
     }
+} catch (MySQLException $e) {
+    $cnx->rollback();
 }

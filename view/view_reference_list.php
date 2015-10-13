@@ -87,7 +87,8 @@
                         <td class="colData">
                             <?php if($oRef->ref_photos_pref!=''){ ?>
                                      <img src="<?php echo $imgMiniPath.$oRef->ref_photos_pref.'_lbl.jpg'; ?>" 
-                                          onclick ='location.href="index.php?action=ref_detail&idRef="+ <?php echo $oRef->ref_id; ?>'
+                                          onclick ='location.href="index.php?action=ref_detail&idRef="
+                                                   + <?php echo $oRef->ref_id; ?>'
                             <?php }else{
                                      echo 'Aucune photos définis';
                         }?>
@@ -95,7 +96,8 @@
                         <td class="colData"><?php echo $oRef->ref_code; ?></td>
                         <td class="colData"><?php echo $oRef->ref_lbl;  ?></td>
                         <td class="colData" id='colFiart' 
-                            onclick='location.href="index.php?action=fiart_detail&fiartId="+<?php echo $oRef->fiart_id ;?>'
+                            onclick='location.href="index.php?action=fiart_detail&fiartId="
+                                     +<?php echo $oRef->fiart_id ;?>'
                             ><?php $oFiArt =  FicheArticleManager::getFicheArticleById($oRef->fiart_id);
                                                   echo $oFiArt->fiart_lbl; ?>
                         </td>
@@ -127,13 +129,19 @@
                                                   echo $oTva->tva_lbl.' '.$oTva->tva_taux; ?>
                         </td>
                         <td class="colData"><?php echo 'RIEN'  ?></td>
-                        <td class="colData"><?php $oDd    =  DroitDouaneManager::getDroitDouaneById($oRef->dd_id);
-                                                  echo $oDd->dd_taux.' '.$oDd->dd_lbl; ?>
+                        <td class="colData">
+                            <?php $oDd    =  DroitDouaneManager::getDroitDouaneById($oRef->dd_id);
+                                 echo $oDd->dd_taux.' '.$oDd->dd_lbl; ?>
                         </td>
-                        <td class="colData"><?php echo $oRef->ref_emb_lbl;      ?></td>
-                        <td class="colData"><?php echo $oRef->ref_st_min;       ?></td>
-                        <td class="colData"><?php echo $oRef->ref_com;          ?></td>
-                           
+                        <td class="colData">
+                            <?php echo $oRef->ref_emb_lbl;?>
+                        </td>
+                        <td class="colData">
+                            <?php echo $oRef->ref_st_min;?>
+                        </td>
+                        <td class="colData">
+                            <?php echo $oRef->ref_com; ?>
+                        </td>
                         <td>
                             <img src="img/icon/read.png" 
                                   onclick='location.href="index.php?action=ref_detail&idRef="+
@@ -158,7 +166,12 @@
                         </td>
                      </tr>
 
-                   <?php } ?>
+                   <?php }
+                       
+                   }else{ ?>
+                     <div class="corps">
+                         <?php echo $toRef;?>
+                     </div>
             </table>
              <?php
         if ($iTotal > $iNbPage) {

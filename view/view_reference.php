@@ -8,6 +8,7 @@
         <form class ="form" method="POST" enctype="multipart/form-data">
             <div class=" haut"> 
                 
+                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <label for="ficheArticle"> Associée fiche article: </label><br>
                 <select id="ficheArticle" name="ficheArticle" title="Choisir un élément"
                         required onchange="changeRefCodeAtTime();">

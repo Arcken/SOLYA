@@ -7,14 +7,15 @@
  */
 
 
-
+try {
+    
 $sPageTitle = "Détail de la référence";
 
 
 require $path . '/model/ReferenceManager.php';
 $idRef = $_REQUEST['idRef'];
 
-try {
+
 
     $rsRef = ReferenceManager::getReference($idRef);
 
@@ -43,13 +44,6 @@ try {
     }
     
 } catch (MySQLException $e) {
-    
-    switch ($resEr) {
-        default:
-            $msg = "<p class='erreur'>Oups!Une erreur inattendue s'est produite".$resEr;
-            Tool::addMsg($msg);
-            break;
-    }
 
     $cnx->rollback();
 }

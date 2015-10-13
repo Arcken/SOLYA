@@ -14,18 +14,16 @@ try{
     $refLbl  = $_REQUEST['refLbl'];
     $resDelRef=  ReferenceManager::delReference($idRef);
     
-    if (($resDelRef)>0){
-        
-        $resMessage ="La référence:\n".$refCode."\n".$refLbl." à bien était Supprimé";
+    //Si la suppression à bien impacté un enregistrement
+    //alors on ajoiute le message de réussite
+    if (($resDelRef)>0){  
+        $msg ="<p class='info'>".date('H:i:s')."La référence:\n".$refCode."\n".$refLbl." à bien était Supprimé</p>";
+        Tool::addMsg($msg);
     }
+    
 
 }catch(MySQLException $e){
-    if(isset($resEr)){
-        switch ($resEr){
-            case '23000':
-                $resMessage="Impossible de supprimer la référence :\n".$refCode."\n".$refLbl;
-        }
-    }
+    
 }
 require_once $path.'/controler/control_ref_list.php';
 $sAction="ref_list";
