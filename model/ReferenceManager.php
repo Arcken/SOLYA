@@ -12,6 +12,33 @@
  */
 class ReferenceManager {
    
+/**
+ * Récupère le cout d'achat moyen de la référencepar rapport à sa valeurs en stock actuel
+ * 
+ * @param refId identifiant de la référénce
+ * @return numeric  le stock actuelle de la référence
+ */    
+public static function getRefCurCaMoyen($refId){
+    
+    try{
+        $tParam=[$refId];
+    $sql = "SELECT AVG(be.belig_cu_achat) as nb "
+         . "FROM be_ligne be "
+         . "INNER JOIN ligne l "
+         . "ON be.lig_id=l.lig_id "
+         . "INNER JOIN lot lt "
+         . "ON l.lot_id=lt.lot_id "    
+         . "WHERE lt.lot_qt_stock > 0 AND lt.ref_id=?";
+    
+    $result = Connection::request(0, $sql, $tParam);
+    
+    } catch (MySQLException $e) {
+           throw $e;
+    }
+        return $result;
+}    
+    
+    
     
 /**
  * Récupère la somme total du stock associé à la référence
@@ -19,17 +46,17 @@ class ReferenceManager {
  * @param refId identifiant de la référénce
  * @return numeric  le stock actuelle de la référence
  */    
-public static function getSumInStk($refId){
+public static function getRefCurSumStk($refId){
     
     try{
-        
-    $sql = "SELECT SUM(lt.lot_qt_stock) "
-         . "FROM lot lt INNER JOIN"
+        $tParam=[$refId];
+    $sql = "SELECT SUM(lt.lot_qt_stock) as nb "
+         . "FROM lot lt INNER JOIN "
          . "reference r "
          . "ON r.ref_id=lt.ref_id "
-         . "WHERE lt.lot_qt_stock > 0";
+         . "WHERE lt.lot_qt_stock > 0 AND lt.ref_id=?";
     
-    $result = Connection::request(0, $sql);
+    $result = Connection::request(0, $sql, $tParam);
     
     } catch (MySQLException $e) {
            throw $e;

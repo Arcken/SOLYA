@@ -47,8 +47,14 @@ class BeLigneManager {
             
             $tParam=[$lotId];
             
-            $sql =  'SELECT be.lig_id, be.be_id, be.belig_pu, be.belig_cu_achat, be.belig_fb,'
-                    . 'be.belig_ft, be.belig_dd, be.belig_taxe '
+            $sql =  'SELECT be.lig_id, '
+                    . 'be.be_id,'
+                    . 'be.belig_pu,'
+                    . 'be.belig_cu_achat,'
+                    . 'be.belig_fb,'
+                    . 'be.belig_ft,'
+                    . 'be.belig_dd,'
+                    . 'be.belig_taxe '
                     . 'FROM be_ligne be '
                     . 'INNER JOIN ligne lig '
                     . 'ON be.lig_id=lig.lig_id '

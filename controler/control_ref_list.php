@@ -21,6 +21,7 @@ try {
     require_once $path . '/model/DureeConservationManager.php';
     require_once $path . '/model/PrixVente.php';
     require_once $path . '/model/PrixVenteManager.php';
+    require_once $path . '/model/Lot.php';
     require_once $path . '/model/LotManager.php';
     require_once $path . '/model/BeLigneManager.php';
     
@@ -38,46 +39,102 @@ try {
     
     if(is_array($toRef)){
         //on initialise les tableau
-        $resRef=[];
-        $resFiArt=[];
-        $resPve=[];
-        $resTva=[];
-        $resDd=[];
-        $resLot=[];
-        $resBeLigne=[];
-        $resStk=[];
-    }
+        $resAllRefs=[];
+        $resAllFiArts=[];
+        $resAllPves=[];
+        $resAllTvas=[];
+        $resAllDds=[];
+        $resAllLots=[];
+        $resAllBeLignes=[];
+        $resAllStk=[];
+        $resAllCaM=[];
+        $resAllCoefsPart=[];
+        $resAllCoefsPro=[];
+        $resAllMargesPart=[];
+        $resAllMargesPro=[];
     
     //Pour chaque référence contenu dans notre tableau de référence
     foreach($toRef as $oRef){
-        $resRef[]     = $oRef;
+        
+        //On récupère la référence 
+        $resAllRefs[]     = $oRef;
         //On récupère la fiche article associé
-        $resFiArt[]   = $oFiArt   = FicheArticleManager::getFicheArticleById($oRef->fiart_id);
+        $resAllFiArts[]   = $oFiArt   = FicheArticleManager::getFicheArticleById($oRef->fiart_id);
         //On récupère les prix de vente associés
-        $resPve[]     = $oPve     = PrixVenteManager::getCurPrixVente($oRef->ref_id);
+        $resAllPves[]     = $oPve     = PrixVenteManager::getCurPrixVente($oRef->ref_id);
         //On récupère la tva associé
-        $resTva[]     = $oTva     = TvaManager::getTvaById($oRef->tva_id);
+        $resAllTvas[]     = $oTva     = TvaManager::getTvaById($oRef->tva_id);
         //On récupère le droit de douane associés
-        $resDd[]      = $oDd      = DroitDouaneManager::getDroitDouaneById($oRef->dd_id);
+        $resAllDds[]      = $oDd      = DroitDouaneManager::getDroitDouaneById($oRef->dd_id);
         //On récupère les informations du lot le plus récent et en stock associé
-        $resLot[]     = $oLot     = LotManager::getLotDlcMin($oRef->ref_id);
+        $oLot             = LotManager::getLotDlcMin($oRef->ref_id);
+        
+        //Si $oLot est définis on va chercher la ligne du bon d'entré associé
+        if(isset($oLot) && $oLot !==0){
         //On récupère la ligne de bon d'entré associé au lot
-        $resBeLigne[] = $oBeLigne = BeLigneManager::getBeLigneFromLot($oLot->lot_id);
+            $resAllBeLignes[] = $oBeLigne = BeLigneManager::getBeLigneFromLot($oLot->lot_id);
+        //Sinon    
+        }else{
+            //On créé un lot 'indéfinis' 
+            //et on stock la valeur 'indéfinis' dans le tableau des Lignes de bon d'entrée
+           $oLot= new Lot();
+           $oLot->lot_dlc  ='indéfinis';
+           
+           $resAllBeLignes[] ='indéfinis';
+        }
+        $resAllLots[]    = $oLot;
+        
         //On récupère le stock actuel de la référence
-        $resStk[]     = $nStk     = ReferenceManager::getSumInStk($oRef->ref_id);
+        $resAllStk[]     = $nStk = ReferenceManager::getRefCurSumStk($oRef->ref_id);
+        
+        //On récupère le cout d'achat moyen sur le stock actuel de la référence
+        $oCaM     = ReferenceManager::getRefCurCaMoyen($oRef->ref_id);
+        
+        //On calcul les marges et coeffs professionnel et particulier
+        //Si on a un résultats != 0 dans $oPve et dans $oCaM 
+        if( isset($oPve) && ($oPve!==0) && ($oCaM->nb!='')){
+            
+            //Calcul des marges
+            $margePro     = round(($oPve->pve_ent - $oCaM->nb)/$oPve->pve_ent,2);
+            $resAllMargesPro[]  = $margePro.'%';
+            $margePart = round(($oPve->pve_per - $oCaM->nb)/$oPve->pve_per,2);
+            $resAllMargesPart[] = $margePart.'%';
+            
+            //Calcule des coefficients
+            $resAllCoefsPro[]   = $coefPro      = round(($oPve->pve_ent / $oCaM->nb),2);
+            $resAllCoefsPart[]  = $coefPart     = round(($oPve->pve_per / $oCaM->nb),2);
+            
+        }else{
+            
+            //Sinon on remplis avec indéfinis
+            $oCaM = (object) ['nb'=>'indéfinis'];
+            $resAllMargesPro[]  = 'indéfinis';
+            $resAllMargesPart[] = 'indéfinis';
+            $resAllCoefsPro[]   = 'indéfinis';
+            $resAllCoefsPart[]  = 'indéfinis';
+        
+        }
+        //Enfin on remplis le tableau des Cout d'achats moyens
+        $resAllCaM[]     = $oCaM;
     }
-    print_r($resStk);
+    
     //Enfin on construit le tableau contenant toutes les données
     $resLigRefs=[    
-                'ref'  =>$resRef,
-                'fiart'=>$resFiArt,
-                'dd'   =>$resDd,
-                'tva'  =>$resTva,
-                'pve'  =>$resPve,
-                'lot'  =>$resLot,
-                'beLig'=>$resBeLigne,
-                'stock'=>$resStk
+                'ref'       =>$resAllRefs,
+                'fiart'     =>$resAllFiArts,
+                'dd'        =>$resAllDds,
+                'tva'       =>$resAllTvas,
+                'pve'       =>$resAllPves,
+                'lot'       =>$resAllLots,
+                'beLig'     =>$resAllBeLignes,
+                'stock'     =>$resAllStk,
+                'cuAchM'    =>$resAllCaM,
+                'margePro'  =>$resAllMargesPro,
+                'margePart' =>$resAllMargesPart,
+                'coefPro'   =>$resAllCoefsPro,
+                'coefPart'  =>$resAllCoefsPart
                      ];
+    }
     
 } catch (MySQLException $e) {
     

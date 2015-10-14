@@ -7,7 +7,8 @@
 
         <form class ="form" id='ref_detail' method="POST" enctype="multipart/form-data">
             <div class=" haut"> 
-
+                
+                <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <label for="ficheArticle"> Associée fiche article: </label><br>
                 <select  name="ficheArticle" 
                          title="Choisir un élément" 
@@ -258,7 +259,17 @@
             </div>
 
             <div class="col30">
-
+             
+                <label for="refCodeDouane"> Code douane: </label>
+                <br>
+                <input name="refCodeDouane" 
+                       type="text"
+                       placeholder="Code douane" 
+                       title="3 caractères minimum"
+                       pattern=".{3,}"
+                       value="<?php echo $rsRef->ref_code_douane;?>"
+                       >
+                <br>
                     <label for="pvePer"> Prix de vente particulier: </label><br>
                     <input name="pvePer" 
                            placeholder="### ###,##" 

@@ -37,7 +37,7 @@
                     </th>
                     <th class="colTitle">Qte Stock</th>
                     <th class="colTitle">DLUO</th>
-                    <th class="colTitle">Coût d'achat</th>
+                    <th class="colTitle">Coût d'achat moyen</th>
                     <th class="colTitle">PV Part</th>
                     <th class="colTitle">Marge Part</th>
                     <th class="colTitle">Coeff Part</th>
@@ -70,7 +70,7 @@
                 </tr>
                 
                 <!--Données du tableau -->
-            <?php if (is_array($resLigRefs)) {
+            <?php if (isset($resLigRefs)&& is_array($resLigRefs)) {
                       for($i=0;$i<count($resLigRefs['ref']);$i++){ ?> 
                 
                     <script type='text/javascript'>
@@ -103,9 +103,27 @@
                         <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_mrq;  ?></td>
                         <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_poids_net;    ?></td>
                         <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_emb_vlm_ctn;  ?></td>
-                        <td class="colData"><?php echo $resLigRefs['lot'][$i]->lot_qt_stock;  ?></td>
-                        <td class="colData"><?php echo $resLigRefs['lot'][$i]->lot_dlc;  ?></td>
-                        <td class="colData"><?php echo $resLigRefs['beLig'][$i]->belig_cu_achat;  ?></td>
+                        <td class="colData"><?php
+                                                //Si la valeur en stock n'est pas définis on echo indéfinis
+                                                if($resLigRefs['stock'][$i]->nb!=''){
+                                                    echo $resLigRefs['stock'][$i]->nb;
+                                                }else{
+                                                    echo 'indéfinis';   
+                                                }?></td>
+                        <td class="colData"
+                            title="Date la plus courte en stock">
+                                <?php echo $resLigRefs['lot'][$i]->lot_dlc;  ?></td>
+                        <td class="colData" 
+                            title="Sur article en stock">
+                         <?php
+                             //Si la valeur du coutAchatMoyen = indéfinis
+                             //aucune valeur n'est disponible pour le cout d'achat
+                                if($resLigRefs['cuAchM'][$i]->nb != 'indéfinis'){
+                                    echo round($resLigRefs['cuAchM'][$i]->nb,2);
+                                    
+                                }else{
+                                    echo $resLigRefs['cuAchM'][$i]->nb;
+                                }?></td>
                         <td class="colData">
                             <?php
                                 if($resLigRefs['pve'][$i] === 0){
@@ -113,31 +131,43 @@
                                    $resLigRefs['pve'][$i] = new PrixVente();
                                    $resLigRefs['pve'][$i]->pve_ent='indéfinis';
                                    $resLigRefs['pve'][$i]->pve_per='indéfinis';
+                                   
                                 }
                                 echo $resLigRefs['pve'][$i]->pve_per; ?>
                         </td>
-                        <td class="colData"><?php echo 'RIEN'  ?></td>
-                        <td class="colData"><?php echo 'RIEN'  ?></td>
+                          
+                        <td class="colData"><?php echo $resLigRefs['margePart'][$i]  ?></td>
+                        <td class="colData"><?php echo $resLigRefs['coefPart'][$i]  ?></td>
                         <td class="colData">
                             <?php echo $resLigRefs['pve'][$i]->pve_ent; ?>
                         </td>
-                        <td class="colData"><?php echo 'RIEN'  ?></td>
-                        <td class="colData"><?php echo 'RIEN'  ?></td>
+                        <td class="colData"><?php echo $resLigRefs['margePro'][$i]  ?></td>
+                        <td class="colData"><?php echo $resLigRefs['coefPro'][$i]  ?></td>
                         <td class="colData">
-                            <?php echo $resLigRefs['tva'][$i]->tva_lbl.' '.$resLigRefs['tva'][$i]->tva_taux; ?>
+                            <?php echo $resLigRefs['tva'][$i]->tva_lbl
+                                       .' '.$resLigRefs['tva'][$i]->tva_taux; ?>
                         </td>
                         <td class="colData">
-                            <?php if ($resLigRefs['ref'][$i]->ref_code_douane != ''){
+                            <?php //Si le code douanier n'est pas définis on echo indéfinis
+                                    if ($resLigRefs['ref'][$i]->ref_code_douane != ''){
                                         echo $resLigRefs['ref'][$i]->ref_code_douane;
                                    }else{
                                        echo 'indéfinis';
                                    } ?>
                         </td>
                         <td class="colData">
-                            <?php  echo$resLigRefs['dd'][$i]->dd_lbl.' '.$resLigRefs['dd'][$i]->dd_taux; ?>
+                            <?php  echo $resLigRefs['dd'][$i]->dd_lbl.' '.
+                                        $resLigRefs['dd'][$i]->dd_taux; ?>
                         </td>
                         <td class="colData">
-                            <?php echo $resLigRefs['ref'][$i]->ref_emb_lbl;?>
+                            <?php 
+                                //Si l'embalage n'est pas définis on echo indéfinis
+                                if($resLigRefs['ref'][$i]->ref_emb_lbl!=''){
+                                    echo $resLigRefs['ref'][$i]->ref_emb_lbl;
+
+                                }else{
+                                    echo 'indéfinis';    
+                                }?>
                         </td>
                         <td class="colData">
                             <?php echo $resLigRefs['ref'][$i]->ref_st_min;?>

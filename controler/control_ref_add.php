@@ -59,6 +59,7 @@ try {
             $oRef->ref_com = $_REQUEST['refCom'];
             $oRef->ref_code = strtoupper($_REQUEST['refCode']);
             $oRef->ref_mrq = $_REQUEST['refMrq'];
+            $oRef->ref_code_douane =$_REQUEST['refCodeDouane'];
 
             $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
             if (count($resPhoto) > 0 && $resPhoto[0] != '') {
@@ -85,7 +86,7 @@ try {
                 $resPv = PrixVenteManager::addPrixVente($oPve);
             }
 
-            echo '<br> id Ref:' . $idRef;
+           
 
             $cnx->commit();
             $msg = "<p class='info'>". date('H:i:s')." La référence " . $oRef->ref_lbl . " a été enregistré"
@@ -105,4 +106,6 @@ try {
     }
 } catch (MySQLException $e) {
     $cnx->rollback();
+    $msg=$resEr[1];
+    Tool::addMsg($msg);
 }

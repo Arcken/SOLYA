@@ -88,5 +88,30 @@ class PrixVenteManager {
         }
         return $result;
     }
+    
+    /**
+     * Supprime les prix de ventes associés à une référence 
+     * 
+     * @param $refId
+     * Id de la référence
+     * 
+     * @return objet
+     * retourne un objet
+     */
+    public static function delPrixVentesOfRef($refId) {
+
+        try {
+            $tParam = [$refId];
+
+            $sql = 'DELETE '
+                   . 'FROM prix_vente  '
+                   . 'WHERE ref_id=? ';
+
+            $result = Connection::request(2, $sql, $tParam);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 
 }

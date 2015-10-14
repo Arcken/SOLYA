@@ -9,7 +9,7 @@
  */
 class BonManager {
     /**
-     * Retourne un enregistrement de la table Bon pour mise a jour
+     * Retourne un enregistrement de la table Bon 
      * selon son ID.
      *  
      * @param type $bonId
