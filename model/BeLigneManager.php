@@ -11,20 +11,53 @@
  */
 class BeLigneManager {
 
+    
     /**
-     * Retourne tous les enregistrements de la table
+     * Retourne un enregistrements de la table
+     * selon lig_id
      * 
      * @return objet[]
      * Renvoie tableau d'objet
      */
-    public static function getAllBesLignes() {
+    public static function getBeLigne($ligId) {
 
         try {
-
+            $tParam= [$ligId];
+            
             $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
                     . 'belig_ft, belig_dd, belig_taxe '
-                    . 'FROM be_ligne';
-            $result = Connection::request(1, $sql);
+                    . 'FROM be_ligne WHERE lig_id=?';
+            $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    /**
+     * Retourne l' enregistrements de la table associé au lot
+     * 
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getBeLigneFromLot($lotId) {
+
+        try {
+            
+            $tParam=[$lotId];
+            
+            $sql =  'SELECT be.lig_id, be.be_id, be.belig_pu, be.belig_cu_achat, be.belig_fb,'
+                    . 'be.belig_ft, be.belig_dd, be.belig_taxe '
+                    . 'FROM be_ligne be '
+                    . 'INNER JOIN ligne lig '
+                    . 'ON be.lig_id=lig.lig_id '
+                    . 'INNER JOIN lot lt '
+                    . 'ON lig.lot_id = lt.lot_id '
+                    . 'WHERE lt.lot_id = ?';
+            
+            $result = Connection::request(0, $sql,$tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }

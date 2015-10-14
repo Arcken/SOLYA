@@ -11,20 +11,28 @@
     <div id="blocSearch">
         <h3>Recherche:</h3>
         <!--Champ pour le moteur de recherche-->
-        <input id='inptSearch' type="text" onkeyup="search()">
+        <input id='inptSearch' type="text" 
+               onkeyup="if($(this).val().length > 2){
+                            search();
+                        }"
+                        
+                onfocus="if($(this).val().length > 2){
+                            search();
+                        }"
+        >
         <br>
         <br>
-        <label for="table"> Choix de recherche : </label>
+        <label for="table"> Choisir : </label>
         <br>
-        
-        Reference
+        <br>
+        <i>Reference</i>
         <input type='radio' 
                name='table' 
                value='reference' 
                title='Recherche une référence par libéllé' 
                onclick='changeRequest()'
                >
-        Lot
+       <i>Lot</i>
         <input type='radio' 
                name='table' 
                value='lot' 

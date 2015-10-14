@@ -11,6 +11,32 @@
  *
  */
 class ReferenceManager {
+   
+    
+/**
+ * Récupère la somme total du stock associé à la référence
+ * 
+ * @param refId identifiant de la référénce
+ * @return numeric  le stock actuelle de la référence
+ */    
+public static function getSumInStk($refId){
+    
+    try{
+        
+    $sql = "SELECT SUM(lt.lot_qt_stock) "
+         . "FROM lot lt INNER JOIN"
+         . "reference r "
+         . "ON r.ref_id=lt.ref_id "
+         . "WHERE lt.lot_qt_stock > 0";
+    
+    $result = Connection::request(0, $sql);
+    
+    } catch (MySQLException $e) {
+           throw $e;
+    }
+        return $result;
+}
+
 
     /**
      * Retourne les enregistrements de la table Référence
@@ -52,7 +78,8 @@ class ReferenceManager {
                             ref_com,
                             ref_code, 
                             ref_photos,
-                            ref_photos_pref 
+                            ref_photos_pref,
+                            ref_code_douane
                             FROM reference " 
                             ."ORDER BY ".$orderby." ".$tri." "
                             ."LIMIT ".$limit.",".$nombre."";
@@ -100,7 +127,8 @@ class ReferenceManager {
                     $oReference->ref_com,
                     $oReference->ref_code,
                     $oReference->ref_photos,
-                    $oReference->ref_photos_pref
+                    $oReference->ref_photos_pref,
+                    $oReference->ref_code_douane
                 );
 
                 $sql = "INSERT INTO reference ("
@@ -124,8 +152,9 @@ class ReferenceManager {
                         . "ref_com,"
                         . "ref_code,"
                         . "ref_photos,"
-                        . "ref_photos_pref) " .
-                        " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                        . "ref_photos_pref,"
+                        . "ref_code_douane) " 
+                        ." VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
             
@@ -171,6 +200,7 @@ class ReferenceManager {
                     $oReference->ref_code,
                     $oReference->ref_photos,
                     $oReference->ref_photos_pref,
+                    $oReference->ref_code_douane,
                     $oReference->ref_id
                 );
                     
@@ -195,8 +225,9 @@ class ReferenceManager {
                         . "r.ref_com=?," 
                         . "r.ref_code=?,"
                         . "r.ref_photos=?,"
-                        . "r.ref_photos_pref=? ".
-                          "WHERE r.ref_id=? ";
+                        . "r.ref_photos_pref=?,"
+                        . "r.ref_code_douane=? "
+                        . "WHERE r.ref_id=? ";
 
                 $result = Connection::request(2, $sql, $tParam);
  
@@ -242,7 +273,9 @@ class ReferenceManager {
                             r.ref_com,
                             r.ref_code,
                             r.ref_photos,
-                            r.ref_photos_pref FROM reference r 
+                            r.ref_photos_pref,
+                            r.ref_code_douane
+                            FROM reference r 
                             WHERE r.ref_id = ? FOR UPDATE";
 
             $result = Connection::request(0, $sql,$tParam);
@@ -289,7 +322,9 @@ class ReferenceManager {
                             r.ref_com,
                             r.ref_code,
                             r.ref_photos,
-                            r.ref_photos_pref FROM reference r WHERE r.ref_id = ?";
+                            r.ref_photos_pref,
+                            r.ref_code_douane 
+                            FROM reference r WHERE r.ref_id = ?";
 
             $result = Connection::request(0, $sql,$tParam);
             
@@ -301,11 +336,11 @@ class ReferenceManager {
     
     
     /**
-     * Retourne un enregistrements de la table
+     * Retourne le ref code 
+     * associé à un enregistrement de la table
      * 
      * @param $id
      * Identifiant de la l'enregistrement
-     * 
      * @return objet
      * Retourne un objet
      */

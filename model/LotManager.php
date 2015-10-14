@@ -133,7 +133,37 @@ class LotManager {
         }
         return $result;
         }
+        
+    /**
+     * Récupère les informations du lot
+     * dont la date limite est la plus proche
+     * @param type $refId
+     * @return object Lot
+     * @throws MySQLException
+     */
+        public static function getLotDlcMin($refId){
+         
+     
+        try{
+            $tParam = [$refId];
+
+            $sql= "SELECT lot_id,"
+                        . "lot_dlc,"
+                        . "lot_qt_stock,"
+                        . "lot_qt_init "
+                        . "FROM lot "
+                        . "WHERE ref_id =? and lot_qt_stock > 0 "
+                        . "ORDER BY lot_dlc LIMIT 0,1 ";
+
+             $result = Connection::request(0, $sql, $tParam);
+         
+        }catch(MySQLException $e){
+          throw $e;   
+        }
+        return $result;
+        }
     
+        
      /**
      * Modifie un enregistrement dans la table Lot
      * @param type $oLot

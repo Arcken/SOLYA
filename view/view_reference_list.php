@@ -103,9 +103,9 @@
                         <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_mrq;  ?></td>
                         <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_poids_net;    ?></td>
                         <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_emb_vlm_ctn;  ?></td>
-                        <td class="colData"><?php echo 'QTE STOCK'  ?></td>
-                        <td class="colData"><?php echo 'DLUO'  ?></td>
-                        <td class="colData"><?php echo "Coût d'achat"  ?></td>
+                        <td class="colData"><?php echo $resLigRefs['lot'][$i]->lot_qt_stock;  ?></td>
+                        <td class="colData"><?php echo $resLigRefs['lot'][$i]->lot_dlc;  ?></td>
+                        <td class="colData"><?php echo $resLigRefs['beLig'][$i]->belig_cu_achat;  ?></td>
                         <td class="colData">
                             <?php
                                 if($resLigRefs['pve'][$i] === 0){
@@ -126,9 +126,15 @@
                         <td class="colData">
                             <?php echo $resLigRefs['tva'][$i]->tva_lbl.' '.$resLigRefs['tva'][$i]->tva_taux; ?>
                         </td>
-                        <td class="colData"><?php echo 'RIEN'  ?></td>
                         <td class="colData">
-                            <?php  echo $resLigRefs['dd'][$i]->dd_taux.' '.$resLigRefs['dd'][$i]->dd_lbl; ?>
+                            <?php if ($resLigRefs['ref'][$i]->ref_code_douane != ''){
+                                        echo $resLigRefs['ref'][$i]->ref_code_douane;
+                                   }else{
+                                       echo 'indéfinis';
+                                   } ?>
+                        </td>
+                        <td class="colData">
+                            <?php  echo$resLigRefs['dd'][$i]->dd_lbl.' '.$resLigRefs['dd'][$i]->dd_taux; ?>
                         </td>
                         <td class="colData">
                             <?php echo $resLigRefs['ref'][$i]->ref_emb_lbl;?>

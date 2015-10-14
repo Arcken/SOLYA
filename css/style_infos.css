@@ -26,7 +26,7 @@
 #alert, #blocSearch{
     overflow: auto;
     margin: 4%;
-    padding:auto;
+    padding:5%;
     background-color: gainsboro;
     width: auto;
     border:  2px solid cyan;
@@ -54,9 +54,8 @@
 #alert td, #blocSearch td{
     text-align: center;
     border: 1px solid black;
-   
-   //width:100%;
 }
+
 #alert tr, #blocSearch tr{
     width:auto;
 }

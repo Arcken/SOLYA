@@ -29,6 +29,7 @@ class Reference {
     public $ref_code         = '';
     public $ref_photos       = '';
     public $ref_photos_pref  = '';
+    public $ref_code_douane  = '';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

@@ -152,8 +152,9 @@ try {
             for ($i = 1; $i <= (count($tLigneForm['ref_id'])) - 1; $i++) {
                 //echo '<br> dans la boucle <br>';
 
-                //Si la case lig-id est != '' c'est un update
-                if ($tLigneForm['lig_id'][$i] != 0) {
+                //Si la case lig-id est > 0 c'est un update ou une suppression
+                if ($tLigneForm['lig_id'][$i]> 0) {
+                    
                     //Si le tableau de checkbox pour la suppression est définit
                     if (isset($tLigSupp[$i])) {
 
@@ -207,6 +208,7 @@ try {
                             case '12':
 
                                 //echo "<br>Ancienne valeur stk du lot = $oLot->lot_qt_stock <br>";
+                                
                                 //Sur la suppression d'une ligne de bon de retour
                                 //on modifie la valeur stock du lot pour la décrémenter
                                 //Cependant il est nécessaire de controler
@@ -229,6 +231,7 @@ try {
                         $resLigneDel =  LigneManager::delLigne($oLigneToDel->lig_id);
                                 //echo"<br> Suppression ligne $i check : $resLigneDel <br> ";
                     } else {
+                        
                         echo $i . "<br>";
                         //On hydrate un objet Ligne
                         $args = array(
@@ -274,6 +277,7 @@ try {
                         }
 
                         echo 'diffQtMvt = ' . $diffQteMvt . '</br>';
+                        
                         //On réajuste la qté en stock 
                         //Règles des opérateurs (- et -) = (+), (+ et -) = (-) ,( + et +) = (+)
                         $newQtLot = $oOldLot->lot_qt_stock + ($diffQteMvt);

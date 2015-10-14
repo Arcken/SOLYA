@@ -48,7 +48,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="beDate" 
                        id="beDate"
                        type="date"
-                       required=""
+                       required
                        >
                 <br>
                 <label for="beCom"> Commentaire</label><br>
@@ -63,7 +63,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beFraisDouane" 
                        type="number"
                        min="0"
-                       step="0.01"
+                       step="any"
                        value ="0">
                 <br>
                 <label for="beFraisBancaire"> Frais bancaires </label><br>
@@ -71,7 +71,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beFraisBancaire" 
                        type="number"
                        min="0"
-                       step="0.01"
+                       step="any"
                        value ="0">
                 <br>
                 <label for="beFraisTrans"> Frais de transport </label><br>
@@ -79,7 +79,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beFraisTrans" 
                        type="number"
                        min="0"
-                       step="0.01"
+                       step="any"
                        value ="0">
                 <br>
                 
@@ -186,7 +186,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                             "ref_id",
                                                             "be")' 
                                        min="0"
-                                       required="">
+                                       required
+                                       value="0">
                         </td>
                         <td class="beLigneCode">
                             <input type="text"
@@ -196,7 +197,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                             "refCodeNID",
                                                             "ref_code",
                                                             "be")'
-                                       required="">
+                                       value=" "                     
+                                       required>
                         </td>
                         <td>
                             <textarea name="refLbl[NID]" 
@@ -214,28 +216,28 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                    value="1"
                                    min="0.01"
-                                   step="0.01"
+                                   step="any"
                                    name="beligPu[NID]" 
                                    id="beligPuNID"
-                                   required="">
+                                   required>
                         </td>
                         <td class="beLigneNb">
                             <input type="number" 
                                    value="1"
                                    min="0.01"
-                                   step="0.01"
+                                   step="any"
                                    name="ligQte[NID]" 
                                    id ="ligQteNID"
-                                   required="">
+                                   required>
                         </td>
                         <td class="beLigneNb">
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01"
+                                   step="any"
                                    name="refPoidsBrut[NID]" 
                                    id="refPoidsBrutNID"
-                                   required="">
+                                   required>
                         </td>
                         <td class="beLigneNb">
                             <!-- Calcul totalPoids: Multiplication entre la quantité
@@ -243,7 +245,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                    value="0"
                                    min="0.00"
-                                   step="0.01"
+                                   step="any"
                                    name="totalPoids[NID]" 
                                    id="totalPoidsNID"
                                    onfocus='ccMultiplier(["ligQteNID",
@@ -256,14 +258,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                        value="0"
                                        min="0"
-                                       step="0.01"
+                                       step="any"
                                        name="beligDd[NID]" 
                                        id="beligDdNID"
                                        onfocus='beCcDroitDouane("beligPuNID",
                                                            "beligTauxDouaneNID",
                                                            "ligQteNID",
                                                            "beligDdNID")'
-                                       required="">
+                                       required>
                         </td>
                         <td class="beLigneNb">
                             <!-- Calcul droit de douane selon le pu, le taux 
@@ -271,34 +273,34 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                        value="0"
                                        min="0"                                   
-                                       step="0.01"
+                                       step="any"
                                        name="beligTauxDouane[NID]" 
                                        id="beligTauxDouaneNID"
                                        onchange='beCcDroitDouane("beligPuNID",
                                                            "beligTauxDouaneNID",
                                                            "ligQteNID",
                                                            "beligDdNID")'
-                                       required="">
+                                       required>
                         </td>
                         <td class="beLigneNb">
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01"
+                                   step="any"
                                    name="beligTaxe[NID]" 
                                    id="beligTaxeNID"
-                                   required="">
+                                   required>
                         </td>
                         <td class="beLigneNb">
                             <!-- Additionne droit de douane et taxe-->
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01" 
+                                   step="any" 
                                    name="totalFd[NID]" 
                                    id="totalFdNID" 
                                    readonly=""
-                                   required=""
+                                   required
                                    onfocus='ccAddition(
                                                        ["beligDdNID", "beligTaxeNID"],
                                                        "totalFdNID")'>
@@ -307,21 +309,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01"
+                                   step="any"
                                    name="beligFb[NID]" 
                                    id="beligFbNID"
-                                   required="">
+                                   required>
                         </td>
                         <td class="beLigneNb">
                             <!-- Copie frais bancaire dans total -->
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01"
+                                   step="any"
                                    name="totalFb[NID]" 
                                    id="totalFbNID"
                                    readonly=""
-                                   required=""
+                                   required
                                    onfocus='copieChamps("beligFbNID",
                                                        "totalFbNID")'>
                         </td>
@@ -329,9 +331,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01" 
+                                   step="any" 
                                    name="beligFt[NID]" 
-                                   required=""
+                                   required
                                    id="beligFtNID">
                         </td>
                         <td class="beLigneNb">
@@ -339,11 +341,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="number" 
                                    value="0"
                                    min="0"
-                                   step="0.01" 
+                                   step="any" 
                                    name="totalFt[NID]" 
                                    id="totalFtNID"
                                    readonly=""
-                                   required=""
+                                   required
                                    onfocus='copieChamps("beligFtNID",
                                                        "totalFtNID")'>
                         </td>
@@ -352,7 +354,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                 calcul le total de la ligne-->
                             <input type="number" 
                                    value="0" 
-                                   step="0.01"
+                                   step="any"
                                    name="totalLig[NID]" 
                                    id="totalLigNID"
                                    readonly=""
@@ -362,7 +364,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="date" 
                                    name="lotDlc[NID]" 
                                    id="lotDlcNID"
-                                   required="">
+                                   value="<?php echo date('Y-m-d')?>"
+                                   required>
                         </td>
                         <td >
                             <textarea name="ligComDep[NID]" 
@@ -377,11 +380,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <td>
                             <input type="number" 
                                    value="0" 
-                                   step="0.01"
+                                   step="any"
                                    name="beligCuAchat[NID]" 
                                    id="beligCuAchatNID"
                                    value=""
-                                   required="">                            
+                                   required>                            
                         </td>
                         <td  class="beLigneImg">
                             <!-- Efface la ligne en cours -->

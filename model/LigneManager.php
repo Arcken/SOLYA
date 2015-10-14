@@ -32,6 +32,29 @@ class LigneManager {
         return $result;
     }
     
+    /**
+     * retourne un enregistrement selon l'id
+     * @param $ligId
+     * attend l'id de l'enregistrement
+     * @return objet
+     * retourne un objet
+     */
+    public static function getLignesByLot($lotId) {
+
+        try {
+
+            $tParam = [$lotId];
+            
+            $sql = 'SELECT lig_id, lot_id, lig_qte, lig_com_dep, lig_com '
+                    . 'FROM ligne '
+                    . 'WHERE lot_id =?';
+            $result = Connection::request(1, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
     
     /**
      * retourne un enregistrement selon l'id
@@ -48,7 +71,7 @@ class LigneManager {
             
             $sql = 'SELECT lig_id, lot_id, lig_qte, lig_com_dep, lig_com '
                     . 'FROM ligne '
-                    . 'WHERE lig_id =? FOR UPDATE';
+                    . 'WHERE lig_id =?';
             $result = Connection::request(0, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
