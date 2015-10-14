@@ -224,7 +224,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             //Rappel du controleur de la liste, après update on appel view_be_list
             //et redéfinition de $sAction
 
-            $sAction = "belist";
+            $sAction = "be_list";
             require_once $path . '/controler/control_be_list.php';
         } catch (MySQLException $e) {
             //Message pour l'erreur
@@ -296,23 +296,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $lot = LotManager::getLotForUpd($lotId);
                     //On ajoute le lot retourné au tableau de lot
                     $resAllLots[] = $lot;
-                    print_r($lot);
                     //On récupére l'id de la référence
                     $refId = $lot->ref_id;
-                    echo $refId;
                     //On récupére les infos de la référence
                     $ref = ReferenceManager::getReference($refId);
-                    print_r($ref);
                     //On ajoute la référence retournée au tableau de référence
                     $resAllRefs[] = $ref;
-                    print_r($resAllRefs);
                     //On récupére l'id du droit de douane
                     $ddId = $ref->dd_id;
                     //On récupére les infos du droit de douane
                     $dd = DroitDouaneManager::getDroitDouaneById($ddId);
                     //On ajoute le droit de douane retournée au tableau de droit douane
                     $resAllDds[] = $dd;
-                    print_r($resAllDds);
                 }
             }
            

@@ -2,5 +2,5 @@
 <script src="js/function.js" type="text/javascript"></script>
 </body>
 <footer>
-    echo $ligneMessage;
+    <?php if (isset($ligneMessage)) echo $ligneMessage; ?>
 </footer>

@@ -17,7 +17,8 @@ class NutritionManager {
     public static function getAllNutritions() {
 
         try {
-            $sql = 'SELECT nut_id, nut_lbl FROM nutrition';
+            $sql = 'SELECT nut_id, nut_lbl FROM nutrition '
+                    . 'ORDER BY nut_lbl';
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

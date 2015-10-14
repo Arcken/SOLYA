@@ -66,7 +66,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        placeholder="Saisie" 
                        required
                        pattern=".{2,}" 
-                       title="2 caractères minimum">
+                       title="2 caractères minimum"
                        type="text">            
                 <br>
 

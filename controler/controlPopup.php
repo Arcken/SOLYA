@@ -135,21 +135,21 @@ switch ($sAction) {
 
     //gamme
     case "nv_ga_add":
-        require $path . '/view/view_gamme.php';
+        require $path . '/view/view_gamme_add.php';
         break;
 
     //Mode conservation
     case "nv_mc_add":
-        require $path . '/view/view_mode_conservation.php';
+        require $path . '/view/view_mode_conservation_add.php';
         break;
 
     //nutrition
     case "nv_nut_add":
-        require $path . '/view/view_nutrition.php';
+        require $path . '/view/view_nutrition_add.php';
         break;
 
     //pays
     case "nv_pays_add":
-        require $path . '/view/view_pays.php';
+        require $path . '/view/view_pays_add.php';
         break;
 }
