@@ -27,7 +27,7 @@
 
             //Modification du bon d'entrée
             case "be_detail":
-                require $path . '/controler/control_be_detail.php';
+                require $path . '/controler/control_be_upd.php';
                 break;
 
             
@@ -133,7 +133,7 @@
 
             //Detail fiche article et maj fiche article            
             case "fiart_detail":
-                require $path . '/controler/control_fiart_detail.php';
+                require $path . '/controler/control_fiart_upd.php';
                 break;
 
 
@@ -308,7 +308,7 @@
 
             //Détail de l'utilisateur
             case "utilisateur_detail":
-                require $path . '/controler/control_ut_detail.php';
+                require $path . '/controler/control_ut_upd.php';
                 break;
 
 

@@ -6,19 +6,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     //Si la suppression ne se fait pas le manager léve un exception
     try {
-        require_once $path . '/model/FicheArticleManager.php';
+        require_once $path . '/model/DroitDouaneManager.php';
+        //On passe en paramètre de la requète la valeur gaIg de l'url
+        $res = DroitDouaneManager::delDroitDouane($_REQUEST['ddId']);
 
-        //On exécute la requête avec les paramètres de l'url
-        $res = FicheArticleManager::delFicheArticle($_REQUEST['fiartId']);
-        
         //Message pour le succés
         $msg = '<p class=\'info\'>' . date('H:i:s')
-                . ' La suppression de la fiche article: "'
-                . $_REQUEST['fiartId']
+                . ' La suppression du droit de douane: "'
+                . $_REQUEST['ddId']
                 . '" à été effectué avec succès </p>';
-        
         // si la suppression a été effectué on met le message dans le tableau
-        if ($res > 0) {
+        if ($res > 0){
             Tool::addMsg($msg);
         }
         
@@ -26,14 +24,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //Message en cas d'échec
         $msg = '<p class=\'info\'>' . date('H:i:s')
-                . "La fiche article N° " . $_REQUEST['fiartId']
+                . "Le droit de douane N° " . $_REQUEST['ddId']
                 . " n'est pas supprimée</p>";
         //On met le message dans le tableau
         Tool::addMsg($msg);
     }
     
-     //On appel le contrôleur de la liste, car on affiche la liste après une suppression
-    require $path . '/controler/control_fiart_list.php';
+    //On appel le contrôleur de la liste, car on affiche la liste après une suppression
+    require $path . '/controler/control_dd_list.php';
 } else {
     echo 'Le silence est d\'or';
 }

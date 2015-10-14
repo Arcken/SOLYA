@@ -9,7 +9,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     //Si le formulaire est envoyé
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
-        
+
         //Si la modification ne se fait pas le manager léve un exception
         try {
             //Vérification du jeton pour savoir si le formulaire à déja était envoyé
@@ -21,7 +21,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oNutrition = new Nutrition();
                 $oNutrition->nut_id = $_REQUEST['nutId'];
                 $oNutrition->nut_lbl = $_REQUEST['nutLbl'];
-                
+
                 $resUpdNutrition = NutritionManager::updNutrition($oNutrition);
 
                 //Message pour le succés
@@ -44,7 +44,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
             $sAction = "nut_list";
             require_once $path . '/controler/control_nut_list.php';
-            
         } catch (MySQLException $e) {
             //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
@@ -57,13 +56,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //Sinon on est dans l'affichage du détail
     } else {
-        //On définit le titre
-        $sPageTitle = "Détail de la nutrition";
-        //On contrôle si l'id est définie est on on récupére le détail 
-        //de l'enregistrement et on défnit la valeur du button du formulaire
-        if (isset($_REQUEST['nutId']) && $_REQUEST['nutId'] != '') {
-            $resNutDetail = NutritionManager::getNutritionDetailForUpd($_REQUEST['nutId']);
-            $sButton = 'Modifier';
+        try {
+            //On définit le titre
+            $sPageTitle = "Détail de la nutrition";
+            //On contrôle si l'id est définie est on on récupére le détail 
+            //de l'enregistrement et on défnit la valeur du button du formulaire
+            if (isset($_REQUEST['nutId']) && $_REQUEST['nutId'] != '') {
+                $resNutDetail = NutritionManager::getNutritionDetailForUpd($_REQUEST['nutId']);
+                $sButton = 'Modifier';
+            }
+        } catch (MySQLException $e) {
+            $msg = $resEr[1];
+            Tool::addMsg($msg);
         }
     }
 } else {

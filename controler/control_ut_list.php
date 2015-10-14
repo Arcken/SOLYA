@@ -1,19 +1,34 @@
 <?php
-$sPageTitle = "Liste des utilisateurs";
 
-require_once $path . '/model/Utilisateur.php';
-require_once $path . '/model/UtilisateurManager.php';
+//Contrôle si la connection de l'utilisateur est valide
+//Le 'group' permet de choisir si l'utilisateur à accés à la page
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
-//Compte le nombre d'enregistrements de la table pour l'affichage par page
-$iTotal = Tool::getCountTable('utilisateur');
+    try {
+        $sPageTitle = "Liste des utilisateurs";
 
-//On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
-if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-    $orderby = $_REQUEST['orderby'];
-    $resAllUtilisateurs = UtilisateurManager::getAllUtilisateursLim($limite, $iNbPage, $orderby);
-}
+        require_once $path . '/model/Utilisateur.php';
+        require_once $path . '/model/UtilisateurManager.php';
 
-//Sinon on appel la requête classique
-else {
-    $resAllUtilisateurs = UtilisateurManager::getAllUtilisateursLim($limite, $iNbPage);
+        //Compte le nombre d'enregistrements de la table pour l'affichage par page
+        $iTotal = Tool::getCountTable('utilisateur');
+
+        //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
+        if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
+            $orderby = $_REQUEST['orderby'];
+            $resAllUtilisateurs = UtilisateurManager::getAllUtilisateursLim($limite, $iNbPage, $orderby);
+        }
+
+        //Sinon on appel la requête classique
+        else {
+            $resAllUtilisateurs = UtilisateurManager::getAllUtilisateursLim($limite, $iNbPage);
+        }
+        
+    } catch (MySQLException $e) {
+        $msg = $resEr[1];
+        Tool::addMsg($msg);
+    }
+    
+} else {
+    echo 'Le silence est d\'or';
 }

@@ -28,7 +28,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //Message pour le succés
                 $msg = '<p class=\'info\'>' . date('H:i:s')
                         . ' La modification du mode de conservation: "'
-                        . $oMc->cons_id . '" intitulé "' . $oMc->cons_lbl 
+                        . $oMc->cons_id . '" intitulé "' . $oMc->cons_lbl
                         . '" à été effectué'
                         . ' avec succès </p>';
 
@@ -39,13 +39,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $msg = "<p class= 'erreur'> " . date('H:i:s') . "
                 Vous avez déja envoyé ce formulaire </p>";
             }
-            
+
             //Rappel du controleur de la liste, après update on appel view_mc_list
             //et redéfinition de $sAction
-            
+
             $sAction = "mc_list";
             require_once $path . '/controler/control_mc_list.php';
-            
         } catch (MySQLException $e) {
             //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
@@ -55,16 +54,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //On insert le message dans le tableau de message
         Tool::addMsg($msg);
-        
-    //Sinon on est dans l'affichage du détail
+
+        //Sinon on est dans l'affichage du détail
     } else {
-        //On définit le titre
-        $sPageTitle = "Détail du mode de conservation";
-        //On contrôle si l'id est définie est on on récupére le détail 
-        //de l'enregistrement et on défnit la valeur du button du formulaire
-        if (isset($_REQUEST['consId']) && $_REQUEST['consId'] != '') {
-            $resMcDetail = ModeConservationManager::getModeConservationDetailForUpd($_REQUEST['consId']);
-            $sButton = 'Modifier';
+        try {
+            //On définit le titre
+            $sPageTitle = "Détail du mode de conservation";
+            //On contrôle si l'id est définie est on on récupére le détail 
+            //de l'enregistrement et on défnit la valeur du button du formulaire
+            if (isset($_REQUEST['consId']) && $_REQUEST['consId'] != '') {
+                $resMcDetail = ModeConservationManager::getModeConservationDetailForUpd($_REQUEST['consId']);
+                $sButton = 'Modifier';
+            }
+        } catch (MySQLException $e) {
+            $msg = $resEr[1];
+            Tool::addMsg($msg);
         }
     }
 } else {

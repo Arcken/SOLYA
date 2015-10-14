@@ -18,12 +18,20 @@
 
             //Ajout du bon d'entrée
             case "be_add":
-                require $path . '/view/view_bon_entree.php';
+                require $path . '/view/view_bon_entree_add.php';
                 break;
 
             //Détail d'un bon d'entrée
             case "be_detail":
-                require $path . '/view/view_bon_entree_ru.php';
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_bon_entree_list.php';
+                    
+                } else {
+                    require $path . '/view/view_bon_entree_upd.php';
+                }
+                
                 break;
             
             //Liste des bons d'entrées
@@ -153,14 +161,7 @@
             //Ajout d'une fiche article
             case "fiart_add":
                 
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Envoyer') {
-                    
-                    require $path . '/view/view_fiche_article_list.php';
-                    
-                } else {
-                    require $path . '/view/view_fiche_article.php';
-                }
+                    require $path . '/view/view_fiche_article_add.php';
                 
                 break;
 
@@ -173,7 +174,7 @@
                     require $path . '/view/view_fiche_article_list.php';
                     
                 } else {
-                    require $path . '/view/view_fiche_article_ru.php';
+                    require $path . '/view/view_fiche_article_upd.php';
                 }
                 
                 break;
@@ -383,24 +384,23 @@
 
             //Ajout d'un utilisateur
             case "utilisateur_add":
-                require $path . '/view/view_utilisateur.php';
+                require $path . '/view/view_utilisateur_add.php';
                 break;
 
             //Liste des utilisateurs
             case "utilisateur_list":
-                require $path . '/view/view_utilisateur_liste.php';
+                require $path . '/view/view_utilisateur_list.php';
                 break;
 
             //Détail d'un utilisateur
             case "utilisateur_detail":
                 
                 if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == "Modifier") {
-                    
-                    require $path . '/view/view_utilisateur_liste.php';
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    require $path . '/view/view_utilisateur_list.php';
                     
                 } else {
-                    require $path . '/view/view_utilisateur_detail_ru.php';
+                    require $path . '/view/view_utilisateur_upd.php';
                 }
                 break;
         }

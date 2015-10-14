@@ -156,7 +156,7 @@ class UtilisateurManager {
      * @return objet
      * Retourne un objet
      */
-    public static function getUtilisateurDetailUpd($id) {
+    public static function getUtilisateurDetailForUpd($id) {
 
         try {
             $tParam = [$id];

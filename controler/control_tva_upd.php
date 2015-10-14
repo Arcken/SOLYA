@@ -36,19 +36,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 //La requète s'est effectué donc on copie le token dans la session
                 $_SESSION['token'] = $_REQUEST['token'];
-                
             } else {
 
                 $msg = "<p class= 'erreur'> " . date('H:i:s') . "
                 Vous avez déja envoyé ce formulaire </p>";
             }
-            
-            //Rappel du controleur de la liste, après update on appel view_ga_list
+
+            //Rappel du controleur de la liste, après update on appel view_tva_list
             //et redéfinition de $sAction
-            
+
             $sAction = "tva_list";
             require_once $path . '/controler/control_tva_list.php';
-            
         } catch (MySQLException $e) {
             //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
@@ -58,16 +56,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //On insert le message dans le tableau de message
         Tool::addMsg($msg);
-        
-    //Sinon on est dans l'affichage du détail
+
+        //Sinon on est dans l'affichage du détail
     } else {
-        //On définit le titre
-        $sPageTitle = "Détail de la tva";
-        //On contrôle si l'id est définie est on on récupére le détail 
-        //de l'enregistrement et on défnit la valeur du button du formulaire
-        if (isset($_REQUEST['tvaId']) && $_REQUEST['tvaId'] != '') {
-            $resTvaDetail = TvaManager::getTvaDetailForUpd($_REQUEST['tvaId']);
-            $sButton = 'Modifier';
+        try {
+            //On définit le titre
+            $sPageTitle = "Détail de la tva";
+            //On contrôle si l'id est définie est on on récupére le détail 
+            //de l'enregistrement et on défnit la valeur du button du formulaire
+            if (isset($_REQUEST['tvaId']) && $_REQUEST['tvaId'] != '') {
+                $resTvaDetail = TvaManager::getTvaDetailForUpd($_REQUEST['tvaId']);
+                $sButton = 'Modifier';
+            }
+        } catch (MySQLException $e) {
+            $msg = $resEr[1];
+            Tool::addMsg($msg);
         }
     }
 } else {

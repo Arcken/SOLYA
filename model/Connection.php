@@ -146,21 +146,22 @@ class Connection {
             //soit sur la connexion directement.
             //On le place ensuite dans $resErr qui est afiché dans le footer.
            if(isset($stm)){ 
-               $resEr = $stm->errorCode();
+               $resEr[0] = $stm->errorCode();
            }else{
-               $resEr =self::$cnx->errorCode();
+               $resEr[0] =self::$cnx->errorCode();
            }
-           switch ($resEr) {
+        switch ($resEr[0]) {
                 case '23000':
-                    $resEr = "<b>23000</b> Elément utilisé par un autre enregistrement";
+                    $resEr[1] = date('H:i:s') . "<b>23000</b> Elément utilisé "
+                        . "par un autre enregistrement";
                     break;
                 default:
-                    $resEr = "<b>$resEr</b> Erreur inattendu: ";
+                    $resEr[1] = date('H:i:s') . "<b>$resEr[0]</b> Erreur inattendu: ";
                     break;
                 
             }
             $result=0;
-            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr, self::$cnx);
+            throw new MySQLException("Erreur sur la requête : $sql || état de la requète -->" .$resEr[0], self::$cnx);
            
            
         } 

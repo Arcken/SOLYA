@@ -60,6 +60,91 @@ class DroitDouaneManager {
 
     
     /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getAllDroitsDouanesLim($limite, $nombre, $orderby = 'dd_id') {
+
+        try {
+
+            $sql = 'SELECT dd_id, dd_lbl, dd_taux '
+                    . 'FROM droit_douane '
+                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
+                    . $nombre;
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+     /**
+     * Select for update d'un enregistrement selon son id
+     * 
+     * @param $id
+     * attend l'id du droit douane
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getDroitDouaneDetailForUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql = "SELECT dd_id, dd_lbl, dd_taux "
+                    . "FROM droit_douane "
+                    . "WHERE dd_id =? FOR UPDATE";
+            $result = Connection::request(0, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Modifie un enregistrement selon son id
+     * 
+     * @param $oDd
+     * Attend un objet Droit douane
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updDroitDouane($oDd) {
+        
+        try {
+                $tParam = [
+                    $oDd->dd_lbl,
+                    $oDd->dd_taux,
+                    $oDd->dd_id
+                ];
+
+                $sql = "UPDATE droit_douane SET "
+                        . "dd_lbl = ?, "
+                        . "dd_taux = ? "
+                        . "WHERE dd_id =?";
+
+                $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
      * Ajoute un enregistrement dans la table
      * 
      * @param type $oDd
@@ -88,4 +173,24 @@ class DroitDouaneManager {
         return $result;
     }
 
+    /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $id
+     * id du droit de douane
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delDroitDouane($id) {
+        try {
+            $tParam = [$id];
+            $sql = 'DELETE FROM droit_douane WHERE dd_id=?';
+            
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
 }
