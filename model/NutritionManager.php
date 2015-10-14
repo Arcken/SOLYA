@@ -64,7 +64,7 @@ class NutritionManager {
      * @return objet
      * Retourne un objet
      */
-    public static function getNutritionDetailUpd($id) {
+    public static function getNutritionDetailForUpd($id) {
 
         try {
 

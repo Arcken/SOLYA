@@ -58,6 +58,43 @@
                 break;
 
             
+    //-------------------------------Durée conservation-------------------------
+
+            //Détail d'une Durée conservation
+            case "dc_detail":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_duree_conservation_list.php';
+                    
+                } else {
+                    require $path . '/view/view_duree_conservation_upd.php';
+                }
+                
+                break;
+
+            //Ajout d'une Durée conservation
+            case "dc_add":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_duree_conservation_list.php';
+                }
+                
+                require $path . '/view/view_duree_conservation_add.php';
+                break;
+
+            //Supp d'une Durée conservation
+            case "dc_del":
+
+            //Liste des Durées conservations
+            case "dc_list":
+                require $path . '/view/view_duree_conservation_list.php';
+                break;
+
+            
     //------------------------------ Fiche article------------------------------
             
             //Supp de la fiche article
@@ -108,7 +145,7 @@
                     require $path . '/view/view_gamme_list.php';
                     
                 } else {
-                    require $path . '/view/view_gamme_ru.php';
+                    require $path . '/view/view_gamme_upd.php';
                 }
                 
                 break;
@@ -122,7 +159,7 @@
                     require $path . '/view/view_gamme_list.php';
                 }
                 
-                require $path . '/view/view_gamme.php';
+                require $path . '/view/view_gamme_add.php';
                 break;
 
             //Supp d'une gamme
@@ -145,7 +182,7 @@
     
             //Ajout de mode de conservation
             case "mc_add":
-                require $path . '/view/view_mode_conservation.php';
+                require $path . '/view/view_mode_conservation_add.php';
                 break;
             
             //liste des modes de conservation
@@ -162,7 +199,7 @@
                     require $path . '/view/view_mode_conservation_list.php';
                     
                 } else {
-                    require $path . '/view/view_mode_conservation_detail.php';
+                    require $path . '/view/view_mode_conservation_upd.php';
                 }
                 break;
 
@@ -176,7 +213,7 @@
 
             //Ajout d'un pays
             case "pays_add":
-                require $path . '/view/view_pays.php';
+                require $path . '/view/view_pays_add.php';
                 break;
             
             //Détail d'un pays
@@ -188,7 +225,7 @@
                     require $path . '/view/view_pays_list.php';
                     
                 } else {
-                    require $path . '/view/view_pays_ru.php';
+                    require $path . '/view/view_pays_upd.php';
                 }
                 break;
 
@@ -205,7 +242,7 @@
 
             //Ajout d'une nutrition
             case "nut_add":
-                require $path . '/view/view_nutrition.php';
+                require $path . '/view/view_nutrition_add.php';
                 break;
 
             //Détial d'une nutrition
@@ -217,7 +254,7 @@
                     require $path . '/view/view_nutrition_list.php';
                     
                 } else {
-                    require $path . '/view/view_nutrition_ru.php';
+                    require $path . '/view/view_nutrition_upd.php';
                 }
                 break;
 

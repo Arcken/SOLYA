@@ -85,7 +85,7 @@ class ModeConservationManager {
      * @return objet
      * Retourne un objet
      */
-    public static function getModeConservationDetailUpd($id) {
+    public static function getModeConservationDetailForUpd($id) {
 
         try {
 
@@ -95,6 +95,35 @@ class ModeConservationManager {
                     . "FROM mode_conservation "
                     . "WHERE cons_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Modifie un enregistrement selon son id
+     * 
+     * @param $oMc
+     * Attend un objet ModeConservation
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updModeConservation($oMc) {
+        
+        try {
+                $tParam = [
+                    $oMc->cons_lbl,
+                    $oMc->cons_id
+                ];
+
+                $sql = "UPDATE mode_conservation SET "
+                        . "cons_lbl = ? "
+                        . "WHERE cons_id =?";
+
+                $result = Connection::request(2, $sql, $tParam);
             
         } catch (MySQLException $e) {
             throw $e;

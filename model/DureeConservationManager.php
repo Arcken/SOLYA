@@ -32,6 +32,34 @@ class DureeConservationManager {
     }
     
     
+    /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $limite
+     * debut de limite
+     * @param $nombre
+     * nombre d'élément à recevoir
+     * @param $orderby
+     * champs pour le tri
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getAllDureesConservationsLim($limite, $nombre, $orderby = 'dc_id') {
+
+        try {
+
+            $sql = 'SELECT dc_id, dc_lbl, dc_nb '
+                    . 'FROM duree_conservation '
+                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
+                    . $nombre;
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
    /**
      * Retourne un enregistrement de la table selon son id
      * 

@@ -95,7 +95,7 @@ class GammeManager {
      * @return objet
      * Retourne un objet
      */
-    public static function getGammeDetailUpd($id) {
+    public static function getGammeDetailForUpd($id) {
 
         try {
 

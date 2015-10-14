@@ -5,6 +5,8 @@
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     $sPageTitle = "Ajouter une gamme";
+    require_once $path . '/model/Gamme.php';
+    require_once $path . '/model/GammeManager.php';
 
     //Si le formulaire est envoyé
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
@@ -12,9 +14,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         try {
             //Vérification du jeton pour savoir si le formulaire à déja était envoyé
             if ($_SESSION['token'] != $_REQUEST['token']) {
-
-                require_once $path . '/model/Gamme.php';
-                require_once $path . '/model/GammeManager.php';
 
                 //Les valeurs sont vérifiées à la saisie
                 //On créé un objet contenant les valeurs que l'on passe en paramètre 
@@ -38,8 +37,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 //La requète s'est effectué donc on copie le token dans la session
                 $_SESSION['token'] = $_REQUEST['token'];
+                
             } else {
-
+                //Message en cas de formulaire déja envoyé
                 $msg = "<p class= 'erreur'> " . date('H:i:s') . "
                 Vous avez déja envoyé ce formulaire </p>";
             }

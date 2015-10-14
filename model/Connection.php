@@ -154,7 +154,7 @@ class Connection {
                 case '23000':
                     $resEr = "<b>23000</b> Elément utilisé par un autre enregistrement";
                     break;
-                case defaut:
+                default:
                     $resEr = "<b>$resEr</b> Erreur inattendu: ";
                     break;
                 

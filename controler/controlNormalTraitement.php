@@ -58,6 +58,30 @@
                 break;
 
             
+    //-------------------------------Durée conservation-------------------------
+
+            //ajout de Durée conservation
+            case "dc_add":
+                require_once $path . '/controler/control_dc_add.php';
+                break;
+
+            //liste des Durées conservations
+            case "dc_list":
+                require_once $path . '/controler/control_dc_list.php';
+                break;
+
+            //détail  et upd d'une Durée conservation
+            case "dc_detail":
+                require_once $path . '/controler/control_dc_upd.php';
+                break;
+
+            //Suppression d'une Durée conservation
+            case "dc_del":
+                require $path . '/controler/control_dc_del.php';
+                $sAction = "ga_list";
+                break;
+
+            
     //-------------------------------- EXPORT ----------------------------------
             //export
             case "export":
@@ -103,7 +127,7 @@
 
             //détail d'une gamme
             case "ga_detail":
-                require_once $path . '/controler/control_ga_detail.php';
+                require_once $path . '/controler/control_ga_upd.php';
                 break;
 
             //Suppression d'une gamme
@@ -135,7 +159,7 @@
 
             //détail d'un mode de conservation
             case "mc_detail":
-                require_once $path . '/controler/control_mc_detail.php';
+                require_once $path . '/controler/control_mc_upd.php';
                 break;
 
             //Suppression d'un mode de conservation
@@ -159,7 +183,7 @@
 
             //detail nutrition
             case "nut_detail":
-                require $path . '/controler/control_nut_detail.php';
+                require $path . '/controler/control_nut_upd.php';
                 break;
 
             //supp nutrition
@@ -183,7 +207,7 @@
 
             //détail pays
             case "pays_detail":
-                require $path . '/controler/control_pays_detail.php';
+                require $path . '/controler/control_pays_upd.php';
                 break;
 
             //supp pays
