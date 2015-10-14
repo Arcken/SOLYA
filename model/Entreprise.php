@@ -9,14 +9,14 @@
 class Entreprise {
     
     //Données membres
-    public $ENT_NOM='';
-    public $ENT_HORAIRE='';
-    public $ENT_ECOMMERCE='';
-    public $ENT_NIC='';
-    public $ENT_NAF='';
-    public $ENT_SIREN='';
-    public $ENT_CLE_TVA='';
-    public $ENT_COM='';
+    public $ent_nom='';
+    public $ent_horaire='';
+    public $ent_ecommerce='';
+    public $ent_nic='';
+    public $ent_naf='';
+    public $ent_siren='';
+    public $ent_cle_tva='';
+    public $ent_com='';
  
     
     

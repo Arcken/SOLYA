@@ -26,21 +26,21 @@ class PersonneManager {
         try {
 
                 $tParam = array(
-                    $oPersonne->CIV_ID,
-                    $oPersonne->PRS_NOM,
-                    $oPersonne->PRS_PRENOM1,
-                    $oPersonne->PRS_PRENOM2,
-                    $oPersonne->PRS_PRENOM3,
-                    $oPersonne->PRS_DTN
+                    $oPersonne->civ_id,
+                    $oPersonne->prs_nom,
+                    $oPersonne->prs_prenom1,
+                    $oPersonne->prs_prenom2,
+                    $oPersonne->prs_prenom3,
+                    $oPersonne->prs_dtn
                 );
 
                 $sql = "INSERT INTO personne ("
-                        . "CIV_ID,"
-                        . "PRS_NOM,"
-                        . "PRS_PRENOM1,"
-                        . "PRS_PRENOM2,"
-                        . "PRS_PRENOM3,"
-                        . "PRS_DTN)"
+                        . "civ_id,"
+                        . "prs_nom,"
+                        . "prs_prenom1,"
+                        . "prs_prenom2,"
+                        . "prs_prenom3,"
+                        . "prs_dtn)"
                         . "VALUES(?,?,?,?,?,?)";
 
 

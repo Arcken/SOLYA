@@ -14,13 +14,13 @@
 class Personne {
     
     //Données membre
-    public $PRS_ID='';
-    public $CIV_ID='';
-    public $PRS_NOM='';
-    public $PRS_PRENOM1='';
-    public $PRS_PRENOM2='';
-    public $PRS_PRENOM3='';
-    public $PRS_DTN='';
+    public $prs_id='';
+    public $civ_id='';
+    public $prs_nom='';
+    public $prs_prenom1='';
+    public $prs_prenom2='';
+    public $prs_prenom3='';
+    public $prs_dtn='';
     
      /**
      * Constructeur prenant un tableau associatifs en paramètre

@@ -53,35 +53,42 @@
            
        <!-- Partie gauche de l'écran : Civilité -->
         <div class="col30" id="add_prs" style="display:none"> 
-            <label for="PRS_ENT">Entreprise :</label><br>
-            <select name="PRS_ENT"id="PRS_ENT" onChange="" required>
-                    <option value="">Nom de l'entreprise</option>
-                    <option value="1">truc</option>
-                    <option value="2">machin</option>
-                </select>
+            
+            <label for="CIV_CODE">Civilité :</label>
             <br>
-            <label for="CIV_CODE">Civilité :</label><br>
             <select name="CIV_CODE" id="CIV_LBL" required>
-                <option value="" selected > --Civilité-- </option>
+                <option value="" selected > Aucun </option>
                     <?php foreach ($toCiv as $oCiv) {?>
-                <option value ="<?php echo $oCiv->civ_id?>"> <?php echo $oCiv->civ_code ?> </option>
+                <option 
+                    value ="<?php echo $oCiv->civ_id?>">
+                    <?php echo $oCiv->civ_code ?> </option>
                     <?php } ?>
                 </select>
             <br>
-            <label for ="PRS_NOM">Nom :</label><br>
-            <input name="PRS_NOM" type="text"/>
+            <label for ="PRS_NOM">Nom :</label>
             <br>
-            <label for ="PRS_PRENOM1">Prénom :</label><br>
-            <input name="PRS_PRENOM1" type="text"/>
+            <input name="PRS_NOM" 
+                   type="text">
             <br>
-            <label for ="PRS_PRENOM2">Deuxième prénom :</label><br>
-            <input name="PRS_PRENOM2" type="text"/>
+            <label for ="PRS_PRENOM1">Prénom :</label>
             <br>
-            <label for ="PRS_PRENOM3">Troisième prénom :</label><br>
-            <input name="PRS_PRENOM3" type="text"/>
+            <input name="PRS_PRENOM1" 
+                   type="text">
             <br>
-            <label for ="PRS_DTN">Date de naissance :</label><br>
-            <input name="PRS_DTN" type="text"/>
+            <label for ="PRS_PRENOM2">Deuxième prénom :</label>
+            <br>
+            <input name="PRS_PRENOM2" 
+                   type="text">
+            <br>
+            <label for ="PRS_PRENOM3">Troisième prénom :</label>
+            <br>
+            <input name="PRS_PRENOM3" 
+                   type="text">
+            <br>
+            <label for ="PRS_DTN">Date de naissance :</label>
+            <br>
+            <input name="PRS_DTN" 
+                   type="text">
             <br>
         </div>
         
@@ -90,27 +97,69 @@
         
        <!--Partie de droite : Mail/téléphone Catégorie contact-->  
         <div class="col30" id="add_tel_mail" style="display:none">
-            <label for="MAIL_ADR">Adresse mail :</label><br>
-            <input name="MAIL_ADR" type="text"/>
+            <label for="MAIL_ADR">Adresse mail :</label>
+            <br>
+            <input name="MAIL_ADR" 
+                   type="text"
+                   >
             <br>
             <label for="TEL_IND">Indicatif pays :</label><br>
-            <textarea name="TEL_IND" type="text"></textarea>
+            <textarea name="TEL_IND" 
+                      type="text"></textarea>
             <br>
-            <label for="TEL_NUM">Numéro de téléphone :</label><br>
-            <textarea name="TEL_NUM" type="text"></textarea>
+            <label for="TEL_NUM">Numéro de téléphone :</label>
             <br>
-            <label for='CAT_CTC[]'>Catégorie contact :</label> <br>
-            <input class='CB_CLI'   type="checkbox" name='CAT_CTC[]' value='Client' onclick="cbChooser()"/>Client <br>
-            <input class='CB_FOUR'  type="checkbox" name='CAT_CTC[]' value='Fournisseur' onclick="cbChooser()"/>Fournisseur <br>
-            <input class='CB_PRSPT' type="checkbox" name='CAT_CTC[]' value='Prospect' onclick="cbChooser()" />Prospect <br>
+            <textarea name="TEL_NUM" 
+                      type="text"></textarea>
+            <br>
+            <label for='CAT_CTC[]'>Catégorie contact :</label> 
+            <br>
+            <input class='CB_CLI'   
+                   type="checkbox" 
+                   name='CAT_CTC[]' 
+                   value='Client' 
+                   onclick="cbChooser()"
+                   >Client 
+            <br>
+            <input class='CB_FOUR'  
+                   type="checkbox" 
+                   name='CAT_CTC[]' 
+                   value='Fournisseur' 
+                   onclick="cbChooser()"
+                   >Fournisseur
+            <br>
+            <input class='CB_PRSPT' 
+                   type="checkbox" 
+                   name='CAT_CTC[]' 
+                   value='Prospect' 
+                   onclick="cbChooser()"
+                   >Prospect 
+            <br>
             
         </div>
         
        <!--Zone des boutons-->
-        <div class="bas" id="btn_zone" style="display:none">    
-            <input name="btnForm" type="submit" value="<?php echo $sButton; ?>"/>
-            <input id ='clearForm' name="clear"   type="reset" onclick="formChooser()"/> 
-            <input name="action"  value="<?php echo $sAction ?>" type="text" hidden/>
+        <div class="bas" 
+             id="btn_zone" 
+             style="display:none"
+             >    
+            
+            <input name="btnForm" 
+                   type="submit" 
+                   value="<?php echo $sButton; ?>"
+                   >
+            
+            <input id ='clearForm' 
+                   name="clear"   
+                   type="reset" 
+                   onclick="formChooser()"
+                   >
+            
+            <input name="action" 
+                   value="<?php echo $sAction ?>" 
+                   type="text" 
+                   hidden
+                   >
         </div>
     </form>
 </div>
