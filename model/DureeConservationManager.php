@@ -86,6 +86,63 @@ class DureeConservationManager {
     
     
     /**
+     * Select for update d'un enregistrement selon son id
+     * 
+     * @param $id
+     * attend l'id de la durée de conservation
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getDureeConservationDetailForUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql = "SELECT dc_id, dc_lbl, dc_nb "
+                    . "FROM duree_conservation "
+                    . "WHERE dc_id =? FOR UPDATE";
+            $result = Connection::request(0, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+     /**
+     * Modifie un enregistrement selon son id
+     * 
+     * @param $oDc
+     * Attend un objet Durée conservation
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updDureeConservation($oDc) {
+        
+        try {
+                $tParam = [
+                    $oDc->dc_lbl,
+                    $oDc->dc_nb,
+                    $oDc->dc_id
+                ];
+
+                $sql = "UPDATE duree_conservation SET "
+                        . "dc_lbl = ?, "
+                        . "dc_nb = ? "
+                        . "WHERE dc_id =?";
+
+                $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
      * Ajoute un enregistrement dans la table
      * 
      * @param type $oDc
@@ -109,6 +166,28 @@ class DureeConservationManager {
                 
                 $result = Connection::request(2, $sql, $tParam);
   
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $id
+     * id de la durée de conservation
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delDureeConservation($id) {
+        try {
+            $tParam = [$id];
+            $sql = 'DELETE FROM duree_conservation '
+                    . 'WHERE dc_id=?';
+            
+            $result = Connection::request(2, $sql, $tParam);
+            
         } catch (MySQLException $e) {
             throw $e;
         }

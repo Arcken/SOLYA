@@ -8,7 +8,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
     <div class="corps">
         <div class="list">
             <h2> Liste des éléments </h2>
-            <input type="button" onclick='location.href = "index.php?action=dc_add"' value="Ajouter">
+            <input type="button" onclick='location.href = "index.php?action=tva_add"' value="Ajouter">
             <table>
                 <tr>
                     <th>
@@ -18,28 +18,28 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                         Libellé
                     </th>
                     <th>
-                        Nombre
+                        Taux
                     </th>                        
                 </tr>
                 <?php
-                if ($resAllDc != 0 && is_array($resAllDc)) {
-                    foreach ($resAllDc as $dc) {
+                if ($resAllTva != 0 && is_array($resAllTva)) {
+                    foreach ($resAllTva as $tva) {
                         ?>
                         <tr>
                             <td style="border-right: solid 2px black;">
-                                <?php echo $dc->dc_id ?>
+                                <?php echo $tva->tva_id ?>
                             </td>
                             <td style="border-right: solid 2px black;">
-                                <?php echo $dc->dc_lbl ?>
+                                <?php echo $tva->tva_lbl ?>
                             </td>
                             <td>
-                                <?php echo $dc->dc_nb ?>
+                                <?php echo $tva->tva_taux ?>
                             </td>
                             <td><img src="img/icon/modify.png" alt="" title="Modifier"
-                                     onclick='location.href = "index.php?action=dc_detail&dcId=<?php echo $dc->dc_id ?>"'/></td>
+                                     onclick='location.href = "index.php?action=tva_detail&tvaId=<?php echo $tva->tva_id ?>"'/></td>
 
                             <td><img src="img/icon/delete.png" alt="" title="Supprimer"
-                                     onclick='delElt(<?php echo $dc->dc_id ?>, "dcId", "durée conservation", "dc_del")'/></td>
+                                     onclick='delElt(<?php echo $tva->tva_id ?>, "tvaId", "tva", "tva_del")'/></td>
                         </tr>
                         <?php
                     }

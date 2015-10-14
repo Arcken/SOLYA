@@ -49,6 +49,30 @@
                 break;
 
 
+    //-------------------------------- Droit de douane -------------------------
+
+            //ajout de Droit de douane
+            case "dd_add":
+                require_once $path . '/controler/control_dd_add.php';
+                break;
+
+            //liste des Droits de douane
+            case "dd_list":
+                require_once $path . '/controler/control_dd_list.php';
+                break;
+
+            //détail  et upd d'un Droit de douane
+            case "dd_detail":
+                require_once $path . '/controler/control_dd_upd.php';
+                break;
+
+            //Suppression d'un Droit de douane
+            case "dd_del":
+                require $path . '/controler/control_dd_del.php';
+                $sAction = "dd_list";
+                break;
+
+            
     //--------------------------------Contact-----------------------------------
 
             //Créer un contact    
@@ -78,7 +102,7 @@
             //Suppression d'une Durée conservation
             case "dc_del":
                 require $path . '/controler/control_dc_del.php';
-                $sAction = "ga_list";
+                $sAction = "dc_list";
                 break;
 
             
@@ -114,7 +138,7 @@
 
 
     //-------------------------------Gamme--------------------------------------
-    //
+    
             //ajout de gamme
             case "ga_add":
                 require_once $path . '/controler/control_ga_add.php';
@@ -243,6 +267,30 @@
             case "ref_del":
                 require $path . '/controler/control_ref_del.php';
                 $sAction = "ref_list";
+                break;
+
+            
+    //------------------------------- TVA --------------------------------------
+    
+            //ajout de tva
+            case "tva_add":
+                require_once $path . '/controler/control_tva_add.php';
+                break;
+
+            //liste des tva
+            case "tva_list":
+                require_once $path . '/controler/control_tva_list.php';
+                break;
+
+            //détail d'une tva
+            case "tva_detail":
+                require_once $path . '/controler/control_tva_upd.php';
+                break;
+
+            //Suppression d'une tva
+            case "tva_del":
+                require $path . '/controler/control_tva_del.php';
+                $sAction = "tva_list";
                 break;
 
             

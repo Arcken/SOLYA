@@ -58,6 +58,43 @@
                 break;
 
             
+    //-------------------------------- Droit de douane -------------------------
+
+            //Détail d'un Droit de douane
+            case "dd_detail":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_droit_douane_list.php';
+                    
+                } else {
+                    require $path . '/view/view_droit_douane_upd.php';
+                }
+                
+                break;
+
+            //Ajout d'un Droit de douane
+            case "dd_add":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_droit_douane_list.php';
+                }
+                
+                require $path . '/view/view_droit_douane_add.php';
+                break;
+
+            //Supp d'un Droit de douane
+            case "dd_del":
+
+            //Liste des Droits de douane
+            case "dd_list":
+                require $path . '/view/view_droit_douane_list.php';
+                break;
+
+            
     //-------------------------------Durée conservation-------------------------
 
             //Détail d'une Durée conservation
@@ -95,6 +132,14 @@
                 break;
 
             
+    //----------------------------------Export----------------------------------
+
+            //Export
+            case "export":
+                require $path . '/view/view_export.php';
+                break;
+            
+          
     //------------------------------ Fiche article------------------------------
             
             //Supp de la fiche article
@@ -209,35 +254,7 @@
                 $sAction = "mc_list";
                 break;
 
-    //-------------------------------------Pays---------------------------------
-
-            //Ajout d'un pays
-            case "pays_add":
-                require $path . '/view/view_pays_add.php';
-                break;
-            
-            //Détail d'un pays
-            case "pays_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_pays_list.php';
-                    
-                } else {
-                    require $path . '/view/view_pays_upd.php';
-                }
-                break;
-
-            //Supp d'un pays
-            case "pays_del":
-
-            //Liste des pays
-            case "pays_list":
-                require $path . '/view/view_pays_list.php';
-                break;
-
-            
+    
 //-----------------------------------Nutrition----------------------------------            
 
             //Ajout d'une nutrition
@@ -267,6 +284,35 @@
                 break;
             
 
+    //-------------------------------------Pays---------------------------------
+
+            //Ajout d'un pays
+            case "pays_add":
+                require $path . '/view/view_pays_add.php';
+                break;
+            
+            //Détail d'un pays
+            case "pays_detail":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_pays_list.php';
+                    
+                } else {
+                    require $path . '/view/view_pays_upd.php';
+                }
+                break;
+
+            //Supp d'un pays
+            case "pays_del":
+
+            //Liste des pays
+            case "pays_list":
+                require $path . '/view/view_pays_list.php';
+                break;
+
+            
     //-------------------------------Références---------------------------------
 
             //Ajout d'une référence
@@ -296,14 +342,43 @@
                 break;
 
 
-    //----------------------------------Export----------------------------------
+    //-------------------------------------- TVA -------------------------------
 
-            //Export
-            case "export":
-                require $path . '/view/view_export.php';
+            //Détail d'une tva
+            case "tva_detail":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_tva_list.php';
+                    
+                } else {
+                    require $path . '/view/view_tva_upd.php';
+                }
+                
                 break;
-            
-            
+
+            //Ajout d'une tva
+            case "tva_add":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_tva_list.php';
+                }
+                
+                require $path . '/view/view_tva_add.php';
+                break;
+
+            //Supp d'une tva
+            case "tva_del":
+
+            //Liste des tva
+            case "tva_list":
+                require $path . '/view/view_tva_list.php';
+                break;
+
+              
     //----------------------------------Utilisateur-----------------------------
 
             //Ajout d'un utilisateur
