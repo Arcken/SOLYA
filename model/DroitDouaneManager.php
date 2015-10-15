@@ -19,11 +19,12 @@ class DroitDouaneManager {
      * @return []objet
      * Retourne un tableau d'objet
      */
-    public static function getAllDroitDouanes() {
+    public static function getAllDroitsDouanes() {
 
         try {
 
-            $sql = 'SELECT d.dd_id, d.dd_lbl, d.dd_taux FROM droit_douane d';
+            $sql = 'SELECT dd_id, dd_lbl, dd_taux FROM droit_douane '
+                    . 'ORDER BY dd_id';
 
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -61,23 +62,27 @@ class DroitDouaneManager {
     
     /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllDroitsDouanesLim($limite, $nombre, $orderby = 'dd_id') {
+    public static function getDroitsDouanesLim($rowStart, $nbRow, $orderBy = 'dd_id', $sort = 'ASC') {
 
         try {
 
             $sql = 'SELECT dd_id, dd_lbl, dd_taux '
                     . 'FROM droit_douane '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
-                    . $nombre;
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort 
+                    . ' LIMIT ' . $rowStart . ' , ' 
+                    . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

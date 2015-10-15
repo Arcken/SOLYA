@@ -65,22 +65,67 @@ public static function getRefCurSumStk($refId){
 }
 
 
-    /**
-     * Retourne les enregistrements de la table Référence
-     * par défaut la table remonte les 15 premier résultats.
-     * Il est possible cependant de modifier
-     * le résultats attendu grace aux paramètres :
+/**
+     * Retourne tous les enregistrements de la table
      * 
-     * @param $limit par défaut 0
-     * @param $nombre par défaut 15
-     * @param $orderBy par défaut ref_id 
-     * @param $tri par défaut DESC
-     * @return Reference[]
+     * @return objet[]
+     * Renvoie tableau d'objet
      */
-    public static function getAllReferences($limit=0,
-                                            $nombre=15,
-                                            $orderby="ref_id",
-                                            $tri='DESC') {
+    public static function getAllReferences() {
+
+        try {
+
+             $sql = "SELECT  ref_id, 
+                            dc_id,
+                            fiart_id,
+                            dd_id,
+                            cons_id,
+                            tva_id,
+                            ref_lbl,
+                            ref_mrq,
+                            ref_st_min,
+                            ref_poids_brut,
+                            ref_poids_net,
+                            ref_emb_lbl,
+                            ref_emb_couleur,
+                            ref_emb_vlm_ctn,
+                            ref_emb_dim_lng,
+                            ref_emb_dim_lrg,
+                            ref_emb_dim_ht,
+                            ref_emb_dim_diam,
+                            ref_com,
+                            ref_code, 
+                            ref_photos,
+                            ref_photos_pref,
+                            ref_code_douane
+                            FROM reference  
+                            ORDER BY ref_id";
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+   /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $rowStart
+     * debut de limite
+     * @param $nbRow
+     * nombre d'élément à recevoir
+     * @param $orderBy
+     * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getReferencesLim($limit,
+                                            $nbRow,
+                                            $orderBy="ref_id",
+                                            $sort='ASC') {
 
         try {
 
@@ -108,8 +153,8 @@ public static function getRefCurSumStk($refId){
                             ref_photos_pref,
                             ref_code_douane
                             FROM reference " 
-                            ."ORDER BY ".$orderby." ".$tri." "
-                            ."LIMIT ".$limit.",".$nombre."";
+                            ."ORDER BY ".$orderBy." ".$sort." "
+                            ."LIMIT ".$limit.",".$nbRow."";
 
             $result = Connection::request(1, $sql);
             

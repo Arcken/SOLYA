@@ -68,21 +68,22 @@ class BonManager {
     }
  
    /**
-     * Retourne tous les enregistrements de la table Bon
-     * par défaut la table remonte les 15 premiers résultats.
-     * Il est possible cependant de modifier
-     * le résultats attendu grace aux paramètres :
-     * 
-     * @param orderBy par défaut ref_id 
-     * @param $tri par défaut ASC 
-     * @param $limite par défaut 0
-     * @param $nombre par défaut 15
-     * @return Bon []
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $rowStart
+     * debut de limite
+     * @param $nbRow
+     * nombre d'élément à recevoir
+     * @param $orderBy
+     * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
+     * @return Objet[]
+     * Retourne un tableau d'objet
      */
-    public static function getAllBon($limite=0,
-                                     $nombre=15,
-                                     $orderby="bon_id",
-                                     $tri="ASC") {
+    public static function getBonsLim($rowStart,
+                                     $nbRow,
+                                     $orderBy="bon_id",
+                                     $sort="ASC") {
         try {
 
           
@@ -93,10 +94,10 @@ class BonManager {
                          ."bon_date,"
                          ."bon_com,"
                          ."bon_sortie_assoc FROM bon "
-                         ."ORDER BY ".$orderby
-                         ." " . $tri 
+                         ."ORDER BY ".$orderBy
+                         ." " . $sort 
                          ." LIMIT " 
-                         .$limite . " , " . $nombre;
+                         .$rowStart . " , " . $nbRow;
 
           $result = Connection::request(1, $sql);
             

@@ -25,7 +25,7 @@ ob_start();
     //On appel le manager pour récupéré le Bon 
     $oBon = BonManager::getBon($bonId);
     //Et le manager pour les intitulés 
-    $resDocLbl = DocLibelleManager::getDocLibelles();
+    $resDocLbl = DocLibelleManager::getAllDocsLibelles();
     
     foreach($resDocLbl as $lbl){
         if ($lbl->doclbl_id == $oBon->doclbl_id){

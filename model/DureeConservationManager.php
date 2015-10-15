@@ -16,12 +16,13 @@ class DureeConservationManager {
      * @return []objet
      * Retourne un tableau d'objet
      */
-    public static function getAllDureeConservations() {
+    public static function getAllDureesConservations() {
 
         try {
 
-            $sql = 'SELECT d.dc_id,d.dc_lbl,d.dc_nb '
-                    . 'FROM duree_conservation d';
+            $sql = 'SELECT dc_id, dc_lbl, dc_nb '
+                    . 'FROM duree_conservation '
+                    . 'PRDER BY dc_lbl';
             
             $result = Connection::request(1,$sql);
             
@@ -34,23 +35,27 @@ class DureeConservationManager {
     
     /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllDureesConservationsLim($limite, $nombre, $orderby = 'dc_id') {
+    public static function getDureesConservationsLim($rowStart, $nbRow, $orderBy = 'dc_id', $sort = 'ASC') {
 
         try {
 
             $sql = 'SELECT dc_id, dc_lbl, dc_nb '
                     . 'FROM duree_conservation '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
-                    . $nombre;
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort 
+                    . ' LIMIT ' . $rowStart . ' , ' 
+                    . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

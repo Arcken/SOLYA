@@ -32,11 +32,11 @@ require $path . '/model/PrixVenteManager.php';
 //On va chercher toutes les tvas
 $toTvas = TvaManager::getAllTvas();
 //On va chercher toutes les droit de douanes
-$toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
+$toDroitDouanes = DroitDouaneManager::getAllDroitsDouanes();
 //On va chercher toutes les durée de conservation
-$toDurCons = DureeConservationManager::getAllDureeConservations();
+$toDurCons = DureeConservationManager::getAllDureesConservations();
 //On va chercher toutes les modes de conservations
-$toModCons = ModeConservationManager::getAllModeConservations();
+$toModCons = ModeConservationManager::getAllModesConservations();
 //On va chercher toutes les fiches articles
 $toFiArts = FicheArticleManager::getAllFichesArticles();
 //Pour charger les comboboxs

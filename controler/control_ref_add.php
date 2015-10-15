@@ -18,10 +18,10 @@ try {
 
 
     $toFiArts = FicheArticleManager::getAllFichesArticles();
-    $toModCons = ModeConservationManager::getAllModeConservations();
-    $toDurCons = DureeConservationManager::getAllDureeConservations();
+    $toModCons = ModeConservationManager::getAllModesConservations();
+    $toDurCons = DureeConservationManager::getAllDureesConservations();
     $toTvas = TvaManager::getAllTvas();
-    $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
+    $toDroitDouanes = DroitDouaneManager::getAllDroitsDouanes();
 
 
 

@@ -14,13 +14,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-            $orderby = $_REQUEST['orderby'];
-            $resAllDc = DureeConservationManager::getAllDureesConservationsLim($limite, $iNbPage, $orderby);
+            $orderBy = $_REQUEST['orderby'];
+            $resAllDc = DureeConservationManager::getDureesConservationsLim($rowStart, $iNbPage, $orderBy);
         }
 
         //Sinon on appel la requête classique
         else {
-            $resAllDc = DureeConservationManager::getAllDureesConservationsLim($limite, $iNbPage);
+            $resAllDc = DureeConservationManager::getDureesConservationsLim($rowStart, $iNbPage);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

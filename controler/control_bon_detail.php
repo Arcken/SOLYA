@@ -26,7 +26,7 @@ try {
     //On appel le manager pour récupéré le Bon 
     $oBon = BonManager::getBonForUpd($bonId);
     //Et le manager pour les intitulés 
-    $resDocLbl = DocLibelleManager::getDocLibelles();
+    $resDocLbl = DocLibelleManager::getAllDocsLibelles();
 
     //On récupére toutes les ligne du bon
     $resAllBonLignes = BonLigneManager::getBonLignesFromBon($bonId);

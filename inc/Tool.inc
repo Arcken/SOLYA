@@ -27,15 +27,15 @@ class Tool {
     }
 
     //affichage numero  navigation
-    public static function affichePages($limite, $nombre, $total, $sAction) {
+    public static function affichePages($rowStart, $nbRow, $total, $sAction) {
 
         $page = 'index.php';
-        $nbpages = ceil($total / $nombre);
+        $nbpages = ceil($total / $nbRow);
         $numeroPages = 1;
         $compteurPages = 1;
         $lim = 0;
-        $limiteSuivante = $limite + $nombre;
-        $limitePrecedente = $limite - $nombre;
+        $rowStartSuivante = $rowStart + $nbRow;
+        $rowStartPrecedente = $rowStart - $nbRow;
 
         echo '<table border = "0" ><tr>' . "\n";
         if (isset($_REQUEST['orderby'])) {
@@ -44,21 +44,21 @@ class Tool {
             $order = '';
         }
         if (isset($_REQUEST['tri'])) {
-            $tri = $_REQUEST['tri'];
+            $sort = $_REQUEST['tri'];
         } else {
-            $tri = '';
+            $sort = '';
         }
-        if ($limite != 0) {
+        if ($rowStart != 0) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limitePrecedente . '&orderby=' . $order . '&tri=' .$tri . '" method="post"><</a></td>' . "\n";
+            . $rowStartPrecedente . '&orderby=' . $order . '&tri=' .$sort . '" method="post"><</a></td>' . "\n";
         }
 
         while ($numeroPages <= $nbpages) {
             echo '<td ><a href =
-"' . $page . '?action=' . $sAction . '&limite=' . $lim . '&orderby=' . $order . '&tri=' .$tri . '">'
+"' . $page . '?action=' . $sAction . '&limite=' . $lim . '&orderby=' . $order . '&tri=' .$sort . '">'
             . $numeroPages . '</a></td>' . " \n";
-            $lim = $lim + $nombre;
+            $lim = $lim + $nbRow;
             $numeroPages = $numeroPages + 1;
             $compteurPages = $compteurPages + 1;
             if ($compteurPages == 10) {
@@ -67,10 +67,10 @@ class Tool {
             }
         }
 
-        if ($limiteSuivante < $total) {
+        if ($rowStartSuivante < $total) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $limiteSuivante . '&orderby=' . $order . '&tri=' .$tri . '" method="post">></a></td>' . "\n";
+            . $rowStartSuivante . '&orderby=' . $order . '&tri=' .$sort . '" method="post">></a></td>' . "\n";
         }
 
         echo '</tr></table>' . "\n";

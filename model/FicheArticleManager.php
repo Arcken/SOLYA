@@ -87,25 +87,29 @@ class FicheArticleManager {
     
     /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllFichesArticlesLim($limite, $nombre, 
-            $orderby = 'fiart_id') {
+    public static function getAllFichesArticlesLim($rowStart, $nbRow, 
+            $orderBy = 'fiart_id', $sort = 'ASC') {
 
         try {
 
             $sql = 'SELECT fiart_id, fiart_lbl, fiart_photos_pref, fiart_ing, '
                     . 'fiart_alg, fiart_com, fiart_desc_fr, pays_id '
                     . 'FROM fiche_article '
-                    . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite 
-                    . ' , ' . $nombre;
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort
+                    . ' DESC LIMIT ' . $rowStart 
+                    . ' , ' . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

@@ -13,13 +13,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-            $orderby = $_REQUEST['orderby'];
-            $resAllDd = DroitDouaneManager::getAllDroitsDouanesLim($limite, $iNbPage, $orderby);
+            $orderBy = $_REQUEST['orderby'];
+            
+            if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
+                $sort = $_REQUEST['tri'];
+            }
+            
+            $resAllDd = DroitDouaneManager::getDroitsDouanesLim($rowStart, $iNbPage, $orderBy,$sort);
         }
 
         //Sinon on appel la requête classique
         else {
-            $resAllDd = DroitDouaneManager::getAllDroitsDouanesLim($limite, $iNbPage);
+            $resAllDd = DroitDouaneManager::getDroitsDouanesLim($rowStart, $iNbPage);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

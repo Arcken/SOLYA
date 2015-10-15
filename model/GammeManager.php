@@ -33,23 +33,27 @@ class GammeManager {
 
     /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllGammesLim($limite, $nombre, $orderby = 'ga_id') {
+    public static function getAllGammesLim($rowStart, $nbRow, $orderBy = 'ga_id', $sort = 'ASC') {
 
         try {
 
             $sql = 'SELECT ga_id, ga_lbl, ga_abv '
                     . 'FROM gamme '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
-                    . $nombre;
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort
+                    . ' LIMIT ' . $rowStart . ' , ' 
+                    . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

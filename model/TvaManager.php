@@ -54,24 +54,49 @@ class TvaManager {
     
     
     /**
-     * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
-     * debut de limite
-     * @param $nombre
-     * nombre d'élément à recevoir
-     * @param $orderby
-     * champs pour le tri
-     * @return Objet[]
-     * Retourne un tableau d'objet
+     * Retourne tous les enregistrements de la table
+     * 
+     * @return objet[]
+     * Renvoie tableau d'objet
      */
-    public static function getAllTvasLim($limite, $nombre, $orderby = 'tva_id') {
+    public static function getAllTvas() {
 
         try {
 
             $sql = 'SELECT tva_id, tva_lbl, tva_taux '
                     . 'FROM tva '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
-                    . $nombre;
+                    . 'ORDER BY tva_lbl';
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $rowStart
+     * debut de limite
+     * @param $nbRow
+     * nombre d'élément à recevoir
+     * @param $orderBy
+     * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+    public static function getTvaLim($rowStart, $nbRow, 
+            $orderBy = 'tva_id', $sort = 'ASC') {
+
+        try {
+
+            $sql = 'SELECT tva_id, tva_lbl, tva_taux '
+                    . 'FROM tva '
+                    . 'ORDER BY ' . $orderBy . ' LIMIT ' . $rowStart . ' , ' 
+                    . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

@@ -29,9 +29,9 @@ $idRef = $_REQUEST['idRef'];
     require $path . '/model/LotManager.php';
     
     $toTvas         = TvaManager::getAllTvas();
-    $toDroitDouanes = DroitDouaneManager::getAllDroitDouanes();
-    $toDurCons      = DureeConservationManager::getAllDureeConservations();
-    $toModCons      = ModeConservationManager::getAllModeConservations();
+    $toDroitDouanes = DroitDouaneManager::getAllDroitsDouanes();
+    $toDurCons      = DureeConservationManager::getAllDureesConservations();
+    $toModCons      = ModeConservationManager::getAllModesConservations();
     $toFiArts       = FicheArticleManager::getAllFichesArticles();
     $oPve           = PrixVenteManager::getCurPrixVente($idRef);
     $toLots         = LotManager::getLotsFromReference($idRef);

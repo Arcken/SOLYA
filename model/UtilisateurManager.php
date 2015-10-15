@@ -122,23 +122,26 @@ class UtilisateurManager {
     
      /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllUtilisateursLim($limite, $nombre, $orderby = 'ut_login') {
+    public static function getUtilisateurLim($rowStart, $nbRow, 
+            $orderBy = 'ut_login', $sort = 'ASC') {
 
         try {
 
             $sql = 'SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id '
                     . 'FROM utilisateur '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
-                    . $nombre;
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort 
+                    . ' LIMIT ' . $rowStart . ' , ' 
+                    . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

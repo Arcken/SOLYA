@@ -34,18 +34,18 @@ class BonEntreeManager {
 
     /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
-     * @param $tri
+     * @param $sort
      * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllBonsEntreesLim($limite, $nombre, $orderby = 'be_id', $tri = 'ASC') {
+    public static function getBonsEntreesLim($rowStart, $nbRow, $orderBy = 'be_id', $sort = 'ASC') {
 
         try {
 
@@ -53,7 +53,7 @@ class BonEntreeManager {
                     . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
                     . 'be_com, be_info_trans, be_total '
                     . 'FROM bon_entree '
-                    . 'ORDER BY '.$orderby . ' ' . $tri .' LIMIT ' . $limite . ' , ' . $nombre;
+                    . 'ORDER BY '.$orderBy . ' ' . $sort .' LIMIT ' . $rowStart . ' , ' . $nbRow;
                  
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {

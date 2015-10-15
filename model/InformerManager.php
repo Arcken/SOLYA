@@ -11,7 +11,7 @@ class InformerManager {
      * @return objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllInformer() {
+    public static function getAllInformers() {
 
         try {
             $sql = 'SELECT * FROM informer';

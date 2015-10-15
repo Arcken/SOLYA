@@ -13,24 +13,49 @@
  */
 class DocLibelleManager {
     
-     /**
-     * Retourne tous les enregistrements de la table DocLibelle
-     * par défaut la table remonte les 15 premier résultats.
-     * Il est possible cependant de modifier
-     * le résultats attendu grace aux paramètres :
-     *   
-     * @param integer $limit par défaut 15
-     * @param integer $nombre par défaut 0
-     * @param string orderBy par défaut doclbl_id DESC
-     * @return DocLibelle[]
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * 
+     * @return objet[]
+     * Renvoie tableau d'objet
      */
-public static function getDocLibelles($limit=15, $nombre=0,$orderby="doclbl_id") {
+    public static function getAllDocsLibelles() {
 
         try {
 
             $sql = "SELECT doclbl_id, doclbl_lbl FROM doc_libelle " 
-                            ."ORDER BY ".$orderby." ASC "
-                            ."LIMIT ".$nombre.",".$limit."";
+                            ."ORDER BY doclbl_id";
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+     /**
+     * Retourne tous les enregistrements de la table avec limite définie
+     * @param $rowStart
+     * debut de limite
+     * @param $nbRow
+     * nombre d'élément à recevoir
+     * @param $orderBy
+     * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
+     * @return Objet[]
+     * Retourne un tableau d'objet
+     */
+public static function getDocLibellesLim($limit, $nbRow,$orderBy="doclbl_id", $sort = "ASC") {
+
+        try {
+
+            $sql = "SELECT doclbl_id, doclbl_lbl FROM doc_libelle " 
+                            ."ORDER BY ".$orderBy
+                            ." " . $sort
+                            ." LIMIT ".$nbRow.",".$limit."";
 
             $result = Connection::request(1, $sql);
             

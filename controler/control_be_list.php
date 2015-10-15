@@ -13,15 +13,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         
         //Si un champs de orderby est défini on exécute la requète avec tri et ordreby
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-            $orderby = $_REQUEST['orderby'];
+            $orderBy = $_REQUEST['orderby'];
             if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
-                $tri = $_REQUEST['tri'];
+                $sort = $_REQUEST['tri'];
             }
-            $resBeList = BonEntreeManager::getAllBonsEntreesLim($limite, $iNbPage, $orderby, $tri);
+            $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $iNbPage, $orderBy, $sort);
         }
         //Sinon sans tri
         else {
-            $resBeList = BonEntreeManager::getAllBonsEntreesLim($limite, $iNbPage);
+            $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $iNbPage);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

@@ -97,23 +97,28 @@ class BeLigneManager {
     /**
      * Retourne les enregistrements de la table avec limite définie
      * 
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllBesLignesLim($limite, $nombre, $orderby = 'be_id') {
+    public static function getBesLignesLim($rowStart, $nbRow, $orderBy = 'be_id', $sort = 'ASC') {
 
         try {
 
             $sql = 'SELECT lig_id, be_id, belig_pu, belig_cu_achat, belig_fb,'
                     . 'belig_ft, belig_dd, belig_taxe '
                     . 'FROM be_ligne '
-                    . 'ORDER BY ' . $orderby . ' DESC LIMIT ' . $limite . ' , ' . $nombre;
+                    . 'ORDER BY ' 
+                    . $orderBy 
+                    . ' ' . $sort 
+                    . ' LIMIT ' . $rowStart . ' , ' . $nbRow;
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
             throw $e;

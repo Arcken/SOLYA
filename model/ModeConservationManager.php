@@ -14,7 +14,7 @@ class ModeConservationManager {
      * 
      * @return []objet
      */
-    public static function getAllModeConservations() {
+    public static function getAllModesConservations() {
 
         try {
 
@@ -29,23 +29,27 @@ class ModeConservationManager {
     
     /**
      * Retourne tous les enregistrements de la table avec limite définie
-     * @param $limite
+     * @param $rowStart
      * debut de limite
-     * @param $nombre
+     * @param $nbRow
      * nombre d'élément à recevoir
-     * @param $orderby
+     * @param $orderBy
      * champs pour le tri
+     * @param $sort
+     * tri croissant ou décroissant (ASC ou DESC)
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllGammesLim($limite, $nombre, $orderby = 'cons_id') {
+    public static function getModeConservationLim($rowStart, $nbRow, $orderBy = 'cons_id', $sort = asc) {
 
         try {
 
             $sql = 'SELECT cons_id, cons_lbl '
                     . 'FROM mode_conservation '
-                    . 'ORDER BY ' . $orderby . ' LIMIT ' . $limite . ' , ' 
-                    . $nombre;
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort
+                    . ' LIMIT ' . $rowStart . ' , ' 
+                    . $nbRow;
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

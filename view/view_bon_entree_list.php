@@ -105,7 +105,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
             <?php
             if ($iTotal > $iNbPage) {
                 // affichage des liens vers les pages
-                Tool::affichePages($limite, $iNbPage, $iTotal, $sAction);
+                Tool::affichePages($rowStart, $iNbPage, $iTotal, $sAction);
             }
             ?>
         </div>

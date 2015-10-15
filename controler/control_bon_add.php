@@ -14,7 +14,7 @@ try {
     //Déffinition du titre de la page
     $sPageTitle = 'Créer un Bon';
     //Chargement des Libéllé de documents
-    $resDocLbl = DocLibelleManager::getDocLibelles();
+    $resDocLbl = DocLibelleManager::getAllDocsLibelles();
 
     //Controle si le formulaire a était envoyé 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {

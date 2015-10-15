@@ -28,12 +28,14 @@ try {
     $iTotal = Tool::getCountTable('reference');
 
     if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-
-        $orderby = $_REQUEST['orderby'];
-        $toRef = ReferenceManager::getAllReferences($limite, $iNbPage, $orderby);
+        if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
+                $sort = $_REQUEST['tri'];
+            }
+        $orderBy = $_REQUEST['orderby'];
+        $toRef = ReferenceManager::getReferencesLim($rowStart, $iNbPage, $orderBy, $sort);
     } else {
 
-        $toRef = ReferenceManager::getAllReferences($limite, $iNbPage);
+        $toRef = ReferenceManager::getReferencesLim($rowStart, $iNbPage);
     }
     //Initialisation du tableau contenant toutes les informations
     

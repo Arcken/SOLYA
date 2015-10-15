@@ -16,14 +16,14 @@ try {
    //Si orderby est définis alors tri l'est forcément. 
    //Si c'est le cas on les utilise en paramètres dans notre manager
     if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
-        $tri=$_REQUEST['tri'];
-        $orderby = $_REQUEST['orderby'];
-        $resAllBon = BonManager::getAllBon($limite, $iNbPage, $orderby,$tri);
+        $sort=$_REQUEST['tri'];
+        $orderBy = $_REQUEST['orderby'];
+        $resAllBon = BonManager::getBonsLim($rowStart, $iNbPage, $orderBy,$sort);
     } else {
-        $resAllBon = BonManager::getAllBon($limite, $iNbPage);
+        $resAllBon = BonManager::getBonsLim($rowStart, $iNbPage);
     }
     //On récupère tout les libéllés des Bons pour les associés dans la colonne
-    $toDocLbl=  DocLibelleManager::getDocLibelles();
+    $toDocLbl=  DocLibelleManager::getAllDocsLibelles();
     
 } catch (MySQLException $e) {
 

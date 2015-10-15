@@ -20,9 +20,9 @@ $nv = '';
 //cette variable sert pour récupérer la 'limit' pour faire des select d'un 
 //nombre précis d'enregistrement
 if (!isset($_REQUEST['limite']))
-    $limite = 0;
+    $rowStart = 0;
 else
-    $limite = (int) $_REQUEST['limite'];
+    $rowStart = (int) $_REQUEST['limite'];
 
 
 // si action = déconnection on détruit la session
