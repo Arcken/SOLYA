@@ -83,13 +83,15 @@ ob_start();
     //#1 Initialisation
 
 
-$adresse ="\n\nSOL'YA Mexico \n22 quai vandoeuvre\n14000\nCaen";
+$adresse ="\n\nSOLYA MEXICO \nLieu Quétel\n14430\nGOUSTRANVILLE\nFRANCE";
 
-$piedPage1 ='SOL\'YA Mexico 22 quai vandoeuvre 14000 Caen - contact@solya-mexico.fr 06 00 00 00 00';
-$piedPage2 = "Les produits livrés demeurent la propriété exclusive de notre entreprise "
-            ."jusqu'au paiement complet de la présente facture.";
-$piedPage3 = "RCS : 000-000-000- CAEN "
-            ."/ TVA Intracomunautaire : FR 00 0000 0000 0000 0000 / SIRET 000 000 000 000 000";
+$piedPage1 ='SOLYA MEXICO - SARL Unipersonnelle au capital de 10 000 euros';
+
+
+
+
+$piedPage2 = "- Mail : contact@solyamexico.com - Tél : 06.27.18.29.94 ";
+$piedPage3 = "N°SIRET : 8053006540001 - N°TVA INTRA : FR89805300654";
 
 
 $pdf = new generatorPDF($adresse,'', $piedPage1."\n".$piedPage2."\n".$piedPage3);
