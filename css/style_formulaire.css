@@ -78,6 +78,8 @@ img{
     display: inline-block;
     vertical-align: top;  
     margin: 0.8%;
+    margin-bottom: 1.5%;
+    padding-top: 5px;
     border: antiquewhite solid 2px;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -99,8 +101,8 @@ img{
 }
 
 .col50{
-    max-width: 45%; 
-    width:45%;
+    max-width: 47%; 
+    width:47%;
 
 }
 .col70{
@@ -165,62 +167,4 @@ table{
     width:157px;
 }
 
-.beLigne{
-    margin-top: 0.4%;
-    margin-bottom: 0.4%;
-    color: whitesmoke;
-    border-collapse: collapse;
-    width: auto;
-}
-
-.beLigne th{
-    border: 1px solid black;
-    
-    font-size: 0.8em;
-}
-.beLigne input:read-only{
-    background-color: #cfcfcf;
-}
-
-.beLigne td{
-    text-align: center;
-    //border-bottom: 1px solid black;
-    border: 1px solid black;
-}
-
-.beLigne input{
-    text-align: center;
-    width: 100%;
-    margin: auto;
-}
-
-.beLigne textArea{
-    
-    width: 30px;
-    min-width: 30px;
-    margin: auto;
-}
-.beLigneNb{
-    width: 40px;
-    min-width: 40px;
-}
-.beLigneId{
-    
-    width: 25px;
-    min-width: 25px;
-    
-}
-.beLigneCode{
-    
-    width: 60px;
-    min-width: 60px;
-    
-}
-
-.beLigneImg{
-    size: auto;
-     margin: auto;
-     
-     text-align: center;
-}
 

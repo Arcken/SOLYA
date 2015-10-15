@@ -6,7 +6,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     try {
         $sPageTitle = "Liste des fiches articles";
-        require_once $path . '/model/FicheArticle.php';
         require_once $path . '/model/FicheArticleManager.php';
 
         //Compte le nombre d'enregistrements de la table pour l'affichage par page
@@ -15,11 +14,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         //Si un champs de tri est défini on exécute la requète avec tri
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
             $orderBy = $_REQUEST['orderby'];
-            $resFiartList = FicheArticleManager::getAllFichesArticlesLim($rowStart, $nbRow, $orderBy);
+            $sort = $_REQUEST['tri'];
+            $resFiartList = FicheArticleManager::getFichesArticlesLim($rowStart, $nbRow, $orderBy, $sort);
         }
         //Sinon sans tri
         else {
-            $resFiartList = FicheArticleManager::getAllFichesArticlesLim($rowStart, $nbRow);
+            $resFiartList = FicheArticleManager::getFichesArticlesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

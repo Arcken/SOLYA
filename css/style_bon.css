@@ -53,3 +53,94 @@ and open the template in the editor.
 #divTable{
     min-height:10%;
 }
+
+.trColTitre{
+    color: whitesmoke;
+}
+
+.colTitleSup{
+    
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+}
+
+.colTitlSupUnique{
+    border-top: 2px solid white;
+    border-left: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom:  2px solid white;
+}
+
+.colTitleLeft{
+    border-left: 2px solid white;
+    border-bottom:  2px solid white;
+}
+
+.colTitleMiddle{
+     border-bottom:  2px solid white;
+}
+
+.colTitleRight{
+    border-right: 2px solid white;
+    border-bottom:  2px solid white;
+}
+
+.beLigne{
+    margin-top: 0.4%;
+    margin-bottom: 0.4%;
+    color: whitesmoke;
+    border-collapse: collapse;
+    width: auto;
+}
+
+.beLigne th{
+    border: 1px solid black;
+    
+    font-size: 0.8em;
+}
+.beLigne input:read-only{
+    background-color: #cfcfcf;
+}
+
+.beLigne td{
+    text-align: center;
+    //border-bottom: 1px solid black;
+    border: 1px solid black;
+}
+
+.beLigne input{
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.beLigne textArea{
+    
+    width: 30px;
+    min-width: 30px;
+    margin: auto;
+}
+.beLigneNb{
+    width: 40px;
+    min-width: 40px;
+}
+.beLigneId{
+    
+    width: 25px;
+    min-width: 25px;
+    
+}
+.beLigneCode{
+    
+    width: 60px;
+    min-width: 60px;
+    
+}
+
+.beLigneImg{
+    size: auto;
+     margin: auto;
+     
+     text-align: center;
+}

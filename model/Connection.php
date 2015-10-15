@@ -152,11 +152,11 @@ class Connection {
            }
         switch ($resEr[0]) {
                 case '23000':
-                    $resEr[1] = date('H:i:s') . "<b>23000</b> Elément utilisé "
+                    $resEr[1] = date('H:i:s') . ' <b>"23000"</b> Elément utilisé '
                         . "par un autre enregistrement";
                     break;
                 default:
-                    $resEr[1] = date('H:i:s') . "<b>$resEr[0]</b> Erreur inattendu: ";
+                    $resEr[1] = date('H:i:s') . " <b>\"$resEr[0]\"</b> Erreur inattendu!";
                     break;
                 
             }

@@ -25,7 +25,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <?php
             $fiartControl = '';
             $fiartGamme = '';
-            
+            if (isset($resFiartList) && is_array($resFiartList)){
             foreach ($resFiartList as $value) {
                 ?>
             
@@ -43,7 +43,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 </tr>
                 <?php
-            }
+            }}
             ?>
         </table>
         <?php

@@ -11,7 +11,7 @@
     
     <h1 class="connexion"><?php echo $sPageTitle ?></h1>
     
-    <form class="connexion" action ="index.php" method ="get" >
+    <form class="connexion" action ="index.php" method ="post" >
         <input type="text" require="required" name="login"></input>
         <input type="password" require="required" name="pwd"></input>
         <input type="submit" name ="action" value="connexion"></input>

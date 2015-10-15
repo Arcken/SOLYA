@@ -90,7 +90,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     </th>
                 </tr>
                 <?php
-                if ($resBeList != 0 && is_array($resBeList)) {
+                if (isset($resBeList) && is_array($resBeList)) {
                     foreach ($resBeList as $be) {
                         ?>
                         <tr>

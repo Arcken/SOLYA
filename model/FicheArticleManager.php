@@ -98,7 +98,7 @@ class FicheArticleManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllFichesArticlesLim($rowStart, $nbRow, 
+    public static function getFichesArticlesLim($rowStart, $nbRow, 
             $orderBy = 'fiart_id', $sort = 'ASC') {
 
         try {
@@ -108,7 +108,7 @@ class FicheArticleManager {
                     . 'FROM fiche_article '
                     . 'ORDER BY ' . $orderBy 
                     . ' ' . $sort
-                    . ' DESC LIMIT ' . $rowStart 
+                    . ' LIMIT ' . $rowStart 
                     . ' , ' . $nbRow;
             $result = Connection::request(1, $sql);
             
