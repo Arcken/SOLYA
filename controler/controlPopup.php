@@ -105,6 +105,10 @@ switch ($sAction) {
             $ligneMessage = $msg;
         }
         break;
+        
+    case 'nv_bon_pdf':
+        //On appel le controleur qui créé le pdf
+        require $path . '/controler/control_bon_pdf.php';
 }
 
 /* ----------------------------Affichage--------------------------------- */

@@ -10,10 +10,11 @@
 //
 
 // coordonnée de l'entreprise
-$pdf->template['header']['fontSize'] = 15;
+$pdf->template['header']['fontSize'] = 12;
 $pdf->template['header']['lineHeight'] = 5;
 $pdf->template['header']['margin'] = array(24, 0, 0, 10);
 // numéro de page
+//$pdf->template['infoPage']['fontSize']=15;
 $pdf->template['infoPage']['margin'] = array(5, 5, 0, 0);
 $pdf->template['infoPage']['align'] = 'R';
 // numéro de Bon
