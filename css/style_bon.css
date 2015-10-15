@@ -63,10 +63,7 @@ input:read-only{
 }
 
 .beLigne{
-    //margin: 0;
-    //margin-top: 0.4%;
     margin-bottom: 0.4%;
-    //padding: 0;
     color: whitesmoke;
     border-collapse: collapse;
     width: auto;
@@ -105,9 +102,18 @@ input:read-only{
     
     font-size: 0.8em;
 }
+.readOnly{
+    background-color: darkgray;
+}
 
 .beLigne td{
     text-align: center;
+}
+
+.beLigne img{
+    width: 16px;
+    height: 16px;
+    margin: auto;
 }
 
 .beLigne input{
@@ -128,26 +134,3 @@ input:read-only{
     margin-right: 2px;
 }
 
-.beLigneNb{
-    width: 40px;
-    min-width: 40px;
-}
-.beLigneId{
-    
-    width: 25px;
-    min-width: 25px;
-    
-}
-.beLigneCode{
-    
-    width: 60px;
-    min-width: 60px;
-    
-}
-
-.beLigneImg{
-    size: auto;
-     margin: auto;
-     
-     text-align: center;
-}

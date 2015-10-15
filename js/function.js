@@ -18,6 +18,8 @@ function addLigne($table) {
     $id = "idLigne" + nRowCount;
     //on remplace tous les mots NID par le même numéro de ligne 
     $ligne = $ligne.replace(/NID/g, nRowCount);
+    //on vide toutes les valeur des input
+    $ligne = $ligne.replace(/value="[^*"]*"/g, 'value=""');
     //On remplace idLigne par le nouvel id $id
     $ligne = $ligne.replace(/idLigne/, $id);
     //On ajoute le code à la fin de la table

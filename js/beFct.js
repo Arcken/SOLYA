@@ -17,17 +17,19 @@
  * @returns {undefined}
  */
 function beCcDroitDouane($source1, $source2, $source3, $cible) {
-    console.log("DEBUT CC DROIT DOUANE");
+        //console.log("DEBUT CC DROIT DOUANE");
 
     //on récupére la valeur de l'input prix unitaire
     $pu = parseFloat($("input[id='" + $source1 + "']").val());
-    console.log("PU : " + $pu);
+        //console.log("PU : " + $pu);
+        
     //on récupére la valeur de l'input taux douane
     $tauxDouane = parseFloat($("input[id='" + $source2 + "']").val());
-    console.log("Taux douane : " + $tauxDouane);
+        //console.log("Taux douane : " + $tauxDouane);
+    
     //on récupére la valeur de l'input quantité
     $qt = parseFloat($("input[id='" + $source3 + "']").val());
-    console.log("Quantité : " + $qt);
+        //console.log("Quantité : " + $qt);
 
     //on effectue le calcul puis on met l'input cible à jour
     $res = parseFloat($tauxDouane * $pu
@@ -36,8 +38,8 @@ function beCcDroitDouane($source1, $source2, $source3, $cible) {
     
     $res = $("input[id='" + $cible + "']").val($res);
 
-    console.log("Droit unitaire : " + $res.val());
-    console.log("FIN CC DROIT DOUANE");
+        //console.log("Droit unitaire : " + $res.val());
+        //console.log("FIN CC DROIT DOUANE");
 }
 
 //-----------------calcul bon entree------------------
@@ -84,28 +86,22 @@ function beTotalLigne($cible) {
 
 
 /**
- * Fonction qui ajoute dans chaque ligne:
- *          (frais douane entête diviser par qtTtotal)*qtLigne 
- *          à la case total douane (addition avec son contenu)
- *          (frais bancaire entête diviser par qtTtotal)*qtLigne
- *          à la case total banque (addition avec son contenu)
- *          (frais transport entête diviser par qtTtotal)*qtLigne
- *          à la case total douane (addition avec son contenu)
- * @returns {undefined}
+ * Fonction qui fait les calculs du bon
  */
 function beCalcul() {
-    console.log('DEBUT BECALCUL');
+    //console.log('DEBUT BECALCUL');
 
     //on récupére les frais de l'entête du bon
     $fDouaneVal = parseFloat($('[id="beFraisDouane"]').val());
-    console.log("frais douane: " + $fDouaneVal);
+        //console.log("frais douane: " + $fDouaneVal);
     $fBancaireVal = parseFloat($('[id="beFraisBancaire"]').val());
-    console.log("frais bancaire: " + $fBancaireVal);
+        //console.log("frais bancaire: " + $fBancaireVal);
     $fTransportVal = parseFloat($('[id="beFraisTrans"]').val());
-    console.log("frais transport: " + $fTransportVal);
+        //console.log("frais transport: " + $fTransportVal);
 
     //On récupère la quantité totale d'article
     $qtTotalVal = 0;
+    
     //Pour chaque balise tr dont l'id est différent de celle des titres 
     //et du squelette (idligne)
     $('tr').not('#titreGnl, #titreCol, #idLigne').each(function () {
@@ -118,15 +114,15 @@ function beCalcul() {
             $qtTotalVal += parseFloat($(this).find('[id^="ligQte"]').val());
         }
     });
-    console.log("Qt total: " + $qtTotalVal);
+        //console.log("Qt total: " + $qtTotalVal);
 
     //Pour chaque frais de l'entête on calcul la valeur par article
     $fdUniteVal = parseFloat($fDouaneVal / $qtTotalVal);
-    console.log("Frais douane par unité: " + $fdUniteVal);
+        //console.log("Frais douane par unité: " + $fdUniteVal);
     $fbUniteVal = parseFloat($fBancaireVal / $qtTotalVal);
-    console.log("Frais bancaire par unité: " + $fbUniteVal);
+        //console.log("Frais bancaire par unité: " + $fbUniteVal);
     $ftUniteVal = parseFloat($fTransportVal / $qtTotalVal);
-    console.log("Frais transport par unité: " + $ftUniteVal);
+        //console.log("Frais transport par unité: " + $ftUniteVal);
 
     //On récupére l'input beTotal et on met sa valeur à zéro pour éviter 
     //des erreurs
@@ -142,11 +138,11 @@ function beCalcul() {
 
             //idligne pour le control dans la console
             $idLigne = $(this).attr('id');
-            console.log("ligne calculé: " + $(this).attr('id'));
+                //console.log("ligne calculé: " + $(this).attr('id'));
 
             //On récupére la quantité descendant de ce tr
             $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
-            console.log($idLigne + ": qtLigne " + $ligneQtVal);
+                //console.log($idLigne + ": qtLigne " + $ligneQtVal);
 
             //On met à jour le champs poids
             //poids unitaire
@@ -178,7 +174,7 @@ function beCalcul() {
             $ligneTempsTotalDouane = (parseFloat($ligneDroitDouane.val()) +
                     parseFloat($ligneTaxe.val()));
 
-            console.log($idLigne + ": Total FD: " + $ligneTempsTotalDouane);
+                //console.log($idLigne + ": Total FD: " + $ligneTempsTotalDouane);
 
             //On fait le calcul 'frais de douane unitaire entête * quantité ligne 
             // + total temps douane ligne' et on met à jour la case total douane ligne
@@ -186,14 +182,14 @@ function beCalcul() {
             $ligneTotalFd = $(this).find('[id^="totalFd"]');
             $tmp = $fdUniteVal * $ligneQtVal + $ligneTempsTotalDouane;
             $ligneTotalFd.val($tmp.toFixed(2));
-            console.log($idLigne + ": Total FD MAJ : " + $ligneTotalFd.val());
+                //console.log($idLigne + ": Total FD MAJ : " + $ligneTotalFd.val());
             $ligneTotalFdVal = $ligneTotalFd.val();
 
             //On récupére l'input et la valeur de la case frais banque ligne
             //descendant de ce tr
             $ligneFraisBancaire = $(this).find('[id^="beligFb"]');
             $ligneTempsTotalFbVal = parseFloat($ligneFraisBancaire.val());
-            console.log($idLigne + ": Total FB: " + $ligneTempsTotalFbVal);
+                //console.log($idLigne + ": Total FB: " + $ligneTempsTotalFbVal);
 
             //On fait le calcul 'frais de banque unitaire entête * quantité ligne 
             // + total temp banque ligne' et on met à jour la case total banque ligne
@@ -202,14 +198,14 @@ function beCalcul() {
             
             $tmp = ($fbUniteVal * $ligneQtVal + $ligneTempsTotalFbVal);
             $ligneTotalFb.val($tmp.toFixed(2));
-            console.log($idLigne + ": Total FB MAJ : " + $ligneTotalFb.val());
+                //console.log($idLigne + ": Total FB MAJ : " + $ligneTotalFb.val());
             $ligneTotalFbVal = parseFloat($ligneTotalFb.val());
 
             //On récupére l'input et la valeur de la case prix transport ligne 
             //descendant de tr
             $lignePrixFt = $(this).find('[id^="beligFt"]');
             $ligneTempsTotalFtVal = parseFloat($lignePrixFt.val());
-            console.log($idLigne + ": Total FT: " + $ligneTempsTotalFtVal);
+                //console.log($idLigne + ": Total FT: " + $ligneTempsTotalFtVal);
 
             //On fait le calcul 'frais de transport unitaire entête * quantité ligne
             // + total transport ligne' et on met à jour la case 
@@ -219,7 +215,7 @@ function beCalcul() {
             
             $tmp = ($ftUniteVal * $ligneQtVal + $ligneTempsTotalFtVal);
             $ligneTotalFt.val($tmp.toFixed(2));
-            console.log($idLigne + ": " + "Total Ft MAJ : " + $ligneTotalFt.val());
+                //console.log($idLigne + ": " + "Total Ft MAJ : " + $ligneTotalFt.val());
             $ligneTotalFtVal = parseFloat($ligneTotalFt.val());
 
             //MAJ du total ligne
@@ -229,7 +225,7 @@ function beCalcul() {
             //Calcul du coût unitaire
             //on prend le total ligne que l'on divise par la quantitée de la ligne
             $coutUnitaire = parseFloat($(this).find('[id^="totalLig"]').val() / $ligneQtVal);
-            console.log($idLigne + ": cout unitaire " + $coutUnitaire);
+                //console.log($idLigne + ": cout unitaire " + $coutUnitaire);
             $(this).find('[id^="beligCuAchat"]').val($coutUnitaire.toFixed(2));
 
             //On met à jour le total du bon en lui ajoutant le total de la ligne en cours
@@ -242,23 +238,24 @@ function beCalcul() {
 
     });
 
-    console.log('FIN BECALCUL');
-
-}
-
-function ctrlFormValide() {
-    //Pour chaque balise tr dont l'id est différent de celle des titres 
-    //et du squelette (idligne)
-    $('tr').not('#titreGnl, #titreCol, #idLigne').each(function () {
-        $val = cptOccurence("ref_id", "reference",$(this).find('[id^="refId"]').attr('id'));
-        alert('test ' + $val);
-    }
-    );
+    //console.log('FIN BECALCUL');
 
 }
 
 /**
- * Fonction de caulcul de quantité minimum pour la midification de bon d'entrée
+ * Fonction qui exécute calcul et retourne true à la fin
+ * @returns {Boolean}
+ */
+function ctrlFormValide() {
+    //On exécute la fonction de caalcul
+    beCalcul();
+    //on renvoie true pour que le formulaire parte
+    return true;
+}
+
+
+/**
+ * Fonction de calcul de quantité minimum pour la modification de bon d'entrée
  * @param $cible
  * Id de l'input cible
  * @param $qtInit
