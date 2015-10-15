@@ -41,7 +41,7 @@ class NutritionManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getAllNutritionsLim($rowStart, $nbRow, 
+    public static function getNutritionsLim($rowStart, $nbRow, 
             $orderBy = 'nut_id', $sort = 'ASC') {
 
         try {

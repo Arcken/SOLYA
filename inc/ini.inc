@@ -15,7 +15,7 @@ if (file_exists($fichier) && is_file($fichier)) {
     $sWebPath = $config['APPLI']['webpath'];
     
     $iLimLbl = $config['APPLI']['limlbl'];
-    $iNbPage = $config['APPLI']['nbpage'];
+    $nbRow = $config['APPLI']['nbpage'];
     
     $imgPath = $config['APPLI']['imgpath'];
     $imgMiniPath = $config['APPLI']['imgminipath'];

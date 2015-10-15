@@ -14,13 +14,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
+            if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
+                $sort = $_REQUEST['tri'];
+            }
             $orderBy = $_REQUEST['orderby'];
-            $resAllTva = TvaManager::getTvaLim($rowStart, $iNbPage, $orderBy);
+            $resAllTva = TvaManager::getTvaLim($rowStart, $nbRow, $orderBy, $sort);
         }
 
         //Sinon on appel la requête classique
         else {
-            $resAllTva = TvaManager::getTvaLim($rowStart, $iNbPage);
+            $resAllTva = TvaManager::getTvaLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

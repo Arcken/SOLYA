@@ -41,9 +41,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                 ?>
             </table>
             <?php
-            if ($iTotal > $iNbPage) {
+            if ($iTotal > $nbRow) {
                 // affichage des liens vers les pages
-                Tool::affichePages($rowStart, $iNbPage, $iTotal, $sAction);
+                Tool::affichePages($rowStart, $nbRow, $iTotal, $sAction);
             }
             ?>
         </div>

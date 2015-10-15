@@ -1,11 +1,11 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
     
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-
-    <div class="corps">
-        <div >
+ <link type="text/css" href="css/style_list.css" rel="stylesheet">
+    <div class="corpsCenter">
+        <div class="colOnlyOne">
             
-            <table id="tableRef">
+            <table id="tableRef" class="tableList">
                 <script type='text/javascript'>
                     $tabRefs=new Array();
                 </script>
@@ -13,60 +13,188 @@
                     <th class="colTitle" id="colImg">
                         Image
                     </th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_code','DESC');">
+                    <th class="colTitle">
                         Code référence
                     </th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_lbl','DESC');">
+                     <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_code','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_code','ASC');"/>
+                    </th>
+                    <th class="colTitle">
                         Libéllé
                     </th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','fiart_id','DESC');">
+                     <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_lbl','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_lbl','ASC');"/>
+                    </th>
+                    <th class="colTitle">
                         Fiche article associé 
                     </th>
-                    <th class="colTitle"
-                        onclick="orderby('<?php echo $sAction?>','ref_mrq','DESC');">Marque</th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_poids_net','DESC');">
+                     <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','fiart_id','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','fiart_id','ASC');"/>
+                    </th>
+                    <th class="colTitle">
+                        Marque
+                    </th>
+                     <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_mrq','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_mrq','ASC');"/>
+                    </th>
+                    <th class="colTitle">
                         Poids net
                     </th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_emb_vlm_ctn');">
+                    <th class="colTdImg">
+                    <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_poids_net','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_poids_net','ASC');"/>
+                    </th>                    
+                    <th class="colTitle">
                         Volume net 
                     </th>
-                    <th class="colTitle">Qte Stock</th>
-                    <th class="colTitle">DLUO</th>
-                    <th class="colTitle">Coût d'achat moyen</th>
-                    <th class="colTitle">PV Part</th>
-                    <th class="colTitle">Marge Part</th>
-                    <th class="colTitle">Coeff Part</th>
-                    <th class="colTitle">PV Pro</th>
-                    <th class="colTitle">Marge Pro</th>
-                    <th class="colTitle">Coeff Pro</th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','tva_id','DESC');">
+                    <th class="colTdImg">
+                    <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_emb_vlm_ctn','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_emb_vlm_ctn','ASC');"/>
+                    </th>
+                    <th class="colTitle">
+                        Qte Stock
+                    </th>                     
+                    <th class="colTitle">
+                        DLUO
+                    </th>                     
+                    <th class="colTitle">
+                        Coût d'achat moyen
+                    </th>                     
+                    <th class="colTitle">
+                        PV Part
+                    </th>
+                    <th class="colTitle">
+                        Marge Part
+                    </th>
+                    <th class="colTitle">
+                        Coeff Part
+                    </th>
+                    <th class="colTitle">
+                        PV Pro
+                    </th>
+                    <th class="colTitle">
+                        Marge Pro
+                    </th>
+                    <th class="colTitle">
+                        Coeff Pro
+                    </th>
+                    <th class="colTitle">
                         TVA
                     </th>
+                     <th class="colTdImg">
+                    <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','tva_id','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','tva_id','ASC');"/>
+                    </th>
                     <th class="colTitle">Code Douanier</th>
+                     <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_code_douane','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_code_douane','ASC');"/>
+                    </th>
                     <th class="colTitle" 
                         onclick="orderby('<?php echo $sAction?>','dd_id','DESC');">
                         Droit de douane 
-                    </th> 
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_emb_lbl','DESC');">
+                    </th>
+                   <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','dd_id','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','dd_id','ASC');"/>
+                    </th>
+                    <th class="colTitle">
                         Conditionnement
                     </th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_st_min','DESC');">
+                     <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_emb_lbl','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_emb_lbl','ASC');"/>
+                    </th>
+                    <th class="colTitle">
                         Stock Minimum 
                     </th>
-                    <th class="colTitle" 
-                        onclick="orderby('<?php echo $sAction?>','ref_com','DESC');">
+                    <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_st_min','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_st_min','ASC');"/>
+                    </th>
+                    <th class="colTitle">
                         Commentaire 
                     </th>
-                    <th></th>
-                    <th></th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/down.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_com','DESC');"/>
+                    </th>
+                    <th class="colTdImg">
+                       <img src ="img/icon/up.png" 
+                               title="Tri croissant" 
+                               onclick="orderby('<?php echo $sAction?>','ref_com','ASC');"/>
+                    </th>
                 </tr>
                 
                 <!--Données du tableau -->
@@ -93,16 +221,16 @@
                                      echo 'Aucune photos définis';
                         }?>
                         </td>
-                        <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_code; ?></td>
-                        <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_lbl;  ?></td>
-                        <td class="colData" id='colFiart' 
+                        <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_code; ?></td>
+                        <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_lbl;  ?></td>
+                        <td class="colData" colspan="3" id='colFiart' 
                             onclick='location.href="index.php?action=fiart_detail&fiartId="
                                      +<?php echo $resLigRefs['ref'][$i]->fiart_id ;?>'
                             ><?php echo $resLigRefs['fiart'][$i]->fiart_lbl; ?>
                         </td>
-                        <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_mrq;  ?></td>
-                        <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_poids_net;    ?></td>
-                        <td class="colData"><?php echo $resLigRefs['ref'][$i]->ref_emb_vlm_ctn;  ?></td>
+                        <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_mrq;  ?></td>
+                        <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_poids_net;    ?></td>
+                        <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_emb_vlm_ctn;  ?></td>
                         <td class="colData"><?php
                                                 //Si la valeur en stock n'est pas définis on echo indéfinis
                                                 if($resLigRefs['stock'][$i]->nb!=''){
@@ -143,11 +271,11 @@
                         </td>
                         <td class="colData"><?php echo $resLigRefs['margePro'][$i]  ?></td>
                         <td class="colData"><?php echo $resLigRefs['coefPro'][$i]  ?></td>
-                        <td class="colData">
+                        <td class="colData" colspan="3">
                             <?php echo $resLigRefs['tva'][$i]->tva_lbl
                                        .' '.$resLigRefs['tva'][$i]->tva_taux; ?>
                         </td>
-                        <td class="colData">
+                        <td class="colData" colspan="3">
                             <?php //Si le code douanier n'est pas définis on echo indéfinis
                                     if ($resLigRefs['ref'][$i]->ref_code_douane != ''){
                                         echo $resLigRefs['ref'][$i]->ref_code_douane;
@@ -155,11 +283,11 @@
                                        echo 'indéfinis';
                                    } ?>
                         </td>
-                        <td class="colData">
+                        <td class="colData" colspan="3">
                             <?php  echo $resLigRefs['dd'][$i]->dd_lbl.' '.
                                         $resLigRefs['dd'][$i]->dd_taux; ?>
                         </td>
-                        <td class="colData">
+                        <td class="colData" colspan="3">
                             <?php 
                                 //Si l'embalage n'est pas définis on echo indéfinis
                                 if($resLigRefs['ref'][$i]->ref_emb_lbl!=''){
@@ -169,26 +297,26 @@
                                     echo 'indéfinis';    
                                 }?>
                         </td>
-                        <td class="colData">
+                        <td class="colData" colspan="3">
                             <?php echo $resLigRefs['ref'][$i]->ref_st_min;?>
                         </td>
-                        <td class="colData">
+                        <td class="colData" colspan="3">
                             <?php echo $resLigRefs['ref'][$i]->ref_com; ?>
                         </td>
-                        <td>
-                            <img src="img/icon/read.png" 
+                        <td class="colTdImg">
+                            <img src="img/icon/read.png" title="Modifier"
                                   onclick='location.href="index.php?action=ref_detail&idRef="+
                                            <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                              />
                         </td>
-                        <td>
-                            <img src="img/icon/modify.png" 
+                        <td class="colTdImg">
+                            <img src="img/icon/modify.png" title="Consulter"
                                   onclick='location.href="index.php?action=ref_upd&idRef="+
                                    <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                              />
                         </td>
                         
-                        <td>
+                        <td class="colTdImg">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
                                  onclick='delElt(<?php echo $resLigRefs['ref'][$i]->ref_id ?>,
                                                  "idRef",
@@ -205,9 +333,9 @@
                        
             </table>
              <?php
-        if ($iTotal > $iNbPage) {
+        if ($iTotal > $nbRow) {
             // affichage des liens vers les pages
-            Tool::affichePages($rowStart, $iNbPage, $iTotal, $sAction);
+            Tool::affichePages($rowStart, $nbRow, $iTotal, $sAction);
         }
         ?>
 <?php

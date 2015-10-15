@@ -19,12 +19,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $sort = $_REQUEST['tri'];
             }
             
-            $resAllDd = DroitDouaneManager::getDroitsDouanesLim($rowStart, $iNbPage, $orderBy,$sort);
+            $resAllDd = DroitDouaneManager::getDroitsDouanesLim($rowStart, $nbRow, $orderBy,$sort);
         }
 
         //Sinon on appel la requête classique
         else {
-            $resAllDd = DroitDouaneManager::getDroitsDouanesLim($rowStart, $iNbPage);
+            $resAllDd = DroitDouaneManager::getDroitsDouanesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

@@ -40,7 +40,7 @@ class ModeConservationManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getModeConservationLim($rowStart, $nbRow, $orderBy = 'cons_id', $sort = asc) {
+    public static function getModeConservationLim($rowStart, $nbRow, $orderBy = 'cons_id', $sort = 'ASC') {
 
         try {
 

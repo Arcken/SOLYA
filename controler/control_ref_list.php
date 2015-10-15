@@ -32,10 +32,10 @@ try {
                 $sort = $_REQUEST['tri'];
             }
         $orderBy = $_REQUEST['orderby'];
-        $toRef = ReferenceManager::getReferencesLim($rowStart, $iNbPage, $orderBy, $sort);
+        $toRef = ReferenceManager::getReferencesLim($rowStart, $nbRow, $orderBy, $sort);
     } else {
 
-        $toRef = ReferenceManager::getReferencesLim($rowStart, $iNbPage);
+        $toRef = ReferenceManager::getReferencesLim($rowStart, $nbRow);
     }
     //Initialisation du tableau contenant toutes les informations
     

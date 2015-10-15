@@ -17,11 +17,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
                 $sort = $_REQUEST['tri'];
             }
-            $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $iNbPage, $orderBy, $sort);
+            $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $nbRow, $orderBy, $sort);
         }
         //Sinon sans tri
         else {
-            $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $iNbPage);
+            $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

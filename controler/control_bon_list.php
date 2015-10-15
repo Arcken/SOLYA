@@ -18,9 +18,9 @@ try {
     if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
         $sort=$_REQUEST['tri'];
         $orderBy = $_REQUEST['orderby'];
-        $resAllBon = BonManager::getBonsLim($rowStart, $iNbPage, $orderBy,$sort);
+        $resAllBon = BonManager::getBonsLim($rowStart, $nbRow, $orderBy,$sort);
     } else {
-        $resAllBon = BonManager::getBonsLim($rowStart, $iNbPage);
+        $resAllBon = BonManager::getBonsLim($rowStart, $nbRow);
     }
     //On récupère tout les libéllés des Bons pour les associés dans la colonne
     $toDocLbl=  DocLibelleManager::getAllDocsLibelles();

@@ -16,12 +16,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
             $orderBy = $_REQUEST['orderby'];
-            $resAllMc = ModeConservationManager::getAllGammesLim($rowStart, $iNbPage, $orderBy);
+             if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
+                 $sort = $_REQUEST['tri'];
+             }
+            $resAllMc = ModeConservationManager::getModeConservationLim($rowStart, $nbRow, $orderBy, $sort);
         }
 
 //Sinon on appel la requête classique
         else {
-            $resAllMc = ModeConservationManager::getAllGammesLim($rowStart, $iNbPage);
+            $resAllMc = ModeConservationManager::getModeConservationLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         //Message pour l'erreur

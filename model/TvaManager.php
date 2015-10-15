@@ -19,7 +19,8 @@ class TvaManager {
 
         try {
 
-            $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t';
+            $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t'
+                    . 'ORDER BY tva_lbl';
 
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -54,28 +55,6 @@ class TvaManager {
     
     
     /**
-     * Retourne tous les enregistrements de la table
-     * 
-     * @return objet[]
-     * Renvoie tableau d'objet
-     */
-    public static function getAllTvas() {
-
-        try {
-
-            $sql = 'SELECT tva_id, tva_lbl, tva_taux '
-                    . 'FROM tva '
-                    . 'ORDER BY tva_lbl';
-            $result = Connection::request(1, $sql);
-            
-        } catch (MySQLException $e) {
-            throw $e;
-        }
-        return $result;
-    }
-    
-    
-    /**
      * Retourne tous les enregistrements de la table avec limite définie
      * @param $rowStart
      * debut de limite
@@ -95,7 +74,9 @@ class TvaManager {
 
             $sql = 'SELECT tva_id, tva_lbl, tva_taux '
                     . 'FROM tva '
-                    . 'ORDER BY ' . $orderBy . ' LIMIT ' . $rowStart . ' , ' 
+                    . 'ORDER BY ' . $orderBy 
+                    . ' ' . $sort 
+                    . ' LIMIT ' . $rowStart . ' , ' 
                     . $nbRow;
             $result = Connection::request(1, $sql);
             

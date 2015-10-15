@@ -15,11 +15,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         //On regarde si orderby est  définie pour appeler la méthode de trie dans ce cas
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
             $orderBy = $_REQUEST['orderby'];
-            $resAllNut = NutritionManager::getAllNutritionsLim($rowStart, $iNbPage, $orderBy);
+            if (isset($_REQUEST['tri']) && $_REQUEST['tri'] != '') {
+                $sort = $_REQUEST['tri'];
+            }
+            $resAllNut = NutritionManager::getNutritionsLim($rowStart, $nbRow, $orderBy, $sort);
         }
         //Sinon on appel la requête classique
         else {
-            $resAllNut = NutritionManager::getAllNutritionsLim($rowStart, $iNbPage);
+            $resAllNut = NutritionManager::getNutritionsLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

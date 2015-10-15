@@ -15,7 +15,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "accésValide") {
             $sWebPath = $config['APPLI']['webpath'];
 
             $iLimLbl = $config['APPLI']['limlbl'];
-            $iNbPage = $config['APPLI']['nbpage'];
+            $nbRow = $config['APPLI']['nbpage'];
 
             $imgPath = $config['APPLI']['imgpath'];
             $imgMiniPath = $config['APPLI']['imgminipath'];

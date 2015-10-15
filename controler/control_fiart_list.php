@@ -15,11 +15,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         //Si un champs de tri est défini on exécute la requète avec tri
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
             $orderBy = $_REQUEST['orderby'];
-            $resFiartList = FicheArticleManager::getAllFichesArticlesLim($rowStart, $iNbPage, $orderBy);
+            $resFiartList = FicheArticleManager::getAllFichesArticlesLim($rowStart, $nbRow, $orderBy);
         }
         //Sinon sans tri
         else {
-            $resFiartList = FicheArticleManager::getAllFichesArticlesLim($rowStart, $iNbPage);
+            $resFiartList = FicheArticleManager::getAllFichesArticlesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];
