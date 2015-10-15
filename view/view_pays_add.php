@@ -88,11 +88,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         </form>        
 
     </div>
-    <?php
-    if ($nv == 1) {
-        require $path . '/view/view_new_view_footer.php';
-    }
-    ?>
+   
 
     <?php
     //Test si la fenêtre est une popup, si oui on charge un footer

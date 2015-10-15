@@ -4,7 +4,7 @@ $sAction = $_REQUEST['action'];
 //Comme la fenétre est une popup on passe la variable de contrôle d'affichage
 // à 1
 $nv = 1;
-
+$msg='';
 /* ----------------------------Traitement--------------------------------- */
 
 switch ($sAction) {
