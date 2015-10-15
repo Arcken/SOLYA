@@ -12,17 +12,19 @@
 // coordonnée de l'entreprise
 $pdf->template['header']['fontSize'] = 12;
 $pdf->template['header']['lineHeight'] = 5;
-$pdf->template['header']['margin'] = array(24, 0, 0, 10);
+$pdf->template['header']['margin'] = array(25, 0, 0, 10);
 // numéro de page
-//$pdf->template['infoPage']['fontSize']=15;
+
 $pdf->template['infoPage']['margin'] = array(5, 5, 0, 0);
 $pdf->template['infoPage']['align'] = 'R';
 // numéro de Bon
-$pdf->template['infoFacture']['margin'] = array(60, 5, 0, 10);
+$pdf->template['infoFacture']['fontSize'] = 18;
+
+$pdf->template['infoFacture']['margin']   = array(10, 0, 0, 80);
 $pdf->template['infoFacture']['fontFace'] = 'B';
 // date
 $pdf->template['infoDate']['fontSize'] = 10;
-$pdf->template['infoDate']['margin'] = array(20, 0, 0, 120);
+$pdf->template['infoDate']['margin'] = array(50, 0, 0, 130);
 $pdf->template['infoDate']['color'] = array('r'=>150, 'g'=>150, 'b'=>150);
 // partie client
 $pdf->template['client']['fontSize'] = 15;

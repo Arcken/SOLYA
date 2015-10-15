@@ -30,6 +30,7 @@ ob_start();
     foreach($resDocLbl as $lbl){
         if ($lbl->doclbl_id == $oBon->doclbl_id){
             $sTypeBon=$lbl->doclbl_lbl;
+            
         }
     }
     //On récupére toutes les ligne du bon
@@ -83,14 +84,14 @@ ob_start();
     //#1 Initialisation
 
 
-$adresse ="\n\nSOLYA MEXICO \nLieu Quétel\n14430\nGOUSTRANVILLE\nFRANCE";
+$adresse ="\nSOLYA MEXICO \n\nLieu Quétel\n14430\nGOUSTRANVILLE\nFRANCE";
 
 $piedPage1 ='SOLYA MEXICO - SARL Unipersonnelle au capital de 10 000 euros';
 $piedPage2 = "- Mail : contact@solyamexico.com - Tél : 06.27.18.29.94 ";
 $piedPage3 = "N°SIRET : 8053006540001 - N°TVA INTRA : FR89805300654";
 
 
-$pdf = new generatorPDF($adresse,'', $piedPage1."\n".$piedPage2."\n".$piedPage3);
+$pdf = new generatorPDF($adresse,'LE CLIENT EST ICI ET IL EST VACHEMENT LONG SON NOM EN PLUS IL PREND DE LA PLACE MAIS C\'EST QUAND MEME COOL CA SE DEFORME PAS', $piedPage1."\n".$piedPage2."\n".$piedPage3);
 //Modification du saut de page à 50 px du bas de page
 $pdf->SetAutoPageBreak(true, 50); 
 $pdf->setLogo($path.'/img/site/logo.png');
@@ -107,18 +108,18 @@ $pdf->elementAdd('', 'traitBas', 'footer');
 
 //Colonnes du tableau
 
-$pdf->productHeaderAddRow('CODE REFERENCE', 30, 'C');
+$pdf->productHeaderAddRow('CODE REF ', 30, 'C');
 $pdf->productHeaderAddRow('REFERENCE ', 30, 'C');
-$pdf->productHeaderAddRow('N°LOT', 20, 'C');
+$pdf->productHeaderAddRow('N°LOT ', 20, 'C');
 $pdf->productHeaderAddRow('QTE ', 20, 'C');
-$pdf->productHeaderAddRow('DLC/DLUO', 20, 'L');
-$pdf->productHeaderAddRow('DEPOT',25,'C');
-$pdf->productHeaderAddRow('COMMENTAIRE',40,'R');
+$pdf->productHeaderAddRow('DLC/DLUO ', 20, 'L');
+$pdf->productHeaderAddRow('DEPOT ',25,'C');
+$pdf->productHeaderAddRow('COMMENTAIRE ',40,'R');
 
     //#2 Ajout des infos
 list($year, $month, $day) = explode("-", $oBon->bon_date);
 
-$pdf->initPDF("Bon de ".strtoupper($sTypeBon)." N°".$oBon->bon_id , "Caen le ".$day."/".$month."/".$year);
+$pdf->initPDF("BON N°".$oBon->bon_id." : ".strtoupper($sTypeBon) , "Caen le ".$day."/".$month."/".$year);
 
 
 //Création d'une ligne par éléments à l'intérieur de mon tableau
