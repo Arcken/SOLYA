@@ -234,7 +234,9 @@ try {
         Tool::addMsg($msg);
     }
 } catch (MySQLException $e) {
+    echo $e->RetourneErreur();
     switch ($resEr) {
+        
         case '666':
         case '777':
            

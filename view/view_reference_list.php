@@ -332,6 +332,8 @@
            }?>
                        
             </table>
+            </div>
+        </div>
              <?php
         if ($iTotal > $nbRow) {
             // affichage des liens vers les pages

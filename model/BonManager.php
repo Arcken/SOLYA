@@ -124,7 +124,7 @@ class BonManager {
                 $oBon->bon_sortie_assoc
             );
 
-            $sql = "INSERT INTO bon("
+            $sql = "INSERT INTO bon ("
                     . "doclbl_id,"
                     . "bon_fact_num,"
                     . "bon_date,"

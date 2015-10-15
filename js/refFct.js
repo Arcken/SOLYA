@@ -1,8 +1,4 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
  * Change la valeur de l'input refcode
@@ -11,9 +7,9 @@
  * @returns {undefined}
  */
 function changeRefCodeAtTime() {
-
+//On récupère la valeur de la combobox fiche article
     var $fiartId = $('#ficheArticle').val();
-    
+    console.log($fiartId);
     if ($fiartId !== '') {
         
         fillFiartInfos($fiartId);
@@ -80,7 +76,7 @@ function fillFiartInfos($fiartId) {
     function (json) {
         var $str = '';
         for (var key in json) {
-            $str += json[key].PAYS_ABV;
+            $str += json[key].pays_abv;
         }
         $sRes = $str;
         $("#pays_abv").val($sRes.toUpperCase());
@@ -102,7 +98,7 @@ function fillFiartGamme($fiartId) {
         var $sRes = '';
         var $str = '';
         for (var key in json) {
-            $str += json[key].GA_ABV;
+            $str += json[key].ga_abv;
         }
         $sRes = $str;
         $("#ga_abv").val($sRes.toUpperCase());
