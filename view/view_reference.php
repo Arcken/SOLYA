@@ -135,7 +135,7 @@
                 <img src="img/icon/add.png" 
                      alt="" 
                      title="Créer" 
-                     onClick="popup('view_duree_conservation.php');" />
+                     onClick="popup('dc_add');" />
                 <br>
             </div>
 
@@ -233,7 +233,7 @@
                 <img src="img/icon/add.png" 
                      alt="" 
                      title="Créer" 
-                     onClick="popup('view_tva.php');" />
+                     onClick="popup('tva_add');" />
 
                 <br>
                 <label for="droitDouane"> Droit de douanes: </label><br>
@@ -263,7 +263,7 @@
                 <img src="img/icon/add.png" 
                      alt="" 
                      title="Créer" 
-                     onClick="popup('view_droit_douane.php');"/>
+                     onClick="popup('dd_add');"/>
                 <br>
                 <label for="refCom"> Commentaire : </label><br>
                 <textarea name="refCom" 
