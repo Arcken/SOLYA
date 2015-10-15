@@ -86,10 +86,6 @@ ob_start();
 $adresse ="\n\nSOLYA MEXICO \nLieu Quétel\n14430\nGOUSTRANVILLE\nFRANCE";
 
 $piedPage1 ='SOLYA MEXICO - SARL Unipersonnelle au capital de 10 000 euros';
-
-
-
-
 $piedPage2 = "- Mail : contact@solyamexico.com - Tél : 06.27.18.29.94 ";
 $piedPage3 = "N°SIRET : 8053006540001 - N°TVA INTRA : FR89805300654";
 
@@ -110,11 +106,12 @@ if($oBon->bon_sortie_assoc != ''){
 $pdf->elementAdd('', 'traitBas', 'footer');
 
 //Colonnes du tableau
-$pdf->productHeaderAddRow('ID', 20, 'L');
-$pdf->productHeaderAddRow('CODE ', 30, 'C');
-$pdf->productHeaderAddRow('LIBELLE ', 30, 'C');
+
+$pdf->productHeaderAddRow('CODE REFERENCE', 30, 'C');
+$pdf->productHeaderAddRow('REFERENCE ', 30, 'C');
 $pdf->productHeaderAddRow('N°LOT', 20, 'C');
 $pdf->productHeaderAddRow('QTE ', 20, 'C');
+$pdf->productHeaderAddRow('DLC/DLUO', 20, 'L');
 $pdf->productHeaderAddRow('DEPOT',25,'C');
 $pdf->productHeaderAddRow('COMMENTAIRE',40,'R');
 

@@ -10,7 +10,7 @@
 //
 
 // coordonnée de l'entreprise
-$pdf->template['header']['fontSize'] = 11;
+$pdf->template['header']['fontSize'] = 15;
 $pdf->template['header']['lineHeight'] = 5;
 $pdf->template['header']['margin'] = array(24, 0, 0, 10);
 // numéro de page
