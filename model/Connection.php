@@ -140,6 +140,7 @@ class Connection {
             
             
         } catch (Exception $e) { 
+            
             //Les erreurs de la base de données étant gérer avec le SQLSTATE.
             //Cela permet de récupérer le SQLSTATE quoiqu'il arrive.
             //Car selon les cas il est récupéré soit sur le statement
@@ -150,6 +151,7 @@ class Connection {
            }else{
                $resEr[0] =self::$cnx->errorCode();
            }
+           
         switch ($resEr[0]) {
                 case '23000':
                     $resEr[1] = date('H:i:s') . ' <b>"23000"</b> Elément utilisé '

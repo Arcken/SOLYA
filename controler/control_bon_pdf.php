@@ -84,37 +84,46 @@ ob_start();
     //#1 Initialisation
 
 
-$adresse ="\nSOLYA MEXICO \n\nLieu Quétel\n14430\nGOUSTRANVILLE\nFRANCE";
+$adresse ="SOLYA MEXICO \n\nLieu Quétel\n14430 GOUSTRANVILLE \n\nFRANCE";
 
 $piedPage1 ='SOLYA MEXICO - SARL Unipersonnelle au capital de 10 000 euros';
 $piedPage2 = "- Mail : contact@solyamexico.com - Tél : 06.27.18.29.94 ";
-$piedPage3 = "N°SIRET : 8053006540001 - N°TVA INTRA : FR89805300654";
+$piedPage3 = "- N°SIRET : 8053006540001 - N°TVA INTRA : FR89805300654";
 
 
-$pdf = new generatorPDF($adresse,'LE CLIENT EST ICI ET IL EST VACHEMENT LONG SON NOM EN PLUS IL PREND DE LA PLACE MAIS C\'EST QUAND MEME COOL CA SE DEFORME PAS', $piedPage1."\n".$piedPage2."\n".$piedPage3);
-//Modification du saut de page à 50 px du bas de page
-$pdf->SetAutoPageBreak(true, 50); 
-$pdf->setLogo($path.'/img/site/logo.png');
-// element personnalisé
-$pdf->elementAdd('', 'traitEnteteProduit', 'content');
+$pdf = new generatorPDF($adresse,'LE CLIENT EST ICI ET IL EST VACHEMENT LONG '
+                                . 'SON NOM EN PLUS IL PREND DE LA PLACE '
+                                . 'MAIS C\'EST QUAND MEME COOL '
+                                . 'CA SE DEFORME PAS', $piedPage1."\n".$piedPage2."\n".$piedPage3);
+
+//Modification du saut de page à 40 px du bas de page
+//10 px au dessus du footer
+$pdf->SetAutoPageBreak(true, 40); 
+
+//Ajout du logo
+$pdf->setLogo($path.'/img/site/logoSolya186x106.png');
+
+// elements personnalisé
+
 $pdf->elementAdd('Commentaire : '.$oBon->bon_com,'commentaire', 'content');
-
 //Si bon de sortie associé (cas du bon de retour)
 if($oBon->bon_sortie_assoc != ''){
     $pdf->elementAdd('Bon de sortie associé : '.$oBon->bon_sortie_assoc,'bonSortieAssoc', 'content');
 }
+$pdf->elementAdd('', 'traitEnteteProduit', 'content');
+$pdf->elementAdd('', 'traitEnteteProduitInf', 'content');
+
 //Ajout trait bas du footer
 $pdf->elementAdd('', 'traitBas', 'footer');
 
 //Colonnes du tableau
-
 $pdf->productHeaderAddRow('CODE REF ', 30, 'C');
 $pdf->productHeaderAddRow('REFERENCE ', 30, 'C');
 $pdf->productHeaderAddRow('N°LOT ', 20, 'C');
 $pdf->productHeaderAddRow('QTE ', 20, 'C');
-$pdf->productHeaderAddRow('DLC/DLUO ', 20, 'L');
+$pdf->productHeaderAddRow('DLC/DLUO ', 25, 'C');
 $pdf->productHeaderAddRow('DEPOT ',25,'C');
-$pdf->productHeaderAddRow('COMMENTAIRE ',40,'R');
+$pdf->productHeaderAddRow('COMMENTAIRE ',40,'C');
 
     //#2 Ajout des infos
 list($year, $month, $day) = explode("-", $oBon->bon_date);
@@ -124,15 +133,18 @@ $pdf->initPDF("BON N°".$oBon->bon_id." : ".strtoupper($sTypeBon) , "Caen le ".$
 
 //Création d'une ligne par éléments à l'intérieur de mon tableau
 for($i=0;$i<count($tabLig['ref']);$i++){
+   //On formate la date récupéré comme on la souhaite 
+   list($year, $month, $day) = explode("-",(string)$tabLig['lot'][$i]->lot_dlc);
+   $lotDlc=$day."/".$month."/".$year;
    
     $pdf->productAdd(
                       
                      array(
-                          (string)$tabLig['ref'][$i]->ref_id,
                           (string)$tabLig['ref'][$i]->ref_code,
                           (string)$tabLig['ref'][$i]->ref_lbl,
                           (string)$tabLig['lot'][$i]->lot_id,
                           (string)$tabLig['lig'][$i]->lig_qte,
+                          $lotDlc,
                           (string)$tabLig['lig'][$i]->lig_com_dep,
                           (string)$tabLig['lig'][$i]->lig_com
                           )

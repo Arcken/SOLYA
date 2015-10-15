@@ -14,7 +14,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         ?>
         <link type="text/css" href="./css/style_new_view.css" rel="stylesheet">
         <?php
-        require $path . '/view/view_new_view_header.php';
+        //require $path . '/view/view_new_view_header.php';
     }
     ?>
 
@@ -93,7 +93,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <?php
     //Test si la fenêtre est une popup, si oui on charge un footer
     if ($nv == 1) {
-        require $path . '/view/view_new_view_footer.php';
+       // require $path . '/view/view_new_view_footer.php';
     }
 } else {
     echo 'Le silence est d\'or';

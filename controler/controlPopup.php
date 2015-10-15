@@ -4,7 +4,8 @@ $sAction = $_REQUEST['action'];
 //Comme la fenétre est une popup on passe la variable de contrôle d'affichage
 // à 1
 $nv = 1;
-$msg='';
+
+
 /* ----------------------------Traitement--------------------------------- */
 
 switch ($sAction) {
@@ -109,9 +110,17 @@ switch ($sAction) {
     case 'nv_bon_pdf':
         //On appel le controleur qui créé le pdf
         require $path . '/controler/control_bon_pdf.php';
+        break;
 }
 
+
+
 /* ----------------------------Affichage--------------------------------- */
+
+//On va chercher le header associé aux popups
+require $path.'/view/view_new_view_header.php';
+
+
 switch ($sAction) {
 
     //Droit de douane
@@ -149,3 +158,5 @@ switch ($sAction) {
         require $path . '/view/view_tva_add.php';
         break;
 }
+//Et on ajoute le footer associé aux popups
+require $path.'/view/view_new_view_footer.php';
