@@ -1,16 +1,28 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Class contenant les Managers
+ * de la table Entreprise
  */
 
-/**
- * Description of EntrepriseManager
- *
- * @author Olivier
- */
+
 class EntrepriseManager {
-    //put your code here
+   
+    
+    public static function getEntreprisesLim($rowStart,$nbRow,$orderBy="ENT_ID",$sort="ASC"){
+        
+        $sql="SELECT ent_id,"
+                    . "catent_id, "
+                    . "fmju_id, "
+                    . "ent_nom, "
+                    . "ent_horaire, "
+                    . "ent_ecommerce, "
+                    . "ent_siren, "
+                    . "ent_num_tva, "
+                    . "ent_com "
+                    . "FROM entreprise"
+                    . "ORDER BY ".$orderBy." ".$sort
+                    . "LIMIT ".$rowStart.",".$nbRow;
+    }
+    
 }
