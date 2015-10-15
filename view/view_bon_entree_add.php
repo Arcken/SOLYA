@@ -176,7 +176,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <tr id="idLigne" hidden="">
 
-                        <td  class="beLigneId">
+                        <td>
                             <!-- Appel de fonction qui recherche une reference 
                             selon son id-->
                             <input type="number" 
@@ -190,7 +190,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        required
                                        value="0">
                         </td>
-                        <td class="beLigneCode">
+                        <td>
                             <input type="text"
                                        name="refCode[NID]" 
                                        id="refCodeNID"
@@ -206,14 +206,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                       id="refLblNID"
                                       class="beLigneT"></textarea>                           
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="text" 
                                    value="" 
                                    name="lotIdProducteur[NID]" 
                                    id="lotIdProducteurNID"
                                    title="Lot du producteur">
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="number" 
                                    value="1"
                                    min="0.01"
@@ -222,7 +222,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligPuNID"
                                    required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="number" 
                                    value="1"
                                    min="0.01"
@@ -231,7 +231,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id ="ligQteNID"
                                    required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -240,7 +240,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="refPoidsBrutNID"
                                    required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Calcul totalPoids: Multiplication entre la quantité
                             et le pois unitaire-->
                             <input type="number" 
@@ -253,7 +253,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                    "refPoidsBrutNID"],
                                                        "totalPoidsNID")'>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Calcul droit de douane selon le pu, le taux 
                                 et la quantité-->
                             <input type="number" 
@@ -268,7 +268,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                            "beligDdNID")'
                                        required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Calcul droit de douane selon le pu, le taux 
                                 et la quantité-->
                             <input type="number" 
@@ -283,7 +283,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                            "beligDdNID")'
                                        required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -292,7 +292,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligTaxeNID"
                                    required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Additionne droit de douane et taxe-->
                             <input type="number" 
                                    value="0"
@@ -306,7 +306,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        ["beligDdNID", "beligTaxeNID"],
                                                        "totalFdNID")'>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -315,7 +315,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="beligFbNID"
                                    required>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Copie frais bancaire dans total -->
                             <input type="number" 
                                    value="0"
@@ -328,7 +328,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    onfocus='copieChamps("beligFbNID",
                                                        "totalFbNID")'>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -337,7 +337,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    required
                                    id="beligFtNID">
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Copie frais transport dans total-->
                             <input type="number" 
                                    value="0"
@@ -350,7 +350,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    onfocus='copieChamps("beligFtNID",
                                                        "totalFtNID")'>
                         </td>
-                        <td class="beLigneNb">
+                        <td>
                             <!-- Total de la ligne: appel la fonction qui
                                 calcul le total de la ligne-->
                             <input type="number" 
@@ -387,7 +387,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    value=""
                                    required>                            
                         </td>
-                        <td  class="beLigneImg">
+                        <td>
                             <!-- Efface la ligne en cours -->
                             <img src="img/icon/delete.png" 
                                  alt="" 

@@ -48,7 +48,7 @@ switch ($sAction) {
 
             //on créé un objet contenant les données que l'on passe en paramètre
             //de la requête
-            $oMc = new Mode_conservation();
+            $oMc = new ModeConservation();
             $oMc->cons_lbl = $_REQUEST['consLbl'];
             $result = ModeConservationManager::addModeConservation($oMc);
 
