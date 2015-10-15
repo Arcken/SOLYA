@@ -46,6 +46,7 @@ class Tool {
         $page = 'index.php';
         //On calcul le nombre de page
         $nbpages = ceil($total / $nbRow);
+        //on initialise 
         $numeroPages = 1;
         $compteurPages = 1;
         $lim = 0;
@@ -53,8 +54,9 @@ class Tool {
         $rowStartSuivante = $rowStart + $nbRow;
         $rowStartPrecedente = $rowStart - $nbRow;
 
+        
         //On commence le tableau
-        echo '<table border = "0" ><tr>' . "\n";
+        echo '<table class="puceNav" border = "0" ><tr>' . "\n";
         // on détermine le orderby et le tri
         if (isset($_REQUEST['orderby'])) {
             $order = $_REQUEST['orderby'];
@@ -71,11 +73,28 @@ class Tool {
         if ($rowStart != 0) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $rowStartPrecedente . '&orderby=' . $order . '&tri=' .$sort . '" method="post"><</a></td>' . "\n";
+            . $rowStartPrecedente . '&orderby=' . $order . '&tri=' .$sort . '" method="post"><<</a></td>' . "\n";
+        }else{
+            echo '<td class="puceNavDesactive" valign="top">' . "\n";
+            echo ' <a href =""><<</a></td>' . "\n";
         }
 
         //Tant que la page en cours est inférieur au nombre de page
         while ($numeroPages <= $nbpages) {
+            
+            //Page en cours
+            if($numeroPages == ($rowStart/$nbRow+1)){
+                 echo '<td class="puceNavActive"><a href ="' . $page 
+                    . '?action=' . $sAction 
+                    . '&limite=' . $lim 
+                    . '&orderby=' 
+                    . $order 
+                    . '&tri=' .$sort . '">'
+                    . $numeroPages . '</a></td>' . " \n";
+           
+            } else {
+            
+            //autre page
             echo '<td ><a href ="' . $page 
                     . '?action=' . $sAction 
                     . '&limite=' . $lim 
@@ -83,15 +102,18 @@ class Tool {
                     . $order 
                     . '&tri=' .$sort . '">'
                     . $numeroPages . '</a></td>' . " \n";
+            
+            }
             //on clacul la limite suivante
             $lim = $lim + $nbRow;
             //on incrémente la puce
-            $numeroPages = $numeroPages + 1;
+            $numeroPages++;
             //on incrémente le compteur de page
-            $compteurPages = $compteurPages + 1;
+            $compteurPages++;
+            //on incrémente le compteur pour le saut à la ligne
             if ($compteurPages == 10) {
                 $compteurPages = 1;
-                echo '<br />' . "\n";
+                echo '<tr />' . "\n";
             }
         }
 
@@ -99,7 +121,10 @@ class Tool {
         if ($rowStartSuivante < $total) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $rowStartSuivante . '&orderby=' . $order . '&tri=' .$sort . '" method="post">></a></td>' . "\n";
+            . $rowStartSuivante . '&orderby=' . $order . '&tri=' .$sort . '" method="post">>></a></td>' . "\n";
+        }else{
+            echo '<td class="puceNavDesactive" valign="top">' . "\n";
+            echo ' <a href ="">>></a></td>' . "\n";
         }
 
         echo '</tr></table>' . "\n";

@@ -32,3 +32,39 @@
     height: 16px;
     margin: auto;
 }
+
+
+
+.puceNav{
+    border-collapse:separate;
+    font-size: 1.1em;
+    color: antiquewhite;
+}
+
+
+.puceNav a{
+    margin-right: 2px;
+    margin-left:  2px;
+    color: antiquewhite;
+}
+
+.puceNav a:link, .puceNav a:visited{
+    text-decoration:none;
+    
+    padding:3px 6px;
+}
+
+.puceNav td{
+    border: solid antiquewhite 1px;
+    min-width: 35px;
+    text-align: center;
+}
+
+.puceNavActive a{
+    color: black;
+    font-weight:bold;
+}
+
+.puceNavDesactive a{
+    color: darkgray;
+}
