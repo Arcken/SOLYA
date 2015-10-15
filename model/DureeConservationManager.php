@@ -22,7 +22,7 @@ class DureeConservationManager {
 
             $sql = 'SELECT dc_id, dc_lbl, dc_nb '
                     . 'FROM duree_conservation '
-                    . 'PRDER BY dc_lbl';
+                    . 'ORDER BY dc_lbl';
             
             $result = Connection::request(1,$sql);
             

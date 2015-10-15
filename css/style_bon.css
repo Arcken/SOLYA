@@ -58,6 +58,17 @@ and open the template in the editor.
     color: whitesmoke;
 }
 
+
+.beLigne{
+    margin: 0;
+    margin-top: 0.4%;
+    margin-bottom: 0.4%;
+    padding: 0;
+    color: whitesmoke;
+    border-collapse: collapse;
+    width: auto;
+}
+
 .colTitleSup{
     
     border-top: 2px solid white;
@@ -86,16 +97,10 @@ and open the template in the editor.
     border-bottom:  2px solid white;
 }
 
-.beLigne{
-    margin-top: 0.4%;
-    margin-bottom: 0.4%;
-    color: whitesmoke;
-    border-collapse: collapse;
-    width: auto;
-}
+
+
 
 .beLigne th{
-    border: 1px solid black;
     
     font-size: 0.8em;
 }
@@ -105,20 +110,20 @@ and open the template in the editor.
 
 .beLigne td{
     text-align: center;
-    //border-bottom: 1px solid black;
-    border: 1px solid black;
+    border: solid black 1px;
 }
 
 .beLigne input{
     text-align: center;
-    width: 100%;
+    margin-left: 0px;
+    width: 45px;
     margin: auto;
 }
 
 .beLigne textArea{
-    
-    width: 30px;
-    min-width: 30px;
+    height: 20px;
+    width: 45px;
+    min-width: 45px;
     margin: auto;
 }
 .beLigneNb{

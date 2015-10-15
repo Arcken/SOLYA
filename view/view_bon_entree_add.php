@@ -21,8 +21,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
 -->
 
-     <link type="text/css" href="css/style_bon.css" rel="stylesheet">
+    
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+     <link type="text/css" href="css/style_bon.css" rel="stylesheet">
     <script type="text/javascript" src="js/calculFct.js" ></script>
     <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">

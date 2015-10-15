@@ -10,7 +10,10 @@
     <link href="css/style_footer.css" type="text/css" rel="stylesheet">
     <div id="bloc_footer">
         <p class="erreur"><?php if (isset($resEr)) echo $resEr[1];?></p>
-        
+        <?php 
+        foreach ($_SESSION['msg'] as $msg){
+            echo $msg;
+        } ?>
      
     </div>
 </footer>

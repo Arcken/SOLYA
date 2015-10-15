@@ -19,7 +19,7 @@ class TvaManager {
 
         try {
 
-            $sql = 'SELECT t.tva_id, t.tva_lbl, t.tva_taux FROM tva t'
+            $sql = 'SELECT tva_id, tva_lbl, tva_taux FROM tva '
                     . 'ORDER BY tva_lbl';
 
             $result = Connection::request(1, $sql);

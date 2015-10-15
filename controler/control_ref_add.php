@@ -15,15 +15,11 @@ try {
     $sPageTitle = "Ajouter une référence";
     $sButton = "Envoyer";
 
-
-
     $toFiArts = FicheArticleManager::getAllFichesArticles();
     $toModCons = ModeConservationManager::getAllModesConservations();
     $toDurCons = DureeConservationManager::getAllDureesConservations();
     $toTvas = TvaManager::getAllTvas();
     $toDroitDouanes = DroitDouaneManager::getAllDroitsDouanes();
-
-
 
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         if ($_SESSION['token'] != $_REQUEST['token']) {
@@ -59,7 +55,7 @@ try {
             $oRef->ref_com = $_REQUEST['refCom'];
             $oRef->ref_code = strtoupper($_REQUEST['refCode']);
             $oRef->ref_mrq = $_REQUEST['refMrq'];
-            $oRef->ref_code_douane =$_REQUEST['refCodeDouane'];
+            $oRef->ref_code_douane = $_REQUEST['refCodeDouane'];
 
             $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
             if (count($resPhoto) > 0 && $resPhoto[0] != '') {
@@ -86,26 +82,24 @@ try {
                 $resPv = PrixVenteManager::addPrixVente($oPve);
             }
 
-           
+
 
             $cnx->commit();
-            $msg = "<p class='info'>". date('H:i:s')." La référence " . $oRef->ref_lbl . " a été enregistré"
+            $msg = "<p class='info'>" . date('H:i:s') . " La référence " . $oRef->ref_lbl . " a été enregistré"
                     . " avec succès</p>";
 
-            
+
             $_SESSION['token'] = $_REQUEST['token'];
             $sAction = 'ref_list';
             require $path . '/controler/control_ref_list.php';
-            
-        }else{
-            $msg = "<p class= 'erreur'> " . date('H:i:s').
+        } else {
+            $msg = "<p class= 'erreur'> " . date('H:i:s') .
                     " Vous avez déja envoyé ce formulaire </p>";
-        
         }
         Tool::addMsg($msg);
     }
 } catch (MySQLException $e) {
     $cnx->rollback();
-    $msg=$resEr[1];
+    $msg = $resEr[1];
     Tool::addMsg($msg);
 }
