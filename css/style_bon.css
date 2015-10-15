@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : Olivier
 */
 
+input:read-only{
+    background-color: #cfcfcf;
+}
+
 #bonTable{
     border-collapse: collapse;
     margin-top: 1%;
@@ -58,66 +62,61 @@ and open the template in the editor.
     color: whitesmoke;
 }
 
-
 .beLigne{
-    margin: 0;
-    margin-top: 0.4%;
+    //margin: 0;
+    //margin-top: 0.4%;
     margin-bottom: 0.4%;
-    padding: 0;
+    //padding: 0;
     color: whitesmoke;
     border-collapse: collapse;
     width: auto;
+    border-color: antiquewhite;
 }
 
 .colTitleSup{
     
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
 }
 
 .colTitlSupUnique{
-    border-top: 2px solid white;
-    border-left: 2px solid white;
-    border-right: 2px solid white;
-    border-bottom:  2px solid white;
+    border-top: 2px solid;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-bottom:  2px solid;
 }
 
 .colTitleLeft{
-    border-left: 2px solid white;
-    border-bottom:  2px solid white;
+    border-left: 2px solid ;
+    border-bottom:  2px solid ;
 }
 
 .colTitleMiddle{
-     border-bottom:  2px solid white;
+     border-bottom:  2px solid ;
 }
 
 .colTitleRight{
-    border-right: 2px solid white;
-    border-bottom:  2px solid white;
+    border-right: 2px solid ;
+    border-bottom:  2px solid ;
 }
-
-
-
 
 .beLigne th{
     
     font-size: 0.8em;
 }
-.beLigne input:read-only{
-    background-color: #cfcfcf;
-}
 
 .beLigne td{
     text-align: center;
-    border: solid black 1px;
 }
 
 .beLigne input{
     text-align: center;
-    margin-left: 0px;
+    
     width: 45px;
     margin: auto;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .beLigne textArea{
@@ -125,7 +124,10 @@ and open the template in the editor.
     width: 45px;
     min-width: 45px;
     margin: auto;
+    margin-left: 2px;
+    margin-right: 2px;
 }
+
 .beLigneNb{
     width: 40px;
     min-width: 40px;

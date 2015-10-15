@@ -8,6 +8,70 @@ $nv = 1;
 /* ----------------------------Traitement--------------------------------- */
 switch ($sAction) {
 
+    //Droit de douane
+    case "nv_dd_add":
+
+        require $path . '/model/DroitDouane.php';
+        require $path . '/model/DroitDouaneManager.php';
+        $sPageTitle = "Ajouter un droit de douane";
+
+        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+
+            //Les valeurs sont vérifiées à la saisie
+            //On créé un objet contenant les valeurs que l'on passe en paramètre 
+            //à la requête
+
+            $oDd = new DroitDouane();
+            $oDd->dd_lbl = $_REQUEST['ddLbl'];
+            $oDd->dd_taux = $_REQUEST['ddTaux'];
+
+            $result = DroitDouaneManager::addDroitDouane($oDd);
+
+            //On récupére l'id de l'insert
+            $id = Connection::dernierId();
+
+            //Si l'insert c'est bien passé
+            if ($result == 1) {
+                $ligneMessage = "<font color='green'> L'ajout du droit de douane N° $id" .
+                        "intitulée: $oDd->dd_lbl est un succés</font>";
+            } else {
+                $ligneMessage = "<font color='red'> L'ajout du droit de douane est un échec.";
+            }
+        }
+
+        break;
+
+    //Durée de conservation
+    case "nv_dc_add":
+
+        require $path . '/model/DureeConservation.php';
+        require $path . '/model/DureeConservationManager.php';
+        $sPageTitle = "Ajouter une durée de conservation";
+
+        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+
+            //on créé un objet contenant les données que l'on passe en paramètre
+            //de la requête
+            $oDc = new DureeConservation();
+            $oDc->dc_lbl = $_REQUEST['dcLbl'];
+            $oDc->dc_nb = $_REQUEST['dcNb'];
+
+            $result = DureeConservationManager::addDureeConservation($oDc);
+
+            //On récupére l'id de l'insert
+            $id = Connection::dernierId();
+
+            //Si l'insert c'est bien passé
+            if ($result == 1) {
+                $ligneMessage = "<font color='green'> L'ajout de la durée de cnservation N° $id" .
+                        "intitulée: $oDc->dc_lbl est un succés</font>";
+            } else {
+                $ligneMessage = "<font color='red'> L'ajout de la durée de conservation est un échec.";
+            }
+        }
+
+        break;
+
     //gammme
     case "nv_ga_add":
 
@@ -125,13 +189,51 @@ switch ($sAction) {
 
         break;
 
-    case "nv_bon_pdf":
-        require $path . '/controler/control_bon_pdf.php';
+    //TVA
+    case "nv_tva_add":
+
+        require $path . '/model/Tva.php';
+        require $path . '/model/TvaManager.php';
+        $sPageTitle = "Ajouter une tva";
+
+        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+
+            //on créé un objet contenant les données que l'on passe en paramètre
+            //de la requête
+            $oTva = new Tva();
+            $oTva->tva_lbl = $_REQUEST['tvaLbl'];
+            $oTva->tva_taux = $_REQUEST['tvaTaux'];
+
+            $result = TvaManager::addTva($oTva);
+
+            //On récupére l'id de l'insert
+            $id = Connection::dernierId();
+            ;
+
+            //Si l'insert c'est bien passé
+            if ($result == 1) {
+                $ligneMessage = "<font color='green'> L'ajout de la TVA N° $id" .
+                        "intitulée: $oTva->tva_lbl est un succés</font>";
+            } else {
+                $ligneMessage = "<font color='red'> L'ajout de la TVA est un échec.";
+            }
+        }
+
         break;
 }
 
 /* ----------------------------Affichage--------------------------------- */
 switch ($sAction) {
+
+    //Droit de douane
+    case "nv_dd_add":
+        require $path . '/view/view_dd_add.php';
+        break;
+
+    //Durée de conservation
+    case "nv_dc_add":
+        require $path . '/view/view_dc_add.php';
+        break;
 
     //gamme
     case "nv_ga_add":
@@ -151,5 +253,10 @@ switch ($sAction) {
     //pays
     case "nv_pays_add":
         require $path . '/view/view_pays_add.php';
+        break;
+
+    //tva
+    case "nv_tva_add":
+        require $path . '/view/view_tva_add.php';
         break;
 }
