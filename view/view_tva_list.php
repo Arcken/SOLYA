@@ -5,8 +5,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     <link type="text/css" href="css/style_list.css" rel="stylesheet">
-    <div class="corps">
-        <div class="list">
+    <div class="corpsCenter">
+        <div class="colOnlyOne">
             <h2> Liste des éléments </h2>
             
             <table class="tableList">

@@ -23,6 +23,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+    <link type="text/css" href="css/style_bon.css" rel="stylesheet">
     <script type="text/javascript" src="js/calculFct.js" ></script>
     <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">
@@ -34,6 +35,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beId"
                        type="text"
                        value="<?php echo $resBeDetail->be_id ?>"
+                       readonly=""
                        >
                 <br>
                 <label for="beFactNum"> Référence de facture </label><br>
@@ -58,6 +60,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        placeholder="description" 
                        type="date"
                        value="<?php echo $resBeDetail->be_date ?>"
+                       required=""
                        >
                 <br>
                 <label for="beCom"> Commentaire</label><br>
@@ -101,87 +104,87 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
             <div class="col90">
                 <table class="beLigne" id="beTable">
-                    <tr id="titreGnl">
-                        <th rowspan="2">
+                    <tr id="titreGnl" class="trColTitre">
+                        <th rowspan="2" class="colTitlSupUnique">
                             ID ligne
                         </th>
-                        <th colspan="8">
+                        <th colspan="8" class="colTitleSup">
                             Référence
                         </th>
-                        <th colspan="4">
+                        <th colspan="4" class="colTitleSup">
                             Douane
-                        <th colspan="2">
+                        <th colspan="2" class="colTitleSup">
                             Banque
                         </th>
-                        <th colspan="2">
+                        <th colspan="2" class="colTitleSup">
                             Transport
                         </th>
-                        <th rowspan="2">
+                        <th rowspan="2" class="colTitlSupUnique">
                             Total ligne
                         </th>
-                        <th rowspan="2">
+                        <th rowspan="2" class="colTitlSupUnique">
                             DLC DLUO
                         </th>
-                        <th rowspan="2">
+                        <th rowspan="2" class="colTitlSupUnique">
                             Dépôt
                         </th>
-                        <th rowspan="2">
+                        <th rowspan="2" class="colTitlSupUnique">
                             Commentaire
                         </th>
-                        <th rowspan="2">
+                        <th rowspan="2" class="colTitlSupUnique">
                             Coût unitaire
                         </th>
-                        <th rowspan="2">
+                        <th rowspan="2" class="colTitlSupUnique">
                             Supp
                         </th>
                     </tr>
-                    <tr id="titreCol">
-                        <th>
+                    <tr id="titreCol" class="trColTitre">
+                        <th class="colTitleLeft">
                             Id
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Code
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Libellé
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Lot
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             PU
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Qt
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Pd U
                         </th>
-                        <th>
+                        <th class="colTitleRight">
                             Poids
                         </th>
-                        <th>
+                        <th class="colTitleLeft">
                             Droit
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Taux
                         </th>
-                        <th>
+                        <th class="colTitleMiddle">
                             Taxe
                         </th>
-                        <th>
+                        <th class="colTitleRight">
                             Total
                         </th>
-                        <th>
+                        <th class="colTitleLeft">
                             Frais
                         </th>
-                        <th>
+                        <th class="colTitleRight">
                             Total
                         </th>
-                        <th>
+                        <th class="colTitleLeft">
                             Prix
                         </th>
-                        <th>
+                        <th class="colTitleRight">
                             Total
                         </th>
 

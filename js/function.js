@@ -1,27 +1,32 @@
 
 /**
- * Fonction d'ajout de ligne pour les bons
+ * Fonction d'ajout de ligne
  * On prend tous ce qui se trouvent entre <tr id=idLigne> et </tr>
  * On modifie les valeurs nécessaires et on ajoute l'ensemble au document avant
  * la fin de la balise table
  * @param $table
  * Table html du document
+ * @param $idTr
+ * 
  * @returns {undefined}
  */
-function addLigne($table) {
+function addLigne($table, $idTr) {
+    
     //on incrémente le compteur
     nRowCount++;
-    //On récupére le squelette du code entre le balises <tr id=idLigne> et </tr>
-    $ligne = $('#idLigne').html();
+    
+    //On récupére le squelette du code entre le balises <tr id=$idTr> et </tr>
+    $ligne = $('#' + $idTr).html();
     console.log($ligne);
     //On créé une variable qui est l'id du nouveau tr
-    $id = "idLigne" + nRowCount;
+    $id = $idTr + nRowCount;
     //on remplace tous les mots NID par le même numéro de ligne 
     $ligne = $ligne.replace(/NID/g, nRowCount);
-    //on vide toutes les valeur des input
+    //on vide toutes les valeur des input pour 
+    //que le require du formulaire fonctionne
     $ligne = $ligne.replace(/value="[^*"]*"/g, 'value=""');
     //On remplace idLigne par le nouvel id $id
-    $ligne = $ligne.replace(/idLigne/, $id);
+    $ligne = $ligne.replace($idTr, $id);
     //On ajoute le code à la fin de la table
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
     console.log($ligne);
