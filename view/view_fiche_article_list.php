@@ -16,12 +16,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <th class="colTitle">
                         Identifiant                 
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/down.png" 
                              title="Tri décroissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'fiart_id', 'DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/up.png" 
                              title="Tri croissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'fiart_id', 'ASC');"/>
@@ -29,12 +29,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     <th class="colTitle">
                         Libellé         
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/down.png" 
                              title="Tri décroissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'fiart_lbl', 'DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/up.png" 
                              title="Tri croissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'fiart_lbl', 'ASC');"/>
@@ -48,15 +48,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 ?>
                         
                             <tr>
-                                <td style="border: solid black 1px;width: 125px;" ><img src="<?php echo $imgMiniPath . $value->fiart_photos_pref . '_lbl.jpg' ?>" alt="" title="Modifier"
+                                <td class="colImg"><img src="<?php echo $imgMiniPath . $value->fiart_photos_pref . '_lbl.jpg' ?>" alt="" title="Modifier"
                                          onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></center></td>
                                 <td class="colData" colspan="3"><?php echo $value->fiart_id ?></td>
                                 <td class="colData" colspan="3"><?php echo $value->fiart_lbl ?></td>               
                                 
-                                <td><img src="img/icon/modify.png" alt="" title="Modifier"
+                                <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                          onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></td>
 
-                                <td><img src="img/icon/delete.png" alt="" title="Modifier"
+                                <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Modifier"
                                          onclick='delElt(<?php echo $value->fiart_id ?>, "fiartId", "Fiche article", "fiart_del")'/></td>
 
                             </tr>

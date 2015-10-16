@@ -14,12 +14,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th class="colTitle">
                         ID
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','dc_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','dc_id','ASC');"/>
@@ -27,12 +27,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th class="colTitle">
                         Libellé
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','dc_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','dc_id','ASC');"/>
@@ -55,10 +55,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             <td  class="colData">
                                 <?php echo $dc->dc_nb ?>
                             </td>
-                            <td class="colTdImg"><img src="img/icon/modify.png" alt="" title="Modifier"
+                            <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = "index.php?action=dc_detail&dcId=<?php echo $dc->dc_id ?>"'/></td>
 
-                            <td class="colTdImg"><img src="img/icon/delete.png" alt="" title="Supprimer"
+                            <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                      onclick='delElt(<?php echo $dc->dc_id ?>, "dcId", "durée conservation", "dc_del")'/></td>
                         </tr>
                         <?php

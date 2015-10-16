@@ -27,7 +27,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/calculFct.js" ></script>
     <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">
-        <form class="form" action="index.php" method="post" onsubmit="ctrlFormValide();">
+        <form class="form" action="index.php" method="post" onsubmit="return ctrlFormValide();">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col50">
                 

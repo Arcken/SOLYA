@@ -1,5 +1,8 @@
 <?php
-
+//Contrôle si la connection de l'utilisateur est valide
+//Le 'group' permet de choisir si l'utilisateur à accés à la page
+if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
+    
 //Déffinition du titre de la page
 $sPageTitle = "Créer un Bon d'entrée";
 
@@ -16,6 +19,9 @@ require_once $path . '/model/LotManager.php';
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
     try {
+        //Vérification du jeton pour savoir si le formulaire à déja était envoyé
+        if ($_SESSION['token'] != $_REQUEST['token']) {
+        
         //Instanciation de la connection
         $cnx = Connection::getConnection();
 
@@ -34,10 +40,10 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $oBe->be_com = $_REQUEST['beCom'];
         $oBe->be_info_trans = $_REQUEST['beInfoTrans'];
         $oBe->be_total = $_REQUEST['beTotal'];
-        
+
         //Insert du bon
         $resBe = BonEntreeManager::addBonEntree($oBe);
-        
+
         //On récupére l'id du bon d'entrée inséré
         $idBe = Connection::dernierId();
 
@@ -81,6 +87,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             'lot_qt_stock' => $tLigQte,
             'ref_id' => $tRefId
         ];
+        
 
         //Boucle pour insérer les lignes
         //On ignore la première ligne, c'est le squelette de construction 
@@ -95,7 +102,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $oLot->lot_dlc = $tLigneForm['lot_dlc'][$i];
             $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
             $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
-            
+
             //Insert du lot dans la table lot
             $resLot = LotManager::addLot($oLot);
 
@@ -130,11 +137,39 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
             //on insert l'objet BeLigne dans la table be_ligne
             $resBeLigne = BeLigneManager::addBeLigne($oBeLigne);
-
         }
+        
+        //Message pour le succés
+        $msg = '<p class=\'info\'>' . date('H:i:s')
+                . ' L\'enregistrement de la durée de conservation: "'
+                . $id
+                . '" intitulé "' . $oDc->dc_lbl . '" à été effectué '
+                . 'avec succès </p>';
+
+        //La requète s'est effectué donc on copie le token dans la session
+        $_SESSION['token'] = $_REQUEST['token'];
+
+        //on valide le formulaire
         $cnx->commit();
+        } else {
+            //Message en cas de formulaire déja envoyé
+            $msg = "<p class= 'erreur'> " . date('H:i:s') . "
+                Vous avez déja envoyé ce formulaire </p>";
+        }
+        
+        
     } catch (MySQLException $e) {
         $cnx->rollback();
-        throw $e;
+        //Message pour l'erreur
+            $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
+                    . ' Echec insert Durée conservation, code: '
+                    . $resEr . '</p>';
+        }
+
+        //On insert le message dans le tableau de message
+        Tool::addMsg($msg);
     }
+
+} else {
+    echo 'Le silence est d\'or';
 }

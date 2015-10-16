@@ -10,12 +10,12 @@
                     <th class="colTitle">
                         ID
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','pays_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','pays_id','ASC');"/>
@@ -23,12 +23,12 @@
                     <th class="colTitle">
                         Nom
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','pays_nom','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','pays_nom','ASC');"/>
@@ -69,10 +69,10 @@
                             <td class="colData">
             <?php echo $pays->pays_dvs_sym ?>
                             </td>
-                            <td class="colTdImg"><img src="img/icon/modify.png" alt="" title="Modifier"
+                            <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = "index.php?action=pays_detail&paysId=<?php echo $pays->pays_id ?>"'/></td>
 
-                            <td class="colTdImg"><img src="img/icon/delete.png" alt="" title="Supprimer"
+                            <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                      onclick='delElt(<?php echo $pays->pays_id ?>, "paysId", "pays", "pays_del")'/></td>
                         </tr>
 

@@ -11,12 +11,12 @@
                     <th class="colTitle">
                         ID
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/down.png" 
                              title="Tri décroissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'nut_id', 'DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/up.png" 
                              title="Tri croissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'nut_id', 'ASC');"/>
@@ -24,12 +24,12 @@
                     <th class="colTitle">
                         Nom
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/down.png" 
                              title="Tri décroissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'nut_lbl', 'DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/up.png" 
                              title="Tri croissant" 
                              onclick="orderby('<?php echo $sAction ?>', 'nut_lbl', 'ASC');"/>
@@ -46,10 +46,10 @@
                             <td class="colData" colspan="3">
                                 <?php echo $nut->nut_lbl ?>
                             </td>
-                            <td class="colTdImg"><img src="img/icon/modify.png" alt="" title="Modifier"
+                            <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                                       onclick='location.href = "index.php?action=nut_detail&nutId=<?php echo $nut->nut_id ?>"'/></td>
 
-                            <td class="colTdImg"><img src="img/icon/delete.png" alt="" title="Supprimer"
+                            <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                                       onclick='delElt(<?php echo $nut->nut_id ?>, "nutId", "nutrition", "nut_del")'/></td>
 
                         </tr>

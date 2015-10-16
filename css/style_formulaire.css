@@ -116,10 +116,13 @@ img{
 }
 
 .colOnlyOne {
-    width: auto;
+    
+    width: 95%;
     height: auto;
     margin: 10px;
-    overflow: hidden;
+    max-width: 95%;
+    min-width: 75%;
+    text-align: center;
     
 }
 .impImg input{

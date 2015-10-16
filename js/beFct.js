@@ -17,29 +17,29 @@
  * @returns {undefined}
  */
 function beCcDroitDouane($source1, $source2, $source3, $cible) {
-        //console.log("DEBUT CC DROIT DOUANE");
+    //console.log("DEBUT CC DROIT DOUANE");
 
     //on récupére la valeur de l'input prix unitaire
     $pu = parseFloat($("input[id='" + $source1 + "']").val());
-        //console.log("PU : " + $pu);
-        
+    //console.log("PU : " + $pu);
+
     //on récupére la valeur de l'input taux douane
     $tauxDouane = parseFloat($("input[id='" + $source2 + "']").val());
-        //console.log("Taux douane : " + $tauxDouane);
-    
+    //console.log("Taux douane : " + $tauxDouane);
+
     //on récupére la valeur de l'input quantité
     $qt = parseFloat($("input[id='" + $source3 + "']").val());
-        //console.log("Quantité : " + $qt);
+    //console.log("Quantité : " + $qt);
 
     //on effectue le calcul puis on met l'input cible à jour
     $res = parseFloat($tauxDouane * $pu
             * $qt / 100);
     $res = $res.toFixed(2);
-    
+
     $res = $("input[id='" + $cible + "']").val($res);
 
-        //console.log("Droit unitaire : " + $res.val());
-        //console.log("FIN CC DROIT DOUANE");
+    //console.log("Droit unitaire : " + $res.val());
+    //console.log("FIN CC DROIT DOUANE");
 }
 
 //-----------------calcul bon entree------------------
@@ -75,7 +75,7 @@ function beTotalLigne($cible) {
         //calcul
         $tmp = ($puVal * $qtVal +
                 $tDouane + $tBanque + $tTransport).toFixed(2);
-        
+
         //MAJ de l'input cible
         $(this).find('[id^="' + $cible + '"]').val($puVal * $qtVal +
                 $tDouane + $tBanque + $tTransport);
@@ -93,15 +93,15 @@ function beCalcul() {
 
     //on récupére les frais de l'entête du bon
     $fDouaneVal = parseFloat($('[id="beFraisDouane"]').val());
-        //console.log("frais douane: " + $fDouaneVal);
+    //console.log("frais douane: " + $fDouaneVal);
     $fBancaireVal = parseFloat($('[id="beFraisBancaire"]').val());
-        //console.log("frais bancaire: " + $fBancaireVal);
+    //console.log("frais bancaire: " + $fBancaireVal);
     $fTransportVal = parseFloat($('[id="beFraisTrans"]').val());
-        //console.log("frais transport: " + $fTransportVal);
+    //console.log("frais transport: " + $fTransportVal);
 
     //On récupère la quantité totale d'article
     $qtTotalVal = 0;
-    
+
     //Pour chaque balise tr dont l'id est différent de celle des titres 
     //et du squelette (idligne)
     $('tr').not('#titreGnl, #titreCol, #idLigne').each(function () {
@@ -114,15 +114,15 @@ function beCalcul() {
             $qtTotalVal += parseFloat($(this).find('[id^="ligQte"]').val());
         }
     });
-        //console.log("Qt total: " + $qtTotalVal);
+    //console.log("Qt total: " + $qtTotalVal);
 
     //Pour chaque frais de l'entête on calcul la valeur par article
     $fdUniteVal = parseFloat($fDouaneVal / $qtTotalVal);
-        //console.log("Frais douane par unité: " + $fdUniteVal);
+    //console.log("Frais douane par unité: " + $fdUniteVal);
     $fbUniteVal = parseFloat($fBancaireVal / $qtTotalVal);
-        //console.log("Frais bancaire par unité: " + $fbUniteVal);
+    //console.log("Frais bancaire par unité: " + $fbUniteVal);
     $ftUniteVal = parseFloat($fTransportVal / $qtTotalVal);
-        //console.log("Frais transport par unité: " + $ftUniteVal);
+    //console.log("Frais transport par unité: " + $ftUniteVal);
 
     //On récupére l'input beTotal et on met sa valeur à zéro pour éviter 
     //des erreurs
@@ -138,11 +138,11 @@ function beCalcul() {
 
             //idligne pour le control dans la console
             $idLigne = $(this).attr('id');
-                //console.log("ligne calculé: " + $(this).attr('id'));
+            //console.log("ligne calculé: " + $(this).attr('id'));
 
             //On récupére la quantité descendant de ce tr
             $ligneQtVal = parseFloat($(this).find('[id^="ligQte"]').val());
-                //console.log($idLigne + ": qtLigne " + $ligneQtVal);
+            //console.log($idLigne + ": qtLigne " + $ligneQtVal);
 
             //On met à jour le champs poids
             //poids unitaire
@@ -174,7 +174,7 @@ function beCalcul() {
             $ligneTempsTotalDouane = (parseFloat($ligneDroitDouane.val()) +
                     parseFloat($ligneTaxe.val()));
 
-                //console.log($idLigne + ": Total FD: " + $ligneTempsTotalDouane);
+            //console.log($idLigne + ": Total FD: " + $ligneTempsTotalDouane);
 
             //On fait le calcul 'frais de douane unitaire entête * quantité ligne 
             // + total temps douane ligne' et on met à jour la case total douane ligne
@@ -182,40 +182,40 @@ function beCalcul() {
             $ligneTotalFd = $(this).find('[id^="totalFd"]');
             $tmp = $fdUniteVal * $ligneQtVal + $ligneTempsTotalDouane;
             $ligneTotalFd.val($tmp.toFixed(2));
-                //console.log($idLigne + ": Total FD MAJ : " + $ligneTotalFd.val());
+            //console.log($idLigne + ": Total FD MAJ : " + $ligneTotalFd.val());
             $ligneTotalFdVal = $ligneTotalFd.val();
 
             //On récupére l'input et la valeur de la case frais banque ligne
             //descendant de ce tr
             $ligneFraisBancaire = $(this).find('[id^="beligFb"]');
             $ligneTempsTotalFbVal = parseFloat($ligneFraisBancaire.val());
-                //console.log($idLigne + ": Total FB: " + $ligneTempsTotalFbVal);
+            //console.log($idLigne + ": Total FB: " + $ligneTempsTotalFbVal);
 
             //On fait le calcul 'frais de banque unitaire entête * quantité ligne 
             // + total temp banque ligne' et on met à jour la case total banque ligne
             //et on stock sa valeur dans une variable pour un calcul plus tard
             $ligneTotalFb = $(this).find('[id^="totalFb"]');
-            
+
             $tmp = ($fbUniteVal * $ligneQtVal + $ligneTempsTotalFbVal);
             $ligneTotalFb.val($tmp.toFixed(2));
-                //console.log($idLigne + ": Total FB MAJ : " + $ligneTotalFb.val());
+            //console.log($idLigne + ": Total FB MAJ : " + $ligneTotalFb.val());
             $ligneTotalFbVal = parseFloat($ligneTotalFb.val());
 
             //On récupére l'input et la valeur de la case prix transport ligne 
             //descendant de tr
             $lignePrixFt = $(this).find('[id^="beligFt"]');
             $ligneTempsTotalFtVal = parseFloat($lignePrixFt.val());
-                //console.log($idLigne + ": Total FT: " + $ligneTempsTotalFtVal);
+            //console.log($idLigne + ": Total FT: " + $ligneTempsTotalFtVal);
 
             //On fait le calcul 'frais de transport unitaire entête * quantité ligne
             // + total transport ligne' et on met à jour la case 
             // total transport ligne
             //et on stock sa valeur dans une variable pour un calcul plus tard
             $ligneTotalFt = $(this).find('[id^="totalFt"]');
-            
+
             $tmp = ($ftUniteVal * $ligneQtVal + $ligneTempsTotalFtVal);
             $ligneTotalFt.val($tmp.toFixed(2));
-                //console.log($idLigne + ": " + "Total Ft MAJ : " + $ligneTotalFt.val());
+            //console.log($idLigne + ": " + "Total Ft MAJ : " + $ligneTotalFt.val());
             $ligneTotalFtVal = parseFloat($ligneTotalFt.val());
 
             //MAJ du total ligne
@@ -225,7 +225,7 @@ function beCalcul() {
             //Calcul du coût unitaire
             //on prend le total ligne que l'on divise par la quantitée de la ligne
             $coutUnitaire = parseFloat($(this).find('[id^="totalLig"]').val() / $ligneQtVal);
-                //console.log($idLigne + ": cout unitaire " + $coutUnitaire);
+            //console.log($idLigne + ": cout unitaire " + $coutUnitaire);
             $(this).find('[id^="beligCuAchat"]').val($coutUnitaire.toFixed(2));
 
             //On met à jour le total du bon en lui ajoutant le total de la ligne en cours
@@ -243,14 +243,28 @@ function beCalcul() {
 }
 
 /**
- * Fonction qui exécute calcul et retourne true à la fin
+ * Fonction qui exécute calcul
+ * qui contrôle si une ligne existe
+ *  et retourne true ou false à la fin à la fin
  * @returns {Boolean}
  */
 function ctrlFormValide() {
-    //On exécute la fonction de caalcul
-    beCalcul();
-    //on renvoie true pour que le formulaire parte
-    return true;
+    //
+//On vérifie que le bon contient au moins une ligne pour autoriser l'envoie
+    //du formulaire
+    if ($('tr').not('#titreGnl, #titreCol, #idLigne').length) {
+        
+        //On exécute la fonction de calcul
+        beCalcul();
+        //on renvoie true pour que le formulaire parte
+        return  true;
+
+    //sinon on annule l'envoie
+    } else{
+        alert('Le formulaire doit contenir au moins une ligne');
+        return false;
+        
+    }
 }
 
 

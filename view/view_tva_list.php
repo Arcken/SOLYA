@@ -14,12 +14,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th class="colTitle">
                         ID
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_id','ASC');"/>
@@ -27,12 +27,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th class="colTitle">
                         Libellé
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_lbl','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_lbl','ASC');"/>
@@ -40,12 +40,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th class="colTitle">
                         Taux
                     </th>    
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_taux','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_taux','ASC');"/>
@@ -65,10 +65,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             <td  class="colData" colspan="3">
                                 <?php echo $tva->tva_taux ?>
                             </td>
-                            <td class="colTdImg"><img src="img/icon/modify.png" alt="" title="Modifier"
+                            <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = "index.php?action=tva_detail&tvaId=<?php echo $tva->tva_id ?>"'/></td>
 
-                            <td class="colTdImg"><img src="img/icon/delete.png" alt="" title="Supprimer"
+                            <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                      onclick='delElt(<?php echo $tva->tva_id ?>, "tvaId", "tva", "tva_del")'/></td>
                         </tr>
                         <?php

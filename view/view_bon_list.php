@@ -11,12 +11,12 @@
                     <th class="colTitle">
                        ID 
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_id','ASC');"/>
@@ -24,12 +24,12 @@
                     <th class="colTitle">
                        TYPE 
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','doclbl_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','doclbl_id','ASC');"/>
@@ -37,12 +37,12 @@
                     <th class="colTitle">
                        N°FACTURE
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                         <img src ="img/icon/down.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_fact_num','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_fact_num','ASC');"/>
@@ -50,12 +50,12 @@
                     <th class="colTitle">
                        DATE  
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_date','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_date','ASC');"/>
@@ -63,12 +63,12 @@
                     <th class="colTitle">
                        BON SORTIE ASSOCIE
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_sortie_assoc','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','bon_sortie_assoc','ASC');"/>
@@ -109,11 +109,11 @@
                                          echo 'indéfinis';
                                       } ?>
                             </td>
-                            <td class="colTdImg"><img src="img/icon/modify.png" alt="" title="Modifier"
+                            <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = 
                                                 "index.php?action=bon_detail&bonId=<?php echo $oBon->bon_id ?>"' />
                                </td>
-                               <td class="colTdImg">
+                               <td class="colTdIco">
                                 <img src="img/icon/read.png" title="Consulter"
                                      onclick='window.open(
                                               "index.php?action=nv_bon_pdf&bonId=<?php echo $oBon->bon_id ?>")'

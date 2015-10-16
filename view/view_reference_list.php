@@ -16,12 +16,12 @@
                     <th class="colTitle">
                         Code référence
                     </th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_code','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_code','ASC');"/>
@@ -29,12 +29,12 @@
                     <th class="colTitle">
                         Libéllé
                     </th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_lbl','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_lbl','ASC');"/>
@@ -42,12 +42,12 @@
                     <th class="colTitle">
                         Fiche article associé 
                     </th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','fiart_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','fiart_id','ASC');"/>
@@ -55,12 +55,12 @@
                     <th class="colTitle">
                         Marque
                     </th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_mrq','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_mrq','ASC');"/>
@@ -68,12 +68,12 @@
                     <th class="colTitle">
                         Poids net
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                     <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_poids_net','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_poids_net','ASC');"/>
@@ -81,12 +81,12 @@
                     <th class="colTitle">
                         Volume net 
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                     <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_emb_vlm_ctn','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_emb_vlm_ctn','ASC');"/>
@@ -121,23 +121,23 @@
                     <th class="colTitle">
                         TVA
                     </th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                     <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','tva_id','ASC');"/>
                     </th>
                     <th class="colTitle">Code Douanier</th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_code_douane','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_code_douane','ASC');"/>
@@ -146,12 +146,12 @@
                         onclick="orderby('<?php echo $sAction?>','dd_id','DESC');">
                         Droit de douane 
                     </th>
-                   <th class="colTdImg">
+                   <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','dd_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','dd_id','ASC');"/>
@@ -159,12 +159,12 @@
                     <th class="colTitle">
                         Conditionnement
                     </th>
-                     <th class="colTdImg">
+                     <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_emb_lbl','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_emb_lbl','ASC');"/>
@@ -172,12 +172,12 @@
                     <th class="colTitle">
                         Stock Minimum 
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_st_min','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_st_min','ASC');"/>
@@ -185,12 +185,12 @@
                     <th class="colTitle">
                         Commentaire 
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_com','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','ref_com','ASC');"/>
@@ -303,20 +303,20 @@
                         <td class="colData" colspan="3">
                             <?php echo $resLigRefs['ref'][$i]->ref_com; ?>
                         </td>
-                        <td class="colTdImg">
+                        <td class="colTdIco">
                             <img src="img/icon/read.png" title="Modifier"
                                   onclick='location.href="index.php?action=ref_detail&idRef="+
                                            <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                              />
                         </td>
-                        <td class="colTdImg">
+                        <td class="colTdIco">
                             <img src="img/icon/modify.png" title="Consulter"
                                   onclick='location.href="index.php?action=ref_upd&idRef="+
                                    <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                              />
                         </td>
                         
-                        <td class="colTdImg">
+                        <td class="colTdIco">
                             <img src="img/icon/delete.png" alt="" title="Supprimer"
                                  onclick='delElt(<?php echo $resLigRefs['ref'][$i]->ref_id ?>,
                                                  "idRef",

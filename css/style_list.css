@@ -1,6 +1,7 @@
 
 .tableList{
-    margin: 5px;
+    margin: auto;
+    margin-bottom: 10px;
 }
 
 .tableList td{
@@ -23,21 +24,27 @@
     border-bottom: 2px solid white;
 }
 
-.colTdImg{
+.colTdIco{
     width: 18px;
 }
 
-.colTdImg img{
+.colTdIco img{
+    
     width: 16px;
     height: 16px;
     margin: auto;
 }
 
 .colImg{
-    
+    border:1px solid white;
+    height: 100px;
+    max-height: 100px;
 }
 
 .puceNav{
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
     border-collapse:separate;
     font-size: 1.1em;
     color: antiquewhite;

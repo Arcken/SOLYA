@@ -13,12 +13,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th class="colTitle">
                         Id
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','be_id','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','be_id','ASC');"/>
@@ -26,12 +26,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th  class="colTitle">
                         Libellé
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','be_lbl','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','be_lbl','ASC');"/>
@@ -39,12 +39,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th  class="colTitle">
                         Facture
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','be_fact_num','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','be_fact_num','ASC');"/>
@@ -52,12 +52,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th  class="colTitle">
                         Commentaire
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','be_com','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','be_com','ASC');"/>
@@ -65,12 +65,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th  class="colTitle">
                         Total
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','be_total','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','be_total','ASC');"/>
@@ -78,12 +78,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     <th  class="colTitle">
                         Date
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/down.png" 
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','be_date','DESC');"/>
                     </th>
-                    <th class="colTdImg">
+                    <th class="colTdIco">
                        <img src ="img/icon/up.png" 
                                title="Tri croissant" 
                                onclick="orderby('<?php echo $sAction?>','be_date','ASC');"/>
@@ -112,10 +112,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             <td class="colData" colspan="3">
                                 <?php echo $be->be_date ?>
                             </td>
-                            <td class="colTdImg"><img src="img/icon/modify.png" alt="" title="Modifier"
+                            <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = "index.php?action=be_detail&beId=<?php echo $be->be_id ?>"'/></td>
 
-                            <td class="colTdImg"><img src="img/icon/delete.png" alt="" title="Supprimer"
+                            <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                      onclick='delElt(<?php echo $be->be_id ?>, "beId", "Bon entrée", "be_del")'/></td>
 
                         </tr>
