@@ -16,12 +16,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         if (isset($_REQUEST['orderby']) && $_REQUEST['orderby'] != '') {
             $orderBy = $_REQUEST['orderby'];
             $sort = $_REQUEST['tri'];
-            $resAllGa = GammeManager::getAllGammesLim($rowStart, $nbRow, $orderBy, $sort);
+            $resAllGa = GammeManager::getGammesLim($rowStart, $nbRow, $orderBy, $sort);
         }
 
         //Sinon on appel la requête classique
         else {
-            $resAllGa = GammeManager::getAllGammesLim($rowStart, $nbRow);
+            $resAllGa = GammeManager::getGammesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
         $msg = $resEr[1];

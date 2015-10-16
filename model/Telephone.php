@@ -13,9 +13,9 @@
 class Telephone {
     
     //Données membres
-    public $TEL_ID='';
-    public $TEL_IND='';
-    public $TEL_NUM='';
+    public $tel_id ='';
+    public $tel_ind ='';
+    public $tel_num ='';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

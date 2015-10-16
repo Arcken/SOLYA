@@ -14,8 +14,8 @@
 class Mail {
     
     //Données membres
-    public $MAIL_ID='';
-    public $MAIL_ADR='';
+    public $mail_id ='';
+    public $mail_adr ='';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

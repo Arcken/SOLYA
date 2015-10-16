@@ -1,32 +1,26 @@
 <?php
 
-/*
+/* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-/**
- * Class de l'objet Personne.
- * Méthode principal :Constructeur
- */
+class Categorie {
 
-class Personne {
+    //Données membres
+    public $catent_id = '';
+    public $catent_lbl = '';
     
-    //Données membre
-    public $cpt_id='';
-    public $civ_id='';
-    public $prs_prenom1='';
-    public $prs_prenom2='';
-    public $prs_dtn='';
-    
-     /**
-     * Constructeur prenant un tableau associatifs en paramètre
-     * Permet la surcharge de la méthode
-     * @param Array $args
-     * @throws MySQLException
+    /**
+     * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs
+     * constructeurs avec des paramètres différents.
+     * Pour contourner cette limitation, on passe un tableau associatif en argument
+     * le parcours de ce tableau permettra d'alimenter la ou les données membres
+     * 
+     * @param tableau associatif $args
      */
-      public function __construct($args = null) {
+    public function __construct($args = null) {
         if (is_array($args) && !empty($args)) {
             // Pour chaque clé, on récupère sa valeur.
             foreach ($args as $key => $value) {
@@ -37,4 +31,5 @@ class Personne {
             }
         }
     }
+
 }

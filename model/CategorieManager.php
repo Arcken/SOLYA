@@ -7,9 +7,9 @@
  */
 
 /**
- * @description Manager de la table GAMME
+ * @description Manager de la table CATEGORIE
  */
-class GammeManager {
+class CategorieManager {
 
     /**
      * Retourne tous les enregistrements de la table
@@ -17,12 +17,12 @@ class GammeManager {
      * @return objet[]
      * Renvoie tableau d'objet
      */
-    public static function getAllGammes() {
+    public static function getAllCategories() {
 
         try {
 
-            $sql = 'SELECT ga_id, ga_lbl, ga_abv FROM gamme '
-                    . 'ORDER BY ga_lbl';
+            $sql = 'SELECT catent_id, catent_lbl FROM categorie '
+                    . 'ORDER BY catent_lbl';
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {
@@ -44,12 +44,13 @@ class GammeManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getGammesLim($rowStart, $nbRow, $orderBy = 'ga_id', $sort = 'ASC') {
+    public static function getCategoriesLim($rowStart, $nbRow, 
+            $orderBy = 'catent_id', $sort = 'ASC') {
 
         try {
 
-            $sql = 'SELECT ga_id, ga_lbl, ga_abv '
-                    . 'FROM gamme '
+            $sql = 'SELECT catent_id, catent_lbl '
+                    . 'FROM categorie '
                     . 'ORDER BY ' . $orderBy 
                     . ' ' . $sort
                     . ' LIMIT ' . $rowStart . ' , ' 
@@ -64,23 +65,21 @@ class GammeManager {
 
     /**
      * Insert une enregistrement dans la table 
-     * @param $oGamme
-     * attend un objet de la classe Gamme
+     * @param $oCategorie
+     * attend un objet de la classe Categorie
      * @return string
      * Renvoie le nombre de ligne insérée
      */
-    public static function addGamme($oGamme) {
+    public static function addCategorie($oCategorie) {
 
         try {
                 $tParam = [
-                    $oGamme->ga_lbl,
-                    $oGamme->ga_abv
+                    $oCategorie->catent_lbl,
                 ];
 
-                $sql = "INSERT INTO gamme ("
-                        . " ga_lbl, "
-                        . " ga_abv) "
-                        . " VALUES(?,?)";
+                $sql = "INSERT INTO categorie ("
+                        . " catent_lbl) "
+                        . " VALUES(?)";
 
                 $result = Connection::request(2, $sql, $tParam);
                 
@@ -95,19 +94,19 @@ class GammeManager {
      * Select for update d'un enregistrement selon son id
      * 
      * @param $id
-     * attend l'id de la gamme
+     * attend l'id de la categorie
      * @return objet
      * Retourne un objet
      */
-    public static function getGammeDetailForUpd($id) {
+    public static function getCategorieDetailForUpd($id) {
 
         try {
 
             $tParam = [$id];
             
-            $sql = "SELECT ga_id, ga_lbl, ga_abv "
-                    . "FROM gamme "
-                    . "WHERE ga_id =? FOR UPDATE";
+            $sql = "SELECT catent_id, catent_lbl "
+                    . "FROM categorie "
+                    . "WHERE catent_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
@@ -120,24 +119,22 @@ class GammeManager {
      /**
      * Modifie un enregistrement selon son id
      * 
-     * @param $oGamme
-     * Attend un objet Gamme
+     * @param $oCategorie
+     * Attend un objet Categorie
      *  @return int 
      * Retourne le nombre de ligne impacté
      */
-    public static function updGamme($oGamme) {
+    public static function updCategorie($oCategorie) {
         
         try {
                 $tParam = [
-                    $oGamme->ga_lbl,
-                    $oGamme->ga_abv,
-                    $oGamme->ga_id
+                    $oCategorie->catent_lbl,
+                    $oCategorie->catent_id
                 ];
 
-                $sql = "UPDATE gamme SET "
-                        . "ga_lbl = ?, "
-                        . "ga_abv = ? "
-                        . "WHERE ga_id =?";
+                $sql = "UPDATE categorie SET "
+                        . "catent_lbl = ?, "
+                        . "WHERE catent_id =?";
 
                 $result = Connection::request(2, $sql, $tParam);
             
@@ -151,14 +148,14 @@ class GammeManager {
     /**
      * Supprime l'enregistrement de la table selon son id
      * @param $id
-     * id de la gamme
+     * id de la categorie
      * @return int 
      * nombre de ligne impacté
      */
-    public static function delGamme($id) {
+    public static function delCategorie($id) {
         try {
             $tParam = [$id];
-            $sql = 'DELETE FROM gamme WHERE ga_id=?';
+            $sql = 'DELETE FROM categorie WHERE catent_id=?';
             
             $result = Connection::request(2, $sql, $tParam);
             

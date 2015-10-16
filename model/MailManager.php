@@ -26,17 +26,94 @@ class MailManager {
         try {
 
             $tParam = array(
-                $oMail->MAIL_ADR
+                $oMail->mail_adr
             );
 
             $sql = "INSERT INTO mail ("
-                    . "MAIL_ADR)"
+                    . "mail_adr) "
                     . "VALUES(?)";
 
             $result = Connection::request(2, $sql, $tParam);
         } catch (MySQLException $e) {
             throw $e;
         }
+        return $result;
+    }
+    
+    
+    /**
+     * Select for update d'un enregistrement selon son id
+     * 
+     * @param $id
+     * attend l'id de l'adresse mail
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getMailDetailForUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql = "SELECT mail_id, mail_adr "
+                    . "FROM mail "
+                    . "WHERE mail_id =? FOR UPDATE";
+            $result = Connection::request(0, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+     /**
+     * Modifie un enregistrement selon son id
+     * 
+     * @param $oMail
+     * Attend un objet Mail
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updGamme($oMail) {
+        
+        try {
+                $tParam = [
+                    $oMail->mail_adr,
+                    $oMail->mail_id
+                ];
+
+                $sql = "UPDATE mail SET "
+                        . "mail_adr = ?, "
+                        . "WHERE mail_id =?";
+
+                $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
+     * Supprime l'enregistrement de la table selon son id
+     * @param $id
+     * id de l'adresse mail
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delMail($id) {
+        try {
+            $tParam = [$id];
+            $sql = 'DELETE FROM mail WHERE mail_id=?';
+            
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
     }
 
 }

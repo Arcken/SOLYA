@@ -14,9 +14,9 @@
 class Civilite {
 
     //Données membre
-    public $CIV_ID   = "";
-    public $CIV_LBL  = "";
-    public $CIV_CODE = "";
+    public $civ_id   = "";
+    public $civ_lbl  = "";
+    public $civ_code = "";
 
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

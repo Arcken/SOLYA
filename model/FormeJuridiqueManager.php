@@ -7,9 +7,9 @@
  */
 
 /**
- * @description Manager de la table GAMME
+ * @description Manager de la table FORME_JURIDIQUE
  */
-class GammeManager {
+class FormeJuridiqueManager {
 
     /**
      * Retourne tous les enregistrements de la table
@@ -17,12 +17,12 @@ class GammeManager {
      * @return objet[]
      * Renvoie tableau d'objet
      */
-    public static function getAllGammes() {
+    public static function getAllFormesJuridiques() {
 
         try {
 
-            $sql = 'SELECT ga_id, ga_lbl, ga_abv FROM gamme '
-                    . 'ORDER BY ga_lbl';
+            $sql = 'SELECT fmju_id, fmju_lbl FROM forme_juridique '
+                    . 'ORDER BY fmju_lbl';
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {
@@ -44,12 +44,13 @@ class GammeManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getGammesLim($rowStart, $nbRow, $orderBy = 'ga_id', $sort = 'ASC') {
+    public static function getFormesJuridiquesLim($rowStart, $nbRow, 
+            $orderBy = 'fmju_id', $sort = 'ASC') {
 
         try {
 
-            $sql = 'SELECT ga_id, ga_lbl, ga_abv '
-                    . 'FROM gamme '
+            $sql = 'SELECT fmju_id, fmju_lbl '
+                    . 'FROM forme_juridique '
                     . 'ORDER BY ' . $orderBy 
                     . ' ' . $sort
                     . ' LIMIT ' . $rowStart . ' , ' 
@@ -64,23 +65,21 @@ class GammeManager {
 
     /**
      * Insert une enregistrement dans la table 
-     * @param $oGamme
-     * attend un objet de la classe Gamme
+     * @param $oFormeJuridique
+     * attend un objet de la classe FormeJuridique
      * @return string
      * Renvoie le nombre de ligne insérée
      */
-    public static function addGamme($oGamme) {
+    public static function addFormeJuridique($oFormeJuridique) {
 
         try {
                 $tParam = [
-                    $oGamme->ga_lbl,
-                    $oGamme->ga_abv
+                    $oFormeJuridique->fmju_lbl
                 ];
 
-                $sql = "INSERT INTO gamme ("
-                        . " ga_lbl, "
-                        . " ga_abv) "
-                        . " VALUES(?,?)";
+                $sql = "INSERT INTO forme_juridique ("
+                        . " fmju_lbl) "
+                        . " VALUES(?)";
 
                 $result = Connection::request(2, $sql, $tParam);
                 
@@ -95,19 +94,19 @@ class GammeManager {
      * Select for update d'un enregistrement selon son id
      * 
      * @param $id
-     * attend l'id de la gamme
+     * attend l'id de la forme_juridique
      * @return objet
      * Retourne un objet
      */
-    public static function getGammeDetailForUpd($id) {
+    public static function getFormeJuridiqueDetailForUpd($id) {
 
         try {
 
             $tParam = [$id];
             
-            $sql = "SELECT ga_id, ga_lbl, ga_abv "
-                    . "FROM gamme "
-                    . "WHERE ga_id =? FOR UPDATE";
+            $sql = "SELECT fmju_id, fmju_lbl "
+                    . "FROM forme_juridique "
+                    . "WHERE fmju_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
             
         } catch (MySQLException $e) {
@@ -120,24 +119,22 @@ class GammeManager {
      /**
      * Modifie un enregistrement selon son id
      * 
-     * @param $oGamme
-     * Attend un objet Gamme
+     * @param $oFormeJuridique
+     * Attend un objet FormeJuridique
      *  @return int 
      * Retourne le nombre de ligne impacté
      */
-    public static function updGamme($oGamme) {
+    public static function updFormeJuridique($oFormeJuridique) {
         
         try {
                 $tParam = [
-                    $oGamme->ga_lbl,
-                    $oGamme->ga_abv,
-                    $oGamme->ga_id
+                    $oFormeJuridique->fmju_lbl,
+                    $oFormeJuridique->fmju_id
                 ];
 
-                $sql = "UPDATE gamme SET "
-                        . "ga_lbl = ?, "
-                        . "ga_abv = ? "
-                        . "WHERE ga_id =?";
+                $sql = "UPDATE forme_juridique SET "
+                        . "fmju_lbl = ?, "
+                        . "WHERE fmju_id =?";
 
                 $result = Connection::request(2, $sql, $tParam);
             
@@ -151,14 +148,14 @@ class GammeManager {
     /**
      * Supprime l'enregistrement de la table selon son id
      * @param $id
-     * id de la gamme
+     * id de la forme_juridique
      * @return int 
      * nombre de ligne impacté
      */
-    public static function delGamme($id) {
+    public static function delFormeJuridique($id) {
         try {
             $tParam = [$id];
-            $sql = 'DELETE FROM gamme WHERE ga_id=?';
+            $sql = 'DELETE FROM forme_juridique WHERE fmju_id=?';
             
             $result = Connection::request(2, $sql, $tParam);
             
