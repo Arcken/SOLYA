@@ -28,6 +28,7 @@ class generatorPDF extends FPDF {
 // gabarit
     public $template;
 
+    
 /** - - - - - - - - - - - - - - - - - - - - - - - -
 * constructeur
 *
@@ -96,10 +97,9 @@ class generatorPDF extends FPDF {
 * $aDate : date d'émission 
 * 
 */
-    public function initPDF($aInfos = '', $aDate = '', $aPage = '') {
-        $this->elementAdd($aInfos, 'infoFacture', 'header');
+    public function initPDF($aInfos = '', $aDate = '') {
+        $this->elementAdd($aInfos, 'infoDoc', 'header');
         $this->elementAdd($aDate, 'infoDate', 'header');
-        $this->elementAdd($aPage, 'infoPage', 'header');
         $this->SetSubject($aInfos, true);
     }
 
@@ -206,8 +206,11 @@ class generatorPDF extends FPDF {
                 }
                 $cellHeightMax = $nbLineMax * $tplt['lineHeight'];
                 // vérifie si on a la place pour ajouter la ligne. sinon créer une nouvelle page
-                if ($this->GetY() + $cellHeightMax > $this->PageBreakTrigger)
+                if ($this->GetY() + $cellHeightMax > $this->PageBreakTrigger){
+                   
                     $this->AddPage();
+                }
+                
                 // change les couleurs
                 if ($nb % 2 != 0) {
                     $bg = $tplt['backgroundColor'];
@@ -369,11 +372,13 @@ class generatorPDF extends FPDF {
 * 
 */
     function Header() {
+       
         $yMax=0;
         if (!empty($this->logoUrl)) {
             $this->Image($this->logoUrl, $this->logoPosX, $this->logoPosY, $this->logoWidth);
             $this->Ln(12);
         }
+        
         // elements d'entete
         foreach ($this->elementLst['header'] as $v) {
             $yMax = max($yMax, $this->prepareLine($v['text'], $this->template[$v['id']]));
@@ -392,11 +397,15 @@ class generatorPDF extends FPDF {
 * 
 */
     function Footer() {
+        //On ajoute la pagination 
+        $this->Cell(0,20,'Page '.$this->PageNo().'/{nb}',0,0,'R');
         foreach ($this->elementLst['footer'] as $v) {
             $this->prepareLine($v['text'], $this->template[$v['id']]);
         }
+       
     }
 
+    
 // - - - - - - - - - - - - - - - - - - - - - - - -
 }
 

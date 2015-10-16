@@ -19,10 +19,10 @@ $pdf->template['infoPage']['margin']                    = array(5, 5, 0, 0);
 $pdf->template['infoPage']['align']                     = 'R';
 
 // numéro de bon ou facture (information du document)
-$pdf->template['infoFacture']['fontSize']               = 20;
-$pdf->template['infoFacture']['margin']                 = array(10, 5, 0, 0);
-$pdf->template['infoFacture']['fontFace']               = 'B';
-$pdf->template['infoFacture']['align']                  = 'R';
+$pdf->template['infoDoc']['fontSize']               = 20;
+$pdf->template['infoDoc']['margin']                 = array(10, 5, 0, 0);
+$pdf->template['infoDoc']['fontFace']               = 'B';
+$pdf->template['infoDoc']['align']                  = 'R';
 
 // date
 $pdf->template['infoDate']['fontSize']                  = 12;
@@ -36,11 +36,11 @@ $pdf->template['client']['margin']                      = array(40, 5, 0, 120);
 $pdf->template['client']['align']                       = 'L';
 
 // pied de page
-$pdf->template['footer']['fontSize']                    = 11;
+$pdf->template['footer']['fontSize']                    = 8;
 $pdf->template['footer']['lineHeight']                  = 5;
 $pdf->template['footer']['color']                       = array('r'=>150, 'g'=>150, 'b'=>150);
 $pdf->template['footer']['align']                       = 'C';
-$pdf->template['footer']['margin']                      = array(278, 40, 0, 40);
+$pdf->template['footer']['margin']                      = array(277, 40, 0, 40);
 
 // entete de produit
 $pdf->template['productHead']['fontFace']               = 'B';
@@ -70,7 +70,7 @@ $pdf->template['total']['padding']                      = array(2, 0, 0, 0);
 
 
 //element personnalisé motif
-// numéro de bon ou facture (information du document)
+
 $pdf->template['motif']['fontSize']               = 15;
 $pdf->template['motif']['margin']                 = array(20, 5, 0, 0);
 $pdf->template['motif']['fontFace']               = 'B';
@@ -84,7 +84,7 @@ $pdf->template['bonSortieAssoc']['margin']              = array(75, 5, 0, 120);
 
 //trait entête produit
 $pdf->template['traitEnteteProduit']['lineHeight']      = 1;
-$pdf->template['traitEnteteProduit']['backgroundColor'] = array('r'=>1, 'g'=>173, 'b'=>216);
+$pdf->template['traitEnteteProduit']['backgroundColor'] = array('r'=>50, 'g'=>50, 'b'=>50);
 $pdf->template['traitEnteteProduit']['margin']          = array(85, 0, 0, 0);
 
 //trait inferieur produit
@@ -93,6 +93,6 @@ $pdf->template['traitEnteteProduitInf']['backgroundColor'] = array('r'=>50, 'g'=
 $pdf->template['traitEnteteProduitInf']['margin']          = array(97, 0, 0, 0);
 
 //trait bas du footer
-$pdf->template['traitBas']['lineHeight']                = 1;
+$pdf->template['traitBas']['lineHeight']                = 0.5;
 $pdf->template['traitBas']['backgroundColor']           = array('r'=>150, 'g'=>150, 'b'=>150);
 $pdf->template['traitBas']['margin']                    = array(275, 40, 0, 40);

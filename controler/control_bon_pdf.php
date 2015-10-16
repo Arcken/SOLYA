@@ -79,15 +79,17 @@ ob_start();
                      'lig' => $resLignes 
                         );
      
-//Récupération des données en liste pour mise en page   
-list($year, $month, $day) = explode("-", $oBon->bon_date);
-list($sCat, $sSubCat) = explode(" ",$sTypeBon);
+
 
 //------------------------Création du Pdf----------------------//
     //#1 Initialisation
 
+//Récupération des données en liste pour mise en page   
+list($year, $month, $day) = explode("-", $oBon->bon_date);
+list($sCat, $sSubCat) = explode(" ",$sTypeBon);
 
-$adresse ="SOLYA MEXICO \nLieu Quétel\n14430 GOUSTRANVILLE \nFRANCE";
+$adresse   ="SOLYA MEXICO \nLieu Quétel\n14430 GOUSTRANVILLE \nFRANCE"
+            . "\n\nMail : contact@solyamexico.com\nTél : 06.27.18.29.94";
 
 $piedPage1 ='SOLYA MEXICO - SARL Unipersonnelle au capital de 10 000 euros';
 $piedPage2 = "- Mail : contact@solyamexico.com - Tél : 06.27.18.29.94 ";
