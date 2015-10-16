@@ -78,13 +78,16 @@ ob_start();
                      'lot' => $resAllLots,
                      'lig' => $resLignes 
                         );
-    
-    
+     
+//Récupération des données en liste pour mise en page   
+list($year, $month, $day) = explode("-", $oBon->bon_date);
+list($sCat, $sSubCat) = explode(" ",$sTypeBon);
+
 //------------------------Création du Pdf----------------------//
     //#1 Initialisation
 
 
-$adresse ="SOLYA MEXICO \n\nLieu Quétel\n14430 GOUSTRANVILLE \n\nFRANCE";
+$adresse ="SOLYA MEXICO \nLieu Quétel\n14430 GOUSTRANVILLE \nFRANCE";
 
 $piedPage1 ='SOLYA MEXICO - SARL Unipersonnelle au capital de 10 000 euros';
 $piedPage2 = "- Mail : contact@solyamexico.com - Tél : 06.27.18.29.94 ";
@@ -103,22 +106,24 @@ $pdf->SetAutoPageBreak(true, 40);
 //Ajout du logo
 $pdf->setLogo($path.'/img/site/logoSolya186x106.png');
 
-// elements personnalisé
-
-$pdf->elementAdd('Commentaire : '.$oBon->bon_com,'commentaire', 'content');
-//Si bon de sortie associé (cas du bon de retour)
-if($oBon->bon_sortie_assoc != ''){
-    $pdf->elementAdd('Bon de sortie associé : '.$oBon->bon_sortie_assoc,'bonSortieAssoc', 'content');
-}
+//Elements personnalisé
+    //Ajout de la partie motif
+$pdf->elementAdd('Motif : '.$sSubCat, 'motif', 'header');
+    //Ajout des lignes pour la mise en page
 $pdf->elementAdd('', 'traitEnteteProduit', 'content');
 $pdf->elementAdd('', 'traitEnteteProduitInf', 'content');
 
-//Ajout trait bas du footer
+$pdf->elementAdd('Commentaire : '.$oBon->bon_com,'commentaire', 'content');
+    //Si bon de sortie associé (cas du bon de retour)
+if($oBon->bon_sortie_assoc != ''){
+    $pdf->elementAdd('Bon de sortie associé : '.$oBon->bon_sortie_assoc,'bonSortieAssoc', 'content');
+}
+    //Ajout trait bas du footer
 $pdf->elementAdd('', 'traitBas', 'footer');
 
 //Colonnes du tableau
-$pdf->productHeaderAddRow('CODE REF ', 30, 'C');
 $pdf->productHeaderAddRow('REFERENCE ', 30, 'C');
+$pdf->productHeaderAddRow('PRODUIT ', 30, 'C');
 $pdf->productHeaderAddRow('N°LOT ', 20, 'C');
 $pdf->productHeaderAddRow('QTE ', 20, 'C');
 $pdf->productHeaderAddRow('DLC/DLUO ', 25, 'C');
@@ -126,9 +131,8 @@ $pdf->productHeaderAddRow('DEPOT ',25,'C');
 $pdf->productHeaderAddRow('COMMENTAIRE ',40,'C');
 
     //#2 Ajout des infos
-list($year, $month, $day) = explode("-", $oBon->bon_date);
 
-$pdf->initPDF("BON N°".$oBon->bon_id."\n ".strtoupper($sTypeBon) , "Caen le ".$day."/".$month."/".$year);
+$pdf->initPDF("BON N°".$oBon->bon_id." ".$sCat, "Caen le ".$day."/".$month."/".$year);
 
 
 //Création d'une ligne par éléments à l'intérieur de mon tableau
