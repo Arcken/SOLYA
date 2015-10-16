@@ -110,7 +110,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                     </tr>
                 </table>
-                <input type="button" value="Ajouter ligne" onclick="addLigne('bonTable');">
+                <input type="button" value="Ajouter ligne" onclick="addLigne('bonTable','idLigne');">
                 <script type="text/javascript">
                     nRowCount=1;
                 </script>

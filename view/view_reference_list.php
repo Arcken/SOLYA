@@ -332,14 +332,20 @@
            }?>
                        
             </table>
+            <div class="bas">
+                <input type="button" onclick='location.href = "index.php?action=bon_add"' value="Ajouter">
             </div>
         </div>
+    </div>
+        
+        
              <?php
         if ($iTotal > $nbRow) {
             // affichage des liens vers les pages
             Tool::affichePages($rowStart, $nbRow, $iTotal, $sAction);
         }
         ?>
+        
 <?php
 } else {
     echo 'Le silence est d\'or';

@@ -128,7 +128,7 @@ $pdf->productHeaderAddRow('COMMENTAIRE ',40,'C');
     //#2 Ajout des infos
 list($year, $month, $day) = explode("-", $oBon->bon_date);
 
-$pdf->initPDF("BON N°".$oBon->bon_id." : ".strtoupper($sTypeBon) , "Caen le ".$day."/".$month."/".$year);
+$pdf->initPDF("BON N°".$oBon->bon_id."\n ".strtoupper($sTypeBon) , "Caen le ".$day."/".$month."/".$year);
 
 
 //Création d'une ligne par éléments à l'intérieur de mon tableau

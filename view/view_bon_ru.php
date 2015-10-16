@@ -35,14 +35,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <?php foreach ($resDocLbl as $lbl) {
                     if ($oBon->doclbl_id === $lbl->doclbl_id) {
                         ?>
-                        <input name="typeBon" id="typeBon" 
-                               placeholder="description" 
-                               type="text"
-                               value="<?php echo $lbl->doclbl_id; ?>" 
-                               hidden> 
                         <input type="text" 
                                value="<?php echo $lbl->doclbl_lbl; ?>" 
-                               title="Non modifiable" disabled>
+                               title="Non modifiable" readonly>
         <?php } ?>
     <?php } ?>
                 </select>
@@ -267,7 +262,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                       <?php }
                         }?>   
                 </table>
-                <input type="button" value="Ajouter ligne" onclick="addLigne('bonTable');">
+                <input type="button" value="Ajouter ligne" onclick="addLigne('bonTable','idLigne');">
 
                 <script type="text/javascript">
                     //On initialise le compte de ligne pour la fonction addLigne

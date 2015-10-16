@@ -4,8 +4,8 @@
      <link type="text/css" href="css/style_list.css" rel="stylesheet">
     <script type="text/javascript" src="js/function.js"></script>
 
-    <div class="corps">
-        <div>
+    <div class="corpsCenter">
+        <div class='colOnlyOne'>
             <table class="tableList">
                 <tr>
                     <th class="colTitle">
