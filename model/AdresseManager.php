@@ -20,7 +20,7 @@ class AdresseManager {
      * Attend un objet de la classe Adresse
      * 
      */
-    public static function addAddresse($oAdresse) {
+    public static function addAdresse($oAdresse) {
 
         try {
             $tParam = array(
@@ -44,7 +44,7 @@ class AdresseManager {
                     . "adr_rue3,"
                     . "adr_cp,"
                     . "adr_ville,"
-                    . "adr_etat)"
+                    . "adr_etat) "
                     . "VALUES(?,?,?,?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);

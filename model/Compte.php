@@ -13,6 +13,7 @@ class Compte {
     public $cpt_date = '';
     public $cpt_nom  = '';
     public $cpt_com  = '';
+    public $cpt_code = '';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

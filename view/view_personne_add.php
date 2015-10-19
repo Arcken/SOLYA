@@ -28,6 +28,10 @@
                 <?php } ?>
             </select>
             <br>
+            <label for="cptCode">Code compte :</label>
+            <br>
+            <input name="cptCode" type="text">
+            <br>
             <label for="cptNom">Nom :</label>
             <br>
             <input name="cptNom" type="text">
@@ -182,10 +186,13 @@
                                id="adrEtatNID"> 
                     </td>
                     <td class="colData">
-                        <select name="paysId[]" id="paysIdNID" required >
+                        <select name="paysId[]" id="paysIdNID" required>
                             <option value="0" selected> --Pays-- </option>
-                            <?php foreach ($resAllPays as $oPays) { ?>
-                                <option value ="<?php echo $oPays->pays_id ?>"> <?php echo $oPays->pays_nom ?> </option>
+                            <?php foreach ($resAllPays as $oPays) { print_r($oPays)?>
+                                <option 
+                                    value ="<?php echo $oPays->pays_id ?>">
+                                            <?php echo $oPays->pays_nom ?> 
+                                </option>
                             <?php } ?>
                         </select>
                     </td>    
