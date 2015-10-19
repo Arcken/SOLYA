@@ -83,12 +83,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     'ref_id' => $tRefId
                 ];
 
-                //Boucle pour traiter les lignes
-                //On ignore la première ligne, c'est le squelette de construction 
-                //pour l'ajout de ligne dans le bon
-                //
-            //La limite étant le nombre de ligne remplie 
-                //on prend ref_id comme témoin
                 //On hydrate un objet bon d'entrée
                 $oBe = new BonEntree();
                 $oBe->be_id = $beId;
@@ -101,7 +95,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oBe->be_com = $_REQUEST['beCom'];
                 $oBe->be_info_trans = $_REQUEST['beInfoTrans'];
                 $oBe->be_total = $_REQUEST['beTotal'];
-
+                
+                //Modification du bon
+                $updBe = BonEntreeManager::updBonEntree($oBe);
+                
+                //Boucle pour traiter les lignes
+                //On ignore la première ligne, c'est le squelette de construction 
+                //pour l'ajout de ligne dans le bon
+                //La limite étant le nombre de ligne remplie 
+                //on prend ref_id comme témoin
                 for ($i = 1; $i < (count($tLigneForm['ref_id'])); $i++) {
 
 
@@ -134,8 +136,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     //Si la case lig-id est != '' c'est un update
                     if ($tLigneForm['lig_id'][$i] != '') {
 
-                        //Modification du bon
-                        $updBe = BonEntreeManager::updBonEntree($oBe);
+                        
                         //Si la case suppLigne existe, c'est que la ligne est cochée
                         //pour être supprimmée
                         if (isset($tLigSupp[$i])) {
@@ -254,17 +255,19 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             //On vérifie que $resAllBeLigneBE soit bien un tableau (si aucune donnée,
             // ce n'est pas un tableau
             if (is_array($resAllBeLigneBE)) {
+                
                 //Tableau pour les lignes
                 $resLignes = [];
+                
                 //Tableau pour les lots
                 $resAllLots = [];
 
-                //tableau pour des bons de sorties sont créés pour les lots, afin
-                //d'interdire leur suppression dans ce cas
+                //tableau pour les lots
                 $resAllLotsBons = [];
 
                 //Tableau pour les reférénces
                 $resAllRefs = [];
+                
                 //Tableaux pour les droits de douanes
                 $resAllDds = [];
 
@@ -273,8 +276,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                     //On récupére l'id de ligne
                     $ligId = $beLigne->lig_id;
+                    
                     //On récupére les infos de la ligne
                     $ligne = LigneManager::getLigneDetailForUpd($ligId);
+                    
                     //On ajoute la ligne retourné au tableau de ligne
                     $resLignes[] = $ligne;
 
@@ -293,15 +298,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     }
 
                     //On récupére les infos du lot
-                    $lot = LotManager::getLotForUpd($lotId);
+                    $lot = LotManager::getLotForUpd($lotId);                    
                     //On ajoute le lot retourné au tableau de lot
                     $resAllLots[] = $lot;
+                    
                     //On récupére l'id de la référence
-                    $refId = $lot->ref_id;
+                    $refId = $lot->ref_id;                    
                     //On récupére les infos de la référence
-                    $ref = ReferenceManager::getReference($refId);
+                    $ref = ReferenceManager::getReference($refId);                    
                     //On ajoute la référence retournée au tableau de référence
                     $resAllRefs[] = $ref;
+                    
                     //On récupére l'id du droit de douane
                     $ddId = $ref->dd_id;
                     //On récupére les infos du droit de douane

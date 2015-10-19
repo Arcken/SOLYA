@@ -173,7 +173,16 @@
             case "inventaire_add":
                 require_once $path . '/controler/control_inv_add.php';
                 break;
+            
+            //modification d'un inventaire
+            case "inventaire_upd":
+                require_once $path . '/controler/control_inv_upd.php';
+                break;
 
+            //Suppression d'un inventaire
+            case "inventaire_del";
+                require_once $path . '/controler/control_inv_del.php';
+                
             //Liste des inventaires
             case "inventaire_list":
                 require $path . '/controler/control_inv_list.php';

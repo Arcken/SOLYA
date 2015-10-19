@@ -222,11 +222,27 @@
 
     //----------------------------------- Inventaire ---------------------------
             
-            //Ajout d'un enventaire
+            //Ajout d'un inventaire
             case "inventaire_add":
                 require $path . '/view/view_inventaire_add.php';
                 break;
 
+            //détail d'un inventaire
+            case "inventaire_upd":
+                
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/view/view_inventaire_list.php';
+                    
+                } else {
+                    require $path . '/view/view_inventaire_upd.php';
+                }
+                break;
+            
+            //Supp d'un inventaire
+            case "inventaire_del":
+            
             //Liste des inventaires
             case "inventaire_list":
                 require $path . '/view/view_inventaire_list.php';
@@ -239,12 +255,7 @@
             case "mc_add":
                 require $path . '/view/view_mode_conservation_add.php';
                 break;
-            
-            //liste des modes de conservation
-            case "mc_list":
-                require_once $path . '/view/view_mode_conservation_list.php';
-                break;
-
+                        
             //détail d'un mode de conservation
             case "mc_detail":
                 
@@ -260,8 +271,11 @@
 
             //Suppression d'un mode de conservation
             case "mc_del":
-                require $path . '/view/view_mode_conservation_list.php';
+            
+            //liste des modes de conservation
+            case "mc_list":
                 $sAction = "mc_list";
+                require_once $path . '/view/view_mode_conservation_list.php';
                 break;
 
     

@@ -72,14 +72,15 @@ class LigneInventaireManager {
      * @return objet[]
      * Renvoie tableau d'objet
      */
-    public static function getLigneInventairesFromInventaire($id) {
+    public static function getLigneInventairesFromInventaireForUpd($id) {
 
         try {
 
             $sql = 'SELECT liginv_id, liginv_lbl, liginv_qt_stock, '
                     . 'liginv_qt_reel , lot_id, inv_id '
                     . 'FROM ligne_inv '
-                    . 'WHERE inv_id =' . $id;
+                    . 'WHERE inv_id =' . $id
+                    . ' FOR UPDATE';
             $result = Connection::request(1, $sql);
             
         } catch (MySQLException $e) {

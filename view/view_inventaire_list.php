@@ -70,7 +70,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <?php if ($inventaire->inv_vld == 0) { ?>
 
                                 <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
-                                                          onclick='location.href = "index.php?action=inventaire_detail&invId=<?php echo $inventaire->inv_id ?>"'/></td>
+                                                          onclick='location.href = "index.php?action=inventaire_upd&invId=<?php echo $inventaire->inv_id ?>"'/></td>
                                 <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                                           onclick='delElt(<?php echo $inventaire->inv_id ?>, "invId", "inventaire", "inventaire_del")'/></td>
 

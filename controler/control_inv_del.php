@@ -30,12 +30,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 . $invId
                 . '" à été effectué avec succès </p>';
         // si la suppression a été effectué on met le message dans le tableau
-        if ($res > 0){
+        if ($resDelInv > 0){
             Tool::addMsg($msg);
         }
         
+        //On valide la transaction
+        $cnx->commit();
+        
     } catch (MySQLException $e) {
-
+        
+        //On annule la transaction
+         $cnx->rollBack();
+        
         //Message en cas d'échec
         $msg = '<p class=\'info\'>' . date('H:i:s')
                 . "L'inventaire N° " . $invId
@@ -45,7 +51,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     }
     
     //On appel le contrôleur de la liste, car on affiche la liste après une suppression
-    require $path . '/controler/control_ga_list.php';
+    require $path . '/controler/control_inv_list.php';
 } else {
     echo 'Le silence est d\'or';
 }

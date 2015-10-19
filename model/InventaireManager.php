@@ -140,7 +140,7 @@ class InventaireManager {
 
                 $sql = "UPDATE inventaire SET "
                         . "inv_date = ?, "
-                        . "inv_lbl = ? "
+                        . "inv_lbl = ?, "
                         . "inv_vld = ? "
                         . "WHERE inv_id =?";
 
