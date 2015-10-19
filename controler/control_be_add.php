@@ -22,7 +22,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         //Vérification du jeton pour savoir si le formulaire à déja était envoyé
         if ($_SESSION['token'] != $_REQUEST['token']) {
         
-        //Instanciation de la connection
+        //Récupération de la connection
         $cnx = Connection::getConnection();
 
         //Démarrage de la transaction
@@ -70,7 +70,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         //Tableau pour la référence
         $tRefId = $_REQUEST['refId'];
 
-        //Tableau de ligne de formulaire
+        //On rassemble les tableaux dans un seul
         $tLigneForm = [
             'belig_pu' => $tBeligPu,
             'belig_cu_achat' => $tBeligCuAchat,
@@ -159,6 +159,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         
         
     } catch (MySQLException $e) {
+        //on annule la transaction
         $cnx->rollback();
         //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''

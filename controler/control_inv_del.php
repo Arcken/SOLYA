@@ -7,13 +7,27 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     //Si la suppression ne se fait pas le manager léve un exception
     try {
         require_once $path . '/model/InventaireManager.php';
-        //On passe en paramètre de la requète la valeur gaIg de l'url
-        $res = GammeManager::delGamme($_REQUEST['gaId']);
+        require_once $path . '/model/LigneInventaireManager.php';
+        
+        //Récupération de la connection
+        $cnx = Connection::getConnection();
 
+        //Démarrage de la transaction
+        $cnx->beginTransaction();
+        
+        //On récupére l'id de l'inventaire
+        $invId = $_REQUEST['invId'];
+        
+        //on efface toutes les lignes de l'inventaire
+        $resDelLiginv = LigneInventaireManager::delLigneInventaireFromInventaire($invId);
+        
+        //On efface l'inventaire
+        $resDelInv = InventaireManager::delInventaire($invId);
+        
         //Message pour le succés
         $msg = '<p class=\'info\'>' . date('H:i:s')
-                . ' La suppression de la gamme: "'
-                . $_REQUEST['gaId']
+                . ' La suppression de l\'inventaire: "'
+                . $invId
                 . '" à été effectué avec succès </p>';
         // si la suppression a été effectué on met le message dans le tableau
         if ($res > 0){
@@ -24,7 +38,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
         //Message en cas d'échec
         $msg = '<p class=\'info\'>' . date('H:i:s')
-                . "La gamme N° " . $_REQUEST['gaId']
+                . "L'inventaire N° " . $invId
                 . " n'est pas supprimée</p>";
         //On met le message dans le tableau
         Tool::addMsg($msg);

@@ -204,5 +204,25 @@ class LigneInventaireManager {
         }
         return $result;
     }
-
+    
+    
+     /**
+     * Supprime les enregistrements de la table selon l'id de l'inventaire
+     * @param $id
+     * id de l'inventaire
+     * @return int 
+     * nombre de ligne impacté
+     */
+    public static function delLigneInventaireFromInventaire($id) {
+        try {
+            $tParam = [$id];
+            $sql = 'DELETE FROM ligne_inv WHERE inv_id=?';
+            
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }
