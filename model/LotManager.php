@@ -69,6 +69,7 @@ class LotManager {
                 
         $sql= "SELECT lot_id,"
                 . "ref_id,"
+                . "lot_id_producteur,"
                 . "lot_dlc,"
                 . "lot_qt_stock,"
                 . "lot_qt_init "

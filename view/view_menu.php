@@ -180,7 +180,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
           <li class='has-sub'><a href='index.php?action='><span>Inventaire</span></a>
              <ul>
                 <li><a href='index.php?action=inventaire_add'><span>Ajout inventaire</span></a></li>
-               <li><a href='index.php?action=inv_list'><span>Liste inventaire</span></a></li>
+               <li><a href='index.php?action=inventaire_list'><span>Liste inventaire</span></a></li>
             </ul>
          </li>
           <li class='has-sub'><a href='index.php?action=export'><span>Export</span></a>

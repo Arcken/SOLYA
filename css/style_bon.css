@@ -125,6 +125,11 @@ input:read-only{
     margin-right: 2px;
 }
 
+//input date
+.tdDate{
+    min-width: 60px;
+    width: 60px;
+}
 .beLigne textArea{
     height: 20px;
     width: 45px;

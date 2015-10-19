@@ -220,9 +220,14 @@
             
             //Ajout d'un enventaire
             case "inventaire_add":
-                require $path . '/view/view_inventaire_c.php';
+                require $path . '/view/view_inventaire_add.php';
                 break;
 
+            //Liste des inventaires
+            case "inventaire_list":
+                require $path . '/view/view_inventaire_list.php';
+                break;
+            
             
     //---------------------------- Mode de conservation ------------------------
     

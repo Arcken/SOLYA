@@ -168,7 +168,12 @@
                 require_once $path . '/controler/control_inv_add.php';
                 break;
 
-                
+            //Liste des inventaires
+            case "inventaire_list":
+                require $path . '/controler/control_inv_list.php';
+                break;
+            
+            
     //---------------------------- Mode de conservation ------------------------
     
             //Ajout de mode de conservation
