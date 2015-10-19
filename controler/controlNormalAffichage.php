@@ -44,12 +44,12 @@
 
             //Ajout du bon de sortie/reprise
             case "bon_add":
-                require $path . '/view/view_bon.php';
+                require $path . '/view/view_bon_add.php';
                 break;
 
             //Détail du bon de sortie/reprise
-            case "bon_detail":
-                require $path . '/view/view_bon_ru.php';
+            case "bon_upd":
+                require $path . '/view/view_bon_upd.php';
                 break;
             
             //Liste des bons de sortie/reprise
@@ -60,11 +60,15 @@
 
     //--------------------------------Contacts----------------------------------
 
-            //Ajout d'un contact
-            case "ctc_add":
-                require $path . '/view/view_creer_contact.php';
+            //Ajout d'une personne
+            case "pers_add":
+                require $path . '/view/view_personne_add.php';
                 break;
-
+            
+            //Ajout d'une entreprise
+            case "ent_add":
+                require $path . '/view/view_entreprise_add.php';
+                break;
             
     //-------------------------------- Droit de douane -------------------------
 

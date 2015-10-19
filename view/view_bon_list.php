@@ -111,7 +111,7 @@
                             </td>
                             <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                      onclick='location.href = 
-                                                "index.php?action=bon_detail&bonId=<?php echo $oBon->bon_id ?>"' />
+                                                "index.php?action=bon_upd&bonId=<?php echo $oBon->bon_id ?>"' />
                                </td>
                                <td class="colTdIco">
                                 <img src="img/icon/read.png" title="Consulter"

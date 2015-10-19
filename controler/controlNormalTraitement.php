@@ -44,8 +44,8 @@
                 break;
 
             //Modification du bon
-            case "bon_detail":
-                require $path . '/controler/control_bon_detail.php';
+            case "bon_upd":
+                require $path . '/controler/control_bon_upd.php';
                 break;
 
 
@@ -75,10 +75,16 @@
             
     //--------------------------------Contact-----------------------------------
 
-            //Créer un contact    
-            case "ctc_add":
-                require $path . '/controler/control_ctc_add.php';
-                $sPageTitle = "Ajouter un contact";
+            //Créer une personne    
+            case "pers_add":
+                require $path . '/controler/control_pers_add.php';
+                $sPageTitle = "Ajouter une personne";
+                break;
+            
+            //Créer une entreprise    
+            case "pers_add":
+                require $path . '/controler/control_ent_add.php';
+                $sPageTitle = "Ajouter une entreprise";
                 break;
 
             
