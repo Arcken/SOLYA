@@ -170,7 +170,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $resAllRefCode[] = ReferenceManager::getRefCode($resLot->ref_id);
                 }
             }
-           
         } catch (MySQLException $e) {
             $msg = $resEr[1];
             Tool::addMsg($msg);

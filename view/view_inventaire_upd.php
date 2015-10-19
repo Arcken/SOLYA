@@ -8,7 +8,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <link type="text/css" href="css/style_bon.css" rel="stylesheet">
     
     <div class="corps">
-        <form class="form" action="index.php" method="get">
+        <form class="form" id="invAdd" action="index.php" method="get" 
+              onsubmit='return uniqueValueInForm("lotId")'>
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
 
@@ -47,6 +48,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                 Lot
                             </th>
                             <th class="colTitlSupUnique">
+                                Lot id producteur
+                            </th>
+                            <th class="colTitlSupUnique">
                                 Référence
                             </th>
                             <th class="colTitlSupUnique">
@@ -77,17 +81,24 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
 
                             <td  class="beLigneId">
-                                <!-- Appel de fonction qui recherche une reference 
+                                <!-- Appel de fonction qui recherche un lot 
                                 selon son id-->
                                 <input type="text" 
                                        name="lotId[NID]" 
                                        id="lotIdNID"
+                                       onblur='getLotDetail("NID")'
                                        >
                             </td>
                             <td class="beLigneCode">
                                 <input type="text"
                                        name="refCode[NID]" 
                                        id="refCodeNID"
+                                       readonly="">
+                            </td>
+                            <td class="beLigneCode">
+                                <input type="text"
+                                       name="lotIdProducteur[NID]" 
+                                       id="lotIdProducteurNID"
                                        readonly="">
                             </td>
                             <td class="beLigneNb">
@@ -167,8 +178,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            name="lotId[<?php echo $idLigne ?>]" 
                                            id="lotId<?php echo $idLigne ?>"
                                            value='<?php echo $oLiginv->lot_id ?>'
+                                           readonly=""
                                            >
                                 </td>
+                                 <td class="beLigneCode">
+                                <input type="text"
+                                       name="lotIdProducteur[NID]" 
+                                       id="lotIdProducteurNID"
+                                        value='<?php echo $resAllLots[$i]->lot_id_producteur ?>'
+                                        readonly="">
+                            </td>
                                 <td class="beLigneCode">
                                     <!-- On récupére le refcode du lot et 
                                            on l'affiche -->
@@ -176,7 +195,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            name="refCode[<?php echo $idLigne ?>]" 
                                            id="refCode<?php echo $idLigne ?>"
                                            value="<?php echo $resAllRefCode[$i]->ref_code ?>"
-                                           onblur=''>
+                                           readonly="">
                                 </td>
                                 <td class="beLigneNb">
                                     <input type="number" 
@@ -194,8 +213,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                                    "diffLig<?php echo $idLigne ?>");'
                                            min="0"
                                            step="any"
+                                           max="<?php echo $resAllLots[$i]->lot_qt_init ?>"
                                            name="liginvQtReel[<?php echo $idLigne ?>]" 
-                                           id="liginvQtReel<?php echo $idLigne ?>">
+                                           id="liginvQtReel<?php echo $idLigne ?>"
+                                           value='<?php echo $oLiginv->liginv_qt_reel ?>'
+                                           >
                                 </td>
                                 <td>
                                     <input type="number" 
@@ -203,6 +225,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            step="any"
                                            name="diffLig[<?php echo $idLigne ?>]" 
                                            id="diffLig<?php echo $idLigne ?>"
+                                           readonly=""
                                            >                            
                                 </td>
                                 <td >
@@ -216,7 +239,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            id="lotDlc"
                                            type="date"
                                            value='<?php echo $resAllLots[$i]->lot_dlc ?>'
-                                           >
+                                           readonly="">
                                 </td>
                                 
 

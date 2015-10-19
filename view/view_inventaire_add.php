@@ -6,7 +6,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     <link type="text/css" href="css/style_bon.css" rel="stylesheet">
     <div class="corps">
-        <form class="form" action="index.php" method="get">
+        <form class="form" action="index.php" method="get" 
+               onsubmit='return uniqueValueInForm("lotId")'>
             <input name='token' type="text" value ='<?php echo rand(1, 1000000) ?>' hidden/>
             <div class="col30">
 
@@ -58,6 +59,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="lotIdNID"
                                    required=""
                                    value="1"
+                                   onblur='getLotDetail("NID")'
                                    >
                         </td>
                         <td>
@@ -78,7 +80,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    min="0"
                                    step="any"
                                    name="liginvQtStock[NID]" 
-                                   id="liginvQtStockNID">
+                                   id="liginvQtStockNID"
+                                   readonly="">
                         </td>
                         <td >
                             <textarea name="liginvLbl[NID]" 
@@ -91,6 +94,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    type="date"
                                    readonly=""
                                    >
+                        </td>
+                        <td>
+                            <!-- Efface la ligne en cours -->
+                            <img src="img/icon/delete.png" 
+                                 alt="" 
+                                 title="Supprimer la ligne"
+                                 onclick='delLigne("idLigne")' 
+                                 class="tdImgTd"/>
                         </td>
 
                     </tr>
@@ -113,6 +124,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="lotId<?php echo $idLigne ?>"
                                        value='<?php echo $oLot->lot_id ?>'
                                        required=""
+                                       readonly=""
                                        >
                             </td>
                             <td class="beLigneCode">
@@ -133,12 +145,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
                             <td class="beLigneNb">
                                 <input type="number" 
-
                                        min="0"
                                        step="any"
                                        name="liginvQtStock[<?php echo $idLigne ?>]" 
                                        id="liginvQtStock<?php echo $idLigne ?>"
                                        value='<?php echo $oLot->lot_qt_stock ?>'
+                                       readonly=""
                                        >
                             </td>
                             <td >

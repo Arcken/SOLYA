@@ -11,10 +11,10 @@
  * @returns {undefined}
  */
 function addLigne($table, $idTr) {
-    
+
     //on incrémente le compteur
     nRowCount++;
-    
+
     //On récupére le squelette du code entre le balises <tr id=$idTr> et </tr>
     $ligne = $('#' + $idTr).html();
     console.log($ligne);
@@ -88,10 +88,10 @@ function popup($action) //------------------------Appelable partout
  * nom de l'input contenant la valeur à chercher
  * @returns {undefined}
  */
-function cptOccurence($champs, $table, $source){
+function cptOccurence($champs, $table, $source) {
     //on récupére la valeur de l'input
     $valeur = $("input[id=" + $source + "]").val();
-     $.getJSON(
+    $.getJSON(
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getNombre', table: $table, champs: $champs, valeur: $valeur},
     function (json) {
@@ -106,6 +106,27 @@ function cptOccurence($champs, $table, $source){
         }
     }
     );
+}
+
+
+function uniqueValueInForm($id) {
+    
+    //Tableau pourla valeur des inputs
+    var $tabInputVal = new Array;
+    //boolean de retour
+    var $bTest = true;
+    //pour chaque input commençant avec l'id mais != de lotIdP
+    $('[id^="' + $id + '"]').not('[id^="' + $id + 'NID"], [id^="lotIdP"]').each(function () {
+        //On test si la valeur est dans le tableau
+        if ($tabInputVal.indexOf($(this).val()) > -1){
+            $bTest = false;
+        }
+        //On rajoute la valeur dans le tableau
+        $tabInputVal.push($(this).val());
+});
+
+ if (!$bTest) alert('Le formulaire comporte des doublons');
+return $bTest;
 }
 
 
@@ -258,18 +279,18 @@ function orderby($action, $champs, $ordre) { //appel partout
  */
 function delElt($id, $codetype, $type, $action, $precision) { //appel partout
 
-    $resBool = confirm("Voulez-vous supprimez l'élément: \n" + 
+    $resBool = confirm("Voulez-vous supprimez l'élément: \n" +
             $type + " numéro: " + $id);
     //si $précision est null
     if ($resBool && $precision == null) {
-        
-        window.open('index.php?action=' + $action + "&" + 
+
+        window.open('index.php?action=' + $action + "&" +
                 $codetype + "=" + $id, '_self');
     }
-    
+
     //Si $précision est un tableau
     else if ($resBool && $precision.constructor === Array) {
-        
+
         $url = "index.php?action=" + $action + "&" + $codetype + "=" + $id;
         //On incorpore les cases du tableau à la variable url
         for (var $key in $precision[$id]) {
@@ -309,6 +330,43 @@ function selMaj() { // Appel partout
             break;
     }
 }
+
+/**
+ * Récupère les informations du lot à partir de son id et modifie des éléments
+ * html selon leur id
+ * @param  $row
+ * id de la ligne à modifier dans le formulaire
+ * @returns {undefined}
+ */
+
+function getLotDetail($row) {
+    console.log('recherche' + $row);
+    $lotIdVal = $('#lotId' + $row).val();
+    console.log($lotIdVal);
+    //Ajax
+    $.getJSON(
+            // page cible
+            'ws/webService.php',
+            //Paramètres
+                    {test: 'Solya', action: 'getLot', lotId: $lotIdVal},
+            //Callback
+            function (json) {
+                $refCodeInp = $('#refCode' + $row);
+                $lotIdProducteurInp = $('#lotIdProducteur' + $row);
+                $lotQtStockInp = $('#liginvQtStock' + $row);
+                $lotQtReelInp = $('#liginvQtReel' + $row);
+                $lotDlcInp = $('#lotDlc' + $row);
+                for (var key in json){
+                    console.log(json);
+                    $refCodeInp.val(json[key].ref_code);
+                    $lotIdProducteurInp.val(json[key].lot_id_producteur);
+                    $lotQtStockInp.val(json[key].lot_qt_stock);
+                    $lotQtReelInp.prop('max', parseFloat(json[key].lot_qt_init));
+                    $lotDlcInp.val(json[key].lot_dlc);
+                }
+            }
+            );
+        }
 
 
 /**
@@ -478,6 +536,7 @@ function getReference($row, $source, $champs, $form) {
                 $inputRefPoidsBrut.val(json[key].ref_poids_brut);
                 $inputTD.val(json[key].dd_taux);
             }
+
         }
     }
     );
