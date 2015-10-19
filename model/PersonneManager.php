@@ -105,7 +105,6 @@ class PersonneManager {
         try {
 
                 $tParam = array(
-                    $oPersonne->cpt_id,
                     $oPersonne->civ_id,
                     $oPersonne->prs_prenom1,
                     $oPersonne->prs_prenom2,
@@ -113,12 +112,11 @@ class PersonneManager {
                 );
 
                 $sql = "INSERT INTO personne ("
-                        . "cpt_id,"
                         . "civ_id,"
                         . "prs_prenom1,"
                         . "prs_prenom2,"
                         . "prs_dtn)"
-                        . "VALUES(?,?,?,?,?)";
+                        . "VALUES(?,?,?,?)";
 
 
                 $result = Connection::request(2, $sql, $tParam);

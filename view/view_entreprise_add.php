@@ -1,5 +1,6 @@
 
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
+<link type="text/css" href="css/style_list.css" rel="stylesheet">
 <script src="lib/jquery.js" type="text/javascript"></script>
 <script src="js/CtcAddFct.js" type="text/javascript"></script>
 
@@ -8,14 +9,14 @@
 <div class="corps">
 
     <!-- En-tête choix du type contact-->
-    <form id="form_add_pers" class="form" action="index.php" method="get">
+    <form id="form_ent_pers" class="form" action="index.php" method="get">
         <input name='token'
                type="text"
                value ='<?php echo rand(1, 1000000) ?>' 
                hidden>
 
-        <!--Partie gauche de l'écran : Civilité--> 
-        <div class="col30" id ="add_ent">
+        <!--Partie informations de l'entreprise--> 
+        <div class="col20" id ="add_ent">
             <label for="fmju">Forme juridique :</label>
             <br>
             <select name="fmju" id="fmju" required>
@@ -26,8 +27,8 @@
                         <?php echo $oCiv->fmju_lbl ?> </option>
                 <?php } ?>
             </select>
-            
-            <label for="catEnt">Forme juridique :</label>
+            <br>
+            <label for="catEnt">Catégorie:</label>
             <br>
             <select name="catEnt" id="catEnt" required>
                 <option value="" selected > Aucun </option>
@@ -38,86 +39,171 @@
                 <?php } ?>
             </select>
             <br>
-            <label for="cpt_nom">Nom :</label>
+            <label for="cptNom">Nom :</label>
             <br>
-            <input name="cpt_nom" type="text">
+            <input name="cptNom" type="text">
             <br>
-        </div>
-
-
-        <!-- Renseignement de l'entreprise : -->
-        <div class="col30" id="add_ent">
+            <label for ="entHoraire">Horaires :</label>
             <br>
-            <label for ="ent_horaire">Horaires :</label>
-            <br>
-            <input name="ent_horaire" 
+            <input name="entHoraire" 
                    type="text">
             <br>
-            <label for ="ent_siren">N°SIREN :</label>
+            <label for ="entSiren">N°SIREN :</label>
             <br>
-            <input name="ent_siren" 
+            <input name="entSiren" 
                    type="text">
             <br>
-            <label for ="ent_tva">N°TVA Intra :</label>
+            <label for ="entTva">N°TVA Intra :</label>
             <br>
-            <input name="ent_tva" 
+            <input name="entTva" 
                    type="text">
             <br>
-            <label for ="ent_site">Site internet: </label>
+            <label for ="entSite">Site internet: </label>
             <br>
-            <input name="ent_site" 
+            <input name="entSite" 
                    type="text"
                    title='Site vitrine de l\'entreprise'>
             <br>
-            <label for ="ent_ecom">Site e-commerce :</label>
+            <label for ="entEcom">Site e-commerce :</label>
             <br>
-            <input name="ent_ecom"
+            <input name="entEcom"
                    title='site ecommerce de l\'entreprise'
                    type="text">
             <br>
         </div>
-
-        <!--Partie central de l'écran : Informations de localisation-->
-
-        <div class="col30" hidden>
-            <table id="addrTable">
+     <!--Partie Mail/téléphone-->  
+        <div class="col30" >
+                <table id='tableMail' class="tableList">
+                    <tr>
+                        <th class="colTitle">Libéllé du mail</th>
+                        <th class="colTitle">Adresse mail :</th>
+                    </tr>
+                    <tr id='mailLigne' hidden>
+                        <td>
+                            <input name="mailLbl[]"
+                                   title="eg : Administratif, personnel.."
+                                   type="text" 
+                                   id="mailLblNID"
+                                   >
+                        </td>
+                        <td>
+                            <input name="mailAdr[]" 
+                                   type="text"
+                                   id="mailAdrNID"
+                                   >
+                        </td>
+                    </tr>
+                </table>
+                <input type="button" 
+                       value="Ajouter mail" 
+                       onclick="addLigne('tableMail', 'mailLigne');">
+        </div>
+            
+        <div class="col40">
+              <table id='tableTel' class="tableList">
+                    <tr>
+                        <th class="colTitle">Libéllé du téléphone</th>
+                        <th class="colTitle">Indicatif pays </th>
+                        <th class="colTitle">Numéro de téléphone </th>
+                    </tr>
+              
+                    <tr id='telLigne' hidden>
+                        <td >
+                        <input name="telLbl[]"
+                               title="eg : Administratif, personnel.."
+                               type="text"
+                               id="telLblNID"
+                               >
+                        </td>
+                        <td>
+                        <input name="telInd[]"
+                               title="Indicatif du numéro de téléphone eg : +33.."
+                               type="text"
+                               id="telIndNID"
+                               >
+                        </td>
+                        <td>
+                        <input name="telNum[]"
+                               title="Sans l'indicatif pays eg :6 10 10 10 10.."
+                               type="text"
+                               id="telNumNID"
+                               >
+                        </td>
+                    </tr>
+            </table>
+            <input type="button"
+                   value="Ajouter un téléphone" 
+                   onclick="addLigne('tableTel', 'telLigne');">
+        </div>
+     
+        <!--Partie Adresse l'écran :-->
+        <div class="col90">
+            <table id="addrTable" class="tableList">
                 
                 <tr>
-                    <th>Numéro :</th>
-                    <th>Voie :</th>
-                    <th colspan='3'>Rue :</th>  
-                    <th>Code postale :</th>
-                    <th>Ville :</th>
-                    <th>Etat :</th>
-                    <th>Pays :</th>
+                    <th class="colTitle">Libéllé de l'addresse</th>
+                    <th class="colTitle">Numéro </th>
+                    <th class="colTitle">Voie </th>
+                    <th class="colTitle">Rue </th>  
+                    <th class="colTitle">Code postale </th>
+                    <th class="colTitle">Ville </th>
+                    <th class="colTitle">Etat </th>
+                    <th class="colTitle">Pays </th>
                 </tr>
                 
-                <tr id='addrLigne'>
-                    <td>
-                        <input name="adr_num" type="text"> 
+                <tr id='addrLigne'
+                    hidden>
+                    <td class="colData">
+                        <input name="adrLbl[]" 
+                               type="text" 
+                               id="adrLblNID"> 
                     </td>
-                    <td>
-                        <input name="adr_voie" type="text"> 
+                    <td class="colData">
+                        <input name="adrNum[]" 
+                               type="text" 
+                               id="adrNumNID"> 
                     </td>
-                    <td>
-                        <input name="adr_rue1" type="text"> 
-                        <input name="adr_rue2" type="text"> 
-                        <input name="adr_rue3" type="text"> 
+                    <td class="colData">
+                        <input name="adrVoie[]" 
+                               type="text" 
+                               id="adrVoieNID"
+                               > 
                     </td>
-                    <td>
-                        <input name="adr_cp" type="text"> 
+                    <td class="colData">
+                        <input name="adrRue1[]" 
+                               type="text" 
+                               id="adrRue1NID"
+                               > 
+                        <br>
+                        <input name="adrRue2[]"
+                               type="text" 
+                               id="adrRue2NID"
+                               > 
+                        <br>
+                        <input name="adrRue3[]" 
+                               type="text" 
+                               id="adrRue3NID"> 
+                    </td>
+                    <td class="colData">
+                        <input name="adrCp[]"
+                               type="text" 
+                               id="adrCpNID"> 
                     </td>
 
-                    <td>
-                        <input name="adr_ville" type="text">
+                    <td class="colData">
+                        <input name="adrVille[]"
+                               type="text" 
+                               id="adrVilleNID">
                     </td>    
-                    <td> 
-                        <input name="adr_etat" type="text"> 
+                    <td class="colData"> 
+                        <input name="adrEtat[]"
+                               type="text"
+                               id="adrEtatNID"> 
                     </td>
-                    <td>
-                        <select name="pays_id" id="pays_id" required >
+                    <td class="colData">
+                        <select name="paysId[]" id="paysIdNID" required >
                             <option value="0" selected> --Pays-- </option>
-                            <?php foreach ($toPays as $oPays) { ?>
+                            <?php foreach ($resAllPays as $oPays) { ?>
                                 <option value ="<?php echo $oPays->pays_id ?>"> <?php echo $oPays->pays_nom ?> </option>
                             <?php } ?>
                         </select>
@@ -128,64 +214,12 @@
                    value="Ajouter ligne" 
                    onclick="addLigne('addrTable', 'addrLigne');"
                    >
+                <script type="text/javascript">
+                    nRowCount=1;
+                </script>
         </div>
 
-            <!--Partie de droite : Mail/téléphone Catégorie contact-->  
-        <div class="col30" >
-                <table id='tableMail'>
-                    <tr>
-                        <th>Libéllé du mail</th>
-                        <th>Adresse mail :</th>
-                    </tr>
-                    <tr id='mailLigne'>
-                        <td>
-                            <input name="mail_lbl"
-                                   title="eg : Administratif, personnel.."
-                                   type="text" 
-                                   >
-                        </td>
-                        <td>
-                            <input name="mail_adr" 
-                                   type="text"
-                                   >
-                        </td>
-                    </tr>
-                </table>
-                <input type="button" 
-                       value="Ajouter ligne" 
-                       onclick="addLigne('mailTable', 'mailLigne');">
-        </div>
-            
-        <div class="col30">
-              <table id='tableTel' hidden>
-                    <tr>
-                        <th>Libéllé du téléphone</th>
-                        <th>Indicatif pays </th>
-                        <th>Numéro de téléphone </th>
-                    </tr>
-              
-                    <tr id='telLigne'>
-                        <input name="tel_lbl"
-                               title="eg : Administratif, personnel.."
-                               type="text"
-                               >
-
-                        <input name="tel_ind"
-                               title="Indicatif du numéro de téléphone eg : +33.."
-                               type="text"
-                               >
-
-                        <input name="tel_num"
-                               title="Sans l'indicatif pays eg :6 10 10 10 10.."
-                               type="text"
-                               >
-                    </tr>
-            </table>
-            <input type="button"
-                   value="Ajouter un téléphone" 
-                   onclick="addLigne('telTable', 'telLigne');">
-        </div>
-
+       
             <!--Zone des boutons-->
             <div class="bas" 
                  id="btn_zone" 

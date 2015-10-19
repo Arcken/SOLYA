@@ -72,7 +72,7 @@ img{
     max-height: 540px;
 }
 
-.col30, .col50, .col70, .col20, .col90, .colOnlyOne{
+.col30, .col50, .col70, .col20, .col90, .colOnlyOne, .col40{
     overflow:auto;
     padding: 0.2%;   
     display: inline-block;
@@ -99,7 +99,10 @@ img{
     max-width: 30%; 
     width:30%;
 }
-
+.col40{
+    max-width: 40%;
+    width:40%;
+}
 .col50{
     max-width: 47%; 
     width:47%;

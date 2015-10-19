@@ -11,11 +11,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
    <li><a href='index.php?action=Accueil'><span>Accueil</span></a></li>
    <li><a href='#'><span>Contacts</span></a>
       <ul>
-         <li><a href='index.php?action=ctc_add'><span>Créer</span></a>
+         <li><a href='#'><span>Créer</span></a>
             <ul>
-               <li><a href='#'><span>Fournisseur</span></a></li>
-               <li><a href='#'><span> Client</span></a></li>
-               <li><a href='#'><span>Prospect</span></a></li>
+               <li><a href='index.php?action=pers_add'><span>Personne</span></a></li>
+               <li><a href='index.php?action=ent_add'><span>Entreprise</span></a></li>
             </ul>
          </li>
          <li><a href='#'><span>Consulter</span></a>
