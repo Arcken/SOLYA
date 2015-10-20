@@ -23,7 +23,7 @@
                 <?php foreach ($resAllFmju as $oFmju) { ?>
                     <option 
                         value ="<?php echo $oFmju->fmju_id ?>">
-                        <?php echo $oCiv->fmju_lbl ?> </option>
+                        <?php echo $oFmju->fmju_lbl ?> </option>
                 <?php } ?>
             </select>
             <br>
@@ -38,9 +38,13 @@
                 <?php } ?>
             </select>
             <br>
+            <label for="cptCode">Code compte :</label>
+            <br>
+            <input name="cptCode" type="text">
+            <br>
             <label for="cptNom">Nom :</label>
             <br>
-            <input name="cptNom" type="text">
+            <input name="cptNom" type="text" required>
             <br>
             <label for ="entHoraire">Horaires :</label>
             <br>
@@ -69,12 +73,15 @@
                    title='site ecommerce de l\'entreprise'
                    type="text">
             <br>
+            <label for="cptCom">Commentaire :</label>
+            <br>
+            <textarea name="cptCom" title='Commentaire'></textarea>
         </div>
-     <!--Partie Mail/téléphone-->  
+     <!--Partie de Mail/téléphone -->  
         <div class="col30" >
                 <table id='tableMail' class="tableList">
                     <tr>
-                        <th class="colTitle">Libéllé du mail</th>
+                        <th class="colTitle">Libellé du mail</th>
                         <th class="colTitle">Adresse mail :</th>
                     </tr>
                     <tr id='mailLigne' hidden>
@@ -83,13 +90,19 @@
                                    title="eg : Administratif, personnel.."
                                    type="text" 
                                    id="mailLblNID"
-                                   >
+                                   required
+                                   value="0" >
                         </td>
                         <td>
                             <input name="mailAdr[]" 
-                                   type="text"
+                                   type="email"
                                    id="mailAdrNID"
-                                   >
+                                   required
+                                   value="truc@truc.fr" >
+                        </td>
+                        <td class="bonLigneImg">
+                            <img src="img/icon/delete.png" alt="" title="Supprimer"
+                                 onclick="delLigne('mailLigne');" class="tdImgTd"/>
                         </td>
                     </tr>
                 </table>
@@ -101,7 +114,7 @@
         <div class="col40">
               <table id='tableTel' class="tableList">
                     <tr>
-                        <th class="colTitle">Libéllé du téléphone</th>
+                        <th class="colTitle">Libellé du téléphone</th>
                         <th class="colTitle">Indicatif pays </th>
                         <th class="colTitle">Numéro de téléphone </th>
                     </tr>
@@ -112,7 +125,8 @@
                                title="eg : Administratif, personnel.."
                                type="text"
                                id="telLblNID"
-                               >
+                               value="0" 
+                               required>
                         </td>
                         <td>
                         <input name="telInd[]"
@@ -126,7 +140,12 @@
                                title="Sans l'indicatif pays eg :6 10 10 10 10.."
                                type="text"
                                id="telNumNID"
-                               >
+                               value="0" 
+                               required>
+                        </td>
+                        <td class="bonLigneImg">
+                            <img src="img/icon/delete.png" alt="" title="Supprimer"
+                                 onclick="delLigne('telLigne');" class="tdImgTd"/>
                         </td>
                     </tr>
             </table>
@@ -134,28 +153,30 @@
                    value="Ajouter un téléphone" 
                    onclick="addLigne('tableTel', 'telLigne');">
         </div>
-     
         <!--Partie Adresse l'écran :-->
+
         <div class="col90">
-            <table id="addrTable" class="tableList">
+            <table id="adrTable" class="tableList">
                 
                 <tr>
-                    <th class="colTitle">Libéllé de l'addresse</th>
+                    <th class="colTitle">Libellé de l'adresse</th>
                     <th class="colTitle">Numéro </th>
                     <th class="colTitle">Voie </th>
                     <th class="colTitle">Rue </th>  
-                    <th class="colTitle">Code postale </th>
+                    <th class="colTitle">Code postal </th>
                     <th class="colTitle">Ville </th>
                     <th class="colTitle">Etat </th>
                     <th class="colTitle">Pays </th>
                 </tr>
                 
-                <tr id='addrLigne'
+                <tr id='adrLigne'
                     hidden>
                     <td class="colData">
                         <input name="adrLbl[]" 
                                type="text" 
-                               id="adrLblNID"> 
+                               id="adrLblNID"
+                               value="0" 
+                               required> 
                     </td>
                     <td class="colData">
                         <input name="adrNum[]" 
@@ -199,17 +220,21 @@
                                type="text"
                                id="adrEtatNID"> 
                     </td>
-                   <td class="colData">
+                    <td class="colData">
                         <select name="paysId[]" id="paysIdNID" required>
                             <option value="0" selected> --Pays-- </option>
                             <!--La combobox est vide car elle est remplie en ajax-->
                         </select>
-                    </td>    
+                    </td>
+                    <td class="bonLigneImg">
+                            <img src="img/icon/delete.png" alt="" title="Supprimer"
+                                 onclick="delLigne('adrLigne');" class="tdImgTd"/>
+                    </td>
                 </tr>
             </table>
             <input type="button" 
                    value="Ajouter ligne" 
-                   onclick="addLigne('addrTable', 'addrLigne');
+                   onclick="addLigne('adrTable', 'adrLigne');
                             fillPays('paysId',nRowCount);"
                    >
                 <script type="text/javascript">

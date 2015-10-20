@@ -23,7 +23,7 @@ class CompteManager {
 
         try {
 
-            $sql = 'SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code FROM compte '
+            $sql = 'SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code,cpt_type FROM compte '
                   .'ORDER BY cpt_nom';
             $result = Connection::request(1, $sql);
             
@@ -50,7 +50,7 @@ class CompteManager {
 
         try {
 
-            $sql = 'SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code '
+            $sql = 'SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code, cpt_type '
                     . 'FROM compte '
                     . 'ORDER BY ' . $orderBy 
                     . ' ' . $sort
@@ -78,15 +78,17 @@ class CompteManager {
                     $oCompte->cpt_date,
                     $oCompte->cpt_nom,
                     $oCompte->cpt_com,
-                    $oCompte->cpt_code
+                    $oCompte->cpt_code,
+                    $oCompte->cpt_type
                 ];
 
                 $sql = "INSERT INTO compte ("
                         . " cpt_date,"
                         . " cpt_nom,"
                         . " cpt_com,"
-                        . " cpt_code) "
-                        . " VALUES(?,?,?,?)";
+                        . " cpt_code,"
+                        . " cpt_type) "
+                        . " VALUES(?,?,?,?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);
                 
@@ -111,7 +113,7 @@ class CompteManager {
 
             $tParam = [$id];
             
-            $sql = "SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code "
+            $sql = "SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code,cpt_type "
                     . "FROM compte "
                     . "WHERE cpt_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
@@ -145,7 +147,7 @@ class CompteManager {
                         . "cpt_date=?,"
                         . "cpt_nom=?,"
                         . "cpt_com=?,"
-                        . "cpt_code=? "
+                        . "cpt_code=?,"
                         . "WHERE cpt_id =?";
 
                 $result = Connection::request(2, $sql, $tParam);

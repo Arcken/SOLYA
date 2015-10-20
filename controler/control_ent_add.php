@@ -18,8 +18,8 @@ try{
             //On appel les managers nécéssaire à l'insert d'une personne
             require_once $path . '/model/Compte.php';
             require_once $path . '/model/CompteManager.php';
-            require_once $path . '/model/Personne.php';
-            require_once $path . '/model/PersonneManager.php';
+            require_once $path . '/model/Entreprise.php';
+            require_once $path . '/model/EntrepriseManager.php';
             require_once $path . '/model/Mail.php';
             require_once $path . '/model/MailManager.php';
             require_once $path . '/model/Telephone.php';
@@ -39,10 +39,12 @@ try{
             
             
             //On créé le tableau d'argument pour notre objet compte
-            $argsCpt=['cpt_date'=>date('Y-m-d'),
-                      'cpt_nom'=>$_REQUEST['cptNom'],
-                      'cpt_com'=>$_REQUEST['cptCom'],
-                      'cpt_code'=>$_REQUEST['cptCode']
+            //Le compte type 1 correspond à une entreprise
+            $argsCpt=['cpt_date' =>date('Y-m-d'),
+                      'cpt_nom'  =>$_REQUEST['cptNom'],
+                      'cpt_com'  =>$_REQUEST['cptCom'],
+                      'cpt_code' =>$_REQUEST['cptCode'],
+                      'cpt_type' =>1
                   ];
             
             //On hydrate notre objet compte
@@ -54,24 +56,27 @@ try{
             //Et on récupère son identifiant
             $idCpt =  Connection::dernierId();
             echo 'resultat compte '.$resInsCompte;
-            print_r($_REQUEST['paysId']);
-            //On créé le tableau d'arguments pour notre objet Personne
-            $argsPers=['cpt_id'=>$idCpt,
-                       'civ_id'=>$_REQUEST['civilite'],
-                       'prs_prenom1'=>$_REQUEST['prsPrenom1'],
-                       'prs_prenom2'=>$_REQUEST['prsPrenom2'],
-                       'prs_dtn'=>$_REQUEST['prsDtn']
+            
+            //On créé le tableau d'arguments pour notre objet Entreprise
+            $argsEnt=['cpt_id'=>$idCpt,
+                      'fmju_id'=>$_REQUEST['fmju'],
+                      'catent_id'=>$_REQUEST['catEnt'],
+                      'ent_horaire'=>$_REQUEST['entHoraire'],
+                      'ent_siren'=>$_REQUEST['entSiren'],
+                      'ent_num_tva'=>$_REQUEST['entTva'],
+                      'ent_site'=>$_REQUEST['entSite'],
+                      'ent_ecommerce'=>$_REQUEST['entEcom']
                       ];
             
             //On hydrate notre objet personne
-           $oPersonne = new Personne($argsPers);
-           print_r($oPersonne);
+           $oEntreprise = new Entreprise($argsEnt);
+           print_r($oEntreprise);
            //On appel le manager pour effectuer l'insert
-           $resInsPers =  PersonneManager::addPersonne($oPersonne);
+           $resInsPers =  EntrepriseManager::addEntreprise($oEntreprise);
            
            //Et on récupère son identifiant
            $idPers =  Connection::dernierId();
-           echo 'resultat personne '.$resInsPers;
+           //echo 'resultat personne '.$resInsPers;
            
            
            //On regroupe toutes les informations
@@ -108,7 +113,7 @@ try{
                     print_r($oAdr);
                     //On insert notre adresse
                     $resInsAdr = AdresseManager::addAdresse($oAdr);
-                    echo 'résultat insert adresse '.$resInsAdr;
+                    //echo 'résultat insert adresse '.$resInsAdr;
                     //On récupère l'identifiant de notre adresse
                     $idAdr=Connection::dernierId();
                     
@@ -141,7 +146,7 @@ try{
                     
                      //On insert notre adresse mail
                     $resInsMail= MailManager::addMail($oMail);
-                    echo 'résultat insert mail '.$resInsMail;
+                    //echo 'résultat insert mail '.$resInsMail;
                     
                     //On récupère son identifiant
                     $idMail=  Connection::dernierId();
@@ -152,10 +157,10 @@ try{
                     $oContacter->mail_lbl=$resAllMail['mail_lbl'][$i];
                     $oContacter->cpt_id=$idCpt;
                     $oContacter->mail_id=$idMail;
-                    print_r($oContacter);
+                    //print_r($oContacter);
                     //On insert notre enregistrement dans contacter
                     $resInsContacter=  ContacterManager::addContacter($oContacter);
-                    echo 'résultat insert contacter '.$resInsContacter;
+                    //echo 'résultat insert contacter '.$resInsContacter;
                     
                 }
                 
@@ -179,7 +184,7 @@ try{
                     
                     //On insert notre adresse mail
                     $resInsTel= TelephoneManager::addTel($oTelephone);
-                    echo 'résultat insert Tel '.$resInsMail;
+                    //echo 'résultat insert Tel '.$resInsMail;
                     
                     //On récupère son identifiant
                     $idTel=  Connection::dernierId();
@@ -193,7 +198,7 @@ try{
                     
                     //On insert notre enregistrement dans contacter
                     $resInsJoindre= JoindreManager::addJoindre($oJoindre);
-                    echo 'résultat insert contacter '. $resInsJoindre;
+                    //echo 'résultat insert contacter '. $resInsJoindre;
                     
                 }
                 
@@ -203,14 +208,15 @@ try{
                     //Et enfin on vient stocker le jeton dans la session
                     $_SESSION['token']=$_REQUEST['token'];
                     
-                     $msg = '<p class=\'info\'>' . date('H:i:s') . ' Le compte de '
-                            .$oCompte->cpt_nom.' '.$oPersonne->prs_prenom1
+                     $msg = '<p class=\'info\'>' . date('H:i:s') 
+                            . ' Le compte de l\'entreprise '
+                            .$oCompte->cpt_nom
                             .' à bien été enregistré sous le numéro '
                             . $idCpt . '</p>';
            }else{
                
-                $msg = "<p class= 'erreur'> " . date('H:i:s')."
-                Vous avez déja envoyé ce formulaire </p>";
+                $msg = "<p class= 'erreur'> " . date('H:i:s')
+                        ." Vous avez déja envoyé ce formulaire </p>";
            }
            Tool::addMsg($msg);
     }
@@ -219,7 +225,7 @@ try{
     echo $e->RetourneErreur();
     $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
             . ' Oups une erreur est survenue veuillez contacter'
-            . ' votre administrateur avec le code erreur suivant : '
+            . ' votre administrateur '
             . $resEr .'</p>';
     Tool::addMsg($msg);
 
