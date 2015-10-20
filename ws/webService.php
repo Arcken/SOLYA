@@ -44,8 +44,9 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
         case 'getAllPays':
             $tab = array();
-            $requete = "SELECT pays_id, pays_nom, pays_abv FROM pays "
-                    . "ORDER BY pays_nom";
+            $requete = 'SELECT pays_id, pays_nom, pays_abv, pays_dvs_nom, '
+                        . 'pays_dvs_abv, pays_dvs_sym '
+                        . 'FROM pays ORDER BY pays_nom';;
             $resultat = $bdd->query($requete);
             while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $donnees;

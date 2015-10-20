@@ -24,13 +24,13 @@ class DomicilierManager {
             $tParam = array(
                 $oDomicilier->adr_lbl,
                 $oDomicilier->adr_id,
-                $oDomicilier->prs_id
+                $oDomicilier->cpt_id
             );
 
             $sql = "INSERT INTO domicilier ("
                     . "adr_lbl,"
                     . "adr_id,"
-                    . "prs_id)"
+                    . "cpt_id) "
                     . "VALUES(?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);

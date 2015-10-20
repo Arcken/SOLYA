@@ -5,6 +5,7 @@ try{
     require_once $path . '/model/Pays.php';
     require_once $path . '/model/PaysManager.php';
     
+    $sPageTitle='Ajouter une personne';
     //On récupère toutes les civilités
     $resAllCivs = CiviliteManager::getAllCivilites();
     //On récupère tout les pays
@@ -152,7 +153,7 @@ try{
                     $oContacter->mail_lbl=$resAllMail['mail_lbl'][$i];
                     $oContacter->cpt_id=$idCpt;
                     $oContacter->mail_id=$idMail;
-                    
+                    print_r($oContacter);
                     //On insert notre enregistrement dans contacter
                     $resInsContacter=  ContacterManager::addContacter($oContacter);
                     echo 'résultat insert contacter '.$resInsContacter;
@@ -192,7 +193,7 @@ try{
                     $oJoindre->tel_id=$idTel;
                     
                     //On insert notre enregistrement dans contacter
-                    $resInsJoindre=  ContacterManager::addContacter($oContacter);
+                    $resInsJoindre= JoindreManager::addJoindre($oJoindre);
                     echo 'résultat insert contacter '. $resInsJoindre;
                     
                 }

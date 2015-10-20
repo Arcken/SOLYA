@@ -23,7 +23,7 @@ class PaysManager {
 
             $sql = 'SELECT pays_id, pays_nom, pays_abv, pays_dvs_nom, '
                     . 'pays_dvs_abv, pays_dvs_sym '
-                    . 'FROM pays';
+                    . 'FROM pays ORDER BY pays_nom';
 
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {

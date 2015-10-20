@@ -1,8 +1,7 @@
 
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 <link type="text/css" href="css/style_list.css" rel="stylesheet">
-<script src="lib/jquery.js" type="text/javascript"></script>
-<script src="js/CtcAddFct.js" type="text/javascript"></script>
+<script src="js/contactAdd.js" type="text/javascript"></script>
 
 
 <!--Corps de la page-->
@@ -200,19 +199,18 @@
                                type="text"
                                id="adrEtatNID"> 
                     </td>
-                    <td class="colData">
-                        <select name="paysId[]" id="paysIdNID" required >
+                   <td class="colData">
+                        <select name="paysId[]" id="paysIdNID" required>
                             <option value="0" selected> --Pays-- </option>
-                            <?php foreach ($resAllPays as $oPays) { ?>
-                                <option value ="<?php echo $oPays->pays_id ?>"> <?php echo $oPays->pays_nom ?> </option>
-                            <?php } ?>
+                            <!--La combobox est vide car elle est remplie en ajax-->
                         </select>
                     </td>    
                 </tr>
             </table>
             <input type="button" 
                    value="Ajouter ligne" 
-                   onclick="addLigne('addrTable', 'addrLigne');"
+                   onclick="addLigne('addrTable', 'addrLigne');
+                            fillPays('paysId',nRowCount);"
                    >
                 <script type="text/javascript">
                     nRowCount=1;

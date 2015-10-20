@@ -26,7 +26,7 @@ class ContacterManager {
             $sql = "INSERT INTO contacter ("
                     . "mail_lbl,"
                     . "mail_id,"
-                    . "cpt_id)"
+                    . "cpt_id) "
                     . "VALUES(?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
