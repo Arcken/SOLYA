@@ -22,43 +22,57 @@
             <label for="civilite">Civilité :</label>
             <br>
             <select name="civilite" id="civilite" required>
-                <option value="" selected > Aucun </option>
-                <?php foreach ($resAllCivs as $oCiv) { ?>
+               <option value="" selected > Aucun </option>
+                <?php foreach ($resAllCivs as $oCiv) { 
+                    if ($oPersonne->civ_id === $oCiv->civ_id){?>
                     <option 
-                        value ="<?php echo $oCiv->civ_id ?>">
+                        value ="<?php echo $oCiv->civ_id ?>" selected>
                         <?php echo $oCiv->civ_code ?> </option>
-                <?php } ?>
+                <?php }else{?>
+                        <option 
+                        value ="<?php echo $oCiv->civ_id ?>" >
+                        <?php echo $oCiv->civ_code ?> </option>
+                <?php }
+                
+                    } ?>
             </select>
             <br>
             <label for="cptCode">Code compte :</label>
             <br>
-            <input name="cptCode" type="text">
+            <input name="cptCode" 
+                   type="text"
+                   value="<?php echo $oCompte->cpt_code ?>">
             <br>
             <label for="cptNom" >Nom :</label>
             <br>
             <input name="cptNom" required
-                   type="text" 
+                   type="text"
+                   value="<?php echo $oCompte->cpt_nom ?>"
                     >
             <br>
             <label for ="prsPrenom1">Prénom :</label>
             <br>
             <input name="prsPrenom1" 
-                   type="text">
+                   type="text"
+                   value="<?php echo $oPersonne->prs_prenom1 ?>">
             <br>
             <label for ="prsPrenom2">Deuxième prénom :</label>
             <br>
             <input name="prsPrenom2" 
-                   type="text">
+                   type="text"
+                   value="<?php echo $oPersonne->prs_prenom2 ?>">
             <br>
             <label for ="prsDtn">Date de naissance :</label>
             <br>
             <input name="prsDtn" 
                    type="Date"
-                   title='Date de naissance de la personne'>
+                   title='Date de naissance de la personne'
+                   value="<?php echo $oPersonne->prs_dtn ?>">
             <br>
             <label for="cptCom">Commentaire :</label>
             <br>
-            <textarea name="cptCom" title='Commentaire'></textarea>
+            <textarea name="cptCom"
+                      title='Commentaire'><?php echo $oCompte->cpt_com ?></textarea>
         </div>
  <!--Partie de Mail/téléphone -->  
         <div class="col30" >
@@ -386,9 +400,19 @@
                             <select name="paysId[<?php echo $ligId ?>]" 
                                     id="paysId<?php echo $ligId ?>"  
                                     required>
-                                <option value="<?php echo $oAdr->pays_id ?>"
-                                        selected> --Pays-- </option>
-                                
+                          
+                  <?php foreach ($resAllPays as $oPays) { 
+                           if ($oAdr->pays_id === $oPays->pays_id){?>
+                                <option 
+                                   value ="<?php echo $oPays->pays_id ?>" selected>
+                                <?php echo $oPays->pays_nom ?> </option>
+                  <?php    }else{?>
+                                <option 
+                                value ="<?php echo $oPays->pays_id ?>" >
+                                <?php echo $oPays->pays_nom ?> </option>
+                    <?php }
+                
+                    } ?>
                             </select>
                         </td>
                          <td class="bonLigneImg">

@@ -70,7 +70,7 @@ class MailManager {
      * Select for update de tous les enregistrements associé à un compte
      * 
      * @param $id
-     * attend l'id de l'adresse mail
+     * attend l'id du compte
      * @return objet
      * Retourne un objet
      */

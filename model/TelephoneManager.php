@@ -72,7 +72,7 @@ class TelephoneManager {
      *  associé à un compte id
      * 
      * @param $id
-     * attend l'id du téléphone
+     * attend l'id du compte
      * @return objet
      * Retourne un objet
      */

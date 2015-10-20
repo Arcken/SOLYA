@@ -8,8 +8,7 @@ try{
     $sPageTitle='Ajouter une personne';
     //On récupère toutes les civilités
     $resAllCivs = CiviliteManager::getAllCivilites();
-    //On récupère tout les pays
-    $resAllPays = PaysManager::getAllPays();
+   
     
     //Si le bouton envoyer est définis
    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
