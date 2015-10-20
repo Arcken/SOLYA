@@ -82,7 +82,7 @@
                 break;
             
             //Créer une entreprise    
-            case "pers_add":
+            case "ent_add":
                 require $path . '/controler/control_ent_add.php';
                 $sPageTitle = "Ajouter une entreprise";
                 break;
@@ -171,15 +171,41 @@
     
             //ajout inventaire
             case "inventaire_add":
-                require_once $path . '/controler/control_inv_add.php';
+                if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Envoyer') {
+                    //On traite l'ajout
+                    require_once $path . '/controler/control_inv_add.php';
+                    //puis on appel la liste
+                    $sAction = "inventaire_list";
+                    require_once $path . '/controler/control_inv_list.php';
+                    
+                }else{
+                    require_once $path . '/controler/control_inv_add.php';
+                }
                 break;
             
             //modification d'un inventaire
             case "inventaire_upd":
-                require_once $path . '/controler/control_inv_upd.php';
-                break;
+        //si on execute l'inventaire                
+        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Executer') {
+            //on traite l'exécution
+            require_once $path . '/controler/control_inv_exec.php';
+            //puis on appel la liste
+                $sAction = "inventaire_list";
+                require_once $path . '/controler/control_inv_list.php';
+        } else if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+            //on traite l'update
+            require_once $path . '/controler/control_inv_upd.php';
+            //puis on appel la liste
+                    $sAction = "inventaire_list";
+                    require_once $path . '/controler/control_inv_list.php';
+        }
+        else {
+            require_once $path . '/controler/control_inv_upd.php';
+        }
+        break;
 
-            //Suppression d'un inventaire
+    //Suppression d'un inventaire
             case "inventaire_del";
                 require_once $path . '/controler/control_inv_del.php';
                 

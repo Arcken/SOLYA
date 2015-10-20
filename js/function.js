@@ -12,7 +12,10 @@
  */
 function addLigne($table, $idTr) {
 
-    //on incrémente le compteur
+    //on incrémente le compteur, cette variable est à instancier dans le formualaire
+    //elle prendra comme valeur 0 pour les formulaires d'ajout
+    //elle prendra comme valeur le nombre de ligne déja enregistré pour les 
+    //formaulaires de modification
     nRowCount++;
 
     //On récupére le squelette du code entre le balises <tr id=$idTr> et </tr>

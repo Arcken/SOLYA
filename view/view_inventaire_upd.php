@@ -261,6 +261,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="bas">
                 <input name="action" id="action" value="<?php echo $sAction ?>" type="text" hidden>
                 <input name="btnForm" type="submit" value="<?php echo $sButton; ?>">
+                 <input name="btnForm" type="submit" value="Executer">
                 <input name="clear" type="reset">
             </div>
         </form>

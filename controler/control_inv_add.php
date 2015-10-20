@@ -92,6 +92,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //on valide le formulaire
                 $cnx->commit();
                 
+                
+                
             } else {
                 //Message en cas de formulaire déja envoyé
                 $msg = "<p class= 'erreur'> " . date('H:i:s') . "
