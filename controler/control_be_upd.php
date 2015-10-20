@@ -86,6 +86,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //On hydrate un objet bon d'entrée
                 $oBe = new BonEntree();
                 $oBe->be_id = $beId;
+                //Si un compte est choisi
+                if (isset($_REQUEST['cptId']) && $_REQUEST['cptId']!=''){
+                    $oBe->cpt_id = $_REQUEST['cptId'];
+                }
                 $oBe->be_lbl = $_REQUEST['beLbl'];
                 $oBe->be_date = $_REQUEST['beDate'];
                 $oBe->be_fact_num = $_REQUEST['beFactNum'];
@@ -95,6 +99,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oBe->be_com = $_REQUEST['beCom'];
                 $oBe->be_info_trans = $_REQUEST['beInfoTrans'];
                 $oBe->be_total = $_REQUEST['beTotal'];
+                $oBe->be_mode_pai = $_REQUEST['beModePai'];
+                $oBe->be_com_pai = $_REQUEST['beComPai'];
                 
                 //Modification du bon
                 $updBe = BonEntreeManager::updBonEntree($oBe);
@@ -228,6 +234,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             $sAction = "be_list";
             require_once $path . '/controler/control_be_list.php';
         } catch (MySQLException $e) {
+            $e->RetourneErreur();
             //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
                     . ' Echec modification bon d\'entré, code: '
@@ -319,6 +326,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             }
            
         } catch (MySQLException $e) {
+            
             $msg = $resEr[1];
             Tool::addMsg($msg);
         }

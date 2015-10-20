@@ -12,7 +12,7 @@
  * id de l'input cible
  * @returns {undefined}
  */
-function beTotalLigne($cible) {
+function sdqdsqbeTotalLigne($cible) {
     //console.log("DEBUT beTotalLigne");
     //On parcours ligne par ligne
     $('tr').not('#titreGnl, #titreCol, #idLigne').each(function () {
@@ -47,7 +47,7 @@ function beTotalLigne($cible) {
 
 
 /**
- * Fonction qui fait les calculs du bon
+ * Fonction qui effectue les calculs du bon d'entrée
  */
 function beCalcul() {
     //console.log('DEBUT BECALCUL');
@@ -169,41 +169,44 @@ function beCalcul() {
 
             $tmp = ($ftUniteVal * $ligneQtVal + $ligneTempsTotalFtVal);
             $ligneTotalFt.val($tmp.toFixed(2));
-            //console.log($idLigne + ": " + "Total Ft MAJ : " + $ligneTotalFt.val());
+            console.log($idLigne + ": " + "Total Ft MAJ : " + $ligneTotalFt.val());
             $ligneTotalFtVal = parseFloat($ligneTotalFt.val());
 
             //Calcul lot
             $totalFraisLot = $(this).find('[id^="totalFraisLot"]');
-            $totalFraisLotVal = $ligneTotalFdVal + $ligneTempsTotalFtVal + $ligneTotalFbVal;
+            $totalFraisLotVal = $ligneTotalFdVal + $ligneTotalFtVal + $ligneTotalFbVal;
             $totalFraisLot.val($totalFraisLotVal);
             
             //On récupére le prix unitaire
-             $puVal = parseFloat($(this).find('[id^="beligPu"]').val());
-            
+             $tmp = $(this).find('[id^="beligPu"]').val();
+            $lignePuVal = parseFloat($tmp);
+            $lignePuVal = $lignePuVal.toFixed(2);
             //Calcul du cout du lot
             $coutLot = $(this).find('[id^="coutLot"]');
-            $tmp = $totalFraisLotVal + $ligneQtVal*$puVal;
+            $tmp = $totalFraisLotVal + $ligneQtVal*$lignePuVal;
             $couLotVal = $tmp.toFixed(2);
             $coutLot.val($couLotVal);
             
             //Calcul des frais unitaire
             $totalFraisUnitaire = $(this).find('[id^="totalFraisUnitaire"]');
-            $tmp = $totalFraisLot/$ligneQtVal;
+            $tmp = $totalFraisLotVal/$ligneQtVal;
             $totalFraisUnitaireVal = $tmp.toFixed(2);
             $totalFraisUnitaire.val($totalFraisUnitaireVal);
             
+             
             //Calcul du coût unitaire
             $beligCuAchat = $(this).find('[id^="beligCuAchat"]');
-            $tmp = $totalFraisLotVal/$ligneQtVal;
+            $tmp = $totalFraisUnitaireVal*1 + $lignePuVal*1;
             $beligCuAchatVal = $tmp.toFixed(2);
             $beligCuAchat.val($beligCuAchatVal);
 
+            //Rapport
+            $rapportFraisCout = $(this).find('[id^="rapportFraisCout"]');
+            $tmp = $beligCuAchatVal/$lignePuVal;
+            $rapportFraisCout.val($tmp.toFixed(2));
+
             //On met à jour le total du bon en lui ajoutant le cout du lot en cours en cours
-            $totalBe.val(parseFloat($totalBe.val()) + $couLotVal);
-        } else {
-            //On met 0 au total de la ligne, c'est juste indicatif pour
-            //l'utilisateur
-            $totalLigne = $(this).find('[id^="totalLig"]').val(0);
+            $totalBe.val(parseFloat($totalBe.val()) + $couLotVal*1);
         }
 
     });

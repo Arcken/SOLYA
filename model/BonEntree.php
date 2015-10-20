@@ -20,6 +20,8 @@ class BonEntree {
     public $be_com = '';
     public $be_info_trans = '';
     public $be_total = '';
+    public $be_mode_pai = '';
+    public $be_com_pai = '';
     
     /**
      * PHP 5 ne supportant pas la surcharge de méthode, on ne peut définir plusieurs

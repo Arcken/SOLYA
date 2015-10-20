@@ -3,24 +3,6 @@
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
-
-
-
-
-
-<!--
-
-
-                Ajouter le mode de paiement
-
-
-
-
-
-
-
--->
-
     
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
      <link type="text/css" href="css/style_bon.css" rel="stylesheet">
@@ -29,7 +11,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <div class="corps">
         <form class="form" action="index.php" method="post" onsubmit="return ctrlFormValide();">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
-            <div class="col50">
+            <div class="col30">
                 
                 <label for="beFactNum"> Référence de facture </label><br>
                 <input name="beFactNum" 
@@ -60,7 +42,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                           placeholder="description"></textarea>
                 <br>
             </div>
-            <div class="col50">
+            <div class="col30">
                 <label for="beFraisDouane"> Frais de douane </label><br>
                 <input name="beFraisDouane" 
                        id="beFraisDouane" 
@@ -91,7 +73,23 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                           placeholder="description"></textarea>
                 <br>
             </div>
-            
+            <div class="col30">
+                <label for="cptId"> Compte </label><br>
+                <input name="cptId" 
+                       id="cptId" 
+                       type="texte"
+                       >
+                <br>
+                <label for="cptNom"> Nom </label><br>
+                <input name="cptNom" 
+                       id="cptNom" 
+                       type="texte"
+                       >
+                <br>
+                <label for="cptCom"> Comentaire </label><br>
+                <textarea name="cptCom" id="cptCom"></textarea>
+                <br>
+            </div>
             <div class="col90">
                 <table class="beLigne" id="beTable">
                     <tr id="titreGnl" class="trColTitre">
@@ -220,6 +218,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <td>
                             <textarea name="refLbl[NID]" 
                                       id="refLblNID"
+                                      readonly=""
                                       class="beLigneT"></textarea>                           
                         </td>
                         <td>
@@ -266,8 +265,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                                        "totalPoidsNID")'>
                         </td>
                         <td>
-                            <!-- Calcul totalPoids: Multiplication entre la quantité
-                            et le pois unitaire-->
                             <input type="number" 
                                    value="0"
                                    min="0.00"
@@ -284,7 +281,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="lotDlc[NID]" 
                                    id="lotDlcNID"
                                    title="Dlc du lot"
-                                   value=""
+                                   value="<?php echo date('Y-m-d')?>"
+                                   style="width: 110px;"
                                    required>
                         </td>
                         <td>
@@ -325,7 +323,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    readonly=""
                                    required
                                    title="Total de douane du lot"
-                                   class="readOnly"
                                    >
                         </td>
                         <td>
@@ -474,12 +471,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     nRowCount = 0;
                 </script>
             </div>
-            <div>
+            <div class="col90">
                 <label for="beTotal">Total</label>
                 <input type="text" 
                        name="beTotal" 
                        id="beTotal"
-                       value="0">
+                       value="0"><br>
+                <label for="beModePai">Mode de paiement</label>
+                <textarea name="beModePai" 
+                        id="beModePai" 
+                        title="Mode de paiement"
+                        ></textarea><br>
+                <label for="beComPai">Commentaire paiement</label>
+                <textarea name="beComPai" 
+                        id="beComPai" 
+                        title="Mode de paiement"
+                        ></textarea>
             </div>
             <div class="bas">
                 <input name="btnForm" 

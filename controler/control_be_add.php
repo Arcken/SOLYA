@@ -30,7 +30,10 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
         //Création du bon d'entrée
         $oBe = new BonEntree();
-        //$oBe->cpt_id = $_REQUEST['cptId'];
+        //Si un compte est choisi
+        if (isset($_REQUEST['cptId']) && $_REQUEST['cptId']!=''){
+            $oBe->cpt_id = $_REQUEST['cptId'];
+        }
         $oBe->be_lbl = $_REQUEST['beLbl'];
         $oBe->be_date = $_REQUEST['beDate'];
         $oBe->be_fact_num = $_REQUEST['beFactNum'];
@@ -40,6 +43,8 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $oBe->be_com = $_REQUEST['beCom'];
         $oBe->be_info_trans = $_REQUEST['beInfoTrans'];
         $oBe->be_total = $_REQUEST['beTotal'];
+        $oBe->be_mode_pai = $_REQUEST['beModePai'];
+        $oBe->be_com_pai = $_REQUEST['beComPai'];
 
         //Insert du bon
         $resBe = BonEntreeManager::addBonEntree($oBe);
@@ -141,9 +146,9 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         
         //Message pour le succés
         $msg = '<p class=\'info\'>' . date('H:i:s')
-                . ' L\'enregistrement de la durée de conservation: "'
-                . $id
-                . '" intitulé "' . $oDc->dc_lbl . '" à été effectué '
+                . ' L\'enregistrement du bon d\entrée: "'
+                . $idBe
+                . '" intitulé "' . $oBe->be_lbl . '" à été effectué '
                 . 'avec succès </p>';
 
         //La requète s'est effectué donc on copie le token dans la session
@@ -160,10 +165,11 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         
     } catch (MySQLException $e) {
         //on annule la transaction
+        echo $e->RetourneErreur();
         $cnx->rollback();
         //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
-                    . ' Echec insert Durée conservation, code: '
+                    . ' Echec insert bon entrée, code: '
                     . $resEr . '</p>';
         }
 

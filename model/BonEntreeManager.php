@@ -23,7 +23,7 @@ class BonEntreeManager {
 
             $sql = 'SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,'
                     . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
-                    . 'be_com, be_info_trans, be_total '
+                    . 'be_com, be_info_trans, be_total, be_mode_pai, be_com_pai '
                     . 'FROM bon_entree';
             $result = Connection::request(1, $sql);
         } catch (MySQLException $e) {
@@ -51,7 +51,7 @@ class BonEntreeManager {
 
             $sql = 'SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,'
                     . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
-                    . 'be_com, be_info_trans, be_total '
+                    . 'be_com, be_info_trans, be_total, be_mode_pai, be_com_pai '
                     . 'FROM bon_entree '
                     . 'ORDER BY '.$orderBy . ' ' . $sort .' LIMIT ' . $rowStart . ' , ' . $nbRow;
                  
@@ -84,7 +84,9 @@ class BonEntreeManager {
                 $oBonEntree->be_frais_trans,
                 $oBonEntree->be_com,
                 $oBonEntree->be_info_trans,
-                $oBonEntree->be_total
+                $oBonEntree->be_total,
+                $oBonEntree->be_mode_pai,
+                $oBonEntree->be_com_pai
             );
 
             $sql = "INSERT INTO bon_entree ("
@@ -98,8 +100,10 @@ class BonEntreeManager {
                     . "be_frais_trans, "
                     . "be_com, "
                     . "be_info_trans, "
-                    . "be_total) "
-                    . "VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    . "be_total, "
+                    . "be_mode_pai,"
+                    . "be_com_pai) "
+                    . "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
             
@@ -127,7 +131,7 @@ class BonEntreeManager {
             );
             $sql = "SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,
                     be_frais_douane, be_frais_bancaire, be_frais_trans, 
-                    be_com, be_info_trans, be_total
+                    be_com, be_info_trans, be_total, be_mode_pai, be_com_pai
                     FROM bon_entree 
                     WHERE be_id =? FOR UPDATE";
             $result = Connection::request(0, $sql, $tParam);
@@ -159,9 +163,13 @@ class BonEntreeManager {
                 $oBonEntree->be_com,
                 $oBonEntree->be_info_trans,
                 $oBonEntree->be_total,
+                $oBonEntree->be_mode_pai,
+                $oBonEntree->be_com_pai,
                 $oBonEntree->be_id
             );
 
+            
+            
             $sql = "UPDATE bon_entree SET "
                     . " cpt_id = ?, "
                     . " be_lbl = ?, "
@@ -172,7 +180,9 @@ class BonEntreeManager {
                     . " be_frais_trans = ?, "
                     . " be_com = ?, "
                     . " be_info_trans = ?, "
-                    . " be_total = ? "
+                    . " be_total = ?, "
+                    . " be_mode_pai = ?,  "
+                    . " be_com_pai = ? "
                     . "WHERE be_id =?";
 
             $result = Connection::request(2, $sql, $tParam);
