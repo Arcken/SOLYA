@@ -78,13 +78,36 @@
             //Créer une personne    
             case "pers_add":
                 require $path . '/controler/control_pers_add.php';
-                $sPageTitle = "Ajouter une personne";
                 break;
             
             //Créer une entreprise    
             case "ent_add":
                 require $path . '/controler/control_ent_add.php';
-                $sPageTitle = "Ajouter une entreprise";
+                break;
+            
+             // d'une personne
+            case "pers_upd":
+                require $path . '/controler/control_pers_upd.php';
+                break;
+            
+            //Ajout d'une entreprise
+            case "ent_upd":
+                require $path . '/controler/control_ent_upd.php';
+                break;
+            
+              //Suppression d'une personne
+            case "pers_del":
+                require $path . '/controler/control_pers_del.php';
+                break;
+            
+            //Suppression d'une entreprise
+            case "ent_del":
+                require $path . '/controler/control_ent_del.php';
+                break;
+            
+            //Ajout d'une personne
+            case "ctc_list":
+                require $path . '/controler/control_ctc_list.php';
                 break;
 
             

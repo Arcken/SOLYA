@@ -17,7 +17,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >=0) {
                <li><a href='index.php?action=ent_add'><span>Entreprise</span></a></li>
             </ul>
          </li>
-         <li><a href='#'><span>Consulter</span></a>
+         <li><a href='index.php?action=ctc_list'><span>Consulter</span></a>
             <ul>
                <li><a href='#'><span>Fournisseur</span></a></li>
                <li><a href='#'><span>Client</span></a></li>

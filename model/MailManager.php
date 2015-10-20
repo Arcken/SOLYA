@@ -66,6 +66,36 @@ class MailManager {
         return $result;
     }
     
+    /**
+     * Select for update de tous les enregistrements associé à un compte
+     * 
+     * @param $id
+     * attend l'id de l'adresse mail
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getMailsFromCptForUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql =  " SELECT ctc.mail_lbl, m.mail_id, m.mail_adr "
+                    . "FROM mail m "
+                    . "INNER JOIN contacter ctc "
+                    . "ON m.mail_id=ctc.mail_id  "
+                    . "INNER JOIN compte cpt "
+                    . "ON ctc.cpt_id=cpt.cpt_id "
+                    . "WHERE cpt.cpt_id =? FOR UPDATE";
+            
+            $result = Connection::request(1, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     
      /**
      * Modifie un enregistrement selon son id

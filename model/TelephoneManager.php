@@ -67,6 +67,36 @@ class TelephoneManager {
         }
         return $result;
     }
+     /**
+     * Select for update de tous les enregistrement
+     *  associé à un compte id
+     * 
+     * @param $id
+     * attend l'id du téléphone
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getTelephonesFromCptForUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql = "SELECT j.tel_lbl, t.tel_id, t.tel_num, t.tel_ind "
+                    . "FROM telephone t "
+                    . "INNER JOIN joindre j "
+                    . "ON t.tel_id=j.tel_id "
+                    . "INNER JOIN compte c "
+                    . "ON j.cpt_id =c.cpt_id "
+                    . "WHERE c.cpt_id =? FOR UPDATE";
+            
+            $result = Connection::request(1, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
     
     
      /**

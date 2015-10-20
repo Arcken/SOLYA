@@ -20,7 +20,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                                title="Tri décroissant" 
                                onclick="orderby('<?php echo $sAction?>','cpt_id','DESC');"/>
                     </th>
-                    <th class="colTitle">
+                    <th class="colTdIco">
+                    <img src ="img/icon/up.png" 
+                               title="Tri décroissant" 
+                               onclick="orderby('<?php echo $sAction?>','cpt_id','ASC');"/>
+                    </th>
+                     <th class="colTitle">
                         CODE Compte
                     </th>
                     <th class="colTdIco">
@@ -77,6 +82,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             <td class="colData" colspan="3">
                                 <?php echo $oCompte->cpt_nom ?>
                             </td>
+                            <td class="colData" colspan="3">
+                                <?php echo $oCompte->cpt_date ?>
+                            </td>
+                            <td class="colData" colspan="3">
+                                <?php echo $oCompte->cpt_com ?>
+                            </td>
                             <?php if($oCompte->cpt_type==0){?>
                             <td class="colTdIco">
                                 <img src="img/icon/modify.png" 
@@ -101,7 +112,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                                 <img src="img/icon/delete.png" 
                                      alt="" 
                                      title="Supprimer"
-                                     onclick='delElt(<?php echo $oCompte->ga_id ?>, "gaId", "compte", "pers_del")'/>
+                                     onclick='delElt(<?php echo $oCompte->cpt_id ?>, "gaId", "compte", "pers_del")'/>
                             </td>
                             <?php }else{ ?>
                              <td class="colTdIco">

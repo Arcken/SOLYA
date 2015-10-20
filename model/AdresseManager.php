@@ -89,6 +89,48 @@ class AdresseManager {
         return $result;
     }
     
+    /**
+     * Select for update de tous les enregistrement
+     * selon son  un compte id
+     * 
+     * @param $id
+     * attend l'id du compte
+     * @return objet
+     * Retourne un objet
+     */
+    public static function getAdressesFromCptForUpd($id) {
+
+        try {
+
+            $tParam = [$id];
+            
+            $sql =    "SELECT "
+                    . "a.adr_id,"
+                    . "a.pays_id,"
+                    . "a.adr_num,"
+                    . "a.adr_voie,"
+                    . "a.adr_rue1,"
+                    . "a.adr_rue2,"
+                    . "a.adr_rue3,"
+                    . "a.adr_cp,"
+                    . "a.adr_ville,"
+                    . "a.adr_etat, "
+                    . "d.adr_lbl "
+                    . "FROM adresse a "
+                    . "INNER JOIN domicilier d "
+                    . "ON d.adr_id = a.adr_id "
+                    . "INNER JOIN compte c "
+                    . "ON c.cpt_id =d.cpt_id "
+                    . "WHERE c.cpt_id =? FOR UPDATE";
+            
+            $result = Connection::request(1, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     
      /**
      * Modifie un enregistrement selon son id

@@ -70,6 +70,31 @@
                 require $path . '/view/view_entreprise_add.php';
                 break;
             
+            //Ajout d'une personne
+            case "pers_upd":
+                require $path . '/view/view_personne_upd.php';
+                break;
+            
+            //Ajout d'une entreprise
+            case "ent_upd":
+                require $path . '/view/view_entreprise_upd.php';
+                break;
+            
+              //Suppression d'une personne
+            case "pers_del":
+                require $path . '/view/view_personne_del.php';
+                break;
+            
+            //Suppression d'une entreprise
+            case "ent_del":
+                require $path . '/view/view_entreprise_del.php';
+                break;
+            
+            //Ajout d'une personne
+            case "ctc_list":
+                require $path . '/view/view_contact_list.php';
+                break;
+            
     //-------------------------------- Droit de douane -------------------------
 
             //Détail d'un Droit de douane
