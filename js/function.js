@@ -113,7 +113,7 @@ function cptOccurence($champs, $table, $source) {
 
 
 function uniqueValueInForm($id) {
-    
+
     //Tableau pourla valeur des inputs
     var $tabInputVal = new Array;
     //boolean de retour
@@ -121,15 +121,16 @@ function uniqueValueInForm($id) {
     //pour chaque input commençant avec l'id mais != de lotIdP
     $('[id^="' + $id + '"]').not('[id^="' + $id + 'NID"], [id^="lotIdP"]').each(function () {
         //On test si la valeur est dans le tableau
-        if ($tabInputVal.indexOf($(this).val()) > -1){
+        if ($tabInputVal.indexOf($(this).val()) > -1) {
             $bTest = false;
         }
         //On rajoute la valeur dans le tableau
         $tabInputVal.push($(this).val());
-});
+    });
 
- if (!$bTest) alert('Le formulaire comporte des doublons');
-return $bTest;
+    if (!$bTest)
+        alert('Le formulaire comporte des doublons');
+    return $bTest;
 }
 
 
@@ -359,7 +360,7 @@ function getLotDetail($row) {
                 $lotQtStockInp = $('#liginvQtStock' + $row);
                 $lotQtReelInp = $('#liginvQtReel' + $row);
                 $lotDlcInp = $('#lotDlc' + $row);
-                for (var key in json){
+                for (var key in json) {
                     console.log(json);
                     $refCodeInp.val(json[key].ref_code);
                     $lotIdProducteurInp.val(json[key].lot_id_producteur);

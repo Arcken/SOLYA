@@ -51,6 +51,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beDate"
                        type="date"
                        required
+                       value='<?php echo date('Y-m-d')?>'
                        >
                 <br>
                 <label for="beCom"> Commentaire</label><br>
@@ -97,7 +98,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <th colspan="8" class="colTitleSup">
                             Référence
                         </th>
-                        <th colspan="4" class="colTitleSup">
+                        <th rowspan="2" class="colTitlSupUnique">
+                            DLC DLUO
+                        </th>
+                        <th colspan="3" class="colTitleSup">
                             Douane
                         <th colspan="2" class="colTitleSup">
                             Banque
@@ -105,21 +109,21 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <th colspan="2" class="colTitleSup">
                             Transport
                         </th>
-                        <th rowspan="2" class="colTitlSupUnique">
-                            Total ligne
+                        <th colspan="2" class="colTitleSup">
+                            Calcul lot
+                        </th>
+                        <th colspan="2" class="colTitleSup">
+                            Calcul unitaire
                         </th>
                         <th rowspan="2" class="colTitlSupUnique">
-                            DLC DLUO
+                            Rapport Frais/coût
                         </th>
                         <th rowspan="2" class="colTitlSupUnique">
                             Dépôt
                         </th>
                         <th rowspan="2" class="colTitlSupUnique">
                             Commentaire
-                        </th>
-                        <th rowspan="2" class="colTitlSupUnique">
-                            Coût unitaire
-                        </th>
+                        </th>                       
                         <th rowspan="2" class="colTitlSupUnique">
                             Supp
                         </th>
@@ -149,9 +153,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <th class="colTitleRight">
                             Poids
                         </th>
-                        <th class="colTitleLeft">
-                            Droit
-                        </th>
                         <th class="colTitleMiddle">
                             Taux
                         </th>
@@ -172,6 +173,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </th>
                         <th class="colTitleRight">
                             Total
+                        </th>
+                        <th class="colTitleLeft">
+                            Frais
+                        </th>
+                        <th class="colTitleRight">
+                            Coûts
+                        </th>
+                        <th class="colTitleLeft">
+                            Frais
+                        </th>
+                        <th class="colTitleRight">
+                            Coûts
                         </th>
 
                     </tr>
@@ -234,7 +247,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="ligQte[NID]" 
                                    id ="ligQteNID"
                                    title="Quantité"
-                                   required>
+                                   required
+                                   onchange='ccMultiplier(["ligQteNID",
+                                                   "refPoidsBrutNID"],
+                                                       "totalPoidsNID")'>
                         </td>
                         <td>
                             <input type="number" 
@@ -244,7 +260,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="refPoidsBrut[NID]" 
                                    id="refPoidsBrutNID"
                                    title="Poids brut de l'article"
-                                   required>
+                                   required
+                                   onchange='ccMultiplier(["ligQteNID",
+                                                   "refPoidsBrutNID"],
+                                                       "totalPoidsNID")'>
                         </td>
                         <td>
                             <!-- Calcul totalPoids: Multiplication entre la quantité
@@ -258,41 +277,28 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    readonly=""
                                    title="Poids total du lot"
                                    class="readOnly"
-                                   onfocus='ccMultiplier(["ligQteNID",
-                                                   "refPoidsBrutNID"],
-                                                       "totalPoidsNID")'>
+                                   >
                         </td>
                         <td>
-                            <!-- Calcul droit de douane selon le pu, le taux 
-                                et la quantité-->
+                            <input type="date" 
+                                   name="lotDlc[NID]" 
+                                   id="lotDlcNID"
+                                   title="Dlc du lot"
+                                   value=""
+                                   required>
+                        </td>
+                        <td>
+                            
                             <input type="number" 
                                        value="0"
                                        min="0"
                                        step="any"
                                        name="beligDd[NID]" 
                                        id="beligDdNID"
-                                       readonly=""
                                        title="Droit de douane du lot"
-                                       onfocus='beCcDroitDouane("beligPuNID",
-                                                           "beligTauxDouaneNID",
-                                                           "ligQteNID",
-                                                           "beligDdNID")'
-                                       required>
-                        </td>
-                        <td>
-                            <!-- Calcul droit de douane selon le pu, le taux 
-                                et la quantité-->
-                            <input type="number" 
-                                       value="0"
-                                       min="0"                                   
-                                       step="any"
-                                       name="beligTauxDouane[NID]" 
-                                       id="beligTauxDouaneNID"
-                                       title="Taux de douane"
-                                       onchange='beCcDroitDouane("beligPuNID",
-                                                           "beligTauxDouaneNID",
-                                                           "ligQteNID",
-                                                           "beligDdNID")'
+                                       onchange='ccAddition(
+                                                       ["beligDdNID", "beligTaxeNID"],
+                                                       "totalFdNID")'
                                        required>
                         </td>
                         <td>
@@ -303,10 +309,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="beligTaxe[NID]" 
                                    id="beligTaxeNID"
                                    title="Taxe du lot"
+                                   onchange='ccAddition(
+                                                       ["beligDdNID", "beligTaxeNID"],
+                                                       "totalFdNID")'
                                    required>
                         </td>
                         <td>
-                            <!-- Additionne droit de douane et taxe-->
+                            
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -317,9 +326,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    required
                                    title="Total de douane du lot"
                                    class="readOnly"
-                                   onfocus='ccAddition(
-                                                       ["beligDdNID", "beligTaxeNID"],
-                                                       "totalFdNID")'>
+                                   >
                         </td>
                         <td>
                             <input type="number" 
@@ -329,10 +336,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="beligFb[NID]" 
                                    id="beligFbNID"
                                    title="Frais bancaire du lot"
-                                   required>
+                                   required
+                                   onchange='copieChamps("beligFbNID",
+                                                       "totalFbNID")'>
                         </td>
                         <td>
-                            <!-- Copie frais bancaire dans total -->
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -343,8 +351,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    required
                                    class="readOnly"
                                    title="Total de frais bancaire du lot"
-                                   onfocus='copieChamps("beligFbNID",
-                                                       "totalFbNID")'>
+                                  >
                         </td>
                         <td>
                             <input type="number" 
@@ -354,10 +361,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="beligFt[NID]" 
                                    required
                                    title="Frais de transport du lot"
-                                   id="beligFtNID">
+                                   id="beligFtNID"
+                                   onchange='copieChamps("beligFtNID",
+                                                       "totalFtNID")'>
                         </td>
                         <td>
-                            <!-- Copie frais transport dans total-->
                             <input type="number" 
                                    value="0"
                                    min="0"
@@ -368,29 +376,72 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    required
                                    class="readOnly"
                                    title="Total de frais de transport du lot"
-                                   onfocus='copieChamps("beligFtNID",
-                                                       "totalFtNID")'>
+                                   >
                         </td>
                         <td>
-                            <!-- Total de la ligne: appel la fonction qui
-                                calcul le total de la ligne-->
                             <input type="number" 
-                                   value="0" 
-                                   step="any"
-                                   name="totalLig[NID]" 
-                                   id="totalLigNID"
+                                   value="0"
+                                   min="0"
+                                   step="any" 
+                                   name="totalFraisLot[NID]" 
+                                   id="totalFraisLotNID"
                                    readonly=""
+                                   required
                                    class="readOnly"
-                                   title="Prix total du lot"
-                                   onfocus='beTotalLigne("totalLigNID")'>
+                                   title="Total frais du lot"
+                                   >
                         </td>
                         <td>
-                            <input type="date" 
-                                   name="lotDlc[NID]" 
-                                   id="lotDlcNID"
-                                   title="Dlc du lot"
-                                   value="<?php echo date('Y-m-d')?>"
-                                   required>
+                            <input type="number" 
+                                   value="0"
+                                   min="0"
+                                   step="any" 
+                                   name="coutLot[NID]" 
+                                   id="coutLotNID"
+                                   readonly=""
+                                   required
+                                   class="readOnly"
+                                   title="Total frais du lot"
+                                   >
+                        </td>
+                         <td>
+                            <input type="number" 
+                                   value="0"
+                                   min="0"
+                                   step="any" 
+                                   name="totalFraisUnitaire[NID]" 
+                                   id="totalFraisUnitaireNID"
+                                   readonly=""
+                                   required
+                                   class="readOnly"
+                                   title="Total frais unitaire"
+                                   >
+                        </td>
+                        <td>
+                            <input type="number" 
+                                   value="0"
+                                   min="0"
+                                   step="any" 
+                                   name="beligCuAchat[NID]" 
+                                   id="beligCuAchatNID"
+                                   readonly=""
+                                   required
+                                   class="readOnly"
+                                   title="Coût unitaire"
+                                   >
+                        </td>
+                         <td>
+                            <input type="number" 
+                                   value="0"
+                                   min="0"
+                                   step="any" 
+                                   name="rapportFraisCout[NID]" 
+                                   id="rapportFraisCoutNID"
+                                   readonly=""
+                                   required
+                                   class="readOnly"
+                                   title="Rapport frais/coût"
+                                   >
                         </td>
                         <td >
                             <textarea name="ligComDep[NID]" 
@@ -403,18 +454,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                       id="ligComNID"  
                                       title="Commentaire du lot"
                                       class="beLigneT"></textarea>
-                        </td>
-                        <td>
-                            <input type="number" 
-                                   value="0" 
-                                   step="any"
-                                   name="beligCuAchat[NID]" 
-                                   id="beligCuAchatNID"
-                                   value=""
-                                   readonly=""
-                                   class="readOnly"
-                                   title="Coût unitaire de l'article"
-                                   required>                            
                         </td>
                         <td>
                             <!-- Efface la ligne en cours -->

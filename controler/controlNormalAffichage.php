@@ -224,12 +224,11 @@
             
             //Ajout d'un inventaire
             case "inventaire_add":
+                //Si on ajoute un inventaire 
                 if (isset($_REQUEST['btnForm']) 
                         && $_REQUEST['btnForm'] == 'Envoyer') {
-                    print_r($_REQUEST);
                 require $path . '/view/view_inventaire_list.php';
                 }else {
-                    print_r($_REQUEST);
                 require $path . '/view/view_inventaire_add.php';
                 }
                 break;
