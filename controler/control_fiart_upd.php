@@ -69,13 +69,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 //Maj de la fiche article
                 $r = FicheArticleManager::updFicheArticle($oFiArt);
-                if ($r != 1) {
-                    throw new Exception;
-                }
+                
                 //Effacement des enregistrements concernant cette fiche dans la table Regrouper
                 RegrouperManager::delRegrouperFiart($oFiArt->fiart_id);
                 //Effacement des enregistrements concernant cette fiche dans la table Informer
                 InformerManager::delInformerFiart($oFiArt->fiart_id);
+                
 
                 //Insertion des nouvelles valeurs pour les Gammes
                 foreach ($_REQUEST['gamme'] as $value) {
@@ -83,10 +82,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                     $oRegrouper->fiart_id = $oFiArt->fiart_id;
                     $oRegrouper->ga_id = $value;
+                    
                     $r = RegrouperManager::addRegrouper($oRegrouper);
-                    if ($r != 1) {
-                        throw new Exception;
-                    }
+                    
                 }
 
                 //On vérifie pour chaque champ de nutrition, la valeur soit !=0
@@ -103,9 +101,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oInformer->nutfiart_ajr = $_REQUEST['nutAjr' . $object->nut_id];
                         $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
                         $r = InformerManager::addInformer($oInformer);
-                        if ($r != 1) {
-                            throw new Exception;
-                        }
+                        
                     }
                 }
                 $cnx->commit();

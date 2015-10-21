@@ -70,8 +70,8 @@ class RegrouperManager {
                 );
 
                 $sql = "INSERT INTO regrouper ("
-                        . " GA_ID, "
-                        . " FIART_ID) "
+                        . " ga_id, "
+                        . " fiart_id) "
                         . " VALUES(?,?)";
 
                 $result = Connection::request(2, $sql, $tParam);

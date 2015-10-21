@@ -12,7 +12,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" action="index.php"  method="POST" enctype="multipart/form-data">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
-                <div>                    
+                <div>
+                     <label for="fiartId"> Id </label><br>
+                    <input name="fiartId"
+                           readonly=""
+                           type="text" value="<?php echo $resFiartDetail->fiart_id ?>"
+                          >
                     <label for="fiartLbl"> Libellé de la fiche article </label><br>
                     <input name="fiartLbl" placeholder="description" required 
                            type="text" value="<?php echo $resFiartDetail->fiart_lbl ?>"

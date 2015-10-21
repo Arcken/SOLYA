@@ -81,8 +81,8 @@ class UtilisateurManager {
             $sql = "SELECT ut_login, ut_nom, ut_prenom, ut_actif, grp_id, "
                     . "grp_nom "
                     . "FROM utilisateur "
-                    . "NATURAL JOIN GROUPE "
-                    . "WHERE UT_LOGIN =? AND UT_PASS =?";
+                    . "NATURAL JOIN groupe "
+                    . "WHERE ut_login =? AND ut_pass =?";
 
             $result = Connection::request(0, $sql, $tParam);
             
@@ -233,12 +233,12 @@ class UtilisateurManager {
             );
 
             $sql = "INSERT INTO utilisateur ("
-                    . "UT_LOGIN,"
-                    . "UT_PASS,"
-                    . "UT_NOM,"
-                    . "UT_PRENOM,"
-                    . "UT_ACTIF,"
-                    . "GRP_ID)"
+                    . "ut_login,"
+                    . "ut_pass,"
+                    . "ut_nom,"
+                    . "ut_prenom,"
+                    . "ut_actif,"
+                    . "grp_id)"
                     . "VALUES(?,?,?,?,?,?)";
 
             $result = Connection::request(2, $sql, $tParam);
