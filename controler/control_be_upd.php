@@ -58,6 +58,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //Tableaux pour la table lot
                 $tLotIdProducteur = $_REQUEST['lotIdProducteur'];
                 $tLotDlc = $_REQUEST['lotDlc'];
+                $tLotId = $_REQUEST['lotId'];
 
                 //Tableau pour la référence
                 $tRefId = $_REQUEST['refId'];
@@ -80,7 +81,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     //pour une modification on ajustera
                     'lot_qt_init' => $tLigQte,
                     'lot_qt_stock' => $tLigQte,
-                    'ref_id' => $tRefId
+                    'ref_id' => $tRefId,
+                    'lot_id' => $tLotId
                 ];
 
                 //On hydrate un objet bon d'entrée
@@ -102,7 +104,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oBe->be_mode_pai = $_REQUEST['beModePai'];
                 $oBe->be_com_pai = $_REQUEST['beComPai'];
                 
-                //Modification du bon
+                //Modification du bon c'est la première modification à vendre
                 $updBe = BonEntreeManager::updBonEntree($oBe);
                 
                 //Boucle pour traiter les lignes
@@ -112,6 +114,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //on prend ref_id comme témoin
                 for ($i = 1; $i < (count($tLigneForm['ref_id'])); $i++) {
 
+                    //on hydrate un objet lot
+                    $oLot = new Lot();
+                    $oLot->lot_id = $tLigneForm['lot_id'][$i];
+                    $oLot->ref_id = $tLigneForm['ref_id'][$i];
+                    $oLot->lot_id_producteur = $tLigneForm['lot_id_producteur'][$i];
+                    $oLot->lot_dlc = $tLigneForm['lot_dlc'][$i];
+                    $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
+                    $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
 
                     //On hydrate un objet Ligne
                     $oLigne = new Ligne();
@@ -119,14 +129,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $oLigne->lig_qte = $tLigneForm['lig_qte'][$i];
                     $oLigne->lig_com_dep = $tLigneForm['lig_com_dep'][$i];
                     $oLigne->lig_com = $tLigneForm['lig_com'][$i];
-
-                    //on hydrate un objet lot
-                    $oLot = new Lot();
-                    $oLot->ref_id = $tLigneForm['ref_id'][$i];
-                    $oLot->lot_id_producteur = $tLigneForm['lot_id_producteur'][$i];
-                    $oLot->lot_dlc = $tLigneForm['lot_dlc'][$i];
-                    $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
-                    $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
 
                     //On hydrate l'objet BeLigne
                     $oBeLigne = new BeLigne();
@@ -144,14 +146,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                         
                         //Si la case suppLigne existe, c'est que la ligne est cochée
-                        //pour être supprimmée
+                        //pour être supprimmée, si le lot est utilisé 
+                        //dans un autre enregsitrement de ligne
+                        //une exception sera levé et fera un rollback
                         if (isset($tLigSupp[$i])) {
                             //on commence par supprimmer be_ligne
                             $delBeLigne = BeLigneManager::delBeLigne($beId, $oBeLigne->lig_id);
-
-                            //on récupére le lot_id de la ligne
-                            $resLigne = LigneManager::getLigneDetail($oBeLigne->lig_id);
-                            $oLot->lot_id = $resLigne->lot_id;
 
                             //On supprimme la ligne
                             $delLigne = LigneManager::delLigne($oLigne->lig_id);
@@ -159,36 +159,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             //On supprimme le lot
                             $delLot = LotManager::delLot($oLot->lot_id);
 
-                            //sinon on fait un update
+                        //sinon on fait un update
                         } else {
 
                             //Update de la ligne dans la table ligne
                             $updLigne = LigneManager::updLigne($oLigne);
 
-                            //L'id du lot est récupéré dans la table ligne
-                            //on créé un objet de la ligne qui va être maj
-                            $oOldLigne = LigneManager::getLigneDetail($oLigne->lig_id);
+                            
 
-                            //on créé un objet du lot qui va être maj
-                            $oOldLot = LotManager::getLot($oOldLigne->lot_id);
-                            //On compare le stock_init de l'ancien lot et du nouveau
-                            $diffQtLot = $oLot->lot_qt_init - $oOldLot->lot_qt_init;
-
-                            //Si ils sont différents on réajuste
-                            if ($diffQtLot != 0) {
-                                //La quantité init est la nouvelle valeur,
-                                //La quantité stock est l'ancienne qt_stock + 
-                                //nouvelle qt_init - ancienne qt_init
-                                $oLot->lot_qt_stock = $oOldLot->lot_qt_stock + $diffQtLot;
-                            }
-
-                            //Insert du lot dans la table lot
-                            $updLot = LotManager::updLot($oLot);
-
-                            //on insert l'objet BeLigne dans la table be_ligne
-                            $updBeLigne = BeLigneManager::updBeLigne($oBeLigne);
+                            //on update l'objet BeLigne dans la table be_ligne
+                            $tResUpdate[] = BeLigneManager::updBeLigne($oBeLigne);
+                            print_r($tResUpdate);
+                            //l'update du lot dans la table lot se fait par 
+                            //un triger dans la base
+                            
                         }
-                        //Sinon c'est que c'est un insert    
+                    //Sinon c'est que c'est un insert    
                     } else {
                         //Insert du lot dans la table lot
                         $resLot = LotManager::addLot($oLot);

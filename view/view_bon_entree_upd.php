@@ -198,6 +198,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <th class="colTitleRight">
                             Coûts
                         </th>
+                        <th></th> <!-- colonne pour le champs cahé lotId -->
 
                     </tr>
 
@@ -481,6 +482,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                  onclick='delLigne("idLigne")' 
                                  class="tdImgTd"/>
                         </td>
+                        <input type="number" 
+                                   value=""
+                                   hidden=""                                  
+                                   name="lotId[NID]" 
+                                   id="lotIdNID"
+                                   >
                     </tr>
 
 
@@ -755,6 +762,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        >
                                        <?php } ?>
                             </td>
+                            <input type="number" 
+                                   value="<?php echo $oLot->lot_id ?>"
+                                   hidden=""                                  
+                                   name="lotId[<?php echo $idLigne ?>]" 
+                                   id="lotId<?php echo $idLigne ?>"
+                                   >
                         </tr>
                         <!-- Fin construction lignes récupérées-->
 
