@@ -114,7 +114,7 @@ function cptOccurence($champs, $table, $source) {
 
 function uniqueValueInForm($id) {
 
-    //Tableau pourla valeur des inputs
+    //Tableau pour la valeur des inputs
     var $tabInputVal = new Array;
     //boolean de retour
     var $bTest = true;

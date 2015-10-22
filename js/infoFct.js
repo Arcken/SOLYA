@@ -58,7 +58,62 @@ function search(){
     
     //On finalise la requète en y associant la valeur
     $request=$inptReq+" '%"+$value+"%'";
-    
+    $.ajax({ 
+			url: "ws/webService.php",
+			data: { 'test': 'Solya', 'action': 'getSearch','request':$request },
+			type: "GET",
+			timeout: 30000,
+			dataType: "json", // "xml", "json""
+			success:function(json) {
+				
+        // show text reply as-is (debug)
+        console.log('Je suis dans la callback');
+        //String qui va contenir les entêtes        
+        var $strTh='';
+        //Tableau qui va contenir toutes les lignes de la table 
+        $tab=new Array();
+        
+        //On boucle une premiere fois sur les objets que ramène le Json
+        for (var key in json) {
+            
+            //On initialise la string qui va contenir les céllule pour former la ligne
+            var $strTd='';
+            
+           //On boucle sur les propriétés contenue par les objets Json  
+          for(var prop in json[key]){
+              
+            //Si c'est la première ligne on mémorise les en-têtes
+              if(key==='0'){    
+                $strTh+='<th>'+prop+'</th>';  
+              }
+              
+              //On construit la ligne de la table
+              $strTd+='<td>' + json[key][prop] +'</td>'; 
+           }
+           
+           //On vient l'ajouter au tableau
+           $tab.push($strTd);
+        }
+        
+          //On initialise la string contenant toute les lignes de la table html 
+           var $strRows='';
+           
+           for (var $row in $tab){
+              //Construction des lignes 
+              $strRows+='<tr>'+$tab[$row]+'</tr>';
+           }
+           
+           
+           //Enfin on ajoute le résultats dans notre div
+           $resSearch.append('<table id=tabSearch><tr>'+$strTh+'</tr>'+$strRows+'</table>');
+           //Et on l'affiche
+           $resSearch.show();
+    },
+	error: function(jqXHR, textStatus, ex) {
+        alert(textStatus + "," + ex + "," + jqXHR.responseText);
+    }
+   });
+    /*
     //Ajax
     $.getJSON(
             'ws/webService.php', // page cible         
@@ -107,5 +162,5 @@ function search(){
            //Et on l'affiche
            $resSearch.show();
         }
-        );
+        );*/
 }
