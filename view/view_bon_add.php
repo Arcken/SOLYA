@@ -9,8 +9,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/bonFct.js" ></script>
     
     <div class="corps">
-        <form class="form" action="index.php" method="get">
+        <form class="form" 
+              action="index.php"
+              method="get"
+              onsubmit='return uniqueValueInForm("lotId")'>>
             <div class="col50">
+                
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 <label for="numFact"> Numéro de facture </label><br>
                 <input name="numFact"  id="nFact" placeholder="Numéro de Facture" type="text" >

@@ -1,8 +1,11 @@
 <?php
 
 if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
+    //Création d'un objet PDO pour accéder à la base de données
+    //Paramètrage
     $bdd = new PDO('mysql:host=localhost;dbname=solya;charset=utf8', 'solya', "Stage2015!");
     $sAction = $_REQUEST['action'];
+    
     switch ($sAction) {
 
         case 'getAllGamme':
@@ -245,6 +248,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
 
             break;
+            
             case 'getSearch':
 
             $tab = array();

@@ -38,6 +38,12 @@
                value='lot' 
                title='Recherche les lots associé à la référence'
                onclick='changeRequest()'>
+        <i>Contact</i>
+        <input type='radio' 
+               name='table' 
+               value='compte' 
+               title='Recherche dans les contacts par nom'
+               onclick='changeRequest()'>
        
         
         <input type='text' id='request' name='request' value='' hidden>

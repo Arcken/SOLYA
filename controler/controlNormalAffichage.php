@@ -375,7 +375,7 @@
             //Ajout d'une référence
             case "ref_add":
                 $sPageTitle = "Ajouter une référence";
-                require $path . '/view/view_reference.php';
+                require $path . '/view/view_reference_add.php';
                 break;
             
             //Modification d'une référence

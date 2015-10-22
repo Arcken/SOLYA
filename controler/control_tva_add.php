@@ -32,7 +32,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $msg = '<p class=\'info\'>' . date('H:i:s')
                         . ' L\'enregistrement de la TVA: "'
                         . $id
-                        . '" intitulé "' . $oTva->tva_lbl . '" à été effectué '
+                        . '" intitulé "' . $oTva->tva_lbl . '" a été effectué '
                         . 'avec succès </p>';
 
                 //La requète s'est effectué donc on copie le token dans la session
