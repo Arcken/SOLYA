@@ -107,8 +107,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         if (isset($_REQUEST['nut' . $object->nut_id]))
                             $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
 
-                        //on exécute la requête
-                        $r = InformerManager::addInformer($oInformer);
+                        //on exécute la requête si une deux deux valeurs est non nul
+                        if ($oInformer->nutfiart_ajr != '' || $oInformer->nutfiart_val !=''){
+                            InformerManager::addInformer($oInformer);
+                        }
                     }
                 }
 

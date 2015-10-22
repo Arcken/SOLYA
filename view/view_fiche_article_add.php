@@ -149,7 +149,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 </br>
                 </br>
                 
-<!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
+<!-- Boucle permettant d'afficher pour chaque résultat une input box et son label-->
                 <?php
                 if (is_array($resAllNut) && $resAllNut != 0) {
                     foreach ($resAllNut as $value) {

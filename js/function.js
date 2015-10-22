@@ -20,7 +20,6 @@ function addLigne($table, $idTr) {
 
     //On récupére le squelette du code entre le balises <tr id=$idTr> et </tr>
     $ligne = $('#' + $idTr).html();
-    console.log($ligne);
     //On créé une variable qui est l'id du nouveau tr
     $id = $idTr + nRowCount;
     //on remplace tous les mots NID par le même numéro de ligne 
@@ -32,7 +31,6 @@ function addLigne($table, $idTr) {
     $ligne = $ligne.replace($idTr, $id);
     //On ajoute le code à la fin de la table
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
-    console.log($ligne);
 }
 
 
@@ -507,9 +505,11 @@ function getReference($row, $source, $champs, $form) {
     //On récupére la valeur de l'input
     $valInput = $("input[id='" + $source + "']").val();
 
-    $.getJSON(
-            'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput},
+    $.ajax({
+            url: "ws/webService.php", // code cible    
+            dataType: "jsonp", 
+            data: {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput}
+        }).done(
     function (json) {
 
         for (var key in json) {
