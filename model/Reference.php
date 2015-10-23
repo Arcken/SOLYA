@@ -8,10 +8,10 @@ class Reference {
 
     //Données membres
     public $ref_id           = '';
-    public $dc_id            = '';
-    public $cons_id          = '';
-    public $fiart_id         = '';
-    public $dd_id            = '';
+    public $dc_id            = NULL;
+    public $cons_id          = NULL;
+    public $fiart_id         = NULL;
+    public $dd_id            = NULL;
     public $tva_id           = '';
     public $ref_lbl          = '';
     public $ref_mrq          = '';

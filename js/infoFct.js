@@ -23,20 +23,39 @@ function changeRequest(){
     switch ($radioBtnVal){
         //Selon sa valeur on vient stocker une requète à l'interieur
         case 'reference':
-          $request.val('SELECT * FROM reference WHERE ref_lbl LIKE ');  
+            
+          $request.val('SELECT ref_id as Numéro, '
+                              +'ref_code as Code$Référence, '
+                              +'ref_lbl as Nom, '
+                              +'ref_mrq as Marque, '
+                              +'ref_st_min as Stk$Mini, '
+                              +'ref_poids_brut as PoidsBrut, '
+                              +'ref_poids_net as PoidsNet, '
+                              +'ref_emb_lbl as Emballage, '
+                              +'ref_com as Commentaire ' 
+                              +'FROM reference WHERE ref_lbl LIKE '); 
         break;
         
         case 'lot':
-          $request.val('SELECT * FROM lot l NATURAL JOIN '
-                       +'reference r WHERE r.ref_lbl LIKE ');     
+          $request.val("SELECT l.lot_id as Numéro$Lot, "
+                + "l.ref_id as Référence$Associée, "
+                + "r.ref_code as Code$Référence, "
+                + "l.lot_id_producteur as N°Lot$Producteur, "
+                + "l.lot_dlc as DLC$DLUO, "
+                + "l.lot_qt_stock as Quantité$Stock, "
+                + "l.lot_qt_init as Quantité$Initial "
+                + "FROM lot l "
+                + "NATURAL JOIN "
+                + "reference r WHERE r.ref_lbl LIKE ");     
         break;
         
         case 'compte':
-          $request.val('SELECT cpt_id as Numéro,\n\
-                        cpt_nom as Nom,\n\
-                        cpt_date as Création,\n\
-                        cpt_com as Commentaire, \n\
-                        cpt_type as Type FROM compte '
+          $request.val('SELECT cpt_id as Numéro$Compte, '
+                        +'cpt_nom as Nom, '
+                        +'cpt_code as Code$Compte, '
+                        +'cpt_date as Date$Création, '
+                        +'cpt_com as Commentaire '
+                        +'FROM compte '
                        + 'WHERE cpt_nom LIKE ');     
         break;
         
@@ -66,14 +85,14 @@ function search(){
     
     //On finalise la requète en y associant la valeur
     $request=$inptReq+" '%"+$value+"%'";
+    console.log($request);
     //Ajax
     $.getJSON(
             'ws/webService.php', // page cible         
-            {test: 'Solya', action: 'getSearch',
-            request:$request},
+            {test: 'Solya', action: 'getSearch',request:$request},
           //Callback  
     function (json) {
-        //String qui va contenir les entêtes        
+        //String qui va contenir les entêtes   
         var $strTh='';
         //Tableau qui va contenir toutes les lignes de la table 
         $tab=new Array();
@@ -88,8 +107,9 @@ function search(){
           for(var prop in json[key]){
               
             //Si c'est la première ligne on mémorise les en-têtes
-              if(key==='0'){    
-                $strTh+='<th>'+prop+'</th>';  
+              if(key==='0'){
+                $title=prop.replace('$',' ');
+                $strTh+='<th>'+$title+'</th>';  
               }
               
               //On construit la ligne de la table

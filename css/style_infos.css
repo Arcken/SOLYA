@@ -38,6 +38,7 @@
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
 }
 
+
 #alert table, #blocSearch table{
     border-collapse: collapse;
     margin:2%;
@@ -47,13 +48,13 @@
 }
 
 #alert th, #blocSearch th{
-    border: 2px solid black;
+    border: 4px solid lightslategray;
     font-size: 0.8em;
 }
 
 #alert td, #blocSearch td{
     text-align: center;
-    border: 1px solid black;
+    border: 4px solid lightslategray;
 }
 
 #alert tr, #blocSearch tr{

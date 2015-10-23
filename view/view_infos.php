@@ -29,9 +29,8 @@
         <input type='radio' 
                name='table' 
                value='reference' 
-               title='Recherche une référence par libéllé' 
-               onclick='changeRequest()'
-               >
+               title='Recherche une référence par nom' 
+               onclick='changeRequest()'>
        <i>Lot</i>
         <input type='radio' 
                name='table' 

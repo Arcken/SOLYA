@@ -33,8 +33,12 @@
                 <input id="pays_abv" name="pays_abv" type="text"  hidden/>
                 <input id="ga_abv" name="ga_abv" type="text"  hidden/>
                 <label for="refCode">Code de la référence : </label><br>          
-                <input id="refCode" name="refCode" type="text" placeholder="Code de la référence"
-                       required  pattern=".{6,}" autocomplete="off" 
+                <input id="refCode" name="refCode"
+                       type="text" 
+                       placeholder="Code de la référence"
+                       required  
+                       pattern=".{6,}" 
+                       autocomplete="off" 
                        onkeyup="getLastRefCode();"
                       
                        onfocus="getLastRefCode();"  
@@ -94,7 +98,7 @@
                 <select name="modeConservation" 
                         id="modeConservation" 
                         title="Choisir un élément" 
-                        required>
+                        >
                     <option value="" 
                             selected>Aucun</option>
                     
@@ -114,7 +118,7 @@
                 <label for="dureeConservation"> Durée de conservation </label>
                 <br>
                 <select name="dureeConservation" 
-                        title="Choisir un élément" required>
+                        title="Choisir un élément" >
                     <option value="" selected>Aucun</option>
                     
                     <?php
@@ -239,7 +243,7 @@
                 <label for="droitDouane"> Droit de douanes: </label><br>
                 <select name="droitDouane" 
                         title="Choisir un élément" 
-                        required>
+                        >
                     
                      <option value="" selected>Aucun</option>
                      

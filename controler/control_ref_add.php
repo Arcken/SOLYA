@@ -99,7 +99,13 @@ try {
         Tool::addMsg($msg);
     }
 } catch (MySQLException $e) {
-    $cnx->rollback();
-    $msg = $resEr[1];
+   
+    switch ($resEr[0]){
+        case '23000':
+    $resErr[1]='';
+    $msg = "<p class= 'erreur'> " . date('H:i:s') 
+                 ." <b> \"$resEr[0]\" </b> Des champs obligatoire ne sont pas renseignés </p>";
     Tool::addMsg($msg);
+    $cnx->rollback();
+    }
 }
