@@ -28,7 +28,14 @@
 
             //Modification du bon d'entrée
             case "be_detail":
+                 
                 require $path . '/controler/control_be_upd.php';
+                 if (isset($_REQUEST['btnForm']) 
+                        && $_REQUEST['btnForm'] == 'Modifier') {
+                    
+                    require $path . '/controler/control_be_list.php';
+                    
+                };
                 break;
 
             

@@ -77,8 +77,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     'lig_com' => $tLigCom,
                     'lot_id_producteur' => $tLotIdProducteur,
                     'lot_dlc' => $tLotDlc,
-                    //les quantités sont identique pour un insert, 
-                    //pour une modification on ajustera
+                    //les quantités sont identique pour un insert
                     'lot_qt_init' => $tLigQte,
                     'lot_qt_stock' => $tLigQte,
                     'ref_id' => $tRefId,
@@ -120,8 +119,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $oLot->ref_id = $tLigneForm['ref_id'][$i];
                     $oLot->lot_id_producteur = $tLigneForm['lot_id_producteur'][$i];
                     $oLot->lot_dlc = $tLigneForm['lot_dlc'][$i];
-                    $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
-                    $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
+                   
 
                     //On hydrate un objet Ligne
                     $oLigne = new Ligne();
@@ -161,22 +159,30 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                         //sinon on fait un update
                         } else {
-
+                            print_r($oLigne);
                             //Update de la ligne dans la table ligne
                             $updLigne = LigneManager::updLigne($oLigne);
 
-                            
+                            print_r($oBeLigne);
 
                             //on update l'objet BeLigne dans la table be_ligne
                             $tResUpdate[] = BeLigneManager::updBeLigne($oBeLigne);
-                            print_r($tResUpdate);
+                            
                             //l'update du lot dans la table lot se fait par 
-                            //un triger dans la base
+                            //un triger dans la base pour les champs quantités
+                            //On fait une update que pour les champs 
+                            //autres que quantité
+                            
+                            LotManager::updInfosLot($oLot);
                             
                         }
                     //Sinon c'est que c'est un insert    
                     } else {
-                        //Insert du lot dans la table lot
+                        
+                        //Insert du lot dans la table lot avec toutes les infos
+                        //récupérés                        
+                        $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
+                        $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
                         $resLot = LotManager::addLot($oLot);
 
                         //On récupére l'id du lot inséré
@@ -220,11 +226,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             $sAction = "be_list";
             require_once $path . '/controler/control_be_list.php';
         } catch (MySQLException $e) {
-            $e->RetourneErreur();
+            echo ($e->RetourneErreur());
             //Message pour l'erreur
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
                     . ' Echec modification bon d\'entré, code: '
-                    . $resEr . '</p>';
+                    . $resEr[0] . '</p>'; 
             $cnx->rollback();
         }
         //On insert le message dans le tableau de message

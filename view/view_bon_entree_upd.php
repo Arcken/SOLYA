@@ -498,6 +498,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                     <?php
                     //Pour chaque ligne de bon
+                    if (isset($resAllBeLigneBE) && is_array($resAllBeLigneBE)){
                     for ($i = 0; $i < count($resAllBeLigneBE); $i++) {
                         //l'id du tr html est i+1, 0 étant celle du squellette
                         $idLigne = $i + 1;
@@ -771,7 +772,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </tr>
                         <!-- Fin construction lignes récupérées-->
 
-                    <?php } ?>
+                    <?php } }?>
                 </table>
                 <!-- Ajoute une ligne -->
                 <input type="button" 

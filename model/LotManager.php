@@ -29,6 +29,34 @@ class LotManager {
         return $result;
     }
     
+    /**
+     * Modifie un enregistrement dans la table Lot que
+     * dans les champs autres que quantités
+     * @param type $oLot
+     */
+    public static function updInfosLot($oLot) {
+        try {
+            
+            $tParam = [
+                $oLot->ref_id,
+                $oLot->lot_id_producteur,
+                $oLot->lot_dlc,
+                $oLot->lot_id];
+
+            $sql = "UPDATE lot SET "
+                    . "ref_id =?, "
+                    . "lot_id_producteur =?, "
+                    . "lot_dlc =? "
+                    . "WHERE lot_id=?";
+
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     
     /** 
      * Select d'un enregistrement selon l'id

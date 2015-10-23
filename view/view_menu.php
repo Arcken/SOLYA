@@ -91,9 +91,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </li>
                     <li><a href='#'><span>Consulter</span></a>
                         <ul>
-                            <li><a href='#' ><span>Entrée</span></a></li>
+                            <li><a href='index.php?action=be_list' ><span>Entrée</span></a></li>
                             <li><a href='index.php?action=bon_list'><span>Sortie/Retour</span></a></li>
-                            <li><a href='index.php?action=bon_detail'><span>Modif/Détail</span></a></li>
                             <li><a href='index.php?action=inventaire_list'><span>Inventaire</span></a></li>
                         </ul>
                     </li>
