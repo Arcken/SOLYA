@@ -45,7 +45,7 @@ class BonEntreeManager {
      * @return Objet[]
      * Retourne un tableau d'objet
      */
-    public static function getBonsEntreesLim($rowStart, $nbRow, $orderBy = 'be_id', $sort = 'ASC') {
+    public static function getBonsEntreesLim($rowStart, $nbRow, $orderBy = 'be_id', $sort = 'DESC') {
 
         try {
 

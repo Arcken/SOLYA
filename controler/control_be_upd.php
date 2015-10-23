@@ -104,7 +104,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oBe->be_com_pai = $_REQUEST['beComPai'];
                 
                 //Modification du bon c'est la première modification à vendre
-                $updBe = BonEntreeManager::updBonEntree($oBe);
+                BonEntreeManager::updBonEntree($oBe);
                 
                 //Boucle pour traiter les lignes
                 //On ignore la première ligne, c'est le squelette de construction 
@@ -149,24 +149,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         //une exception sera levé et fera un rollback
                         if (isset($tLigSupp[$i])) {
                             //on commence par supprimmer be_ligne
-                            $delBeLigne = BeLigneManager::delBeLigne($beId, $oBeLigne->lig_id);
+                            BeLigneManager::delBeLigne($beId, $oBeLigne->lig_id);
 
                             //On supprimme la ligne
-                            $delLigne = LigneManager::delLigne($oLigne->lig_id);
+                            LigneManager::delLigne($oLigne->lig_id);
 
                             //On supprimme le lot
-                            $delLot = LotManager::delLot($oLot->lot_id);
+                            LotManager::delLot($oLot->lot_id);
 
                         //sinon on fait un update
                         } else {
-                            print_r($oLigne);
+                            
                             //Update de la ligne dans la table ligne
-                            $updLigne = LigneManager::updLigne($oLigne);
-
-                            print_r($oBeLigne);
+                            LigneManager::updLigne($oLigne);
 
                             //on update l'objet BeLigne dans la table be_ligne
-                            $tResUpdate[] = BeLigneManager::updBeLigne($oBeLigne);
+                            BeLigneManager::updBeLigne($oBeLigne);
                             
                             //l'update du lot dans la table lot se fait par 
                             //un triger dans la base pour les champs quantités
@@ -183,7 +181,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         //récupérés                        
                         $oLot->lot_qt_stock = $tLigneForm['lot_qt_stock'][$i];
                         $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
-                        $resLot = LotManager::addLot($oLot);
+                        LotManager::addLot($oLot);
 
                         //On récupére l'id du lot inséré
                         $idLot = Connection::dernierId();
@@ -192,7 +190,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oLigne->lot_id = $idLot;
 
                         //Insert de la ligne dans la table ligne
-                        $resLigne = LigneManager::addLigne($oLigne);
+                        LigneManager::addLigne($oLigne);
 
                         //On récupére l'id de la ligne inséré
                         $idLigne = Connection::dernierId();
@@ -201,7 +199,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oBeLigne->lig_id = $idLigne;
 
                         //on insert l'objet BeLigne dans la table be_ligne
-                        $resBeLigne = BeLigneManager::addBeLigne($oBeLigne);
+                        BeLigneManager::addBeLigne($oBeLigne);
                     }
                 }
                 //La requète s'est effectué donc on commit la transaction

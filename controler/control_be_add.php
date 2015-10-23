@@ -47,7 +47,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         $oBe->be_com_pai = $_REQUEST['beComPai'];
 
         //Insert du bon
-        $resBe = BonEntreeManager::addBonEntree($oBe);
+        BonEntreeManager::addBonEntree($oBe);
 
         //On récupére l'id du bon d'entrée inséré
         $idBe = Connection::dernierId();
@@ -109,7 +109,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $oLot->lot_qt_init = $tLigneForm['lot_qt_init'][$i];
 
             //Insert du lot dans la table lot
-            $resLot = LotManager::addLot($oLot);
+            LotManager::addLot($oLot);
 
             //On récupére l'id du lot inséré
             $idLot = Connection::dernierId();
@@ -122,7 +122,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $oLigne->lig_com = $tLigneForm['lig_com'][$i];
 
             //Insert de la ligne dans la table ligne
-            $resLigne = LigneManager::addLigne($oLigne);
+            LigneManager::addLigne($oLigne);
 
             //On récupére l'id de la ligne inséré
             $idLigne = Connection::dernierId();
@@ -141,7 +141,7 @@ if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
             $oBeLigne->belig_taxe = $tLigneForm['belig_taxe'][$i];
 
             //on insert l'objet BeLigne dans la table be_ligne
-            $resBeLigne = BeLigneManager::addBeLigne($oBeLigne);
+            BeLigneManager::addBeLigne($oBeLigne);
         }
         
         //Message pour le succés

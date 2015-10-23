@@ -569,9 +569,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="ligQte[<?php echo $idLigne ?>]" 
                                        id ="ligQte<?php echo $idLigne ?>"
                                        value="<?php echo $oLigne->lig_qte ?>"
-                                       onfocus='ctrlUpdQtInit("ligQte<?php echo $idLigne ?>",
-                                                            "<?php echo $oLot->lot_qt_init ?>",
-                                                            "<?php echo $oLot->lot_qt_stock ?>")'>
+                                       min="<?php echo $oLot->lot_qt_stock ?>")>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"

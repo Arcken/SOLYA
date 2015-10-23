@@ -24,6 +24,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
+        echo ($e->RetourneErreur());
         $msg = $resEr[1];
         Tool::addMsg($msg);
     }
