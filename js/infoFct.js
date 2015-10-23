@@ -71,25 +71,26 @@ function changeRequest(){
 
 function search(){
     //On récupère la valeur à rechercher
-    $value =$('#inptSearch').val();
+    $value = $('#inptSearch');
     
     //On récupère la div dans laquelle les résultat sont affichés
     $resSearch =$('#resSearch');
     
     //On récupère la requète stocké dans l'input caché
-    $inptReq=$('#request').val();
+    $request=$('#request').val();
     
     //On cache la div et on la néttoie
     $resSearch.hide();
     $resSearch.text('');
     
-    //On finalise la requète en y associant la valeur
-    $request=$inptReq+" '%"+$value+"%'";
     console.log($request);
+    console.log($value);
+    console.log($value.val());
+    
     //Ajax
     $.getJSON(
             'ws/webService.php', // page cible         
-            {test: 'Solya', action: 'getSearch',request:$request},
+            {test: 'Solya', action: 'getSearch',request:$request, value:$value.val()},
           //Callback  
     function (json) {
         //String qui va contenir les entêtes   

@@ -250,19 +250,26 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             break;
             
             case 'getSearch':
-
-            $tab = array();
-
-            $requete =$_REQUEST['request'];
-
-            //On l'éxécute
-            $resultat = $bdd->query($requete);
-            //Récupération des données
             
+           
+            $tab = array();
+            $requete   =(string)$_REQUEST['request'];
+            //Protection contre les potentiel 
+            $valueSrch =  htmlspecialchars($_REQUEST['value']);
+            
+            $myRequest=$requete."'%$valueSrch'";
+            
+            //On l'éxécute
+            $resultat = $bdd->query($myRequest);
+             
+             
+            //Récupération des données
             while ($data = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $data;
             }
+           
             echo json_encode($tab);
+            
 
 
             break;
