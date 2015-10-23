@@ -112,11 +112,20 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             <td class="colData" colspan="3">
                                 <?php echo $be->be_date ?>
                             </td>
+                            <td class="colTdIco">
+                                <img src="img/icon/read.png" title="Consulter"
+                                     onclick='window.open(
+                                              "index.php?action=nv_be_pdf&beId=<?php echo $be->be_id ?>")'/>
+                            </td>
                             <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
-                                     onclick='location.href = "index.php?action=be_detail&beId=<?php echo $be->be_id ?>"'/></td>
+                                     onclick='location.href = "index.php?action=be_detail&beId=<?php echo $be->be_id ?>"'/>
+                            </td>
+                           
 
                             <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
-                                     onclick='delElt(<?php echo $be->be_id ?>, "beId", "Bon entrée", "be_del")'/></td>
+                                     onclick='delElt(<?php echo $be->be_id ?>, "beId", "Bon entrée", "be_del")'/>
+                            </td>
+                            
 
                         </tr>
 

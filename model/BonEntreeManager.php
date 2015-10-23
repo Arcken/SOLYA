@@ -11,6 +11,29 @@
  */
 class BonEntreeManager {
 
+     /**
+     * Retourne enregistrements de la table selon son id
+     * @param $beId identifiant 
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getBonEntree($beId) {
+
+        try {
+            $tParam=[$beId];
+            
+            $sql = 'SELECT be_id, cpt_id, be_lbl, be_date, be_fact_num,'
+                    . 'be_frais_douane, be_frais_bancaire, be_frais_trans, '
+                    . 'be_com, be_info_trans, be_total, be_mode_pai, be_com_pai '
+                    . 'FROM bon_entree WHERE be_id=?';
+            
+            $result = Connection::request(0,$sql,$tParam);
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+
     /**
      * Retourne tous les enregistrements de la table
      * 

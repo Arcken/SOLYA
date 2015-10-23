@@ -21,7 +21,8 @@ class BonManager {
 
           $tParam=[$bonId];
 
-            $sql = "SELECT bon_id, "
+            $sql = "SELECT bon_id,"
+                         ."cpt_id, "
                          ."doclbl_id,"
                          ."bon_fact_num,"
                          ."bon_date,"
@@ -52,6 +53,7 @@ class BonManager {
           $tParam=[$bonId];
 
             $sql = "SELECT bon_id, "
+                         ."cpt_id,"
                          ."doclbl_id,"
                          ."bon_fact_num,"
                          ."bon_date,"
@@ -89,6 +91,7 @@ class BonManager {
           
 
             $sql = "SELECT bon_id, "
+                         ."cpt_id,"
                          ."doclbl_id,"
                          ."bon_fact_num,"
                          ."bon_date,"
@@ -117,6 +120,7 @@ class BonManager {
 
 
             $tParam = array(
+                $oBon->cpt_id,
                 $oBon->doclbl_id,
                 $oBon->bon_fact_num,
                 $oBon->bon_date,
@@ -125,12 +129,13 @@ class BonManager {
             );
 
             $sql = "INSERT INTO bon ("
+                    . "cpt_id, "
                     . "doclbl_id,"
                     . "bon_fact_num,"
                     . "bon_date,"
                     . "bon_com,"
                     . "bon_sortie_assoc) "
-                    . "VALUES(?,?,?,?,?)";
+                    . "VALUES(?,?,?,?,?,?)";
 
           $result = Connection::request(2, $sql, $tParam);
             
@@ -151,7 +156,7 @@ class BonManager {
 
 
             $tParam = array(
-                
+                $oBon->cpt_id,
                 $oBon->doclbl_id,
                 $oBon->bon_fact_num,
                 $oBon->bon_date,
@@ -161,6 +166,7 @@ class BonManager {
             );
 
             $sql = "UPDATE bon SET "
+                    . "cpt_id=?,"
                     . "doclbl_id = ?,"
                     . "bon_fact_num = ?,"
                     . "bon_date = ?,"

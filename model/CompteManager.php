@@ -13,6 +13,29 @@
  */
 class CompteManager {
     
+    
+    /**
+     * Retourne un les enregistrements de la table selon son id
+     * @param $cptId identifiant de la ligne
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getCompte($cptId) {
+
+        try {
+            $tParam=[$cptId];
+            
+            $sql = 'SELECT cpt_id, cpt_date, cpt_nom, cpt_com, cpt_code,cpt_type FROM compte '
+                  .'WHERE cpt_id =?';
+            
+            $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     /**
      * Retourne tous les enregistrements de la table
      * 

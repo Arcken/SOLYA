@@ -233,7 +233,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
 
             $requete = "SELECT lot_qt_stock, lot_qt_init, l.ref_id, "
-                    . "lot_id_producteur, lot_dlc, r.ref_code"
+                    . " lot_id_producteur, lot_dlc, r.ref_code"
                     . " FROM lot l"
                     . " JOIN reference r ON l.ref_id = r.ref_id"
                     . " WHERE lot_id=" . $lotId;
@@ -254,7 +254,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
            
             $tab = array();
             $requete   =(string)$_REQUEST['request'];
-            //Protection contre les potentiel 
+            //Protection contre les potentiel attaques 
             $valueSrch =  htmlspecialchars($_REQUEST['value']);
             
             $myRequest=$requete."'%$valueSrch'";

@@ -14,6 +14,7 @@
 class Bon {
     //Données membres
     public $bon_id='';
+    public $cpt_id=NULL;
     public $doclbl_id='';
     public $bon_fact_num='';
     public $bon_date='';
