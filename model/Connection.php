@@ -149,12 +149,19 @@ class Connection {
             //Car selon les cas il est récupéré soit sur le statement
             //soit sur la connexion directement.
             //On le place ensuite dans $resErr qui est afiché dans le footer.
-           if(isset($stm)){ 
+            
+             if(isset($stm)){ 
                $resEr[0] = $stm->errorCode();
-           }else{
-               $resEr[0] =self::$cnx->errorCode();
+            } else if (is_object(self::$cnx)){
+                $resEr[0] =self::$cnx->errorCode();                
+            }else{
+                echo 'code: '. $e->getCode().'<br>';
+                echo 'message: '. $e->getMessage().'<br>';
+                foreach ($e->getTrace() as $value) {
+                    echo $value.'<br>';
+                }
            }
-           
+        
         switch ($resEr[0]) {
                 
                 case 'ERR0R':

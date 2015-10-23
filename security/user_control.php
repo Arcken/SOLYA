@@ -3,7 +3,7 @@
 /*
  *  Script s'occupant de la vérification de l'utilisateur
  */
-
+try{
 //On teste si les variables sont renseignées
 if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
         isset($_REQUEST['pwd']) && !empty($_REQUEST['pwd'])) {
@@ -35,4 +35,8 @@ if (isset($_REQUEST['login']) && !empty($_REQUEST['login']) &&
     else {
         echo "Erreur de login, compte inexistant ou désactivé.";
     }
+}
+}catch (Exception $e){
+    echo 'test';
+    echo $e->getCode();
 }

@@ -1,6 +1,6 @@
 
 [SQL]
-host = localhost
+host = 78.246.124.129
 user = solya
 pwd = "Stage2015!"
 base = solya
