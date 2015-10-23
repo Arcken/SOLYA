@@ -84,7 +84,10 @@ class Connection {
         try {
             global $resEr;
             global $resMessage;
+            
+            //On lance la remonté d'erreur
             ExceptionThrower::Start();
+            
             if (empty(self::$cnx)) {
                 self::$cnx = Connection::getConnection();
             }
@@ -135,7 +138,7 @@ class Connection {
                     }
                     break;
             }
-            
+            //Enfin on ferme la remonté d'erreur
             ExceptionThrower::Stop();
             
             

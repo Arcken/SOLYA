@@ -2,7 +2,7 @@
 
 <!-- Intégration de Jquery et des fontions js-->
 <script type="text/javascript" src="lib/jquery.js"></script>
-<script src="js/function.js" type="text/javascript"></script>
+<script src="js/js_function.js" type="text/javascript"></script>
 
 </body>
 

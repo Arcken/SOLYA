@@ -1,7 +1,7 @@
 
 <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 <link type="text/css" href="css/style_list.css" rel="stylesheet">
-<script src="js/contactAdd.js" type="text/javascript"></script>
+<script src="js/js_contact.js" type="text/javascript"></script>
 
 
 <!--Corps de la page-->

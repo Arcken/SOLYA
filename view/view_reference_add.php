@@ -1,6 +1,6 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
-    <script type="text/javascript" src="js/function.js"></script>
-    <script type="text/javascript" src="js/refFct.js"></script>
+    <script type="text/javascript" src="js/js_function.js"></script>
+    <script type="text/javascript" src="js/js_reference.js"></script>
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     
     <div class="corps">

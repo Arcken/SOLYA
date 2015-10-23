@@ -1,7 +1,8 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0){ ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet" >
-    <script type="text/javascript" src="js/refFct.js"></script>
+     <link type="text/css" href="css/style_list.css" rel="stylesheet" >
+    <script type="text/javascript" src="js/js_reference.js"></script>
     
     <div class="corps">
 
@@ -10,7 +11,9 @@
 
                 <label for="ficheArticle">Fiche article associée : </label>
                 <br>
-                <input  name="ficheArticle" type="text"
+                <input  name="ficheArticle" 
+                        type="text"
+                        size="15"
                         <?php
                             foreach ($toFiArts as $oFiArt) {
                                 if ($oFiArt->fiart_id === $rsRef->fiart_id) {?>
@@ -153,7 +156,7 @@
                         <br>
                         <input name="tva" 
                                type="text"
-                               size="30"
+                               size="20"
                             <?php
                                 foreach ($toTvas as $oTva) {
                                     if ($oTva->tva_id === $rsRef->tva_id) {?>
@@ -213,7 +216,7 @@
                     
                     <div class="col90" id='tableLot'>
                      <?php if (is_array($toLots)){?>
-                        <table style='margin:auto;'>
+                        <table class="tableList">
                             <tr>
                                 <th class='colTitle'>
                                     N°Lot</th>

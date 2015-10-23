@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */?>
 <link type="text/css" href="css/style_infos.css" rel="stylesheet">
-<script type='text/javascript' src='js/infoFct.js'></script>
+<script type='text/javascript' src='js/js_search.js'></script>
 <aside id='asideInfos'>
     <div id="blocSearch">
         <h3>Recherche:</h3>

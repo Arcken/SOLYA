@@ -1,17 +1,7 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 8 sept. 2015, 12:14:32
-    Author     : Olivier
-*/
+
 
 /*Initialisation des propriétés*/
-body{
-    background-color: antiquewhite;
-}
+
 #bloc_header{
     margin: 0px;
     padding: 0px;
@@ -41,8 +31,11 @@ body{
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: black;
-    border: solid yellow 2px;
+    background-color: cyan;
+    border: solid black 0px;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
     -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -58,9 +51,9 @@ body{
     margin-right: 1%;
     width:70%;
     height: 89%;
-    border: solid red 2px;
-    background-color:darkslategrey;
-    color: blanchedalmond;
+    border: solid black 2px;
+    background-color:lightslategrey;
+    color: white;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
     -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -73,7 +66,7 @@ body{
 #header_user_info{
     
     display:block;
-    border: solid red 2px;
+    border: solid black 2px;
     margin-right:0.2%;
     background-color: whitesmoke;
     height: 89%;
@@ -113,6 +106,6 @@ h1{
     //left:10.5%;
     width:99%;
     height:99%;
-    border: solid black 2px;
+    //border: solid black 2px;
     //background-color: yellow;
 }

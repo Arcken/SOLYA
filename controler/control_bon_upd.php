@@ -1,12 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Sous controleur Modification bon
  */
 try {
-    
+    require_once $path. '/model/InventaireManager.php';
     //Contrôle si un inventaire est en cours
             $tInventaire = InventaireManager::getInventaireOpen();
             if (!isset($tInventaire) || !is_array($tInventaire)) {
@@ -90,6 +88,7 @@ try {
             $oBon->bon_id           = $bonId;
             $oBon->doclbl_id        = $_REQUEST['typeBon'];
             $oBon->bon_date         = $_REQUEST['bonDate'];
+            
             if(isset($_REQUEST['bonSortie'])){
                 $oBon->bon_sortie_assoc = $_REQUEST['bonSortie'];
             }
@@ -148,7 +147,7 @@ try {
 
             //Boucle pour traiter les lignes
             //On ignore la première ligne, c'est le squelette de construction 
-            //pour l'ajout de ligne dans le bon
+            //pour l'ajout de ligne dans le bon.
             //La limite étant le nombre de ligne remplie on prend ref_id comme témoin
             
            //echo '<br> en dehors de la boucle <br>';
@@ -236,7 +235,7 @@ try {
                                 //echo"<br> Suppression ligne $i check : $resLigneDel <br> ";
                     } else {
                         
-                        echo $i . "<br>";
+                        //echo $i . "<br>";
                         //On hydrate un objet Ligne
                         $args = array(
                             'lig_id'=>$tLigneForm['lig_id'][$i],
@@ -250,7 +249,7 @@ try {
 
                         //Update de la ligne dans la table ligne
                         $updLigne = LigneManager::updLigne($oLigne);
-                        echo "<br>Update ligne check : $updLigne <br>";
+                        //echo "<br>Update ligne check : $updLigne <br>";
 
                         //on récupére l'ancien lot
                         $oOldLot = LotManager::getLot($oLigne->lot_id);
@@ -415,6 +414,7 @@ try {
             }
 
             $cnx->commit();
+            
             $msg ="<p class= info>". date('H:i:s').
                   " Les modifications sur le bon N° $oBon->bon_id".
                   " ont bien étaient prises en compte";
@@ -433,17 +433,21 @@ try {
 } catch (MySQLException $e) {
     switch ($resEr){
         
-    case '666':
-    case '777':
-    case '444':
-        $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
-                . $e->getMessage() . "</p>";
+        case 'ERR0R':
+            $msg = "<p class='erreur'>". date('H:i:s') . "$resEr[1]";
+            break;
+
+        case '666':
+        case '777':
+        case '444':
+            $msg = "<p class= 'erreur'> " . date('H:i:s') . " "
+                    . $e->getMessage() . "</p>";
+            break;
+
+        default :
+            $msg='<p class="erreur"> '. date('H:i:s') . 'Oups !une erreur innatendue est survenue ' .
+                   $resEr . " " . $e->getMessage().'</p>';
         break;
-    
-    default :
-        $msg='<p class="erreur"> '. date('H:i:s') . 'Oups !une erreur innatendue est survenue ' .
-               $resEr . " " . $e->getMessage().'</p>';
-    break;
 
     }
     $cnx->rollback();

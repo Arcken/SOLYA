@@ -223,10 +223,11 @@
                         </td>
                         <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_code; ?></td>
                         <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_lbl;  ?></td>
-                        <td class="colData" colspan="3" id='colFiart' 
+                        <td class="colLinkCell" colspan="3" id='colFiart' 
                             onclick='location.href="index.php?action=fiart_detail&fiartId="
                                      +<?php echo $resLigRefs['ref'][$i]->fiart_id ;?>'
-                            ><?php echo $resLigRefs['fiart'][$i]->fiart_lbl; ?>
+                            
+                            style="cursor:pointer;"><?php echo $resLigRefs['fiart'][$i]->fiart_lbl; ?>
                         </td>
                         <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_mrq;  ?></td>
                         <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_poids_net;    ?></td>

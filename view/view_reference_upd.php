@@ -1,7 +1,7 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
-    <script type="text/javascript" src="js/refFct.js"></script>
+    <script type="text/javascript" src="js/js_reference.js"></script>
 
     <div class="corps">
 

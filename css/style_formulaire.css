@@ -17,7 +17,7 @@ and open the template in the editor.
     top: 17%;
     margin-left:2%;
     background-color: gray;
-    border: 2px solid yellow;
+    border: 3px solid black;
     border-radius: 10px 10px 10px 10px;
     -moz-box-shadow: 10px 10px 5px 0px #cfcfcf;
     -webkit-box-shadow: 10px 10px 5px 0px #cfcfcf;
@@ -172,5 +172,6 @@ table{
     background-color: white;
     width:157px;
 }
+
 
 

@@ -9,7 +9,7 @@
     margin-left: 5px;
 }
 
-.colData,.colTitle{
+.colData,.colTitle,.colLinkCell{
     color:white;
     min-width: 25px;
     text-align: center;
@@ -24,6 +24,10 @@
     border-bottom: 2px solid white;
 }
 
+.colLinkCell:hover{
+    cursor:pointer;
+    color:blue;
+}
 .colTdIco{
     width: 18px;
 }

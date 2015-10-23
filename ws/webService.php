@@ -249,15 +249,15 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
 
             break;
             
-            case 'getSearch':
+        case 'getSearch':
             
            
             $tab = array();
             $requete   =(string)$_REQUEST['request'];
-            //Protection contre les potentiel attaques 
+            //Protection contre les potentiels attaques 
             $valueSrch =  htmlspecialchars($_REQUEST['value']);
             
-            $myRequest=$requete."'%$valueSrch'";
+            $myRequest=$requete."'%$valueSrch%'";
             
             //On l'éxécute
             $resultat = $bdd->query($myRequest);

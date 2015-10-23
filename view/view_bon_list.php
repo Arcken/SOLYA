@@ -2,7 +2,7 @@
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
      <link type="text/css" href="css/style_list.css" rel="stylesheet">
-    <script type="text/javascript" src="js/function.js"></script>
+    <script type="text/javascript" src="js/js_function.js"></script>
 
     <div class="corpsCenter">
         <div class='colOnlyOne'>
