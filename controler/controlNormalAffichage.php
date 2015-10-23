@@ -7,9 +7,11 @@
 
         switch ($sAction) {
 
-    //---------------------------- Accueil -------------------------------------
+    //----------------------------- Accueil ------------------------------------
+
             case "home":
             case "connexion":
+            default:
                 require $path . '/view/view_home.php';
                 break;
             
@@ -459,4 +461,6 @@
                     require $path . '/view/view_utilisateur_upd.php';
                 }
                 break;
+                
+                    
         }

@@ -9,6 +9,7 @@
 
             case "home":
             case "connexion":
+            default:
                 $sPageTitle = "Accueil";
                 break;
 
