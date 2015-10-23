@@ -9,6 +9,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/bonFct.js" ></script>
 
     <div class="corps">
+        
+        <?php //Contrôle selon l'inventaire
+            $tInventaire = InventaireManager::getInventaireOpen();
+            if (!isset($tInventaire) || !is_array($tInventaire)){?>
         <form class="form" action="index.php" method="get">
             <div class="col50">
                 <!-- valeur du token du formulaire en cours -->
@@ -280,6 +284,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     </div>
 
     <?php
-} else {
-    echo 'Le silence est d\'or';
-}
+        } else {
+            echo $invMes;
+        }
+    } else {
+        echo 'Le silence est d\'or';
+    }

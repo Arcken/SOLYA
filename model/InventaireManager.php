@@ -32,6 +32,31 @@ class InventaireManager {
         return $result;
     }
 
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * 
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getInventaireOpen() {
+
+        try {
+
+            $sql = 'SELECT inv_id, inv_date, inv_lbl, inv_vld '
+                    . 'FROM inventaire '
+                    
+                    . 'WHERE inv_vld = 0'
+                    . ' ORDER BY inv_date ';
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
     /**
      * Retourne tous les enregistrements de la table avec limite définie
      * @param $rowStart

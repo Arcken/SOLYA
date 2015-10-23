@@ -6,6 +6,10 @@
  * and open the template in the editor.
  */
 try {
+    
+    //Contrôle si un inventaire est en cours
+            $tInventaire = InventaireManager::getInventaireOpen();
+            if (!isset($tInventaire) || !is_array($tInventaire)) {
 
     require_once $path . '/model/Bon.php';
     require_once $path . '/model/BonManager.php';
@@ -425,6 +429,7 @@ try {
         }
         Tool::addMsg($msg); 
     }
+            }
 } catch (MySQLException $e) {
     switch ($resEr){
         

@@ -153,6 +153,11 @@ class Connection {
            }
            
         switch ($resEr[0]) {
+                
+                case 'ERR0R':
+                    $resEr[1] = '<b>"'. $stm->errorInfo()[1] 
+                            .'"</b> '.$stm->errorInfo()[2];
+                    break;
                 case '23000':
                     $resEr[1] = date('H:i:s') . ' <b>"23000"</b> Elément utilisé '
                         . "par un autre enregistrement";

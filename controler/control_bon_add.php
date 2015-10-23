@@ -1,6 +1,12 @@
 <?php
 
 try {
+    
+    //Contrôle si un inventaire est en cours
+            $tInventaire = InventaireManager::getInventaireOpen();
+            if (!isset($tInventaire) || !is_array($tInventaire)) {
+    
+    
     require $path . '/model/DocLibelleManager.php';
     require $path . '/model/Lot.php';
     require $path . '/model/LotManager.php';
@@ -233,6 +239,7 @@ try {
         }
         Tool::addMsg($msg);
     }
+            }
 } catch (MySQLException $e) {
  
     switch ($resEr) {

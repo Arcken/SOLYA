@@ -3,6 +3,10 @@
 //Contrôle si la connection de l'utilisateur est valide
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
+    
+    //Contrôle si un inventaire est en cours
+            $tInventaire = InventaireManager::getInventaireOpen();
+            if (!isset($tInventaire) || !is_array($tInventaire)) {
 
 //on récupére l'id du bon entré
     $beId = $_REQUEST['beId'];
@@ -224,11 +228,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             $sAction = "be_list";
             require_once $path . '/controler/control_be_list.php';
         } catch (MySQLException $e) {
-            echo ($e->RetourneErreur());
+            
             //Message pour l'erreur
+            
             $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
                     . ' Echec modification bon d\'entré, code: '
-                    . $resEr[0] . '</p>'; 
+                    . $resEr[1] . '</p>'; 
+             
+             
             $cnx->rollback();
         }
         //On insert le message dans le tableau de message
@@ -321,6 +328,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             Tool::addMsg($msg);
         }
     }
+            }
 } else {
     $sPageTitle = 'Erreur de chargement';
 }                            

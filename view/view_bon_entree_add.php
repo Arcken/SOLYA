@@ -9,6 +9,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/calculFct.js" ></script>
     <script type="text/javascript" src="js/beFct.js" ></script>
     <div class="corps">
+        <?php //Contrôle selon l'inventaire
+            $tInventaire = InventaireManager::getInventaireOpen();
+            if (!isset($tInventaire) || !is_array($tInventaire)){?>
         <form class="form" action="index.php" method="post" onsubmit="return ctrlFormValide();">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
@@ -511,7 +514,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     </div>
 
-    <?php
-} else {
-    echo 'Le silence est d\'or';
-}
+            <?php
+        } else {
+            echo $invMes;
+        }
+    } else {
+        echo 'Le silence est d\'or';
+    }

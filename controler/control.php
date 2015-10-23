@@ -15,6 +15,9 @@ $sAction = '';
 //variable pour contrôler l'affichage des popups
 $nv = '';
 
+//Message en cas d'inventaire ouvert
+$invMes = "<h1>Un inventaire est en cours<h1>";
+
 //Initialisation valeur limite pour les requêtes si non définie 
 //sinon on récupére la valeur 
 //cette variable sert pour récupérer la 'limit' pour faire des select d'un 
