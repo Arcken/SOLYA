@@ -1,7 +1,13 @@
 <?php
 //Démarrage de la session
 session_start();
+?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"></meta>
 
+<?php
 //recupere parametre du fichier param.ini
 require_once 'inc/ini.inc';
 
@@ -14,18 +20,18 @@ require_once 'model/Connection.php';
 //Vérification de connection
 //Si on n'est pas identifié on appel la page de connection
 if (!isset($_SESSION['auth'])) {
-    
+
     //Si on a envoyé le formulaire on appel le traitement pour la connection 
     if (isset($_REQUEST['action']) && $_REQUEST['action'] == "connexion") {
 
         require_once 'security/user_control.php';
-        
+
         //Sinon on appel la vue pour la connection
     } else {
         $sPageTitle = "Connexion";
         require_once 'view/view_connection.php';
     }
-    
+
 //Sinon on est connecté et on appel le controler
 } else {
 
@@ -33,4 +39,5 @@ if (!isset($_SESSION['auth'])) {
     require_once 'controler/control.php';
 }
 ?>
-</footer>
+    </footer>
+</html>

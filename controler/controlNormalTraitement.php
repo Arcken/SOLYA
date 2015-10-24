@@ -34,7 +34,7 @@
                     
                     require $path . '/controler/control_be_list.php';
                     
-                };
+                }
                 break;
 
             

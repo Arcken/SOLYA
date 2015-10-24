@@ -3,4 +3,3 @@
 </body>
 <footer>
     <?php if (isset($ligneMessage)) echo $ligneMessage; ?>
-</footer>
