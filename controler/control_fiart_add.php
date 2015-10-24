@@ -4,23 +4,22 @@
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
-
-    require $path . '/model/Gamme.php';
-    require $path . '/model/GammeManager.php';
-    require $path . '/model/Pays.php';
-    require $path . '/model/PaysManager.php';
-    require $path . '/model/Nutrition.php';
-    require $path . '/model/NutritionManager.php';
-
     //Si une requéte échoue, une exception est levé par la manager
     try {
+        
+        require $path . '/model/Gamme.php';
+        require $path . '/model/GammeManager.php';
+        require $path . '/model/Pays.php';
+        require $path . '/model/PaysManager.php';
+        require $path . '/model/Nutrition.php';
+        require $path . '/model/NutritionManager.php';
 
         $resAllGa = GammeManager::getAllGammes();
         $resAllPays = PaysManager::getAllPays();
         $resAllNut = NutritionManager::getAllNutritions();
         
         //Si le formulaire est envoyé
-        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+        if ($sButtonUt == "Envoyer") {
 
             //Vérification du jeton pour savoir si le formulaire à déja était envoyé
             if ($_SESSION['token'] != $_REQUEST['token']) {
@@ -138,12 +137,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         //Message pour l'erreur
         $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
                 . ' Echec insert fiche article, code: '
-                . $resEr . '</p>';
+                . $resEr[0] . ' Message: ' . $resEr[1] . '</p>';
     }
 
     //On insert le message dans le tableau de message
-    Tool::addMsg($msg);
-    
+    if (isset($msg)) {
+        Tool::addMsg($msg);
+    }
 } else {
     echo 'Le silence est d\'or';
 }

@@ -4,7 +4,8 @@
 require_once $path . '/inc/Tool.inc';
 
 
-//Initialisation des variables-------------------------------------
+//-------------Initialisation des variables-------------------------------------
+
 //action pour le controleur
 if (isset($_REQUEST['action'])) {
     $sAction = $_REQUEST['action'];
@@ -17,6 +18,7 @@ if (isset($_REQUEST['btnForm'])){
 } else {
     $sButtonUt = '';
 }
+
 //valeur du bouton d'un formulaire par défaut
 $sButton = "Envoyer";
 
@@ -26,14 +28,13 @@ $nv = '';
 //Message en cas d'inventaire ouvert
 $invMes = "<h1>Un inventaire est en cours<h1>";
 
-//Initialisation valeur limite pour les requêtes 
 //cette variable sert pour récupérer la 'limit' pour faire des select d'un 
 //nombre précis d'enregistrement
-if (!isset($_REQUEST['limite']))
+if (!isset($_REQUEST['limite'])) {
     $rowStart = 0;
-else
+} else {
     $rowStart = (int) $_REQUEST['limite'];
-
+}
 
 //-----------------------fin init variable--------------------------------------
 

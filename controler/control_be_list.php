@@ -3,8 +3,10 @@
 //Contrôle si la connection de l'utilisateur est valide
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
+    
+    //Si une requéte échoue, une exception est levé par la manager
     try {
-        $sPageTitle = "Liste des bons d'entrés";
+        
         require_once $path . '/model/BonEntree.php';
         require_once $path . '/model/BonEntreeManager.php';
 
@@ -24,8 +26,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
-        echo ($e->RetourneErreur());
-        $msg = $resEr[1];
+        $msg = '<p class=\'erreur\'> ' . date('H:i:s')
+                . ' Erreur, code: '
+                . $resEr[0] . ' Message: ' . $resEr[1] . '</p>';
+    }
+    if (isset($msg)){
         Tool::addMsg($msg);
     }
 } else {

@@ -4,23 +4,21 @@
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
-//Déffinition du titre de la page
-    $sPageTitle = "Créer un Bon d'entrée";
+    //Si une requéte échoue, une exception est levé par la manager
+    try {
 
-    require_once $path . '/model/BonEntree.php';
-    require_once $path . '/model/BonEntreeManager.php';
-    require_once $path . '/model/BeLigne.php';
-    require_once $path . '/model/BeLigneManager.php';
-    require_once $path . '/model/Ligne.php';
-    require_once $path . '/model/LigneManager.php';
-    require_once $path . '/model/Lot.php';
-    require_once $path . '/model/LotManager.php';
-    require_once $path . '/model/InventaireManager.php';
+        require_once $path . '/model/BonEntree.php';
+        require_once $path . '/model/BonEntreeManager.php';
+        require_once $path . '/model/BeLigne.php';
+        require_once $path . '/model/BeLigneManager.php';
+        require_once $path . '/model/Ligne.php';
+        require_once $path . '/model/LigneManager.php';
+        require_once $path . '/model/Lot.php';
+        require_once $path . '/model/LotManager.php';
+        require_once $path . '/model/InventaireManager.php';
 
-//Controle si le formulaire a était envoyé 
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-
-        try {
+        //Controle si le formulaire a était envoyé 
+        if ($sButtonUt == "Envoyer") {
 
             //Contrôle si un inventaire est en cours
             $tInventaire = InventaireManager::getInventaireOpen();
@@ -169,17 +167,19 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 Vous avez déja envoyé ce formulaire </p>";
                 }
             }
-        } catch (MySQLException $e) {
-            //on annule la transaction
-            echo $e->RetourneErreur();
-            $cnx->rollback();
-            //Message pour l'erreur
-            $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
-                    . ' Echec insert bon entrée, code: '
-                    . $resEr . '</p>';
         }
+    } catch (MySQLException $e) {
+        //on annule la transaction
+        echo $e->RetourneErreur();
+        $cnx->rollback();
+        //Message pour l'erreur
+        $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
+                . ' Echec insert bon entrée, code: '
+                . $resEr[0] . ' Message: ' . $resEr[1] . '</p>';
+    }
 
-        //On insert le message dans le tableau de message
+    //On insert le message dans le tableau de message
+    if (isset($msg)) {
         Tool::addMsg($msg);
     }
 } else {
