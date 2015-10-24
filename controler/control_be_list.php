@@ -26,13 +26,19 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             $resBeList = BonEntreeManager::getBonsEntreesLim($rowStart, $nbRow);
         }
     } catch (MySQLException $e) {
-        $msg = '<p class=\'erreur\'> ' . date('H:i:s')
-                . ' Erreur, code: '
-                . $resEr[0] . ' Message: ' . $resEr[1] . '</p>';
+        switch ($resEr[0]) {
+
+        default:
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Impossible d'afficher la liste. Code :"
+                    . $resEr[0] . " Message : $resEr[1]"
+                    . "</p>";
+            
+            break;
+     }
+     Tool::addMsg($msg);
     }
-    if (isset($msg)){
-        Tool::addMsg($msg);
-    }
+    
 } else {
     echo 'Le silence est d\'or';
 }

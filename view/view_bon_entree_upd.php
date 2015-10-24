@@ -107,7 +107,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col90">
                 <table class="beLigne" id="beTable">
                     <tr id="titreGnl" class="trColTitre">
-                        <th rowspan="2" class="colTitlSupUnique">
+                        <th rowspan="2" class="colTitlSupUnique" hidden="">
                             ID ligne
                         </th>
                         <th colspan="8" class="colTitleSup">

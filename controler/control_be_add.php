@@ -7,8 +7,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     //Si une requéte échoue, une exception est levé par la manager
     try {
 
-        //Contrôle si un inventaire est en cours
+        require_once $path . '/model/InventaireManager.php';
+        
         $tInventaire = InventaireManager::getInventaireOpen();
+        
+        //Contrôle si un inventaire est en cours
         if (!isset($tInventaire) || !is_array($tInventaire)) {
 
             require_once $path . '/model/BonEntree.php';
@@ -19,14 +22,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             require_once $path . '/model/LigneManager.php';
             require_once $path . '/model/Lot.php';
             require_once $path . '/model/LotManager.php';
-            require_once $path . '/model/InventaireManager.php';
 
             //Controle si le formulaire a était envoyé 
             if ($sButtonUt == "Envoyer") {
 
                 //Vérification du jeton pour savoir si le formulaire à déja était envoyé
                 if ($_SESSION['token'] != $_REQUEST['token']) {
-                    throw new MySQLException($e, 'erreur test', $cnx);
+                    
                     //Récupération de la connection
                     $cnx = Connection::getConnection();
 
