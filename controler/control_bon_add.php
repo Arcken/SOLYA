@@ -1,7 +1,7 @@
 <?php
 
 try {
-    
+    require_once $path. '/model/InventaireManager.php';
     //Contrôle si un inventaire est en cours
             $tInventaire = InventaireManager::getInventaireOpen();
             if (!isset($tInventaire) || !is_array($tInventaire)) {
@@ -23,7 +23,7 @@ try {
     $resDocLbl = DocLibelleManager::getAllDocsLibelles();
 
     //Controle si le formulaire a était envoyé 
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+    if (isset($sButtonUt) && $sButtonUt== "Envoyer") {
         //Vérification du jeton pour savoir si le formulaire à déja était envoyé
         if ($_SESSION['token'] != $_REQUEST['token']) {
             //On récupère la valeur de typeBon pour définir l'action à executer
@@ -242,8 +242,13 @@ try {
             }
 } catch (MySQLException $e) {
  
-    switch ($resEr) {
+    switch ($resEr[0]) {
         
+        case 'ERR0R':
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                . "Echec de la modification du bon. Code : $resEr[0] "
+                . "Message : $resEr[1]";
+            break;
         case '666':
         case '777':
            

@@ -15,7 +15,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <form class="form" 
               action="index.php"
               method="get"
-              onsubmit='return uniqueValueInForm("lotId")'>>
+              onsubmit='return uniqueValueInForm("lotId")'>
             <div class="col50">
                 
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
@@ -84,28 +84,41 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="text" name="refId[]" id='refIdNID' onblur="getReferenceBonFromId('NID');">
                         </td>
                         <td class="bonLigneCode">
-                            <input type="text" value="MXSI01" name="refCode[]" id='refCodeNID' onblur="getReferenceBonFromRefCode('NID');">
+                            <input type="text"
+                                   value="0" 
+                                   name="refCode[]" 
+                                   id='refCodeNID' 
+                                   onblur="getReferenceBonFromRefCode('NID');"
+                                   required>
                         </td>
                         <td>
-                            <textarea name="refLbl[]" id='refLblNID' class="bonLigneT"
+                            <textarea name="refLbl[]" 
+                                      id='refLblNID' 
+                                      class="bonLigneT"
                                       rows="4" cols="30"
-                            >Tablette chocolat du Mexique 70% cacao</textarea>
+                            ></textarea>
                            
                         </td>
                          <td class="bonLigneId">
-                             <input type="text" name="lotId[]" id='lotIdNID' onfocus="getLotsFromCurReference('NID');"
+                             <input type="text" 
+                                    name="lotId[]" 
+                                    id='lotIdNID' 
+                                    onfocus="getLotsFromCurReference('NID');"
+                                    required
                                     >
                         </td>
                         <td class="bonLigneNb">
                             <input type="number" name="ligQte[]" id='ligQteNID' 
                                    value="1" step="any"
                                    onblur="confirmQteStock('NID');"
-                                   onfocus="limitQteMax('NID');" min='1' >
+                                   onfocus="limitQteMax('NID');" min='1' 
+                                   required>
                         </td>
                         
                         <td >
                             <textarea name="ligDepot[]" id='ligDepotNID' class="bonLigneT"
-                                      rows="2" cols="30">Dépot?</textarea>
+                                      rows="2" cols="30"
+                                      >Dépot?</textarea>
                         </td>
                         <td>
                             <textarea name="ligCom[]" id ='ligComNID' class="bonLigneT" 

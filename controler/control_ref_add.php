@@ -21,7 +21,7 @@ try {
     $toTvas = TvaManager::getAllTvas();
     $toDroitDouanes = DroitDouaneManager::getAllDroitsDouanes();
 
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
+    if (isset($sButtonUt) && $sButtonUt == "Envoyer") {
         if ($_SESSION['token'] != $_REQUEST['token']) {
 
             require $path . '/model/Reference.php';
@@ -99,13 +99,11 @@ try {
         Tool::addMsg($msg);
     }
 } catch (MySQLException $e) {
-   
-    switch ($resEr[0]){
-        case '23000':
-    $resErr[1]='';
-    $msg = "<p class= 'erreur'> " . date('H:i:s') 
-                 ." <b> \"$resEr[0]\" </b> Des champs obligatoire ne sont pas renseignés </p>";
-    Tool::addMsg($msg);
     $cnx->rollback();
-    }
+    $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Echec Modification de la référence. Code :"
+                    . $resEr[0] . " Message : $resEr[1]"
+                    . "</p>";
+    Tool::addMsg($msg);
+   
 }

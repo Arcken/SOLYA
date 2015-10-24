@@ -123,18 +123,24 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="text"
                                    name="ligId[]" 
                                    id="ligIdNID"
+                                   value="0"
+                                   required
                                    >
                         </td>
                         <td  class="bonLigneId">
                             <input type="text" 
                                    name="refId[]" 
                                    id='refIdNID' 
-                                   onblur="getReferenceBonFromId('NID');">
+                                   onblur="getReferenceBonFromId('NID');"
+                                   value="1"
+                                   required>
                         </td>
                         <td class="bonLigneCode">
                             <input type="text" 
                                    value="" name="refCode[]" id='refCodeNID' 
-                                   onblur="getReferenceBonFromRefCode('NID');">
+                                   onblur="getReferenceBonFromRefCode('NID');"
+                                   value="REFCODE"
+                                   required>
                         </td>
                         <td>
                             <textarea name="refLbl[]" 
@@ -147,14 +153,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <td class="bonLigneId">
                             <input type="text" 
                                    name="lotId[]" id='lotIdNID' 
+                                   required
+                                   value="1"
                                    onfocus="getLotsFromCurReference('NID');"
                                    >
                         </td>
                         <td class="bonLigneNb">
-                            <input type="number" name="ligQte[]" id='ligQteNID' value="" 
+                            <input type="number" name="ligQte[]" id='ligQteNID' value="1" 
                                    step="any"
                                    onblur="confirmQteStock('NID');"
-                                   onfocus="limitQteMax('NID');" min='1'cols="15" >
+                                   onfocus="limitQteMax('NID');" min='1'cols="15" 
+                                   required>
                         </td>
 
                         <td >
@@ -202,19 +211,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            name="refId[<?php echo $ligId ?>]" 
                                            id="refId<?php echo $ligId ?>"
                                            value="<?php echo $oLot->ref_id ?>"
-                                           onblur='getReferenceBonFromId("<?php echo $ligId ?>")'>
+                                           onblur='getReferenceBonFromId("<?php echo $ligId ?>")'
+                                           required>
                                 </td>
                                 <td class="bonLigneCode">
                                     <input type="text"
                                            name="refCode[<?php echo $ligId ?>]" 
                                            id="refCode<?php echo $ligId ?>"
                                            value="<?php echo $oRef->ref_code ?>"
-                                           onblur="getReferenceBonFromRefCode('<?php echo $ligId ?>')">
+                                           onblur="getReferenceBonFromRefCode('<?php echo $ligId ?>')"
+                                           required>
                                 </td>
                                 <td>
                                     <textarea name="refLbl[<?php echo $ligId ?>]" 
                                               id="refLbl<?php echo $ligId ?>"
                                               class="beLigneT"
+                                              required
                                               ><?php echo $oRef->ref_lbl ?></textarea>                           
                                 </td>
                                 <td class="bonLigneId">
@@ -222,7 +234,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            name="lotId[<?php echo $ligId ?>]" 
                                            id='lotId<?php echo $ligId ?>' 
                                            onfocus="getLotsFromCurReference('<?php echo $ligId ?>');"
-                                           value=<?php echo $oLot->lot_id ?>
+                                           required
+                                           value="<?php echo $oLot->lot_id ?>"
                                            >
                                 </td>
                                 <td class="bonLigneNb">
@@ -232,6 +245,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            value="<?php echo $oLigne->lig_qte; ?>" 
                                            onblur="confirmQteStock('<?php echo $ligId ?>');"
                                            onfocus="limitQteMax('<?php echo $ligId ?>');" min='0'
+                                           required
                                            cols="15" >
                                 </td>
                                 <td class="bonLigneNb" hidden>
@@ -240,7 +254,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                            id='ligQteOld<?php echo $ligId ?>' 
                                            value="<?php echo $oLigne->lig_qte; ?>"
                                            onblur="confirmQteStock('<?php echo $ligId ?>');"
-                                           onfocus="limitQteMax('<?php echo $ligId ?>');" min='1' >
+                                           onfocus="limitQteMax('<?php echo $ligId ?>');" min='1'
+                                           required>
                                 </td>
                                 <td class="bonLigneNb">
                                     <textarea name="ligComDep[<?php echo $ligId ?>]" 

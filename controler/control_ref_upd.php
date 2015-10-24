@@ -50,7 +50,7 @@ try {
         $oPve->pve_per = 'indéfinis';
     }
 //Si le bouton du formulaire est définis et que sa valeur est = à modifier
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] === "Modifier") {
+    if (isset($sButtonUt) && $sButtonUt === "Modifier") {
         //Si le formulaire n'a pas déja été envoyé
          if ($_SESSION['token'] != $_REQUEST['token']) {    
             require $path . '/model/Reference.php';
@@ -146,6 +146,7 @@ try {
          //Et on rappel la liste de référence
          $sAction='ref_list';
          require $path.'/controler/control_ref_list.php';
+         
     }else{
         // le token session étant égale au token du formulaire
         //On renvoie un message disant que le formulaire à déja était ajouté
@@ -156,7 +157,10 @@ try {
   } 
 } catch (MySQLException $e) {
     $cnx->rollback();
-    $msg=$resEr[1];
+    $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Echec Modification de la référence. Code :"
+                    . $resEr[0] . " Message : $resEr[1]"
+                    . "</p>";
     Tool::addMsg($msg);
 }
    

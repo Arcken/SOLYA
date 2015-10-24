@@ -72,7 +72,7 @@ try {
     $sButton = 'Modifier';
 
     //Si le formulaire est envoyé
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
+    if (isset($sButtonUt) && $sButtonUt == 'Modifier') {
         //Vérification du jeton pour savoir si le formulaire à était envoyé
         if ($_SESSION['token'] != $_REQUEST['token']) {
     
@@ -431,10 +431,12 @@ try {
     }
             }
 } catch (MySQLException $e) {
-    switch ($resEr){
+    switch ($resEr[0]){
         
         case 'ERR0R':
-            $msg = "<p class='erreur'>". date('H:i:s') . "$resEr[1]";
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                . "Echec de l'insert du bon. Code : $resEr[0] "
+                . "Message : $resEr[1]";
             break;
 
         case '666':
@@ -446,7 +448,7 @@ try {
 
         default :
             $msg='<p class="erreur"> '. date('H:i:s') . 'Oups !une erreur innatendue est survenue ' .
-                   $resEr . " " . $e->getMessage().'</p>';
+                   $resEr[0] . " " . $e->getMessage().'</p>';
         break;
 
     }

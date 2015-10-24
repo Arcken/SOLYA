@@ -139,5 +139,15 @@ try {
     }
     
 } catch (MySQLException $e) {
-    
+     switch ($resEr[0]) {
+
+        default:
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Impossible d'afficher la liste. Code :"
+                    . $resEr[0] . " Message : $resEr[1]"
+                    . "</p>";
+            
+            break;
+     }
+     Tool::addMsg($msg);
 }
