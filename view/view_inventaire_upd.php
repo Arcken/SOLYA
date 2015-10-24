@@ -8,6 +8,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <link type="text/css" href="css/style_bon.css" rel="stylesheet">
     
     <div class="corps">
+        <?php ?>
         <form class="form" id="invAdd" action="index.php" method="get" 
               onsubmit='return uniqueValueInForm("lotId")'>
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>

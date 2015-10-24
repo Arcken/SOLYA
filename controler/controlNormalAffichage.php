@@ -1,466 +1,668 @@
 <?php
-/* ----------------------------Affichage---------------------------------
-    * -------------------------------------------------------------------- */
-        require_once $path . '/view/view_header.php';
-        require_once $path . '/view/view_menu.php';
-        require_once $path . '/view/view_infos.php';
 
-        switch ($sAction) {
+/* ----------------------------Affichage---------------------------------
+ * -------------------------------------------------------------------- */
+
+//Pour chaque appel de page, on définit le titre puis oon appel le header le menu
+//le bloc latéral puis la page. Le ffoter est appelé dans control.php
+
+switch ($sAction) {
 
     //----------------------------- Accueil ------------------------------------
 
-            case "home":
-            case "connexion":
-            default:
-                require $path . '/view/view_home.php';
-                break;
-            
-            
+    case "home":
+    case "connexion":
+    default:
+        //titre par défaut
+        $sPageTitle = "Accueil";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_home.php';
+        break;
+
+
     //-------------------------------Bon entrée---------------------------------
+    //Ajout du bon d'entrée
+    case "be_add":
+        $sPageTitle = "Ajouter une bon d'entrée";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_bon_entree_add.php';
+        break;
 
-            //Ajout du bon d'entrée
-            case "be_add":
-                require $path . '/view/view_bon_entree_add.php';
-                break;
+    //Détail d'un bon d'entrée
+    case "be_detail":
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des bons d'entrée";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_bon_entree_list.php';
+        } else {
+            $sPageTitle = "Modifier une bon d'entrée";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_bon_entree_upd.php';
+        }
 
-            //Détail d'un bon d'entrée
-            case "be_detail":
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_bon_entree_list.php';
-                    
-                } else {
-                    require $path . '/view/view_bon_entree_upd.php';
-                }
-                
-                break;
-            
-            //Liste des bons d'entrées
-            case "be_list":
-                require $path . '/view/view_bon_entree_list.php';
-                break;
-            
-            
+        break;
+
+    //Liste des bons d'entrées
+    case "be_list":
+        $sPageTitle = "Liste des bons d'entrée";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_bon_entree_list.php';
+        break;
+
+
     //-------------------------------Bon sortie/reprise-------------------------
+    //Ajout du bon de sortie/reprise
+    case "bon_add":
+        $sPageTitle = "Ajouter une bon de mouvement";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_bon_add.php';
+        break;
 
-            //Ajout du bon de sortie/reprise
-            case "bon_add":
-                require $path . '/view/view_bon_add.php';
-                break;
+    //Détail du bon de sortie/reprise
+    case "bon_upd":
+        $sPageTitle = "Modifier une bon de mouvement";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_bon_upd.php';
+        break;
 
-            //Détail du bon de sortie/reprise
-            case "bon_upd":
-                require $path . '/view/view_bon_upd.php';
-                break;
-            
-            //Liste des bons de sortie/reprise
-            case "bon_list":
-                require $path . '/view/view_bon_list.php';
-                break;
+    //Liste des bons de sortie/reprise
+    case "bon_list":
+        $sPageTitle = "Liste des bons de mouvement";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_bon_list.php';
+        break;
 
 
     //--------------------------------Contacts----------------------------------
+    //Ajout d'une personne
+    case "pers_add":
+        $sPageTitle = "Ajouter une personne";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_personne_add.php';
+        break;
 
-            //Ajout d'une personne
-            case "pers_add":
-                require $path . '/view/view_personne_add.php';
-                break;
-            
-            //Ajout d'une entreprise
-            case "ent_add":
-                require $path . '/view/view_entreprise_add.php';
-                break;
-            
-            //Ajout d'une personne
-            case "pers_upd":
-                require $path . '/view/view_personne_upd.php';
-                break;
-            
-            //Ajout d'une entreprise
-            case "ent_upd":
-                require $path . '/view/view_entreprise_upd.php';
-                break;
-            
-              //Suppression d'une personne
-            case "pers_del":
-                require $path . '/view/view_personne_del.php';
-                break;
-            
-            //Suppression d'une entreprise
-            case "ent_del":
-                require $path . '/view/view_entreprise_del.php';
-                break;
-            
-            //Ajout d'une personne
-            case "ctc_list":
-                require $path . '/view/view_contact_list.php';
-                break;
-            
+    //Ajout d'une entreprise
+    case "ent_add":
+        $sPageTitle = "Ajouter une entreprise";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_entreprise_add.php';
+        break;
+
+    //Modifier une personne
+    case "pers_upd":
+        $sPageTitle = "Modifier une personne";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_personne_upd.php';
+        break;
+
+    //Modifier une entreprise
+    case "ent_upd":
+        $sPageTitle = "Modifier une entreprise";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_entreprise_upd.php';
+        break;
+
+    //Suppression d'une personne
+    case "pers_del":
+        $sPageTitle = "Sup";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_personne_del.php';
+        break;
+
+    //Suppression d'une entreprise
+    case "ent_del":
+        $sPageTitle = "Sup";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_entreprise_del.php';
+        break;
+
+    //Ajout d'une personne
+    case "ctc_list":
+        $sPageTitle = "Liste des contacts";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_contact_list.php';
+        break;
+
     //-------------------------------- Droit de douane -------------------------
+    //Détail d'un Droit de douane
+    case "dd_detail":
 
-            //Détail d'un Droit de douane
-            case "dd_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_droit_douane_list.php';
-                    
-                } else {
-                    require $path . '/view/view_droit_douane_upd.php';
-                }
-                
-                break;
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des droits de douane";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_droit_douane_list.php';
+        } else {
+            $sPageTitle = "Modifier un droit de douane";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_droit_douane_upd.php';
+        }
 
-            //Ajout d'un Droit de douane
-            case "dd_add":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_droit_douane_list.php';
-                }
-                
-                require $path . '/view/view_droit_douane_add.php';
-                break;
+        break;
 
-            //Supp d'un Droit de douane
-            case "dd_del":
+    //Ajout d'un Droit de douane
+    case "dd_add":
 
-            //Liste des Droits de douane
-            case "dd_list":
-                require $path . '/view/view_droit_douane_list.php';
-                break;
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des droits de douanes";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_droit_douane_list.php';
+        }
+        $sPageTitle = "Ajouter une droit de douane";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_droit_douane_add.php';
+        break;
 
-            
+    //Supp d'un Droit de douane
+    case "dd_del":
+
+    //Liste des Droits de douane
+    case "dd_list": $sPageTitle = "Liste des droits de douane";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_droit_douane_list.php';
+        break;
+
+
     //-------------------------------Durée conservation-------------------------
+    //Détail d'une Durée conservation
+    case "dc_detail":
 
-            //Détail d'une Durée conservation
-            case "dc_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_duree_conservation_list.php';
-                    
-                } else {
-                    require $path . '/view/view_duree_conservation_upd.php';
-                }
-                
-                break;
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des durées de conservation";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_duree_conservation_list.php';
+        } else {
+            $sPageTitle = "Modifier un durées de conservation";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_duree_conservation_upd.php';
+        }
 
-            //Ajout d'une Durée conservation
-            case "dc_add":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_duree_conservation_list.php';
-                }
-                
-                require $path . '/view/view_duree_conservation_add.php';
-                break;
+        break;
 
-            //Supp d'une Durée conservation
-            case "dc_del":
+    //Ajout d'une Durée conservation
+    case "dc_add":
 
-            //Liste des Durées conservations
-            case "dc_list":
-                require $path . '/view/view_duree_conservation_list.php';
-                break;
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des durées de conservation";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_duree_conservation_list.php';
+        }
+        $sPageTitle = "Ajouter une durée de conservation";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_duree_conservation_add.php';
+        break;
 
-            
+    //Supp d'une Durée conservation
+    case "dc_del":
+
+    //Liste des Durées conservations
+    case "dc_list":
+        $sPageTitle = "Liste des durées de conservation";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_duree_conservation_list.php';
+        break;
+
+
     //----------------------------------Export----------------------------------
+    //Export
+    case "export":
+        $sPageTitle = "Exporter des données";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_export.php';
+        break;
 
-            //Export
-            case "export":
-                require $path . '/view/view_export.php';
-                break;
-            
-          
+
     //------------------------------ Fiche article------------------------------
-            
-            //Supp de la fiche article
-            case "fiart_del":
-                
-            //Liste des fiches articles
-            case "fiart_list":
-                require $path . '/view/view_fiche_article_list.php';
-                break;
+    //Supp de la fiche article
+    case "fiart_del":
 
-            //Ajout d'une fiche article
-            case "fiart_add":
-                
-                    require $path . '/view/view_fiche_article_add.php';
-                
-                break;
+    //Liste des fiches articles
+    case "fiart_list":
+        $sPageTitle = "Liste des fiches articles";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_fiche_article_list.php';
+        break;
 
-            //Detail d'une fiche article
-            case "fiart_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_fiche_article_list.php';
-                    
-                } else {
-                    require $path . '/view/view_fiche_article_upd.php';
-                }
-                
-                break;
-                
+    //Ajout d'une fiche article
+    case "fiart_add":
+        $sPageTitle = "Ajouter une fiche article";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_fiche_article_add.php';
+
+        break;
+
+    //Detail d'une fiche article
+    case "fiart_detail":
+
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des fiches articles";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_fiche_article_list.php';
+        } else {
+            $sPageTitle = "Modifier une fiche article";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_fiche_article_upd.php';
+        }
+
+        break;
+
 
     //-------------------------------------- Gamme------------------------------
+    //Détail d'une gammme
+    case "ga_detail":
 
-            //Détail d'une gammme
-            case "ga_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_gamme_list.php';
-                    
-                } else {
-                    require $path . '/view/view_gamme_upd.php';
-                }
-                
-                break;
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des gammes";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_gamme_list.php';
+        } else {
+            $sPageTitle = "Modifier une gamme";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_gamme_upd.php';
+        }
 
-            //Ajout d'une gamme
-            case "ga_add":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_gamme_list.php';
-                }
-                
-                require $path . '/view/view_gamme_add.php';
-                break;
+        break;
 
-            //Supp d'une gamme
-            case "ga_del":
+    //Ajout d'une gamme
+    case "ga_add":
+        $sPageTitle = "Ajouter une gamme";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_gamme_add.php';
+        break;
 
-            //Liste des gammes
-            case "ga_list":
-                require $path . '/view/view_gamme_list.php';
-                break;
+    //Supp d'une gamme
+    case "ga_del":
+
+    //Liste des gammes
+    case "ga_list":
+        $sPageTitle = "Liste des gammes";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_gamme_list.php';
+        break;
 
     //----------------------------------- Inventaire ---------------------------
-            
-            //Ajout d'un inventaire
-            case "inventaire_add":
-                //Si on ajoute un inventaire 
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Envoyer') {
-                require $path . '/view/view_inventaire_list.php';
-                }else {
-                require $path . '/view/view_inventaire_add.php';
-                }
-                break;
+    //Ajout d'un inventaire
+    case "inventaire_add":
+        //Si on ajoute un inventaire 
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Envoyer') {
+            $sPageTitle = "Liste des inventaires";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_inventaire_list.php';
+        } else {
+            $sPageTitle = "Créer un inventaire";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_inventaire_add.php';
+        }
+        break;
 
-            //détail d'un inventaire
-            case "inventaire_upd":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier' 
-                        || isset($_REQUEST['btnForm'])
-                        && $_REQUEST['btnForm'] == 'Executer' ) {
-                    
-                    require $path . '/view/view_inventaire_list.php';
-                    
-                } else {
-                    require $path . '/view/view_inventaire_upd.php';
-                }
-                break;
-            
-            //Supp d'un inventaire
-            case "inventaire_del":
-            
-            //Liste des inventaires
-            case "inventaire_list":
-                require $path . '/view/view_inventaire_list.php';
-                break;
-            
-            
+    //détail d'un inventaire
+    case "inventaire_upd":
+
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier' 
+                || isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Executer') {
+            $sPageTitle = "Liste des inventaire";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_inventaire_list.php';
+        } else {
+            $sPageTitle = "Modifier une inventaire";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_inventaire_upd.php';
+        }
+        break;
+
+    //Supp d'un inventaire
+    case "inventaire_del":
+
+    //Liste des inventaires
+    case "inventaire_list":
+        $sPageTitle = "Liste des inventaires";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_inventaire_list.php';
+        break;
+
+
     //---------------------------- Mode de conservation ------------------------
-    
-            //Ajout de mode de conservation
-            case "mc_add":
-                require $path . '/view/view_mode_conservation_add.php';
-                break;
-                        
-            //détail d'un mode de conservation
-            case "mc_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_mode_conservation_list.php';
-                    
-                } else {
-                    require $path . '/view/view_mode_conservation_upd.php';
-                }
-                break;
+    //Ajout de mode de conservation
+    case "mc_add":
+        $sPageTitle = "Ajouter un mode de conservation";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_mode_conservation_add.php';
+        break;
 
-            //Suppression d'un mode de conservation
-            case "mc_del":
-            
-            //liste des modes de conservation
-            case "mc_list":
-                $sAction = "mc_list";
-                require_once $path . '/view/view_mode_conservation_list.php';
-                break;
+    //détail d'un mode de conservation
+    case "mc_detail":
 
-    
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des modes de conservation";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_mode_conservation_list.php';
+        } else {
+            $sPageTitle = "Modifier un mode de conservation";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_mode_conservation_upd.php';
+        }
+        break;
+
+    //Suppression d'un mode de conservation
+    case "mc_del":
+
+    //liste des modes de conservation
+    case "mc_list":
+        $sPageTitle = "Liste des modes de conservation";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        $sAction = "mc_list";
+        require_once $path . '/view/view_mode_conservation_list.php';
+        break;
+
+
 //-----------------------------------Nutrition----------------------------------            
+    //Ajout d'une nutrition
+    case "nut_add":
+         $sPageTitle = "Ajouter un libellé de nutrition";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_nutrition_add.php';
+        break;
 
-            //Ajout d'une nutrition
-            case "nut_add":
-                require $path . '/view/view_nutrition_add.php';
-                break;
+    //Détial d'une nutrition
+    case "nut_detail":
 
-            //Détial d'une nutrition
-            case "nut_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_nutrition_list.php';
-                    
-                } else {
-                    require $path . '/view/view_nutrition_upd.php';
-                }
-                break;
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des libellés de nutrition";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_nutrition_list.php';
+        } else {
+            $sPageTitle = "Ajouter un libellé de nutrition";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_nutrition_upd.php';
+        }
+        break;
 
-            //Supp d'une nutrition
-            case "nut_del":
+    //Supp d'une nutrition
+    case "nut_del":
 
-            //Liste des nutritions
-            case "nut_list":
-                require $path . '/view/view_nutrition_list.php';
-                break;
-            
+    //Liste des nutritions
+    case "nut_list":
+        $sPageTitle = "Liste des libellés de nutrition";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_nutrition_list.php';
+        break;
+
 
     //-------------------------------------Pays---------------------------------
+    //Ajout d'un pays
+    case "pays_add":
+        $sPageTitle = "Ajouter un pays";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_pays_add.php';
+        break;
 
-            //Ajout d'un pays
-            case "pays_add":
-                require $path . '/view/view_pays_add.php';
-                break;
-            
-            //Détail d'un pays
-            case "pays_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_pays_list.php';
-                    
-                } else {
-                    require $path . '/view/view_pays_upd.php';
-                }
-                break;
+    //Détail d'un pays
+    case "pays_detail":
 
-            //Supp d'un pays
-            case "pays_del":
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des pays";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_pays_list.php';
+        } else {
+            $sPageTitle = "Modifier un pays";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_pays_upd.php';
+        }
+        break;
 
-            //Liste des pays
-            case "pays_list":
-                require $path . '/view/view_pays_list.php';
-                break;
+    //Supp d'un pays
+    case "pays_del":
 
-            
+    //Liste des pays
+    case "pays_list":
+        $sPageTitle = "Liste des pays";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_pays_list.php';
+        break;
+
+
     //-------------------------------Références---------------------------------
+    //Ajout d'une référence
+    case "ref_add":
+        $sPageTitle = "Ajouter une référence";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_reference_add.php';
+        break;
 
-            //Ajout d'une référence
-            case "ref_add":
-                $sPageTitle = "Ajouter une référence";
-                require $path . '/view/view_reference_add.php';
-                break;
-            
-            //Modification d'une référence
-            case "ref_upd":
-                $sPageTitle = "Modifier une référence";
-                require $path . '/view/view_reference_upd.php';
-                break;
-            
-            //Détail d'une référence
-            case "ref_detail":
-                $sPageTitle = "Consulter une référence";
-                require $path . '/view/view_reference_detail.php';
-                break;
+    //Modification d'une référence
+    case "ref_upd":
+        $sPageTitle = "Modifier une référence";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_reference_upd.php';
+        break;
 
-            //Supp d'une référence
-            case "ref_del":
+    //Détail d'une référence
+    case "ref_detail":
+        $sPageTitle = "Détail de la référence";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_reference_detail.php';
+        break;
 
-            //Liste des références
-            case "ref_list":
-                require $path . '/view/view_reference_list.php';
-                break;
+    //Supp d'une référence
+    case "ref_del":
+
+    //Liste des références
+    case "ref_list":
+        $sPageTitle = "Liste des références";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_reference_list.php';
+        break;
 
 
     //-------------------------------------- TVA -------------------------------
+    //Détail d'une tva
+    case "tva_detail":
 
-            //Détail d'une tva
-            case "tva_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_tva_list.php';
-                    
-                } else {
-                    require $path . '/view/view_tva_upd.php';
-                }
-                
-                break;
-
-            //Ajout d'une tva
-            case "tva_add":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    
-                    require $path . '/view/view_tva_list.php';
-                }
-                
-                require $path . '/view/view_tva_add.php';
-                break;
-
-            //Supp d'une tva
-            case "tva_del":
-
-            //Liste des tva
-            case "tva_list":
-                require $path . '/view/view_tva_list.php';
-                break;
-
-              
-    //----------------------------------Utilisateur-----------------------------
-
-            //Ajout d'un utilisateur
-            case "utilisateur_add":
-                require $path . '/view/view_utilisateur_add.php';
-                break;
-
-            //Liste des utilisateurs
-            case "utilisateur_list":
-                require $path . '/view/view_utilisateur_list.php';
-                break;
-
-            //Détail d'un utilisateur
-            case "utilisateur_detail":
-                
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
-                    require $path . '/view/view_utilisateur_list.php';
-                    
-                } else {
-                    require $path . '/view/view_utilisateur_upd.php';
-                }
-                break;
-                
-                    
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des TVA";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_tva_list.php';
+        } else {
+            $sPageTitle = "Ajouter une TVA";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_tva_upd.php';
         }
+
+        break;
+
+    //Ajout d'une tva
+    case "tva_add":
+
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des TVA";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_tva_list.php';
+        }
+        $sPageTitle = "Ajouter une TVA";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_tva_add.php';
+        break;
+
+    //Supp d'une tva
+    case "tva_del":
+
+    //Liste des tva
+    case "tva_list":
+        $sPageTitle = "Liste des TVA";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_tva_list.php';
+        break;
+
+
+    //----------------------------------Utilisateur-----------------------------
+    //Ajout d'un utilisateur
+    case "utilisateur_add":
+        $sPageTitle = "Ajouter un utilisateur";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_utilisateur_add.php';
+        break;
+
+    //Liste des utilisateurs
+    case "utilisateur_list":
+        $sPageTitle = "Liste des utilisateurs";
+        require_once $path . '/view/view_header.php';
+        require_once $path . '/view/view_menu.php';
+        require_once $path . '/view/view_infos.php';
+        require $path . '/view/view_utilisateur_list.php';
+        break;
+
+    //Détail d'un utilisateur
+    case "utilisateur_detail":
+
+        if (isset($_REQUEST['btnForm']) 
+                && $_REQUEST['btnForm'] == 'Modifier') {
+            $sPageTitle = "Liste des utilisateurs";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_utilisateur_list.php';
+        } else {
+            $sPageTitle = "Modifier un utilisateur";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_utilisateur_upd.php';
+        }
+        break;
+}

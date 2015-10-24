@@ -229,9 +229,8 @@ function verifPassForce() { //appel dans view_utilisateur
  * affiche une alertbox si différents
  * @returns {Boolean}
  */
-function verifPass() { //appel dans view_utilisateur 
-    var test = false;
-
+function verifPass() {  
+    
     if ($('#pass').val().length >= 8) {
         if ($('#pass').val() != ''
                 && $('#confirmPass').val() != ''
@@ -260,7 +259,7 @@ function verifPass() { //appel dans view_utilisateur
  * @param $champs
  *  champs sur lequel porte le tri de la requéte
  */
-function orderby($action, $champs, $ordre) { //appel partout
+function orderby($action, $champs, $ordre) {
     window.open('index.php?action=' + $action + '&tri=' + $ordre + '&orderby=' + $champs, '_self');
 }
 
@@ -279,11 +278,11 @@ function orderby($action, $champs, $ordre) { //appel partout
  * Arguments suplémentaire à passer dans l'url si besoin.(Optionnel)
  * @returns {undefined}
  */
-function delElt($id, $codetype, $type, $action, $precision) { //appel partout
+function delElt($id, $codetype, $type, $action, $precision) {
 
     $resBool = confirm("Voulez-vous supprimez l'élément: \n" +
             $type + " numéro: " + $id);
-    //si $précision est null
+    //si des précision sont définis 
     if ($resBool && $precision == null) {
 
         window.open('index.php?action=' + $action + "&" +
@@ -544,21 +543,4 @@ function getReference($row, $source, $champs, $form) {
         }
     }
     );
-}
-
-
-/**
- * Fonction copie valeur de champs dans un autre
- * @param $source
- * id de la source
- * @param $cible
- * id de la cible
- * @returns {undefined}
- */
-function copieChamps($source, $cible) {
-    //console.log("DEBUT COPIE CHAMPS");
-    $1 = parseFloat($("input[id='" + $source + "']").val());
-    $("input[id='" + $cible + "']").val(parseFloat($1));
-    //console.log($source + " dans " + $cible);
-    //console.log("FIN COPIE CHAMPS");
 }

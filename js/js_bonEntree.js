@@ -273,3 +273,17 @@ function ctrlUpdQtInit($cible, $qtInit, $qtStock) {
     //Enfin on change la valeur de l'attribut Min de l'input Qt
     $inpQt.attr('min', $qtInitMin);
 }
+
+
+/**
+ * Fonction copie valeur de champs dans un autre
+ * @param $source
+ * id de la source
+ * @param $cible
+ * id de la cible
+ * @returns {undefined}
+ */
+function copieChamps($source, $cible) {
+    $1 = parseFloat($("input[id='" + $source + "']").val());
+    $("input[id='" + $cible + "']").val(parseFloat($1));
+}

@@ -19,13 +19,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
 
     <!-- Fin des tests entête, code de la page -->
-    <div class="corps">
+    <div class="corpsCenter">
 
 
         <!-- On choisit le titre du bloc selon si c'est une popup-->
-        <?php if ($nv == 0) { ?>            
-            <h2>Saisie</h2>
-        <?php } else { ?>
+        <?php if ($nv != 0) { ?>            
+            
             <h2> <?php
                 echo $sPageTitle;
             }
@@ -35,7 +34,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <input name='token' 
                    type="text" 
                    value ='<?php echo rand(1, 1000000) ?>' hidden/>
-            <div class="col90"> 
+            <div class="col30"> 
                 <label for="consLbl"> Libellé: </label>
                 <input name="consLbl" 
                        placeholder="Saisie" 
