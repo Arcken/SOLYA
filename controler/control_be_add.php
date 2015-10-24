@@ -7,26 +7,26 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     //Si une requéte échoue, une exception est levé par la manager
     try {
 
-        require_once $path . '/model/BonEntree.php';
-        require_once $path . '/model/BonEntreeManager.php';
-        require_once $path . '/model/BeLigne.php';
-        require_once $path . '/model/BeLigneManager.php';
-        require_once $path . '/model/Ligne.php';
-        require_once $path . '/model/LigneManager.php';
-        require_once $path . '/model/Lot.php';
-        require_once $path . '/model/LotManager.php';
-        require_once $path . '/model/InventaireManager.php';
+        //Contrôle si un inventaire est en cours
+        $tInventaire = InventaireManager::getInventaireOpen();
+        if (!isset($tInventaire) || !is_array($tInventaire)) {
 
-        //Controle si le formulaire a était envoyé 
-        if ($sButtonUt == "Envoyer") {
+            require_once $path . '/model/BonEntree.php';
+            require_once $path . '/model/BonEntreeManager.php';
+            require_once $path . '/model/BeLigne.php';
+            require_once $path . '/model/BeLigneManager.php';
+            require_once $path . '/model/Ligne.php';
+            require_once $path . '/model/LigneManager.php';
+            require_once $path . '/model/Lot.php';
+            require_once $path . '/model/LotManager.php';
+            require_once $path . '/model/InventaireManager.php';
 
-            //Contrôle si un inventaire est en cours
-            $tInventaire = InventaireManager::getInventaireOpen();
-            if (!isset($tInventaire) || !is_array($tInventaire)) {
+            //Controle si le formulaire a était envoyé 
+            if ($sButtonUt == "Envoyer") {
 
                 //Vérification du jeton pour savoir si le formulaire à déja était envoyé
                 if ($_SESSION['token'] != $_REQUEST['token']) {
-
+                    throw new MySQLException($e, 'erreur test', $cnx);
                     //Récupération de la connection
                     $cnx = Connection::getConnection();
 
@@ -169,13 +169,26 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             }
         }
     } catch (MySQLException $e) {
+
         //on annule la transaction
-        echo $e->RetourneErreur();
         $cnx->rollback();
+
         //Message pour l'erreur
-        $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
-                . ' Echec insert bon entrée, code: '
-                . $resEr[0] . ' Message: ' . $resEr[1] . '</p>';
+
+        switch ($resEr[0]) {
+
+            case 'ERR0R':
+                $msg = "<p class='erreur'> " . date('H:i:s')
+                        . ' Echec ajout bon entrée, code: '
+                        . $resEr[0] . ' Message: ' . $resEr[1] . '</p>';
+                break;
+
+            default:
+                $msg = '<p class=\'erreur\'> ' . date('H:i:s')
+                        . 'code: ' . $resEr[0]
+                        . ' message: ' . $resEr[1] . '</p>';
+                break;
+        }
     }
 
     //On insert le message dans le tableau de message
