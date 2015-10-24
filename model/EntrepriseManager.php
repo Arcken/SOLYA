@@ -144,7 +144,7 @@ class EntrepriseManager {
      * @return objet
      * Retourne un objet
      */
-    public static function getEntrepriseDetailForUpd($id) {
+    public static function getEntrepriseForUpd($id) {
 
         try {
 

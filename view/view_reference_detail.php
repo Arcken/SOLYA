@@ -14,12 +14,8 @@
                 <input  name="ficheArticle" 
                         type="text"
                         size="15"
-                        <?php
-                            foreach ($toFiArts as $oFiArt) {
-                                if ($oFiArt->fiart_id === $rsRef->fiart_id) {?>
-                                    value="<?php echo 'Id :' 
-                                    . $oFiArt->fiart_id . ' | ' . $oFiArt->fiart_lbl; ?> "
-                           <?php } } ?> 
+                        value="<?php echo 'Id :' 
+                               . $oFiArt->fiart_id . ' | ' . $oFiArt->fiart_lbl; ?> "
                         readonly>                   
             </div>
 
@@ -61,22 +57,13 @@
                 <br>
                 <label for="modeConservation"> Mode de conservation </label><br>
                 <input name="modeConservation" type="text" 
-                           <?php foreach ($toModCons as $oModCons) {
-                                     if ($oModCons->cons_id === $rsRef->cons_id) { ?>
-                                       value='<?php echo $oModCons->cons_lbl; ?>'
-                               <?php }
-                            }?>
+                       value='<?php echo $oModCons->cons_lbl; ?>'
                        readonly>
                         <br>
                 <label for="dureeConservation"> Durée de conservation </label><br>
                 <input name="dureeConservation" 
                        type="text" 
-                            <?php
-                                foreach ($toDurCons as $oDurCons) {
-                                    if($oDurCons->dc_id === $rsRef->dc_id) {?>
-                                    value=" <?php echo $oDurCons->dc_nb.' | '.$oDurCons->dc_lbl; ?> "    
-                                  <?php }
-                               } ?>
+                       value=" <?php echo $oDurCons->dc_nb.' | '.$oDurCons->dc_lbl; ?> "  
                        readonly>
                         <br>
                     </div>
@@ -157,27 +144,16 @@
                         <input name="tva" 
                                type="text"
                                size="20"
-                            <?php
-                                foreach ($toTvas as $oTva) {
-                                    if ($oTva->tva_id === $rsRef->tva_id) {?>
-                                    value ="<?php echo $oTva->tva_lbl.' '.$oTva->tva_taux.'%'; ?>"
-                                <?php }
-                                }?>
+                               value ="<?php echo $oTva->tva_lbl.' '.$oTva->tva_taux.'%'; ?>"
                                readonly>           
                         <br>
                         <label for="droitDouane"> Droit de douanes: </label>
                         <br>
                         <input name="droitDouane" 
                                type="text"
-                        <?php
-                            if (isset($toDroitDouanes) && is_array($toDroitDouanes)) {
-                                foreach ($toDroitDouanes as $oDroitDouane) {
-                                    if ($oDroitDouane->dd_id === $rsRef->dd_id) { ?>
-                                        value="<?php echo $oDroitDouane->dd_lbl 
-                                              . ' ' . $oDroitDouane->dd_taux.'%' ;?>"
-                              <?php } 
-                                }
-                            }?>
+                               value="<?php echo $oDroitDouane->dd_lbl 
+                                           . ' ' . $oDroitDouane->dd_taux.'%' ;?>"
+                         
                                 readonly>    
                         <br>
                         <label for="refCom"> Commentaire : </label>

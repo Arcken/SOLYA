@@ -105,7 +105,7 @@ class MailManager {
      *  @return int 
      * Retourne le nombre de ligne impacté
      */
-    public static function updGamme($oMail) {
+    public static function updMail($oMail) {
         
         try {
                 $tParam = [
@@ -114,7 +114,7 @@ class MailManager {
                 ];
 
                 $sql = "UPDATE mail SET "
-                        . "mail_adr = ?, "
+                        . "mail_adr = ? "
                         . "WHERE mail_id =?";
 
                 $result = Connection::request(2, $sql, $tParam);

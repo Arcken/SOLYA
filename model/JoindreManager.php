@@ -89,4 +89,56 @@ class JoindreManager {
         }
         return $result;
     }
+    
+    /**
+     * Efface un enregistrement de la table Joindre 
+     * selon l'id du compte et du téléphone
+     * @param $idCpt
+     * ID du compte
+     * @param $idTel
+     * ID du téléphone
+     * @return int
+     * retourne le nombre de ligne supprimmé
+     */
+    public static function delJoindreFromCptAndTel($idCpt,$idTel) {
+        try {
+            $tParam = [$idCpt,$idTel];
+            $sql = 'DELETE FROM joindre WHERE cpt_id=? AND tel_id=?';
+            
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+     /**
+     * Modifie un enregistrement selon l'id du compte
+     * et du téléphone
+     * 
+     * @param $oJoindre
+     * Attend un objet Joindre
+     * @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updJoindre($oJoindre) {
+        
+        try {
+                $tParam = [
+                    $oJoindre->tel_lbl,
+                    $oJoindre->cpt_id,
+                    $oJoindre->tel_id
+                ];
+
+                $sql = "UPDATE joindre SET "
+                        . "tel_lbl=? "
+                        . "WHERE cpt_id =? AND tel_id=?";
+
+                $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }

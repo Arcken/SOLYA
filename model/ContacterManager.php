@@ -80,4 +80,56 @@ class ContacterManager {
         }
         return $result;
     }
+    /**
+     * Efface un enregistrement de la table Contacter 
+     * selon l'id du compte et du mail
+     * @param $idCpt
+     * ID du compte
+     * @param $idMAil
+     * ID du mail
+     * @return int
+     * retourne le nombre de ligne supprimmé
+     */
+    public static function delContacterFromCptAndMail($idCpt,$idMail) {
+        try {
+            $tParam = [$idCpt,$idMail];
+            
+            $sql = 'DELETE FROM contacter WHERE cpt_id=? AND mail_id=?';
+            
+            $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+     /**
+     * Modifie un enregistrement selon l'id du compte
+     * et de l'email
+     * 
+     * @param $oContacter
+     * Attend un objet Compte
+     *  @return int 
+     * Retourne le nombre de ligne impacté
+     */
+    public static function updContacter($oContacter) {
+        
+        try {
+                $tParam = [
+                    $oContacter->mail_lbl,
+                    $oContacter->cpt_id,
+                    $oContacter->mail_id
+                ];
+
+                $sql = "UPDATE contacter SET "
+                        . "mail_lbl=? "
+                        . "WHERE cpt_id =? AND mail_id=?";
+
+                $result = Connection::request(2, $sql, $tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
 }

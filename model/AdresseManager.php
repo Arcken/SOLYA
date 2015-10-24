@@ -158,7 +158,7 @@ class AdresseManager {
 
                 $sql = "UPDATE adresse SET "
                         . "pays_id = ?, "
-                        . "adr_um = ?, "
+                        . "adr_num = ?, "
                         . "adr_voie = ?, "
                         . "adr_rue1 = ?, "
                         . "adr_rue2 = ?, "

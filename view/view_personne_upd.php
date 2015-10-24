@@ -16,7 +16,11 @@
                type="text"
                value ='<?php echo rand(1, 1000000) ?>' 
                hidden/>
-
+        
+         <input name='cptId'
+               type="text"
+               value ='<?php echo $oCompte->cpt_id ?>' 
+               hidden/>
         <!--Partie gauche de l'écran : Civilité--> 
         <div class="col20" id ="addPers">
             <label for="civilite">Civilité :</label>
@@ -84,6 +88,14 @@
                     </tr>
                     <tr id='mailLigne' hidden>
                         <td>
+                             <input name="mailId[]"
+                                   title="eg : Administratif, personnel.."
+                                   type="text" 
+                                   id="mailLblNID"
+                                   value='0'
+                                   hidden
+                                   >
+                                 
                             <input name="mailLbl[]"
                                    title="eg : Administratif, personnel.."
                                    type="text" 
@@ -105,7 +117,8 @@
                     </tr>
                     
                     <?php
-                    //On initialise ligId la variable qui nous sert à déterminer les case à supprimer
+                    //On initialise ligId pour la variable qui nous sert a créer nos identifiant
+                    //Elle permet de diférencier les différentes lignes et les inputs
                      $ligId=0;
                     //Pour chaque mail enregistré on créé une nouvelle ligne
                     if (is_array($resAllMail)) {
@@ -115,7 +128,7 @@
                     
                              <tr id='mailLigne<?php echo $ligId ?>'>
                                  <td hidden>
-                                    <input name="mailId[<?php echo $ligId ?>]"
+                                    <input name="mailId[]"
                                            title="eg : Administratif, personnel.."
                                            type="text" 
                                            id="mailId<?php echo $ligId ?>"
@@ -123,7 +136,7 @@
                                            value="<?php echo $oMail->mail_id ?>" >
                                 </td>
                                 <td>
-                                    <input name="mailLbl[<?php echo $ligId ?>]"
+                                    <input name="mailLbl[]"
                                            title="eg : Administratif, personnel.."
                                            type="text" 
                                            id="mailLbl<?php echo $ligId ?>"
@@ -131,7 +144,7 @@
                                            value="<?php echo $oMail->mail_lbl ?>" >
                                 </td>
                                 <td>
-                                    <input name="mailAdr[<?php echo $ligId ?>]" 
+                                    <input name="mailAdr[]" 
                                            type="email"
                                            id="mailAdr<?php echo $ligId ?>"
                                            required
@@ -139,7 +152,7 @@
                                 </td>
                                <td class="bonLigneImg">
                                      <input type="checkbox" 
-                                           name="ligSupp[<?php echo $ligId ?>]" 
+                                           name="ligSupp[mail][<?php echo $oMail->mail_id ?>]" 
                                            id="ligSupp<?php echo $ligId ?>"
                                            value="<?php echo $oMail->mail_id ?>">
                                 </td>
@@ -162,7 +175,13 @@
               
                     <tr id='telLigne' hidden>
                         <td >
-                            
+                         <input name="telId[]"
+                               title="eg : Administratif, personnel.."
+                               type="text"
+                               id="telLblNID"
+                               value="0" 
+                               hidden>  
+                         
                         <input name="telLbl[]"
                                title="eg : Administratif, personnel.."
                                type="text"
@@ -200,15 +219,15 @@
                         
                             <tr id='telLigne<?php echo $ligId ?>'>
                                 <td hidden>
-                                    <input name="telId[<?php echo $ligId ?>]"
+                                    <input name="telId[]"
                                            title="eg : Administratif, personnel.."
                                            type="text" 
-                                           id="mailId"
+                                           id="telId<?php echo $ligId ?>"
                                            required
                                            value="<?php echo $oTel->tel_id ?>" >
                                 </td>
                                 <td >
-                                <input name="telLbl[<?php echo $ligId ?>]"
+                                <input name="telLbl[]"
                                        title="eg : Administratif, personnel.."
                                        type="text"
                                        id="telLbl<?php echo $ligId ?>"
@@ -216,7 +235,7 @@
                                        required>
                                 </td>
                                 <td>
-                                <input name="telInd[<?php echo $ligId ?>]"
+                                <input name="telInd[]"
                                        title="Indicatif du numéro de téléphone eg : +33.."
                                        type="text"
                                        value='<?php echo $oTel->tel_ind ?>'
@@ -224,7 +243,7 @@
                                        >
                                 </td>
                                 <td>
-                                <input name="telNum[<?php echo $ligId ?>]"
+                                <input name="telNum[]"
                                        title="Sans l'indicatif pays eg :6 10 10 10 10.."
                                        type="text"
                                        id="telNum<?php echo $ligId ?>"
@@ -233,7 +252,7 @@
                                 </td>
                                 <td class="bonLigneImg">
                                      <input type="checkbox" 
-                                           name="ligSupp[<?php echo $ligId ?>]" 
+                                           name="ligSupp[tel][<?php echo $oTel->tel_id ?>]" 
                                            id="ligSupp<?php echo $ligId ?>"
                                            value="<?php echo $oTel->tel_id ?>">
                                 </td>
@@ -264,6 +283,12 @@
                 <tr id='adrLigne'
                     hidden>
                     <td class="colData">
+                         <input name="adrId[]" 
+                               type="text" 
+                               id="adrLblNID"
+                               value="0"
+                               hidden>
+                         
                         <input name="adrLbl[]" 
                                type="text" 
                                id="adrLblNID"
@@ -333,71 +358,71 @@
                     <tr id='adrLigne<?php echo $ligId ?>'>
                         
                         <td class="colData" hidden>
-                            <input name="adrId[<?php echo $ligId ?>]" 
+                            <input name="adrId[]" 
                                    type="text" 
                                    id="adrLbl<?php echo $ligId ?>"
                                    value="<?php echo $oAdr->adr_id ?>" 
                                    required>
                             
                         <td class="colData">
-                            <input name="adrLbl[<?php echo $ligId ?>]" 
+                            <input name="adrLbl[]" 
                                    type="text" 
                                    id="adrLbl<?php echo $ligId ?>"
                                    value="<?php echo $oAdr->adr_lbl ?>"
                                    required> 
                         </td>
                         <td class="colData">
-                            <input name="adrNum[<?php echo $ligId ?>]" 
+                            <input name="adrNum[]" 
                                    type="text" 
                                    value="<?php echo $oAdr->adr_num ?>" 
                                    id="adrNum<?php echo $ligId ?>"> 
                         </td>
                         <td class="colData">
-                            <input name="adrVoie[<?php echo $ligId ?>]" 
+                            <input name="adrVoie[]" 
                                    type="text" 
                                    value="<?php echo $oAdr->adr_voie ?>" 
                                    id="adrVoie<?php echo $ligId ?>"
                                    > 
                         </td>
                         <td class="colData">
-                            <input name="adrRue1[<?php echo $ligId ?>]" 
+                            <input name="adrRue1[]" 
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue1 ?>" 
                                    id="adrRue1<?php echo $ligId ?>"
                                    > 
                             <br>
-                            <input name="adrRue2[<?php echo $ligId ?>]"
+                            <input name="adrRue2[]"
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue2 ?>" 
                                    id="adrRue2<?php echo $ligId ?>"
                                    > 
                             <br>
-                            <input name="adrRue3[<?php echo $ligId ?>]" 
+                            <input name="adrRue3[]" 
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue3 ?>" 
                                    id="adrRue3<?php echo $ligId ?>"> 
                         </td>
                         <td class="colData">
-                            <input name="adrCp[<?php echo $ligId ?>]"
+                            <input name="adrCp[]"
                                    type="text" 
                                    value="<?php echo $oAdr->adr_cp ?>" 
                                    id="adrCp<?php echo $ligId ?>"> 
                         </td>
 
                         <td class="colData">
-                            <input name="adrVille[<?php echo $ligId ?>]"
+                            <input name="adrVille[]"
                                    type="text" 
                                    value="<?php echo $oAdr->adr_ville ?>" 
                                    id="adrVille<?php echo $ligId ?>">
                         </td>    
                         <td class="colData"> 
-                            <input name="adrEtat[<?php echo $ligId ?>]"
+                            <input name="adrEtat[]"
                                    type="text"
                                    value="<?php echo $oAdr->adr_etat ?>" 
                                    id="adrEtat<?php echo $ligId ?>"> 
                         </td>
                         <td class="colData">
-                            <select name="paysId[<?php echo $ligId ?>]" 
+                            <select name="paysId[]" 
                                     id="paysId<?php echo $ligId ?>"  
                                     required>
                           
@@ -417,7 +442,7 @@
                         </td>
                          <td class="bonLigneImg">
                                      <input type="checkbox" 
-                                           name="ligSupp[<?php echo $ligId ?>]" 
+                                           name="ligSupp[adr][<?php echo $oAdr->adr_id ?>]" 
                                            id="ligSupp<?php echo $ligId ?>"
                                            value="<?php echo $oAdr->adr_id ?>">
                         </td>
@@ -452,7 +477,7 @@
                 <input id ='clearForm' 
                        name="clear"   
                        type="reset" 
-                       onclick="location.href='index.php?action=pers_add'"
+                       onclick="location.href='index.php?action=pers_upd&cptId='<?php $oCompte->cpt_id ?>"
                        >
 
                 <input name="action" 

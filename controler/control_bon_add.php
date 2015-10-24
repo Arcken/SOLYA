@@ -248,8 +248,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     }
     //On ajoute le message
     if (isset($msg)){
-    Tool::addMsg($msg);
-    
+        Tool::addMsg($msg);
     }
 }else{
     echo "Le silence est d'or";

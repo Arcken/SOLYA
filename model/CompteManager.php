@@ -160,17 +160,16 @@ class CompteManager {
         
         try {
                 $tParam = [
-                    $oCompte->cpt_date,
                     $oCompte->cpt_nom,
                     $oCompte->cpt_com,
+                    $oCompte->cpt_code,
                     $oCompte->cpt_id
                 ];
 
                 $sql = "UPDATE compte SET "
-                        . "cpt_date=?,"
                         . "cpt_nom=?,"
                         . "cpt_com=?,"
-                        . "cpt_code=?,"
+                        . "cpt_code=? "
                         . "WHERE cpt_id =?";
 
                 $result = Connection::request(2, $sql, $tParam);

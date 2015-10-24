@@ -138,7 +138,7 @@ class PersonneManager {
      * @return objet
      * Retourne un objet
      */
-    public static function getPersonneDetailForUpd($id) {
+    public static function getPersonneForUpd($id) {
 
         try {
 

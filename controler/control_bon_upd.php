@@ -388,10 +388,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $_SESSION['token'] = $_REQUEST['token'];
                 } else {
 
-                    $msg = "<p class= 'erreur'> " . date('H:i:s') . "
-                Vous avez déja envoyé ce formulaire </p>";
+                    $msg = "<p class= 'erreur'> " . date('H:i:s') 
+                          . " Vous avez déja envoyé ce formulaire </p>";
                 }
-                Tool::addMsg($msg);
+               
             }
         }
     } catch (MySQLException $e) {
@@ -410,6 +410,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 break;
         }
         $cnx->rollback();
+    }
+    //On ajoute le message
+    if (isset($msg)){
         Tool::addMsg($msg);
     }
 } else {

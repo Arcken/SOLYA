@@ -69,7 +69,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                     </th>
                 </tr>
                 <?php
-                if ($resAllCpt != 0 && is_array($resAllCpt)) {
+                if (isset($resAllCpt) && is_array($resAllCpt)) {
                     foreach ($resAllCpt as $oCompte) {
                         ?>
                         <tr>

@@ -32,7 +32,7 @@
             <div class="col30"> 
                 <input id="pays_abv" name="pays_abv" type="text"  hidden/>
                 <input id="ga_abv" name="ga_abv" type="text"  hidden/>
-                <label for="refCode">Code de la référence : </label><br>          
+                <label for="refCode">Code référence: </label><br>          
                 <input id="refCode" name="refCode"
                        type="text" 
                        placeholder="Code de la référence"
@@ -93,7 +93,7 @@
                        placeholder="gramme ### ###,##" 
                        type="text">             
                 <br>
-                <label for="modeConservation"> Mode de conservation </label>
+                <label for="modeConservation"> Mode de conservation: </label>
                 <br>
                 <select name="modeConservation" 
                         id="modeConservation" 
@@ -115,7 +115,7 @@
                      alt="" title="Créer" 
                      onClick="popup('mc_add');"/>
                 <br>
-                <label for="dureeConservation"> Durée de conservation </label>
+                <label for="dureeConservation"> Durée de conservation: </label>
                 <br>
                 <select name="dureeConservation" 
                         title="Choisir un élément" >
@@ -144,13 +144,13 @@
             </div>
 
             <div class="col30">
-                <label for="refEmbLbl">Description de l'emballage :</label>
+                <label for="refEmbLbl">Description emballage:</label>
                 <br>
                 <input name="refEmbLbl" 
                        placeholder="Description" 
                        type="text">         
                 <br>
-                <label for="refEmbCouleur" >Couleur : </label>
+                <label for="refEmbCouleur" >Couleur:</label>
                 <br>
                 <input name="refEmbCouleur" 
                        placeholder="Couleur" 
@@ -162,25 +162,25 @@
                        placeholder="###,### EN LITRE" 
                        type="text">         
                 <br>
-                <label for="refEmbDimLng">Longueur : </label>
+                <label for="refEmbDimLng">Longueur:</label>
                 <br>
                 <input name="refEmbDimLng" 
                        placeholder="###,##" 
                        type="text">         
                 <br>
-                <label for="refEmbDimLrg">Largeur : </label>
+                <label for="refEmbDimLrg">Largeur:</label>
                 <br>
                 <input name="refEmbDimLrg" 
                        placeholder="###,##" 
                        type="text">         
                 <br>
-                <label for="refEmbDimHt">Hauteur : </label>
+                <label for="refEmbDimHt">Hauteur:</label>
                 <br>
                 <input name="refEmbDimHt" 
                        placeholder="###,##" 
                        type="text"> 
                 <br>
-                <label for="refEmbDimDiam">Diamètre : </label>
+                <label for="refEmbDimDiam">Diamètre:</label>
                 <br>
                 <input name="refEmbDimDiam" 
                        placeholder="###,##" 
@@ -190,7 +190,7 @@
             </div>
 
             <div class="col30">
-                <label for="refCodeDouane"> Code douane: </label>
+                <label for="refCodeDouane">Code douane:</label>
                 <br>
                 <input name="refCodeDouane" 
                        type="text"
@@ -199,19 +199,19 @@
                        pattern=".{3,}"
                        >
                 <br>
-                <label for="pvePer"> Prix de vente particulier: </label>
+                <label for="pvePer">Prix de vente particulier:</label>
                 <br>
                 <input name="pvePer" 
                        placeholder="### ###,##" 
                        type="text">         
                 <br>
-                <label for="pveEnt"> Prix de vente entreprise: </label>
+                <label for="pveEnt">Prix de vente entreprise:</label>
                 <br>
                 <input name="pveEnt" 
                        placeholder="### ###,##"
                        type="text">         
                 <br>
-                <label for="tva"> Taux de TVA: </label>
+                <label for="tva">Taux de TVA:</label>
                 <br>
                 <select name="tva" 
                         title="Choisir un élément"
@@ -269,7 +269,7 @@
                      title="Créer" 
                      onClick="popup('dd_add');"/>
                 <br>
-                <label for="refCom"> Commentaire : </label><br>
+                <label for="refCom"> Commentaire: </label><br>
                 <textarea name="refCom" 
                           rows="4" 
                           cols="25" 
@@ -279,8 +279,7 @@
                         <fieldset><legend>Image</legend>                           
 
                             <label for="img_upload[]">
-                                Image(<?php echo $imgExtension ?> | max. 
-                            <?php echo $imgMaxSize / 1000 ?> Ko) :
+                                Image(<?php echo $imgExtension ?>|max<?php echo $imgMaxSize / 1000 ?>Ko):
                             </label>
                             <br/>       
                             <input type="hidden" 
