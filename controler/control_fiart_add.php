@@ -12,15 +12,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     require $path . '/model/Nutrition.php';
     require $path . '/model/NutritionManager.php';
 
+    //Si une requéte échoue, une exception est levé par la manager
+    try {
 
-    $resAllGa = GammeManager::getAllGammes();
-    $resAllPays = PaysManager::getAllPays();
-    $resAllNut = NutritionManager::getAllNutritions();
-//Si le formulaire est envoyé
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
-
-        //Si l'insert ne se fait pas le manager léve un exception
-        try {
+        $resAllGa = GammeManager::getAllGammes();
+        $resAllPays = PaysManager::getAllPays();
+        $resAllNut = NutritionManager::getAllNutritions();
+        
+        //Si le formulaire est envoyé
+        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
 
             //Vérification du jeton pour savoir si le formulaire à déja était envoyé
             if ($_SESSION['token'] != $_REQUEST['token']) {
@@ -100,14 +100,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oInformer->fiart_id = $oFiArt->fiart_id;
                         $oInformer->nut_id = $object->nut_id;
 
-                        if (isset($_REQUEST['nutAjr' . $object->nut_id]))
+                        if (isset($_REQUEST['nutAjr' . $object->nut_id])) {
                             $oInformer->nutfiart_ajr = $_REQUEST['nutAjr' . $object->nut_id];
+                        }
 
-                        if (isset($_REQUEST['nut' . $object->nut_id]))
+                        if (isset($_REQUEST['nut' . $object->nut_id])) {
                             $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
+                        }
 
                         //on exécute la requête si une deux deux valeurs est non nul
-                        if ($oInformer->nutfiart_ajr != '' || $oInformer->nutfiart_val !=''){
+                        if ($oInformer->nutfiart_ajr != '' 
+                                || $oInformer->nutfiart_val != '') {
                             InformerManager::addInformer($oInformer);
                         }
                     }
@@ -124,21 +127,23 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 //La requète s'est effectué donc on copie le token dans la session
                 $_SESSION['token'] = $_REQUEST['token'];
+                
             } else {
                 //Message en cas de formulaire déja envoyé
                 $msg = "<p class= 'erreur'> " . date('H:i:s') . "
                 Vous avez déja envoyé ce formulaire </p>";
             }
-        } catch (MySQLException $e) {
-            //Message pour l'erreur
-            $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
-                    . ' Echec insert fiche article, code: '
-                    . $resEr . '</p>';
         }
-
-        //On insert le message dans le tableau de message
-        Tool::addMsg($msg);
+    } catch (MySQLException $e) {
+        //Message pour l'erreur
+        $msg = '<p class=\'erreur\'> ' . date('H:i:s') . ''
+                . ' Echec insert fiche article, code: '
+                . $resEr . '</p>';
     }
+
+    //On insert le message dans le tableau de message
+    Tool::addMsg($msg);
+    
 } else {
     echo 'Le silence est d\'or';
 }

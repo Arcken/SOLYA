@@ -11,7 +11,12 @@ if (isset($_REQUEST['action'])) {
 } else {
     $sAction = 'home';    
 }
-
+//Variable pour tester la valeur du button cliqué par l'utilisateur
+if (isset($_REQUEST['btnForm'])){
+    $sButtonUt = $_REQUEST['btnForm'];
+} else {
+    $sButtonUt = '';
+}
 //valeur du bouton d'un formulaire par défaut
 $sButton = "Envoyer";
 

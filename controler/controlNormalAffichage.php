@@ -34,8 +34,7 @@ switch ($sAction) {
 
     //Détail d'un bon d'entrée
     case "be_detail":
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des bons d'entrée";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -158,8 +157,7 @@ switch ($sAction) {
     //Détail d'un Droit de douane
     case "dd_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des droits de douane";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -178,8 +176,7 @@ switch ($sAction) {
     //Ajout d'un Droit de douane
     case "dd_add":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des droits de douanes";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -209,8 +206,7 @@ switch ($sAction) {
     //Détail d'une Durée conservation
     case "dc_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des durées de conservation";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -229,8 +225,7 @@ switch ($sAction) {
     //Ajout d'une Durée conservation
     case "dc_add":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des durées de conservation";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -294,8 +289,7 @@ switch ($sAction) {
     //Detail d'une fiche article
     case "fiart_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des fiches articles";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -316,8 +310,7 @@ switch ($sAction) {
     //Détail d'une gammme
     case "ga_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des gammes";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -358,8 +351,7 @@ switch ($sAction) {
     //Ajout d'un inventaire
     case "inventaire_add":
         //Si on ajoute un inventaire 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Envoyer') {
+        if ($sButtonUt == 'Envoyer') {
             $sPageTitle = "Liste des inventaires";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -377,10 +369,7 @@ switch ($sAction) {
     //détail d'un inventaire
     case "inventaire_upd":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier' 
-                || isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Executer') {
+        if ($sButtonUt == 'Modifier' || $sButtonUt == 'Executer') {
             $sPageTitle = "Liste des inventaire";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -421,8 +410,7 @@ switch ($sAction) {
     //détail d'un mode de conservation
     case "mc_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des modes de conservation";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -464,8 +452,7 @@ switch ($sAction) {
     //Détial d'une nutrition
     case "nut_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des libellés de nutrition";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -506,8 +493,7 @@ switch ($sAction) {
     //Détail d'un pays
     case "pays_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des pays";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -580,8 +566,7 @@ switch ($sAction) {
     //Détail d'une tva
     case "tva_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des TVA";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -600,8 +585,7 @@ switch ($sAction) {
     //Ajout d'une tva
     case "tva_add":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des TVA";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
@@ -650,8 +634,7 @@ switch ($sAction) {
     //Détail d'un utilisateur
     case "utilisateur_detail":
 
-        if (isset($_REQUEST['btnForm']) 
-                && $_REQUEST['btnForm'] == 'Modifier') {
+        if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des utilisateurs";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';

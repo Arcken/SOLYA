@@ -30,8 +30,7 @@
             case "be_detail":
                  
                 require $path . '/controler/control_be_upd.php';
-                 if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Modifier') {
+                 if ($sButtonUt == 'Modifier') {
                     
                     require $path . '/controler/control_be_list.php';
                     
@@ -202,8 +201,7 @@
     
             //ajout inventaire
             case "inventaire_add":
-                if (isset($_REQUEST['btnForm']) 
-                        && $_REQUEST['btnForm'] == 'Envoyer') {
+                if ($sButtonUt == 'Envoyer') {
                     //On traite l'ajout
                     require_once $path . '/controler/control_inv_add.php';
                     //puis on appel la liste
@@ -217,26 +215,25 @@
             
             //modification d'un inventaire
             case "inventaire_upd":
-        //si on execute l'inventaire                
-        if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Executer') {
-            //on traite l'exécution
-            require_once $path . '/controler/control_inv_exec.php';
-            //puis on appel la liste
-                $sAction = "inventaire_list";
-                require_once $path . '/controler/control_inv_list.php';
-        } else if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
-            //on traite l'update
-            require_once $path . '/controler/control_inv_upd.php';
-            //puis on appel la liste
+                //si on execute l'inventaire                
+                if ($sButtonUt == 'Executer') {
+                    //on traite l'exécution
+                    require_once $path . '/controler/control_inv_exec.php';
+                    //puis on appel la liste
                     $sAction = "inventaire_list";
                     require_once $path . '/controler/control_inv_list.php';
-        }
-        else {
-            require_once $path . '/controler/control_inv_upd.php';
-        }
-        break;
+                } else if ($sButtonUt == 'Modifier') {
+                    //on traite l'update
+                    require_once $path . '/controler/control_inv_upd.php';
+                    //puis on appel la liste
+                    $sAction = "inventaire_list";
+                    require_once $path . '/controler/control_inv_list.php';
+                } else {
+                    require_once $path . '/controler/control_inv_upd.php';
+                }
+                break;
 
-    //Suppression d'un inventaire
+            //Suppression d'un inventaire
             case "inventaire_del";
                 require_once $path . '/controler/control_inv_del.php';
                 

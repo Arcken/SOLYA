@@ -204,3 +204,7 @@ table{
     width: 90%;
     text-align: center;
 }
+#formFiart select{
+    width: auto;
+    max-width: 80%;
+}
