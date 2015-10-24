@@ -4,7 +4,6 @@
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
-    $sPageTitle = "Ajout de Fiche Article";
 
     require $path . '/model/Gamme.php';
     require $path . '/model/GammeManager.php';
@@ -60,7 +59,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 }
 
                 //on exécute la requête d'insert de la fiche article
-                $resFiartAdd = FicheArticleManager::addFicheArticle($oFiArt);
+                FicheArticleManager::addFicheArticle($oFiArt);
 
                 //On récupère l'id du dernier insert de la fiche article
                 $oFiArt->fiart_id = Connection::dernierId();
@@ -77,7 +76,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $oRegrouper->fiart_id = $oFiArt->fiart_id;
                     $oRegrouper->ga_id = $value;
 
-                    $r = RegrouperManager::addRegrouper($oRegrouper);
+                    RegrouperManager::addRegrouper($oRegrouper);
                 }
 
                 require $path . '/model/InformerManager.php';
@@ -115,7 +114,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 }
 
                 //La requète s'est effectué donc on commit la transaction
-                $res = $cnx->commit();
+                $cnx->commit();
 
                 $resMessage = '<p class=\'info\'>' . date('H:i:s')
                         . ' L\'enregistrement de la fiche article N° "'

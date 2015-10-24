@@ -3,7 +3,7 @@
 /* ----------------------------Affichage---------------------------------
  * -------------------------------------------------------------------- */
 
-//Pour chaque appel de page, on définit le titre puis oon appel le header le menu
+//Pour chaque appel de page, on définit le titre puis on appel le header le menu
 //le bloc latéral puis la page. Le ffoter est appelé dans control.php
 
 switch ($sAction) {

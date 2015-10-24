@@ -67,10 +67,7 @@ img{
     max-width: 45px;
 }
 
-#divNut{
-    height: 540px;
-    max-height: 540px;
-}
+
 
 .col30, .col50, .col70, .col20, .col90, .colOnlyOne, .col40{
     overflow:auto;
@@ -116,6 +113,12 @@ img{
 .col90{
     max-width: 97%; 
     width:97%;
+}
+
+.col30 label{
+    display: inline-block;
+    text-align: left;
+    width: 60px;
 }
 
 .colOnlyOne {
@@ -173,3 +176,17 @@ table{
     width:157px;
 }
 
+
+#formFiart >div {
+    height: 550px;
+    max-height: 550px;
+}
+#formFiart label{
+    display: block;
+    width: 230px;
+    margin-left: 1%;
+    margin-top: 2%;
+}
+#formFiart span{
+    margin-left: 10%;
+}

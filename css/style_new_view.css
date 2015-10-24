@@ -2,7 +2,7 @@ body{
     background-color: antiquewhite;
 }
 
-.corps{    
+.corps, .corpsCenter{    
     position: relative;
     width: 98%;
     height: auto;    
@@ -14,6 +14,15 @@ body{
     -o-box-shadow: 10px 10px 5px 0px #cfcfcf;
     box-shadow: 10px 10px 5px 0px #cfcfcf;
     filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+}
+.corpsCenter{
+    text-align: center;
+    
+}
+.col30 label{
+    display: inline-block;
+    text-align: left;
+    width: 60px;
 }
 
 .form{
@@ -27,12 +36,6 @@ body{
     vertical-align: middle;
     float: right;
     margin-right: 20px;
-}
-.form input,textArea,select{
-    margin-left: 30px;
-    margin-top: 4px;
-    margin-bottom: 8px;
-    border: solid black 1px;
 }
 
 h2{

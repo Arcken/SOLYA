@@ -35,7 +35,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                    value ='<?php echo rand(1,1000000)?>' 
                    hidden/>            
                 <div class="col30"> 
-                <label for="gaLbl"> Libellé de la gamme: </label>
+                <label for="gaLbl"> Libellé: </label>
                 <input name="gaLbl" 
                        placeholder="Saisie" 
                        required type="text"
@@ -43,7 +43,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        title="3 caractères minimum">            
                 <br>
 
-                <label for="gaAbv"> Abréviation de la gamme: </label>
+                <label for="gaAbv"> Abréviation: </label>
                 <input name="gaAbv" 
                        placeholder="Saisie" 
                        required type="text"
