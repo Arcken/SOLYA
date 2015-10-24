@@ -400,12 +400,11 @@ function getGamme() { //appel partout
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getAllGamme'},
     function (json) {
-        console.log('dedans');
         var $select = $('#selGamme');
-        console.log($select);
         $select.empty();
         $select.append('<option value="">Aucun</option>');
         for (var key in json) {
+            console.log(json);
             $select.append('<option value="' + json[key].ga_id + '">'
                     + json[key].ga_lbl + '</option>');
         }
@@ -423,9 +422,7 @@ function getMc() {
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getAllMc'},
     function (json) {
-        console.log('dedans getMc');
         var $select = $('#modeConservation');
-        console.log($select);
         $select.empty();
         $select.append('<option value="">Aucun</option>');
         for (var key in json) {
@@ -447,7 +444,6 @@ function getNut() {
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getAllNut'},
     function (json) {
-        console.log('dedans');
         var $divNut = $('#divNut');
         $('#divNut').empty();
 
@@ -475,13 +471,12 @@ function getPays() {
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getAllPays'},
     function (json) {
-        console.log('dedans');
         var $selectCol1 = $('#selPays');
         $selectCol1.empty();
         $selectCol1.append('<option value="">Aucun</option>');
         for (var key in json) {
-            $selectCol1.append('<option value="' + json[key].PAYS_ID + '">'
-                    + json[key].PAYS_NOM + '</option>');
+            $selectCol1.append('<option value="' + json[key].pays_id + '">'
+                    + json[key].pays_nom + '</option>');
         }
     }
     );

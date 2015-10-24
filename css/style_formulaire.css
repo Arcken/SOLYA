@@ -30,10 +30,22 @@ and open the template in the editor.
     text-align: center;
     
 }
-
+hr{
+    background-color: antiquewhite;
+    height: 1px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: none;
+}
 h2{
     color: wheat;
     text-align: center;
+}
+h3{
+    color: wheat;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 .form{
     position: relative;            
@@ -51,15 +63,10 @@ img{
     margin-left: 30px;
     margin-top: 4px;
     margin-bottom: 8px;
-    border: solid black 1px;
     font-size: 0.82em;  
 }
 .form label{    
     color: white;
-}
-
-.form textArea{
-
 }
 
 .inputSmall{
@@ -189,4 +196,11 @@ table{
 }
 #formFiart span{
     margin-left: 10%;
+}
+#formFiart textArea{
+    
+    display: inline-block;
+    margin-left: 5%;
+    width: 90%;
+    text-align: center;
 }

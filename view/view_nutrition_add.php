@@ -14,7 +14,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         ?>
         <link type="text/css" href="./css/style_new_view.css" rel="stylesheet">
         <?php
-       // require $path . '/view/view_new_view_header.php';
     }
     ?>
 

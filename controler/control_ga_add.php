@@ -20,8 +20,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //à la requête
 
                 $oGa = new Gamme();
-                $oGa->GA_LBL = $_REQUEST['gaLbl'];
-                $oGa->GA_ABV = strtoupper($_REQUEST['gaAbv']);
+                $oGa->ga_lbl = $_REQUEST['gaLbl'];
+                $oGa->ga_abv = strtoupper($_REQUEST['gaAbv']);
 
                 $result = GammeManager::addGamme($oGa);
 
@@ -32,7 +32,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $msg = '<p class=\'info\'>' . date('H:i:s')
                         . ' L\'enregistrement de la gamme: "'
                         . $id
-                        . '" intitulé "' . $oGa->GA_LBL . '" à été effectué '
+                        . '" intitulé "' . $oGa->ga_lbl . '" à été effectué '
                         . 'avec succès </p>';
 
                 //La requète s'est effectué donc on copie le token dans la session

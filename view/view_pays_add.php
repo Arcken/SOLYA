@@ -35,7 +35,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                    value ='<?php echo rand(1, 1000000) ?>' hidden/>
 
             <div class="col30"> 
-                <label for="paysNom"> Nom du pays: </label>
+                <h3>Pays</h3>
+                <label for="paysNom"> Nom: </label>
                 <input name="paysNom" 
                        placeholder="Saisie" 
                        required type="text"
@@ -43,15 +44,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        title="3 caractères minimum">            
                 <br>
 
-                <label for="paysAbv"> Abréviation du pays: </label>
+                <label for="paysAbv"> Abréviation: </label>
                 <input name="paysAbv" 
                        placeholder="Saisie" 
                        required type="text"
                        pattern=".{2,}" 
                        title="2 caractères minimum">            
                 <br>
-
-                <label for="paysDvsNom"> Devise du pays: </label>
+                <hr>
+                <h3>Devise</h3>
+                <label for="paysDvsNom"> Devise: </label>
                 <input name="paysDvsNom" 
                        pattern=".{3,}" 
                        title="3 caractères minimum"
@@ -60,7 +62,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="text">            
                 <br>
 
-                <label for="paysDvsAbv"> Abréviation de la devise </label>
+                <label for="paysDvsAbv"> Abréviation: </label>
                 <input name="paysDvsAbv" 
                        placeholder="Saisie" 
                        required
@@ -69,7 +71,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="text">            
                 <br>
 
-                <label for="paysDvsSym"> Symbole de la devise </label>
+                <label for="paysDvsSym"> Symbole: </label>
                 <input name="paysDvsSym" 
                        placeholder="Saisie" 
                        required

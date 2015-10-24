@@ -22,9 +22,12 @@ body{
 .col30 label{
     display: inline-block;
     text-align: left;
-    width: 60px;
+    width: 80px;
 }
-
+input{
+    margin-left: auto;
+    margin-top: 1%;
+}
 .form{
     position: relative;            
     width: 98%;
@@ -38,10 +41,22 @@ body{
     margin-right: 20px;
 }
 
+hr{
+    background-color: antiquewhite;
+    height: 1px;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: none;
+}
 h2{
-    color: white;
-    
+    color: #cfcfcf;
     text-align: center;
+}
+h3{
+    color: wheat;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 1px;
 }
 .form label{    
     color: white;
