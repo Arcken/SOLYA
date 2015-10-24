@@ -104,6 +104,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                     name="lotId[]" 
                                     id='lotIdNID' 
                                     onfocus="getLotsFromCurReference('NID');"
+                                    value="1"
                                     required
                                     >
                         </td>

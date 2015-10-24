@@ -174,12 +174,22 @@ try {
 
 //On vide le buffer pour permettre l'affichage du pdf sans problèmes lors du prochain passage.
     ob_end_flush();
+    
 } catch (Exception $e) {
-    echo'<br>';
-    Tool::printAnyCase($e->getCode());
-    echo'<br>';
-    Tool::printAnyCase($e->getMessage());
-    echo'<br>';
-    Tool::printAnyCase($e->getTraceAsString());
-    echo'<br>';
+    //Si une erreur survient on la catch dans une exception
+   if (isset ($resEr[0])){
+      //Si elle provient de la base
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Impossible de générer le PDF. Code :"
+                    . $resEr[0] . " Message : $resEr[1]"
+                    . "</p>";
+   }else{
+       //Si c'est une erreur coté client
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Impossible de générer le PDF. Code :".$e->getCode()
+                    . " Message : ". $e->getMessage()
+                    . "</p>";
+   }
+   Tool::addMsg($msg);
+   
 }

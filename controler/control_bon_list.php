@@ -7,7 +7,7 @@ try {
     require_once $path . '/model/Bon.php';
     require_once $path . '/model/BonManager.php';
     require_once $path . '/model/DocLibelleManager.php';
-    $sPageTitle="Liste des bons de SORTIE/RETOUR";
+    
 
     
     //On récupère le nombre d'enregistrement total pour la pagination
@@ -26,5 +26,15 @@ try {
     $toDocLbl=  DocLibelleManager::getAllDocsLibelles();
     
 } catch (MySQLException $e) {
+    switch ($resEr[0]) {
 
+        default:
+            $msg = "<p class='erreur'> ". date('H:i:s') 
+                    . " Impossible d'afficher la liste. Code :"
+                    . $resEr[0] . " Message : $resEr[1]"
+                    . "</p>";
+            
+            break;
+     }
+     Tool::addMsg($msg);
 }

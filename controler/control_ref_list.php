@@ -6,7 +6,7 @@
  */
 try {
 
-    $sPageTitle = "Liste des références";
+    
     require_once $path . '/model/Reference.php';
     require_once $path . '/model/ReferenceManager.php';
     require_once $path . '/model/Tva.php';
