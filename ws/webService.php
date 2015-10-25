@@ -49,7 +49,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             $tab = array();
             $requete = 'SELECT pays_id, pays_nom, pays_abv, pays_dvs_nom, '
                         . 'pays_dvs_abv, pays_dvs_sym '
-                        . 'FROM pays ORDER BY pays_nom';;
+                        . 'FROM pays ORDER BY pays_nom';
             $resultat = $bdd->query($requete);
             while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
                 $tab[] = $donnees;
@@ -58,7 +58,19 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             break;
 
 
-
+        case 'getCompte':
+            $tab = array();
+            $cptId = $_REQUEST['cptId'];
+            $requete = 'SELECT cpt_id, cpt_nom, cpt_com '
+                        . 'FROM compte '
+                        . 'WHERE cpt_id ='.$cptId;
+            $resultat = $bdd->query($requete);
+            while ($donnees = $resultat->fetch(PDO::FETCH_ASSOC)) {
+                $tab[] = $donnees;
+            }
+            echo json_encode($tab);
+            break;
+            
         case 'getFiartPays':
             $fiartId = $_REQUEST['fiartId'];
             $tab = array();

@@ -94,16 +94,20 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="cptId" 
                        id="cptId" 
                        type="texte"
+                       onchange="getCompte();"
                        >
                 <br>
                 <label for="cptNom"> Nom </label><br>
                 <input name="cptNom" 
                        id="cptNom" 
                        type="texte"
+                       readonly=""
                        >
                 <br>
                 <label for="cptCom"> Commentaire </label><br>
-                <textarea name="cptCom" id="cptCom"></textarea>
+                <textarea name="cptCom" 
+                          id="cptCom"
+                          readonly=""></textarea>
                 <br>
             </div>
 

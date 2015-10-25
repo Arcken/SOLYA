@@ -537,7 +537,7 @@ function getReference($row, $source, $champs, $form) {
 /**
  * Function qui récupére les infos du compte selon la valeur de l'élément html
  * avec l'id = cptId
- * Ensuite elle modifie les inputs avec l'id cptNom et cptCom
+ * Ensuite elle modifie les éléments html avec l'id cptNom et cptCom
  * @returns {undefined}
  */
 function getCompte(){
@@ -551,9 +551,9 @@ function getCompte(){
     
     $.getJSON(
             'ws/webService.php', // code cible         
-            {test: 'Solya', action: 'getCompte', value: $cptVal},
+            {test: 'Solya', action: 'getCompte', cptId: $cptVal},
     function (json) {
-        
+    
         for (var key in json) {
             $cptNomInp.val(json[key].cpt_nom);
             $cptComInp.val(json[key].cpt_com);
