@@ -215,7 +215,7 @@ function limitQteMax($row) {
     //Récupération des inputs
     var $valInput = $('#' + $lotIdId);
     var $inptQte = $('#' + $lotQteId);
-    var $typeBon = $('#typeBon').val();
+    var $typeBon = $('#typeBonId').val();
     
     //On récupère l'action pour déterminer le traitement
     var $sAction = $('#action').val();
@@ -238,8 +238,9 @@ function limitQteMax($row) {
         case "6":
         case "7":
             
-            
-            if ($sAction === "bon_upd" && $ligId!== "" ){
+            console.log('dedans');
+            if ($sAction === "bon_upd" && $ligId!== "" && $ligId ){
+                console.log('aprés le if');
                 //Cas de la modification du bon de sortie
                 //Récupère la quantité initial 
                 var $lotQteOldId = 'ligQteOld' + $row;
@@ -312,7 +313,7 @@ function limitQteMax($row) {
 
            
 
-            if ($sAction === "bon_upd" && $ligId!==""  ) {
+            if ($ligId && $sAction === "bon_upd" && $ligId!==""  ) {
                 //Cas de la modification d'un bon de retour
                 //Récupère la quantité initial 
                 var $lotQteOldId = 'ligQteOld' + $row;
@@ -387,8 +388,8 @@ function confirmQteStock($row) {
     console.log($lotQteId);
     //Récupération des inputs
     var $inptQte = $('#' + $lotQteId);
-    //console.log('Valeur dans l\'input: ' + $inptQte.val());
-    //console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
+   console.log('Valeur dans l\'input: ' + $inptQte.val());
+   console.log('Valeur de l\'attribut Max :' + $inptQte.attr('max'));
 
     if (parseFloat($inptQte.val()) <= parseFloat($inptQte.attr('max'))) {
         $color = 'green';

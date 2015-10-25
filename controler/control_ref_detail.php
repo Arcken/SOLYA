@@ -20,11 +20,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         require $path . '/model/PrixVenteManager.php';
         require $path . '/model/LotManager.php';
         //On récupère les données associés
-        $oTvas = TvaManager::getTvaById($rsRef->tva_id);
-        $oDroitDouanes = DroitDouaneManager::getDroitDouaneById($rsRef->dd_id);
-        $oDurCons = DureeConservationManager::getDureeConservationById($rsRef->$rsRef->dc_id);
-        $oModCons = ModeConservationManager::getModeConservationById($rsRef->mc_id);
-        $oFiArt = FicheArticleManager::getFicheArticleById($rsRef->fiart_id);
+        $oTva = TvaManager::getTvaById($oRef->tva_id);
+        $oDroitDouane = DroitDouaneManager::getDroitDouaneById($oRef->dd_id);
+        $oDurCons = DureeConservationManager::getDureeConservationById($oRef->dc_id);
+        $oModCons = ModeConservationManager::getModeConservationById($oRef->cons_id);
+        $oFiArt = FicheArticleManager::getFicheArticleById($oRef->fiart_id);
         $oPve = PrixVenteManager::getCurPrixVente($idRef);
         $toLots = LotManager::getLotsFromReference($idRef);
 

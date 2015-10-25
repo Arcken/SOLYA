@@ -9,7 +9,7 @@
         <form class ="form" id='ref_detail' method="POST" enctype="multipart/form-data" >
             <div class=" haut"> 
 
-                <label for="ficheArticle">Fiche article associée : </label>
+                <label for="ficheArticle">Fiche article associée: </label>
                 <br>
                 <input  name="ficheArticle" 
                         type="text"
@@ -22,45 +22,47 @@
 
             <div class="col30"> 
                 
-                <label for="refCode">Code de la référence : </label><br>    
+                <label for="refCode">Code de la référence: </label><br>    
                 <input id="refCode" 
                        name="refCode" 
                        type="text"
                        autocomplete="off"  
-                       value="<?php echo $rsRef->ref_code; ?>"
+                       value="<?php echo $oRef->ref_code; ?>"
                        readonly>
                 <br>
                 <label for="refLbl"> Libellé: </label><br>          
                 <input name="refLbl" type="text" 
-                       value="<?php echo $rsRef->ref_lbl; ?>"
+                       value="<?php echo $oRef->ref_lbl; ?>"
                        readonly>
                 <br>
                 <label for="refMrq"> Marque: </label><br>          
                 <input name="refMrq" type="text" 
-                       value="<?php echo $rsRef->ref_mrq; ?>"
+                       value="<?php echo $oRef->ref_mrq; ?>"
                        readonly>
                 <br>
                 <label for="refStMin"> Stock minimum: </label><br>
                 <input name="refStMin" type="text" 
-                       value="<?php echo $rsRef->ref_st_min; ?>"
+                       value="<?php echo $oRef->ref_st_min; ?>"
                        readonly>         
                 <br>
                 <label for="refPoidsBrut"> Poids brut: </label><br>
                 <input name="refPoidsBrut"  type="text" 
-                       value="<?php echo $rsRef->ref_poids_brut; ?>"
+                       value="<?php echo $oRef->ref_poids_brut; ?>"
                        readonly>         
                 <br>
                 <label for="refPoidsNet"> Poids net: </label><br>
                 <input name="refPoidsNet"  type="text" 
-                       value="<?php echo $rsRef->ref_poids_net; ?>"
+                       value="<?php echo $oRef->ref_poids_net; ?>"
                        readonly>         
                 <br>
-                <label for="modeConservation"> Mode de conservation </label><br>
-                <input name="modeConservation" type="text" 
-                       value='<?php echo $oModCons->cons_lbl; ?>'
-                       readonly>
+                <label for="modeConservation"> Mode de conservation:</label><br>
+                <textarea name="modeConservation" 
+                          type="text" 
+                          rows="4" 
+                          cols="25"
+                          readonly><?php echo $oModCons->cons_lbl;?></textarea>
                         <br>
-                <label for="dureeConservation"> Durée de conservation </label><br>
+                <label for="dureeConservation"> Durée de conservation:</label><br>
                 <input name="dureeConservation" 
                        type="text" 
                        value=" <?php echo $oDurCons->dc_nb.' | '.$oDurCons->dc_lbl; ?> "  
@@ -69,46 +71,46 @@
                     </div>
 
                     <div class="col30">
-                        <label for="refEmbLbl">Description de l'emballage :</label><br>
+                        <label for="refEmbLbl">Description de l'emballage:</label><br>
                         <input name="refEmbLbl"  
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_lbl; ?>"
+                               value="<?php echo $oRef->ref_emb_lbl; ?>"
                                readonly>         
                         <br>
-                        <label for="refEmbCouleur" >Couleur : </label><br>
+                        <label for="refEmbCouleur" >Couleur: </label><br>
                         <input name="refEmbCouleur" 
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_couleur; ?>"
+                               value="<?php echo $oRef->ref_emb_couleur; ?>"
                                readonly>         
                         <br> 
                         <label for="refEmbVlmCtn">Volume net:</label><br>
                         <input name="refEmbVlmCtn" 
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_vlm_ctn; ?>"
+                               value="<?php echo $oRef->ref_emb_vlm_ctn; ?>"
                                readonly>         
                         <br>
-                        <label for="refEmbDimLng">Longueur : </label><br>
+                        <label for="refEmbDimLng">Longueur: </label><br>
                         <input name="refEmbDimLng" 
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_dim_lng; ?>"
+                               value="<?php echo $oRef->ref_emb_dim_lng; ?>"
                                readonly>         
                         <br>
-                        <label for="refEmbDimLrg">Largeur : </label><br>
+                        <label for="refEmbDimLrg">Largeur: </label><br>
                         <input name="refEmbDimLrg" 
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_dim_lrg; ?>"
+                               value="<?php echo $oRef->ref_emb_dim_lrg; ?>"
                                readonly>         
                         <br>
-                        <label for="refEmbDimHt">Hauteur : </label><br>
+                        <label for="refEmbDimHt">Hauteur: </label><br>
                         <input name="refEmbDimHt" 
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_dim_ht; ?>"
+                               value="<?php echo $oRef->ref_emb_dim_ht; ?>"
                                readonly> 
                         <br>
-                        <label for="refEmbDimDiam">Diamètre : </label><br>
+                        <label for="refEmbDimDiam">Diamètre: </label><br>
                         <input name="refEmbDimDiam" 
                                type="text" 
-                               value="<?php echo $rsRef->ref_emb_dim_diam; ?>"
+                               value="<?php echo $oRef->ref_emb_dim_diam; ?>"
                                readonly>         
                         <br>
 
@@ -122,7 +124,7 @@
                                placeholder="Code douane" 
                                title="3 caractères minimum"
                                pattern=".{3,}"
-                               value="<?php echo $rsRef->ref_code_douane;?>"
+                               value="<?php echo $oRef->ref_code_douane;?>"
                                readonly>
                         <br>
                         <label for="pvePer"> Prix de vente particulier: </label>
@@ -156,18 +158,18 @@
                          
                                 readonly>    
                         <br>
-                        <label for="refCom"> Commentaire : </label>
+                        <label for="refCom"> Commentaire: </label>
                         <br>
                         <textarea name="refCom" 
                                   rows="4" 
                                   cols="25"
                                   readonly
-                                  ><?php echo $rsRef->ref_com; ?></textarea>
+                                  ><?php echo $oRef->ref_com; ?></textarea>
                         <div class="imgList">
                             <table>
                                 <?php
-                                if ($rsRef->ref_photos != '') {
-                                    $tabPhoto = explode(',', $rsRef->ref_photos);
+                                if ($oRef->ref_photos != '') {
+                                    $tabPhoto = explode(',', $oRef->ref_photos);
                                     foreach ($tabPhoto as $image) {
                                         if ($image != '') {
                                             ?>
@@ -175,7 +177,7 @@
                                                 <td> <input type="radio" 
                                                             name="refPhotosPref" 
                                                             value="<?php echo $image ?>"
-                                                            <?php if ($image == $rsRef->ref_photos_pref) 
+                                                            <?php if ($image == $oRef->ref_photos_pref) 
                                                             {echo ' checked ';}?>
                                                             readonly></td>
                                                 <td><img src="<?php echo $imgMiniPath . $image . '_lbl.jpg';?>" 
@@ -239,7 +241,7 @@
                                hidden/>
                         <input name="idRef" id="refId"  
                                type='text'
-                               value="<?php echo $rsRef->ref_id; ?>"
+                               value="<?php echo $oRef->ref_id; ?>"
                                hidden>
                         
                         

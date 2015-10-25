@@ -39,6 +39,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         value="<?php echo $oDocLbl->doclbl_lbl; ?>" 
                         title="Non modifiable" readonly>
                 <br>
+                
+                    <input type="text" 
+                        value="<?php echo $oDocLbl->doclbl_id; ?>" 
+                        title="Non modifiable" 
+                        id="typeBonId" hidden>
+                <br>
                 <label for="bonDate"> Date</label><br>
                 <input name="bonDate" 
                        placeholder="Date" 
@@ -119,7 +125,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </tr>
                     <!-- Squelette de construction des lignes-->
                     <tr id="idLigne" hidden>
-                        <td class="bonLigneId">
+                        <td class="bonLigneId" hidden>
                             <input type="text"
                                    name="ligId[]" 
                                    id="ligIdNID"

@@ -17,15 +17,15 @@ try {
     ob_start();
 //------------------------Récupération des données----------------------//
     //On récupère l'id du bon passé en paramètre
-    $bonId = $_REQUEST['bonId'];
+    $invId = $_REQUEST['invId'];
 
     //On appel le manager pour récupéré le Bon 
-    $oInv = InventaireManager::getInventaire($bonId);
+    $oInv = InventaireManager::getInventaire($invId);
     //Et le manager pour les intitulés 
     
     //On récupère les lignes associés
     //On récupére toutes les ligne du bon
-    $resAllBonLignes = BonLigneManager::getBonLignesFromBon($bonId);
+    $resAllBonLignes = LigneInventaireManager::getLigneInventaireFromInventaire($bonId);
 
     //On vérifie que le résultat récupéré soit bien un tableau (si aucune donnée ce n'est pas un tableau)
     if (is_array($resAllBonLignes)) {
