@@ -94,6 +94,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="cptId" 
                        id="cptId" 
                        type="texte"
+                       value="<?php echo $resCompte->cpt_id?>"
                        onchange="getCompte();"
                        >
                 <br>
@@ -102,12 +103,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="cptNom" 
                        type="texte"
                        readonly=""
+                       value="<?php echo $resCompte->cpt_nom?>"
                        >
                 <br>
                 <label for="cptCom"> Commentaire </label><br>
                 <textarea name="cptCom" 
                           id="cptCom"
-                          readonly=""></textarea>
+                          readonly=""><?php echo $resCompte->cpt_com?></textarea>
                 <br>
             </div>
 
@@ -273,7 +275,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    title="Prix unitaire"
                                    onchange='ccMultiplier(["ligQteNID",
                                                    "refPoidsBrutNID"],
-                                                       "totalPoidsNID")'>
+                                                       "totalPoidsNID")'
                                    required>
                         </td>
                         <td>
@@ -575,9 +577,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="beligPu[<?php echo $idLigne ?>]" 
                                        id="beligPu<?php echo $idLigne ?>"
                                        value="<?php echo $oBelig->belig_pu ?>"
+                                       required=""
                                        onchange='ccMultiplier(["ligQteNID",
                                                    "refPoidsBrutNID"],
-                                                       "totalPoidsNID")'>>
+                                                       "totalPoidsNID")'>
                             </td>
                             <td class="beLigneNb">
                                 <!-- La quantité minimum que l'on peut mettre à

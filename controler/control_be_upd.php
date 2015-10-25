@@ -29,6 +29,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             require_once $path . '/model/ReferenceManager.php';
             require_once $path . '/model/DroitDouane.php';
             require_once $path . '/model/DroitDouaneManager.php';
+            require_once $path . '/model/CompteManager.php';
                         
             //Si le formulaire est envoyé
             if ($sButtonUt == 'Modifier') {
@@ -110,7 +111,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $oBe->be_total = $_REQUEST['beTotal'];
                     $oBe->be_mode_pai = $_REQUEST['beModePai'];
                     $oBe->be_com_pai = $_REQUEST['beComPai'];
-
+                    
+                    print_r($oBe);
+                    
                     //Modification du bon c'est la première modification à vendre
                     BonEntreeManager::updBonEntree($oBe);
 
@@ -246,6 +249,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                     //On récupére les détails du bon entré
                     $resBeDetail = BonEntreeManager::getBonEntreeDetailForUpd($beId);
+                    
+                    //On récupére les infos du compte
+                    $resCompte = CompteManager::getCompte($resBeDetail->cpt_id);
 
                     //On récupére toutes les be_ligne du bon
                     $resAllBeLigneBE = BeLigneManager::getBesLignesDetailForUpd($beId);
