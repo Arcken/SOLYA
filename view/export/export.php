@@ -2,7 +2,8 @@
 
 if (isset($_REQUEST['test']) && $_REQUEST['test'] == "accésValide") {
     try {
-        $fichier = $path . '/config/param.ini.php';
+        
+        $fichier = '../../config/param.ini.php';
         if (file_exists($fichier) && is_file($fichier)) {
             $config = parse_ini_file($fichier, true);
 
@@ -21,6 +22,11 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "accésValide") {
             $imgMiniPath = $config['APPLI']['imgminipath'];
             $imgExtension = $config['APPLI']['imgextension'];
             $imgMaxSize = $config['APPLI']['imgmaxsize'];
+            
+           $path = $_SERVER['DOCUMENT_ROOT'] . $sWebPath;
+            require_once $path . '/model/Connection.php';
+            require_once $path. '/model/ExportManager.php';
+            
         } else {
             throw new Exception("Impossible de toruver le fichier param.ini");
         }
@@ -28,7 +34,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "accésValide") {
         echo $e->getMessage();
     }
 
-    require_once $path . '/model/Connection.php';
+    
 } else {
     echo 'Le silence est d\'or';
 }

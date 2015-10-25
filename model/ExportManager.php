@@ -32,18 +32,46 @@ class ExportManager {
                     be_frais_bancaire AS 'Frais de Banque Bon', 
                     be_frais_trans AS 'Frais de Transport Bon', 
                     be_com AS 'Commentaire', 
-                    be_info_trans AS 'Info Transport, 
+                    be_info_trans AS 'Info Transport', 
                     be_total AS 'Total', 
-                    be_mode_pai AS 'Mode de paiement, 
+                    be_mode_pai AS 'Mode de paiement', 
                     be_com_pai AS 'Commentaire paiement' 
                     FROM bon_entree";
-            $result = Connection::request(1, $sql);
+            $result = Connection::request(1, $sql, null,PDO::FETCH_ASSOC);
+            
         } catch (MySQLException $e) {
             throw $e;
         }
         return $result;
     }
 
+    
+    /**
+     * Retourne tous les enregistrements de la table utilisateur 
+     * avec le nom du groupe associé
+     * sans le mot de passe
+     * 
+     * @return []
+     * Retourne un tableau associatif
+     */
+    public static function getAllUtilisateurs() {
+
+        try {
+            $sql = "SELECT ut_nom AS Nom, "
+                    . "ut_prenom AS 'Prénom', "
+                    . "ut_login AS Login, "
+                    . "ut_actif AS 'Activé', "
+                    . "grp_nom AS Groupe "
+                    . "FROM utilisateur AS u "
+                    . "JOIN groupe g ON u.grp_id = g.grp_id ";
+            
+            $result = Connection::request(1, $sql, null,PDO::FETCH_ASSOC);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
     
     
 }

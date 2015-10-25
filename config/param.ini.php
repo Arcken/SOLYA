@@ -6,7 +6,7 @@ pwd = "Stage2015!"
 base = solya
 
 [APPLI]
-webpath="SOLYA"
+webpath="/SOLYA"
 titre = "Sol'ya!"
 limlbl = 2
 nbpage = 5
