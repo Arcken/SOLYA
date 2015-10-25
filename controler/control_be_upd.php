@@ -25,10 +25,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             require_once $path . '/model/LigneManager.php';
             require_once $path . '/model/Lot.php';
             require_once $path . '/model/LotManager.php';
-            require_once $path . '/model/Reference.php';
+            //require_once $path . '/model/Reference.php';
             require_once $path . '/model/ReferenceManager.php';
-            require_once $path . '/model/DroitDouane.php';
-            require_once $path . '/model/DroitDouaneManager.php';
+            //require_once $path . '/model/DroitDouane.php';
+            //require_once $path . '/model/DroitDouaneManager.php';
             require_once $path . '/model/CompteManager.php';
                         
             //Si le formulaire est envoyé
