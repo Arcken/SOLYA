@@ -35,8 +35,14 @@ class ExportManager {
                     be_info_trans AS 'Info Transport', 
                     be_total AS 'Total', 
                     be_mode_pai AS 'Mode de paiement', 
-                    be_com_pai AS 'Commentaire paiement' 
-                    FROM bon_entree";
+                    be_com_pai AS 'Commentaire paiement', 
+                    belig_pu AS 'prix unitaire', 
+                    lig_qte as 'quantité', 
+                    lot_qt_stock 'quantité restante
+                    FROM bon_entree be 
+                    LEFT JOIN be_ligne bel ON be.be_id = bel.be_id 
+                    JOIN ligne li ON bel.lig_id = li.lig_id 
+                    JOIN lot lo ON li.lot_id = lo.lot_id";
             $result = Connection::request(1, $sql, null,PDO::FETCH_ASSOC);
             
         } catch (MySQLException $e) {
