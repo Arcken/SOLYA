@@ -2,20 +2,16 @@
 
 try {
     /**
-     * Sous controleur Bon_Pdf 
+     * Sous controleur Inventaire Pdf 
      */
     require_once $path . '/lib/generatorPDF.php';
-    require_once $path . '/model/Bon.php';
-    require_once $path . '/model/BonManager.php';
-    require_once $path . '/model/DocLibelleManager.php';
-    require_once $path . '/model/BonLigne.php';
-    require_once $path . '/model/BonLigneManager.php';
+    require_once $path . '/model/Inventaire.php';
+    require_once $path . '/model/InventaireManager.php';
     require_once $path . '/model/ReferenceManager.php';
     require_once $path . '/model/Lot.php';
     require_once $path . '/model/LotManager.php';
-    require_once $path . '/model/Ligne.php';
-    require_once $path . '/model/LigneManager.php';
-    require_once $path . '/model/CompteManager.php';
+    require_once $path . '/model/LigneInventaire.php';
+    require_once $path . '/model/LigneInventaireManager.php';
 
 //-----------------------Initialisation---------------------------------//
     ob_start();
@@ -24,17 +20,10 @@ try {
     $bonId = $_REQUEST['bonId'];
 
     //On appel le manager pour récupéré le Bon 
-    $oBon = BonManager::getBon($bonId);
-    //Et le manager pour l'intitulé
-    $oDocLbl = DocLibelleManager::getDocLibelle($oBon->doclbl_id);
-    //On récupère le compte associé
-    if ($oBon->cpt_id !=''){
-        $oCompte =  CompteManager::getCompte($oBon->cpt_id);
-    }else{
-        $oCompte =0;
-    }
-    //On initialise notre variable type bon
-    $sTypeBon = $oDocLbl->doclbl_lbl;
+    $oInv = InventaireManager::getInventaire($bonId);
+    //Et le manager pour les intitulés 
+    
+    //On récupère les lignes associés
     //On récupére toutes les ligne du bon
     $resAllBonLignes = BonLigneManager::getBonLignesFromBon($bonId);
 

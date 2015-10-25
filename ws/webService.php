@@ -232,11 +232,11 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
             $lotId = $_REQUEST['lotId'];
 
 
-            $requete = "SELECT lot_qt_stock, lot_qt_init, l.ref_id, "
-                    . " lot_id_producteur, lot_dlc, r.ref_code"
+            $requete = "SELECT l.lot_qt_stock, l.lot_qt_init, l.ref_id, "
+                    . " l.lot_id_producteur, l.lot_dlc, r.ref_code"
                     . " FROM lot l"
                     . " JOIN reference r ON l.ref_id = r.ref_id"
-                    . " WHERE lot_id=" . $lotId;
+                    . " WHERE l.lot_id=" . $lotId;
 
             //On l'éxécute
             $resultat = $bdd->query($requete);

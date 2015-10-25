@@ -14,7 +14,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             if (!isset($tInventaire) || !is_array($tInventaire)){?>
         <form class="form" 
               action="index.php"
-              method="get"
+              method="post"
               onsubmit='return uniqueValueInForm("lotId")'>
             <div class="col50">
                 
@@ -37,6 +37,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="bonCom">Commentaire</label><br>
                 <textarea name="bonCom" placeholder="Commentaire">Com</textarea>
                 <br>
+                <label for="cptId"> N°compte associé:</label><br>
+                <input name="cptId" placeholder="Identifiant compte associé" type="texte">
                 <div id='divBsArea' style='display:none;'>
                     <label for="bonSortie">Bon de sortie associé :</label><br>
                     <input name="bonSortie" placeholder="N° du bon de sortie" id="bonSortie">

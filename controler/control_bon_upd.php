@@ -29,7 +29,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             //On appel le manager pour récupéré le Bon 
             $oBon = BonManager::getBonForUpd($bonId);
             //Et le manager pour les intitulés 
-            $resDocLbl = DocLibelleManager::getAllDocsLibelles();
+            $oDocLbl = DocLibelleManager::getDocLibelle($oBon->doclbl_id);
 
             //On récupére toutes les ligne du bon
             $resAllBonLignes = BonLigneManager::getBonLignesFromBon($bonId);
@@ -87,15 +87,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $oBon = new Bon();
                     //$oBon->cpt_id = $_REQUEST['cptId'];
                     $oBon->bon_id = $bonId;
-                    $oBon->doclbl_id = $_REQUEST['typeBon'];
+                    $oBon->doclbl_id = $oDocLbl->doclbl_id;
                     $oBon->bon_date = $_REQUEST['bonDate'];
-
+                    
                     if (isset($_REQUEST['bonSortie'])) {
                         $oBon->bon_sortie_assoc = $_REQUEST['bonSortie'];
                     }
                     $oBon->bon_fact_num = $_REQUEST['numFact'];
                     $oBon->bon_com = $_REQUEST['bonCom'];
-
+                    $oBon->cpt_id=$_REQUEST['cptId'];
 
                     //Modification du bon
                     $updBon = BonManager::updBon($oBon);
@@ -143,7 +143,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     }
                     //On créé la variable typeBon qui va nous permettre
                     //de choisir quelles actions effectuer
-                    $typeBon = $_REQUEST['typeBon'];
+                    $typeBon = $oDocLbl->doclbl_id;
 
                     //Boucle pour traiter les lignes
                     //On ignore la première ligne, c'est le squelette de construction 

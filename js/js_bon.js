@@ -239,7 +239,7 @@ function limitQteMax($row) {
         case "7":
             
             
-            if ($sAction === "bon_detail" && $ligId!== "" ){
+            if ($sAction === "bon_upd" && $ligId!== "" ){
                 //Cas de la modification du bon de sortie
                 //Récupère la quantité initial 
                 var $lotQteOldId = 'ligQteOld' + $row;
@@ -312,7 +312,7 @@ function limitQteMax($row) {
 
            
 
-            if ($ligId && $sAction === "bon_detail" && $ligId!==""  ) {
+            if ($sAction === "bon_upd" && $ligId!==""  ) {
                 //Cas de la modification d'un bon de retour
                 //Récupère la quantité initial 
                 var $lotQteOldId = 'ligQteOld' + $row;

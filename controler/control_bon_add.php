@@ -48,11 +48,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             $oBon->bon_date = $_REQUEST['bonDate'];
                             $oBon->bon_fact_num = $_REQUEST['numFact'];
                             $oBon->doclbl_id = $_REQUEST['typeBon'];
-
+                            $oBon->cpt_id=$_REQUEST['cptId'];
 
                             //Démarrage de la transaction
                             $cnx->beginTransaction();
-                            throw new MySQLException('Erreur test',$cnx);
+                           
                             //Insert du bon de sortie
                             $resBon = BonManager::addBon($oBon);
 
@@ -138,7 +138,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             $oBon->bon_fact_num = $_REQUEST['numFact'];
                             $oBon->doclbl_id = $_REQUEST['typeBon'];
                             $oBon->bon_sortie_assoc = $_REQUEST['bonSortie'];
-
+                            $oBon->cpt_id=$_REQUEST['cptId'];
                             //Démarrage de la transaction
                             $cnx->beginTransaction();
 
@@ -230,8 +230,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     } catch (MySQLException $e) {
         //On rollback la transaction
         $cnx->rollback();
+         echo $e->RetourneErreur();
         //On défini le message d'erreur
         switch ($resEr[0]) {
+           
 
             case 'ERR0R':
                 $msg = "<p class='erreur'> " . date('H:i:s')

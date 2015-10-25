@@ -4,7 +4,7 @@
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     try {
-        $sPageTitle = "Liste des Comptes";
+
 
         require_once $path . '/model/Compte.php';
         require_once $path . '/model/CompteManager.php';
@@ -36,8 +36,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         }
         Tool::addMsg($msg);
     }
-    echo 'a';
-    print_r($resAllCpt);
 } else {
     echo 'Le silence est d\'or';
 }

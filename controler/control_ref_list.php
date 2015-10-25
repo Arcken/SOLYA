@@ -95,7 +95,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 //On calcul les marges et coeffs professionnel et particulier
                 //Si on a un résultats != 0 dans $oPve et dans $oCaM 
-                if (isset($oPve) && ($oPve !== 0) && ($oCaM->nb != '')) {
+                //On contôle que la case ne soit pas une string 
+                //(cas ou toutes les données pour calculer le cout d'achat moyen n'ont pas étaient renseignés
+                //dans le bon d'entrée)
+                if (isset($oPve) && ($oPve !== 0) &&
+                        ($oCaM->nb != '')&& is_float($oCaM->nb)) {
 
                     //Calcul des marges
                     $margePro = round(($oPve->pve_ent - $oCaM->nb) / $oPve->pve_ent, 2);

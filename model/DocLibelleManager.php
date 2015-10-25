@@ -15,6 +15,28 @@ class DocLibelleManager {
     
     
     /**
+     * Retourne un enregistrements de la table selon son id
+     * @param $docLblId
+     * Identifiant du libellé
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getDocLibelle($docLblId) {
+
+        try {
+            $tParam=[$docLblId];
+            $sql = "SELECT doclbl_id, doclbl_lbl FROM doc_libelle " 
+                            ."WHERE doclbl_id=? ";
+            $result = Connection::request(0, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
      * Retourne tous les enregistrements de la table
      * 
      * @return objet[]

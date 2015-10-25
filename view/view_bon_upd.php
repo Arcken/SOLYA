@@ -13,7 +13,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <?php //Contrôle selon l'inventaire
             $tInventaire = InventaireManager::getInventaireOpen();
             if (!isset($tInventaire) || !is_array($tInventaire)){?>
-        <form class="form" action="index.php" method="get">
+        <form class="form" action="index.php" method="post"  onsubmit='return uniqueValueInForm("lotId")'>
             <div class="col50">
                 <!-- valeur du token du formulaire en cours -->
                 <input name='token' 
@@ -35,16 +35,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="text" >
                 <br>
                 <label for="typeBon"> Type du bon </label><br>
-
-                <?php foreach ($resDocLbl as $lbl) {
-                    if ($oBon->doclbl_id === $lbl->doclbl_id) {
-                        ?>
-                        <input type="text" 
-                               value="<?php echo $lbl->doclbl_lbl; ?>" 
-                               title="Non modifiable" readonly>
-        <?php } ?>
-    <?php } ?>
-                </select>
+                    <input type="text" 
+                        value="<?php echo $oDocLbl->doclbl_lbl; ?>" 
+                        title="Non modifiable" readonly>
                 <br>
                 <label for="bonDate"> Date</label><br>
                 <input name="bonDate" 
@@ -57,6 +50,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <label for="bonCom">Commentaire</label><br>
                 <textarea name="bonCom" 
                           placeholder="Commentaire"><?php echo $oBon->bon_com ?></textarea>
+                <br>
+                <label for="cptId"> N°compte associé:</label>
+                <br>
+                <input name="cptId" 
+                       placeholder="Identifiant compte associé" 
+                       type="texte"
+                       value="<?php echo $oBon->cpt_id ?>">
                 <br>
                 <?php
                 switch ($oBon->doclbl_id) {
@@ -80,7 +80,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <div class="col90" id="divTable">
                 <table  id="bonTable">
                     <tr>
-                        <th rowspan="2">
+                        <th rowspan="2" hidden>
                             Ligne Id
                         </th>
                         <th colspan="3">
@@ -124,7 +124,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="ligId[]" 
                                    id="ligIdNID"
                                    value="0"
-                                   required
                                    >
                         </td>
                         <td  class="bonLigneId">
@@ -139,8 +138,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <input type="text" 
                                    value="" name="refCode[]" id='refCodeNID' 
                                    onblur="getReferenceBonFromRefCode('NID');"
-                                   value="REFCODE"
-                                   required>
+                                   >
                         </td>
                         <td>
                             <textarea name="refLbl[]" 
@@ -161,7 +159,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <td class="bonLigneNb">
                             <input type="number" name="ligQte[]" id='ligQteNID' value="1" 
                                    step="any"
-                                   onblur="confirmQteStock('NID');"
+                                   onkeyup="confirmQteStock('NID');"
                                    onfocus="limitQteMax('NID');" min='1'cols="15" 
                                    required>
                         </td>
@@ -199,7 +197,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             $oRef = $resAllRefs[$i];
                             ?>
                             <tr id="idLigne<?php echo $ligId ?>">
-                                <td class="bonLigneId">
+                                <td class="bonLigneId" hidden>
                                     <input type="text"
                                            name="ligId[<?php echo $ligId ?>]" 
                                            id="ligId<?php echo $ligId ?>"
