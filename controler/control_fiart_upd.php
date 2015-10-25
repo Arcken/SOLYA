@@ -18,9 +18,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     require_once $path . '/model/InformerManager.php';
     require_once $path . '/inc/Tool.inc';
 
-    if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Modifier') {
-
-
+    if ($sButtonUt == 'Modifier') {
 
         //Si la modification ne se fait pas le manager léve un exception
         try {
@@ -68,7 +66,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oFiArt->fiart_desc_esp = $_REQUEST['fiartDescEsp'];
 
                 //Maj de la fiche article
-                $r = FicheArticleManager::updFicheArticle($oFiArt);
+                FicheArticleManager::updFicheArticle($oFiArt);
                 
                 //Effacement des enregistrements concernant cette fiche dans la table Regrouper
                 RegrouperManager::delRegrouperFiart($oFiArt->fiart_id);
@@ -83,10 +81,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     $oRegrouper->fiart_id = $oFiArt->fiart_id;
                     $oRegrouper->ga_id = $value;
                     
-                    $r = RegrouperManager::addRegrouper($oRegrouper);
+                    RegrouperManager::addRegrouper($oRegrouper);
                     
                 }
-
+                
+                //On récupére toutes les nutritions
+                $resAllNut = NutritionManager::getAllNutritions();
+                
                 //On vérifie pour chaque champ de nutrition, la valeur soit !=0
                 //Comme les input du formulaires sont générés dynamiquement, 
                 //leur nom est:
@@ -94,18 +95,23 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //et de 'nutAjr' et de leur id pour les valeurs
                 foreach ($resAllNut as $object) {
 
-                    if ((isset($_REQUEST['nut' . $object->nut_id]) && $_REQUEST['nut' . $object->nut_id] != '') || (isset($_REQUEST['nutAjr' . $object->nut_id]) && $_REQUEST['nutAjr' . $object->nut_id] != '')) {
+                    if ((isset($_REQUEST['nut' . $object->nut_id]) 
+                            && $_REQUEST['nut' . $object->nut_id] != '') 
+                            || (isset($_REQUEST['nutAjr' . $object->nut_id]) 
+                                    && $_REQUEST['nutAjr' . $object->nut_id] != '')) {
+                        
                         $oInformer = new Informer();
                         $oInformer->fiart_id = $oFiArt->fiart_id;
                         $oInformer->nut_id = $object->nut_id;
                         $oInformer->nutfiart_ajr = $_REQUEST['nutAjr' . $object->nut_id];
                         $oInformer->nutfiart_val = $_REQUEST['nut' . $object->nut_id];
-                        $r = InformerManager::addInformer($oInformer);
                         
+                        InformerManager::addInformer($oInformer);
+                       
                     }
                 }
                 $cnx->commit();
-                $resMessage = '<p class=\'info\'>' . date('H:i:s')
+                $msg = '<p class=\'info\'>' . date('H:i:s')
                         . ' La modification de la fiche article: "'
                         . $oFiArt->fiart_id
                         . '" intitulé "' . $oFiArt->fiart_lbl . '" à été effectué '
@@ -122,13 +128,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     . ' Echec modification fiche article, code: '
                     . $resEr . '</p>';
         }
-        
-        //Rappel du controleur de la liste, après update on appel view_fiart_list
-        //et redéfinition de $sAction
-
-        $sAction = "fiart_list";
-        require $path . '/controler/control_fiart_list.php';
-        
+                        
         //On insert le message dans le tableau de message
         Tool::addMsg($msg);
 

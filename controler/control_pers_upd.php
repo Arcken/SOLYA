@@ -239,7 +239,6 @@ try {
               //On traite les lignes d' Adresse
             for($i=1;$i < count($resLigAdr['adr_id']);$i++){
                 //Si l'id de la ligne est > 0
-                print_r($resLigAdr);
                 if($resLigAdr['adr_id'][$i]> 0){
                     //C'est un update ou une suppression
                     //On vérifie si la valeur est dans le tableau

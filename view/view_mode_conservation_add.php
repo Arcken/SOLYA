@@ -36,11 +36,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                    value ='<?php echo rand(1, 1000000) ?>' hidden/>
             <div class="col30"> 
                 <label for="consLbl"> Libellé: </label>
-                <input name="consLbl" 
+                <textarea name="consLbl" 
                        placeholder="Saisie" 
                        required type="text"
                        pattern=".{3,}"
-                       title="3 caractères minimum">            
+                       title="3 caractères minimum"></textarea>
                 <br>            
             </div>
 

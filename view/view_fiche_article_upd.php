@@ -9,21 +9,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
     <div class="corps">
-        <form class="form" action="index.php"  method="POST" enctype="multipart/form-data">
+        <form class="form" id="formFiart" action="index.php"  method="POST" enctype="multipart/form-data">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
                 <div>
-                     <label for="fiartId"> Id </label><br>
+                     <label for="fiartId"> Id </label>
                     <input name="fiartId"
                            readonly=""
                            type="text" value="<?php echo $resFiartDetail->fiart_id ?>"
-                          >
-                    <label for="fiartLbl"> Libellé de la fiche article </label><br>
+                           ><br>
+                    <label for="fiartLbl"> Libellé</label>
                     <input name="fiartLbl" placeholder="description" required 
                            type="text" value="<?php echo $resFiartDetail->fiart_lbl ?>"
                            pattern=".{3,}" title="3 caractères minimum">
                     <br>
-                    <label for="gamme"> Gamme: </label><br>                    
+                    <label for="gamme"> Gamme: </label>    
+                    
                     <select name="gamme[]" id="selGamme" onclick="listSelect('selGamme', 'listGamme')" 
                             multiple="multiple" required="" size='3'>
                                 <?php foreach ($resAllGamme as $gamme) { ?>
@@ -45,17 +46,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         <?php }
                         ?>
                     </select>
-                    <br>
+                    
 
                     <label for="listGamme">Gamme sélectionnée:</label>
-                    <br>                        
+                          
                     <span id="listGamme" class="listchoisis">
                         <?php echo $listGamme;
                         ?>
                     </span>
-                    <br>
-                    <br>
-                    <label for="pays"> Pays: </label><br>
+                    
+                    <label for="pays"> Pays: </label>
                     <select name="pays" id="selPays">
 
                         <!-- Boucle permettant d'afficher toutes les valeurs dans la combobox-->
@@ -72,18 +72,18 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         }
                         ?>                        
                     </select>                    
-                    <br>
+                    
                 </div>
 
                 <div>
                     <div>
-                        <label for="fiartIng"> Ingrédients: </label><br>               
+                        <label for="fiartIng"> Ingrédients: </label>              
                         <textarea name="fiartIng" rows="2" cols="25" 
                                   placeholder="Saisie"><?php echo $resFiartDetail->fiart_ing ?></textarea>
-                        <br>
+                        
                     </div>
                     <div>                    
-                        <label for="fiartAlg"> Allergénes: </label><br>
+                        <label for="fiartAlg"> Allergénes: </label>
                         <textarea name="fiartAlg" rows="2" cols="25" 
                                   placeholder="Saisie"><?php echo $resFiartDetail->fiart_alg ?></textarea>
                     </div>
@@ -93,11 +93,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                         <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
                             <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
-                        <br/>       
+                          
                         <input type="hidden" name="MAX_FILE_SIZE" 
                                value="<?php echo $imgMaxSize ?>" />
-                        <br/>       
-
+                       
                         <input type="file" name="img_upload[]"  
                                id="img_upload" multiple=""/>
 
@@ -131,27 +130,27 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
             <div class="col30" id="ComFiart">
                 <div>                    
-                    <label for="fiartCom"> Commentaire de la fiche: </label><br>
+                    <label for="fiartCom"> Commentaire: </label>
                     <textarea name="fiartCom" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com ?></textarea>
                 </div>
                 <div>                    
-                    <label for="fiartComTech"> Commentaire technique de la fiche: </label><br>
+                    <label for="fiartComTech"> Commentaire technique: </label>
                     <textarea name="fiartComTech" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com_tech ?></textarea>
                 </div>
                 <div>                    
-                    <label for="fiartComUtil"> Commentaire d'utilisation de la fiche: </label><br>
+                    <label for="fiartComUtil"> Commentaire d'utilisation: </label>
                     <textarea name="fiartComUtil" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_com_util ?></textarea>
                 </div>
                 <div>                    
-                    <label for="fiartDescFr"> Description Française de la fiche: </label><br>
+                    <label for="fiartDescFr"> Description Française: </label>
                     <textarea name="fiartDescFr" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_fr ?></textarea>
                 </div>
                 <div>                    
-                    <label for="fiartDescEng"> Description Anglaise de la fiche: </label><br>
+                    <label for="fiartDescEng"> Description Anglaise: </label>
                     <textarea name="fiartDescEng" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_eng ?></textarea>
                 </div>
                 <div>                    
-                    <label for="fiartDescEsp"> Description Espagnole de la fiche: </label><br>
+                    <label for="fiartDescEsp"> Description Espagnole: </label>
                     <textarea name="fiartDescEsp" rows="2" cols="25" placeholder="Saisie"><?php echo $resFiartDetail->fiart_desc_esp ?></textarea>
                 </div>
 
@@ -159,9 +158,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
 
             <div class="col30" id="divNut">
-                <label> Table de nutrition: </label>
+                <center><label> Table de nutrition: </label></center>
 
-                </br>
+                
                 </br>
                 <!-- Boucle permettant d'afficher chaque résultat une input box et son label-->
                 <div>
@@ -170,7 +169,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         foreach ($resAllNut as $nut) {
                             ?>
                             <label for="<?php echo 'nut' . $nut->nut_id ?>"><?php echo $nut->nut_lbl ?></label>
-                            </br>
+                            
                             <input name="<?php echo 'nut' . $nut->nut_id ?>" 
                                    placeholder="saisie" value="<?php
                                    if (is_array($resNutFiart) && $resNutFiart != 0) {
@@ -189,7 +188,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        }
                                    }
                                    ?>">
-                            </br>                               
+                                                          
                                    <?php
                                }
                            }

@@ -31,7 +31,7 @@
                  
                 require $path . '/controler/control_be_upd.php';
                  if ($sButtonUt == 'Modifier') {
-                    
+                    $sAction = 'be_list';
                     require $path . '/controler/control_be_list.php';
                     
                 }
@@ -94,7 +94,8 @@
             
              // d'une personne
             case "pers_upd":
-                if($sButton=='Modifier'){
+                if($sButtonUt=='Modifier'){
+                    require $path . '/controler/control_pers_upd.php';
                     $sAction='ctc_list';
                     require $path. '/controler/control_ctc_list.php';
                 }else{
@@ -104,7 +105,8 @@
             
             //Ajout d'une entreprise
             case "ent_upd":
-                 if($sButton=='Modifier'){
+                 if($sButtonUt=='Modifier'){
+                     require $path . '/controler/control_ent_upd.php';
                     $sAction='ctc_list';
                     require $path. '/controler/control_ctc_list.php';
                 }else{
@@ -162,7 +164,7 @@
     //-------------------------------Fiche article------------------------------
     
             //Ajout de fiche article
-            case "fiart_add":
+            case "fiart_add":                
                 require $path . '/controler/control_fiart_add.php';
                 break;
 
@@ -178,8 +180,14 @@
                 break;
 
             //Detail fiche article et maj fiche article            
-            case "fiart_detail":
+            case "fiart_upd":
+                if ($sButtonUt == 'Modifier'){
+                    require $path . '/controler/control_fiart_upd.php';
+                    $sAction = "fiart_list";
+                    require $path . '/controler/control_fiart_list.php';
+                } else {
                 require $path . '/controler/control_fiart_upd.php';
+                }
                 break;
 
 

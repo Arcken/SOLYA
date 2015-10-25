@@ -118,7 +118,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //La requète s'est effectué donc on commit la transaction
                 $cnx->commit();
 
-                $resMessage = '<p class=\'info\'>' . date('H:i:s')
+                $msg = '<p class=\'info\'>' . date('H:i:s')
                         . ' L\'enregistrement de la fiche article N° "'
                         . $oFiArt->fiart_id
                         . '" intitulé "' . $oFiArt->fiart_lbl . '" à été effectué '

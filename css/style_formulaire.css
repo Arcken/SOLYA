@@ -149,12 +149,8 @@ img{
     overflow: auto;
 }
 
-.bas{
-    display: block;
-    text-align: center;
-    margin-top: 0.5%;
-    height:auto;
-}
+
+
 .haut{ 
     margin: 0.3%;
     margin-bottom: 0.5%;
@@ -184,9 +180,9 @@ table{
 }
 
 
-#formFiart >div {
-    height: 550px;
-    max-height: 550px;
+#formFiart >.col30 {
+    height: 560px;;
+    max-height: 560px;
 }
 #formFiart label{
     display: block;
@@ -207,4 +203,12 @@ table{
 #formFiart select{
     width: auto;
     max-width: 80%;
+}
+
+.bas{
+    display: block;
+    text-align: center;
+    margin-top: 0.5%;
+    max-height: 50px;
+    height: 50px;
 }

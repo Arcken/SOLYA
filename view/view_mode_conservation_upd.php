@@ -6,11 +6,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
 
-    <div class="corps">
+    <div class="corpsCenter">
 
-        <form class="form" id="fGa" action="index.php">
+        <form class="form" id="formMC" action="index.php">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
-            <div>
+            <div class="col30">
                 <label for="consId"> Id: </label>
                 <input name="consId" value="<?php echo $resMcDetail->cons_id ?>" 
                        type="text" 
@@ -18,12 +18,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <br>
                 
                 <label for="consLbl"> Libellé: </label>
-                <input name="consLbl" 
-                       value="<?php echo $resMcDetail->cons_lbl ?>" 
+                <textarea name="consLbl" 
                        required type="text"
                        pattern=".{3,}" 
-                       title="3 caractères minimum">            
-                <br> 
+                       title="3 caractères minimum"><?php echo $resMcDetail->cons_lbl ?></textarea>
+                
                            
             </div>
 

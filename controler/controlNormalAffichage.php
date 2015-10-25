@@ -302,7 +302,7 @@ switch ($sAction) {
         break;
 
     //Detail d'une fiche article
-    case "fiart_detail":
+    case "fiart_upd":
 
         if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des fiches articles";

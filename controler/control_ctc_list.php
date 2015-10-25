@@ -36,6 +36,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         }
         Tool::addMsg($msg);
     }
+    echo 'a';
+    print_r($resAllCpt);
 } else {
     echo 'Le silence est d\'or';
 }

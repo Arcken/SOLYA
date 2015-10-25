@@ -49,12 +49,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         
                             <tr>
                                 <td class="colImg"><img src="<?php echo $imgMiniPath . $value->fiart_photos_pref . '_lbl.jpg' ?>" alt="" title="Modifier"
-                                         onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></center></td>
+                                         onclick='location.href = "index.php?action=fiart_upd&fiartId=<?php echo $value->fiart_id ?>"'/></center></td>
                                 <td class="colData" colspan="3"><?php echo $value->fiart_id ?></td>
                                 <td class="colData" colspan="3"><?php echo $value->fiart_lbl ?></td>               
                                 
                                 <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
-                                         onclick='location.href = "index.php?action=fiart_detail&fiartId=<?php echo $value->fiart_id ?>"'/></td>
+                                         onclick='location.href = "index.php?action=fiart_upd&fiartId=<?php echo $value->fiart_id ?>"'/></td>
 
                                 <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Modifier"
                                          onclick='delElt(<?php echo $value->fiart_id ?>, "fiartId", "Fiche article", "fiart_del")'/></td>
