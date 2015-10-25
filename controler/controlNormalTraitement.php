@@ -94,12 +94,22 @@
             
              // d'une personne
             case "pers_upd":
-                require $path . '/controler/control_pers_upd.php';
+                if($sButton=='Modifier'){
+                    $sAction='ctc_list';
+                    require $path. '/controler/control_ctc_list.php';
+                }else{
+                    require $path . '/controler/control_pers_upd.php';
+                }
                 break;
             
             //Ajout d'une entreprise
             case "ent_upd":
-                require $path . '/controler/control_ent_upd.php';
+                 if($sButton=='Modifier'){
+                    $sAction='ctc_list';
+                    require $path. '/controler/control_ctc_list.php';
+                }else{
+                    require $path . '/controler/control_ent_upd.php';
+                }
                 break;
             
               //Suppression d'une personne

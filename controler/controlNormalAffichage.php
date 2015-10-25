@@ -72,7 +72,7 @@ switch ($sAction) {
 
     //Détail du bon de sortie/reprise
     case "bon_upd":
-        $sPageTitle = "Modifier une bon de mouvement";
+        $sPageTitle = "Modifier une bon de Sortie/Retour";
         require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
         require_once $path . '/view/view_infos.php';
@@ -81,7 +81,7 @@ switch ($sAction) {
 
     //Liste des bons de sortie/reprise
     case "bon_list":
-        $sPageTitle = "Liste des bons de mouvement";
+        $sPageTitle = "Liste des bons de Sortie/Retour";
         require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
         require_once $path . '/view/view_infos.php';
@@ -110,20 +110,35 @@ switch ($sAction) {
 
     //Modifier une personne
     case "pers_upd":
-        $sPageTitle = "Modifier une personne";
-        require_once $path . '/view/view_header.php';
-        require_once $path . '/view/view_menu.php';
-        require_once $path . '/view/view_infos.php';
-        require $path . '/view/view_personne_upd.php';
+        if ($sButtonUt == 'Modifier') {
+         $sPageTitle = "Liste des contacts";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_contact_list.php';
+        }else{
+            $sPageTitle = "Modifier une personne";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_personne_upd.php';
+        }
         break;
-
     //Modifier une entreprise
     case "ent_upd":
-        $sPageTitle = "Modifier une entreprise";
-        require_once $path . '/view/view_header.php';
-        require_once $path . '/view/view_menu.php';
-        require_once $path . '/view/view_infos.php';
-        require $path . '/view/view_entreprise_upd.php';
+        if ($sButtonUt == 'Modifier') {
+         $sPageTitle = "Liste des contacts";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_contact_list.php';
+        }else{
+            $sPageTitle = "Modifier une entreprise";
+            require_once $path . '/view/view_header.php';
+            require_once $path . '/view/view_menu.php';
+            require_once $path . '/view/view_infos.php';
+            require $path . '/view/view_entreprise_upd.php';
+        }
         break;
 
     //Suppression d'une personne

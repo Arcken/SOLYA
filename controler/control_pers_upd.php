@@ -23,6 +23,7 @@ try {
         require_once $path . '/model/ContacterManager.php';
         require_once $path . '/model/CiviliteManager.php';
         require_once $path . '/model/PaysManager.php';
+      
 
     //On met la valeur de sButton a modifier
     $sButton='Modifier';   

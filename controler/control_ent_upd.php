@@ -21,6 +21,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         require_once $path . '/model/ContacterManager.php';
         require_once $path . '/model/CiviliteManager.php';
         require_once $path . '/model/PaysManager.php';
+        require_once $path . '/model/Entreprise.php';
+        require_once $path . '/model/EntrepriseManager.php';
 
         //On initialise sButton
         $sButton = 'Modifier';
@@ -28,7 +30,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         //On récupère l'id du compte passé en paramètre
         $cptId = $_REQUEST['cptId'];
         //On récupère l'entreprise associé
-        $oEntreprise = EntrepriseManager::getEntrepriseForUpd($id);
+        $oEntreprise = EntrepriseManager::getEntrepriseForUpd($cptId);
         //On appel le manager pour récupéré le Compte 
         $oCompte = CompteManager::getCompteDetailForUpd($cptId);
         //On récupère toutes les formes juridiques
@@ -55,7 +57,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         if ($sButtonUt == 'Modifier') {
             //Vérification du jeton pour savoir si le formulaire à était envoyé
             if ($_SESSION['token'] != $_REQUEST['token']) {
-                echo 'dedans';
+                //echo 'dedans';
 
                 //Instanciation de la connection
                 $cnx = Connection::getConnection();
@@ -73,7 +75,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 
                 //Modification du compte
                 $updCpt = CompteManager::updCompte($oCompte);
-                echo "Mise à jour du bon check : $updCpt ";
+                //echo "Mise à jour du bon check : $updCpt ";
                 
                 //Mise à jour de l'entreprise
                 $oEntreprise= new Entreprise();
@@ -176,7 +178,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 }
 
                 //On traite les lignes de téléphones
-                print_r($resLigTel);
+                //print_r($resLigTel);
                 for ($i = 1; $i < count($resLigTel['tel_id']); $i++) {
                     //Si l'id de la ligne est > 0
                     if ($resLigTel['tel_id'][$i] > 0) {
@@ -187,7 +189,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                             //On supprime la ligne
                             $resJoindreDel = JoindreManager::delJoindreFromCptAndTel($cptId, $resLigTel['tel_id'][$i]);
-                            echo "Supression Joindre check $resJoindreDel";
+                            //echo "Supression Joindre check $resJoindreDel";
                         } else {
                             //Sinon on met à jour
                             //Donc on hydrate un objet Joindre
@@ -228,14 +230,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oJoindre->tel_lbl = $resLigTel['tel_lbl'][$i];
                         //Et insertion
                         $resAddJoindre = JoindreManager::addJoindre($oJoindre);
-                        echo "Ajout joindre check : $resAddJoindre";
+                        //echo "Ajout joindre check : $resAddJoindre";
                     }
                 }
 
                 //On traite les lignes d' Adresse
                 for ($i = 1; $i < count($resLigAdr['adr_id']); $i++) {
                     //Si l'id de la ligne est > 0
-                    print_r($resLigAdr);
+                    //print_r($resLigAdr);
                     if ($resLigAdr['adr_id'][$i] > 0) {
                         //C'est un update ou une suppression
                         //On vérifie si la valeur est dans le tableau
@@ -243,7 +245,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                             //On supprime la ligne
                             $resDomicilierDel = DomicilierManager::delDomicilierFromCptAndAdr($cptId, $resLigAdr['adr_id'][$i]);
-                            echo "Supression Domicilier check $resDomicilierDel";
+                            //echo "Supression Domicilier check $resDomicilierDel";
                         } else {
                             //Sinon on met à jour
                             //Donc on hydrate un objet Domicilier
@@ -254,7 +256,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             //On appel le manager pour faire la mise à jour
                             $resDomicilierUpd = DomicilierManager::updDomicilier($oDomicilier);
 
-                            echo "Modif Domicilier check $resDomicilierUpd";
+                            //echo "Modif Domicilier check $resDomicilierUpd";
                             //Ensuite on met à jour l'adresse
                             //Création de l'objet
                             $oAdresse = new Adresse();
@@ -271,7 +273,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                             //Mise à jour de celui-ci
                             $resAdresseUpd = AdresseManager::updAdresse($oAdresse);
-                            echo "Modif adresse check $resAdresseUpd";
+                            //echo "Modif adresse check $resAdresseUpd";
                         }
 
                         //Sinon c'est un insert
@@ -298,14 +300,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oDomicilier->adr_lbl = $resLigAdr['adr_lbl'][$i];
                         //Et insertion
                         $resAddDomicilier = DomicilierManager::addDomicilier($oDomicilier);
-                        echo "Ajout joindre check : $resAddDomicilier";
+                       //echo "Ajout joindre check : $resAddDomicilier";
                     }
                 }
                 //On commit la transaction    
                 $cnx->commit();
                 //On affiche le message de succès
                 $msg = "<p class=info>" . date('H:i:s')
-                        . "La modification du Compte N°$cptId à été effectué avec succés</p>";
+                        . " La modification du Compte N°$cptId à été effectué avec succés</p>";
 
                 $_SESSION['token'] = $_REQUEST['token'];
             } else {

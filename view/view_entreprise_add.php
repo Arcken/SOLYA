@@ -23,7 +23,7 @@
                 <?php foreach ($resAllFmju as $oFmju) { ?>
                     <option 
                         value ="<?php echo $oFmju->fmju_id ?>">
-                        <?php echo $oFmju->fmju_lbl ?> </option>
+                        <?php echo $oFmju->fmju_id ?> </option>
                 <?php } ?>
             </select>
             <br>

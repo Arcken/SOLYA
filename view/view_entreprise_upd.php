@@ -15,26 +15,45 @@
 
         <!--Partie informations de l'entreprise--> 
         <div class="col20" id ="add_ent">
+             <input name='cptId'
+               type="text"
+               value ='<?php echo $oCompte->cpt_id ?>' 
+               hidden/>
+             
             <label for="fmju">Forme juridique :</label>
             <br>
             <select name="fmju" id="fmju" required>
-                <option value="" selected > Aucun </option>
-                <?php foreach ($resAllFmju as $oFmju) { ?>
+                <option value=""> Aucun </option>
+                <?php foreach ($resAllFmju as $oFmju) {
+                    if ($oFmju->fmju_id == $oEntreprise->fmju_id){?>
                     <option 
-                        value ="<?php echo $oFmju->fmju_id ?>">
+                        value ="<?php echo $oFmju->fmju_id ?>" selected>
                         <?php echo $oFmju->fmju_id ?> </option>
-                <?php } ?>
+              <?php }else{ ?>
+                    <option 
+                        value ="<?php echo $oFmju->fmju_id ?>" selected>
+                        <?php echo $oFmju->fmju_id ?> </option>
+                <?php }
+                
+              }?>
             </select>
             <br>
             <label for="catEnt">Catégorie:</label>
             <br>
             <select name="catEnt" id="catEnt" required>
-                <option value="" selected > Aucun </option>
-                <?php foreach ($resAllCatEnt as $oCatEnt) { ?>
+                <option value=""> Aucun </option>
+                <?php foreach ($resAllCatEnt as $oCatEnt) { 
+                        if ($oCatEnt->catent_id==$oEntreprise->catent_id){?>
                     <option 
+                        value ="<?php echo $oCatEnt->catent_id ?>" selected>
+                        <?php echo $oCatEnt->catent_lbl ?> </option>
+                <?php }else{ ?>
+                     <option 
                         value ="<?php echo $oCatEnt->catent_id ?>">
                         <?php echo $oCatEnt->catent_lbl ?> </option>
-                <?php } ?>
+                <?php }
+                
+              }?>
             </select>
             <br>
             <label for="cptCode">Code compte :</label>
@@ -64,7 +83,7 @@
             <br>
             <input name="entTva" 
                    type="text"
-                   value='<?php echo $oEntreprise->ent_tva ?>'>
+                   value='<?php echo $oEntreprise->ent_num_tva ?>'>
             <br>
             <label for ="entSite">Site internet: </label>
             <br>

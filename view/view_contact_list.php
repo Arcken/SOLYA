@@ -129,7 +129,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                 ?>
             </table>
             <?php
-            if ($iTotal > $nbRow) {
+            
+            if (isset ($iTota) && $iTotal > $nbRow) {
                 // affichage des liens vers les pages
                 Tool::affichePages($rowStart, $nbRow, $iTotal, $sAction);
             }
