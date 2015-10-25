@@ -60,6 +60,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beFraisDouane" 
                        type="number"
                        min="0"
+                       required=""
                        step="0.01"
                        value="<?php echo $resBeDetail->be_frais_douane ?>">
                 <br>
@@ -68,6 +69,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beFraisBancaire" 
                        type="number"
                        min="0"
+                       required=""
                        step="0.01"
                        value="<?php echo $resBeDetail->be_frais_bancaire ?>">
                 <br>
@@ -76,6 +78,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        id="beFraisTrans" 
                        type="number"
                        min="0"
+                       required=""
                        step="0.01"
                        value="<?php echo $resBeDetail->be_frais_trans ?>">
                 <br>
@@ -99,7 +102,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        type="texte"
                        >
                 <br>
-                <label for="cptCom"> Comentaire </label><br>
+                <label for="cptCom"> Commentaire </label><br>
                 <textarea name="cptCom" id="cptCom"></textarea>
                 <br>
             </div>
@@ -212,11 +215,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     même incrément
                     -->
                     <tr id="idLigne" hidden="">
-                        <td class="beLigneId">
+                        <td class="beLigneId" hidden="">
                             <input type="text"
                                    name="ligId[NID]" 
                                    id="ligIdNID"
-                                   readonly="">
+                                   readonly=""
+                                   >
                         </td>
                         <td  class="beLigneId">
                             <!-- Appel de fonction qui recherche une reference 
@@ -263,6 +267,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    name="beligPu[NID]" 
                                    id="beligPuNID"
                                    title="Prix unitaire"
+                                   onchange='ccMultiplier(["ligQteNID",
+                                                   "refPoidsBrutNID"],
+                                                       "totalPoidsNID")'>
                                    required>
                         </td>
                         <td>
@@ -517,12 +524,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         $oDd = $resAllDds[$i];
                         ?>
                         <tr id="idLigne<?php echo $idLigne ?>">
-                            <td class="beLigneId">
+                            <td class="beLigneId" hidden="">
                                 <input type="text"
                                        name="ligId[<?php echo $idLigne ?>]" 
                                        id="ligId<?php echo $idLigne ?>"
                                        value="<?php echo $oBelig->lig_id ?>"
-                                       readonly="">
+                                       readonly=""
+                                       >
                             </td>
                             <td  class="beLigneId">
                                 <!-- Appel de fonction qui recherche une reference 
@@ -562,7 +570,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        step="0.01"
                                        name="beligPu[<?php echo $idLigne ?>]" 
                                        id="beligPu<?php echo $idLigne ?>"
-                                       value="<?php echo $oBelig->belig_pu ?>">
+                                       value="<?php echo $oBelig->belig_pu ?>"
+                                       onchange='ccMultiplier(["ligQteNID",
+                                                   "refPoidsBrutNID"],
+                                                       "totalPoidsNID")'>>
                             </td>
                             <td class="beLigneNb">
                                 <!-- La quantité minimum que l'on peut mettre à
@@ -572,7 +583,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="ligQte[<?php echo $idLigne ?>]" 
                                        id ="ligQte<?php echo $idLigne ?>"
                                        value="<?php echo $oLigne->lig_qte ?>"
-                                       min="<?php echo $oLot->lot_qt_stock ?>")>
+                                       min="<?php echo $oLot->lot_qt_stock ?>"
+                                       required=""
+                                        onchange='ccMultiplier(["ligQte<?php echo $idLigne ?>",
+                                                   "refPoidsBrut<?php echo $idLigne ?>"],
+                                                       "totalPoids<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
@@ -581,6 +596,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="refPoidsBrut[<?php echo $idLigne ?>]" 
                                        id="refPoidsBrut<?php echo $idLigne ?>"
                                        value="<?php echo $oRef->ref_poids_brut ?>"
+                                       onchange='ccMultiplier(["ligQte<?php echo $idLigne ?>",
+                                                   "refPoidsBrut<?php echo $idLigne ?>"],
+                                                       "totalPoids<?php echo $idLigne ?>")'
+                                        required=""
                                        >
                             </td>
                             <td class="beLigneNb">
@@ -605,8 +624,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    required>
                             </td>
                             <td class="beLigneNb">
-                                <!-- Calcul droit de douane selon le pu et le taux 
-                                récupérés par getreference-->
                                 <input type="number"
                                        min="0"
                                        step="0.01"
@@ -615,25 +632,23 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        id="beligDd<?php echo $idLigne ?>"
                                        required=""
                                        onchange='ccAddition(
-                                                       ["beligDdNID", "beligTaxeNID"],
-                                                       "totalFdNID")'>
+                                                       ["beligDd<?php echo $idLigne ?>", "beligTaxe<?php echo $idLigne ?>"],
+                                                       "totalFd<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
                                        min="0"
-                                       step="0.01"
                                        value="<?php echo $oBelig->belig_taxe ?>" 
                                        name="beligTaxe[<?php echo $idLigne ?>]" 
                                        id="beligTaxe<?php echo $idLigne ?>"
                                        onchange='ccAddition(
-                                                       ["beligDdNID", "beligTaxeNID"],
-                                                       "totalFdNID")'
+                                                       ["beligDd<?php echo $idLigne ?>", "beligTaxe<?php echo $idLigne ?>"],
+                                                       "totalFd<?php echo $idLigne ?>")'
                                             required="">
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
                                        min="0"
-                                       step="any"
                                        value="<?php echo ($oBelig->belig_dd + $oBelig->belig_taxe) ?>" 
                                        name="totalFd[<?php echo $idLigne ?>]" 
                                        id="totalFd<?php echo $idLigne ?>" 
@@ -647,13 +662,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        value="<?php echo $oBelig->belig_fb ?>"
                                        name="beligFb[<?php echo $idLigne ?>]" 
                                        id="beligFb<?php echo $idLigne ?>"
-                                       onchange='copieChamps("beligFbNID",
-                                                       "totalFbNID")'>
+                                       required=""
+                                       onchange='copieChamps("beligFb<?php echo $oBelig->belig_fb ?>",
+                                                       "totalFb<?php echo $oBelig->belig_fb ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
                                        min="0"
-                                       step="any"
                                        name="totalFb[<?php echo $idLigne ?>]" 
                                        id="totalFb<?php echo $idLigne ?>"
                                        readonly=""
@@ -667,16 +682,16 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        name="beligFt[<?php echo $idLigne ?>]" 
                                        id="beligFt<?php echo $idLigne ?>"
                                        required=""
-                                       onchange='copieChamps("beligFtNID",
-                                                       "totalFtNID")'>
+                                       onchange='copieChamps("beligFt<?php echo $idLigne ?>",
+                                                       "totalFt<?php echo $idLigne ?>")'>
                             </td>
                             <td class="beLigneNb">
                                 <input type="number"
                                        min="0"
-                                       step="0.01"
                                        name="totalFt[<?php echo $idLigne ?>]" 
                                        id="totalFt<?php echo $idLigne ?>"
                                        readonly=""
+                                       required=""
                                        >
                             </td>
                             <td>

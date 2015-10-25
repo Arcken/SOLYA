@@ -6,6 +6,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     //Si une requéte échoue, une exception est levé par la manager
     try {
+        
+        require_once $path . '/model/InventaireManager.php';
         //Contrôle si un inventaire est en cours
         $tInventaire = InventaireManager::getInventaireOpen();
         if (!isset($tInventaire) || !is_array($tInventaire)) {
@@ -27,7 +29,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             require_once $path . '/model/ReferenceManager.php';
             require_once $path . '/model/DroitDouane.php';
             require_once $path . '/model/DroitDouaneManager.php';
-
+                        
             //Si le formulaire est envoyé
             if ($sButtonUt == 'Modifier') {
 

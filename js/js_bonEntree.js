@@ -229,9 +229,14 @@ function ctrlFormValide() {
         
         //On exécute la fonction de calcul
         beCalcul();
+        
+        if (isFloat($('#beTotal').val())){
         //on renvoie true pour que le formulaire parte
         return  true;
-
+    } else {
+        alert("Une valeur de ligne n'est pas remplie");
+        return false;
+    }
     //sinon on annule l'envoie
     } else{
         alert('Le formulaire doit contenir au moins une ligne');

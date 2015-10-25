@@ -341,9 +341,7 @@ function selMaj() { // Appel partout
  */
 
 function getLotDetail($row) {
-    console.log('recherche' + $row);
     $lotIdVal = $('#lotId' + $row).val();
-    console.log($lotIdVal);
     //Ajax
     $.getJSON(
             // page cible
@@ -404,7 +402,6 @@ function getGamme() { //appel partout
         $select.empty();
         $select.append('<option value="">Aucun</option>');
         for (var key in json) {
-            console.log(json);
             $select.append('<option value="' + json[key].ga_id + '">'
                     + json[key].ga_lbl + '</option>');
         }
@@ -498,14 +495,11 @@ function getPays() {
 function getReference($row, $source, $champs, $form) {
     //On récupére la valeur de l'input
     $valInput = $("input[id='" + $source + "']").val();
-
-    $.ajax({
-            url: "ws/webService.php", // code cible    
-            dataType: "jsonp", 
-            data: {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput}
-        }).done(
+    $.getJSON(
+            "ws/webService.php", // code cible                 
+            {test: 'Solya', action: 'getRef', champs: $champs, value: $valInput},
+       
     function (json) {
-
         for (var key in json) {
             //Si le champs est refid et le formulaire appelant est le bon entrée
             if ($champs == "ref_id" && $form == "be") {
@@ -535,6 +529,34 @@ function getReference($row, $source, $champs, $form) {
                 $inputTD.val(json[key].dd_taux);
             }
 
+        }
+    }
+    );
+}
+
+/**
+ * Function qui récupére les infos du compte selon la valeur de l'élément html
+ * avec l'id = cptId
+ * Ensuite elle modifie les inputs avec l'id cptNom et cptCom
+ * @returns {undefined}
+ */
+function getCompte(){
+    
+    //On récupére le numéro de compte
+    $cptVal = $('#cptId').val();
+    
+    //On récupére les inputs à modifier
+    $cptNomInp = $('#cptNom');
+    $cptComInp = $('#cptCom');
+    
+    $.getJSON(
+            'ws/webService.php', // code cible         
+            {test: 'Solya', action: 'getCompte', value: $cptVal},
+    function (json) {
+        
+        for (var key in json) {
+            $cptNomInp.val(json[key].cpt_nom);
+            $cptComInp.val(json[key].cpt_com);
         }
     }
     );
