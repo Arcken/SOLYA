@@ -33,6 +33,7 @@ $tLigneForm = [
     'liginv_id' => $tLiginvId,
     'liginv_lbl' => $tLiginvLbl,
     'liginv_qt_reel' => $tLiginvQtReel,
+    'liginv_qt_stock' =>$tLiginvQtStock,
     'lot_id' => $tLotId
 ];
 
@@ -56,11 +57,11 @@ for ($i = 1; $i < (count($tLigneForm['lot_id'])); $i++) {
     $oLiginv->lot_id = $tLigneForm['lot_id'][$i];
     $oLiginv->liginv_lbl = $tLigneForm['liginv_lbl'][$i];
     $oLiginv->liginv_qt_reel = $tLigneForm['liginv_qt_reel'][$i];
+    $oLiginv->liginv_qt_stock = $tLigneForm['liginv_qt_stock'][$i];
     $oLiginv->inv_id = $invId;
 
     //Si la case liginv_id est != '' c'est un update
     if ($tLigneForm['liginv_id'][$i] != '') {
-        echo 'update';
         //On récupére l'id de la ligne                        
         $oLiginv->liginv_id = $tLigneForm['liginv_id'][$i];
         //On update la ligne
@@ -68,7 +69,6 @@ for ($i = 1; $i < (count($tLigneForm['lot_id'])); $i++) {
 
         //Sinon c'est que c'est un insert    
     } else {
-        echo 'insert';
         //on insert la ligne inventaire
         $resLiginv = LigneInventaireManager::addLigneInventaire($oLiginv);
     }
@@ -81,14 +81,13 @@ for ($i = 1; $i < (count($tLigneForm['lot_id'])); $i++) {
         $oLot = new Lot();
         $oLot = LotManager::getLot($oLiginv->lot_id);
         $oLot->lot_qt_stock = $oLiginv->liginv_qt_reel;
-        print_r($oLot);
         //On update le lot
         $resLot = LotManager::updLot($oLot);
     }
 }
 
 //une fois tous les lots modifiés on change le booleen de l'inventaire pour interdire
-//sa modification à partir de maintenant
+//sa modification à partir de maintenant si le bouton executer est cliqué
 if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == 'Executer') {
     $oInventaire->inv_vld = 1;
 }
