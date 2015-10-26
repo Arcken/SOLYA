@@ -9,9 +9,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     <script type="text/javascript" src="js/exportFct.js" ></script>
 
     <div class="corps">
-        <a href="view/export/export_bon_entree.php?test=accésValide">Bon entree</a>
-        <a href="view/export/export_utilisateur.php?test=accésValide">Utilisateur</a>
-
+        <ul>
+            <li><a href="view/export/export_bon.php?test=accésValide">Bon reprise/sortie</a></li>
+            <li><a href="view/export/export_bon_entree.php?test=accésValide">Bon entree</a></li>
+            <li><a href="view/export/export_utilisateur.php?test=accésValide">Utilisateur</a></li>
+        </ul>
     </div>
 
     <?php
