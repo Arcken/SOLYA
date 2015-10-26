@@ -100,7 +100,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </li>
 
             <!--Partie Utilisateur-->
-            <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= '1') { ?>
+            <?php if ($_SESSION['group'] >= '1') { ?>
                 <li><a href='#'><span>Utilisateur</span></a>
                     <ul>
                         <li class='has-sub'><a href='index.php?action=ut_add'><span>Créer</span></a>

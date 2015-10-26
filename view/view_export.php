@@ -10,8 +10,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     <div class="corps">
         <ul>
-            <li><a href="view/export/export_bon.php?test=accésValide">Bon reprise/sortie</a></li>
             <li><a href="view/export/export_bon_entree.php?test=accésValide">Bon entree</a></li>
+            <li><a href="view/export/export_bon.php?test=accésValide">Bon reprise/sortie</a></li>
+            <li><a href="view/export/export_inventaire.php?test=accésValide">Inventaire</a></li>
             <li><a href="view/export/export_utilisateur.php?test=accésValide">Utilisateur</a></li>
         </ul>
     </div>

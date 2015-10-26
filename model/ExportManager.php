@@ -13,10 +13,11 @@ class ExportManager {
 
      
     /**
-     * Retourne tous les enregistrements de la table Bon entrée
+     * Retourne tous les enregistrements de la table Bon entrée, avec jointure
      * 
-     * @return objet[]
-     * Renvoie tableau d'objet
+     * @return [Assoc]
+     * Retourne un tableau associatif
+     * @throws Exception
      */
     public static function getAllBonsEntrees() {
 
@@ -72,7 +73,12 @@ class ExportManager {
         return $result;
     }
 
-    
+    /**
+     * Retourne tous les enregistrements de la table bon, avec jointure
+     * @return [assoc]
+     * Retourne un tableau associatif
+     * @throws Exception
+     */
     public static function getAllBons() {
 
         try {
@@ -115,14 +121,102 @@ class ExportManager {
         return $result;
     }
     
+        /**
+     * Retourne tous les enregistrements de la table Inventaire, avec jointure 
+     * 
+     * @return [Assoc]
+     * Retourne un tableau associatif
+     * @throws Exception
+     */
+    public static function getAllInventaires(){
+        try{
+            $sql = "SELECT inv_id AS 'Inventaire ID', 
+                        inv_date AS 'Inventaire Date',
+                        inv_lbl AS 'Inventaire Libellé',
+                        inv_vld AS 'Inventaire Validé',
+                        liginv_id AS 'Ligne: ID',
+                        liginv_lbl AS 'Ligne: libellé',
+                        liginv_qt_stock AS 'Ligne: Quantité stock prévu',
+                        liginv_qt_reel AS 'Ligne: Quantité relevé',
+                        l.lot_id AS 'Lot ID',
+                        lo.lot_id_producteur AS 'Lot ID Producteur',
+                        lo.lot_dlc AS 'Lot DLC/DLUO',
+                        r.ref_id AS 'Ligne: Référence ID',
+                        r.ref_code AS 'Ligne: Référence code',
+                        r.ref_lbl AS 'Ligne: Référence libellé',
+                        FROM inventaire i
+                        JOIN ligne_inv l ON i.inv_id = l.inv_id
+                        JOIN lot lo ON l.lot_id = lo.lot_id
+                        JOIN reference r ON lo.ref_id = r.ref_id";
+;
+            $result = Connection::request(1, $sql, null,PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            throw $e;
+        }
+        return $result;
+    }
+
     
-    /**
+    
+        /**
      * Retourne tous les enregistrements de la table utilisateur 
      * avec le nom du groupe associé
      * sans le mot de passe
      * 
-     * @return []
+     * @return [Assoc]
      * Retourne un tableau associatif
+     * @throws Exception
+     */
+    public static function getAllUtilisateurs() {
+
+        try {
+                $sql = "SELECT ref_id AS 'Référence: ID',
+                            ref_code AS 'Référence: code',
+                            ref_mrq AS 'Référence: Marque',
+                            ref_lbl AS 'Référence: Libellé',
+                            ref_com AS 'Référence: Commentaire',
+                            ref_emb_lbl AS 'Référence: Libellé emballage',
+                            ref_st_min AS 'Référence: Stock minimum',
+                            ref_poids_brut AS 'Référence: Poids brut',
+                            ref_poids_net AS 'Référence: Poids net',
+                            fiart_id AS 'Fiche article: ID',
+                            fiart_lbl AS 'Fiche article: Libellé',
+                            fiart_ing AS 'Fiche article: Ingrédients',
+                            fiart_alg AS 'Fiche article: Allergènes',
+                            fiart_com AS 'Fiche article: Commentaire',
+                            fiart_com_tech AS 'Fiche article: Technique',
+                            fiart_com_util AS 'Fiche article: Utilisation',
+                            fiart_desc_fr AS 'Fiche article: Français',
+                            fiart_desc_eng AS 'Fiche article: Anglais',
+                            fiart_desc_esp AS 'Fiche article: Espagnole',
+                            g.ga_lbl AS 'Gamme libellé',
+A finri!!!!!!!!!!!!!!!!!!
+
+
+                            FROM reference r
+                            JOIN fiche_article fa ON r.fiart_id = fa.fiart_id
+                            JOIN gamme g ON fa.ga_id = g.ga_id
+                            JOIN pays p ON fa.pays_id = p.pays_id
+                            
+                            
+
+                        
+                        
+                ;
+            
+        } catch (Exception $e) {
+            throw $e;
+        }
+        
+    }
+        /**
+     * Retourne tous les enregistrements de la table utilisateur 
+     * avec le nom du groupe associé
+     * sans le mot de passe
+     * 
+     * @return [Assoc]
+     * Retourne un tableau associatif
+     * @throws Exception
      */
     public static function getAllUtilisateurs() {
 
