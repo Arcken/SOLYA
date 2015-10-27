@@ -14,7 +14,13 @@
                     </th>                   
                     <th class="colTitle">
                         Référence ID
-                    </th>         
+                    </th> 
+                    <th class="colTitle">
+                        Référence Code
+                    </th>
+                    <th class="colTitle">
+                        Référence Libellé
+                    </th>
                     <th class="colTitle">
                         Stock Minimum
                     </th>
@@ -35,6 +41,12 @@
                                 <?php echo $resStockMin[$i]->ref_id ?>
                             </td>
                             <td class="colData" >
+                                <?php echo $tRef[$i]->ref_code ?>
+                            </td>
+                            <td class="colData" >
+                                <?php echo $tRef[$i]->ref_lbl ?>
+                            </td>
+                            <td class="colData" >
                                 <?php echo $tRef[$i]->ref_st_min ?>
                             </td>
                             <td class="colData" >
@@ -48,9 +60,6 @@
                 ?>
             </table>
 
-        </div>
-        <div class="bas">
-            <input type="button" onclick='location.href = "index.php?action=ga_add"' value="Ajouter">
         </div>
     </div>
 
