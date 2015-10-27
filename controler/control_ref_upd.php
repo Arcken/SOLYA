@@ -12,8 +12,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     try {
         require $path . '/model/ReferenceManager.php';
 
-
-
+//Initialisation du bouton
+       $sButton='Modifier' ;
 //On récupère idRef qui correspond à l'id de la référence
         $idRef = $_REQUEST['idRef'];
 
@@ -64,7 +64,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oRef->ref_id = $_REQUEST['idRef'];
                 $oRef->dc_id = $_REQUEST['dureeConservation'];
                 $oRef->cons_id = $_REQUEST['modeConservation'];
-                $oRef->fiart_id = $_REQUEST['ficheArticle'];
+                $oRef->fiart_id = $_REQUEST['fiartId'];
                 $oRef->dd_id = $_REQUEST['droitDouane'];
                 $oRef->tva_id = $_REQUEST['tva'];
                 $oRef->ref_lbl = $_REQUEST['refLbl'];

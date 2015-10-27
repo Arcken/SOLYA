@@ -9,8 +9,8 @@
             <div class=" haut"> 
                 
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
-                <label for="ficheArticle"> Associée fiche article: </label><br>
-                <select  name="ficheArticle" 
+                <label for="fiartId"> Associée fiche article: </label><br>
+                <select  name="fiartId" 
                          title="Choisir un élément" 
                          required 
                          >

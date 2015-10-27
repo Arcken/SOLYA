@@ -25,10 +25,10 @@ try {
     
     //On récupère les lignes associés
     //On récupére toutes les ligne du bon
-    $resAllInvLignes = LigneInventaireManager::getLigneInventaireFromInventaire($invId);
+    $resAllInvLignes = LigneInventaireManager::getLignesInventaireFromInventaire($invId);
     
     //On vérifie que le résultat récupéré soit bien un tableau (si aucune donnée ce n'est pas un tableau)
-    if (is_array($resAllBonLignes)) {
+    if (is_array($resAllInvLignes)) {
 
         //Tableau pour les lignes
         $resLignes = [];

@@ -12,6 +12,30 @@
 class InventaireManager {
 
     /**
+     * Retourne un enregistrement de la table selon son id
+     * 
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getInventaire($invId) {
+
+        try {
+            
+            $tParam=[$invId];
+            
+            $sql = 'SELECT inv_id, inv_date, inv_lbl, inv_vld '
+                    . 'FROM inventaire '
+                    . 'WHERE inv_id=? ';
+            $result = Connection::request(1, $sql,$tParam);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
+    
+    /**
      * Retourne tous les enregistrements de la table
      * 
      * @return objet[]

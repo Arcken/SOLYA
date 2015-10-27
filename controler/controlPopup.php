@@ -116,6 +116,11 @@ switch ($sAction) {
         //On appel le controleur qui créé le pdf
         require $path . '/controler/control_be_pdf.php';
         break;
+    
+    case 'nv_inv_pdf':
+        //On appel le controleur qui créé le pdf
+        require $path.'/controler/control_inv_pdf.php';
+        break;
 }
 
 

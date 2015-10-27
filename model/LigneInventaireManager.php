@@ -11,6 +11,32 @@
  */
 class LigneInventaireManager {
 
+    
+    /**
+     * Retourne tous les enregistrements de la table
+     * @param $id
+     * id de l'inventaire
+     * @return objet[]
+     * Renvoie tableau d'objet
+     */
+    public static function getLignesInventaireFromInventaire($invId) {
+
+        try {
+            $tParam=[$invId];
+            
+            $sql = 'SELECT liginv_id, liginv_lbl, liginv_qt_stock, '
+                    . 'liginv_qt_reel , lot_id, inv_id '
+                    . 'FROM ligne_inv '
+                    . 'WHERE inv_id =?';
+                    
+            $result = Connection::request(1, $sql);
+            
+        } catch (MySQLException $e) {
+            throw $e;
+        }
+        return $result;
+    }
+    
     /**
      * Retourne tous les enregistrements de la table
      * 
