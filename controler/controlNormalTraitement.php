@@ -10,7 +10,7 @@
             case "home":
             case "connexion":
             default:
-                $sPageTitle = "Accueil";
+                require $path . '/controler/control_home.php';
                 break;
 
             
