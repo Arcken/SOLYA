@@ -133,7 +133,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 if ($resAddRef > 0 || $resAddPve > 0) {
                     //si le résultat ramené est supérieur à 0 une modification à bien était apporté 
                     //donc on ajoute un message
-                    $msg = "<p class=info>" . date('H:i:s') . " La référence " . $oRef->ref_lbl . " a été modifié "
+                    $msg = "<p class=info>" . date('H:i:s') . " La référence " . $oRef->ref_lbl . " a été modifiée "
                             . "avec succès</p>";
                 }
                 //On met le token du formulaire dans celui de la session

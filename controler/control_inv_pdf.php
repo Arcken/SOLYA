@@ -160,7 +160,7 @@ try {
 //On vide le buffer pour permettre l'affichage du pdf sans problèmes lors du prochain passage.
     ob_end_flush();
     
-} catch (Exception $e) {
+} catch (MySQLException $e) {
     //Si une erreur survient on la catch dans une exception
    if (isset ($resEr[0])){
       //Si elle provient de la base
