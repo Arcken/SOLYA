@@ -25,8 +25,8 @@ try {
     
     //On récupère les lignes associés
     //On récupére toutes les ligne du bon
-    $resAllBonLignes = LigneInventaireManager::getLigneInventaireFromInventaire($bonId);
-
+    $resAllInvLignes = LigneInventaireManager::getLigneInventaireFromInventaire($invId);
+    
     //On vérifie que le résultat récupéré soit bien un tableau (si aucune donnée ce n'est pas un tableau)
     if (is_array($resAllBonLignes)) {
 
@@ -38,7 +38,7 @@ try {
         $resAllRefs = [];
 
         //Pour chaque bon_ligne
-        foreach ($resAllBonLignes as $bonLigne) {
+        foreach ($resAllInvLignes as $bonLigne) {
 
             //On récupére l'id de ligne
             $ligId = $bonLigne->lig_id;

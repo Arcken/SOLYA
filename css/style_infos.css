@@ -60,3 +60,6 @@
 #alert tr, #blocSearch tr{
     width:auto;
 }
+#inptSearch{
+    width: 100%;
+}

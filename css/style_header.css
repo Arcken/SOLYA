@@ -96,21 +96,17 @@
     width: auto;
 }
 
-h1
-{
-	text-shadow:2px 2px 2px 2px black;
-	color: #FFFFFF;
-	font-size: 50px;
-        text-align:center;
+h1{
+    text-shadow:2px 2px 2px 2px black;
+    color: #FFFFFF;
+    font-size: 2.4em ;
+    text-align:center;
 }
 
 /* Bloc du centre de l'application */
 .zone_client{
     position :static;
-    //top:12%;
-    //left:10.5%;
     width:99%;
     height:99%;
-    //border: solid black 2px;
-    //background-color: yellow;
+
 }

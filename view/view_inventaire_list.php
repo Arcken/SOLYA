@@ -67,8 +67,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <td class="colData" colspan="3">
                             <?php echo $inventaire->inv_date ?>
                             </td>
+                            
+                            <td class="colTdIco"> <img src="img/icon/read.png" title="Modifier"
+                                onclick='location.href="index.php?action=nv_inv_pdf&idInv="+
+                                           <?php echo $inventaire->inv_id ; ?>'
+                                />
+                            </td>
             <?php if ($inventaire->inv_vld == 0) { ?>
-
+                            
+                                
                                 <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                                           onclick='location.href = "index.php?action=inventaire_upd&invId=<?php echo $inventaire->inv_id ?>"'/></td>
                                 <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
@@ -78,7 +85,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                 <td class="colTdIco"><img src="img/icon/modify_desat.png" alt="" title="Modifier"/>
                                 <td class="colTdIco"><img src="img/icon/delete_desat.png" alt="" title="Supprimer"/>
             <?php } ?>
-
 
                         </tr>
                         <?php

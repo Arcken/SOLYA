@@ -218,7 +218,7 @@
                                           onclick ='location.href="index.php?action=ref_detail&idRef="
                                                    + <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                             <?php }else{
-                                     echo 'Aucune photos définis';
+                                     echo 'Aucune photos définie';
                         }?>
                         </td>
                         <td class="colData" colspan="3"><?php echo $resLigRefs['ref'][$i]->ref_code; ?></td>

@@ -111,6 +111,7 @@
                     <tr>
                         <th class="colTitle">Libellé du mail</th>
                         <th class="colTitle">Adresse mail :</th>
+                        <th class="colTitle">Supprimer?</th>
                     </tr>
                     <tr id='mailLigne' hidden>
                         <td>
@@ -197,6 +198,7 @@
                         <th class="colTitle">Libellé du téléphone</th>
                         <th class="colTitle">Indicatif pays </th>
                         <th class="colTitle">Numéro de téléphone </th>
+                        <th class="colTitle">Supprimer?</th>
                     </tr>
               
                     <tr id='telLigne' hidden>
@@ -304,6 +306,7 @@
                     <th class="colTitle">Ville </th>
                     <th class="colTitle">Etat </th>
                     <th class="colTitle">Pays </th>
+                    <th class="colTitle">Supprimer?</th>
                 </tr>
                 
                 <tr id='adrLigne'
