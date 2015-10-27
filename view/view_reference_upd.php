@@ -9,7 +9,7 @@
             <div class=" haut"> 
                 
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
-                <label for="fiartId"> Associée fiche article: </label><br>
+                <label for="fiartId"> Associée fiche article: </label>
                 <select  name="fiartId" 
                          title="Choisir un élément" 
                          required 
@@ -59,7 +59,7 @@
                      value="<?php echo $rsRef->ref_code; ?>" 
                      hidden>
               
-               <label for="refCode">Code de la référence : </label><br>    
+               <label for="refCode">Code de la référence : </label>    
                <input id="refCode" 
                       name="refCode"
                       type="text" 
@@ -83,7 +83,7 @@
                      src="img/icon/delete.png" 
                      title="Code référence Non Valide"
                      hidden >
-                <br>
+                
                 
                 <div id="divSuggest"
                      style="display:none">
@@ -91,7 +91,7 @@
                      <span id="resSugg"></span>
                 </div>
                 
-                <label for="refLbl"> Libellé: </label><br>          
+                <label for="refLbl"> Libellé: </label>          
                 <input name="refLbl" 
                        type="text" 
                        placeholder="Nom de la référence" 
@@ -100,33 +100,33 @@
                        required 
                        value="<?php echo $rsRef->ref_lbl; ?>"
                        >
-                <br>
-                <label for="refMrq"> Marque: </label><br>          
+                
+                <label for="refMrq"> Marque: </label>          
                 <input name="refMrq" 
                        type="text" 
                        placeholder="Marque de la référence" 
                        value="<?php echo $rsRef->ref_mrq; ?>"
                        >
-                <br>
-                <label for="refStMin"> Stock minimum: </label><br>
+                
+                <label for="refStMin"> Stock minimum: </label>
                 <input name="refStMin" 
                        placeholder="###,##" 
                        type="text" 
                        value="<?php echo $rsRef->ref_st_min; ?>"
                        > 
-                <br>
-                <label for="refPoidsBrut"> Poids brut: </label><br>
+                
+                <label for="refPoidsBrut"> Poids brut: </label>
                 <input name="refPoidsBrut" 
                        placeholder="gramme ### ###,##" 
                        type="text" 
                        value="<?php echo $rsRef->ref_poids_brut; ?>">         
-                <br>
-                <label for="refPoidsNet"> Poids net: </label><br>
+                
+                <label for="refPoidsNet"> Poids net: </label>
                 <input name="refPoidsNet" 
                        placeholder="gramme ### ###,##" 
                        type="text" value="<?php echo $rsRef->ref_poids_net; ?>">         
-                <br>
-                <label for="modeConservation"> Mode de conservation </label><br>
+                
+                <label for="modeConservation"> Mode de conservation </label>
                 <select name="modeConservation" 
                         title="Choisir un élément" 
                         required>
@@ -160,8 +160,8 @@
                 <img src="img/icon/add.png" 
                      title="Créer"
                      onClick="popup('view_mode_conservation.php');">
-                <br>
-                <label for="dureeConservation"> Durée de conservation </label><br>
+                
+                <label for="dureeConservation"> Durée de conservation </label>
                 <select name="dureeConservation"
                         title="Choisir un élément" 
                         required>
@@ -210,58 +210,58 @@
                 <img src="img/icon/add.png"
                      title="Créer" 
                      onClick="popup('view_duree_conservation.php');" >
-                <br>
+                
             </div>
 
             <div class="col30">
-                <label for="refEmbLbl">Description de l'emballage :</label><br>
+                <label for="refEmbLbl">Description de l'emballage :</label>
                 <input name="refEmbLbl" 
                        placeholder="Description" 
                        type="text" value="<?php echo $rsRef->ref_emb_lbl ?>">         
-                <br>
-                <label for="refEmbCouleur" >Couleur : </label><br>
+                
+                <label for="refEmbCouleur" >Couleur : </label>
                 <input name="refEmbCouleur" 
                        placeholder="Couleur" 
                        type="text" 
                        value="<?php echo $rsRef->ref_emb_couleur ?>">         
-                <br> 
-                <label for="refEmbVlmCtn">Volume net:</label><br>
+                 
+                <label for="refEmbVlmCtn">Volume net:</label>
                 <input name="refEmbVlmCtn" 
                        placeholder="###,### EN LITRE" 
                        type="text" 
                        value="<?php echo $rsRef->ref_emb_vlm_ctn ?>">         
-                <br>
-                <label for="refEmbDimLng">Longueur : </label><br>
+                
+                <label for="refEmbDimLng">Longueur : </label>
                 <input name="refEmbDimLng" 
                        placeholder="###,##" 
                        type="text" 
                        value="<?php echo $rsRef->ref_emb_dim_lng ?>">         
-                <br>
-                <label for="refEmbDimLrg">Largeur : </label><br>
+                
+                <label for="refEmbDimLrg">Largeur : </label>
                 <input name="refEmbDimLrg" 
                        placeholder="###,##" 
                        type="text" 
                        value="<?php echo $rsRef->ref_emb_dim_lrg ?>">         
-                <br>
-                <label for="refEmbDimHt">Hauteur : </label><br>
+                
+                <label for="refEmbDimHt">Hauteur : </label>
                 <input name="refEmbDimHt" 
                        placeholder="###,##" 
                        type="text" 
                        value="<?php echo $rsRef->ref_emb_dim_ht ?>"> 
-                <br>
-                <label for="refEmbDimDiam">Diamètre : </label><br>
+                
+                <label for="refEmbDimDiam">Diamètre : </label>
                 <input name="refEmbDimDiam"
                        placeholder="###,##" 
                        type="text" 
                        value="<?php echo $rsRef->ref_emb_dim_diam ?>">         
-                <br>
+                
 
             </div>
 
             <div class="col30">
              
                 <label for="refCodeDouane"> Code douane: </label>
-                <br>
+                
                 <input name="refCodeDouane" 
                        type="text"
                        placeholder="Code douane" 
@@ -269,20 +269,20 @@
                        pattern=".{3,}"
                        value="<?php echo $rsRef->ref_code_douane;?>"
                        >
-                <br>
-                    <label for="pvePer"> Prix de vente particulier: </label><br>
+                
+                    <label for="pvePer"> Prix de vente particulier: </label>
                     <input name="pvePer" 
                            placeholder="### ###,##" 
                            type="text" 
                            value='<?php echo $oPve->pve_per; ?>'>         
-                    <br>
-                    <label for="pveEnt"> Prix de vente entreprise: </label><br>
+                    
+                    <label for="pveEnt"> Prix de vente entreprise: </label>
                     <input name="pveEnt" 
                            placeholder="### ###,##" 
                            type="text" 
                            value='<?php echo $oPve->pve_ent; ?>'>         
-                    <br>
-                    <label for="tva"> Taux de TVA: </label><br>
+                    
+                    <label for="tva"> Taux de TVA: </label>
                     <select name="tva" 
                             title="Choisir un élément" 
                             required>
@@ -338,8 +338,8 @@
                          title="Créer"
                          onClick="popup('view_tva.php');" >
 
-                    <br>
-                    <label for="droitDouane"> Droit de douanes: </label><br>
+                    
+                    <label for="droitDouane"> Droit de douanes: </label>
                     <select name="droitDouane" 
                             title="Choisir un élément"
                             required>
@@ -406,8 +406,8 @@
                          alt="" 
                          title="Créer" 
                          onClick="popup('view_droit_douane.php');">
-                    <br>
-                    <label for="refCom"> Commentaire : </label><br>
+                    
+                    <label for="refCom"> Commentaire : </label>
                     <textarea name="refCom" 
                               rows="4" 
                               cols="25" 
@@ -417,10 +417,10 @@
 
                             <label for="img_upload">Image (<?php echo $imgExtension ?> | max. 
                                 <?php echo $imgMaxSize / 1000 ?> Ko) :</label>
-                            <br>       
+                                   
                             <input type="hidden" name="MAX_FILE_SIZE" 
                                    value="<?php echo $imgMaxSize ?>" >
-                            <br>       
+                                   
 
                             <input type="file" name="img_upload[]"  
                                    id="img_upload" multiple="">

@@ -130,7 +130,7 @@ class ExportManager {
      */
     public static function getAllInventaires(){
         try{
-            $sql = "SELECT inv_id AS 'Inventaire ID', 
+            $sql = "SELECT i.inv_id AS 'Inventaire ID', 
                         inv_date AS 'Inventaire Date',
                         inv_lbl AS 'Inventaire Libellé',
                         inv_vld AS 'Inventaire Validé',
@@ -143,12 +143,12 @@ class ExportManager {
                         lo.lot_dlc AS 'Lot DLC/DLUO',
                         r.ref_id AS 'Ligne: Référence ID',
                         r.ref_code AS 'Ligne: Référence code',
-                        r.ref_lbl AS 'Ligne: Référence libellé',
+                        r.ref_lbl AS 'Ligne: Référence libellé'
                         FROM inventaire i
                         JOIN ligne_inv l ON i.inv_id = l.inv_id
                         JOIN lot lo ON l.lot_id = lo.lot_id
                         JOIN reference r ON lo.ref_id = r.ref_id";
-;
+
             $result = Connection::request(1, $sql, null,PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             throw $e;
@@ -167,7 +167,7 @@ class ExportManager {
      * Retourne un tableau associatif
      * @throws Exception
      */
-    public static function getAllUtilisateurs() {
+    public static function getAllReferences() {
 
         try {
                 $sql = "SELECT ref_id AS 'Référence: ID',
@@ -196,7 +196,7 @@ A finri!!!!!!!!!!!!!!!!!!
                             FROM reference r
                             JOIN fiche_article fa ON r.fiart_id = fa.fiart_id
                             JOIN gamme g ON fa.ga_id = g.ga_id
-                            JOIN pays p ON fa.pays_id = p.pays_id
+                            JOIN pays p ON fa.pays_id = p.pays_id";
                             
                             
 

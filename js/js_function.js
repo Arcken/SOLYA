@@ -29,6 +29,7 @@ function addLigne($table, $idTr) {
     $ligne = $ligne.replace(/value="[^*"]*"/g, 'value=""');
     //On remplace idLigne par le nouvel id $id
     $ligne = $ligne.replace($idTr, $id);
+    
     //On ajoute le code à la fin de la table
     $('#' + $table).append('<tr id="' + $id + '">' + $ligne + "</tr>");
 }

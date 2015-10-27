@@ -24,7 +24,7 @@
         <!--Partie gauche de l'écran : Civilité--> 
         <div class="col20" id ="addPers">
             <label for="civilite">Civilité :</label>
-            <br>
+            
             <select name="civilite" id="civilite" required>
                <option value="" selected > Aucun </option>
                 <?php foreach ($resAllCivs as $oCiv) { 
@@ -40,41 +40,41 @@
                 
                     } ?>
             </select>
-            <br>
+            
             <label for="cptCode">Code compte :</label>
-            <br>
+            
             <input name="cptCode" 
                    type="text"
                    value="<?php echo $oCompte->cpt_code ?>">
-            <br>
+            
             <label for="cptNom" >Nom :</label>
-            <br>
+            
             <input name="cptNom" required
                    type="text"
                    value="<?php echo $oCompte->cpt_nom ?>"
                     >
-            <br>
+            
             <label for ="prsPrenom1">Prénom :</label>
-            <br>
+            
             <input name="prsPrenom1" 
                    type="text"
                    value="<?php echo $oPersonne->prs_prenom1 ?>">
-            <br>
+            
             <label for ="prsPrenom2">Deuxième prénom :</label>
-            <br>
+            
             <input name="prsPrenom2" 
                    type="text"
                    value="<?php echo $oPersonne->prs_prenom2 ?>">
-            <br>
+            
             <label for ="prsDtn">Date de naissance :</label>
-            <br>
+            
             <input name="prsDtn" 
                    type="Date"
                    title='Date de naissance de la personne'
                    value="<?php echo $oPersonne->prs_dtn ?>">
-            <br>
+            
             <label for="cptCom">Commentaire :</label>
-            <br>
+            
             <textarea name="cptCom"
                       title='Commentaire'><?php echo $oCompte->cpt_com ?></textarea>
         </div>
@@ -314,12 +314,12 @@
                                type="text" 
                                id="adrRue1NID"
                                > 
-                        <br>
+                        
                         <input name="adrRue2[]"
                                type="text" 
                                id="adrRue2NID"
                                > 
-                        <br>
+                        
                         <input name="adrRue3[]" 
                                type="text" 
                                id="adrRue3NID"> 
@@ -393,13 +393,13 @@
                                    value="<?php echo $oAdr->adr_rue1 ?>" 
                                    id="adrRue1<?php echo $ligId ?>"
                                    > 
-                            <br>
+                            
                             <input name="adrRue2[]"
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue2 ?>" 
                                    id="adrRue2<?php echo $ligId ?>"
                                    > 
-                            <br>
+                            
                             <input name="adrRue3[]" 
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue3 ?>" 

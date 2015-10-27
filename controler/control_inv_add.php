@@ -20,10 +20,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
     //pour chaque lot on récupére le ref_code de la référence que l'on stock
     //dans un tableau, l'indexation est la même que le tableau $resStock
-    foreach ($resStock as $lot) {
-        $resStockRefCode[] = ReferenceManager::getRefCode($lot->ref_id)->ref_code;
+    if (is_array($resStock)){
+        foreach ($resStock as $lot) {
+            $resStockRefCode[] = ReferenceManager::getRefCode($lot->ref_id)->ref_code;
+        }
     }
-
     //Si le formulaire est envoyé
     if (isset($_REQUEST['btnForm']) && $_REQUEST['btnForm'] == "Envoyer") {
         //Si l'insert ne se fait pas le manager léve un exception

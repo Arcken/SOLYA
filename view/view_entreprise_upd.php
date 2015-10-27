@@ -21,7 +21,7 @@
                hidden/>
              
             <label for="fmju">Forme juridique :</label>
-            <br>
+            
             <select name="fmju" id="fmju" required>
                 <option value=""> Aucun </option>
                 <?php foreach ($resAllFmju as $oFmju) {
@@ -37,9 +37,9 @@
                 
               }?>
             </select>
-            <br>
+            
             <label for="catEnt">Catégorie:</label>
-            <br>
+            
             <select name="catEnt" id="catEnt" required>
                 <option value=""> Aucun </option>
                 <?php foreach ($resAllCatEnt as $oCatEnt) { 
@@ -55,52 +55,52 @@
                 
               }?>
             </select>
-            <br>
+            
             <label for="cptCode">Code compte :</label>
-            <br>
+            
             <input name="cptCode" type="text" 
                    value="<?php echo $oCompte->cpt_code ?>">
-            <br>
+            
             <label for="cptNom">Nom :</label>
-            <br>
+            
             <input name="cptNom" type="text"
                    value="<?php echo $oCompte->cpt_nom ?>"
                    required>
-            <br>
+            
             <label for ="entHoraire">Horaires :</label>
-            <br>
+            
             <input name="entHoraire" 
                    type="text"
                    value='<?php echo $oEntreprise->ent_horaire ?>'>
-            <br>
+            
             <label for ="entSiren">N°SIREN :</label>
-            <br>
+            
             <input name="entSiren" 
                    type="text"
                    value='<?php echo $oEntreprise->ent_siren ?>'>
-            <br>
+            
             <label for ="entTva">N°TVA Intra :</label>
-            <br>
+            
             <input name="entTva" 
                    type="text"
                    value='<?php echo $oEntreprise->ent_num_tva ?>'>
-            <br>
+            
             <label for ="entSite">Site internet: </label>
-            <br>
+            
             <input name="entSite" 
                    type="text"
                    title='Site vitrine de l\'entreprise'
                    value='<?php echo $oEntreprise->ent_site ?>'>
-            <br>
+            
             <label for ="entEcom">Site e-commerce :</label>
-            <br>
+            
             <input name="entEcom"
                    title='site ecommerce de l\'entreprise'
                    type="text"
                    value='<?php echo $oEntreprise->ent_ecommerce ?>'>
-            <br>
+            
             <label for="cptCom">Commentaire :</label>
-            <br>
+            
             <textarea name="cptCom" title='Commentaire' 
                       value="<?php echo $oCompte->cpt_com ?>"></textarea>
         </div>
@@ -340,12 +340,12 @@
                                type="text" 
                                id="adrRue1NID"
                                > 
-                        <br>
+                        
                         <input name="adrRue2[]"
                                type="text" 
                                id="adrRue2NID"
                                > 
-                        <br>
+                        
                         <input name="adrRue3[]" 
                                type="text" 
                                id="adrRue3NID"> 
@@ -419,13 +419,13 @@
                                    value="<?php echo $oAdr->adr_rue1 ?>" 
                                    id="adrRue1<?php echo $ligId ?>"
                                    > 
-                            <br>
+                            
                             <input name="adrRue2[]"
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue2 ?>" 
                                    id="adrRue2<?php echo $ligId ?>"
                                    > 
-                            <br>
+                            
                             <input name="adrRue3[]" 
                                    type="text" 
                                    value="<?php echo $oAdr->adr_rue3 ?>" 

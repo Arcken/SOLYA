@@ -184,9 +184,9 @@ table{
     height: 560px;;
     max-height: 560px;
 }
-#formFiart label{
+.form label{
     display: block;
-    width: 230px;
+    width: 80%;
     margin-left: 1%;
     margin-top: 2%;
 }

@@ -10,7 +10,7 @@
             <div class=" haut"> 
 
                 <label for="ficheArticle">Fiche article associée: </label>
-                <br>
+                
                 <input  name="ficheArticle" 
                         type="text"
                         size="15"
@@ -22,103 +22,103 @@
 
             <div class="col30"> 
                 
-                <label for="refCode">Code de la référence: </label><br>    
+                <label for="refCode">Code de la référence: </label>    
                 <input id="refCode" 
                        name="refCode" 
                        type="text"
                        autocomplete="off"  
                        value="<?php echo $oRef->ref_code; ?>"
                        readonly>
-                <br>
-                <label for="refLbl"> Libellé: </label><br>          
+                
+                <label for="refLbl"> Libellé: </label>          
                 <input name="refLbl" type="text" 
                        value="<?php echo $oRef->ref_lbl; ?>"
                        readonly>
-                <br>
-                <label for="refMrq"> Marque: </label><br>          
+                
+                <label for="refMrq"> Marque: </label>          
                 <input name="refMrq" type="text" 
                        value="<?php echo $oRef->ref_mrq; ?>"
                        readonly>
-                <br>
-                <label for="refStMin"> Stock minimum: </label><br>
+                
+                <label for="refStMin"> Stock minimum: </label>
                 <input name="refStMin" type="text" 
                        value="<?php echo $oRef->ref_st_min; ?>"
                        readonly>         
-                <br>
-                <label for="refPoidsBrut"> Poids brut: </label><br>
+                
+                <label for="refPoidsBrut"> Poids brut: </label>
                 <input name="refPoidsBrut"  type="text" 
                        value="<?php echo $oRef->ref_poids_brut; ?>"
                        readonly>         
-                <br>
-                <label for="refPoidsNet"> Poids net: </label><br>
+                
+                <label for="refPoidsNet"> Poids net: </label>
                 <input name="refPoidsNet"  type="text" 
                        value="<?php echo $oRef->ref_poids_net; ?>"
                        readonly>         
-                <br>
-                <label for="modeConservation"> Mode de conservation:</label><br>
+                
+                <label for="modeConservation"> Mode de conservation:</label>
                 <textarea name="modeConservation" 
                           type="text" 
                           rows="4" 
                           cols="25"
                           readonly><?php echo $oModCons->cons_lbl;?></textarea>
-                        <br>
-                <label for="dureeConservation"> Durée de conservation:</label><br>
+                        
+                <label for="dureeConservation"> Durée de conservation:</label>
                 <input name="dureeConservation" 
                        type="text" 
                        value=" <?php echo $oDurCons->dc_nb.' | '.$oDurCons->dc_lbl; ?> "  
                        readonly>
-                        <br>
+                        
                     </div>
 
                     <div class="col30">
-                        <label for="refEmbLbl">Description de l'emballage:</label><br>
+                        <label for="refEmbLbl">Description de l'emballage:</label>
                         <input name="refEmbLbl"  
                                type="text" 
                                value="<?php echo $oRef->ref_emb_lbl; ?>"
                                readonly>         
-                        <br>
-                        <label for="refEmbCouleur" >Couleur: </label><br>
+                        
+                        <label for="refEmbCouleur" >Couleur: </label>
                         <input name="refEmbCouleur" 
                                type="text" 
                                value="<?php echo $oRef->ref_emb_couleur; ?>"
                                readonly>         
-                        <br> 
-                        <label for="refEmbVlmCtn">Volume net:</label><br>
+                         
+                        <label for="refEmbVlmCtn">Volume net:</label>
                         <input name="refEmbVlmCtn" 
                                type="text" 
                                value="<?php echo $oRef->ref_emb_vlm_ctn; ?>"
                                readonly>         
-                        <br>
-                        <label for="refEmbDimLng">Longueur: </label><br>
+                        
+                        <label for="refEmbDimLng">Longueur: </label>
                         <input name="refEmbDimLng" 
                                type="text" 
                                value="<?php echo $oRef->ref_emb_dim_lng; ?>"
                                readonly>         
-                        <br>
-                        <label for="refEmbDimLrg">Largeur: </label><br>
+                        
+                        <label for="refEmbDimLrg">Largeur: </label>
                         <input name="refEmbDimLrg" 
                                type="text" 
                                value="<?php echo $oRef->ref_emb_dim_lrg; ?>"
                                readonly>         
-                        <br>
-                        <label for="refEmbDimHt">Hauteur: </label><br>
+                        
+                        <label for="refEmbDimHt">Hauteur: </label>
                         <input name="refEmbDimHt" 
                                type="text" 
                                value="<?php echo $oRef->ref_emb_dim_ht; ?>"
                                readonly> 
-                        <br>
-                        <label for="refEmbDimDiam">Diamètre: </label><br>
+                        
+                        <label for="refEmbDimDiam">Diamètre: </label>
                         <input name="refEmbDimDiam" 
                                type="text" 
                                value="<?php echo $oRef->ref_emb_dim_diam; ?>"
                                readonly>         
-                        <br>
+                        
 
                     </div>
 
                     <div class="col30">
                         <label for="refCodeDouane"> Code douane: </label>
-                        <br>
+                        
                         <input name="refCodeDouane" 
                                type="text"
                                placeholder="Code douane" 
@@ -126,40 +126,40 @@
                                pattern=".{3,}"
                                value="<?php echo $oRef->ref_code_douane;?>"
                                readonly>
-                        <br>
+                        
                         <label for="pvePer"> Prix de vente particulier: </label>
-                        <br>
+                        
                         <input name="pvePer"  
                                type="text" 
                                value='<?php echo $oPve->pve_per; ?>'
                                readonly>         
-                        <br>
+                        
                         <label for="pveEnt"> Prix de vente entreprise: </label>
-                        <br>
+                        
                         <input name="pveEnt" 
                                type="text" 
                                value='<?php echo $oPve->pve_ent; ?>'
                                readonly>         
-                        <br>
+                        
                         <label for="tva"> Taux de TVA: </label>
-                        <br>
+                        
                         <input name="tva" 
                                type="text"
                                size="20"
                                value ="<?php echo $oTva->tva_lbl.' '.$oTva->tva_taux.'%'; ?>"
                                readonly>           
-                        <br>
+                        
                         <label for="droitDouane"> Droit de douanes: </label>
-                        <br>
+                        
                         <input name="droitDouane" 
                                type="text"
                                value="<?php echo $oDroitDouane->dd_lbl 
                                            . ' ' . $oDroitDouane->dd_taux.'%' ;?>"
                          
                                 readonly>    
-                        <br>
+                        
                         <label for="refCom"> Commentaire: </label>
-                        <br>
+                        
                         <textarea name="refCom" 
                                   rows="4" 
                                   cols="25"

@@ -68,7 +68,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <?php echo $inventaire->inv_date ?>
                             </td>
                             
-                            <td class="colTdIco"> <img src="img/icon/read.png" title="Modifier"
+                            <td class="colTdIco"> <img src="img/icon/read.png" title="Consulter"
                                 onclick='location.href="index.php?action=nv_inv_pdf&invId="+
                                            <?php echo $inventaire->inv_id ; ?>'
                                 />

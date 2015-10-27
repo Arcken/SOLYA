@@ -15,6 +15,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input name="invDate" 
                        id="invDate"
                        type="date"
+                       value="<?php echo date('Y-m-d')?>"
                        required=""
                        >
                 <br>
@@ -89,8 +90,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                       class="beLigneT"></textarea>
                         </td>
                         <td class="tdDate">
-                            <input name="lotDlc" 
-                                   id="lotDlc"
+                            <input name="lotDlc[NID]" 
+                                   id="lotDlc[NID]"
                                    type="date"
                                    readonly=""
                                    >
@@ -109,6 +110,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                     <?php
                     //Pour chaque lot en stock
+                    if (is_array($resStock)){
                     for ($i = 0; $i < count($resStock); $i++) {
                         //l'id du tr html est i+1, 0 étant celle du squellette
                         $idLigne = $i + 1;
@@ -159,8 +161,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                           class="beLigneT"></textarea>
                             </td>
                             <td>
-                                <input name="lotDlc" 
-                                       id="lotDlc"
+                                <input name="lotDlc[<?php echo $idLigne ?>]" 
+                                       id="lotDlc<?php echo $idLigne ?>"
                                        type="date"
                                        value='<?php echo $oLot->lot_dlc ?>'
                                        readonly=""
@@ -168,7 +170,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             </td>
 
                         </tr>
-                    <?php } ?>
+                    <?php } }?>
                 </table>
                 <!-- Ajoute une ligne -->
                 <input type="button" 
@@ -176,7 +178,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        onclick='addLigne("beTable", "idLigne")'>
                 <script type="text/javascript">
                     //On initialise le compte de ligne pour la fonction addLigne
+                    $count = <?php echo count($resStock) ?>;
+                    if ($count >1){
                     nRowCount = parseInt(<?php echo count($resStock) ?>);
+                } else {
+                    nRowCount = 0;
+                }
                 </script>
 
 

@@ -17,7 +17,7 @@
         <!--Partie informations de l'entreprise--> 
         <div class="col20" id ="add_ent">
             <label for="fmju">Forme juridique :</label>
-            <br>
+           
             <select name="fmju" id="fmju" required>
                 <option value="" selected > Aucun </option>
                 <?php foreach ($resAllFmju as $oFmju) { ?>
@@ -26,9 +26,9 @@
                         <?php echo $oFmju->fmju_id ?> </option>
                 <?php } ?>
             </select>
-            <br>
+            
             <label for="catEnt">Catégorie:</label>
-            <br>
+           
             <select name="catEnt" id="catEnt" required>
                 <option value="" selected > Aucun </option>
                 <?php foreach ($resAllCatEnt as $oCatEnt) { ?>
@@ -37,44 +37,44 @@
                         <?php echo $oCatEnt->catent_lbl ?> </option>
                 <?php } ?>
             </select>
-            <br>
+           
             <label for="cptCode">Code compte :</label>
-            <br>
+           
             <input name="cptCode" type="text">
-            <br>
+           
             <label for="cptNom">Nom :</label>
-            <br>
+       
             <input name="cptNom" type="text" required>
-            <br>
+        
             <label for ="entHoraire">Horaires :</label>
-            <br>
+      
             <input name="entHoraire" 
                    type="text">
-            <br>
+      
             <label for ="entSiren">N°SIREN :</label>
-            <br>
+        
             <input name="entSiren" 
                    type="text">
-            <br>
+      
             <label for ="entTva">N°TVA Intra :</label>
-            <br>
+    
             <input name="entTva" 
                    type="text">
-            <br>
+    
             <label for ="entSite">Site internet: </label>
-            <br>
+       
             <input name="entSite" 
                    type="text"
                    title='Site vitrine de l\'entreprise'>
-            <br>
+         
             <label for ="entEcom">Site e-commerce :</label>
-            <br>
+    
             <input name="entEcom"
                    title='site ecommerce de l\'entreprise'
                    type="text">
-            <br>
+      
             <label for="cptCom">Commentaire :</label>
-            <br>
+     
             <textarea name="cptCom" title='Commentaire'></textarea>
         </div>
      <!--Partie de Mail/téléphone -->  

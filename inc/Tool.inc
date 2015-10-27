@@ -163,7 +163,6 @@ class Tool {
      */
     public static function uplImg($imgPath, $imgMiniPath, $imgExtension) {
 
-
         //on récupére les extensions valide
         $extensions_valides = explode(",", $imgExtension);
         
@@ -260,8 +259,9 @@ class Tool {
 
                 //enregistrement de la miniature crée dans le fichier ;
                 imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
-                 if (!file_exists($imgPath . $imgMiniNom)) {
-                    die("Ecriture de l'image échoué");
+                 if (!file_exists($imgMiniPath . $imgMiniNom)) {
+                     
+                    die("Ecriture de l'image mini échoué");
                 }
             }
             return $res;

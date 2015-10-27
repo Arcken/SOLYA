@@ -9,7 +9,7 @@
             <div class=" haut"> 
                 
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
-                <label for="ficheArticle"> Associée fiche article: </label><br>
+                <label for="ficheArticle"> Associée fiche article: </label>
                 <select id="ficheArticle" name="ficheArticle" title="Choisir un élément"
                         required onchange="changeRefCodeAtTime();">
                     <option value="" selected>Aucun</option>
@@ -32,7 +32,7 @@
             <div class="col30"> 
                 <input id="pays_abv" name="pays_abv" type="text"  hidden/>
                 <input id="ga_abv" name="ga_abv" type="text"  hidden/>
-                <label for="refCode">Code référence: </label><br>          
+                <label for="refCode">Code référence: </label> 
                 <input id="refCode" name="refCode"
                        type="text" 
                        placeholder="Code de la référence"
@@ -60,41 +60,41 @@
                 <div id="divSuggest" style="display:none">
                     <span id="resSugg"></span>
                 </div>
-                <br>
-                <label for="refLbl"> Libellé: </label><br>          
+                
+                <label for="refLbl"> Libellé: </label>    
                 <input name="refLbl" 
                        type="text"
                        placeholder="Nom de la référence" 
                        title="3 caractères minimum"
                        pattern=".{3,}"
                        required>
-                <br>
+              
                 <label for="refMrq"> Marque: </label>
-                <br>          
+                      
                 <input name="refMrq"
                        type="text" 
                        placeholder="Marque de la référence">
-                <br>
+              
                 <label for="refStMin"> Stock minimum: </label>
-                <br>
+                
                 <input name="refStMin" 
                        placeholder="###,##"
                        type="text">         
-                <br>
+               
                 <label for="refPoidsBrut"> Poids brut: </label>
-                <br>
+               
                 <input name="refPoidsBrut"
                        placeholder="gramme ### ###,##" 
                        type="text">         
-                <br>
+               
                 <label for="refPoidsNet"> Poids net : </label>
-                <br>
+                
                 <input name="refPoidsNet" 
                        placeholder="gramme ### ###,##" 
                        type="text">             
-                <br>
+               
                 <label for="modeConservation"> Mode de conservation: </label>
-                <br>
+               
                 <select name="modeConservation" 
                         id="modeConservation" 
                         title="Choisir un élément" 
@@ -114,9 +114,9 @@
                 <img src="img/icon/add.png" 
                      alt="" title="Créer" 
                      onClick="popup('mc_add');"/>
-                <br>
+               
                 <label for="dureeConservation"> Durée de conservation: </label>
-                <br>
+                
                 <select name="dureeConservation" 
                         title="Choisir un élément" >
                     <option value="" selected>Aucun</option>
@@ -140,79 +140,79 @@
                      alt="" 
                      title="Créer" 
                      onClick="popup('dc_add');" />
-                <br>
+               
             </div>
 
             <div class="col30">
                 <label for="refEmbLbl">Description emballage:</label>
-                <br>
+               
                 <input name="refEmbLbl" 
                        placeholder="Description" 
                        type="text">         
-                <br>
+               
                 <label for="refEmbCouleur" >Couleur:</label>
-                <br>
+               
                 <input name="refEmbCouleur" 
                        placeholder="Couleur" 
                        type="text">         
-                <br> 
+                
                 <label for="refEmbVlmCtn">Volume net:</label>
-                <br>
+               
                 <input name="refEmbVlmCtn"
                        placeholder="###,### EN LITRE" 
                        type="text">         
-                <br>
+                
                 <label for="refEmbDimLng">Longueur:</label>
-                <br>
+               
                 <input name="refEmbDimLng" 
                        placeholder="###,##" 
                        type="text">         
-                <br>
+               
                 <label for="refEmbDimLrg">Largeur:</label>
-                <br>
+                
                 <input name="refEmbDimLrg" 
                        placeholder="###,##" 
                        type="text">         
-                <br>
+               
                 <label for="refEmbDimHt">Hauteur:</label>
                 <br>
                 <input name="refEmbDimHt" 
                        placeholder="###,##" 
                        type="text"> 
-                <br>
+                
                 <label for="refEmbDimDiam">Diamètre:</label>
-                <br>
+                
                 <input name="refEmbDimDiam" 
                        placeholder="###,##" 
                        type="text">         
-                <br>
+                
 
             </div>
 
             <div class="col30">
                 <label for="refCodeDouane">Code douane:</label>
-                <br>
+                
                 <input name="refCodeDouane" 
                        type="text"
                        placeholder="Code douane" 
                        title="3 caractères minimum"
                        pattern=".{3,}"
                        >
-                <br>
+                
                 <label for="pvePer">Prix de vente particulier:</label>
-                <br>
+               
                 <input name="pvePer" 
                        placeholder="### ###,##" 
                        type="text">         
-                <br>
+               
                 <label for="pveEnt">Prix de vente entreprise:</label>
-                <br>
+             
                 <input name="pveEnt" 
                        placeholder="### ###,##"
                        type="text">         
-                <br>
+             
                 <label for="tva">Taux de TVA:</label>
-                <br>
+            
                 <select name="tva" 
                         title="Choisir un élément"
                         required>
@@ -239,8 +239,8 @@
                      title="Créer" 
                      onClick="popup('tva_add');" />
 
-                <br>
-                <label for="droitDouane"> Droit de douanes: </label><br>
+            
+                <label for="droitDouane"> Droit de douanes: </label>
                 <select name="droitDouane" 
                         title="Choisir un élément" 
                         >
@@ -268,24 +268,24 @@
                      alt="" 
                      title="Créer" 
                      onClick="popup('dd_add');"/>
-                <br>
+              
                 <label for="refCom"> Commentaire: </label><br>
                 <textarea name="refCom" 
                           rows="4" 
                           cols="25" 
                           placeholder="Commentaire sur la référence" ></textarea>
-                <br>
+               
                      <div class='impImg'>
                         <fieldset><legend>Image</legend>                           
 
                             <label for="img_upload[]">
                                 Image(<?php echo $imgExtension ?>|max<?php echo $imgMaxSize / 1000 ?>Ko):
                             </label>
-                            <br/>       
+                               
                             <input type="hidden" 
                                    name="MAX_FILE_SIZE" 
                                    value="<?php echo $imgMaxSize ?>" />
-                            <br/>       
+                              
 
                             <input type="file" 
                                    name="img_upload[]"  
@@ -318,4 +318,3 @@
 } else {
     echo 'Le silence est d\'or';
 }
-?>
