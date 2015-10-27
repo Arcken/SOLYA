@@ -25,7 +25,7 @@ switch ($sAction) {
     //-------------------------------Bon entrée---------------------------------
     //Ajout du bon d'entrée
     case "be_add":
-        $sPageTitle = "Ajouter une bon d'entrée";
+        $sPageTitle = "Ajouter un bon d'entrée";
         require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
         require_once $path . '/view/view_infos.php';
@@ -41,7 +41,7 @@ switch ($sAction) {
             require_once $path . '/view/view_infos.php';
             require $path . '/view/view_bon_entree_list.php';
         } else {
-            $sPageTitle = "Modifier une bon d'entrée";
+            $sPageTitle = "Modifier un bon d'entrée";
             require_once $path . '/view/view_header.php';
             require_once $path . '/view/view_menu.php';
             require_once $path . '/view/view_infos.php';
