@@ -24,7 +24,7 @@ class LigneInventaireManager {
                     . 'FROM ligne_inv '
                     . 'WHERE inv_id =?';
                     
-            $result = Connection::request(1, $sql);
+            $result = Connection::request(1, $sql,$tParam);
             
         } catch (MySQLException $e) {
             throw $e;

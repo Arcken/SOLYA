@@ -21,7 +21,7 @@ class InventaireManager {
             $sql = 'SELECT inv_id, inv_date, inv_lbl, inv_vld '
                     . 'FROM inventaire '
                     . 'WHERE inv_id=? ';
-            $result = Connection::request(1, $sql,$tParam);
+            $result = Connection::request(0, $sql,$tParam);
             
         } catch (MySQLException $e) {
             throw $e;
