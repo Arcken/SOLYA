@@ -804,7 +804,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <!-- On rajout un arg taille tab de ligne-->
                 <script type="text/javascript">
                     //On initialise le compte de ligne pour la fonction addLigne
-                    nRowCount = parseInt(<?php echo count($resAllBeLigneBE) ?>);
+                    nRowCount = parseInt(<?php if (is_array($resAllBeLigneBE))
+                    {
+                        echo count($resStock);
+                    }else echo 0;
+                    ?>);
                 </script>
             </div>
              <div class="col90">

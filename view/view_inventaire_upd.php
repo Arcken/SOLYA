@@ -58,6 +58,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                 Qt stock
                             </th>
                             <th class="colTitlSupUnique">
+                                Qt init
+                            </th>
+                            <th class="colTitlSupUnique">
                                 Qt réelle
                             </th>
                             <th class="colTitlSupUnique">
@@ -109,6 +112,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        required=""
                                        name="liginvQtStock[NID]" 
                                        id="liginvQtStockNID"
+                                       readonly="">
+                            </td>
+                            <td class="beLigneNb">
+                                <input type="number" 
+                                       value="1"
+                                       min="0"
+                                       required=""
+                                       name="lotQtInit[NID]" 
+                                       id="lotQtInitNID"
                                        readonly="">
                             </td>
                             <td class="beLigneNb">
@@ -211,6 +223,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                 </td>
                                 <td class="beLigneNb">
                                     <input type="number" 
+                                           min="0"
+                                           name="lotQtInit[<?php echo $idLigne ?>]" 
+                                           id="lotQtInit<?php echo $idLigne ?>"
+                                           value='<?php echo $resAllLots[$i]->lot_qt_stock ?>'
+                                           readonly=""
+                                           >
+                                </td>
+                                <td class="beLigneNb">
+                                    <input type="number" 
                                            onchange='ccSoustraction("liginvQtReel<?php echo $idLigne ?>",
                                                                    "liginvQtStock<?php echo $idLigne ?>",
                                                                    "diffLig<?php echo $idLigne ?>");'
@@ -255,7 +276,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                            onclick='addLigne("beTable", "idLigne")'>
                     <script type="text/javascript">
                         //On initialise le compte de ligne pour la fonction addLigne
-                        nRowCount = parseInt(<?php echo count($resAllLots) ?>);
+                        nRowCount = parseInt(<?php                            if (is_array($resStock)) {
+                                echo count($resStock);
+                            } else {
+                                echo 0;
+                            }
+                            ?>);
                     </script>
                
 

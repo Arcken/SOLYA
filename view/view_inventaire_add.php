@@ -44,6 +44,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             Qt stock
                         </th>
                         <th class="colTitlSupUnique">
+                            Qt init
+                        </th>
+                        <th class="colTitlSupUnique">
                             Commentaire
                         </th>                            
                         <th class="colTitlSupUnique">
@@ -84,6 +87,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    id="liginvQtStockNID"
                                    readonly="">
                         </td>
+                        <td>
+                            <input type="number" 
+                                   value="1"
+                                   min="0"
+                                   step="any"
+                                   name="lotQtInit[NID]" 
+                                   id="lotQtInitNID"
+                                   readonly="">
+                        </td>
                         <td >
                             <textarea name="liginvLbl[NID]" 
                                       id="liginvLblNID" 
@@ -91,7 +103,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         </td>
                         <td class="tdDate">
                             <input name="lotDlc[NID]" 
-                                   id="lotDlc[NID]"
+                                   id="lotDlcNID"
                                    type="date"
                                    readonly=""
                                    >
@@ -155,6 +167,14 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                        readonly=""
                                        >
                             </td>
+                            <td>
+                            <input type="number" 
+                                   step="any"
+                                   value='<?php echo $oLot->lot_qt_init ?>'
+                                   name="liginvQtInit[<?php echo $idLigne ?>]" 
+                                   id="liginvQtInit<?php echo $idLigne ?>"
+                                   readonly="">
+                        </td>
                             <td >
                                 <textarea name="liginvLbl[<?php echo $idLigne ?>]" 
                                           id="liginvLbl<?php echo $idLigne ?>" 
@@ -177,13 +197,13 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        value="Ajouter ligne" 
                        onclick='addLigne("beTable", "idLigne")'>
                 <script type="text/javascript">
-                    //On initialise le compte de ligne pour la fonction addLigne
-                    $count = <?php echo count($resStock) ?>;
-                    if ($count >1){
-                    nRowCount = parseInt(<?php echo count($resStock) ?>);
-                } else {
-                    nRowCount = 0;
-                }
+                    //On initialise le compte de ligne pour la fonction addLigne                   
+                    nRowCount = parseInt(<?php     if (is_array($resStock)) {
+                            echo count($resStock);
+                        } else {
+                            echo 0;
+                        }
+                        ?>);
                 </script>
 
 

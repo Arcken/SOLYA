@@ -356,12 +356,14 @@ function getLotDetail($row) {
                 $lotQtStockInp = $('#liginvQtStock' + $row);
                 $lotQtReelInp = $('#liginvQtReel' + $row);
                 $lotDlcInp = $('#lotDlc' + $row);
+                $lotQtInit = $('#lotQtInit' + $row);
                 for (var key in json) {
                     console.log(json);
                     $refCodeInp.val(json[key].ref_code);
                     $lotIdProducteurInp.val(json[key].lot_id_producteur);
                     $lotQtStockInp.val(json[key].lot_qt_stock);
                     $lotQtReelInp.prop('max', parseFloat(json[key].lot_qt_init));
+                    $lotQtInit.val(json[key].lot_qt_init);
                     $lotDlcInp.val(json[key].lot_dlc);
                 }
             }
