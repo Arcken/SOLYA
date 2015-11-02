@@ -16,37 +16,37 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
                 
-                <label for="beFactNum"> Référence de facture </label><br>
+                <label for="beFactNum"> Référence de facture </label>
                 <input name="beFactNum" 
                        id="beFactNum"
                        placeholder="Saisie" 
                        title="Numéro de la facture achat"
                        type="text"
                        >
-                <br>
-                <label for="beLbl"> Libellé du bon </label><br>
+                
+                <label for="beLbl"> Libellé du bon </label>
                 <input name="beLbl" 
                        id="beLbl"
                        placeholder="texte" 
                        type="text"
                        >
-                <br>
-                <label for="beDate"> Date</label><br>
+                
+                <label for="beDate"> Date</label>
                 <input name="beDate" 
                        id="beDate"
                        type="date"
                        required
                        value='<?php echo date('Y-m-d')?>'
                        >
-                <br>
-                <label for="beCom"> Commentaire</label><br>
+               
+                <label for="beCom"> Commentaire</label>
                 <textarea name="beCom" 
                           id="beCom"
                           placeholder="description"></textarea>
-                <br>
+                
             </div>
             <div class="col30">
-                <label for="beFraisDouane"> Frais de douane </label><br>
+                <label for="beFraisDouane"> Frais de douane </label>
                 <input name="beFraisDouane" 
                        id="beFraisDouane" 
                        type="number"
@@ -54,8 +54,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        min="0"
                        step="any"
                        value ="0">
-                <br>
-                <label for="beFraisBancaire"> Frais bancaires </label><br>
+                
+                <label for="beFraisBancaire"> Frais bancaires </label>
                 <input name="beFraisBancaire" 
                        id="beFraisBancaire" 
                        type="number"
@@ -63,8 +63,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        min="0"
                        step="any"
                        value ="0">
-                <br>
-                <label for="beFraisTrans"> Frais de transport </label><br>
+               
+                <label for="beFraisTrans"> Frais de transport </label>
                 <input name="beFraisTrans" 
                        id="beFraisTrans" 
                        type="number"
@@ -72,33 +72,33 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        required=""
                        step="any"
                        value ="0">
-                <br>
                 
-                <label for="beInfoTrans"> Information transport</label><br>
+                
+                <label for="beInfoTrans"> Information transport</label>
                 <textarea name="beInfoTrans" 
                           placeholder="description"></textarea>
-                <br>
+                
             </div>
             <div class="col30">
-                <label for="cptId"> Compte </label><br>
+                <label for="cptId"> Compte </label>
                 <input name="cptId" 
                        id="cptId" 
                        type="texte"
                        onchange="getCompte();"
                        >
-                <br>
-                <label for="cptNom"> Nom </label><br>
+                
+                <label for="cptNom"> Nom </label>
                 <input name="cptNom" 
                        id="cptNom" 
                        type="texte"
                        readonly=""                       
                        >
-                <br>
-                <label for="cptCom"> Commentaire </label><br>
+                
+                <label for="cptCom"> Commentaire </label>
                 <textarea name="cptCom" 
                           id="cptCom"
                           readonly=""></textarea>
-                <br>
+                
             </div>
             <div class="col90">
                 <table class="beLigne" id="beTable">
@@ -486,12 +486,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <input type="text" 
                        name="beTotal" 
                        id="beTotal"
-                       value="0"><br>
+                       value="0">
                 <label for="beModePai">Mode de paiement</label>
                 <textarea name="beModePai" 
                         id="beModePai" 
                         title="Mode de paiement"
-                        ></textarea><br>
+                        ></textarea>
                 <label for="beComPai">Commentaire paiement</label>
                 <textarea name="beComPai" 
                         id="beComPai" 

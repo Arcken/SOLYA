@@ -18,6 +18,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     require_once $path . '/model/InformerManager.php';
     require_once $path . '/inc/Tool.inc';
 
+	//On récupére la fiche article et d'autres éléments
+	$iFiartId = $_REQUEST['fiartId'];
+	$resFiartDetail = FicheArticleManager::getFicheArticleDetailUpd($iFiartId);
+	
     if ($sButtonUt == 'Modifier') {
 
         //Si la modification ne se fait pas le manager léve un exception
@@ -137,9 +141,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         try {
             //On définit le titre
             $sPageTitle = "Détail de la fiche N°" . $_REQUEST['fiartId'];
-            //On récupére la fiche article et d'autres éléments
-            $iFiartId = $_REQUEST['fiartId'];
-            $resFiartDetail = FicheArticleManager::getFicheArticleDetailUpd($iFiartId);
+                        
             $resAllPays = PaysManager::getAllPays();
             $resAllGamme = GammeManager::getAllGammes();
             $resRegrouperFiart = RegrouperManager::getRegrouperFiart($iFiartId);

@@ -113,7 +113,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                                 <?php echo $be->be_date ?>
                             </td>
                             <td class="colTdIco">
-                                <img src="img/icon/read.png" title="Consulter"
+                                <img src="img/icon/read.png" title="Consulter PDF"
                                      onclick='window.open(
                                               "index.php?action=nv_be_pdf&beId=<?php echo $be->be_id ?>")'/>
                             </td>
@@ -122,9 +122,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             </td>
                            
 
-                            <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
-                                     onclick='delElt(<?php echo $be->be_id ?>, "beId", "Bon entrée", "be_del")'/>
-                            </td>
                             
 
                         </tr>

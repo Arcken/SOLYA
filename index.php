@@ -6,7 +6,8 @@ session_start();
 <html>
     <head>
         <meta charset="UTF-8"></meta>
-
+		<title>Stock Solya</title>
+		<link rel="icon" href="favicon.png" />
 <?php
 //recupere parametre du fichier param.ini
 require_once 'inc/ini.inc';

@@ -56,7 +56,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                 <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
                                          onclick='location.href = "index.php?action=fiart_upd&fiartId=<?php echo $value->fiart_id ?>"'/></td>
 
-                                <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Modifier"
+                                <td class="colTdIco"><img src="img/icon/delete.png" alt="" title="Supprimer"
                                          onclick='delElt(<?php echo $value->fiart_id ?>, "fiartId", "Fiche article", "fiart_del")'/></td>
 
                             </tr>

@@ -1,7 +1,7 @@
 <?php if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
     <link type="text/css" href="css/style_formulaire.css" rel="stylesheet">
     <div class="corps">
-        <form class="form">
+        <form class="form" method="post">
             <div class="col90">
                 <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
                 

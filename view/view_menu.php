@@ -103,10 +103,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             <?php if ($_SESSION['group'] >= '1') { ?>
                 <li><a href='#'><span>Utilisateur</span></a>
                     <ul>
-                        <li class='has-sub'><a href='index.php?action=ut_add'><span>Créer</span></a>
+                        <li class='has-sub'><a href='index.php?action=utilisateur_add'><span>Créer</span></a>
                         </li>
 
-                        <li class='has-sub'><a href='index.php?action=ut_list'><span>Consulter</span></a>
+                        <li class='has-sub'><a href='index.php?action=utilisateur_list'><span>Consulter</span></a>
                         </li>
                     </ul>
                 </li>

@@ -114,7 +114,7 @@
                                                 "index.php?action=bon_upd&bonId=<?php echo $oBon->bon_id ?>"' />
                                </td>
                                <td class="colTdIco">
-                                <img src="img/icon/read.png" title="Consulter"
+                                <img src="img/icon/read.png" title="Consulter PDF"
                                      onclick='window.open(
                                               "index.php?action=nv_bon_pdf&bonId=<?php echo $oBon->bon_id ?>")'
                              />

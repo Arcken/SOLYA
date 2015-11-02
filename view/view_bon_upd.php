@@ -26,44 +26,44 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        value ='<?php echo $oBon->bon_id; ?>' 
                        hidden/>
 
-                <label for="numFact"> Numéro de facture </label><br>
+                <label for="numFact"> Numéro de facture </label>
                 <input name="numFact"  id="nFact" 
                        placeholder="Numéro de Facture" 
                        value="<?php if (isset($oBon->bon_fact_num)) {
                                         echo $oBon->bon_fact_num;
                                     } ?>" 
                        type="text" >
-                <br>
-                <label for="typeBon"> Type du bon </label><br>
+                
+                <label for="typeBon"> Type du bon </label>
                     <input type="text" 
                         value="<?php echo $oDocLbl->doclbl_lbl; ?>" 
                         title="Non modifiable" readonly>
-                <br>
+                
                 
                     <input type="text" 
                         value="<?php echo $oDocLbl->doclbl_id; ?>" 
                         title="Non modifiable" 
                         id="typeBonId" hidden>
-                <br>
-                <label for="bonDate"> Date</label><br>
+               
+                <label for="bonDate"> Date</label>
                 <input name="bonDate" 
                        placeholder="Date" 
                        type="Date"
                        format='DD-MM-YYYY'
                        required 
                        value="<?php echo $oBon->bon_date ?>">
-                <br>
-                <label for="bonCom">Commentaire</label><br>
+               
+                <label for="bonCom">Commentaire</label>
                 <textarea name="bonCom" 
                           placeholder="Commentaire"><?php echo $oBon->bon_com ?></textarea>
-                <br>
+                
                 <label for="cptId"> N°compte associé:</label>
-                <br>
+                
                 <input name="cptId" 
                        placeholder="Identifiant compte associé" 
                        type="texte"
                        value="<?php echo $oBon->cpt_id ?>">
-                <br>
+               
                 <?php
                 switch ($oBon->doclbl_id) {
 
@@ -74,7 +74,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     case '12':
                         ?>
                         <div id='divBsArea' >
-                            <label for="bonSortie">Bon de sortie associé :</label><br>
+                            <label for="bonSortie">Bon de sortie associé :</label>
                             <input name="bonSortie" 
                                    placeholder="N° du bon de sortie" 
                                    id="bonSortie" value="<?php echo $oBon->bon_sortie_assoc ?>">
@@ -289,7 +289,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
 
                 <script type="text/javascript">
                     //On initialise le compte de ligne pour la fonction addLigne
-                    nRowCount = parseInt(<?php echo count($resAllBonLignes) ?>);
+                    nRowCount = parseInt(<?php if (is_array($resAllBonLignes)){
+                        echo count($resAllBonLignes) ;
+                        } else {
+                            echo 0;
+                        }
+                        ?>
                 </script>
             </div>
             <div class="bas" id="zoneBtnBon" >

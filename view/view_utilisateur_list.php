@@ -66,7 +66,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                             <?php echo $utilisateur->ut_actif ?>
                         </td>
                         <td class="colTdIco"><img src="img/icon/modify.png" alt="" title="Modifier"
-                                 onclick='location.href = "index.php?action=utilisateur_detail&utLogin=<?php echo $utilisateur->ut_login ?>"'/></td>
+                                 onclick='location.href = "index.php?action=utilisateur_upd&utLogin=<?php echo $utilisateur->ut_login ?>"'/></td>
                     </tr>
                 <?php } ?>
             </table>

@@ -114,6 +114,32 @@ class LotManager {
     
     
     /** 
+     * Retourne tous les lots dont le stock est <= stock mini
+     * @return []objet
+     * retourne un tableau d'objets
+     */
+    public static function getLotStockMin(){
+        try{
+                
+        $sql= "SELECT lot_id,
+                l.ref_id,
+                lot_id_producteur,
+                lot_dlc,
+                lot_qt_stock,
+                lot_qt_init 
+                FROM lot l 
+                JOIN reference r ON l.ref_id = r.ref_id 
+                WHERE l.lot_qt_stock <= r.ref_st_min";
+        
+         $result = Connection::request(1, $sql);
+         
+        }catch(MySQLException $e){
+          throw $e;   
+        }
+        return $result;
+    }
+    
+    /** 
      * Select for update d'un enregistrement selon l'id
      * @param $lotId
      * Attend l'id du lot

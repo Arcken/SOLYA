@@ -44,6 +44,7 @@ if ($sAction == 'deconnexion') {
     session_destroy();
     session_commit();
     $_SESSION = array();
+	$sPageTitle = "Connexion";
     require $path . '/view/view_connection.php';
 }
 //Sinon c'est que l'on veut faire une action

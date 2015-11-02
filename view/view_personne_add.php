@@ -8,7 +8,7 @@
 <div class="corps">
 
     <!-- En-tête choix du type contact-->
-    <form id="form_add_pers" class="form" action="index.php" method="get">
+    <form id="form_add_pers" class="form" action="index.php" method="post">
         <input name='token'
                type="text"
                value ='<?php echo rand(1, 1000000) ?>' 

@@ -399,7 +399,7 @@
                 break;
 
             //Détail de l'utilisateur
-            case "utilisateur_detail":
+            case "utilisateur_upd":
                 require $path . '/controler/control_ut_upd.php';
                 break;
 

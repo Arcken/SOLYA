@@ -4,7 +4,7 @@
 //Le 'group' permet de choisir si l'utilisateur à accés à la page
 if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     try {
-        
+        /*
         require_once $path . '/model/LotManager.php';
         require_once $path . '/model/ReferenceManager.php';
         $resStockMin = LotManager::getLotStockMin();
@@ -15,6 +15,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             }
         }
         print_r($tRef);
+		*/
     } catch (MySQLException $e) {
         $msg = $resEr[1];
         Tool::addMsg($msg);

@@ -305,13 +305,13 @@
                             <?php echo $resLigRefs['ref'][$i]->ref_com; ?>
                         </td>
                         <td class="colTdIco">
-                            <img src="img/icon/read.png" title="Modifier"
+                            <img src="img/icon/read.png" title="Consulter"
                                   onclick='location.href="index.php?action=ref_detail&idRef="+
                                            <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                              />
                         </td>
                         <td class="colTdIco">
-                            <img src="img/icon/modify.png" title="Consulter"
+                            <img src="img/icon/modify.png" title="Modifier"
                                   onclick='location.href="index.php?action=ref_upd&idRef="+
                                    <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                              />

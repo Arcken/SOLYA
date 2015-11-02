@@ -12,34 +12,34 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
         <?php //Contrôle selon l'inventaire
             $tInventaire = InventaireManager::getInventaireOpen();
             if (!isset($tInventaire) || !is_array($tInventaire)){?>
-        <form class="form" action="index.php" method="get" onsubmit="ctrlFormValide();">
+        <form class="form" action="index.php" method="post" onsubmit="ctrlFormValide();">
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
-                <label for="beId"> Bon entré numéro: </label><br>
+                <label for="beId"> Bon entré numéro: </label>
                 <input name="beId" 
                        id="beId"
                        type="text"
                        value="<?php echo $resBeDetail->be_id ?>"
                        readonly=""
                        >
-                <br>
-                <label for="beFactNum"> Référence de facture </label><br>
+                
+                <label for="beFactNum"> Référence de facture </label>
                 <input name="beFactNum" 
                        id="beFactNum"
                        placeholder="description" 
                        type="text"
                        value="<?php echo $resBeDetail->be_fact_num ?>"
                        >
-                <br>
-                <label for="beLbl"> Libellé du bon </label><br>
+                
+                <label for="beLbl"> Libellé du bon </label>
                 <input name="beLbl" 
                        id="beLbl"
                        placeholder="description" 
                        type="text"
                        value="<?php echo $resBeDetail->be_lbl ?>"
                        >
-                <br>
-                <label for="beDate"> Date</label><br>
+                
+                <label for="beDate"> Date</label>
                 <input name="beDate" 
                        id="beDate"
                        placeholder="description" 
@@ -47,15 +47,15 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        value="<?php echo $resBeDetail->be_date ?>"
                        required=""
                        >
-                <br>
-                <label for="beCom"> Commentaire</label><br>
+                
+                <label for="beCom"> Commentaire</label>
                 <textarea name="beCom" 
                           id="beCom"
                           placeholder="description"><?php echo $resBeDetail->be_com ?></textarea>
-                <br>
+                
             </div>
             <div class="col30">
-                <label for="beFraisDouane"> Frais de douane </label><br>
+                <label for="beFraisDouane"> Frais de douane </label>
                 <input name="beFraisDouane" 
                        id="beFraisDouane" 
                        type="number"
@@ -63,8 +63,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        required=""
                        step="0.01"
                        value="<?php echo $resBeDetail->be_frais_douane ?>">
-                <br>
-                <label for="beFraisBancaire"> Frais bancaires </label><br>
+                
+                <label for="beFraisBancaire"> Frais bancaires </label>
                 <input name="beFraisBancaire" 
                        id="beFraisBancaire" 
                        type="number"
@@ -72,8 +72,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        required=""
                        step="0.01"
                        value="<?php echo $resBeDetail->be_frais_bancaire ?>">
-                <br>
-                <label for="beFraisTrans"> Frais de transport </label><br>
+                
+                <label for="beFraisTrans"> Frais de transport </label>
                 <input name="beFraisTrans" 
                        id="beFraisTrans" 
                        type="number"
@@ -81,36 +81,36 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        required=""
                        step="0.01"
                        value="<?php echo $resBeDetail->be_frais_trans ?>">
-                <br>
+                
 
-                <label for="beInfoTrans"> Information transport</label><br>
+                <label for="beInfoTrans"> Information transport</label>
                 <textarea name="beInfoTrans" 
                           placeholder="description"
                           ><?php echo $resBeDetail->be_info_trans ?></textarea>
-                <br>
+                
             </div>
              <div class="col30">
-                <label for="cptId"> Compte </label><br>
+                <label for="cptId"> Compte </label>
                 <input name="cptId" 
                        id="cptId" 
                        type="texte"
                        value="<?php echo $resCompte->cpt_id?>"
                        onchange="getCompte();"
                        >
-                <br>
-                <label for="cptNom"> Nom </label><br>
+                
+                <label for="cptNom"> Nom </label>
                 <input name="cptNom" 
                        id="cptNom" 
                        type="texte"
                        readonly=""
                        value="<?php echo $resCompte->cpt_nom?>"
                        >
-                <br>
-                <label for="cptCom"> Commentaire </label><br>
+                
+                <label for="cptCom"> Commentaire </label>
                 <textarea name="cptCom" 
                           id="cptCom"
                           readonly=""><?php echo $resCompte->cpt_com?></textarea>
-                <br>
+                
             </div>
 
             <div class="col90">
@@ -805,7 +805,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 <script type="text/javascript">
                     //On initialise le compte de ligne pour la fonction addLigne
                     nRowCount = parseInt(<?php     if (is_array($resAllBeLigneBE)) {
-                                echo count($resStock);
+                                echo count($resAllBeLigneBE);
                             } else {
                                 echo 0;
                             }
@@ -818,12 +818,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                        name="beTotal" 
                        id="beTotal"
                        value="<?php echo $resBeDetail->be_total ?>"
-                       readonly=""><br>
+                       readonly="">
                 <label for="beModePai">Mode de paiement</label>
                 <textarea name="beModePai" 
                         id="beModePai" 
                         title="Mode de paiement"
-                        ><?php echo $resBeDetail->be_mode_pai ?></textarea><br>
+                        ><?php echo $resBeDetail->be_mode_pai ?></textarea>
                 <label for="beComPai">Commentaire paiement</label>
                 <textarea name="beComPai" 
                         id="beComPai" 
