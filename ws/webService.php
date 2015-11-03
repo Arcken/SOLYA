@@ -3,7 +3,7 @@
 if (isset($_REQUEST['test']) && $_REQUEST['test'] == "Solya") {
     //Création d'un objet PDO pour accéder à la base de données
     //Paramètrage
-    $bdd = new PDO('mysql:host=localhost;dbname=solya;charset=utf8', 'solya', "Stage2015!");
+    $bdd = new PDO('mysql:host=thouleg.fr;dbname=solya;charset=utf8', 'solya', "Stage2015!");
     $sAction = $_REQUEST['action'];
     
     switch ($sAction) {

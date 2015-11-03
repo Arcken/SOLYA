@@ -63,7 +63,7 @@ switch ($sAction) {
     //-------------------------------Bon sortie/reprise-------------------------
     //Ajout du bon de sortie/reprise
     case "bon_add":
-        $sPageTitle = "Ajouter une bon de mouvement";
+        $sPageTitle = "Ajouter un bon de Sortie/Retour";
         require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
         require_once $path . '/view/view_infos.php';

@@ -106,22 +106,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) { ?>
                                         location.href ="index.php?action=ent_upd&cptId=<?php echo $oCompte->cpt_id ?>"'/>
                             </td>
                             <?php } ?>
-                            
-                            <?php if($oCompte->cpt_type==0){?>
-                            <td class="colTdIco">
-                                <img src="img/icon/delete.png" 
-                                     alt="" 
-                                     title="Supprimer"
-                                     onclick='delElt(<?php echo $oCompte->cpt_id ?>, "gaId", "compte", "pers_del")'/>
-                            </td>
-                            <?php }else{ ?>
-                             <td class="colTdIco">
-                                <img src="img/icon/delete.png" 
-                                     alt="" 
-                                     title="Supprimer"
-                                     onclick='delElt(<?php echo $oCompte->cpt_id ?>, "cptId", "compte", "ent_del")'/>
-                            </td>
-                            <?php } ?>
                         </tr>
                         <?php
                     }
