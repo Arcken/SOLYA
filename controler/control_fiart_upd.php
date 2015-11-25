@@ -37,7 +37,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //Traitement des uploads de photos
 
                 if (!empty($_FILES) && $_FILES['img_upload']['name'][0] != '') {
-                    $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
+                    $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension, $imgMaxSize);
 
                     //On intégre la liste des nouvelles photos avec l'ancienne si elle existe
                     if ($resFiartDetail->fiart_photos != '') {

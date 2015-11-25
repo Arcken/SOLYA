@@ -12,7 +12,6 @@
  */
 class Tool {
 
-    
     /**
      * Fonction qui affiche la variable quelque soit son type
      * @param $var
@@ -54,7 +53,7 @@ class Tool {
         $rowStartSuivante = $rowStart + $nbRow;
         $rowStartPrecedente = $rowStart - $nbRow;
 
-        
+
         //On commence le tableau
         echo '<table class="puceNav" border = "0" ><tr>' . "\n";
         // on détermine le orderby et le tri
@@ -68,41 +67,39 @@ class Tool {
         } else {
             $sort = '';
         }
-        
+
         //cas pour le précédent
         if ($rowStart != 0) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $rowStartPrecedente . '&orderby=' . $order . '&tri=' .$sort . '" method="post"><<</a></td>' . "\n";
-        }else{
+            . $rowStartPrecedente . '&orderby=' . $order . '&tri=' . $sort . '" method="post"><<</a></td>' . "\n";
+        } else {
             echo '<td class="puceNavDesactive" valign="top">' . "\n";
             echo ' <a href =""><<</a></td>' . "\n";
         }
 
         //Tant que la page en cours est inférieur au nombre de page
         while ($numeroPages <= $nbpages) {
-            
+
             //Page en cours
-            if($numeroPages == ($rowStart/$nbRow+1)){
-                 echo '<td class="puceNavActive"><a href ="' . $page 
-                    . '?action=' . $sAction 
-                    . '&limite=' . $lim 
-                    . '&orderby=' 
-                    . $order 
-                    . '&tri=' .$sort . '">'
-                    . $numeroPages . '</a></td>' . " \n";
-           
+            if ($numeroPages == ($rowStart / $nbRow + 1)) {
+                echo '<td class="puceNavActive"><a href ="' . $page
+                . '?action=' . $sAction
+                . '&limite=' . $lim
+                . '&orderby='
+                . $order
+                . '&tri=' . $sort . '">'
+                . $numeroPages . '</a></td>' . " \n";
             } else {
-            
-            //autre page
-            echo '<td ><a href ="' . $page 
-                    . '?action=' . $sAction 
-                    . '&limite=' . $lim 
-                    . '&orderby=' 
-                    . $order 
-                    . '&tri=' .$sort . '">'
-                    . $numeroPages . '</a></td>' . " \n";
-            
+
+                //autre page
+                echo '<td ><a href ="' . $page
+                . '?action=' . $sAction
+                . '&limite=' . $lim
+                . '&orderby='
+                . $order
+                . '&tri=' . $sort . '">'
+                . $numeroPages . '</a></td>' . " \n";
             }
             //on clacul la limite suivante
             $lim = $lim + $nbRow;
@@ -121,8 +118,8 @@ class Tool {
         if ($rowStartSuivante < $total) {
             echo '<td valign="top">' . "\n";
             echo ' <a href ="' . $page . '?action=' . $sAction . '&limite='
-            . $rowStartSuivante . '&orderby=' . $order . '&tri=' .$sort . '" method="post">>></a></td>' . "\n";
-        }else{
+            . $rowStartSuivante . '&orderby=' . $order . '&tri=' . $sort . '" method="post">>></a></td>' . "\n";
+        } else {
             echo '<td class="puceNavDesactive" valign="top">' . "\n";
             echo ' <a href ="">>></a></td>' . "\n";
         }
@@ -130,7 +127,6 @@ class Tool {
         echo '</tr></table>' . "\n";
     }
 
-    
     /**
      * Renvoie le nombre d'enregistrement d'une table
      * @param String
@@ -161,118 +157,112 @@ class Tool {
      * tableau extension autorisé
      * @return string
      */
-    public static function uplImg($imgPath, $imgMiniPath, $imgExtension) {
+    public static function uplImg($imgPath, $imgMiniPath, $imgExtension, $imgMaxSize) {
+
 
         //on récupére les extensions valide
         $extensions_valides = explode(",", $imgExtension);
-        
+
         //Raccourci d'écriture
-        $image = $_FILES['img_upload']; 
-        
-        //Si l'image existe, on controle sa taille
-        if ($image['size'][0] > 0) {
-            //Pour toutes les images uploadé
-            for ($i = 0; $i < count($image['name']); $i++) {
+        $image = $_FILES['img_upload'];
 
-                //On récupére le nom de l'image
-                $IMGNOM = $image['name'][$i];
-                //On récupére l'image
-                $IMGTMP = $image['tmp_name'][$i];
+        //Pour toutes les images uploadé
+        for ($i = 0; $i < count($image['name']); $i++) {
+            $erreur = "aucune";
 
-                //on vérifie que le nom soit correct
-                if (preg_match('#[\x00-\x1F\x7F-\x9F/\\\\]#', $IMGNOM)) {
-                    die("Fichier image: Nom de fichier non valide");
-                }
+            //On récupére le nom de l'image
+            $IMGNOM = $image['name'][$i];
+            //On récupére l'image
+            $IMGTMP = $image['tmp_name'][$i];
 
-                //on verifie si le fichier existe déja
-                if (file_exists($imgPath . $IMGNOM)) {
-                    die("Fichier déja existant");
-                }
+            //on véfifie sa taille
+            if ($image['size'][$i] > $imgMaxSize) {
+                $erreur = $IMGNOM . ": Fichier trop grand";
+            }
 
-                //on vérifie si l'upload c'est bien passé
-                if ($image['error'][$i] > 0)
-                    die("Fichier image: Erreur lors du transfert");
+            //on vérifie si l'upload c'est bien passé
+            if ($image['error'][$i] > 0) {
+                $erreur = $IMGNOM . ": Fichier image: Erreur lors du transfert";
+            }
 
-                //On récupére l'extension du fichier
-                $extension_upload = strtolower(substr(strrchr($IMGNOM, '.'), 1));
+            //On récupére l'extension du fichier
+            $extension_upload = strtolower(substr(strrchr($IMGNOM, '.'), 1));
 
-                //On vérifie que'elle est autorisée
-                if (!in_array($extension_upload, $extensions_valides)) {
-                    die("Fichier image: Extension incorrecte");
-                }
-
-                //Création du nom de l'image et de sa vignette
+            //On vérifie qu'elle est autorisée
+            if (!in_array($extension_upload, $extensions_valides)) {
+                $erreur = $IMGNOM . ": Extension incorrecte $extension_upload";
+            }
+            if ($erreur == "aucune") {
+                //Tableau de contrôle de création de fichier, on la passe à faux si une erreur survient
+                $bCopy[];
+                
+                //Création du nom de l'image
                 $tNom = explode('.', $IMGNOM);
-                $tNom[0] = strtolower($tNom[0]);
-                $tNom[1] = 'jpg';
+                $tNom[0] = md5(uniqid(rand(), true));
+                if (strtolower($extension_upload) == "png") {
+                    $tNom[1] = "png";
+                } else {
+                    $tNom[1] = 'jpg';
+                }
                 $imgNom = implode('.', $tNom);
-                if ($tNom[0] != '')
-                    $res[] = $tNom[0];
+
+                //Nom de la vingnette
                 $tNom[0] = $tNom[0] . '_lbl';
                 $imgMiniNom = implode('.', $tNom);
 
                 //obtention taille img uploader
                 list($width, $height) = getimagesize($IMGTMP);
 
-                
-                //-----------------------Grande image --------------------------
-                
+                //-----------------------traitement image --------------------------
                 //definition taille
                 $new_height = 400;
                 $new_width = ($width / $height) * $new_height;
+                $new_label_height = 100;
+                $new_label_width = ($width / $height) * $new_label_height;
 
                 //creation d’une image vide en mémoire
                 $image_grande_tmp = imagecreatetruecolor($new_width, $new_height);
+                $image_mini_tmp = imagecreatetruecolor($new_label_width, $new_label_height);
 
                 //copie de l'image à duppliquer en mémoire vers $image_tmp
-                $image_tmp = imagecreatefromjpeg($IMGTMP);
+                if ($tNom[1] == "png") {
+                    $image_tmp = imagecreatefrompng($IMGTMP);
+                    // copie du contenu de $image_tmp, vers $image_grande_tmp 
+                    // en appliquant les nouvelles dimensions
+                    imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                    imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_label_width, $new_label_height, $width, $height);
+                    
+                    $bCopy[] = imagepng($image_grande_tmp, $imgPath . $imgNom);                    
+                    $bCopy[] = imagepng($image_mini_tmp, $imgMiniPath . $imgMiniNom);
+                } else {
+                    $image_tmp = imagecreatefromjpeg($IMGTMP);
+                    // copie du contenu de $image_tmp, vers $image_grande_tmp 
+                    // en appliquant les nouvelles dimensions
+                    imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+                    imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_label_width, $new_label_height, $width, $height);
+                    
+                    $bCopy[] = imagejpeg($image_grande_tmp, $imgPath . $imgNom);
+                    $bCopy[] = imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
+                }                
+                
+                if (in_array("FALSE", $bCopy)) {
 
-                // copie du contenu de $image_tmp, vers $image_grande_tmp 
-                // en appliquant les nouvelles dimensions
-                imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, 
-                        $new_width, $new_height, $width, $height);
-
-                //enregistrement de la grande image créé vers le fichier ;
-                imagejpeg($image_grande_tmp, $imgPath . $imgNom);
-
-                if (!file_exists($imgPath . $imgNom)) {
-                    die("Ecriture de l'image échoué");
+                    $res[] = $imgNom;
+                } else {
+                    Tool::addMsg("Erreur d'écriture de l'image");
                 }
-                
-                
-                //-----------------------Vignette-----------------------------
-                
-                //definition taille
-                $new_height = 100;
-                $new_width = ($width / $height) * $new_height;
-
-                //creation d’une image miniature vide en mémoire
-                $image_mini_tmp = imagecreatetruecolor($new_width, $new_height);
-
-                //copie de l'image à duppliquer en mémoire vers $image_tmp
-                $image_tmp = imagecreatefromjpeg($IMGTMP);
-
-                //copie du contenu de $image_tmp, vers $image_mini_tmp 
-                //en appliquant les nouvelles dimensions
-                imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, 
-                        $new_width, $new_height, $width, $height);
-
-                //enregistrement de la miniature crée dans le fichier ;
-                imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
-                 if (!file_exists($imgMiniPath . $imgMiniNom)) {
-                     
-                    die("Ecriture de l'image mini échoué");
-                }
+            } else {
+                Tool::addMsg($erreur);
             }
             return $res;
         }
     }
 
     /**
-    * Fonction qui ajoute le message au tableau
+     * Fonction qui ajoute le message au tableau
      * on ne conserve que les 5 derniers 
-    * @param $msg
-    */
+     * @param $msg
+     */
     public static function addMsg($msg) {
         $_SESSION['msg'][4] = $_SESSION['msg'][3];
         $_SESSION['msg'][3] = $_SESSION['msg'][2];

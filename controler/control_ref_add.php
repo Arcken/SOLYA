@@ -54,7 +54,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oRef->ref_mrq = $_REQUEST['refMrq'];
                 $oRef->ref_code_douane = $_REQUEST['refCodeDouane'];
 
-                $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
+                $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension, $imgMaxSize);
                 if (count($resPhoto) > 0 && $resPhoto[0] != '') {
                     $oRef->ref_photos = implode(',', $resPhoto);
                     $oRef->ref_photos_pref = $resPhoto[0];
