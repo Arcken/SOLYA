@@ -63,7 +63,7 @@ switch ($sAction) {
     //-------------------------------Bon sortie/reprise-------------------------
     //Ajout du bon de sortie/reprise
     case "bon_add":
-        $sPageTitle = "Ajouter une bon de mouvement";
+        $sPageTitle = "Ajouter un bon de Sortie/Retour";
         require_once $path . '/view/view_header.php';
         require_once $path . '/view/view_menu.php';
         require_once $path . '/view/view_infos.php';
@@ -168,6 +168,13 @@ switch ($sAction) {
         require $path . '/view/view_contact_list.php';
         break;
 
+		
+	 //-------------------------------- Déconnexion -------------------------	
+	case "deconnexion":
+		$sPageTitle = "Accueil";
+		break;
+				
+		
     //-------------------------------- Droit de douane -------------------------
     //Détail d'un Droit de douane
     case "dd_detail":
@@ -647,7 +654,7 @@ switch ($sAction) {
         break;
 
     //Détail d'un utilisateur
-    case "utilisateur_detail":
+    case "utilisateur_upd":
 
         if ($sButtonUt == 'Modifier') {
             $sPageTitle = "Liste des utilisateurs";

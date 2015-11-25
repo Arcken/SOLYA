@@ -9,7 +9,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     
     <div class="corps">
         <?php ?>
-        <form class="form" id="invAdd" action="index.php" method="get" 
+        <form class="form" id="invAdd" action="index.php" method="post" 
               onsubmit='return uniqueValueInForm("lotId")'>
             <input name='token' type="text" value ='<?php echo rand(1,1000000)?>' hidden/>
             <div class="col30">
@@ -276,7 +276,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                            onclick='addLigne("beTable", "idLigne")'>
                     <script type="text/javascript">
                         //On initialise le compte de ligne pour la fonction addLigne
-                        nRowCount = parseInt(<?php                            if (is_array($resStock)) {
+                        nRowCount = parseInt(<?php if (is_array($resStock)) {
                                 echo count($resStock);
                             } else {
                                 echo 0;

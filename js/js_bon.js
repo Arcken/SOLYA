@@ -215,17 +215,23 @@ function limitQteMax($row) {
     //Récupération des inputs
     var $valInput = $('#' + $lotIdId);
     var $inptQte = $('#' + $lotQteId);
-    var $typeBon = $('#typeBonId').val();
     
+    var $typeBon;
     //On récupère l'action pour déterminer le traitement
     var $sAction = $('#action').val();
     var $nb = '';
-    
+    //Si c'est une mise à jour ce n'est pas une combobox donc on s'appuie sur l'input qui contient l'id
+    if ($sAction === "bon_upd"){
+         $typeBon = $('#typeBonId').val();
+    //Sinon c'est une combo donc on va chercher la valeur
+    }else{
+         $typeBon = $('#typeBon').val();
+    }
     //On récupère la valeur de la ligne 
     //Si elle est vide cela correspond à une insertion de ligne 
     //sinon cela correspond à une modification
     var $ligId = $('#'+$ligIdId).val();
-    console.log('$ligID = '+$('#'+$ligIdId).val());
+    console.log($ligIdId+" = "+ $('#'+$ligIdId));
     
     switch ($typeBon) {
         
@@ -239,7 +245,7 @@ function limitQteMax($row) {
         case "7":
             
             console.log('dedans');
-            if ($sAction === "bon_upd" && $ligId!== "" && $ligId ){
+            if ($sAction === "bon_upd" && $ligId != "" && $ligId ){
                 console.log('aprés le if');
                 //Cas de la modification du bon de sortie
                 //Récupère la quantité initial 
@@ -249,7 +255,7 @@ function limitQteMax($row) {
                 
                 //Récupère la quantité en stock du lot
                 $.getJSON(
-                        // url cible
+                        // chemin de la webservice
                         'ws/webService.php',
                         //Paramètres
                                 {test: 'Solya', action: 'getLot', lotId: $valInput.val()},

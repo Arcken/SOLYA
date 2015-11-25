@@ -5,62 +5,9 @@
 
     <div class="corpsCenter">
         <div class="colOnlyOne">
-            <h2> Liste des éléments </h2>
-
-            <table class="tableList">
-                <tr>
-                    <th class="colTitle">
-                        Lot ID
-                    </th>                   
-                    <th class="colTitle">
-                        Référence ID
-                    </th> 
-                    <th class="colTitle">
-                        Référence Code
-                    </th>
-                    <th class="colTitle">
-                        Référence Libellé
-                    </th>
-                    <th class="colTitle">
-                        Stock Minimum
-                    </th>
-                    <th class="colTitle">
-                        Stock
-                    </th>
-
-                </tr>
-                <?php
-                if ($resStockMin != 0 && is_array($resStockMin)) {
-                    for($i = 0;$i < count($resStockMin);$i++) {
-                        ?>
-                        <tr>
-                            <td class="colData" >
-                                <?php echo $resStockMin[$i]->lot_id ?>
-                            </td>
-                            <td class="colData" >
-                                <?php echo $resStockMin[$i]->ref_id ?>
-                            </td>
-                            <td class="colData" >
-                                <?php echo $tRef[$i]->ref_code ?>
-                            </td>
-                            <td class="colData" >
-                                <?php echo $tRef[$i]->ref_lbl ?>
-                            </td>
-                            <td class="colData" >
-                                <?php echo $tRef[$i]->ref_st_min ?>
-                            </td>
-                            <td class="colData" >
-                                <?php echo $resStockMin[$i]->lot_qt_stock ?>
-                            </td>
-
-                        </tr>
-                        <?php
-                    }
-                }
-                ?>
-            </table>
-
+            <img src="img/site/logoSolya.png">
         </div>
+        
     </div>
 
     <?php

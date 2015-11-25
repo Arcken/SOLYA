@@ -13,7 +13,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
     ?>
 
     <div class="corps">
-        <form class="form" id="fNut" action="index.php">
+        <form class="form" id="fNut" action="index.php" method="post">
             <input name='token' type="text" value ='<?php echo rand(1, 1000000) ?>' hidden/>
             <div class="col90">
                 <label for="nutId"> ID: </label>
