@@ -182,7 +182,7 @@ class Tool {
 
             //on vérifie si l'upload c'est bien passé
             if ($image['error'][$i] > 0) {
-                $erreur = $IMGNOM . ": Fichier image: Erreur lors du transfert";
+                $erreur = $IMGNOM . ": Erreur lors du transfert";
             }
 
             //On récupére l'extension du fichier
@@ -231,7 +231,7 @@ class Tool {
                     // en appliquant les nouvelles dimensions
                     imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                     imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_label_width, $new_label_height, $width, $height);
-                    
+                    //Création du fichier image
                     $bCopy[] = imagepng($image_grande_tmp, $imgPath . $imgNom);                    
                     $bCopy[] = imagepng($image_mini_tmp, $imgMiniPath . $imgMiniNom);
                 } else {
@@ -240,7 +240,7 @@ class Tool {
                     // en appliquant les nouvelles dimensions
                     imagecopyresampled($image_grande_tmp, $image_tmp, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
                     imagecopyresampled($image_mini_tmp, $image_tmp, 0, 0, 0, 0, $new_label_width, $new_label_height, $width, $height);
-                    
+                    //création du fichier image
                     $bCopy[] = imagejpeg($image_grande_tmp, $imgPath . $imgNom);
                     $bCopy[] = imagejpeg($image_mini_tmp, $imgMiniPath . $imgMiniNom);
                 }                
