@@ -13,4 +13,4 @@ nbpage = 5
 imgpath = img/ref/
 imgminipath= img/ref/mini/
 imgextension = jpg,jpeg
-imgmaxsize = 400000
+imgmaxsize = 500000
