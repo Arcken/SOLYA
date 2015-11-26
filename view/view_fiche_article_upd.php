@@ -115,7 +115,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                         <td> <input type="radio" name="fiartPhotosPref" 
                                                     value="<?php echo $image ?>"
                                                     <?php if ($image == $resFiartDetail->fiart_photos_pref) echo ' checked '; ?>></td>
-                                        <td><img src="<?php echo $imgMiniPath . $image . '_lbl.jpg' ?>" 
+                                        <td><img src="<?php echo $imgMiniPath . 'lbl_' . $image ?>" 
                                                  alt=""/></td>
                                     </tr>
                                     <?php

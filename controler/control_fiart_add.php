@@ -51,7 +51,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 $oFiArt->fiart_desc_esp = $_REQUEST['fiartDescEsp'];
 
                 //traitement photos
-                $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
+                $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension , $imgMaxSize);
                 if (count($resPhoto) > 0 && $resPhoto[0] != '') {
                     $oFiArt->fiart_photos = implode(',', $resPhoto);
                     $oFiArt->fiart_photos_pref = $resPhoto[0];

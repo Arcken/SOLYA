@@ -214,7 +214,7 @@
                      <tr>
                         <td class="colData">
                             <?php if($resLigRefs['ref'][$i]->ref_photos_pref!=''){ ?>
-                                     <img src="<?php echo $imgMiniPath.$resLigRefs['ref'][$i]->ref_photos_pref.'_lbl.jpg'; ?>" 
+                                     <img src="<?php echo $imgMiniPath. 'lbl_' . $resLigRefs['ref'][$i]->ref_photos_pref; ?>" 
                                           onclick ='location.href="index.php?action=ref_detail&idRef="
                                                    + <?php echo $resLigRefs['ref'][$i]->ref_id; ?>'
                             <?php }else{

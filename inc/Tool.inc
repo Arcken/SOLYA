@@ -194,12 +194,12 @@ class Tool {
             }
             if ($erreur == "aucune") {
                 //Tableau de contrôle de création de fichier, on la passe à faux si une erreur survient
-                $bCopy[];
+                $bCopy = array();
                 
                 //Création du nom de l'image
                 $tNom = explode('.', $IMGNOM);
                 $tNom[0] = md5(uniqid(rand(), true));
-                if (strtolower($extension_upload) == "png") {
+                if ($extension_upload == "png") {
                     $tNom[1] = "png";
                 } else {
                     $tNom[1] = 'jpg';
@@ -207,7 +207,7 @@ class Tool {
                 $imgNom = implode('.', $tNom);
 
                 //Nom de la vingnette
-                $tNom[0] = $tNom[0] . '_lbl';
+                $tNom[0] = 'lbl_' . $tNom[0];
                 $imgMiniNom = implode('.', $tNom);
 
                 //obtention taille img uploader
@@ -246,7 +246,7 @@ class Tool {
                 }                
                 
                 if (in_array("FALSE", $bCopy)) {
-
+                    Tool::addMsg("image ajouté");
                     $res[] = $imgNom;
                 } else {
                     Tool::addMsg("Erreur d'écriture de l'image");
@@ -254,8 +254,11 @@ class Tool {
             } else {
                 Tool::addMsg($erreur);
             }
-            return $res;
+            Tool::addMsg($imgNom.'<br>');
         }
+        print_r($res);
+        
+         return $res;
     }
 
     /**

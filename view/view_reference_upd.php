@@ -441,7 +441,7 @@
                                                         name="refPhotosPref" 
                                                         value="<?php echo $image ?>"
                                                         <?php if ($image == $rsRef->ref_photos_pref) echo ' checked '; ?>></td>
-                                            <td><img src="<?php echo $imgMiniPath . $image . '_lbl.jpg' ?>" 
+                                            <td><img src="<?php echo $imgMiniPath . 'lbl_' . $image?>" 
                                                      alt=""></td>
                                         </tr>
                                         <?php

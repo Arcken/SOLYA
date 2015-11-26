@@ -48,7 +48,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 ?>
                         
                             <tr>
-                                <td class="colImg"><img src="<?php echo $imgMiniPath . $value->fiart_photos_pref . '_lbl.jpg' ?>" alt="" title="Modifier"
+                                <td class="colImg"><img src="<?php echo $imgMiniPath . 'lbl_' . $value->fiart_photos_pref ?>" alt="" title="Modifier"
                                          onclick='location.href = "index.php?action=fiart_upd&fiartId=<?php echo $value->fiart_id ?>"'/></center></td>
                                 <td class="colData" colspan="3"><?php echo $value->fiart_id ?></td>
                                 <td class="colData" colspan="3"><?php echo $value->fiart_lbl ?></td>               

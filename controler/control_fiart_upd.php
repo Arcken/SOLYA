@@ -41,15 +41,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                 //Traitement des uploads de photos
 
                 if (!empty($_FILES) && $_FILES['img_upload']['name'][0] != '') {
-                    $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension);
-
+                    $resPhoto = Tool::uplImg($imgPath, $imgMiniPath, $imgExtension, $imgMaxSize);
+                    print_r($resPhoto);
                     //On intégre la liste des nouvelles photos avec l'ancienne si elle existe
                     if ($resFiartDetail->fiart_photos != '') {
-                        echo "photos deja existante";
+                        
                         $oFiArt->fiart_photos = $resFiartDetail->fiart_photos . ',' . implode(',', $resPhoto);
+                        echo($oFiArt->fiart_photos);
                     }//si  l'ancienne liste est vide on intégre que la nouvelle
                     else {
                         $oFiArt->fiart_photos = implode(',', $resPhoto);
+                        echo($oFiArt->fiart_photos);
                     }
                 }
                 //Si une photo par défaut est choisie
