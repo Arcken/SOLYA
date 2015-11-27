@@ -273,5 +273,7 @@ class Tool {
         $_SESSION['msg'][1] = $_SESSION['msg'][0];
         $_SESSION['msg'][0] = $msg;
     }
+    
+    
 
 }

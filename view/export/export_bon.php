@@ -13,9 +13,9 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "accésValide") {
     //On récupére la date pour la mettre dans le nom du fichier
     $today = date("Ymd");
     //On paramète le nom du fichier
-    header("Content-disposition: filename=Solya-BonSortieReprise-" . $today . ".csv");
+    header("Content-disposition: filename=Solya-BonSortieReprise-" . $today . ".xls");
     //On construit le fichier
-    require $path . '/view/export/export_construct_file.php';
+    require $path . '/view/export/export_construct_file_xls.php';
     
 } else {
     echo 'Le silence est d\'or';

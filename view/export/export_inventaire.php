@@ -15,7 +15,7 @@ if (isset($_REQUEST['test']) && $_REQUEST['test'] == "accésValide") {
     //On paramète le nom du fichier
     header("Content-disposition: filename=Solya-Inventaire-" . $today . ".csv");
     //On construit le fichier
-    require $path . '/view/export/export_construct_file.php';
+    require $path . '/view/export/export_construct_file_xls.php';
     
 } else {
     echo 'Le silence est d\'or';
