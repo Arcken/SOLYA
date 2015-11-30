@@ -274,6 +274,6 @@ class Tool {
         $_SESSION['msg'][0] = $msg;
     }
     
-    
+   
 
 }

@@ -1,4 +1,6 @@
 
+
+
 /**
  * Fonction d'ajout de ligne
  * On prend tous ce qui se trouvent entre <tr id=idLigne> et </tr>
@@ -48,6 +50,17 @@ function delLigne($cible) {
     }
 }
 
+
+function msgConfirmPopup($msg, $function){
+    var rep = confirm($msg);
+    
+    if (rep == true){
+        alert("dedans");
+        popup($function);
+    } else {
+        
+    }
+}
 
 /**
  * Fonction d'ouverture de nouvelle fenetre, 
@@ -444,17 +457,16 @@ function getNut() {
             'ws/webService.php', // code cible         
             {test: 'Solya', action: 'getAllNut'},
     function (json) {
-        var $divNut = $('#divNut');
-        $('#divNut').empty();
-
-        $divNut.append('<label> Table de nutrition: </label><br><br>');
+        var $divNut = $('#lsNut');
+        $divNut.empty();
+       
         for (var key in json) {
             $divNut.append('<label for="nut' + json[key].nut_id + '">'
-                    + json[key].nut_lbl + '</label><br>');
+                    + json[key].nut_lbl + '</label>');
             $divNut.append('<input type="text" name="nut' + json[key].nut_id + '" '
                     + ' placeholder="saisie">');
             $divNut.append('<input type="text" class="inputSmall" name="nutAjr' + json[key].nut_id + '"'
-                    + ' placeholder="###.#"><br>');
+                    + ' placeholder="###.#">');
         }
     }
     );

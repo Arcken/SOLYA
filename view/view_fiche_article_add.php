@@ -142,11 +142,11 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
             </div>
             <div class="col30" id="divNut">
                 <label> Table de nutrition: </label>
-                <img src="img/icon/add.png" onClick="popup('nut_add');" 
+                <img src="img/icon/add.png" onClick="msgConfirmPopup('Ajouter un élément videra les champs de nutrition', 'nut_add');" 
                      title="Créer nouvel élément" alt=""/>
                 
                 </br>
-                
+                <div id="lsNut">
 <!-- Boucle permettant d'afficher pour chaque résultat une input box et son label-->
                 <?php
                 if (is_array($resAllNut) && $resAllNut != 0) {
@@ -167,7 +167,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     }
                 }
                 ?>
-                
+                </div>
             </div>
             
             <div class="bas">
