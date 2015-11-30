@@ -79,7 +79,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                     </div>
                     
                     <div>                    
-                        <label for="fiartAlg"> Allergénes: </label>
+                        <label for="fiartAlg"> Allergènes: </label>
                         <textarea name="fiartAlg" rows="3" cols="25" 
                                   placeholder="Saisie"></textarea>
                     </div>
@@ -156,10 +156,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <?php echo $value->nut_lbl ?></label>
                         
                         <input name="<?php echo 'nut' . $value->nut_id ?>" 
-                               placeholder="saisie">
+                               placeholder="saisie"
+                               title="Saisie de type texte">
                         <input class="inputSmall" 
                                name="<?php echo 'nutAjr' . $value->nut_id ?>" 
-                               placeholder="###.#">
+                               placeholder="###.#"
+                               title="saisie de type: 999.9">
                                                       
                         <?php
                     }

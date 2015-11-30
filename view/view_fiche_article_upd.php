@@ -83,7 +83,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                         
                     </div>
                     <div>                    
-                        <label for="fiartAlg"> Allergénes: </label>
+                        <label for="fiartAlg"> Allergènes: </label>
                         <textarea name="fiartAlg" rows="2" cols="25" 
                                   placeholder="Saisie"><?php echo $resFiartDetail->fiart_alg ?></textarea>
                     </div>
@@ -171,7 +171,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                             <label for="<?php echo 'nut' . $nut->nut_id ?>"><?php echo $nut->nut_lbl ?></label>
                             
                             <input name="<?php echo 'nut' . $nut->nut_id ?>" 
-                                   placeholder="saisie" value="<?php
+                                   placeholder="saisie" 
+                                   title="Saise de type texte"
+                                   value="<?php
                                    if (is_array($resNutFiart) && $resNutFiart != 0) {
                                        foreach ($resNutFiart as $nutVal) {
                                            if ($nutVal->nut_id == $nut->nut_id)
@@ -180,7 +182,9 @@ if (isset($_SESSION['group']) && $_SESSION['group'] >= 0) {
                                    }
                                    ?>"> 
                             <input  class="inputSmall" name="<?php echo 'nutAjr' . $nut->nut_id ?>" 
-                                   placeholder="###.#" value="<?php
+                                   placeholder="###.#" 
+                                   title="Saisie de type: 999.9" 
+                                   value="<?php
                                    if (is_array($resNutFiart) && $resNutFiart != 0) {
                                        foreach ($resNutFiart as $nutVal) {
                                            if ($nutVal->nut_id == $nut->nut_id)
